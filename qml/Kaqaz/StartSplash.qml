@@ -145,4 +145,10 @@ Item {
         start_splash.finished()
         start_splash.destroy()
     }
+
+    function back() {
+        return true
+    }
+
+    Component.onCompleted: backHandler = start_splash
 }

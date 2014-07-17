@@ -124,7 +124,7 @@ Item {
         active_btn.visible = false
         dlist.visible = false
         troll_img.visible = false
-        troll_text.text = qsTr("TRIAL ACTIVED")
+        troll_text.text = qsTr("ACTIVED")
         indicator.start()
         idle_timer.restart()
         close_timer.restart()
@@ -141,4 +141,10 @@ Item {
         idle_timer.restart()
         Qt.openUrlExternally("market://details?id=org.sialan.kaqaz")
     }
+
+    function back() {
+        return true
+    }
+
+    Component.onCompleted: backHandler = dlimit
 }

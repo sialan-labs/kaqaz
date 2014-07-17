@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fa_IR">
+<TS version="2.0" language="fa_IR">
 <context>
     <name>About</name>
     <message>
@@ -327,8 +327,12 @@
     </message>
     <message>
         <location filename="../qml/Kaqaz/DemoLimited.qml" line="127"/>
+        <source>ACTIVED</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>TRIAL ACTIVED</source>
-        <translation>فعال شد</translation>
+        <translation type="obsolete">فعال شد</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/DemoLimited.qml" line="139"/>
@@ -909,7 +913,17 @@ left to select categories.</source>
 <context>
     <name>PaperItem</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperItem.qml" line="545"/>
+        <location filename="../qml/Kaqaz/PaperItem.qml" line="366"/>
+        <source>synced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperItem.qml" line="366"/>
+        <source>unsynced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperItem.qml" line="559"/>
         <source>Title</source>
         <translation>عنوان</translation>
     </message>
@@ -1449,7 +1463,7 @@ left to select categories.</source>
 <context>
     <name>SplashLanguage</name>
     <message>
-        <location filename="../qml/Kaqaz/SplashLanguage.qml" line="107"/>
+        <location filename="../qml/Kaqaz/SplashLanguage.qml" line="106"/>
         <source>Select Language</source>
         <translation>انتخاب زبان</translation>
     </message>

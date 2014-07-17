@@ -21,19 +21,18 @@ Item {
 
     ListView {
         id: lang_list
-        anchors.left: parent.left
-        anchors.right: parent.right
         anchors.margins: 100*physicalPlatformScale
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.centerIn: parent
         height: 300*physicalPlatformScale
+        width: 300*physicalPlatformScale
         highlightMoveDuration: 250
         clip: true
 
         property string lang: kaqaz.currentLanguage()
 
         model: ListModel {}
-        header: Item{ width: 10; height: 20*physicalPlatformScale }
-        footer: Item{ width: 10; height: 20*physicalPlatformScale }
+        header: Item{ width: 10; height: 30*physicalPlatformScale }
+        footer: Item{ width: 10; height: 30*physicalPlatformScale }
         delegate: Rectangle {
             id: item
             width: lang_list.width

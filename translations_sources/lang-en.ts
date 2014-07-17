@@ -224,7 +224,7 @@
     </message>
     <message>
         <location filename="../qml/Kaqaz/DemoLimited.qml" line="127"/>
-        <source>TRIAL ACTIVED</source>
+        <source>ACTIVED</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -640,7 +640,17 @@ left to select categories.</source>
 <context>
     <name>PaperItem</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperItem.qml" line="545"/>
+        <location filename="../qml/Kaqaz/PaperItem.qml" line="366"/>
+        <source>synced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperItem.qml" line="366"/>
+        <source>unsynced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperItem.qml" line="559"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1141,7 +1151,7 @@ left to select categories.</source>
 <context>
     <name>SplashLanguage</name>
     <message>
-        <location filename="../qml/Kaqaz/SplashLanguage.qml" line="107"/>
+        <location filename="../qml/Kaqaz/SplashLanguage.qml" line="106"/>
         <source>Select Language</source>
         <translation type="unfinished"></translation>
     </message>
