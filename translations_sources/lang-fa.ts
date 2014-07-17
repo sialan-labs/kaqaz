@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fa_IR">
+<TS version="2.1" language="fa_IR">
 <context>
     <name>About</name>
     <message>
@@ -328,7 +328,7 @@
     <message>
         <location filename="../qml/Kaqaz/DemoLimited.qml" line="127"/>
         <source>ACTIVED</source>
-        <translation type="unfinished"></translation>
+        <translation>فعال شد</translation>
     </message>
     <message>
         <source>TRIAL ACTIVED</source>
@@ -915,12 +915,12 @@ left to select categories.</source>
     <message>
         <location filename="../qml/Kaqaz/PaperItem.qml" line="366"/>
         <source>synced</source>
-        <translation type="unfinished"></translation>
+        <translation>همگام شده</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/PaperItem.qml" line="366"/>
         <source>unsynced</source>
-        <translation type="unfinished"></translation>
+        <translation>همگام نشده</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/PaperItem.qml" line="559"/>
