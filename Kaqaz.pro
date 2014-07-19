@@ -49,6 +49,7 @@ android {
 
 win32 {
     QT += winextras
+    RC_FILE = kaqaz.rc
 }
 
 # Additional import path used to resolve QML modules in Creator's code model
