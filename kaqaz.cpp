@@ -432,7 +432,7 @@ QString Kaqaz::version() const
 #ifdef DEMO_BUILD
             " demo";
 #else
-            " unlimit";
+            " unlimited";
 #endif
 }
 
