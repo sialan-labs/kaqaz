@@ -34,7 +34,7 @@ Item {
             font.family: globalFontFamily
             color: "#333333"
             height: 70*physicalPlatformScale
-            text: qsTr("DEMO EXPIRED")
+            text: qsTr("TRIAL EXPIRED")
         }
 
         Text {

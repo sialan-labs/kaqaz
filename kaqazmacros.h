@@ -27,7 +27,7 @@
 #define KAQAZ_VERSION "1.0.0"
 
 #define DEMO_PAPERS_LIMIT 20
-//#define DEMO_BUILD
+//#define TRIAL_BUILD
 #define LANG_ON_STARTUP
 
 #define LINUX_DEFAULT_DPI 96

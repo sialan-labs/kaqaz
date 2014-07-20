@@ -165,6 +165,7 @@ Item {
     }
 
     function back() {
+        kaqaz.close()
         return true
     }
 

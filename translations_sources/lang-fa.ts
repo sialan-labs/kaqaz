@@ -349,7 +349,7 @@
     </message>
     <message>
         <location filename="../qml/Kaqaz/DemoLimitedActiveTrial.qml" line="38"/>
-        <source>Active Kaqaz demo until next use.</source>
+        <source>Active Kaqaz trial until next use.</source>
         <translation>فعال سازی کاغذ تا اجرای بعدی.</translation>
     </message>
     <message>
@@ -367,7 +367,7 @@
     </message>
     <message>
         <location filename="../qml/Kaqaz/DemoLimitedBuyPro.qml" line="38"/>
-        <source>Buy kaqaz unlimit version</source>
+        <source>Buy kaqaz unlimited version</source>
         <translation>خرید نسخه ی بدون محدودیت کاغذ</translation>
     </message>
     <message>
@@ -380,7 +380,7 @@
     <name>DemoLimitedStartPage</name>
     <message>
         <location filename="../qml/Kaqaz/DemoLimitedStartPage.qml" line="19"/>
-        <source>DEMO EXPIRED</source>
+        <source>TRIAL EXPIRED</source>
         <translation>پایان نسخه آزمایشی</translation>
     </message>
     <message>

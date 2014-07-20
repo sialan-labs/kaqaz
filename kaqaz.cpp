@@ -409,7 +409,7 @@ bool Kaqaz::isWindowsPhone() const
 
 bool Kaqaz::demoHasTrial() const
 {
-#ifndef DEMO_BUILD
+#ifndef TRIAL_BUILD
     return true;
 #endif
 
@@ -429,10 +429,10 @@ void Kaqaz::demoActiveTrial() const
 QString Kaqaz::version() const
 {
     return KAQAZ_VERSION
-#ifdef DEMO_BUILD
-            " demo";
+#ifdef TRIAL_BUILD
+            " trial";
 #else
-            " unlimit";
+            " unlimited";
 #endif
 }
 
@@ -840,8 +840,8 @@ qreal Kaqaz::fontDensity()
 {
 #ifdef Q_OS_ANDROID
     qreal ratio = 1;
-    if( isLargeTablet() )
-        ratio = 1.2;
+//    if( isLargeTablet() )
+//        ratio = 1.2;
 
     return density()*ratio;
 #else

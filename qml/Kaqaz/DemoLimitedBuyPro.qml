@@ -53,7 +53,7 @@ Item {
             font.pointSize: 12*fontsScale
             font.family: globalFontFamily
             color: "#333333"
-            text: qsTr("Buy kaqaz unlimit version")
+            text: qsTr("Buy kaqaz unlimited version")
         }
     }
 

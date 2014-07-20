@@ -53,7 +53,7 @@ Item {
             font.family: globalFontFamily
             font.pointSize: 12*fontsScale
             color: "#333333"
-            text: qsTr("Active Kaqaz demo until next use.")
+            text: qsTr("Active Kaqaz trial until next use.")
         }
     }
 
