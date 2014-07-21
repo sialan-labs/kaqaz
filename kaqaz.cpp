@@ -839,11 +839,11 @@ qreal Kaqaz::density()
 qreal Kaqaz::fontDensity()
 {
 #ifdef Q_OS_ANDROID
-    qreal ratio = 1;
+    qreal ratio = isTablet()? 1.28 : 1;
 //    if( isLargeTablet() )
-//        ratio = 1.2;
+//        ratio = 1.6;
 
-    return density()*ratio;
+    return p->java_layer->density()*ratio;
 #else
 #ifdef Q_OS_IOS
     return 1.4;
