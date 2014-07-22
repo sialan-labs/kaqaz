@@ -26,7 +26,7 @@
                     <runInTerminal>0</runInTerminal>
                     <windowsExec>${installdir}/Kaqaz/Kaqaz.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
-                    <windowsIcon>${installdir}/icons/kaqaz.ico</windowsIcon>
+                    <windowsIcon>${installdir}/Kaqaz/icons/kaqaz.ico</windowsIcon>
                     <windowsPath>${installdir}/Kaqaz/</windowsPath>
                 </shortcut>
             </desktopShortcutList>
@@ -126,6 +126,7 @@
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Sialan Labs</vendor>
     <width>600</width>
+    <windowsExecutableIcon>icons/kaqaz.ico</windowsExecutableIcon>
     <parameterList>
         <directoryParameter>
             <name>installdir</name>
