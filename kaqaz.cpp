@@ -814,8 +814,8 @@ qreal Kaqaz::density()
 {
 #ifdef Q_OS_ANDROID
     qreal ratio = isTablet()? 1.28 : 1;
-    if( isLargeTablet() )
-        ratio = 1.6;
+//    if( isLargeTablet() )
+//        ratio = 1.6;
 
     return p->java_layer->density()*ratio;
 #else
