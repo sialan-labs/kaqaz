@@ -88,7 +88,7 @@ Item {
     }
 
     ScrollBar {
-        scrollArea: color_grid; height: color_grid.height; width: 8
+        scrollArea: color_grid; height: color_grid.height; width: 6*physicalPlatformScale
         anchors.right: color_grid.right; anchors.top: color_grid.top; color: "#000000"
     }
 }

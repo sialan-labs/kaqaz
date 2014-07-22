@@ -51,7 +51,7 @@ Item {
         x: (width>group_chooser_back.width)? 0 : group_chooser_back.width/2 - width/2
         y: group_chooser_back.height/2 - height/2
         font.bold: kaqaz.tablet
-        font.pointSize: kaqaz.touchDevice? (kaqaz.mobile? 8*fontsScale : 9*fontsScale) : 10*fontsScale
+        font.pixelSize: kaqaz.touchDevice? (kaqaz.mobile? 8*fontsScale : 9*fontsScale) : 10*fontsScale
         font.family: globalFontFamily
         color: "#ffffff"
         text: qsTr("No Label")

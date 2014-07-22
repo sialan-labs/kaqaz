@@ -46,7 +46,7 @@ Item {
 
         Text {
             id: back_txt
-            font.pointSize: 14*fontsScale
+            font.pixelSize: 14*fontsScale
             font.family: globalFontFamily
             y: parent.height/2 - height/2 + 2*physicalPlatformScale
             color: (!back_row.press && header.light)||(back_row.press && !header.light)? "#ffffff" : "#111111"
@@ -65,7 +65,7 @@ Item {
 
     Text {
         id: title_txt
-        font.pointSize: 16*fontsScale
+        font.pixelSize: 16*fontsScale
         font.family: globalFontFamily
         y: parent.height/2 - height/2 + 2*physicalPlatformScale
         anchors.horizontalCenter: parent.horizontalCenter

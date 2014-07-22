@@ -78,7 +78,7 @@ Item {
 
             Text {
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 20*fontsScale
+                font.pixelSize: 20*fontsScale
                 font.family: globalFontFamily
                 color: "#007ee5"
                 text: "Dropbox Authorize"
@@ -100,7 +100,7 @@ Item {
             anchors.horizontalCenter: indicator.horizontalCenter
             anchors.top: indicator.bottom
             anchors.topMargin: 8*physicalPlatformScale
-            font.pointSize: 10*fontsScale
+            font.pixelSize: 10*fontsScale
             font.family: globalFontFamily
             color: "#555555"
             text: qsTr("Connecting...")
@@ -129,7 +129,7 @@ Item {
                 id: sync_pass
                 anchors.fill: parent
                 anchors.margins: 4*physicalPlatformScale
-                font.pointSize: 11*fontsScale
+                font.pixelSize: 11*fontsScale
                 font.family: globalFontFamily
                 color: "#333333"
                 echoMode: TextInput.Password

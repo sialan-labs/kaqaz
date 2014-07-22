@@ -56,7 +56,7 @@ Item {
     FastBlur {
         id: blur
         anchors.fill: parent
-        radius: 64*physicalPlatformScale
+        radius: 64
         cached: true
     }
 

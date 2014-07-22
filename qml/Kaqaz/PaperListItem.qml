@@ -59,7 +59,7 @@ Item {
                 anchors.top: parent.top
                 anchors.right: parent.right
                 anchors.margins: 7*physicalPlatformScale
-                font.pointSize: 7*fontsScale
+                font.pixelSize: 7*fontsScale
                 font.family: globalFontFamily
                 color: "#aaaaaa"
                 text: kaqaz.convertDateTimeToString( database.paperCreatedDate(pitem.paperId) )
@@ -73,7 +73,7 @@ Item {
                 anchors.topMargin: 15*physicalPlatformScale
                 anchors.leftMargin: gc_back.x + gc_back.width
                 anchors.rightMargin: gc_back.x + gc_back.width
-                font.pointSize: 14*fontsScale
+                font.pixelSize: 14*fontsScale
                 font.family: globalFontFamily
                 color: title.length==0? "#cccccc" : "#333333"
                 text: title.length==0? qsTr("Title") : title
@@ -90,7 +90,7 @@ Item {
                 anchors.top: title_txt.bottom
                 anchors.margins: 20*physicalPlatformScale
                 anchors.topMargin: 0
-                font.pointSize: 9*fontsScale
+                font.pixelSize: 9*fontsScale
                 font.family: globalFontFamily
                 wrapMode: Text.Wrap
                 smooth: true

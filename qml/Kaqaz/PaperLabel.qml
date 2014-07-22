@@ -75,7 +75,7 @@ Item {
         id: txt
         anchors.fill: parent
         anchors.topMargin: 5*physicalPlatformScale
-        font.pointSize: 9*fontsScale
+        font.pixelSize: kaqaz.largeTablet? 10*fontsScale : 9*fontsScale
         font.family: globalFontFamily
         wrapMode: Text.Wrap
         smooth: true
@@ -178,9 +178,9 @@ Item {
 
     function refreshEditPosition(){
         btn_box.x = paper_label.mapToItem(paper,paper_label.width,0).x + 14*physicalPlatformScale -btn_box.width
-        btn_box.y = 25*physicalPlatformScale
+        btn_box.y = 15+10*physicalPlatformScale
         listview_btn.x = btn_box.x + btn_box.width - listview_btn.width
-        listview_btn.y = paper.mapToItem(paper,0,paper.height).y - listview_btn.height - 5*physicalPlatformScale - 20
+        listview_btn.y = paper.mapToItem(paper,0,paper.height).y - listview_btn.height - 10*physicalPlatformScale - 15
     }
 
     function deleteRequest(){

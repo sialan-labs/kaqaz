@@ -90,7 +90,7 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text.length == 0? qsTr("Back") : parent.text
-                font.pointSize: 12*fontsScale
+                font.pixelSize: 12*fontsScale
                 font.family: globalFontFamily
                 color: "#ffffff"
                 clip: true
@@ -146,7 +146,7 @@ Item {
     }
 
     ScrollBar {
-        scrollArea: preference_list; height: preference_list.height; width: 8
+        scrollArea: preference_list; height: preference_list.height; width: 6*physicalPlatformScale
         anchors.right: preference_list.right; anchors.top: preference_list.top;color: "#ffffff"
     }
 

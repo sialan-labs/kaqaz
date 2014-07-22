@@ -36,7 +36,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 10*physicalPlatformScale
-        font.pointSize: 15*fontsScale
+        font.pixelSize: 15*fontsScale
         font.family: globalFontFamily
         color: "#333333"
         wrapMode: Text.WordWrap
@@ -60,7 +60,7 @@ Item {
         TextInput{
             id: pass_placeholder
             color: "#bbbbbb"
-            font.pointSize: pass.font.pointSize
+            font.pixelSize: pass.font.pixelSize
             font.family: globalFontFamily
             y: pass.y
             anchors.left: pass.left
@@ -72,7 +72,7 @@ Item {
         TextInput{
             id: pass
             color: "#333333"
-            font.pointSize: 11*fontsScale
+            font.pixelSize: 11*fontsScale
             font.family: globalFontFamily
             y: pass_frame.height/2-height/2
             anchors.left: parent.left
@@ -100,7 +100,7 @@ Item {
         TextInput{
             id: pass_repeat_placeholder
             color: "#bbbbbb"
-            font.pointSize: pass_repeat.font.pointSize
+            font.pixelSize: pass_repeat.font.pixelSize
             font.family: globalFontFamily
             y: pass_repeat.y
             anchors.left: pass_repeat.left
@@ -112,7 +112,7 @@ Item {
         TextInput{
             id: pass_repeat
             color: "#333333"
-            font.pointSize: 11*fontsScale
+            font.pixelSize: 11*fontsScale
             font.family: globalFontFamily
             y: pass_repeat_frame.height/2-height/2
             anchors.left: parent.left

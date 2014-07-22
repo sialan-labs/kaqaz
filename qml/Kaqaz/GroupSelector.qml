@@ -74,7 +74,7 @@ Item {
                 anchors.leftMargin: 44*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pointSize: 10*fontsScale
+                font.pixelSize: 10*fontsScale
                 font.family: globalFontFamily
                 color: item.groupId==-1? "#ffffff" : "#333333"
                 horizontalAlignment: Text.AlignLeft
@@ -122,7 +122,7 @@ Item {
     }
 
     ScrollBar {
-        scrollArea: groups_list; height: groups_list.height; width: 8
+        scrollArea: groups_list; height: groups_list.height; width: 6*physicalPlatformScale
         anchors.right: groups_list.right; anchors.top: groups_list.top; color: "#000000"
     }
 

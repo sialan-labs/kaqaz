@@ -66,7 +66,7 @@ Item {
         anchors.left: icon.right
         anchors.right: back.right
         anchors.margins: 10*physicalPlatformScale
-        font.pointSize: 13*fontsScale
+        font.pixelSize: 13*fontsScale
         font.family: globalFontFamily
         inputMethodHints: Qt.ImhNoPredictiveText
     }

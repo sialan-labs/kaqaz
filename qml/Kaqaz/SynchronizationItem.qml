@@ -49,7 +49,7 @@ Rectangle {
         Text {
             id: txt
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pointSize: 12*fontsScale
+            font.pixelSize: 12*fontsScale
             font.family: globalFontFamily
             color: "#007ee5"
         }

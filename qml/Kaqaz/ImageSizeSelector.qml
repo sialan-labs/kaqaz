@@ -70,7 +70,7 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pointSize: 12*fontsScale
+                font.pixelSize: 12*fontsScale
                 font.family: globalFontFamily
                 color: "#ffffff"
             }

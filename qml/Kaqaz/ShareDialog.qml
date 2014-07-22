@@ -48,7 +48,7 @@ Item {
         x: 40*physicalPlatformScale
         y: 60*physicalPlatformScale
         text: qsTr("Select Application")
-        font.pointSize: 25*fontsScale
+        font.pixelSize: 25*fontsScale
         font.weight: Font.Light
         font.family: globalFontFamily
         color: "#333333"
@@ -87,7 +87,7 @@ Item {
                 anchors.leftMargin: 10*physicalPlatformScale
                 anchors.verticalCenter: parent.verticalCenter
                 font.family: globalFontFamily
-                font.pointSize: 9*fontsScale
+                font.pixelSize: 9*fontsScale
                 text: mimeApps.appName(appId)
             }
 
@@ -115,7 +115,7 @@ Item {
     }
 
     ScrollBar {
-        scrollArea: apps_list; height: apps_list.height; width: 8
+        scrollArea: apps_list; height: apps_list.height; width: 6*physicalPlatformScale
         anchors.right: apps_list.right; anchors.top: apps_list.top; color: "#333333"
     }
 

@@ -45,7 +45,7 @@ Item {
             id: txt
             anchors.left: parent.left
             anchors.right: parent.right
-            font.pointSize: 18*fontsScale
+            font.pixelSize: 18*fontsScale
             font.family: globalFontFamily
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere

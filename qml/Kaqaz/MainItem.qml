@@ -261,7 +261,7 @@ Rectangle {
                     }
                 }
 
-                property real platformMargins: kaqaz.mobile? -20 : -6
+                property real platformMargins: kaqaz.mobile? -15 + 5*physicalPlatformScale : -15 + 5*physicalPlatformScale
             }
 
             SideBar{

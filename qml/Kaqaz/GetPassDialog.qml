@@ -110,7 +110,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: 40*physicalPlatformScale
-            font.pointSize: 15*fontsScale
+            font.pixelSize: 15*fontsScale
             font.family: globalFontFamily
             color: "#ffffff"
             wrapMode: Text.WordWrap
@@ -134,7 +134,7 @@ Item {
             TextInput{
                 id: pass_placeholder
                 color: "#bbbbbb"
-                font.pointSize: pass.font.pointSize
+                font.pixelSize: pass.font.pixelSize
                 font.family: globalFontFamily
                 y: pass.y
                 anchors.left: pass.left
@@ -146,7 +146,7 @@ Item {
             TextInput{
                 id: pass
                 color: "#333333"
-                font.pointSize: 13*fontsScale
+                font.pixelSize: 13*fontsScale
                 font.family: globalFontFamily
                 y: pass_frame.height/2-height/2
                 anchors.left: parent.left
@@ -198,7 +198,7 @@ Item {
 
         Text{
             id: warn_txt
-            font.pointSize: 20*fontsScale
+            font.pixelSize: 20*fontsScale
             font.family: globalFontFamily
             color: "#ffffff"
             wrapMode: Text.WordWrap

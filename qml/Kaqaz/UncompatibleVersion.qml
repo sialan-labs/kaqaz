@@ -31,7 +31,7 @@ Image {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 20*platformScale
-        font.pointSize: 13*platformScale
+        font.pixelSize: 13*platformScale
         font.family: globalFontFamily
         color: "#333333"
         wrapMode: Text.WordWrap
@@ -46,7 +46,7 @@ Image {
         anchors.right: parent.right
         anchors.top: txt.bottom
         anchors.margins: 40*platformScale
-        font.pointSize: 13*platformScale
+        font.pixelSize: 13*platformScale
         font.family: globalFontFamily
         color: "#333333"
         wrapMode: Text.WordWrap
@@ -70,7 +70,7 @@ Image {
         TextInput{
             id: email
             color: "#333333"
-            font.pointSize: 13*platformScale
+            font.pixelSize: 13*platformScale
             font.family: globalFontFamily
             y: email_frame.height/2-height/2
             anchors.left: parent.left

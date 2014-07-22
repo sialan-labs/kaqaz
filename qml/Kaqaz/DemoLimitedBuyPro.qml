@@ -36,7 +36,7 @@ Item {
             id: limit_text
             anchors.left: parent.left
             anchors.right: parent.right
-            font.pointSize: 30*fontsScale
+            font.pixelSize: 30*fontsScale
             font.family: globalFontFamily
             height: 70*physicalPlatformScale
             horizontalAlignment: Text.AlignHCenter
@@ -50,7 +50,7 @@ Item {
             anchors.right: parent.right
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
-            font.pointSize: 12*fontsScale
+            font.pixelSize: 12*fontsScale
             font.family: globalFontFamily
             color: "#333333"
             text: qsTr("Buy kaqaz unlimited version")

@@ -74,7 +74,7 @@ Item {
     }
 
     ScrollBar {
-        scrollArea: p_list; height: p_list.height; width: 8
+        scrollArea: p_list; height: p_list.height; width: 6*physicalPlatformScale
         anchors.right: p_list.right; anchors.top: p_list.top; color: "#000000"
     }
 

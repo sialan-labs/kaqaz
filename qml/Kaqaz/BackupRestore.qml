@@ -65,7 +65,7 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pointSize: 15*fontsScale
+                font.pixelSize: 15*fontsScale
                 font.family: globalFontFamily
                 color: item.press? "#ffffff" : "#333333"
             }

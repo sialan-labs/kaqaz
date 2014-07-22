@@ -30,7 +30,7 @@ Item {
         Text {
             id: limit_text
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pointSize: 30*fontsScale
+            font.pixelSize: 30*fontsScale
             font.family: globalFontFamily
             color: "#333333"
             height: 70*physicalPlatformScale
@@ -40,7 +40,7 @@ Item {
         Text {
             id: choice_text
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pointSize: 13*fontsScale
+            font.pixelSize: 13*fontsScale
             font.family: globalFontFamily
             color: "#333333"
             text: qsTr("Now you have 2 choice")
@@ -50,7 +50,7 @@ Item {
     Text {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: scroll_img.top
-        font.pointSize: 9*fontsScale
+        font.pixelSize: 9*fontsScale
         font.family: globalFontFamily
         color: "#666666"
         text: qsTr("scroll down")

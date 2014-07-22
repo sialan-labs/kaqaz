@@ -68,7 +68,7 @@ Item {
         paper.selected.connect(group_chooser.finished)
 
         var point = mapToItem(kaqaz_root,width/2,height)
-        var h = paper.realHeight()+50
+        var h = paper.realHeight()+40*physicalPlatformScale
         if( h > 5*kaqaz_root.height/9 )
             h = 5*kaqaz_root.height/9
 

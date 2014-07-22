@@ -58,7 +58,7 @@ Rectangle {
 
         Text {
             id: swype_p_text
-            font.pointSize: 10*fontsScale
+            font.pixelSize: 10*fontsScale
             font.family: globalFontFamily
             color: "#0d80ec"
             anchors.top: swype_circle.bottom
@@ -79,7 +79,7 @@ Rectangle {
 
         Text {
             id: swype_group_text
-            font.pointSize: 10*fontsScale
+            font.pixelSize: 10*fontsScale
             font.family: globalFontFamily
             color: "#0d80ec"
             anchors.verticalCenter: swype_group.verticalCenter
@@ -99,7 +99,7 @@ Rectangle {
 
         Text {
             id: swype_left_text
-            font.pointSize: 10*fontsScale
+            font.pixelSize: 10*fontsScale
             font.family: globalFontFamily
             color: "#0d80ec"
             anchors.top: swype_left.bottom
@@ -120,7 +120,7 @@ Rectangle {
 
         Text {
             id: swype_right_text
-            font.pointSize: 10*fontsScale
+            font.pixelSize: 10*fontsScale
             font.family: globalFontFamily
             color: "#0d80ec"
             anchors.bottom: swype_right.top
@@ -154,7 +154,7 @@ Rectangle {
 
         Text {
             id: date_p_text
-            font.pointSize: 10*fontsScale
+            font.pixelSize: 10*fontsScale
             font.family: globalFontFamily
             color: "#0d80ec"
             anchors.top: date_pointer.top

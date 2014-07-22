@@ -31,7 +31,7 @@ Item {
         anchors.leftMargin: 40*physicalPlatformScale
         anchors.rightMargin: 40*physicalPlatformScale
         anchors.bottomMargin: 10*physicalPlatformScale
-        font.pointSize: 20*fontsScale
+        font.pixelSize: 20*fontsScale
         horizontalAlignment: Text.AlignHCenter
         font.family: globalFontFamily
         color: "#333333"
@@ -68,7 +68,7 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pointSize: 13*fontsScale
+                font.pixelSize: 13*fontsScale
                 font.family: globalFontFamily
                 color: marea.pressed? "#ffffff" : "#333333"
             }
@@ -104,7 +104,7 @@ Item {
     }
 
     ScrollBar {
-        scrollArea: lang_list; height: lang_list.height; width: 8
+        scrollArea: lang_list; height: lang_list.height; width: 6*physicalPlatformScale
         anchors.left: lang_list.right; anchors.top: lang_list.top;color: "#888888"
     }
 

@@ -176,8 +176,8 @@ AnimationItem {
     Item {
         id: flick_frame
         anchors.fill: parent
-        anchors.topMargin: 30*physicalPlatformScale + txt.y + 5*physicalPlatformScale
-        anchors.bottomMargin: 60*physicalPlatformScale
+        anchors.topMargin: txt.y + txt.height
+        anchors.bottomMargin: 20+pad + 45*physicalPlatformScale
         z: 20
         clip: true
 
@@ -187,8 +187,8 @@ AnimationItem {
             anchors.right: parent.right
             anchors.top: parent.top
             height: kaqaz.keyboard? parent.height*1/2 : parent.height
-            anchors.leftMargin: 40*physicalPlatformScale
-            anchors.rightMargin: 40*physicalPlatformScale
+            anchors.leftMargin: 20+pad + 25*physicalPlatformScale
+            anchors.rightMargin: 20+pad + 25*physicalPlatformScale
             contentWidth: label.width
             contentHeight: label.height
             flickableDirection: Flickable.VerticalFlick
@@ -273,23 +273,18 @@ AnimationItem {
     }
 
     ScrollBar {
-        scrollArea: label_flickable; height: flick_frame.height; width: 8
+        scrollArea: label_flickable; height: flick_frame.height; width: 6*physicalPlatformScale
         anchors.right: label.horizontalAlignment == Text.AlignRight? paper_back.left : paper_back.right
-        anchors.rightMargin: label.horizontalAlignment == Text.AlignRight? -width-15*physicalPlatformScale : 15*physicalPlatformScale
+        anchors.rightMargin: label.horizontalAlignment == Text.AlignRight? -width-15-3*physicalPlatformScale : 15 + 3*physicalPlatformScale
         anchors.top: flick_frame.top
+        z: 20
         color: "#888888"
     }
 
     TextInput{
         id: placeholder_txt
-        anchors.top: paper.top
-        anchors.left: paper.left
-        anchors.right: paper.right
-        anchors.topMargin: 20+pad + 15*physicalPlatformScale
-        anchors.leftMargin: group_chooser.x + group_chooser.width
-        anchors.rightMargin: group_chooser.x + group_chooser.width
-        font.pointSize: 14*fontsScale
-        font.family: globalFontFamily
+        anchors.fill: txt
+        font: txt.font
         color: "#cccccc"
         horizontalAlignment: Text.AlignHCenter
         visible: (!txt.focus && txt.text == "" && txt.visible)
@@ -304,7 +299,7 @@ AnimationItem {
         anchors.topMargin: 20+pad + 15*physicalPlatformScale
         anchors.leftMargin: group_chooser.x + group_chooser.width
         anchors.rightMargin: group_chooser.x + group_chooser.width
-        font.pointSize: 14*fontsScale
+        font.pixelSize: kaqaz.largeTablet? 15*fontsScale : 14*fontsScale
         font.family: globalFontFamily
         color: "#333333"
         selectionColor: "#0d80ec"
@@ -365,8 +360,8 @@ AnimationItem {
         id: date_label
         anchors.bottom: paper.bottom
         anchors.left: parent.left
-        anchors.margins: 22*physicalPlatformScale
-        font.pointSize: 7*fontsScale
+        anchors.margins: 20+pad + 7*physicalPlatformScale
+        font.pixelSize: 7*fontsScale
         font.family: globalFontFamily
         color: "#aaaaaa"
     }
@@ -378,7 +373,7 @@ AnimationItem {
         anchors.bottom: date_label.bottom
         anchors.right: parent.right
         anchors.rightMargin: 64*physicalPlatformScale
-        font.pointSize: 8*fontsScale
+        font.pixelSize: 8*fontsScale
         font.family: globalFontFamily
         color: synced? "#1DC528" : "#C51313"
         text: synced? qsTr("synced") : qsTr("unsynced")

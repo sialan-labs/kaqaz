@@ -39,7 +39,7 @@ Item {
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
             text: "SIALAN LABS"
-            font.pointSize: 20*fontsScale
+            font.pixelSize: 20*fontsScale
             font.weight: Font.DemiBold
             font.family: globalFontFamily
             color: "#333333"
@@ -51,7 +51,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20*physicalPlatformScale
         text: "slide to next"
-        font.pointSize: 12*fontsScale
+        font.pixelSize: 12*fontsScale
         font.family: globalFontFamily
         color: "#333333"
         speed: 1200

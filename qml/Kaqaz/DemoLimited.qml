@@ -66,7 +66,7 @@ Item {
     }
 
     ScrollBar {
-        scrollArea: dlist; height: dlist.height; width: 8
+        scrollArea: dlist; height: dlist.height; width: 6*physicalPlatformScale
         anchors.right: dlist.right; anchors.top: dlist.top; color: "#ffffff"
     }
 
@@ -89,7 +89,7 @@ Item {
         Text {
             id: troll_text
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pointSize: 20*fontsScale
+            font.pixelSize: 20*fontsScale
             font.family: globalFontFamily
             color: "#333333"
         }

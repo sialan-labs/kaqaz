@@ -58,7 +58,7 @@ Item {
                 Text {
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: "SIALAN LABS"
-                    font.pointSize: 20*fontsScale
+                    font.pixelSize: 20*fontsScale
                     font.weight: Font.DemiBold
                     font.family: globalFontFamily
                     color: "#333333"
@@ -74,7 +74,7 @@ Item {
                     anchors.right: parent.right
                     anchors.margins: 20*physicalPlatformScale
                     text: kaqaz.aboutSialan()
-                    font.pointSize: 9*fontsScale
+                    font.pixelSize: 9*fontsScale
                     font.family: globalFontFamily
                     wrapMode: Text.WordWrap
                     color: "#333333"

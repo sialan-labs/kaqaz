@@ -31,7 +31,7 @@ Item {
 
         Text {
             id: delete_warn
-            font.pointSize: 17*fontsScale
+            font.pixelSize: 17*fontsScale
             font.family: globalFontFamily
             anchors.margins: 10*physicalPlatformScale
             anchors.left: parent.left
@@ -132,7 +132,7 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pointSize: 12*fontsScale
+                font.pixelSize: 12*fontsScale
                 font.family: globalFontFamily
                 color: item.press? "#ffffff" : "#333333"
                 horizontalAlignment: Text.AlignLeft
@@ -202,7 +202,7 @@ Item {
     }
 
     ScrollBar {
-        scrollArea: groups_list; height: groups_list.height; width: 8
+        scrollArea: groups_list; height: groups_list.height; width: 6*physicalPlatformScale
         anchors.right: groups_list.right; anchors.top: groups_list.top; color: "#000000"
     }
 

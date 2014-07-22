@@ -37,7 +37,7 @@ Item {
         anchors.left: backup_wait.left
         anchors.right: backup_wait.right
         anchors.margins: 20*physicalPlatformScale
-        font.pointSize: 15*fontsScale
+        font.pixelSize: 15*fontsScale
         font.family: globalFontFamily
         horizontalAlignment: Text.AlignHCenter
         color: "#333333"

@@ -155,7 +155,7 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->calendar = new CalendarConverter();
     p->backuper = new Backuper(this);
 #ifdef Q_OS_ANDROID
-//    p->logger = new SialanQtLogger(LOG_PATH,this);
+    p->logger = new SialanQtLogger(LOG_PATH,this);
     p->java_layer = new SialanJavaLayer(this);
 #endif
 
@@ -839,7 +839,7 @@ qreal Kaqaz::density()
 qreal Kaqaz::fontDensity()
 {
 #ifdef Q_OS_ANDROID
-    qreal ratio = isTablet()? 1.28 : 1;
+    qreal ratio = (1.28)*1.35;
 //    if( isLargeTablet() )
 //        ratio = 1.6;
 
@@ -849,7 +849,7 @@ qreal Kaqaz::fontDensity()
     return 1.4;
 #else
 #ifdef Q_OS_LINUX
-    return 1;
+    return 1.3;
 #else
 #ifdef Q_OS_WIN32
     return 1;

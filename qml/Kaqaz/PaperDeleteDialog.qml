@@ -89,7 +89,7 @@ Item {
             anchors.centerIn: parent
             text: qsTr("Cancel")
             font.family: globalFontFamily
-            font.pointSize: 15*fontsScale
+            font.pixelSize: 15*fontsScale
             color: "#333333"
         }
 

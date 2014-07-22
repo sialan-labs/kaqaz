@@ -39,7 +39,7 @@ Rectangle {
         id: txt
         x: tooltip.padding
         y: tooltip.padding*0.75
-        font.pointSize: 10*fontsScale
+        font.pixelSize: 10*fontsScale
         font.family: globalFontFamily
         color: "#ffffff"
     }

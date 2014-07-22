@@ -21,7 +21,7 @@ import QtQuick 2.2
 Item {
     id: attach_menu
     width: 100
-    height: opened? (kaqaz_root.width>minimumHeight? minimumHeight : kaqaz_root.width) : toggle_btn.height + 25*physicalPlatformScale
+    height: opened? (kaqaz_root.width>minimumHeight? minimumHeight : kaqaz_root.width) : toggle_btn.height + 10 +20*physicalPlatformScale
 
     property real minimumHeight: kaqaz_root.height - 50*physicalPlatformScale
 

@@ -39,7 +39,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pointSize: 15*fontsScale
+            font.pixelSize: 15*fontsScale
             font.family: globalFontFamily
             color: "#333333"
         }
@@ -49,7 +49,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pointSize: 15*fontsScale
+            font.pixelSize: 15*fontsScale
             font.family: globalFontFamily
             color: "#333333"
         }
@@ -59,7 +59,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pointSize: 15*fontsScale
+            font.pixelSize: 15*fontsScale
             font.family: globalFontFamily
             color: "#333333"
         }

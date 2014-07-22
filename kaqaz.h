@@ -31,6 +31,7 @@ class Kaqaz : public QObject
 {
     Q_PROPERTY( bool   mobile      READ isMobile      NOTIFY mobileChanged  )
     Q_PROPERTY( bool   tablet      READ isTablet      NOTIFY tabletChanged  )
+    Q_PROPERTY( bool   largeTablet READ isLargeTablet NOTIFY largeTabletChanged  )
     Q_PROPERTY( bool   touchDevice READ isTouchDevice NOTIFY touchDeviceChanged )
     Q_PROPERTY( bool   desktop     READ isDesktop     NOTIFY desktopChanged )
     Q_PROPERTY( bool   keyboard    READ keyboard      NOTIFY keyboardChanged )
@@ -188,6 +189,7 @@ signals:
     void tabletChanged();
     void touchDeviceChanged();
     void desktopChanged();
+    void largeTabletChanged();
 
 private slots:
     void incomingShare( const QString & title, const QString & msg );

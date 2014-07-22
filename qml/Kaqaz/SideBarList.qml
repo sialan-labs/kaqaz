@@ -121,7 +121,7 @@ Rectangle {
                 anchors.leftMargin: 6*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pointSize: 9*fontsScale
+                font.pixelSize: 9*fontsScale
                 font.family: globalFontFamily
                 horizontalAlignment: Qt.AlignLeft
                 color: item.press? "#ffffff" : fontColor
@@ -191,7 +191,7 @@ Rectangle {
     }
 
     ScrollBar {
-        scrollArea: list_view; height: list_view.height; width: 8
+        scrollArea: list_view; height: list_view.height; width: 6*physicalPlatformScale
         anchors.right: list_view.right; anchors.top: list_view.top; color: "#ffffff"
     }
 

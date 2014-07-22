@@ -91,7 +91,7 @@ Item {
                 anchors.margins: 25*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pointSize: 11*fontsScale
+                font.pixelSize: 11*fontsScale
                 font.family: globalFontFamily
                 color: "#ffffff"
             }
@@ -152,7 +152,7 @@ Item {
     }
 
     ScrollBar {
-        scrollArea: history_list; height: history_list.height; width: 8
+        scrollArea: history_list; height: history_list.height; width: 6*physicalPlatformScale
         anchors.right: history_list.right; anchors.top: history_list.top; color: "#ffffff"
     }
 

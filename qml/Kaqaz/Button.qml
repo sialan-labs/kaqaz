@@ -28,7 +28,7 @@ Rectangle {
 
     property alias text: txt.text
     property alias icon: icn.source
-    property alias fontSize: txt.font.pointSize
+    property alias fontSize: txt.font.pixelSize
     property alias textFont: txt.font
 
     property alias hoverEnabled: marea.hoverEnabled
@@ -70,7 +70,7 @@ Rectangle {
             color: "#ffffff"
             font.bold: kaqaz.isWindows()? false : true
             font.family: globalFontFamily
-            font.pointSize: 9*fontsScale
+            font.pixelSize: 9*fontsScale
         }
     }
 

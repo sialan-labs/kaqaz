@@ -32,7 +32,7 @@ Item {
 
         Text {
             id: delete_warn
-            font.pointSize: 17*fontsScale
+            font.pixelSize: 17*fontsScale
             font.family: globalFontFamily
             anchors.margins: 10*physicalPlatformScale
             anchors.left: parent.left
@@ -119,7 +119,7 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pointSize: 12*fontsScale
+                font.pixelSize: 12*fontsScale
                 font.family: globalFontFamily
                 color: item.press? "#ffffff" : "#333333"
             }
@@ -176,7 +176,7 @@ Item {
     }
 
     ScrollBar {
-        scrollArea: preference_list; height: preference_list.height; width: 8
+        scrollArea: preference_list; height: preference_list.height; width: 6*physicalPlatformScale
         anchors.right: preference_list.right; anchors.top: preference_list.top;color: "#000000"
     }
 

@@ -48,7 +48,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: 8*physicalPlatformScale
-            font.pointSize: (physicalPlatformScale == 0)? 1 : 15*physicalPlatformScale
+            font.pixelSize: (physicalPlatformScale == 0)? 1 : 15*physicalPlatformScale
             font.family: globalFontFamily
             color: "#ffffff"
         }

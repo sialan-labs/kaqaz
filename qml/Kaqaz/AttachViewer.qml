@@ -51,7 +51,7 @@ Item {
 
         Text {
             id: delete_warn
-            font.pointSize: 17*fontsScale
+            font.pixelSize: 17*fontsScale
             font.family: globalFontFamily
             anchors.margins: 10*physicalPlatformScale
             anchors.left: parent.left

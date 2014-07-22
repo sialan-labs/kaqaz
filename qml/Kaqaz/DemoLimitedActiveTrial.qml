@@ -36,7 +36,7 @@ Item {
             id: limit_text
             anchors.left: parent.left
             anchors.right: parent.right
-            font.pointSize: 30*fontsScale
+            font.pixelSize: 30*fontsScale
             font.family: globalFontFamily
             height: 70*physicalPlatformScale
             horizontalAlignment: Text.AlignHCenter
@@ -51,7 +51,7 @@ Item {
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
             font.family: globalFontFamily
-            font.pointSize: 12*fontsScale
+            font.pixelSize: 12*fontsScale
             color: "#333333"
             text: qsTr("Active Kaqaz trial until next use.")
         }

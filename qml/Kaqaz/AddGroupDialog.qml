@@ -60,7 +60,7 @@ Item {
             x: parent.width/2 - width/2
             y: parent.height/2 - height/2
             width: parent.width
-            font.pointSize: 14*fontsScale
+            font.pixelSize: 14*fontsScale
             font.bold: kaqaz.isWindows()? false : true
             font.family: globalFontFamily
             color: "white"
