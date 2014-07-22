@@ -20,6 +20,7 @@
 
 #ifdef DESKTOP_DEVICE
 #include <QApplication>
+#include "qtsingleapplication/qtsingleapplication.h"
 #else
 #include <QtGui/QGuiApplication>
 #endif
@@ -27,18 +28,36 @@
 #include "kaqaz.h"
 
 #include <QFile>
+#include <QIcon>
 #include "resourcemanager.h"
 
 int main(int argc, char *argv[])
 {
 #ifdef DESKTOP_DEVICE
-    QApplication app(argc, argv);
+    QtSingleApplication app(argc, argv);
 #else
     QGuiApplication app(argc, argv);
+#endif
+    app.setApplicationName("Kaqaz");
+    app.setApplicationDisplayName("Kaqaz");
+    app.setOrganizationDomain("org.sialan.kaqaz");
+    app.setOrganizationName("Sialan");
+    app.setWindowIcon(QIcon(app.applicationDirPath()+"/qml/Kaqaz/files/kaqaz.png"));
+
+#ifdef DESKTOP_DEVICE
+    if( app.isRunning() )
+    {
+        app.sendMessage("show");
+        return 0;
+    }
 #endif
 
     Kaqaz kaqaz;
     kaqaz.start();
+
+#ifdef DESKTOP_DEVICE
+    QObject::connect( &app, SIGNAL(messageReceived(QString)), &kaqaz, SLOT(incomingAppMessage(QString)) );
+#endif
 
     return app.exec();
 }

@@ -278,6 +278,15 @@ void Kaqaz::start()
     p->viewer->showExpanded();
 }
 
+void Kaqaz::incomingAppMessage(const QString &msg)
+{
+    if( msg == "show" )
+    {
+        p->viewer->show();
+        p->viewer->requestActivate();
+    }
+}
+
 void Kaqaz::incomingShare(const QString &title, const QString &msg)
 {
     QVariant title_var = title;

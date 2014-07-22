@@ -171,6 +171,7 @@ public:
 
 public slots:
     void start();
+    void incomingAppMessage( const QString & msg );
 
     void disconnectAllResources();
     void reconnectAllResources();

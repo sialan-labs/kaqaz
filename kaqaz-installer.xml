@@ -1,7 +1,7 @@
 <project>
     <shortName>kaqaz</shortName>
     <fullName>Kaqaz</fullName>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
     <licenseFile>LICENSE</licenseFile>
     <htmlLicenseFile>LICENSE.html</htmlLicenseFile>
     <leftImage>installer/logo.png</leftImage>
@@ -18,7 +18,7 @@
                 <shortcut>
                     <comment>Kaqaz note manager</comment>
                     <exec>${installdir}/kaqaz/run</exec>
-                    <icon>${installdir}/icons/kaqaz.png</icon>
+                    <icon>${installdir}/kaqaz/icons/kaqaz.png</icon>
                     <name>Kaqaz</name>
                     <path>${installdir}/kaqaz/</path>
                     <platforms>all</platforms>
@@ -118,16 +118,20 @@
         </component>
     </componentList>
     <compressionAlgorithm>lzma-ultra</compressionAlgorithm>
+    <disableSplashScreen>1</disableSplashScreen>
     <enableRollback>1</enableRollback>
     <enableTimestamp>1</enableTimestamp>
+    <height>400</height>
+    <licenseFileEncoding>utf-8</licenseFileEncoding>
     <saveRelativePaths>1</saveRelativePaths>
     <vendor>Sialan Labs</vendor>
+    <width>600</width>
     <parameterList>
         <directoryParameter>
             <name>installdir</name>
             <description>Installer.Parameter.installdir.description</description>
             <explanation>Installer.Parameter.installdir.explanation</explanation>
-            <value>${platform_install_prefix}/Sialan Labs/${product_shortname}-${product_version}</value>
+            <value>${platform_install_prefix}/Sialan/${product_shortname}-${product_version}</value>
             <default>${platform_install_prefix}/${product_shortname}-${product_version}</default>
             <allowEmptyValue>0</allowEmptyValue>
             <cliOptionName>prefix</cliOptionName>

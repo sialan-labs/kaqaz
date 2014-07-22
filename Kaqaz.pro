@@ -39,11 +39,22 @@ android {
 
     HEADERS += \
         mimeapps.h \
-        iconprovider.h
+        iconprovider.h \
+        qtsingleapplication/qtsinglecoreapplication.h \
+        qtsingleapplication/qtsingleapplication.h \
+        qtsingleapplication/qtlockedfile.h \
+        qtsingleapplication/qtlocalpeer.h
 
     SOURCES += \
         mimeapps.cpp \
-        iconprovider.cpp
+        iconprovider.cpp \
+        qtsingleapplication/qtsinglecoreapplication.cpp \
+        qtsingleapplication/qtsingleapplication.cpp \
+        qtsingleapplication/qtlockedfile.cpp \
+        qtsingleapplication/qtlocalpeer.cpp
+
+    win32: SOURCES += qtsingleapplication/qtlockedfile_win.cpp
+    unix:  SOURCES += qtsingleapplication/qtlockedfile_unix.cpp
 }
 }
 
