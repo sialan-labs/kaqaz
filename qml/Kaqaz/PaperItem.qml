@@ -212,6 +212,8 @@ AnimationItem {
                 var hg = paper.height*1/2 - 30*physicalPlatformScale
                 if( label.pickersPressed || label.selectionStart != label.selectionEnd )
                     hg = height
+                if( kaqaz.desktop )
+                    hg = height
 
                 if (contentY >= r.y)
                     contentY = r.y;
