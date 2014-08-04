@@ -27,7 +27,7 @@
 #define KAQAZ_VERSION "1.0.4"
 
 #define DEMO_PAPERS_LIMIT 20
-//#define PRO_BUILD
+#define PRO_BUILD
 #ifndef PRO_BUILD
 //#define TRIAL_BUILD
 #endif
