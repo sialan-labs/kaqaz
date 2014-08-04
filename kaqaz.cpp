@@ -849,7 +849,7 @@ qreal Kaqaz::density()
     return screen()->logicalDotsPerInch()/LINUX_DEFAULT_DPI;
 #else
 #ifdef Q_OS_WIN32
-    return 0.95;
+    return 0.95*screen()->logicalDotsPerInch()/WINDOWS_DEFAULT_DPI;
 #else
     return 1;
 #endif
@@ -862,21 +862,21 @@ qreal Kaqaz::fontDensity()
 {
 #ifdef Q_OS_ANDROID
     qreal ratio = (1.28)*1.35;
-//    if( isLargeTablet() )
-//        ratio = 1.6;
-
     return p->java_layer->density()*ratio;
 #else
 #ifdef Q_OS_IOS
     return 1.4;
 #else
 #ifdef Q_OS_LINUX
-    return 1.3;
+    qreal ratio = 1.3;
+    return ratio*density();
 #else
 #ifdef Q_OS_WIN32
-    return 1;
+    qreal ratio = 1.3;
+    return ratio*density();
 #else
-    return 1;
+    qreal ratio = 1.3;
+    return ratio*density();
 #endif
 #endif
 #endif
