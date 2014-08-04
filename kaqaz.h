@@ -36,8 +36,12 @@ class Kaqaz : public QObject
     Q_PROPERTY( bool   desktop     READ isDesktop     NOTIFY desktopChanged )
     Q_PROPERTY( bool   keyboard    READ keyboard      NOTIFY keyboardChanged )
     Q_PROPERTY( int    currentDays READ currentDays   NOTIFY currentDaysChanged )
+    Q_PROPERTY(QObject *screen     READ screenObj     NOTIFY screenChanged )
+    Q_PROPERTY( bool   proBuild    READ proBuild      NOTIFY proBuildChanged )
+    Q_PROPERTY( bool   groupsCount READ groupsCount   WRITE setGroupsCount NOTIFY groupsCountChanged)
+    Q_PROPERTY( bool   modernDelete READ modernDelete WRITE setModernDelete NOTIFY modernDeleteChanged)
+    Q_PROPERTY( bool   allPaper    READ allPaper      WRITE setAllPaper NOTIFY allPaperChanged)
     Q_PROPERTY( Qt::LayoutDirection  languageDirection  READ languageDirection NOTIFY languageDirectionChanged )
-    Q_PROPERTY(QObject * screen READ screenObj NOTIFY screenChanged)
 
     Q_OBJECT
 public:
@@ -58,6 +62,7 @@ public:
 
     Q_INVOKABLE bool demoHasTrial() const;
     Q_INVOKABLE void demoActiveTrial() const;
+    Q_INVOKABLE bool proBuild() const;
 
     Q_INVOKABLE QString version() const;
     Q_INVOKABLE QString qtVersion() const;
@@ -139,6 +144,15 @@ public:
     Q_INVOKABLE void setTutorialCompleted( bool stt );
     Q_INVOKABLE bool isTutorialCompleted() const;
 
+    void setGroupsCount( bool stt );
+    bool groupsCount() const;
+
+    void setModernDelete( bool stt );
+    bool modernDelete() const;
+
+    void setAllPaper( bool stt );
+    bool allPaper() const;
+
     Q_INVOKABLE bool startCameraPicture();
     Q_INVOKABLE bool getOpenPictures();
 
@@ -167,6 +181,9 @@ public:
     Q_INVOKABLE static QDate convertDaysToDate( int days );
     Q_INVOKABLE static int convertDateToDays( const QDate & date );
 
+    Q_INVOKABLE void setProperty( QObject *obj, const QString & property, const QVariant & v );
+    Q_INVOKABLE QVariant property( QObject *obj, const QString & property );
+
     Q_INVOKABLE bool keyboard();
 
 public slots:
@@ -180,6 +197,9 @@ signals:
     void screenChanged();
     void currentDaysChanged();
     void keyboardChanged();
+    void groupsCountChanged();
+    void modernDeleteChanged();
+    void allPaperChanged();
 
     void backRequest();
     void languageChanged();
@@ -191,6 +211,8 @@ signals:
     void touchDeviceChanged();
     void desktopChanged();
     void largeTabletChanged();
+
+    void proBuildChanged();
 
 private slots:
     void incomingShare( const QString & title, const QString & msg );

@@ -40,7 +40,8 @@ public:
         Group,
         Date,
         Search,
-        Clean
+        Clean,
+        All
     };
 
     PaperManager(QQuickItem *parent = 0);

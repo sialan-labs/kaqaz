@@ -25,6 +25,8 @@ Item {
 
     property alias text: title_txt.text
     property bool light: false
+    property bool backButton: !kaqaz.isAndroid()
+    property bool forceBack: false
 
     Row {
         id: back_row
@@ -33,7 +35,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.leftMargin: 10*physicalPlatformScale
         width: 75*physicalPlatformScale
-        visible: !kaqaz.isAndroid() && !backHandler
+        visible: backButton && !backHandler
 
         Image {
             anchors.verticalCenter: parent.verticalCenter
@@ -57,10 +59,15 @@ Item {
 
     MouseArea {
         anchors.fill: back_row
-        onClicked: kaqaz_root.back()
         onPressed: back_row.press = true
         onReleased: back_row.press = false
         visible: back_row.visible
+        onClicked: {
+            if(forceBack)
+                backHandler = 0
+
+            kaqaz_root.back()
+        }
     }
 
     Text {

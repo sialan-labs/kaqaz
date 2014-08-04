@@ -277,6 +277,29 @@ QList<int> Database::papersOf(int group_id)
     return result.values();
 }
 
+QList<int> Database::papers()
+{
+    QSqlQuery query(p->db);
+    query.prepare("SELECT id,ctime,cdate FROM Papers");
+    query.exec();
+
+    if( query.lastError().isValid() )
+        qDebug() << query.lastError();
+
+    QMap<int,int> result;
+    while( query.next() )
+    {
+        QSqlRecord record = query.record();
+        int id    = record.value(0).toInt();
+        int ctime = record.value(1).toInt();
+        int cdate = record.value(2).toInt();
+
+        result.insert( -(cdate*3600*25+ctime), id );
+    }
+
+    return result.values();
+}
+
 QList<int> Database::search(const QString &keyword)
 {
     QSqlQuery query(p->db);
@@ -712,6 +735,22 @@ int Database::groupUuidId(const QString &uuid)
         return -1;
 
     return query.record().value(0).toInt();
+}
+
+int Database::groupPapersCount(int id)
+{
+    QSqlQuery query(p->db);
+    query.prepare("SELECT count(id) FROM Papers WHERE grp=:grp");
+    query.bindValue(":grp",id);
+    query.exec();
+
+    if( query.lastError().isValid() )
+        qDebug() << query.lastError();
+    if( !query.next() )
+        return 0;
+
+    QSqlRecord record = query.record();
+    return record.value(0).toInt();
 }
 
 QList<int> Database::activities()

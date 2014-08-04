@@ -16,9 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import QtQuick 2.2
+import QtQuick 2.0
 
 Item {
+    id: configure
     width: 100
     height: 62
 
@@ -30,7 +31,7 @@ Item {
     }
 
     ListView {
-        id: preference_list
+        id: prefrences
         anchors.top: title.bottom
         anchors.left: parent.left
         anchors.bottom: parent.bottom
@@ -46,15 +47,11 @@ Item {
             height:  50*physicalPlatformScale
             color: press? "#3B97EC" : "#00000000"
 
-            property string text: name
-            property int calendarID: type
-            property bool press: false
+            property string dstFile: file
+            property alias press: marea.pressed
+            property bool checkable: check
 
-            Connections{
-                target: preference_list
-                onMovementStarted: press = false
-                onFlickStarted: press = false
-            }
+            property string prprt: pr
 
             Text{
                 id: txt
@@ -62,42 +59,53 @@ Item {
                 anchors.right: parent.right
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
-                text: parent.text
                 font.pixelSize: 13*fontsScale
                 font.family: globalFontFamily
                 color: item.press? "#ffffff" : "#333333"
+                wrapMode: TextInput.WordWrap
+                text: name
             }
 
             MouseArea{
+                id: marea
                 anchors.fill: parent
-                onPressed: item.press = true
-                onReleased: item.press = false
                 onClicked: {
-                    kaqaz.setCalendar(item.calendarID)
-                    showTooltip( qsTr("Calendar changed") )
-                    main.popPreference()
+                    if( !item.checkable ) {
+                        var component = Qt.createComponent(item.dstFile)
+                        var citem = component.createObject(sub_frame)
+                        sub_frame.item = citem
+                        configure.viewMode = true
+                    } else {
+                        checkbox.checked = !checkbox.checked
+                    }
                 }
+            }
+
+            CheckBox {
+                id: checkbox
+                x: kaqaz.languageDirection == Qt.RightToLeft? 20 : item.width - width - 20
+                anchors.verticalCenter: parent.verticalCenter
+                visible: item.checkable
+                checked: item.prprt.length==0? false : kaqaz.property(kaqaz,item.prprt)
+                color: item.press? "#ffffff" : "#333333"
+                onCheckedChanged: kaqaz.setProperty(kaqaz,item.prprt,checked)
             }
         }
 
-        focus: true
         highlight: Rectangle { color: "#3B97EC"; radius: 3; smooth: true }
         currentIndex: -1
 
-        onCurrentItemChanged: {
-            if( !currentItem )
-                return
-        }
-
-        Component.onCompleted: {
+        function refresh() {
             model.clear()
-
-            var cals = kaqaz.calendarsID()
-            for( var i=0; i<cals.length; i++ )
-                model.append({"type": cals[i], "name": kaqaz.calendarName(cals[i])})
-
-            focus = true
+            model.append({ "name": qsTr("All papers item"), "file": "", "check": true, "pr":"allPaper"})
+            model.append({ "name": qsTr("Groups count"), "file": "", "check": true, "pr":"groupsCount"})
+            model.append({ "name": qsTr("Modern delete dialog"), "file": "", "check": true, "pr":"modernDelete"})
         }
+    }
+
+    ScrollBar {
+        scrollArea: prefrences; height: prefrences.height; width: 6*physicalPlatformScale
+        anchors.right: prefrences.right; anchors.top: prefrences.top; color: "#000000"
     }
 
     Connections{
@@ -106,7 +114,8 @@ Item {
     }
 
     function initTranslations(){
-        title.text = qsTr("Calendars")
+        prefrences.refresh()
+        title.text = qsTr("Appearance")
     }
 
     Component.onCompleted: {

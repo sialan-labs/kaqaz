@@ -98,7 +98,7 @@ Item {
         delegate: Rectangle {
             id: item
             width: groups_list.width
-            height: 60*physicalPlatformScale
+            height:  50*physicalPlatformScale
             color: press? "#3B97EC" : "#00000000"
 
             property string text: name

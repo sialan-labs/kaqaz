@@ -45,7 +45,7 @@ Item {
         delegate: Rectangle {
             id: item
             width: backup_restore_list.width
-            height: 60*physicalPlatformScale
+            height:  50*physicalPlatformScale
             color: press? "#3B97EC" : "#00000000"
 
             property string text: name
@@ -65,7 +65,7 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pixelSize: 15*fontsScale
+                font.pixelSize: 13*fontsScale
                 font.family: globalFontFamily
                 color: item.press? "#ffffff" : "#333333"
             }

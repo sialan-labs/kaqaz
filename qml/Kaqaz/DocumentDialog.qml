@@ -17,11 +17,14 @@
 */
 
 import QtQuick 2.2
+import Qt.labs.folderlistmodel 2.1
 
 Item {
-    id: document_dialog
+    id: doc_dialog
     width: 100
     height: 62
+
+    property variant sizeSelector
 
     signal selected( string repID )
 
@@ -45,18 +48,22 @@ Item {
         maximumFlickVelocity: flickVelocity
 
         property int dept: -1
-        property string path
 
-        model: ListModel {}
+        model: FolderListModel {
+            showDirsFirst: true
+            folder: "file://" + kaqaz.documentsLocation()
+            nameFilters: ["*.pdf","*.txt","*.text"]
+            sortField: FolderListModel.Name
+        }
         delegate: Rectangle {
             id: item
             width: preference_list.width
-            height: 80*physicalPlatformScale
+            height: 100*physicalPlatformScale
             color: press? "#3B97EC" : "#00000000"
 
-            property string text: name
-            property string path: adrs
-            property bool directory: isDir
+            property string text: fileBaseName
+            property string path: fileURL
+            property bool directory: fileIsDir
             property bool press: false
 
             onPressChanged: hideRollerDialog()
@@ -100,10 +107,10 @@ Item {
                 onReleased: item.press = false
                 onClicked: {
                     if( item.directory )
-                        document_dialog.open(item.path)
+                        preference_list.model.folder = item.path
                     else {
                         var id = repository.insert( item.path )
-                        document_dialog.selected(id)
+                        doc_dialog.selected(id)
 
                         backHandler = 0
                         main.popPreference()
@@ -117,31 +124,6 @@ Item {
         focus: true
         highlight: Rectangle { color: "#3B97EC"; radius: 3; smooth: true }
         currentIndex: -1
-
-        onCurrentItemChanged: {
-            if( !currentItem )
-                return
-        }
-
-        Component.onCompleted: {
-
-            refresh( kaqaz.documentsLocation() )
-        }
-
-        function refresh( path ){
-            model.clear()
-            preference_list.path = path
-
-            var dirs = kaqaz.dirEntryDirs(path)
-            for( var i=0; i<dirs.length ; i++ )
-                model.append({"name": kaqaz.fileName(dirs[i]), "adrs": dirs[i], "isDir": true})
-
-            var files = kaqaz.dirEntryFiles(path,["*.pdf","*.txt","*.text"])
-            for( var i=0; i<files.length ; i++ )
-                model.append({"name": kaqaz.fileName(files[i]), "adrs": files[i], "isDir": false})
-
-            focus = true
-        }
     }
 
     ScrollBar {
@@ -158,26 +140,19 @@ Item {
         title.text = qsTr("Document")
     }
 
-    function open( path ){
-        preference_list.refresh(path)
-        preference_list.dept++
-    }
-
     function back(){
-        if( preference_list.dept < 0 )
+        if( preference_list.model.parentFolder == "" )
         {
             backHandler = 0
             return false
         }
 
-        preference_list.refresh(preference_list.path+"/..")
-        preference_list.dept--
-
+        preference_list.model.folder = preference_list.model.folder+"/.."
         return true
     }
 
     Component.onCompleted: {
         initTranslations()
-        backHandler = document_dialog
+        backHandler = doc_dialog
     }
 }

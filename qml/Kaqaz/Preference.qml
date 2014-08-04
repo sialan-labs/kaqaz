@@ -43,7 +43,7 @@ Item {
         delegate: Rectangle {
             id: item
             width: preference_list.width
-            height: 60*physicalPlatformScale
+            height:  50*physicalPlatformScale
             color: press? "#3B97EC" : "#00000000"
 
             property string command: cmd
@@ -63,7 +63,7 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pixelSize: 15*fontsScale
+                font.pixelSize: 13*fontsScale
                 font.family: globalFontFamily
                 color: item.press? "#ffffff" : "#333333"
             }
@@ -96,6 +96,9 @@ Item {
 
         function refresh(){
             model.clear()
+            if( kaqaz.proBuild ) {
+                model.append({"name": qsTr("Appearance"), "cmd": "Appearance.qml"})
+            }
             model.append({"name": qsTr("Languages"), "cmd": "LanguageSelector.qml"})
             model.append({"name": qsTr("Calendars"), "cmd": "Calendar.qml" })
             model.append({"name": qsTr("Label Manager"), "cmd": "GroupManager.qml" })
@@ -103,8 +106,10 @@ Item {
 //            if( kaqaz.isTouchDevice() )
 //                model.append({"name": qsTr("Data Location"), "cmd": "ProfileSettings.qml" })
             model.append({"name": qsTr("Synchronization"), "cmd": "Synchronization.qml" })
-            model.append({"name": qsTr("Security"), "cmd": "Security.qml" })
-            model.append({"name": qsTr("States"), "cmd": "StateDialog.qml" })
+            if( kaqaz.proBuild ) {
+                model.append({"name": qsTr("Security"), "cmd": "Security.qml" })
+                model.append({"name": qsTr("States"), "cmd": "StateDialog.qml" })
+            }
             model.append({"name": qsTr("About Kaqaz"), "cmd": "About.qml" })
             model.append({"name": qsTr("About Sialan"), "cmd": "AboutSialan.qml" })
             focus = true

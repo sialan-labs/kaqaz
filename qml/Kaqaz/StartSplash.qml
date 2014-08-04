@@ -129,6 +129,26 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
+    Button {
+        id: skip_btn
+        width: 80*physicalPlatformScale
+        height: 60*physicalPlatformScale
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.bottomMargin: navigationBarHeight + 5*physicalPlatformScale
+        textColor: press? "#337fa2" : "#4098bf"
+        normalColor: "#00000000"
+        highlightColor: "#00000000"
+        textFont.weight: Font.Normal
+        textFont.bold: false
+        textFont.underline: true
+        textFont.pixelSize: 11*fontsScale
+        onClicked: {
+            kaqaz.setTutorialCompleted(true)
+            start_splash.finish()
+        }
+    }
+
     Component {
         id: square_component
         Item {
@@ -169,5 +189,17 @@ Item {
         return true
     }
 
-    Component.onCompleted: backHandler = start_splash
+    Connections {
+        target: kaqaz
+        onLanguageChanged: initTranslations()
+    }
+
+    function initTranslations(){
+        skip_btn.text = qsTr("Skip")
+    }
+
+    Component.onCompleted: {
+        initTranslations()
+        backHandler = start_splash
+    }
 }

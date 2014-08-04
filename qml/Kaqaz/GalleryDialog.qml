@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import Qt.labs.folderlistmodel 2.1
 
 Item {
     id: gallery_dialog
@@ -47,18 +48,22 @@ Item {
         maximumFlickVelocity: flickVelocity
 
         property int dept: -1
-        property string path
 
-        model: ListModel {}
+        model: FolderListModel {
+            showDirsFirst: true
+            folder: "file://" + kaqaz.picturesLocation()
+            nameFilters: ["*.jpg","*.JPEG","*.jpeg","*.JPG","*.png","*.PNG"]
+            sortField: FolderListModel.Name
+        }
         delegate: Rectangle {
             id: item
             width: preference_list.width
             height: 100*physicalPlatformScale
             color: press? "#3B97EC" : "#00000000"
 
-            property string text: name
-            property string path: adrs
-            property bool directory: isDir
+            property string text: fileBaseName
+            property string path: fileURL
+            property bool directory: fileIsDir
             property bool press: false
 
             onPressChanged: hideRollerDialog()
@@ -80,7 +85,7 @@ Item {
                 width: height*4/3
                 sourceSize.width: width
                 sourceSize.height: height
-                source: item.directory? "files/folder.png" : "file://" + item.path
+                source: item.directory? "files/folder.png" : item.path
             }
 
             Text{
@@ -102,7 +107,7 @@ Item {
                 onReleased: item.press = false
                 onClicked: {
                     if( item.directory )
-                        gallery_dialog.open(item.path)
+                        preference_list.model.folder = item.path
                     else {
                         var component = Qt.createComponent("ImageSizeSelector.qml");
                         var i = component.createObject(main);
@@ -118,31 +123,6 @@ Item {
         focus: true
         highlight: Rectangle { color: "#3B97EC"; radius: 3; smooth: true }
         currentIndex: -1
-
-        onCurrentItemChanged: {
-            if( !currentItem )
-                return
-        }
-
-        Component.onCompleted: {
-
-            refresh( kaqaz.picturesLocation() )
-        }
-
-        function refresh( path ){
-            model.clear()
-            preference_list.path = path
-
-            var dirs = kaqaz.dirEntryDirs(path)
-            for( var i=0; i<dirs.length ; i++ )
-                model.append({"name": kaqaz.fileName(dirs[i]), "adrs": dirs[i], "isDir": true})
-
-            var files = kaqaz.dirEntryFiles(path,["*.jpg","*.JPEG","*.jpeg","*.JPG","*.png","*.PNG"])
-            for( var i=0; i<files.length ; i++ )
-                model.append({"name": kaqaz.fileName(files[i]), "adrs": files[i], "isDir": false})
-
-            focus = true
-        }
     }
 
     ScrollBar {
@@ -159,23 +139,16 @@ Item {
         title.text = qsTr("Gallery")
     }
 
-    function open( path ){
-        preference_list.refresh(path)
-        preference_list.dept++
-    }
-
     function back(){
         if( sizeSelector )
             return false
-        if( preference_list.dept < 0 )
+        if( preference_list.model.parentFolder == "" )
         {
             backHandler = 0
             return false
         }
 
-        preference_list.refresh(preference_list.path+"/..")
-        preference_list.dept--
-
+        preference_list.model.folder = preference_list.model.folder+"/.."
         return true
     }
 

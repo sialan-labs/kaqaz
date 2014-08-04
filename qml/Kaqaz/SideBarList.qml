@@ -67,8 +67,13 @@ Rectangle {
                 if( iid == -1 )
                     return
                 if( type == 1 ){
+                    var append_text = " "
+                    var groupCount = database.groupPapersCount(iid)
+                    if( kaqaz.groupsCount && groupCount != 0 )
+                        append_text += "(" + groupCount + ")"
+
                     color_rect.color = database.groupColor(iid)
-                    text = database.groupName(iid)
+                    text = database.groupName(iid) + append_text
                 }
                 else
                 if( type == 0 ){
@@ -135,6 +140,10 @@ Rectangle {
                     if( item.command === "clean" )
                         main.clean()
                     else
+                    if( item.command === "all" ) {
+                        main.setCurrentGroup(0, PaperManager.All)
+                        show_list_timer.restart()
+                    } else
                     if( item.command === "search" )
                         main.showSearch()
                     else
@@ -164,6 +173,8 @@ Rectangle {
             model.clear()
 
             model.append({"textValue": qsTr("Clean Papers"), "cmdValue": "clean", "typeValue": 0, "guidValue": -1, "iconValue": "files/clean-papers.png"})
+            if( kaqaz.allPaper )
+                model.append({"textValue": qsTr("All Papers"), "cmdValue": "all", "typeValue": 0, "guidValue": -1, "iconValue": "files/all-papers.png"})
             model.append({"textValue": qsTr("Search"), "cmdValue": "search", "typeValue": 0, "guidValue": -1, "iconValue": "files/search.png"})
             if( kaqaz.isDesktop() && database.password().length != 0 )
                 model.append({"textValue": qsTr("Lock"), "cmdValue": "lock", "typeValue": 0, "guidValue": -1, "iconValue": "files/lock.png"})
@@ -198,6 +209,14 @@ Rectangle {
     Connections{
         target: kaqaz
         onLanguageChanged: sidebar_list.refresh()
+        onGroupsCountChanged: sidebar_list.refresh()
+        onAllPaperChanged: sidebar_list.refresh()
+    }
+
+    Timer {
+        id: show_list_timer
+        interval: 1000
+        onTriggered: main.showListView()
     }
 
     function refresh(){

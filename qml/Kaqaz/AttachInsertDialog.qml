@@ -68,7 +68,7 @@ Item {
         delegate: Rectangle {
             id: item
             width: image_types_list.width
-            height: 60*physicalPlatformScale
+            height:  50*physicalPlatformScale
             color: press? "#3B97EC" : "#00000000"
 
             property string fileName: file
@@ -89,7 +89,7 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pixelSize: 15*fontsScale
+                font.pixelSize: 13*fontsScale
                 font.family: globalFontFamily
                 color: "#ffffff"
             }
@@ -131,9 +131,11 @@ Item {
         function refresh(){
             model.clear()
             model.append({"name": qsTr("Camera"), "file": "CameraDialog.qml", "cmd": ""})
-            model.append({"name": qsTr("Document"), "file": "DocumentDialog.qml", "cmd": "" })
+            if( kaqaz.proBuild )
+                model.append({"name": qsTr("Document"), "file": "DocumentDialog.qml", "cmd": "" })
             model.append({"name": qsTr("Gallery"), "file": "GalleryDialog.qml", "cmd": "picture" })
-            model.append({"name": qsTr("Music"), "file": "MusicDialog.qml", "cmd": "" })
+            if( kaqaz.proBuild )
+                model.append({"name": qsTr("Music"), "file": "MusicDialog.qml", "cmd": "" })
             focus = true
         }
 

@@ -66,6 +66,7 @@ Item {
             color: "white"
             horizontalAlignment: Text.AlignHCenter
             inputMethodHints: Qt.ImhNoPredictiveText
+            onAccepted: add_group.accept()
         }
     }
 

@@ -16,6 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#define NORMALIZE_PATH( PATH ) \
+    while( PATH.left(7) == "file://" ) \
+        PATH = PATH.mid(7);
+
 #include "repository.h"
 #include "kaqaz.h"
 
@@ -43,9 +47,9 @@ Repository::Repository(Kaqaz *kaqaz) :
     p->kaqaz = kaqaz;
 }
 
-QString Repository::insert(const QString &fp)
+QString Repository::insert(QString path)
 {
-    QString path = fp.left(7) == "file://"? fp.mid(7) : fp;
+    NORMALIZE_PATH(path)
     QString id = generateID(path);
     QString dest = p->kaqaz->repositoryPath() + "/" + id;
 
@@ -66,8 +70,9 @@ QString Repository::repositoryPath()
     return p->kaqaz->repositoryPath();
 }
 
-QString Repository::copyImageToRepository(const QString &path, int size)
+QString Repository::copyImageToRepository(QString path, int size)
 {
+    NORMALIZE_PATH(path)
     const QString & id = generateID( path );
     const QString & dest_path = getPath( id );
     if( QFile::exists(dest_path) )
@@ -102,8 +107,9 @@ QString Repository::copyImageToRepository(const QString &path, int size)
     return id;
 }
 
-QString Repository::copyAudioToRepository(const QString &path)
+QString Repository::copyAudioToRepository(QString path)
 {
+    NORMALIZE_PATH(path)
     return insert(path);
 }
 
@@ -122,8 +128,9 @@ void Repository::deleteFile(const QString &f)
     file.close();
 }
 
-QString Repository::generateID(const QString &path)
+QString Repository::generateID(QString path)
 {
+    NORMALIZE_PATH(path)
     QFileInfo file(path);
     QString hidden_text = path + " " + QString::number(file.size()) +  " " +
                           file.created().toString("yyyy/MM/dd hh:mm:ss:zzz") + " " +

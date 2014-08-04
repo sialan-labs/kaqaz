@@ -100,6 +100,10 @@ void PaperManager::setRoot(int id)
         p->papers.clear();
         break;
 
+    case All:
+        p->papers = Kaqaz::database()->papers();
+        break;
+
     case Search:
         p->papers.clear();
         if( p->keyword.isEmpty() )

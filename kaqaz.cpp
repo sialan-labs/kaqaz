@@ -435,13 +435,26 @@ void Kaqaz::demoActiveTrial() const
     p->demo_active_until_next = true;
 }
 
+bool Kaqaz::proBuild() const
+{
+#ifdef PRO_BUILD
+    return true;
+#else
+    return false;
+#endif
+}
+
 QString Kaqaz::version() const
 {
     return KAQAZ_VERSION
+#ifdef PRO_BUILD
+            " pro";
+#else
 #ifdef TRIAL_BUILD
             " trial";
 #else
-            " unlimited";
+            " free";
+#endif
 #endif
 }
 
@@ -949,6 +962,39 @@ bool Kaqaz::isTutorialCompleted() const
     return kaqaz_settings->value("General/Tutorial",false).toBool();
 }
 
+void Kaqaz::setGroupsCount(bool stt)
+{
+    kaqaz_settings->setValue("General/GroupsCount",stt);
+    emit groupsCountChanged();
+}
+
+bool Kaqaz::groupsCount() const
+{
+    return kaqaz_settings->value("General/GroupsCount",true).toBool();
+}
+
+void Kaqaz::setModernDelete(bool stt)
+{
+    kaqaz_settings->setValue("General/ModernDelete",stt);
+    emit modernDeleteChanged();
+}
+
+bool Kaqaz::modernDelete() const
+{
+    return kaqaz_settings->value("General/ModernDelete",false).toBool();
+}
+
+void Kaqaz::setAllPaper(bool stt)
+{
+    kaqaz_settings->setValue("General/AllPaper",stt);
+    emit allPaperChanged();
+}
+
+bool Kaqaz::allPaper() const
+{
+    return kaqaz_settings->value("General/AllPaper",true).toBool();
+}
+
 bool Kaqaz::startCameraPicture()
 {
 #ifdef Q_OS_ANDROID
@@ -1143,6 +1189,22 @@ QDate Kaqaz::convertDaysToDate(int days)
 int Kaqaz::convertDateToDays(const QDate &date)
 {
     return QDate(1,1,1).daysTo(date);
+}
+
+void Kaqaz::setProperty(QObject *obj, const QString &property, const QVariant &v)
+{
+    if( !obj || property.isEmpty() )
+        return;
+
+    obj->setProperty( property.toUtf8(), v );
+}
+
+QVariant Kaqaz::property(QObject *obj, const QString &property)
+{
+    if( !obj || property.isEmpty() )
+        return QVariant();
+
+    return obj->property(property.toUtf8());
 }
 
 bool Kaqaz::keyboard()

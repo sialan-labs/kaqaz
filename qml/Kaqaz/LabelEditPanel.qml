@@ -97,8 +97,7 @@ Item {
             highlightColor: "#aa0d80ec"
             textColor: "#ffffff"
             onClicked: {
-                var stt = true
-                if( kaqaz.isTouchDevice() || stt ) {
+                if( !kaqaz.modernDelete ) {
                     btns_item.y = labeledit_panel.height
                 } else {
                     main.closePanel()

@@ -30,18 +30,18 @@ public:
     Repository( Kaqaz *kaqaz );
     ~Repository();
 
-    Q_INVOKABLE QString insert( const QString & path );
+    Q_INVOKABLE QString insert(QString path );
     Q_INVOKABLE QString getPath( const QString & id );
     Q_INVOKABLE QString repositoryPath();
 
-    Q_INVOKABLE QString copyImageToRepository(const QString & path, int size );
-    Q_INVOKABLE QString copyAudioToRepository(const QString & path );
+    Q_INVOKABLE QString copyImageToRepository(QString path, int size );
+    Q_INVOKABLE QString copyAudioToRepository(QString path );
 
 public slots:
     void deleteFile( const QString & f );
 
 private:
-    QString generateID( const QString & path );
+    QString generateID(QString path );
 
 private:
     RepositoryPrivate *p;

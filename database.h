@@ -51,6 +51,7 @@ public:
     Q_INVOKABLE int papersCountOf( const QDate & date );
     Q_INVOKABLE QList<int> papersOf( const QDate & date );
     Q_INVOKABLE QList<int> papersOf( int group_id );
+    Q_INVOKABLE QList<int> papers();
     Q_INVOKABLE QList<int> search(const QString & keyword );
 
     Q_INVOKABLE int createPaper(const QString &uuid = QString());
@@ -97,6 +98,8 @@ public:
 
     Q_INVOKABLE QString groupUuid( int id );
     Q_INVOKABLE int groupUuidId( const QString & uuid );
+
+    Q_INVOKABLE int groupPapersCount( int id );
 
     Q_INVOKABLE QList<int> activities();
 
