@@ -25,6 +25,7 @@ class KaqazSyncPrivate;
 class KaqazSync : public QObject
 {
     Q_PROPERTY(bool tokenAvailable READ tokenAvailable NOTIFY tokenAvailableChanged)
+    Q_PROPERTY(bool fileSyncing READ fileSyncing WRITE setFileSyncing NOTIFY fileSyncingChanged)
     Q_PROPERTY(QString password READ password NOTIFY passwordChanged)
     Q_OBJECT
 public:
@@ -34,6 +35,9 @@ public:
     bool tokenAvailable() const;
 
     QString password() const;
+
+    void setFileSyncing( bool stt );
+    bool fileSyncing() const;
 
 public slots:
     void start();
@@ -51,6 +55,7 @@ signals:
 
     void tokenAvailableChanged();
     void passwordChanged();
+    void fileSyncingChanged();
 
 private slots:
     void password_changed( const QString & password );

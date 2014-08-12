@@ -38,6 +38,9 @@ public:
     bool connected() const;
     bool tokenAvailable() const;
 
+    void setFileSyncing( bool stt );
+    bool fileSyncing() const;
+
     void setLocalSyncHash( const SyncItemHash & hash );
     SyncItemHash localSyncHash() const;
 

@@ -68,6 +68,19 @@ QString KaqazSync::password() const
     return p->db->syncPassword();
 }
 
+void KaqazSync::setFileSyncing(bool stt)
+{
+    p->kdbox->setFileSyncing(stt);
+    Kaqaz::settings()->setValue( "General/fileSyncing", stt );
+    emit fileSyncingChanged();
+    refresh();
+}
+
+bool KaqazSync::fileSyncing() const
+{
+    return p->kdbox->fileSyncing();
+}
+
 void KaqazSync::password_changed(const QString &password)
 {
     p->db->setSyncPassword( password );
@@ -127,6 +140,7 @@ void KaqazSync::reload()
     p->thread = new QThread(this);
 
     p->kdbox = new KaqazDropBox();
+    p->kdbox->setFileSyncing( Kaqaz::settings()->value( "General/fileSyncing", true ).toBool() );
     p->kdbox->setLocalSyncHash(p->db->revisions());
     p->kdbox->moveToThread(p->thread);
 

@@ -34,6 +34,7 @@ Item {
         anchors.right: parent.right
         anchors.margins: 10*physicalPlatformScale
         anchors.verticalCenter: parent.verticalCenter
+        spacing: 10*physicalPlatformScale
 
         SynchronizationItem {
             image: "files/dropbox.png"
@@ -43,6 +44,44 @@ Item {
                     sync.stop();
                 else
                     showSubMessage("DropBoxAuthorize.qml")
+            }
+        }
+
+        Rectangle {
+            id: file_sync
+            width: parent.width
+            height:  60*physicalPlatformScale
+            color: press? "#3B97EC" : "#00000000"
+            visible: kaqaz.proBuild()
+
+            property alias press: marea.pressed
+
+            Text{
+                id: txt
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.margins: 30*physicalPlatformScale
+                y: parent.height/2 - height/2
+                font.pixelSize: 13*fontsScale
+                font.family: globalFontFamily
+                color: file_sync.press? "#ffffff" : "#333333"
+                wrapMode: TextInput.WordWrap
+                text: qsTr("Sync files")
+            }
+
+            MouseArea{
+                id: marea
+                anchors.fill: parent
+                onClicked: checkbox.checked = !checkbox.checked
+            }
+
+            CheckBox {
+                id: checkbox
+                x: kaqaz.languageDirection == Qt.RightToLeft? 20 : file_sync.width - width - 20
+                anchors.verticalCenter: parent.verticalCenter
+                color: file_sync.press? "#ffffff" : "#333333"
+                onCheckedChanged: sync.fileSyncing = checked
+                Component.onCompleted: checked = sync.fileSyncing
             }
         }
     }

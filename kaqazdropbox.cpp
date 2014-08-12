@@ -73,6 +73,7 @@ public:
     bool reupdate_flag;
     bool rsvn_fetched;
     bool token;
+    bool fileSyncing;
 
     QSet<QString> fnc_recall;
     QSet<QString> on_fnc_call;
@@ -90,6 +91,7 @@ KaqazDropBox::KaqazDropBox(QObject *parent) :
     p->refresh_timer = 0;
     p->rsvn_fetched = false;
     p->token = false;
+    p->fileSyncing = true;
 
     p->settings = new QSettings(CONFIG_PATH,QSettings::IniFormat);
     checkToken();
@@ -103,6 +105,16 @@ bool KaqazDropBox::connected() const
 bool KaqazDropBox::tokenAvailable() const
 {
     return p->token;
+}
+
+void KaqazDropBox::setFileSyncing(bool stt)
+{
+    p->fileSyncing = stt;
+}
+
+bool KaqazDropBox::fileSyncing() const
+{
+    return p->fileSyncing;
 }
 
 void KaqazDropBox::setLocalSyncHash(const SyncItemHash &hash)
@@ -199,6 +211,8 @@ void KaqazDropBox::localListUpdated()
         if( local_files.contains(fileName) )
             continue;
         if( inf.bytes()/(1024*1024) >= FILE_MAX_SIZE_MB )
+            continue;
+        if( !p->fileSyncing )
             continue;
 
         p->smartio->fetchFile( ROOT_FOLDER+inf.path(), HOME_PATH + "/repository/" + fileName );
