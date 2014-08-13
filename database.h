@@ -116,7 +116,8 @@ public:
     Q_INVOKABLE int stateDatesCount();
     Q_INVOKABLE int stateGroupsCount();
 
-    Q_INVOKABLE void setRevision( const QString & id, int revision );
+    Q_INVOKABLE void setRevision( const QString & id, int revisionOf );
+    Q_INVOKABLE int revisionOf( const QString & id ) const;
     Q_INVOKABLE SyncItemHash revisions() const;
 
 public slots:
@@ -131,6 +132,7 @@ signals:
     void datesListChanged();
     void activityListChanged();
     void revisionsChanged();
+    void revisionChanged( const QString &iid, int revision );
     void filesListChanged();
 
     void paperChanged( int id );

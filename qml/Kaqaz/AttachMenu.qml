@@ -27,8 +27,10 @@ Item {
 
     property bool opened: false
     property int paperItem
+    property string paperUuid: database.paperUuid(paperItem)
     property variant paper
     property variant attachments
+    property bool paperIsEmpty: true
 
     onPaperItemChanged: {
         if( paperItem == -1 )
@@ -165,13 +167,23 @@ Item {
         color: press? "#3B97EC" : normalColor
         smooth: true
         border.width: 1*physicalPlatformScale
-        border.color: "#ffffff"
+        border.color: attach_menu.opened || !sync.tokenAvailable || attach_menu.paperIsEmpty? "#ffffff" : (synced!=-1? "#50ab99" : "#C51313")
+
+        property int synced: database.revisionOf(paperUuid)
 
         property bool press: false
         property color normalColor: attach_menu.opened? "#00000000" : "#cccccc"
 
         Behavior on normalColor {
             ColorAnimation { easing.type: Easing.OutCubic; duration: 250 }
+        }
+        Behavior on border.color {
+            ColorAnimation { easing.type: Easing.Linear; duration: 400 }
+        }
+
+        Connections {
+            target: database
+            onRevisionChanged: if( iid == attach_menu.paperUuid )toggle_btn.synced = database.revisionOf( database.paperUuid(attach_menu.paperItem) )
         }
 
         Image {

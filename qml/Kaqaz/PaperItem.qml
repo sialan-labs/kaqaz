@@ -368,20 +368,6 @@ AnimationItem {
         color: "#aaaaaa"
     }
 
-    property bool synced
-
-    Text {
-        id: sync_label
-        anchors.bottom: date_label.bottom
-        anchors.right: parent.right
-        anchors.rightMargin: 64*physicalPlatformScale
-        font.pixelSize: 8*fontsScale
-        font.family: globalFontFamily
-        color: synced? "#1DC528" : "#C51313"
-        text: synced? qsTr("synced") : qsTr("unsynced")
-        visible: false
-    }
-
     AttachMenu {
         id: attach_menu
         anchors.bottom: paper.bottom
@@ -389,6 +375,7 @@ AnimationItem {
         anchors.right: paper.right
         paper: paper
         paperItem: paper.paperItem
+        paperIsEmpty: date_label.text.length==0
         z: 30
     }
 

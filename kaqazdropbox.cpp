@@ -122,8 +122,6 @@ void KaqazDropBox::setLocalSyncHash(const SyncItemHash &hash)
     p->mutex.lock();
     p->syncHash = hash;
     p->mutex.unlock();
-
-    QMetaObject::invokeMethod(this, "refresh", Qt::QueuedConnection);
 }
 
 SyncItemHash KaqazDropBox::localSyncHash() const
@@ -168,7 +166,7 @@ void KaqazDropBox::localListUpdated()
     {
         const SyncItem & item = syncHash.value(GROUPS_SYNC_KEY);
         qint64 revision = fetchRevision(GROUPS_SYNC_KEY);
-        if( revision > item.revision )
+        if( revision > item.revision && (item.revision != -1 || item.last_revision == -1) )
             p->smartio->fetchGroups(GROUPS_FILE,revision);
     }
 
@@ -264,13 +262,10 @@ void KaqazDropBox::localListUpdated()
         if( item.id == GROUPS_SYNC_KEY ) // It's Groups list
         {
             qint64 revision = fetchRevision(GROUPS_SYNC_KEY);
-            if( revision >= item.revision )
+            if( revision >= item.revision && item.revision != -1 )
                 continue;
-            if( item.revision == -1 && revision != -1 )
-            {
-                localListUpdated(); // Refresh another time when groups fetched
+            if( item.last_revision == -1 && item.revision == -1 )
                 continue;
-            }
 
             p->smartio->pushGroups(GROUPS_FILE,revision+1);
         }

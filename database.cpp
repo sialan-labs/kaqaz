@@ -826,9 +826,12 @@ void Database::setRevision(const QString &id, int revision)
 {
     BEGIN
     SyncItem & sync = p->syncs[id];
-    sync.last_revision = sync.revision;
-    sync.revision = revision;
     sync.id = id;
+    if( sync.revision != revision )
+    {
+        sync.last_revision = sync.revision;
+        sync.revision = revision;
+    }
 
     QSqlQuery query(p->db);
     query.prepare("INSERT OR REPLACE INTO Sync (id,revision,last_revision) VALUES (:id,:rsvn,:lrsvn)");
@@ -838,7 +841,13 @@ void Database::setRevision(const QString &id, int revision)
     query.exec();
 
     DB_EMIT revisionsChanged();
+    emit revisionChanged(id, revision);
     COMMIT
+}
+
+int Database::revisionOf(const QString &id) const
+{
+    return p->syncs.value(id).revision;
 }
 
 SyncItemHash Database::revisions() const

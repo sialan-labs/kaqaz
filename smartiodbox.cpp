@@ -75,6 +75,7 @@ public:
 
     int queued_cnt;
     int done_cnt;
+    bool actived;
 };
 
 SmartIODBox::SmartIODBox(QObject *parent) :
@@ -82,7 +83,8 @@ SmartIODBox::SmartIODBox(QObject *parent) :
 {
     p = new SmartIODBoxPrivate;
     p->queued_cnt = 0;
-    p->done_cnt = 0;
+    p->done_cnt   = 0;
+    p->actived    = false;
 }
 
 void SmartIODBox::setToken(const QString &t)
@@ -214,7 +216,7 @@ qreal SmartIODBox::progress() const
 
 bool SmartIODBox::isActive() const
 {
-    return !p->queue.isEmpty();
+    return p->actived;
 }
 
 void SmartIODBox::nextCommand()
@@ -226,6 +228,7 @@ void SmartIODBox::nextCommand()
     if( !s )
         return;
 
+    p->actived = true;
     const SmartIODBoxCommand & cmd = p->queue.takeFirst();
     switch( static_cast<int>(cmd.command) )
     {
@@ -252,6 +255,8 @@ void SmartIODBox::nextCommand()
         break;
     default:
         p->threadsQueue << s;
+        p->actived = false;
+        break;
     }
 }
 
@@ -268,6 +273,7 @@ void SmartIODBox::finished(SmartIODBoxSingle *s)
     {
         p->done_cnt = 0;
         p->queued_cnt = 0;
+        p->actived = false;
         emit progressFinished();
     }
 }
