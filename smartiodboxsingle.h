@@ -83,7 +83,7 @@ public slots:
     void requestPaperToSync( const QString & uuid );
     void requestGroupsToSync();
 
-    void paperPushed( const QString & id, quint64 revision );
+    void paperPushed(const QString & id, quint64 revision );
     void paperFetched( const QString & id, const QString & data, quint64 revision );
 
     void groupsPushed( quint64 revision );

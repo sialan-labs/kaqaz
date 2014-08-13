@@ -50,7 +50,7 @@ Item {
         id: txt
         anchors.left: parent.left
         anchors.right: parent.right
-        y: group_chooser_back.height/2 - height/2
+        anchors.verticalCenter: parent.verticalCenter
         font.bold: kaqaz.tablet
         font.pixelSize: kaqaz.touchDevice? (kaqaz.mobile? 8*fontsScale : 9*fontsScale) : 10*fontsScale
         font.family: globalFontFamily

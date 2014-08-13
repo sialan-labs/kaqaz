@@ -177,10 +177,18 @@ void SmartIODBoxSingle::pushPaper(const QString &uuid, qint64 revision, const QS
 
     QDropboxFile file( dest, p->dbox );
     if( !file.open(QDropboxFile::WriteOnly) )
-        END_FNC
+        END_FNC;
 
-    file.write(encryptData(p->cache.toUtf8()));
+    const QString cached_data = p->cache.toUtf8();
+
+    file.write(encryptData(cached_data.toUtf8()));
     file.close();
+
+    CALL_CORE(requestPaperToSync, uuid );
+    p->loop->exec();
+
+    if( p->cache != cached_data )
+        END_FNC
 
     CALL_CORE( paperPushed, uuid, revision );
     p->loop->exec();
