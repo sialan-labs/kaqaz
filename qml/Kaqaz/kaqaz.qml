@@ -55,6 +55,7 @@ Rectangle {
 
     property alias menuIsVisible: main.menuIsVisible
     property alias pasteButtonTextObj: paste_btn.textItem
+    property alias syncProgressBar: sync_pbar
 
     property alias rollerVisible: roller_dialog.visible
 

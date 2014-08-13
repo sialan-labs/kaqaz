@@ -80,8 +80,10 @@ Item {
             highlightColor: "#aa0d80ec"
             textColor: "#ffffff"
             onClicked: {
-                if( sync.tokenAvailable )
+                if( sync.tokenAvailable ) {
                     sync.refreshForce()
+                    syncProgressBar.visible = true
+                }
                 main.closePanel()
             }
         }

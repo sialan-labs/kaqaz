@@ -140,8 +140,14 @@ void KaqazSync::reload()
 
     p->thread = new QThread(this);
 
+#ifdef PRO_BUILD
+    bool file_sync_default = true;
+#else
+    bool file_sync_default = false;
+#endif
+
     p->kdbox = new KaqazDropBox();
-    p->kdbox->setFileSyncing( Kaqaz::settings()->value( "General/fileSyncing", true ).toBool() );
+    p->kdbox->setFileSyncing( Kaqaz::settings()->value( "General/fileSyncing", file_sync_default ).toBool() );
     p->kdbox->setLocalSyncHash(p->db->revisions());
     p->kdbox->moveToThread(p->thread);
 
