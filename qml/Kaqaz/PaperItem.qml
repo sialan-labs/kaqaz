@@ -288,12 +288,13 @@ AnimationItem {
         anchors.fill: txt
         font: txt.font
         color: "#cccccc"
-        horizontalAlignment: Text.AlignHCenter
+        horizontalAlignment: TextInput.AlignHCenter
+        clip: true
         visible: (!txt.focus && txt.text == "" && txt.visible)
         z: 20
     }
 
-    TextInput{
+    TextLineCore{
         id: txt
         anchors.top: paper.top
         anchors.left: paper.left
@@ -306,38 +307,16 @@ AnimationItem {
         color: "#333333"
         selectionColor: "#0d80ec"
         selectedTextColor: "#ffffff"
-        horizontalAlignment: Text.AlignHCenter
+        horizontalAlignment: TextInput.AlignHCenter
         inputMethodHints: Qt.ImhNoPredictiveText
         z: 20
-//        selectByMouse: true
+        selectByMouse: true
         onTextChanged: {
-            if( text != last_text )
-                activeText = 0
             if( signal_blocker )
                 return
 
             save_timer.restart()
-            last_text = text
         }
-
-        onFocusChanged: {
-            if( focus )
-                activeText = txt
-            else
-                activeText = 0
-        }
-
-        MouseArea{
-            anchors.fill: parent
-            visible: activeText == txt
-            onClicked: {
-                activeText = 0
-                txt.cursorPosition = txt.positionAt(mouseX,mouseY)
-                activeText = txt
-            }
-        }
-
-        property string last_text
     }
 
     GroupChooser{

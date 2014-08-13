@@ -23,7 +23,7 @@ Item {
     width: kaqaz.mobile? 75*physicalPlatformScale : 100*physicalPlatformScale
     height: 30*physicalPlatformScale
 
-    property real radius: 5*physicalPlatformScale
+    property real radius: 3*physicalPlatformScale
     property color color: "#aaaaaa"
 
     property int group
@@ -48,12 +48,17 @@ Item {
 
     Text{
         id: txt
-        x: (width>group_chooser_back.width)? 0 : group_chooser_back.width/2 - width/2
+        anchors.left: parent.left
+        anchors.right: parent.right
         y: group_chooser_back.height/2 - height/2
         font.bold: kaqaz.tablet
         font.pixelSize: kaqaz.touchDevice? (kaqaz.mobile? 8*fontsScale : 9*fontsScale) : 10*fontsScale
         font.family: globalFontFamily
         color: "#ffffff"
+        horizontalAlignment: Text.AlignHCenter
+        maximumLineCount: 1
+        elide: Text.ElideRight
+        wrapMode: Text.WrapAnywhere
         text: qsTr("No Label")
     }
 
