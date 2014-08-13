@@ -50,6 +50,7 @@
 #include <QCoreApplication>
 #include <QThread>
 #include <QEventLoop>
+#include <QMutex>
 #include <QDebug>
 
 class SmartIODBoxSinglePrivate
@@ -66,6 +67,7 @@ public:
     SmartIODBoxSingleCore *core;
 
     QString cache;
+    QMutex cache_mutex;
 };
 
 SmartIODBoxSingle::SmartIODBoxSingle(QObject *parent) :
@@ -274,9 +276,19 @@ void SmartIODBoxSingle::close()
     p->thread->deleteLater();
 }
 
+QString SmartIODBoxSingle::cache() const
+{
+    p->cache_mutex.lock();
+    QString result = p->cache;
+    p->cache_mutex.unlock();
+    return result;
+}
+
 void SmartIODBoxSingle::cacheIsReady(const QString &data)
 {
+    p->cache_mutex.lock();
     p->cache = data;
+    p->cache_mutex.unlock();
 }
 
 void SmartIODBoxSingle::coreFinished()

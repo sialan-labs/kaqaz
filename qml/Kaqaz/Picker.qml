@@ -23,13 +23,6 @@ Canvas {
     width: 100
     height: 62
 
-//    Behavior on x {
-//        NumberAnimation { easing.type: Easing.OutCubic; duration: 50 }
-//    }
-//    Behavior on y {
-//        NumberAnimation { easing.type: Easing.OutCubic; duration: 50 }
-//    }
-
     onPaint: {
         var ctx = picker.getContext("2d");
         ctx.save();

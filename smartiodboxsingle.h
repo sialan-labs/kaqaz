@@ -51,6 +51,7 @@ public slots:
     void setDeleted(const QString & path );
 
     void close();
+    QString cache() const;
 
 signals:
     void passwordChanged();

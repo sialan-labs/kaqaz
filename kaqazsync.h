@@ -46,6 +46,9 @@ public slots:
     void authorizeDone();
     void setPassword( const QString & pass );
 
+    void refresh();
+    void refreshForce();
+
 signals:
     void authorizeRequest();
 
@@ -62,9 +65,6 @@ private slots:
     void paperDeleted( const QString & id );
 
     void connectedChanged();
-
-    void refresh();
-    void refreshForce();
 
 private:
     KaqazSyncPrivate *p;

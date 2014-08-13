@@ -68,6 +68,8 @@ Item {
     }
 
     function success(){
+        if( sync.tokenAvailable )
+            sync.refresh()
         status_text.text  = qsTr("Done Successfully")
         close_timer.start()
     }

@@ -42,6 +42,7 @@ KaqazSync::KaqazSync(Database *db, QObject *parent) :
 {
     p = new KaqazSyncPrivate;
     p->db = db;
+    p->kdbox = 0;
     p->password = p->db->syncPassword();
 
     connect( p->db, SIGNAL(paperChanged(int))  , SLOT(refresh()) );

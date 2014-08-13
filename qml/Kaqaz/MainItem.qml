@@ -384,9 +384,6 @@ Rectangle {
     function pressBack(){
         if( backHandler && backHandler.back() )
             return
-        if( activeText )
-            activeText = 0
-        else
         if( rollerVisible )
             hideRollerDialog()
         else

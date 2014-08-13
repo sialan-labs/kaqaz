@@ -105,7 +105,6 @@ Item {
             visible: portrait
             onClicked: {
                 showMenu()
-                activeText = 0
                 kaqaz.hideKeyboard()
             }
         }

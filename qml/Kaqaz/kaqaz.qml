@@ -54,8 +54,8 @@ Rectangle {
     property alias panelAnimDuration: main.panelAnimDuration
 
     property alias menuIsVisible: main.menuIsVisible
+    property alias pasteButtonTextObj: paste_btn.textItem
 
-    property alias activeText: cursor_picker.textItem
     property alias rollerVisible: roller_dialog.visible
 
     property alias audioItem: audio_item
@@ -118,14 +118,8 @@ Rectangle {
         anchors.fill: parent
     }
 
-    CursorPicker{
-        id: cursor_picker
-        x: main.x
-        y: main.y
-        width: main.width
-        height: main.height
-        mainQml: kaqaz_root
-        mainClass: kaqaz
+    PasteButton {
+        id: paste_btn
     }
 
     Audio{

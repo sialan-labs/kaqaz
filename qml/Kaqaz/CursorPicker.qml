@@ -128,6 +128,9 @@ Item {
         width: pickerWidth
         height: pickerHeight
         opacity: disabled? 0.5 : 1.0
+        onVisibleChanged: {
+            pasteButtonTextObj = visible? cursor_picker.textItem : 0
+        }
 
         property bool disabled: true
     }
@@ -167,6 +170,7 @@ Item {
             top_picker.x = top_handler.x
             top_picker.y = top_handler.y
             cursor_picker.calculateSelection()
+            pasteButtonTextObj = 0
         }
     }
 

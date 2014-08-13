@@ -66,8 +66,6 @@ public:
     QString tsecret;
     QString password;
 
-    qreal progress;
-
     QQueue<SmartIODBoxSingle*> threadsQueue;
     QSet<SmartIODBoxSingle*> threads;
 

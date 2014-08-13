@@ -69,7 +69,7 @@ Item {
         }
 
         Button {
-            id: paste_btn
+            id: sync_btn
             anchors.top: parent.top
             anchors.topMargin: 10*physicalPlatformScale
             anchors.bottom: parent.bottom
@@ -80,7 +80,8 @@ Item {
             highlightColor: "#aa0d80ec"
             textColor: "#ffffff"
             onClicked: {
-                item.insertAtCurrent( kaqaz.clipboard() )
+                if( sync.tokenAvailable )
+                    sync.refreshForce()
                 main.closePanel()
             }
         }
@@ -90,7 +91,7 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 10*physicalPlatformScale
             anchors.bottom: parent.bottom
-            anchors.left: paste_btn.right
+            anchors.left: sync_btn.right
             anchors.leftMargin: 5*physicalPlatformScale
             width: parent.width/3 - 5*physicalPlatformScale
             normalColor: "#88ffffff"
@@ -162,11 +163,11 @@ Item {
 
     function initTranslations(){
         delete_button.text = qsTr("Delete")
-        paste_btn.text = qsTr("Paste Text")
-        share_button.text = qsTr("Share")
-        delete_warn.text = qsTr("Are you sure?")
-        yes_button.text  = qsTr("Delete")
-        no_button.text   = qsTr("Cancel")
+        sync_btn.text      = qsTr("Sync")
+        share_button.text  = qsTr("Share")
+        delete_warn.text   = qsTr("Are you sure?")
+        yes_button.text    = qsTr("Delete")
+        no_button.text     = qsTr("Cancel")
     }
 
     Component.onCompleted: {

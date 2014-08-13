@@ -52,7 +52,6 @@ Item {
 
     onOpenedChanged: {
         sidePanel = !opened
-        activeText = 0
         if( opened )
             load_timer.restart()
         else {

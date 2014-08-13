@@ -37,7 +37,7 @@
 <context>
     <name>AboutSialan</name>
     <message>
-        <location filename="../qml/Kaqaz/AboutSialan.qml" line="109"/>
+        <location filename="../qml/Kaqaz/AboutSialan.qml" line="98"/>
         <source>Check Sialan website</source>
         <translation type="unfinished"></translation>
     </message>
@@ -58,22 +58,22 @@
 <context>
     <name>Appearance</name>
     <message>
-        <location filename="../qml/Kaqaz/Appearance.qml" line="82"/>
+        <location filename="../qml/Kaqaz/Appearance.qml" line="100"/>
         <source>All papers item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/Appearance.qml" line="83"/>
+        <location filename="../qml/Kaqaz/Appearance.qml" line="101"/>
         <source>Groups count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/Appearance.qml" line="84"/>
+        <location filename="../qml/Kaqaz/Appearance.qml" line="102"/>
         <source>Modern delete dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/Appearance.qml" line="100"/>
+        <location filename="../qml/Kaqaz/Appearance.qml" line="118"/>
         <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
@@ -109,7 +109,7 @@
 <context>
     <name>AttachMenu</name>
     <message>
-        <location filename="../qml/Kaqaz/AttachMenu.qml" line="140"/>
+        <location filename="../qml/Kaqaz/AttachMenu.qml" line="141"/>
         <source>Select media files.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -153,17 +153,17 @@
 <context>
     <name>BackupWait</name>
     <message>
-        <location filename="../qml/Kaqaz/BackupWait.qml" line="76"/>
+        <location filename="../qml/Kaqaz/BackupWait.qml" line="78"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/BackupWait.qml" line="86"/>
+        <location filename="../qml/Kaqaz/BackupWait.qml" line="88"/>
         <source>Please Wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/BackupWait.qml" line="71"/>
+        <location filename="../qml/Kaqaz/BackupWait.qml" line="73"/>
         <source>Done Successfully</source>
         <translation type="unfinished"></translation>
     </message>
@@ -192,12 +192,12 @@
 <context>
     <name>CheckBox</name>
     <message>
-        <location filename="../qml/Kaqaz/CheckBox.qml" line="83"/>
+        <location filename="../qml/Kaqaz/CheckBox.qml" line="101"/>
         <source>On</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/CheckBox.qml" line="84"/>
+        <location filename="../qml/Kaqaz/CheckBox.qml" line="102"/>
         <source>Off</source>
         <translation type="unfinished"></translation>
     </message>
@@ -205,22 +205,22 @@
 <context>
     <name>CursorPicker</name>
     <message>
-        <location filename="../qml/Kaqaz/CursorPicker.qml" line="338"/>
+        <location filename="../qml/Kaqaz/CursorPicker.qml" line="342"/>
         <source>Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/CursorPicker.qml" line="339"/>
+        <location filename="../qml/Kaqaz/CursorPicker.qml" line="343"/>
         <source>Cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/CursorPicker.qml" line="340"/>
+        <location filename="../qml/Kaqaz/CursorPicker.qml" line="344"/>
         <source>Paste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/CursorPicker.qml" line="341"/>
+        <location filename="../qml/Kaqaz/CursorPicker.qml" line="345"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -246,7 +246,7 @@
 <context>
     <name>Database</name>
     <message>
-        <location filename="../database.cpp" line="874"/>
+        <location filename="../database.cpp" line="884"/>
         <source>No Label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -393,7 +393,7 @@
 <context>
     <name>GroupChooserBack</name>
     <message>
-        <location filename="../qml/Kaqaz/GroupChooserBack.qml" line="57"/>
+        <location filename="../qml/Kaqaz/GroupChooserBack.qml" line="62"/>
         <source>No Label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -606,27 +606,27 @@ left to select categories.</source>
     <name>LabelEditPanel</name>
     <message>
         <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="165"/>
-        <source>Paste Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="164"/>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="168"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="169"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="166"/>
-        <source>Share</source>
+        <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="167"/>
+        <source>Share</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="168"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="169"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="170"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -647,7 +647,7 @@ left to select categories.</source>
 <context>
     <name>MainItem</name>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="516"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="513"/>
         <source>List is empty</source>
         <translation type="unfinished"></translation>
     </message>
@@ -676,17 +676,7 @@ left to select categories.</source>
 <context>
     <name>PaperItem</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperItem.qml" line="381"/>
-        <source>synced</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/PaperItem.qml" line="381"/>
-        <source>unsynced</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/PaperItem.qml" line="574"/>
+        <location filename="../qml/Kaqaz/PaperItem.qml" line="540"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
@@ -694,7 +684,7 @@ left to select categories.</source>
 <context>
     <name>PaperLabel</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperLabel.qml" line="204"/>
+        <location filename="../qml/Kaqaz/PaperLabel.qml" line="203"/>
         <source>New text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -704,6 +694,14 @@ left to select categories.</source>
     <message>
         <location filename="../qml/Kaqaz/PaperListItem.qml" line="79"/>
         <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PasteButton</name>
+    <message>
+        <location filename="../qml/Kaqaz/PasteButton.qml" line="27"/>
+        <source>Paste</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1271,17 +1269,22 @@ left to select categories.</source>
 <context>
     <name>Synchronization</name>
     <message>
-        <location filename="../qml/Kaqaz/Synchronization.qml" line="40"/>
+        <location filename="../qml/Kaqaz/Synchronization.qml" line="41"/>
         <source>Click to disconnect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/Synchronization.qml" line="40"/>
+        <location filename="../qml/Kaqaz/Synchronization.qml" line="41"/>
         <source>Sync using Dropbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/Synchronization.qml" line="56"/>
+        <location filename="../qml/Kaqaz/Synchronization.qml" line="69"/>
+        <source>Sync files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/Synchronization.qml" line="95"/>
         <source>Synchronization</source>
         <translation type="unfinished"></translation>
     </message>

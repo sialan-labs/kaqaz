@@ -86,10 +86,13 @@ KaqazDropBox::KaqazDropBox(QObject *parent) :
     QObject(parent)
 {
     p = new KaqazDropBoxPrivate;
-    p->connected = false;
     p->dbox = 0;
+    p->loop = 0;
+    p->smartio = 0;
     p->refresh_timer = 0;
+    p->connected = false;
     p->rsvn_fetched = false;
+    p->reupdate_flag = false;
     p->token = false;
     p->fileSyncing = true;
 
@@ -370,7 +373,7 @@ void KaqazDropBox::initialize()
         checkToken();
     }
 
-    connect( p->smartio, SIGNAL(revisionChanged(QString,qint64)), SLOT(setRevision(QString,qint64)) );
+    connect( p->smartio, SIGNAL(revisionChanged(QString,qint64)), SLOT(setRevision(QString,qint64)), Qt::QueuedConnection );
     connect( p->smartio, SIGNAL(progressChanged(qreal))         , SIGNAL(syncProgress(qreal))      , Qt::QueuedConnection );
     connect( p->smartio, SIGNAL(progressFinished())             , SLOT(update_finished())          , Qt::QueuedConnection );
 

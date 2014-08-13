@@ -432,6 +432,7 @@ void Database::setPaper(const QString &uuid, const QString &title, const QString
     paper.create = QDateTime::fromString(date);
 
     savePaper(paper);
+    emit datesListChanged();
 }
 
 QString Database::paperTitle(int id)
