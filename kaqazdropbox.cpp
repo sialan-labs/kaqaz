@@ -203,6 +203,8 @@ void KaqazDropBox::localListUpdated()
         const QString & fileName = QFileInfo(inf.path()).fileName();
         filesIndexes[fileName] = inf;
 
+        if( !p->fileSyncing )
+            continue;
         if( dboxFileIsDeleted(ROOT_FOLDER+inf.path()) )
         {
             if( !fileIsDeleted(HOME_PATH + "/repository/" + fileName) )
@@ -213,8 +215,6 @@ void KaqazDropBox::localListUpdated()
             continue;
         if( inf.bytes()/(1024*1024) >= FILE_MAX_SIZE_MB )
             continue;
-        if( !p->fileSyncing )
-            continue;
 
         p->smartio->fetchFile( ROOT_FOLDER+inf.path(), HOME_PATH + "/repository/" + fileName );
     }
@@ -222,6 +222,8 @@ void KaqazDropBox::localListUpdated()
     foreach( const QString & lfile, local_files )
     {
         const QString & path = QString(HOME_PATH + "/repository/" + lfile);
+        if( !p->fileSyncing )
+            continue;
         if( fileIsDeleted(path) )
         {
             if( !dboxFileIsDeleted(ATTACHS_FOLDER + lfile) )
