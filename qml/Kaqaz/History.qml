@@ -111,8 +111,6 @@ Item {
                     x: papers_count.width/2 - width/2
                     y: papers_count.height/2 - height/2
                     color: "#235089"
-                    font.bold: true
-//                    font.italic: true
                 }
             }
 

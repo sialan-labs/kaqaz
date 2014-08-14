@@ -34,8 +34,8 @@ Rectangle {
 
     property bool portrait: kaqaz.desktop? width<height : true//(kaqaz.screen.primaryOrientation==Qt.PortraitOrientation)
 
-    property string globalFontFamily: kaqaz.isIOS()? "Droid Arabic Naskh" : kaqaz_normal_font.name
-    property string globalMonoFontFamily: kaqaz.isIOS()? "Droid Sans Mono" : kaqaz_mono_font.name
+    property string globalFontFamily: kaqaz.isIOS()? "Droid Arabic Naskh" : ( kaqaz.isWindows()? "Tahoma" : kaqaz_normal_font.name )
+    property string globalMonoFontFamily: kaqaz.isIOS()? "Droid Sans Mono" : ( kaqaz.isWindows()? "Courier New" : kaqaz_mono_font.name )
 
     property real statusBarHeight: kaqaz.transparentStatusBar()? 24*physicalPlatformScale : 0
     property real navigationBarHeight: kaqaz.transparentStatusBar()? 45*physicalPlatformScale : 0

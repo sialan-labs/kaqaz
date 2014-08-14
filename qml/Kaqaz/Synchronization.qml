@@ -52,7 +52,7 @@ Item {
             width: parent.width
             height:  60*physicalPlatformScale
             color: press? "#3B97EC" : "#00000000"
-            visible: kaqaz.proBuild()
+            visible: kaqaz.proBuild
 
             property alias press: marea.pressed
 
