@@ -100,6 +100,22 @@ Rectangle {
 
     Keys.onEscapePressed: pressBack()
 
+    Timer {
+        id: back_attemper
+        interval: 1500
+        repeat: false
+
+        function show() {
+            if( back_attemper.running ) {
+                kaqaz.close()
+                return
+            }
+
+            back_attemper.start()
+            showTooltip( qsTr("Press again to exit") )
+        }
+    }
+
     Timer{
         id: panel_visible_timer
         interval: main.panelAnimDuration
@@ -413,7 +429,7 @@ Rectangle {
         }
         else
         if( !kaqaz.isDesktop() )
-            kaqaz.close()
+            back_attemper.show()
     }
 
     function showDialog( item ){
