@@ -330,7 +330,7 @@
         <translation type="obsolete">بی گروه</translation>
     </message>
     <message>
-        <location filename="../database.cpp" line="884"/>
+        <location filename="../database.cpp" line="889"/>
         <source>No Label</source>
         <translation>بدون برچسب</translation>
     </message>
@@ -670,7 +670,7 @@ left to select categories.</source>
         <translation>امروز</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/History.qml" line="165"/>
+        <location filename="../qml/Kaqaz/History.qml" line="163"/>
         <source>History</source>
         <translation>تاریخچه</translation>
     </message>
@@ -825,8 +825,8 @@ left to select categories.</source>
         <translation type="obsolete">پیست متن</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="165"/>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="169"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="167"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="171"/>
         <source>Delete</source>
         <translation>پاک کردن</translation>
     </message>
@@ -835,22 +835,22 @@ left to select categories.</source>
         <translation type="obsolete">اضافه‌کردن</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="166"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="168"/>
         <source>Sync</source>
         <translation>همگام سازی</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="167"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="169"/>
         <source>Share</source>
         <translation>اشتراک گذاری</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="168"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="170"/>
         <source>Are you sure?</source>
         <translation>آیا مطمئنی؟</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="170"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="172"/>
         <source>Cancel</source>
         <translation>نه</translation>
     </message>
@@ -871,7 +871,12 @@ left to select categories.</source>
 <context>
     <name>MainItem</name>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="513"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="115"/>
+        <source>Press again to exit</source>
+        <translation>برای خروج دوباره کلید را فشار دهید</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="529"/>
         <source>List is empty</source>
         <translation>لیست خالی است</translation>
     </message>

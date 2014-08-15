@@ -246,7 +246,7 @@
 <context>
     <name>Database</name>
     <message>
-        <location filename="../database.cpp" line="884"/>
+        <location filename="../database.cpp" line="889"/>
         <source>No Label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -486,7 +486,7 @@ left to select categories.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/History.qml" line="165"/>
+        <location filename="../qml/Kaqaz/History.qml" line="163"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
@@ -605,28 +605,28 @@ left to select categories.</source>
 <context>
     <name>LabelEditPanel</name>
     <message>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="165"/>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="169"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="167"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="171"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="166"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="168"/>
         <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="167"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="169"/>
         <source>Share</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="168"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="170"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="170"/>
+        <location filename="../qml/Kaqaz/LabelEditPanel.qml" line="172"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -647,7 +647,12 @@ left to select categories.</source>
 <context>
     <name>MainItem</name>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="513"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="115"/>
+        <source>Press again to exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="529"/>
         <source>List is empty</source>
         <translation type="unfinished"></translation>
     </message>
