@@ -51,7 +51,7 @@ Item {
 
         model: FolderListModel {
             showDirsFirst: true
-            folder: "file://" + kaqaz.picturesLocation()
+            folder: "file://" + devices.picturesLocation
             nameFilters: ["*.jpg","*.JPEG","*.jpeg","*.JPG","*.png","*.PNG"]
             sortField: FolderListModel.Name
         }

@@ -58,7 +58,7 @@ Item {
         anchors.fill: group_chooser
         onClicked: {
             selectGroup()
-            kaqaz.hideKeyboard()
+            devices.hideKeyboard()
         }
     }
 

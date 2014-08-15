@@ -38,7 +38,7 @@
 #include "smartiodboxsingle.h"
 #include "kaqaz.h"
 #include "database.h"
-#include "sialantools.h"
+#include "sialantools/sialantools.h"
 #include "kaqazmacros.h"
 #include "qdropbox.h"
 #include "qdropboxfile.h"

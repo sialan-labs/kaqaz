@@ -142,10 +142,10 @@ Item {
 
     Component.onCompleted: {
         initTranslations()
-        if( kaqaz.startCameraPicture() )
+        if( devices.startCameraPicture() )
             return
         else
-        if( !kaqaz.isTouchDevice() ) {
+        if( !devices.isTouchDevice ) {
             var component = Qt.createComponent("CameraItem.qml");
             var item = component.createObject(camera_dialog);
         }

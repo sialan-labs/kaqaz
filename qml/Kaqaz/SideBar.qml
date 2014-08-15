@@ -70,7 +70,7 @@ AnimationItem {
             opened = side_panel.isVisible()
 
             main.focus = true
-            kaqaz.hideKeyboard()
+            devices.hideKeyboard()
         }
 
         onReleased: {

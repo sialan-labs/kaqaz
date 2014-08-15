@@ -137,7 +137,7 @@ Item {
         border.width: 1*physicalPlatformScale
         border.color: "#ffffff"
         onClicked: {
-            if( !kaqaz.isTouchDevice() ){
+            if( !devices.isTouchDevice ){
                 var list = kaqaz.getOpenFileNames( qsTr("Select media files."), "Images (*.png *.jpg);;Musics (*.mp3 *.ogg);;Documents (*.pdf *.txt *.text)" )
                 for( var i=0; i<list.length; i++ ){
                     var id = repository.insert( list[i] )

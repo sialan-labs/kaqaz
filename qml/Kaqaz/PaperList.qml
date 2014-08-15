@@ -47,7 +47,7 @@ Item {
 
         header: Item{
             width: p_list.width
-            height: (kaqaz.isAndroid()? 20 + statusBarHeight : title.height)
+            height: (devices.isAndroid? 20 + statusBarHeight : title.height)
         }
 
         footer: Item{

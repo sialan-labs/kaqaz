@@ -25,7 +25,7 @@ Item {
 
     property alias text: title_txt.text
     property bool light: false
-    property bool backButton: !kaqaz.isAndroid()
+    property bool backButton: !devices.isAndroid
     property bool forceBack: false
 
     Row {

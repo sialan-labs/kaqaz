@@ -59,7 +59,7 @@ Item {
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: "SIALAN LABS"
                     font.pixelSize: 20*fontsScale
-                    font.weight: kaqaz.isWindows()? Font.Normal : Font.DemiBold
+                    font.weight: devices.isWindows? Font.Normal : Font.DemiBold
                     font.family: globalFontFamily
                     color: "#333333"
                 }

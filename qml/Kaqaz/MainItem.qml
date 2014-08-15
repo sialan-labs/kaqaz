@@ -24,7 +24,7 @@ Rectangle {
     width: 48
     height: 70
 
-    property real physicalPlatformScale: kaqaz.density()
+    property real physicalPlatformScale: devices.density
     property real fontsScale: 1
     property real platformScale: width/480
 
@@ -49,7 +49,7 @@ Rectangle {
 
     property bool menuIsVisible: panel.padX != 0
 
-    Component.onCompleted: fontsScale = kaqaz.fontDensity()
+    Component.onCompleted: fontsScale = devices.fontDensity
 
     onHeightChanged: {
         main_page.anim = false
@@ -264,7 +264,7 @@ Rectangle {
 
                 DropArea {
                     anchors.fill: parent
-                    visible: kaqaz.isDesktop()
+                    visible: devices.isDesktop
                     onDropped: {
                         if( drop.hasUrls ) {
                             var urls = drop.urls
@@ -277,7 +277,7 @@ Rectangle {
                     }
                 }
 
-                property real platformMargins: kaqaz.mobile? -15 + 5*physicalPlatformScale : -15 + 5*physicalPlatformScale
+                property real platformMargins: devices.isMobile? -15 + 5*physicalPlatformScale : -15 + 5*physicalPlatformScale
             }
 
             SideBar{
@@ -305,7 +305,7 @@ Rectangle {
         visible: false
         onClicked: {
             main.pressBack()
-            kaqaz.hideKeyboard()
+            devices.hideKeyboard()
         }
     }
 
@@ -328,7 +328,7 @@ Rectangle {
     }
 
     function pushPreference( item ){
-        kaqaz.hideKeyboard()
+        devices.hideKeyboard()
         var current = (preferenceArray.length == 0)? main_item : preferenceArray[preferenceArray.length-1]
         var next = item
 
@@ -362,7 +362,7 @@ Rectangle {
     }
 
     function popPreference(){
-        kaqaz.hideKeyboard()
+        devices.hideKeyboard()
         var current = preferenceArray[preferenceArray.length-1]
         var res = new Array
         for( var i=0; i<preferenceArray.length-1; i++ )
@@ -428,7 +428,7 @@ Rectangle {
             stack_switcher.show(0, PaperManager.Clean)
         }
         else
-        if( !kaqaz.isDesktop() )
+        if( !devices.isDesktop )
             back_attemper.show()
     }
 
@@ -436,7 +436,7 @@ Rectangle {
         if( dialogItem )
             dialogItem.destroy()
 
-        kaqaz.hideKeyboard()
+        devices.hideKeyboard()
         dialogItem = item
         main.focus = true
     }
@@ -446,7 +446,7 @@ Rectangle {
             return
 
         main_page.anim = true
-        kaqaz.hideKeyboard()
+        devices.hideKeyboard()
         main_page.y = 0
         kaqaz.deleteItemDelay(dialogItem,1000)
         main.focus = true

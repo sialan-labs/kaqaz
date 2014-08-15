@@ -186,7 +186,7 @@ AnimationItem {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            height: kaqaz.keyboard? parent.height*1/2 : parent.height
+            height: devices.keyboard? parent.height*1/2 : parent.height
             anchors.leftMargin: 20+pad + 25*physicalPlatformScale
             anchors.rightMargin: 20+pad + 25*physicalPlatformScale
             contentWidth: label.width
@@ -212,7 +212,7 @@ AnimationItem {
                 var hg = paper.height*1/2 - 30*physicalPlatformScale
                 if( label.pickersPressed || label.selectionStart != label.selectionEnd )
                     hg = height
-                if( kaqaz.desktop )
+                if( devices.isDesktop )
                     hg = height
 
                 if (contentY >= r.y)
@@ -302,7 +302,7 @@ AnimationItem {
         anchors.topMargin: 20+pad + 15*physicalPlatformScale
         anchors.leftMargin: group_chooser.x + group_chooser.width
         anchors.rightMargin: group_chooser.x + group_chooser.width
-        font.pixelSize: kaqaz.largeTablet? 15*fontsScale : 14*fontsScale
+        font.pixelSize: devices.isLargeTablet? 15*fontsScale : 14*fontsScale
         font.family: globalFontFamily
         color: "#333333"
         selectionColor: "#0d80ec"
@@ -384,7 +384,7 @@ AnimationItem {
                     return
                 if( Math.abs(last_x-mouseX) > 10*physicalPlatformScale && !move_paper_x )
                 {
-                    kaqaz.hideKeyboard()
+                    devices.hideKeyboard()
                     graphic_timer.stop()
                     move_paper_x = true
                 }
@@ -429,7 +429,7 @@ AnimationItem {
                 first_y = paper.y
                 move_paper_y = false
 
-                if( mousearea.parent != label_flickable || !kaqaz.keyboard )
+                if( mousearea.parent != label_flickable || !devices.keyboard )
                     paper.focus = true
 
                 graphic_timer.x = mouseX - graphic_timer.width/2 -10*physicalPlatformScale
@@ -490,7 +490,7 @@ AnimationItem {
                     label.focusOn( label.mapFromItem(mousearea,mouseX,mouseY).x, label.mapFromItem(mousearea,mouseX,mouseY).y )
                 }
                 else
-                    kaqaz.hideKeyboard()
+                    devices.hideKeyboard()
 
                 move_paper_x = false
                 graphic_timer.stop()
@@ -503,7 +503,7 @@ AnimationItem {
                 delayStart: 100
                 interval: 1200
                 onDone: {
-                    kaqaz.hideKeyboard()
+                    devices.hideKeyboard()
                     label.selectWord( label.mapFromItem(mousearea,mousearea.mouseX,mousearea.mouseY).x, label.mapFromItem(mousearea,mousearea.mouseX,mousearea.mouseY).y )
 
                 }

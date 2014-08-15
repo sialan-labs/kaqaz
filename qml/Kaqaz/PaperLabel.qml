@@ -75,7 +75,7 @@ Item {
         id: txt
         anchors.fill: parent
         anchors.topMargin: 5*physicalPlatformScale
-        font.pixelSize: kaqaz.largeTablet? 10*fontsScale : 9*fontsScale
+        font.pixelSize: devices.isLargeTablet? 10*fontsScale : 9*fontsScale
         font.family: globalFontFamily
         wrapMode: Text.Wrap
         smooth: true
@@ -105,7 +105,7 @@ Item {
             visible: portrait
             onClicked: {
                 showMenu()
-                kaqaz.hideKeyboard()
+                devices.hideKeyboard()
             }
         }
 
@@ -168,7 +168,7 @@ Item {
         item.item = paper_label
         main.showPanelImedietly(item)
         touchToBack = true
-        kaqaz.hideKeyboard()
+        devices.hideKeyboard()
     }
 
     function commitFaders() {

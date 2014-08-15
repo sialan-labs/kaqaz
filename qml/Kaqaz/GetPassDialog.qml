@@ -215,7 +215,7 @@ Item {
             destroy_timer.restart()
             error_frame.visible = false
             get_pass.x = -get_pass.width
-            kaqaz.hideKeyboard()
+            devices.hideKeyboard()
             get_pass.passGiven(pass.text)
             return
         }
@@ -225,7 +225,7 @@ Item {
             destroy_timer.restart()
             error_frame.visible = false
             get_pass.x = -get_pass.width
-            kaqaz.hideKeyboard()
+            devices.hideKeyboard()
             get_pass.success()
         }
         else

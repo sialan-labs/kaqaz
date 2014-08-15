@@ -21,31 +21,31 @@ import QtMultimedia 5.0
 
 Rectangle {
     id: kaqaz_root
-    width: kaqaz.isTouchDevice()? 0 : 460*kaqaz.density()
-    height: kaqaz.isTouchDevice()? 0 : 680*kaqaz.density()
+    width: devices.isTouchDevice? 0 : 460*devices.density
+    height: devices.isTouchDevice? 0 : 680*devices.density
 
     property real fixedPortraitHeight: 0
     property real fixedLandscapeHeight: 0
-    property real fixedHeight: kaqaz.desktop? height : fixedPortraitHeight-statusBarHeight-navigationBarHeight// (kaqaz.screen.primaryOrientation==Qt.PortraitOrientation? fixedPortraitHeight : fixedLandscapeHeight)-statusBarHeight-navigationBarHeight
+    property real fixedHeight: devices.isDesktop? height : fixedPortraitHeight-statusBarHeight-navigationBarHeight// (devices.screen.primaryOrientation==Qt.PortraitOrientation? fixedPortraitHeight : fixedLandscapeHeight)-statusBarHeight-navigationBarHeight
 
     property alias physicalPlatformScale: main.physicalPlatformScale
     property alias fontsScale: main.fontsScale
     property alias platformScale: main.platformScale
 
-    property bool portrait: kaqaz.desktop? width<height : true//(kaqaz.screen.primaryOrientation==Qt.PortraitOrientation)
+    property bool portrait: devices.isDesktop? width<height : true//(devices.screen.primaryOrientation==Qt.PortraitOrientation)
 
-    property string globalFontFamily: kaqaz.isIOS()? "Droid Arabic Naskh" : ( kaqaz.isWindows()? "Tahoma" : kaqaz_normal_font.name )
-    property string globalMonoFontFamily: kaqaz.isIOS()? "Droid Sans Mono" : ( kaqaz.isWindows()? "Courier New" : kaqaz_mono_font.name )
+    property string globalFontFamily: devices.isIOS? "Droid Arabic Naskh" : ( devices.isWindows? "Tahoma" : kaqaz_normal_font.name )
+    property string globalMonoFontFamily: devices.isIOS? "Droid Sans Mono" : ( devices.isWindows? "Courier New" : kaqaz_mono_font.name )
 
-    property real statusBarHeight: kaqaz.transparentStatusBar()? 24*physicalPlatformScale : 0
-    property real navigationBarHeight: kaqaz.transparentStatusBar()? 45*physicalPlatformScale : 0
+    property real statusBarHeight: devices.transparentStatusBar? 24*physicalPlatformScale : 0
+    property real navigationBarHeight: devices.transparentStatusBar? 45*physicalPlatformScale : 0
 
     property bool rotated: true
     property alias touchToBack: main.touchToBack
     property alias darkBackground: main.darkBackground
     property alias backHandler: main.backHandler
 
-    property real flickVelocity: kaqaz.isDesktop()? 2500 : 25000
+    property real flickVelocity: devices.isDesktop? 2500 : 25000
 
     property variant subMessage
     property alias pointerDialog: point_dialog.visible
@@ -72,11 +72,11 @@ Rectangle {
     function refreshSizes() {
         if( height == 0 )
             return;
-        if( kaqaz.desktop )
+        if( devices.isDesktop )
             return
 
-        if( kaqaz.screen.primaryOrientation==Qt.PortraitOrientation && height>width*4/3 ) fixedPortraitHeight = height
-        if( kaqaz.screen.primaryOrientation==Qt.LandscapeOrientation && fixedLandscapeHeight == 0 ) fixedLandscapeHeight = height
+        if( devices.screen.primaryOrientation==Qt.PortraitOrientation && height>width*4/3 ) fixedPortraitHeight = height
+        if( devices.screen.primaryOrientation==Qt.LandscapeOrientation && fixedLandscapeHeight == 0 ) fixedLandscapeHeight = height
     }
 
     Connections {
@@ -273,7 +273,7 @@ Rectangle {
     function getPass( parent ){
 
         var blur_item
-        if( kaqaz.isDesktop() ) {
+        if( devices.isDesktop ) {
             var blur_cmpt = Qt.createComponent("KaqazBlur.qml");
             blur_item = blur_cmpt.createObject(kaqaz_root);
             blur_item.source = main

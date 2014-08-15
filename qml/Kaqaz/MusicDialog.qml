@@ -51,7 +51,7 @@ Item {
 
         model: FolderListModel {
             showDirsFirst: true
-            folder: "file://" + kaqaz.musicsLocation()
+            folder: "file://" + devices.musicsLocation
             nameFilters: ["*.mp3","*.ogg","*.MP3","*.ogg","*.wav","*.WAV"]
             sortField: FolderListModel.Name
         }

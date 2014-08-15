@@ -107,7 +107,7 @@ Item {
                         insert_image_dialog.nextPage = obj
                     } else {
                         if( item.command == "picture" ) {
-                            kaqaz.getOpenPictures()
+                            devices.getOpenPictures()
                         }
                     }
                 }

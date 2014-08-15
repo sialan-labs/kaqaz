@@ -51,7 +51,7 @@ Item {
 
         model: FolderListModel {
             showDirsFirst: true
-            folder: "file://" + kaqaz.documentsLocation()
+            folder: "file://" + devices.documentsLocation
             nameFilters: ["*.pdf","*.txt","*.text"]
             sortField: FolderListModel.Name
         }

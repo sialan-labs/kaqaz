@@ -71,6 +71,6 @@ Rectangle {
         anchors.horizontalCenter: camera_item.horizontalCenter
         anchors.bottom: camera_item.bottom
         anchors.bottomMargin: 20*physicalPlatformScale
-        onClicked: camera.imageCapture.captureToLocation( kaqaz.cameraLocation() + "/test.jpg" )
+        onClicked: camera.imageCapture.captureToLocation( devices.cameraLocation + "/test.jpg" )
     }
 }

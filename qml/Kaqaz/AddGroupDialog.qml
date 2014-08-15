@@ -61,7 +61,7 @@ Item {
             y: parent.height/2 - height/2
             width: parent.width
             font.pixelSize: 14*fontsScale
-            font.bold: kaqaz.isWindows()? false : true
+            font.bold: devices.isWindows? false : true
             font.family: globalFontFamily
             color: "white"
             horizontalAlignment: Text.AlignHCenter

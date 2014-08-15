@@ -28,14 +28,15 @@
 #include "kaqazmacros.h"
 #include "database.h"
 #include "backuper.h"
-#include "sialanqtlogger.h"
+#include "sialantools/sialanqtlogger.h"
 #include "calendarconverter.h"
 #include "resourcemanager.h"
 #include "qtquick2applicationviewer/qtquick2applicationviewer.h"
 #include "SimpleQtCryptor/simpleqtcryptor.h"
+#include "sialantools/sialandevices.h"
 
 #ifdef Q_OS_ANDROID
-#include "sialanjavalayer.h"
+#include "sialantools/sialanjavalayer.h"
 #endif
 
 #ifdef DESKTOP_LINUX
@@ -137,6 +138,7 @@ public:
     QFileSystemWatcher *filesystem;
     QMimeDatabase mime_db;
 
+    SialanDevices *devices;
 #ifdef Q_OS_ANDROID
     SialanQtLogger *logger;
     SialanJavaLayer *java_layer;
@@ -154,9 +156,10 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->translator = new QTranslator(this);
     p->calendar = new CalendarConverter();
     p->backuper = new Backuper(this);
+    p->devices = new SialanDevices(this);
 #ifdef Q_OS_ANDROID
     p->logger = new SialanQtLogger(LOG_PATH,this);
-    p->java_layer = new SialanJavaLayer(this);
+    p->java_layer = SialanJavaLayer::instance();
 #endif
 
 #ifdef DESKTOP_LINUX
@@ -226,6 +229,7 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->viewer->engine()->rootContext()->setContextProperty( "repository", p->repository );
     p->viewer->engine()->rootContext()->setContextProperty( "backuper", p->backuper );
     p->viewer->engine()->rootContext()->setContextProperty( "sync", p->sync );
+    p->viewer->engine()->rootContext()->setContextProperty( "devices", p->devices );
 #ifdef DESKTOP_LINUX
     p->viewer->engine()->rootContext()->setContextProperty( "mimeApps", p->mimeApps );
     p->viewer->engine()->addImageProvider( "icon", new IconProvider() );

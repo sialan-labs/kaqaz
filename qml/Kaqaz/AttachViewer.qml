@@ -169,7 +169,7 @@ Item {
                     highlightColor: "#222222"
                     onClicked: {
                         var p = kaqaz.cacheFile(item.path)
-                        kaqaz.openFile( "file://" + p )
+                        devices.openFile( "file://" + p )
                         control_frame.visible = false
                     }
                 }

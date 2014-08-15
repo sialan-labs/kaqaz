@@ -20,19 +20,6 @@ ios {
     DEPLOYMENTFOLDERS += folder_03 folder_04
 } else {
 android {
-    manifest.source = android-build
-    manifest.target = .
-    COPYFOLDERS = manifest
-    include(qmake/copyData.pri)
-    copyData()
-
-    QT += androidextras
-
-    SOURCES += \
-        sialanjavalayer.cpp
-    HEADERS += \
-        sialanjavalayer.h
-
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 } else {
     QT += widgets
@@ -83,10 +70,8 @@ SOURCES += main.cpp \
     backuper.cpp \
     database.cpp \
     kaqazdropbox.cpp \
-    sialanqtlogger.cpp \
     smartiodbox.cpp \
-    smartiodboxsingle.cpp \
-    sialantools.cpp
+    smartiodboxsingle.cpp
 
 # Installation path
 # target.path =
@@ -94,6 +79,7 @@ SOURCES += main.cpp \
 # Please do not modify the following two lines. Required for deployment.
 include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
 include(qtdropbox/qtdropbox.pri)
+include(sialantools/sialantools.pri)
 qtcAddDeployment()
 
 OTHER_FILES += \
@@ -193,10 +179,8 @@ HEADERS += \
     database.h \
     databasedatatypes.h \
     kaqazdropbox.h \
-    sialanqtlogger.h \
     sialandeveloper_macros.h \
     smartiodbox.h \
-    smartiodboxsingle.h \
-    sialantools.h
+    smartiodboxsingle.h
 
 RESOURCES +=

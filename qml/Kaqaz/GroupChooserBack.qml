@@ -20,7 +20,7 @@ import QtQuick 2.0
 
 Item {
     id: group_chooser_back
-    width: kaqaz.mobile? 75*physicalPlatformScale : 100*physicalPlatformScale
+    width: devices.isMobile? 75*physicalPlatformScale : 100*physicalPlatformScale
     height: 30*physicalPlatformScale
 
     property real radius: 3*physicalPlatformScale
@@ -51,8 +51,8 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
-        font.bold: kaqaz.tablet
-        font.pixelSize: kaqaz.touchDevice? (kaqaz.mobile? 8*fontsScale : 9*fontsScale) : 10*fontsScale
+        font.bold: devices.isTablet
+        font.pixelSize: devices.isTouchDevice? (devices.isMobile? 8*fontsScale : 9*fontsScale) : 10*fontsScale
         font.family: globalFontFamily
         color: "#ffffff"
         horizontalAlignment: Text.AlignHCenter

@@ -50,7 +50,7 @@ Item {
             highlightColor: "#aa0d80ec"
             textColor: "#ffffff"
             onClicked: {
-                if( kaqaz.isLinux() && !kaqaz.isAndroid() ) {
+                if( devices.isLinux && !devices.isAndroid ) {
                     var path = kaqaz.getStaticTempPath()
                     kaqaz.shareToFile( database.paperTitle(labeledit_panel.item.paperItem.paperItem),
                                        database.paperText(labeledit_panel.item.paperItem.paperItem),
@@ -60,7 +60,7 @@ Item {
                     msg.sources = [path]
 
                 } else {
-                    kaqaz.share( database.paperTitle(labeledit_panel.item.paperItem.paperItem),
+                    devices.share( database.paperTitle(labeledit_panel.item.paperItem.paperItem),
                                  database.paperText(labeledit_panel.item.paperItem.paperItem) )
                 }
 

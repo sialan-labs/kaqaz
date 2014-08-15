@@ -68,7 +68,7 @@ Rectangle {
             id: txt
             y: parent.height/2 - height/2 - 1*physicalPlatformScale
             color: "#ffffff"
-            font.bold: kaqaz.isWindows()? false : true
+            font.bold: devices.isWindows? false : true
             font.family: globalFontFamily
             font.pixelSize: 9*fontsScale
         }
