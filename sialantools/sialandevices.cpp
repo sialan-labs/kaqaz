@@ -69,6 +69,7 @@ SialanDevices::SialanDevices(QObject *parent) :
     connect( p->java_layer, SIGNAL(activityResumed())             , SLOT(activity_resumed())             , Qt::QueuedConnection );
 #endif
 
+    connect( QGuiApplication::inputMethod(), SIGNAL(visibleChanged()), SLOT(keyboard_changed()) );
     connect( static_cast<QGuiApplication*>(QCoreApplication::instance())->clipboard(), SIGNAL(dataChanged()), SIGNAL(clipboardChanged()) );
 }
 

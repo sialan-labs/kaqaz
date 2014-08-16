@@ -29,14 +29,7 @@ class Database;
 class KaqazPrivate;
 class Kaqaz : public QObject
 {
-    Q_PROPERTY( bool   mobile      READ isMobile      NOTIFY mobileChanged  )
-    Q_PROPERTY( bool   tablet      READ isTablet      NOTIFY tabletChanged  )
-    Q_PROPERTY( bool   largeTablet READ isLargeTablet NOTIFY largeTabletChanged  )
-    Q_PROPERTY( bool   touchDevice READ isTouchDevice NOTIFY touchDeviceChanged )
-    Q_PROPERTY( bool   desktop     READ isDesktop     NOTIFY desktopChanged )
-    Q_PROPERTY( bool   keyboard    READ keyboard      NOTIFY keyboardChanged )
     Q_PROPERTY( int    currentDays READ currentDays   NOTIFY currentDaysChanged )
-    Q_PROPERTY(QObject *screen     READ screenObj     NOTIFY screenChanged )
     Q_PROPERTY( bool   proBuild    READ proBuild      NOTIFY proBuildChanged )
     Q_PROPERTY( bool   groupsCount READ groupsCount   WRITE setGroupsCount NOTIFY groupsCountChanged)
     Q_PROPERTY( bool   modernDelete READ modernDelete WRITE setModernDelete NOTIFY modernDeleteChanged)
@@ -47,18 +40,6 @@ class Kaqaz : public QObject
 public:
     Kaqaz(QObject *parent = 0);
     ~Kaqaz();
-
-    Q_INVOKABLE bool isMobile() const;
-    Q_INVOKABLE bool isTablet() const;
-    Q_INVOKABLE bool isLargeTablet() const;
-    Q_INVOKABLE bool isTouchDevice() const;
-    Q_INVOKABLE bool isDesktop() const;
-    Q_INVOKABLE bool isMacX() const;
-    Q_INVOKABLE bool isWindows() const;
-    Q_INVOKABLE bool isLinux() const;
-    Q_INVOKABLE bool isAndroid() const;
-    Q_INVOKABLE bool isIOS() const;
-    Q_INVOKABLE bool isWindowsPhone() const;
 
     Q_INVOKABLE bool demoHasTrial() const;
     Q_INVOKABLE void demoActiveTrial() const;
@@ -100,40 +81,21 @@ public:
     Q_INVOKABLE void setCurrentLanguage( const QString & lang );
     Q_INVOKABLE QString currentLanguage() const;
 
-    Q_INVOKABLE static QString resourcePath();
-
-    Q_INVOKABLE void openFile( const QString & address );
-    Q_INVOKABLE void share( const QString & subject, const QString & message );
     Q_INVOKABLE void shareToFile( const QString & subject, const QString & message, const QString & path );
     Q_INVOKABLE QString cacheFile( const QString & address );
     Q_INVOKABLE void cleanCache();
     Q_INVOKABLE QString getTempPath();
     Q_INVOKABLE QString getStaticTempPath();
 
-    Q_INVOKABLE static qreal lcdPhysicalSize();
-    Q_INVOKABLE static qreal lcdPhysicalWidth();
-    Q_INVOKABLE static qreal lcdPhysicalHeight();
-
-    Q_INVOKABLE bool transparentStatusBar();
-
     Q_INVOKABLE void setProfilePath( QString path );
     Q_INVOKABLE QString profilePath() const;
     Q_INVOKABLE QString repositoryPath() const;
     Q_INVOKABLE QString sdcardPath() const;
 
-    Q_INVOKABLE static qreal lcdDpiX();
-    Q_INVOKABLE static qreal lcdDpiY();
-
-    Q_INVOKABLE int densityDpi();
-    Q_INVOKABLE qreal density();
-    Q_INVOKABLE qreal fontDensity();
-
     Q_INVOKABLE QString fromMSecSinceEpoch( qint64 t );
     Q_INVOKABLE QString convertDateTimeToString( const QDateTime & dt );
 
     Q_INVOKABLE static QString passToMd5( const QString & pass );
-
-    Q_INVOKABLE void hideKeyboard();
 
     Q_INVOKABLE QStringList findBackups();
 
@@ -152,14 +114,6 @@ public:
 
     void setAllPaper( bool stt );
     bool allPaper() const;
-
-    Q_INVOKABLE bool startCameraPicture();
-    Q_INVOKABLE bool getOpenPictures();
-
-    Q_INVOKABLE QString cameraLocation();
-    Q_INVOKABLE QString picturesLocation();
-    Q_INVOKABLE QString musicsLocation();
-    Q_INVOKABLE QString documentsLocation();
 
     Q_INVOKABLE static QStringList dirEntryFiles(const QString & path , const QStringList &filters);
     Q_INVOKABLE static QStringList findEntryFiles(const QString & path , const QStringList &filters);
@@ -184,8 +138,6 @@ public:
     Q_INVOKABLE void setProperty( QObject *obj, const QString & property, const QVariant & v );
     Q_INVOKABLE QVariant property( QObject *obj, const QString & property );
 
-    Q_INVOKABLE bool keyboard();
-
 public slots:
     void start();
     void incomingAppMessage( const QString & msg );
@@ -194,9 +146,7 @@ public slots:
     void reconnectAllResources();
 
 signals:
-    void screenChanged();
     void currentDaysChanged();
-    void keyboardChanged();
     void groupsCountChanged();
     void modernDeleteChanged();
     void allPaperChanged();
@@ -206,12 +156,6 @@ signals:
     void languageDirectionChanged();
     void calendarChanged();
 
-    void mobileChanged();
-    void tabletChanged();
-    void touchDeviceChanged();
-    void desktopChanged();
-    void largeTabletChanged();
-
     void proBuildChanged();
 
 private slots:
@@ -220,7 +164,6 @@ private slots:
     void selectImageResult( const QString & path );
     void activityPaused();
     void activityResumed();
-    void keyboard_changed();
 
 protected:
     void timerEvent(QTimerEvent *e);

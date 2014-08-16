@@ -113,7 +113,6 @@ public:
     QString confPath;
     QString profilePath;
 
-    int hide_keyboard_timer;
     int lock_timer;
     bool close_blocker;
     bool keyboard;
@@ -149,7 +148,6 @@ Kaqaz::Kaqaz(QObject *parent) :
     QObject(parent)
 {
     p = new KaqazPrivate;
-    p->hide_keyboard_timer = 0;
     p->demo_active_until_next = false;
     p->lock_timer = 0;
     p->keyboard = false;
@@ -239,15 +237,12 @@ Kaqaz::Kaqaz(QObject *parent) :
         p->viewer->engine()->rootContext()->setContextProperty( "screen", QGuiApplication::screens().first() );
 
     connect( kaqaz_database, SIGNAL(fileDeleted(QString)), p->repository, SLOT(deleteFile(QString)) );
-    connect( QGuiApplication::inputMethod(), SIGNAL(visibleChanged()), SLOT(keyboard_changed()) );
 
-#ifdef Q_OS_ANDROID
-    connect( p->java_layer, SIGNAL(incomingShare(QString,QString)), SLOT(incomingShare(QString,QString)), Qt::QueuedConnection );
-    connect( p->java_layer, SIGNAL(incomingImage(QString)), SLOT(incomingImage(QString)), Qt::QueuedConnection );
-    connect( p->java_layer, SIGNAL(selectImageResult(QString)), SLOT(selectImageResult(QString)), Qt::QueuedConnection );
-    connect( p->java_layer, SIGNAL(activityPaused()), SLOT(activityPaused()), Qt::QueuedConnection );
-    connect( p->java_layer, SIGNAL(activityResumed()), SLOT(activityResumed()), Qt::QueuedConnection );
-#endif
+    connect( p->devices, SIGNAL(incomingImage(QString)), SLOT(incomingImage(QString)) );
+    connect( p->devices, SIGNAL(incomingShare(QString,QString)), SLOT(incomingShare(QString,QString)) );
+    connect( p->devices, SIGNAL(selectImageResult(QString)), SLOT(selectImageResult(QString)) );
+    connect( p->devices, SIGNAL(activityPaused()), SLOT(activityPaused()) );
+    connect( p->devices, SIGNAL(activityResumed()), SLOT(activityResumed()) );
 }
 
 void Kaqaz::init_languages()
@@ -325,99 +320,6 @@ void Kaqaz::activityResumed()
 
     killTimer( p->lock_timer );
     p->lock_timer = 0;
-}
-
-void Kaqaz::keyboard_changed()
-{
-    p->keyboard = !p->keyboard;
-    emit keyboardChanged();
-}
-
-bool Kaqaz::isMobile() const
-{
-    return isTouchDevice() && !isTablet();
-}
-
-bool Kaqaz::isTablet() const
-{
-#ifdef Q_OS_ANDROID
-    return isTouchDevice() && p->java_layer->isTablet();
-#else
-    return isTouchDevice() && lcdPhysicalSize() >= 6;
-#endif
-}
-
-bool Kaqaz::isLargeTablet() const
-{
-#ifdef Q_OS_ANDROID
-    return isTablet() && p->java_layer->getSizeName() == 3;
-#else
-    return false;
-#endif
-}
-
-bool Kaqaz::isTouchDevice() const
-{
-    return isAndroid() || isIOS() || isWindowsPhone();
-}
-
-bool Kaqaz::isDesktop() const
-{
-    return !isTouchDevice();
-}
-
-bool Kaqaz::isMacX() const
-{
-#ifdef Q_OS_MAC
-    return true;
-#else
-    return false;
-#endif
-}
-
-bool Kaqaz::isWindows() const
-{
-#ifdef Q_OS_WIN
-    return true;
-#else
-    return false;
-#endif
-}
-
-bool Kaqaz::isLinux() const
-{
-#ifdef Q_OS_LINUX
-    return true;
-#else
-    return false;
-#endif
-}
-
-bool Kaqaz::isAndroid() const
-{
-#ifdef Q_OS_ANDROID
-    return true;
-#else
-    return false;
-#endif
-}
-
-bool Kaqaz::isIOS() const
-{
-#ifdef Q_OS_IOS
-    return true;
-#else
-    return false;
-#endif
-}
-
-bool Kaqaz::isWindowsPhone() const
-{
-#ifdef Q_OS_WINPHONE
-    return true;
-#else
-    return false;
-#endif
 }
 
 bool Kaqaz::demoHasTrial() const
@@ -643,35 +545,6 @@ QString Kaqaz::currentLanguage() const
     return p->language;
 }
 
-QString Kaqaz::resourcePath()
-{
-#ifndef Q_OS_MAC
-    return QCoreApplication::applicationDirPath() + "/";
-#else
-    return QCoreApplication::applicationDirPath() + "/../Resources/";
-#endif
-}
-
-void Kaqaz::openFile(const QString &address)
-{
-#ifdef Q_OS_ANDROID
-    const QMimeType & t = p->mime_db.mimeTypeForFile(address);
-    p->java_layer->openFile( address, t.name() );
-#else
-    QDesktopServices::openUrl( QUrl(address) );
-#endif
-}
-
-void Kaqaz::share(const QString &subject, const QString &message)
-{
-#ifdef Q_OS_ANDROID
-    p->java_layer->sharePaper( subject, message );
-#else
-    QString adrs = QString("mailto:%1?subject=%2&body=%3").arg(QString(),subject,message);
-    QDesktopServices::openUrl( adrs );
-#endif
-}
-
 void Kaqaz::shareToFile(const QString &subject, const QString &message, const QString &path)
 {
     if( QFile::exists(path) )
@@ -724,41 +597,6 @@ QString Kaqaz::getStaticTempPath()
     return path;
 }
 
-qreal Kaqaz::lcdPhysicalSize()
-{
-    qreal w = lcdPhysicalWidth();
-    qreal h = lcdPhysicalHeight();
-
-    return qSqrt( h*h + w*w );
-}
-
-qreal Kaqaz::lcdPhysicalWidth()
-{
-    if( QGuiApplication::screens().isEmpty() )
-        return 0;
-
-    QScreen *scr = QGuiApplication::screens().first();
-    return (qreal)scr->size().width()/scr->physicalDotsPerInchX();
-}
-
-qreal Kaqaz::lcdPhysicalHeight()
-{
-    if( QGuiApplication::screens().isEmpty() )
-        return 0;
-
-    QScreen *scr = QGuiApplication::screens().first();
-    return (qreal)scr->size().height()/scr->physicalDotsPerInchY();
-}
-
-bool Kaqaz::transparentStatusBar()
-{
-#ifdef Q_OS_ANDROID
-    return p->java_layer->transparentStatusBar();
-#else
-    return false;
-#endif
-}
-
 void Kaqaz::setProfilePath(QString path)
 {
     if( path.isEmpty() )
@@ -809,84 +647,6 @@ QString Kaqaz::sdcardPath() const
     return "/sdcard/Android/data/org.sialan.kaqaz";
 }
 
-qreal Kaqaz::lcdDpiX()
-{
-    if( QGuiApplication::screens().isEmpty() )
-        return 0;
-
-    QScreen *scr = QGuiApplication::screens().first();
-    return scr->physicalDotsPerInchX();
-}
-
-qreal Kaqaz::lcdDpiY()
-{
-    if( QGuiApplication::screens().isEmpty() )
-        return 0;
-
-    QScreen *scr = QGuiApplication::screens().first();
-    return scr->physicalDotsPerInchY();
-}
-
-int Kaqaz::densityDpi()
-{
-#ifdef Q_OS_ANDROID
-    return p->java_layer->densityDpi();
-#else
-    return lcdDpiX();
-#endif
-}
-
-qreal Kaqaz::density()
-{
-#ifdef Q_OS_ANDROID
-    qreal ratio = isTablet()? 1.28 : 1;
-//    if( isLargeTablet() )
-//        ratio = 1.6;
-
-    return p->java_layer->density()*ratio;
-#else
-#ifdef Q_OS_IOS
-    qreal ratio = isTablet()? 1.28 : 1;
-    return ratio*densityDpi()/180.0;
-#else
-#ifdef Q_OS_LINUX
-    return screen()->logicalDotsPerInch()/LINUX_DEFAULT_DPI;
-#else
-#ifdef Q_OS_WIN32
-    return 0.95*screen()->logicalDotsPerInch()/WINDOWS_DEFAULT_DPI;
-#else
-    return 1;
-#endif
-#endif
-#endif
-#endif
-}
-
-qreal Kaqaz::fontDensity()
-{
-#ifdef Q_OS_ANDROID
-    qreal ratio = (1.28)*1.35;
-    return p->java_layer->density()*ratio;
-#else
-#ifdef Q_OS_IOS
-    return 1.4;
-#else
-#ifdef Q_OS_LINUX
-    qreal ratio = 1.3;
-    return ratio*density();
-#else
-#ifdef Q_OS_WIN32
-    qreal ratio = 1.4;
-    return ratio*density();
-#else
-    qreal ratio = 1.3;
-    return ratio*density();
-#endif
-#endif
-#endif
-#endif
-}
-
 QString Kaqaz::fromMSecSinceEpoch(qint64 t)
 {
     return convertDateTimeToString( QDateTime::fromMSecsSinceEpoch(t) );
@@ -903,14 +663,6 @@ QString Kaqaz::passToMd5(const QString &pass)
         return QString();
 
     return QCryptographicHash::hash( pass.toUtf8(), QCryptographicHash::Md5 ).toHex();
-}
-
-void Kaqaz::hideKeyboard()
-{
-    if( p->hide_keyboard_timer )
-        killTimer(p->hide_keyboard_timer);
-
-    p->hide_keyboard_timer = startTimer(250);
 }
 
 QStringList Kaqaz::findBackups()
@@ -997,84 +749,6 @@ void Kaqaz::setAllPaper(bool stt)
 bool Kaqaz::allPaper() const
 {
     return kaqaz_settings->value("General/AllPaper",true).toBool();
-}
-
-bool Kaqaz::startCameraPicture()
-{
-#ifdef Q_OS_ANDROID
-    return p->java_layer->startCamera( cameraLocation() + "/kaqaz_" + QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch()) + ".jpg" );
-#else
-    return false;
-#endif
-}
-
-bool Kaqaz::getOpenPictures()
-{
-#ifdef Q_OS_ANDROID
-    return p->java_layer->getOpenPictures();
-#else
-    return false;
-#endif
-}
-
-QString Kaqaz::cameraLocation()
-{
-    return CAMERA_PATH;
-}
-
-QString Kaqaz::picturesLocation()
-{
-    QStringList probs;
-    probs = QStandardPaths::standardLocations( QStandardPaths::PicturesLocation );
-
-#ifdef Q_OS_ANDROID
-    probs << "/sdcard/Pictures";
-#else
-    probs << QDir::homePath() + "/Pictures";
-#endif
-
-    foreach( const QString & prob, probs )
-        if( QFile::exists(prob) )
-            return prob;
-
-    return probs.last();
-}
-
-QString Kaqaz::musicsLocation()
-{
-    QStringList probs;
-    probs = QStandardPaths::standardLocations( QStandardPaths::MusicLocation );
-
-#ifdef Q_OS_ANDROID
-    probs << "/sdcard/Music";
-#else
-    probs << QDir::homePath() + "/Music";
-#endif
-
-    foreach( const QString & prob, probs )
-        if( QFile::exists(prob) )
-            return prob;
-
-    return probs.last();
-}
-
-QString Kaqaz::documentsLocation()
-{
-    QStringList probs;
-    probs = QStandardPaths::standardLocations( QStandardPaths::DocumentsLocation );
-
-#ifdef Q_OS_ANDROID
-    probs << "/sdcard/documents";
-    probs << "/sdcard/Documents";
-#else
-    probs << QDir::homePath() + "/Documents";
-#endif
-
-    foreach( const QString & prob, probs )
-        if( QFile::exists(prob) )
-            return prob;
-
-    return probs.last();
 }
 
 QStringList Kaqaz::dirEntryFiles(const QString &path, const QStringList & filters)
@@ -1211,20 +885,8 @@ QVariant Kaqaz::property(QObject *obj, const QString &property)
     return obj->property(property.toUtf8());
 }
 
-bool Kaqaz::keyboard()
-{
-    return p->keyboard;
-}
-
 void Kaqaz::timerEvent(QTimerEvent *e)
 {
-    if( e->timerId() == p->hide_keyboard_timer )
-    {
-        killTimer(p->hide_keyboard_timer);
-        p->hide_keyboard_timer = 0;
-        QGuiApplication::inputMethod()->hide();
-    }
-    else
     if( e->timerId() == p->lock_timer )
     {
         QMetaObject::invokeMethod( p->viewer->rootObject(), "lock" );
