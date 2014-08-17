@@ -492,7 +492,8 @@ AnimationItem {
                 else
                 if( graphic_timer.running || move_paper_y )
                 {
-                    label.focusOn( label.mapFromItem(mousearea,mouseX,mouseY).x, label.mapFromItem(mousearea,mouseX,mouseY).y )
+                    if( !label_flickable.dragging )
+                        label.focusOn( label.mapFromItem(mousearea,mouseX,mouseY).x, label.mapFromItem(mousearea,mouseX,mouseY).y )
                 }
                 else
                     devices.hideKeyboard()
