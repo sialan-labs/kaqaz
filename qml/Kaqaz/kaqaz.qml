@@ -34,8 +34,8 @@ Rectangle {
 
     property bool portrait: devices.isDesktop? width<height : true//(devices.screen.primaryOrientation==Qt.PortraitOrientation)
 
-    property string globalFontFamily: devices.isIOS? "Droid Arabic Naskh" : ( devices.isWindows? "Tahoma" : kaqaz_normal_font.name )
-    property string globalMonoFontFamily: devices.isIOS? "Droid Sans Mono" : ( devices.isWindows? "Courier New" : kaqaz_mono_font.name )
+    property string globalFontFamily: devices.isIOS? "Droid Kaqaz Sans" : kaqaz_normal_font.name
+    property string globalMonoFontFamily: devices.isIOS? "Droid Sans Mono" : kaqaz_mono_font.name
 
     property real statusBarHeight: devices.transparentStatusBar? 24*physicalPlatformScale : 0
     property real navigationBarHeight: devices.transparentStatusBar? 45*physicalPlatformScale : 0
@@ -89,7 +89,7 @@ Rectangle {
 
     FontLoader{
         id: kaqaz_normal_font
-        source: "fonts/DroidNaskh-Regular.ttf"
+        source: "fonts/DroidKaqazSans.ttf"
     }
 
     FontLoader{

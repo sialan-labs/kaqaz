@@ -156,7 +156,7 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->backuper = new Backuper(this);
     p->devices = new SialanDevices(this);
 #ifdef Q_OS_ANDROID
-//    p->logger = new SialanQtLogger(LOG_PATH,this);
+    p->logger = new SialanQtLogger(LOG_PATH,this);
     p->java_layer = SialanJavaLayer::instance();
 #endif
 
