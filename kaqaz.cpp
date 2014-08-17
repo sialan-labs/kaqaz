@@ -187,8 +187,8 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->translationsPath = "assets:/files/translations";
     p->confPath = p->homePath + "/config.ini";
 #else
-#ifdef Q_OS_WIN
-    p->translationsPath = QCoreApplication::applicationDirPath() + "/files/translations/";
+#ifdef Q_OS_MAC
+    p->translationsPath = QCoreApplication::applicationDirPath() + "/../Resources/files/translations/";
     p->confPath = p->homePath + "/config.ini";
 #else
     p->translationsPath = QCoreApplication::applicationDirPath() + "/files/translations/";
