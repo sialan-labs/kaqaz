@@ -186,15 +186,16 @@ AnimationItem {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            height: devices.keyboard? parent.height*1/2 : parent.height
             anchors.leftMargin: 20+pad + 25*physicalPlatformScale
             anchors.rightMargin: 20+pad + 25*physicalPlatformScale
+            height: parent.height
             contentWidth: label.width
-            contentHeight: label.height
+            contentHeight: devices.keyboard? label.paintedHeight+parent.height*1/2 : label.paintedHeight+25*physicalPlatformScale
             flickableDirection: Flickable.VerticalFlick
             interactive: !label.pickersPressed && secondInteractive
             onMovementStarted: {
                 label.commitBlocker = true
+                pasteButtonTextObj = 0
                 hideRollerDialog()
             }
             onMovementEnded: {
@@ -203,6 +204,7 @@ AnimationItem {
                     label.commitFaders()
                 }
             }
+            onContentHeightChanged: if(devices.keyboard) label_flickable.ensureVisible(label.cursorPosition)
 
             property bool secondInteractive: true
 
@@ -371,6 +373,7 @@ AnimationItem {
             id: mousearea
             anchors.fill: parent
             anchors.margins: -10*physicalPlatformScale
+            onPressedChanged: if(!pressed && label.textFocus) mReleased()
 
             onMouseXChanged: {
                 if( paper.anim )
@@ -409,6 +412,8 @@ AnimationItem {
                     paper.paperTrigger = true
             }
 
+            onReleased: if( !label.textFocus ) mReleased()
+
             onPressed: {
                 var onPickers = label.isPointOnPickers( label.mapFromItem(mousearea,mouseX,mouseY).x, label.mapFromItem(mousearea,mouseX,mouseY).y )
                 if( onPickers || label.selectedText.length != 0 ) {
@@ -439,7 +444,7 @@ AnimationItem {
 
             }
 
-            onReleased: {
+            function mReleased() {
                 if( label.pickersPressed || label.selectedText.length != 0 )
                     return
                 if( !pressedValve )
@@ -503,7 +508,6 @@ AnimationItem {
                 delayStart: 100
                 interval: 1200
                 onDone: {
-                    devices.hideKeyboard()
                     label.selectWord( label.mapFromItem(mousearea,mousearea.mouseX,mousearea.mouseY).x, label.mapFromItem(mousearea,mousearea.mouseX,mousearea.mouseY).y )
 
                 }

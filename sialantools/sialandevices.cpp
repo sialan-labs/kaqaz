@@ -38,12 +38,13 @@
 #include <QtCore/qmath.h>
 #include <QScreen>
 #include <QDateTime>
+#include <QDebug>
 
 class SialanDevicesPrivate
 {
 public:
     int hide_keyboard_timer;
-    bool keyboard;
+    bool keyboard_stt;
 
     QMimeDatabase mime_db;
 
@@ -57,7 +58,7 @@ SialanDevices::SialanDevices(QObject *parent) :
 {
     p = new SialanDevicesPrivate;
     p->hide_keyboard_timer = 0;
-    p->keyboard = false;
+    p->keyboard_stt = false;
 
 #ifdef Q_OS_ANDROID
     p->java_layer = SialanJavaLayer::instance();
@@ -294,7 +295,7 @@ QString SialanDevices::clipboard() const
 
 bool SialanDevices::keyboard() const
 {
-    return p->keyboard;
+    return p->keyboard_stt;
 }
 
 QString SialanDevices::cameraLocation() const
@@ -444,7 +445,12 @@ void SialanDevices::activity_resumed()
 
 void SialanDevices::keyboard_changed()
 {
-    p->keyboard = !p->keyboard;
+    p->keyboard_stt = !p->keyboard_stt;
+    if( p->keyboard_stt )
+        QGuiApplication::inputMethod()->show();
+    else
+        QGuiApplication::inputMethod()->hide();
+
     emit keyboardChanged();
 }
 
