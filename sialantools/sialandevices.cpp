@@ -45,6 +45,7 @@ class SialanDevicesPrivate
 public:
     int hide_keyboard_timer;
     bool keyboard_stt;
+    int keyboard_signal_blocker;
 
     QMimeDatabase mime_db;
 
@@ -59,6 +60,7 @@ SialanDevices::SialanDevices(QObject *parent) :
     p = new SialanDevicesPrivate;
     p->hide_keyboard_timer = 0;
     p->keyboard_stt = false;
+    p->keyboard_signal_blocker = 0;
 
 #ifdef Q_OS_ANDROID
     p->java_layer = SialanJavaLayer::instance();
@@ -445,12 +447,16 @@ void SialanDevices::activity_resumed()
 
 void SialanDevices::keyboard_changed()
 {
+    if( p->keyboard_signal_blocker )
+        return;
+
     p->keyboard_stt = !p->keyboard_stt;
     if( p->keyboard_stt )
         QGuiApplication::inputMethod()->show();
     else
         QGuiApplication::inputMethod()->hide();
 
+    p->keyboard_signal_blocker = startTimer(1000);
     emit keyboardChanged();
 }
 
@@ -461,6 +467,12 @@ void SialanDevices::timerEvent(QTimerEvent *e)
         killTimer(p->hide_keyboard_timer);
         p->hide_keyboard_timer = 0;
         QGuiApplication::inputMethod()->hide();
+    }
+    else
+    if( e->timerId() == p->keyboard_signal_blocker )
+    {
+        killTimer(p->keyboard_signal_blocker);
+        p->keyboard_signal_blocker = 0;
     }
 }
 
