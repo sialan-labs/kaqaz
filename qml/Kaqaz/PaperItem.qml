@@ -186,8 +186,8 @@ AnimationItem {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            anchors.leftMargin: 20+pad + 25*physicalPlatformScale
-            anchors.rightMargin: 20+pad + 25*physicalPlatformScale
+            anchors.leftMargin: 20+pad + (devices.isMobile? 20*physicalPlatformScale : 25*physicalPlatformScale)
+            anchors.rightMargin: 20+pad + (devices.isMobile? 20*physicalPlatformScale : 25*physicalPlatformScale)
             height: parent.height
             contentWidth: label.width
             contentHeight: devices.keyboard? label.paintedHeight+parent.height*1/2 : label.paintedHeight+25*physicalPlatformScale
@@ -301,16 +301,17 @@ AnimationItem {
         anchors.top: paper.top
         anchors.left: paper.left
         anchors.right: paper.right
-        anchors.topMargin: 20+pad + 15*physicalPlatformScale
+        anchors.topMargin: 20+pad + (devices.isMobile? 5*physicalPlatformScale : 15*physicalPlatformScale)
         anchors.leftMargin: group_chooser.x + group_chooser.width
         anchors.rightMargin: group_chooser.x + group_chooser.width
-        font.pixelSize: devices.isLargeTablet? 15*fontsScale : 14*fontsScale
+        font.pixelSize: devices.isLargeTablet? 15*fontsScale : (devices.isMobile? 12*fontsScale : 14*fontsScale)
         font.family: globalFontFamily
         color: "#333333"
         selectionColor: "#0d80ec"
         selectedTextColor: "#ffffff"
         horizontalAlignment: TextInput.AlignHCenter
-        inputMethodHints: Qt.ImhNoPredictiveText
+        inputMethodHints: globalInputMethodHints
+        clip: true
         z: 20
         selectByMouse: true
         onTextChanged: {

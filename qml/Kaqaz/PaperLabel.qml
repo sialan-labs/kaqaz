@@ -81,7 +81,7 @@ Item {
         smooth: true
         selectionColor: "#0d80ec"
         selectedTextColor: "#ffffff"
-        inputMethodHints: Qt.ImhNoPredictiveText
+        inputMethodHints: globalInputMethodHints
     }
 
     Item{
@@ -163,11 +163,9 @@ Item {
     }
 
     function edit(){
-        var component = Qt.createComponent("LabelEditPanel.qml");
-        var item = component.createObject(main);
-        item.item = paper_label
-        main.showPanelImedietly(item)
-        touchToBack = true
+        main.closePanel()
+        var msg = showSubMessage("PaperEditDialog.qml")
+        msg.item = paper_label
         devices.hideKeyboard()
     }
 

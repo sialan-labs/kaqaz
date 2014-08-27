@@ -21,7 +21,7 @@ import QtQuick 2.2
 Item {
     id: labeledit_panel
     width: 100
-    height: 62
+    height: 50*physicalPlatformScale
     clip: true
 
     property variant item

@@ -445,6 +445,11 @@ QString Kaqaz::convertIntToNumStringDate(qint64 d)
     return translateNumbers( p->calendar->numberString(date) );
 }
 
+QString Kaqaz::translateInt(qint64 d)
+{
+    return translateNumbers(QString::number(d));
+}
+
 QString Kaqaz::convertIntToStringDate(qint64 d, const QString &format)
 {
     Q_UNUSED(format)
@@ -749,6 +754,17 @@ void Kaqaz::setAllPaper(bool stt)
 bool Kaqaz::allPaper() const
 {
     return kaqaz_settings->value("General/AllPaper",true).toBool();
+}
+
+void Kaqaz::setKeyboardPredicative(bool stt)
+{
+    kaqaz_settings->setValue("General/KeyboardPredicative",stt);
+    emit keyboardPredicativeChanged();
+}
+
+bool Kaqaz::keyboardPredicative() const
+{
+    return kaqaz_settings->value("General/KeyboardPredicative",true).toBool();
 }
 
 QStringList Kaqaz::dirEntryFiles(const QString &path, const QStringList & filters)

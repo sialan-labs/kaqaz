@@ -37,6 +37,7 @@ Rectangle {
     property string globalFontFamily: devices.isIOS? "Droid Kaqaz Sans" : kaqaz_normal_font.name
     property string globalMonoFontFamily: devices.isIOS? "Droid Sans Mono" : kaqaz_mono_font.name
 
+    property int globalInputMethodHints: kaqaz.keyboardPredicative? Qt.ImhNoPredictiveText : Qt.ImhNone
     property real statusBarHeight: devices.transparentStatusBar? 24*physicalPlatformScale : 0
     property real navigationBarHeight: devices.transparentStatusBar? 45*physicalPlatformScale : 0
 

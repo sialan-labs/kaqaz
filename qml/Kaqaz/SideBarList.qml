@@ -70,7 +70,7 @@ Rectangle {
                     var append_text = " "
                     var groupCount = database.groupPapersCount(iid)
                     if( kaqaz.groupsCount && groupCount != 0 )
-                        append_text += "(" + groupCount + ")"
+                        append_text += "(" + kaqaz.translateInt(groupCount) + ")"
 
                     color_rect.color = database.groupColor(iid)
                     text = database.groupName(iid) + append_text

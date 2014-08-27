@@ -21,19 +21,17 @@ import QtQuick 2.2
 Rectangle {
     id: button
     smooth: true
-    width: row.width + 20*physicalPlatformScale
+    width: 100*physicalPlatformScale
     height: 30*physicalPlatformScale
 //    radius: 2*physicalPlatformScale
     color: press? highlightColor : normalColor
 
     property alias text: txt.text
-    property alias icon: icn.source
     property alias fontSize: txt.font.pixelSize
     property alias textFont: txt.font
 
     property alias hoverEnabled: marea.hoverEnabled
 
-    property alias iconHeight: icn.height
     property bool iconCenter: false
 
     property bool press: marea.pressed
@@ -45,33 +43,17 @@ Rectangle {
 
     signal clicked()
 
-    Row {
-        id: row
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.topMargin: 4*physicalPlatformScale
-        anchors.margins: 3*physicalPlatformScale
-        anchors.horizontalCenter: parent.horizontalCenter
-        spacing: 4*physicalPlatformScale
 
-        Image {
-            id: icn
-            anchors.verticalCenter: parent.verticalCenter
-            height: source==""? 0 : parent.height-14*physicalPlatformScale
-            width: height
-            sourceSize.width: width
-            sourceSize.height: height
-            smooth: true
-        }
-
-        Text{
-            id: txt
-            y: parent.height/2 - height/2 - 1*physicalPlatformScale
-            color: "#ffffff"
-            font.bold: devices.isWindows? false : true
-            font.family: globalFontFamily
-            font.pixelSize: 9*fontsScale
-        }
+    Text{
+        id: txt
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: 20*physicalPlatformScale
+        y: parent.height/2 - height/2 - 1*physicalPlatformScale
+        color: "#ffffff"
+        font.bold: devices.isWindows? false : true
+        font.family: globalFontFamily
+        font.pixelSize: 9*fontsScale
     }
 
     MouseArea{

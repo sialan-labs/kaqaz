@@ -37,7 +37,7 @@
 <context>
     <name>AboutSialan</name>
     <message>
-        <location filename="../qml/Kaqaz/AboutSialan.qml" line="98"/>
+        <location filename="../qml/Kaqaz/AboutSialan.qml" line="102"/>
         <source>Check Sialan website</source>
         <translation type="unfinished"></translation>
     </message>
@@ -64,16 +64,21 @@
     </message>
     <message>
         <location filename="../qml/Kaqaz/Appearance.qml" line="101"/>
-        <source>Groups count</source>
+        <source>Word suggestions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/Appearance.qml" line="102"/>
+        <source>Groups count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/Appearance.qml" line="103"/>
         <source>Modern delete dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/Appearance.qml" line="118"/>
+        <location filename="../qml/Kaqaz/Appearance.qml" line="119"/>
         <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
@@ -527,77 +532,77 @@ left to select categories.</source>
 <context>
     <name>Kaqaz</name>
     <message>
-        <location filename="../kaqaz.cpp" line="622"/>
+        <location filename="../kaqaz.cpp" line="533"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="623"/>
+        <location filename="../kaqaz.cpp" line="534"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="624"/>
+        <location filename="../kaqaz.cpp" line="535"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="625"/>
+        <location filename="../kaqaz.cpp" line="536"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="626"/>
+        <location filename="../kaqaz.cpp" line="537"/>
         <source>4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="627"/>
+        <location filename="../kaqaz.cpp" line="538"/>
         <source>5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="628"/>
+        <location filename="../kaqaz.cpp" line="539"/>
         <source>6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="629"/>
+        <location filename="../kaqaz.cpp" line="540"/>
         <source>7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="630"/>
+        <location filename="../kaqaz.cpp" line="541"/>
         <source>8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="631"/>
+        <location filename="../kaqaz.cpp" line="542"/>
         <source>9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="507"/>
+        <location filename="../kaqaz.cpp" line="413"/>
         <source>Gregorian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="468"/>
+        <location filename="../kaqaz.cpp" line="374"/>
         <source>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="469"/>
+        <location filename="../kaqaz.cpp" line="375"/>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="510"/>
+        <location filename="../kaqaz.cpp" line="416"/>
         <source>Jalali</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="513"/>
+        <location filename="../kaqaz.cpp" line="419"/>
         <source>Hijri</source>
         <translation type="unfinished"></translation>
     </message>
@@ -647,12 +652,12 @@ left to select categories.</source>
 <context>
     <name>MainItem</name>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="115"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="116"/>
         <source>Press again to exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="529"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="530"/>
         <source>List is empty</source>
         <translation type="unfinished"></translation>
     </message>
@@ -679,9 +684,42 @@ left to select categories.</source>
     </message>
 </context>
 <context>
+    <name>PaperEditDialog</name>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="27"/>
+        <source>Untitled Paper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="76"/>
+        <source>Share Paper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="104"/>
+        <source>Force sync</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="124"/>
+        <source>Add Reminder (Soon)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="152"/>
+        <source>Are you sure?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="166"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PaperItem</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperItem.qml" line="540"/>
+        <location filename="../qml/Kaqaz/PaperItem.qml" line="546"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
@@ -689,7 +727,7 @@ left to select categories.</source>
 <context>
     <name>PaperLabel</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperLabel.qml" line="203"/>
+        <location filename="../qml/Kaqaz/PaperLabel.qml" line="201"/>
         <source>New text</source>
         <translation type="unfinished"></translation>
     </message>

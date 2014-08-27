@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fa_IR">
+<TS version="2.1" language="fa_IR">
 <context>
     <name>About</name>
     <message>
@@ -97,7 +97,7 @@
 <context>
     <name>AboutSialan</name>
     <message>
-        <location filename="../qml/Kaqaz/AboutSialan.qml" line="98"/>
+        <location filename="../qml/Kaqaz/AboutSialan.qml" line="102"/>
         <source>Check Sialan website</source>
         <translation>وب سایت سیالان</translation>
     </message>
@@ -128,16 +128,21 @@
     </message>
     <message>
         <location filename="../qml/Kaqaz/Appearance.qml" line="101"/>
+        <source>Word suggestions</source>
+        <translation>پیشنهاد کلمه ها</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/Appearance.qml" line="102"/>
         <source>Groups count</source>
         <translation>نمایش تعداد کاغذهای گروه‌ها</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/Appearance.qml" line="102"/>
+        <location filename="../qml/Kaqaz/Appearance.qml" line="103"/>
         <source>Modern delete dialog</source>
         <translation>دیالوگ مدرن پاک کردن</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/Appearance.qml" line="118"/>
+        <location filename="../qml/Kaqaz/Appearance.qml" line="119"/>
         <source>Appearance</source>
         <translation>نما</translation>
     </message>
@@ -735,62 +740,62 @@ left to select categories.</source>
         <translation type="obsolete">نامعلوم</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="468"/>
+        <location filename="../kaqaz.cpp" line="374"/>
         <source>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
         <translation>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="469"/>
+        <location filename="../kaqaz.cpp" line="375"/>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
         <translation>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="622"/>
+        <location filename="../kaqaz.cpp" line="533"/>
         <source>0</source>
         <translation>۰</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="623"/>
+        <location filename="../kaqaz.cpp" line="534"/>
         <source>1</source>
         <translation>۱</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="624"/>
+        <location filename="../kaqaz.cpp" line="535"/>
         <source>2</source>
         <translation>۲</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="625"/>
+        <location filename="../kaqaz.cpp" line="536"/>
         <source>3</source>
         <translation>۳</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="626"/>
+        <location filename="../kaqaz.cpp" line="537"/>
         <source>4</source>
         <translation>۴</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="627"/>
+        <location filename="../kaqaz.cpp" line="538"/>
         <source>5</source>
         <translation>۵</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="628"/>
+        <location filename="../kaqaz.cpp" line="539"/>
         <source>6</source>
         <translation>۶</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="629"/>
+        <location filename="../kaqaz.cpp" line="540"/>
         <source>7</source>
         <translation>۷</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="630"/>
+        <location filename="../kaqaz.cpp" line="541"/>
         <source>8</source>
         <translation>۸</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="631"/>
+        <location filename="../kaqaz.cpp" line="542"/>
         <source>9</source>
         <translation>۹</translation>
     </message>
@@ -799,17 +804,17 @@ left to select categories.</source>
         <translation type="obsolete">بی گروه</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="507"/>
+        <location filename="../kaqaz.cpp" line="413"/>
         <source>Gregorian</source>
         <translation>میلادی</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="510"/>
+        <location filename="../kaqaz.cpp" line="416"/>
         <source>Jalali</source>
         <translation>جلالی</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="513"/>
+        <location filename="../kaqaz.cpp" line="419"/>
         <source>Hijri</source>
         <translation>هجری قمری</translation>
     </message>
@@ -871,12 +876,12 @@ left to select categories.</source>
 <context>
     <name>MainItem</name>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="115"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="116"/>
         <source>Press again to exit</source>
         <translation>برای خروج دوباره کلید را فشار دهید</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="529"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="530"/>
         <source>List is empty</source>
         <translation>لیست خالی است</translation>
     </message>
@@ -956,6 +961,39 @@ left to select categories.</source>
     </message>
 </context>
 <context>
+    <name>PaperEditDialog</name>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="27"/>
+        <source>Untitled Paper</source>
+        <translation>بدون عنوان</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="76"/>
+        <source>Share Paper</source>
+        <translation>اشتراک گذاری</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="104"/>
+        <source>Force sync</source>
+        <translation>همگام سازی</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="124"/>
+        <source>Add Reminder (Soon)</source>
+        <translation>یادآوری کن (به زودی)</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="152"/>
+        <source>Are you sure?</source>
+        <translation>آیا مطمئنی؟</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="166"/>
+        <source>Delete</source>
+        <translation>پاک کردن</translation>
+    </message>
+</context>
+<context>
     <name>PaperItem</name>
     <message>
         <source>synced</source>
@@ -966,7 +1004,7 @@ left to select categories.</source>
         <translation type="obsolete">همگام نشده</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperItem.qml" line="540"/>
+        <location filename="../qml/Kaqaz/PaperItem.qml" line="546"/>
         <source>Title</source>
         <translation>عنوان</translation>
     </message>
@@ -978,7 +1016,7 @@ left to select categories.</source>
 <context>
     <name>PaperLabel</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperLabel.qml" line="203"/>
+        <location filename="../qml/Kaqaz/PaperLabel.qml" line="201"/>
         <source>New text</source>
         <translation>نوشته‌ی جدید</translation>
     </message>

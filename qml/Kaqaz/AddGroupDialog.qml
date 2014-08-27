@@ -40,8 +40,8 @@ Item {
         anchors.right: add_group.right
         anchors.top: add_group.top
         anchors.topMargin: 20*physicalPlatformScale
-        anchors.leftMargin: 90*physicalPlatformScale
-        anchors.rightMargin: 90*physicalPlatformScale
+        anchors.leftMargin: devices.isMobile && devices.isAndroid? 40*physicalPlatformScale : 90*physicalPlatformScale
+        anchors.rightMargin: devices.isMobile && devices.isAndroid? 40*physicalPlatformScale : 90*physicalPlatformScale
         height: 75*physicalPlatformScale
         radius: 3*physicalPlatformScale
         color: color_list.currentColor
@@ -65,7 +65,7 @@ Item {
             font.family: globalFontFamily
             color: "white"
             horizontalAlignment: Text.AlignHCenter
-            inputMethodHints: Qt.ImhNoPredictiveText
+            inputMethodHints: globalInputMethodHints
             onAccepted: add_group.accept()
         }
     }

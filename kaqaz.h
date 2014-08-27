@@ -29,11 +29,12 @@ class Database;
 class KaqazPrivate;
 class Kaqaz : public QObject
 {
-    Q_PROPERTY( int    currentDays READ currentDays   NOTIFY currentDaysChanged )
-    Q_PROPERTY( bool   proBuild    READ proBuild      NOTIFY proBuildChanged )
-    Q_PROPERTY( bool   groupsCount READ groupsCount   WRITE setGroupsCount NOTIFY groupsCountChanged)
-    Q_PROPERTY( bool   modernDelete READ modernDelete WRITE setModernDelete NOTIFY modernDeleteChanged)
-    Q_PROPERTY( bool   allPaper    READ allPaper      WRITE setAllPaper NOTIFY allPaperChanged)
+    Q_PROPERTY( int    currentDays          READ currentDays         NOTIFY currentDaysChanged )
+    Q_PROPERTY( bool   proBuild             READ proBuild            NOTIFY proBuildChanged )
+    Q_PROPERTY( bool   groupsCount          READ groupsCount         WRITE setGroupsCount         NOTIFY groupsCountChanged)
+    Q_PROPERTY( bool   modernDelete         READ modernDelete        WRITE setModernDelete        NOTIFY modernDeleteChanged)
+    Q_PROPERTY( bool   allPaper             READ allPaper            WRITE setAllPaper            NOTIFY allPaperChanged)
+    Q_PROPERTY( bool   keyboardPredicative  READ keyboardPredicative WRITE setKeyboardPredicative NOTIFY keyboardPredicativeChanged)
     Q_PROPERTY( Qt::LayoutDirection  languageDirection  READ languageDirection NOTIFY languageDirectionChanged )
 
     Q_OBJECT
@@ -62,6 +63,7 @@ public:
     Q_INVOKABLE QString convertIntToStringDate(qint64 d );
     Q_INVOKABLE QString convertIntToFullStringDate(qint64 d );
     Q_INVOKABLE QString convertIntToNumStringDate(qint64 d );
+    Q_INVOKABLE QString translateInt(qint64 d);
     Q_INVOKABLE QString convertIntToStringDate(qint64 d, const QString & format );
 
     Q_INVOKABLE void close();
@@ -115,6 +117,9 @@ public:
     void setAllPaper( bool stt );
     bool allPaper() const;
 
+    void setKeyboardPredicative( bool stt );
+    bool keyboardPredicative() const;
+
     Q_INVOKABLE static QStringList dirEntryFiles(const QString & path , const QStringList &filters);
     Q_INVOKABLE static QStringList findEntryFiles(const QString & path , const QStringList &filters);
     Q_INVOKABLE static QStringList dirEntryDirs(const QString & path);
@@ -150,6 +155,7 @@ signals:
     void groupsCountChanged();
     void modernDeleteChanged();
     void allPaperChanged();
+    void keyboardPredicativeChanged();
 
     void backRequest();
     void languageChanged();

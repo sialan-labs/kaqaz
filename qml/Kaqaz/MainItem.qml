@@ -79,6 +79,7 @@ Rectangle {
         main_page.anim = true
         if( panelItem )
         {
+            panelHeight = panelItem.height
             panelItem.parent = panel_frame
             panelItem.anchors.fill = panel_frame
             panelItem.visible = true

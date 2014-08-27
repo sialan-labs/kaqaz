@@ -21,7 +21,7 @@ import QtQuick 2.2
 Item {
     id: search_panel
     width: 100
-    height: 62
+    height: 50*physicalPlatformScale
 
     property alias text: txt.text
 

@@ -38,9 +38,13 @@ Item {
             anchors.top: parent.top
             anchors.right: parent.right
             anchors.bottom: visit_btn.top
+            anchors.topMargin: title.height
             flickableDirection: Flickable.VerticalFlick
+            contentHeight: column.height
+            contentWidth: width
 
             Column {
+                id: column
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
