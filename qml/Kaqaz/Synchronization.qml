@@ -62,7 +62,7 @@ Item {
                 anchors.right: parent.right
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
-                font.pixelSize: 13*fontsScale
+                font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
                 font.family: globalFontFamily
                 color: file_sync.press? "#ffffff" : "#333333"
                 wrapMode: TextInput.WordWrap

@@ -48,7 +48,7 @@ Item {
             anchors.right: parent.right
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 15*fontsScale
+            font.pixelSize: devices.isMobile? 13*fontsScale : 15*fontsScale
             font.family: globalFontFamily
             color: "#333333"
         }
@@ -59,7 +59,7 @@ Item {
             anchors.right: parent.right
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 13*fontsScale
+            font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
             font.family: globalFontFamily
             color: "#333333"
 
@@ -75,7 +75,7 @@ Item {
             anchors.right: parent.right
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 13*fontsScale
+            font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
             font.family: globalFontFamily
             color: "#333333"
         }
@@ -86,7 +86,7 @@ Item {
             anchors.right: parent.right
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 13*fontsScale
+            font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
             font.family: globalFontFamily
             color: "#333333"
 

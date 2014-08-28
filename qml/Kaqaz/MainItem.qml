@@ -106,8 +106,13 @@ Rectangle {
         interval: 1500
         repeat: false
 
+        property bool closeCalled: false
         function show() {
+            if( closeCalled ) {
+                return
+            }
             if( back_attemper.running ) {
+                closeCalled = true
                 kaqaz.close()
                 return
             }

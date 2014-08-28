@@ -4,7 +4,7 @@
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS Groups (
   id INT NOT NULL ,
-  name TEXT NOT NULL ,
+  name TEXT ,
   color VARCHAR(9) NOT NULL ,
   uuid VARCHAR(64) NOT NULL ,
   PRIMARY KEY (id) )

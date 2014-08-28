@@ -110,7 +110,7 @@ void PaperManager::setRoot(int id)
             break;
 
         p->papers = Kaqaz::database()->search(p->keyword);
-        qSort( p->papers.begin(), p->papers.end(), actionLessThan );
+//        qSort( p->papers.begin(), p->papers.end(), actionLessThan );
         break;
 
     case Date:

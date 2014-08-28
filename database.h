@@ -140,6 +140,7 @@ signals:
 
 private:
     void reinit_buffer();
+    void update_database();
 
     PaperClass getPaper( int id );
     void savePaper(PaperClass paper);

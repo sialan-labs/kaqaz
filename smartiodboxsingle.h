@@ -62,7 +62,7 @@ signals:
     void revisionChanged( const QString & id, qint64 revision );
 
 private slots:
-    void cacheIsReady( const QString & data );
+    void cacheIsReady(const QByteArray &data );
     void coreFinished();
 
 private:
@@ -85,16 +85,16 @@ public slots:
     void requestGroupsToSync();
 
     void paperPushed(const QString & id, quint64 revision );
-    void paperFetched( const QString & id, const QString & data, quint64 revision );
+    void paperFetched(const QString & id, const QByteArray &data, quint64 revision );
 
     void groupsPushed( quint64 revision );
-    void groupsFetched( const QString & data, quint64 revision );
+    void groupsFetched(const QByteArray &data, quint64 revision );
 
     void paperDeleted( const QString & id );
 
 signals:
-    void paperIsReady( const QString & data );
-    void groupsIsReady( const QString & data );
+    void paperIsReady( const QByteArray & data );
+    void groupsIsReady( const QByteArray & data );
     void finished();
 };
 

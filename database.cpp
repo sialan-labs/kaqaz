@@ -115,6 +115,7 @@ void Database::connect()
 
     p->db.open();
     reinit_buffer();
+    update_database();
 }
 
 void Database::disconnect()
@@ -305,29 +306,81 @@ QList<int> Database::papers()
     return result.values();
 }
 
-QList<int> Database::search(const QString &keyword)
+QHash<int,qint64> *search_sort_result;
+QHash<int,int> *search_sort_result_counts;
+QSet<int> *search_sort_result_exact;
+bool searchSort( int a, int b )
 {
-    QSqlQuery query(p->db);
-    query.prepare("SELECT id,ctime,cdate FROM Papers WHERE title LIKE :fkwrd OR text LIKE :skwrd");
-    query.bindValue(":fkwrd","%"+keyword+"%");
-    query.bindValue(":skwrd","%"+keyword+"%");
-    query.exec();
+    QHash<int,qint64> & result = *search_sort_result;
+    QHash<int,int> & result_counts = *search_sort_result_counts;
+    QSet<int> & result_exact = *search_sort_result_exact;
+    if( result_exact.contains(a) && !result_exact.contains(b) )
+        return true;
 
-    if( query.lastError().isValid() )
-        qDebug() << query.lastError();
+    const int a_res_cnt = result_counts[a];
+    const int b_res_cnt = result_counts[b];
+    if( a_res_cnt > b_res_cnt )
+        return true;
+    if( a_res_cnt < b_res_cnt )
+        return false;
 
-    QMap<qint64,int> result;
-    while( query.next() )
+    const qint64 a_data = result[a];
+    const qint64 b_data = result[b];
+    if( a_data > b_data )
+        return true;
+    if( a_data < b_data )
+        return false;
+
+    return a>b;
+}
+
+QList<int> Database::search(const QString &kw)
+{
+    QHash<int,qint64> result;
+    QHash<int,int> result_counts;
+    QSet<int> result_exact;
+
+    QStringList keywords = kw.split(" ",QString::SkipEmptyParts);
+    keywords.prepend(kw);
+
+    bool first_done = false;
+    foreach( const QString & keyword, keywords )
     {
-        QSqlRecord record = query.record();
-        int id    = record.value(0).toInt();
-        int ctime = record.value(1).toInt();
-        int cdate = record.value(2).toInt();
+        QSqlQuery query(p->db);
+        query.prepare("SELECT id,ctime,cdate FROM Papers WHERE title LIKE :fkwrd OR text LIKE :skwrd");
+        query.bindValue(":fkwrd","%"+keyword+"%");
+        query.bindValue(":skwrd","%"+keyword+"%");
+        query.exec();
 
-        result.insert( cdate*3600*25+ctime, id );
+        if( query.lastError().isValid() )
+            qDebug() << query.lastError();
+
+        while( query.next() )
+        {
+            QSqlRecord record = query.record();
+            int id = record.value(0).toInt();
+            int ctime = record.value(1).toInt();
+            int cdate = record.value(2).toInt();
+
+            result_counts[id]++;
+            if( result.contains(id) )
+                continue;
+
+            result.insert( id, cdate*3600*25+ctime );
+            if( !first_done )
+                result_exact.insert(id);
+        }
+
+        first_done = true;
     }
 
-    return result.values();
+    search_sort_result = &result;
+    search_sort_result_counts = &result_counts;
+    search_sort_result_exact = &result_exact;
+    QList<int> final_result = result.keys();
+    qSort(final_result.begin(),final_result.end(),searchSort);
+
+    return final_result;
 }
 
 int Database::createPaper( const QString & uuid )
@@ -1016,6 +1069,27 @@ void Database::reinit_buffer()
     {
         QSqlRecord record = ppr_query.record();
         p->max_paper_id = record.value(0).toInt()+1;
+    }
+}
+
+void Database::update_database()
+{
+    const QString & version = value("version");
+    if( version.isEmpty() )
+    {
+        QStringList query_list;
+        query_list << "BEGIN;";
+        query_list << "ALTER TABLE Groups RENAME TO tmp_Groups;";
+        query_list << "CREATE  TABLE IF NOT EXISTS Groups (id INT NOT NULL ,name TEXT ,color VARCHAR(9) NOT NULL ,uuid VARCHAR(64) NOT NULL ,PRIMARY KEY (id) );";
+        query_list << "INSERT INTO Groups(id,name,color,uuid) SELECT id,name,color,uuid FROM tmp_Groups;";
+        query_list << "DROP TABLE tmp_Groups;";
+        query_list << "CREATE UNIQUE INDEX uuid_g_UNIQUE ON Groups (uuid ASC);";
+        query_list << "COMMIT;";
+
+        foreach( const QString & query_str, query_list )
+            QSqlQuery( query_str, p->db ).exec();
+
+        setValue("version","1");
     }
 }
 

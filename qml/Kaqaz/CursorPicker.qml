@@ -28,6 +28,7 @@ Item {
     property real pickerWidth: 35*physicalPlatformScale
     property real pickerHeight: 35*physicalPlatformScale
 
+    property bool moving: false
     property bool press: top_handler.press || bottom_handler.press
     property bool commitBlocker: false
 
@@ -36,10 +37,18 @@ Item {
     property variant mainClass
     property variant mainQml
 
+    property int cursorPosition: textItem? textItem.cursorPosition : 0
+
     onTextItemChanged: {
         top_picker.visible = false
         bottom_picker.visible = false
         mainQml.hideRollerDialog()
+    }
+    onCursorPositionChanged: {
+        if( moving )
+            return
+
+        hide()
     }
 
     Behavior on opacity {
@@ -140,11 +149,13 @@ Item {
         width: pickerWidth
         height: pickerHeight*3/2
         onCommited: {
+            cursor_picker.moving = false
             cursor_picker.commited(bottom_handler)
             bottom_picker.x = bottom_handler.x
             bottom_picker.y = bottom_handler.y
         }
         onMoved: {
+            cursor_picker.moving = true
             commitBlocker = false
             bottom_picker.disabled = false
             mainQml.hideRollerDialog()
@@ -159,11 +170,13 @@ Item {
         width: pickerWidth
         height: pickerHeight*3/2
         onCommited: {
+            cursor_picker.moving = false
             cursor_picker.commited(top_handler)
             top_picker.x = top_handler.x
             top_picker.y = top_handler.y
         }
         onMoved: {
+            cursor_picker.moving = true
             commitBlocker = false
             top_picker.disabled = false
             mainQml.hideRollerDialog()

@@ -32,6 +32,11 @@
 
 #define NAME_OF(METHOD) #METHOD
 
+#define PAPER_DATA_HEADER  QString("KaqazPaper")
+#define PAPER_DATA_VERSION QString("1.0")
+#define GROUP_DATA_HEADER  QString("KaqazGroups")
+#define GROUP_DATA_VERSION QString("1.0")
+
 #define CALL_CORE_VOID( METHOD ) SialanTools::call(p->core, NAME_OF(METHOD), Qt::QueuedConnection );
 #define CALL_CORE( METHOD, ... ) SialanTools::call(p->core, NAME_OF(METHOD), Qt::QueuedConnection, __VA_ARGS__ );
 
@@ -52,6 +57,8 @@
 #include <QEventLoop>
 #include <QMutex>
 #include <QDebug>
+#include <QBuffer>
+#include <QDataStream>
 
 class SmartIODBoxSinglePrivate
 {
@@ -66,7 +73,7 @@ public:
 
     SmartIODBoxSingleCore *core;
 
-    QString cache;
+    QByteArray cache;
     QMutex cache_mutex;
 };
 
@@ -90,8 +97,8 @@ SmartIODBoxSingle::SmartIODBoxSingle(QObject *parent) :
     p->thread->start();
 
     connect( p->thread, SIGNAL(destroyed())           , SLOT(deleteLater())        , Qt::QueuedConnection );
-    connect( p->core  , SIGNAL(paperIsReady(QString)) , SLOT(cacheIsReady(QString)), Qt::QueuedConnection );
-    connect( p->core  , SIGNAL(groupsIsReady(QString)), SLOT(cacheIsReady(QString)), Qt::QueuedConnection );
+    connect( p->core  , SIGNAL(paperIsReady(QByteArray)) , SLOT(cacheIsReady(QByteArray)), Qt::QueuedConnection );
+    connect( p->core  , SIGNAL(groupsIsReady(QByteArray)), SLOT(cacheIsReady(QByteArray)), Qt::QueuedConnection );
     connect( p->core  , SIGNAL(finished())            , SLOT(coreFinished())       , Qt::QueuedConnection );
 }
 
@@ -181,9 +188,9 @@ void SmartIODBoxSingle::pushPaper(const QString &uuid, qint64 revision, const QS
     if( !file.open(QDropboxFile::WriteOnly) )
         END_FNC;
 
-    const QString cached_data = p->cache.toUtf8();
+    const QByteArray cached_data = p->cache;
 
-    file.write(encryptData(cached_data.toUtf8()));
+    file.write(encryptData(cached_data));
     file.close();
 
     CALL_CORE(requestPaperToSync, uuid );
@@ -229,7 +236,7 @@ void SmartIODBoxSingle::pushGroups(const QString & path, qint64 revision)
     CALL_CORE_VOID( requestGroupsToSync );
     p->loop->exec();
 
-    file.write(encryptData(p->cache.toUtf8()));
+    file.write(encryptData(p->cache));
     file.close();
 
     CALL_CORE( groupsPushed, revision );
@@ -284,7 +291,7 @@ QString SmartIODBoxSingle::cache() const
     return result;
 }
 
-void SmartIODBoxSingle::cacheIsReady(const QString &data)
+void SmartIODBoxSingle::cacheIsReady(const QByteArray &data)
 {
     p->cache_mutex.lock();
     p->cache = data;
@@ -334,12 +341,23 @@ void SmartIODBoxSingleCore::requestPaperToSync(const QString &uuid)
         return;
     }
 
-    QString d;
-    d += db->paperTitle(paperId) + "\n";
-    d += db->paperCreatedDate(paperId).toString() + "\n";
-    d += db->groupUuid( db->paperGroup(paperId) ) + "\n";
-    d += db->paperFiles(paperId).join(";") + "\n";
-    d += db->paperText(paperId);
+    QByteArray d;
+    QBuffer buffer(&d);
+    buffer.open(QBuffer::WriteOnly);
+    QDataStream stream(&buffer);
+
+    stream << PAPER_DATA_HEADER;
+    stream << PAPER_DATA_VERSION;
+    stream << db->paperTitle(paperId);
+    stream << QString("0,0");
+    stream << db->paperCreatedDate(paperId).toString();
+    stream << db->paperModifiedDate(paperId).toString();
+    stream << db->groupUuid( db->paperGroup(paperId) );
+    stream << db->paperFiles(paperId);
+    stream << db->paperText(paperId);
+
+    buffer.close();
+    d.prepend("#");
 
     emit paperIsReady(d);
     emit finished();
@@ -348,15 +366,32 @@ void SmartIODBoxSingleCore::requestPaperToSync(const QString &uuid)
 void SmartIODBoxSingleCore::requestGroupsToSync()
 {
     Database *db = Kaqaz::database();
-    QString data;
+
+    QByteArray data;
+    QBuffer mainBuffer(&data);
+    mainBuffer.open(QBuffer::WriteOnly);
+    QDataStream mainStream(&mainBuffer);
+    mainStream << GROUP_DATA_HEADER;
+    mainStream << GROUP_DATA_VERSION;
 
     const QList<int> & groups = db->groups();
     foreach( int gr, groups )
     {
-        data += db->groupUuid(gr) + "\n";
-        data += db->groupColor(gr).name() + "\n";
-        data += db->groupName(gr) + "\n";
+        QByteArray d;
+        QBuffer buffer(&d);
+        buffer.open(QBuffer::WriteOnly);
+
+        QDataStream stream(&buffer);
+        stream << db->groupUuid(gr);
+        stream << db->groupColor(gr).name();
+        stream << db->groupName(gr);
+
+        buffer.close();
+        mainStream << d;
     }
+
+    mainBuffer.close();
+    data.prepend("#");
 
     emit groupsIsReady(data);
     emit finished();
@@ -371,31 +406,69 @@ void SmartIODBoxSingleCore::paperPushed(const QString &id, quint64 revision)
     emit finished();
 }
 
-void SmartIODBoxSingleCore::paperFetched(const QString &uuid, const QString &d_const, quint64 revision)
+void SmartIODBoxSingleCore::paperFetched(const QString &uuid, const QByteArray &d_const, quint64 revision)
 {
-    QString d = d_const;
-    if( d.isEmpty() )
+    if( d_const.isEmpty() )
     {
         emit finished();
         return;
     }
 
-    EXTRACT_PART(title,d);
-    EXTRACT_PART(date ,d);
-    EXTRACT_PART(group,d);
-    EXTRACT_PART(files,d);
-
     Database *db = Kaqaz::database();
     db->setSignalBlocker(true);
 
-    db->setPaper( uuid, title, d, group, date );
-    db->setRevision( uuid, revision );
+    if( d_const[0] == '#' ) //! New Method
+    {
+        QByteArray d = d_const.mid(1);
+        QBuffer buffer(&d);
+        buffer.open(QBuffer::ReadOnly);
+        QDataStream stream(&buffer);
 
-    int paperId = db->paperUuidId(uuid);
+        QString header;
+        QString version;
+        QString title;
+        QString location;
+        QString date;
+        QString mdate;
+        QString group;
+        QStringList files;
+        QString body;
 
-    const QStringList & flist = files.split(";",QString::SkipEmptyParts);
-    for( int i=flist.count()-1; i>=0 ; i-- )
-        db->addFileToPaper( paperId, flist[i] );
+        stream >> header;
+        stream >> version;
+        stream >> title;
+        stream >> location;
+        stream >> date;
+        stream >> mdate;
+        stream >> group;
+        stream >> files;
+        stream >> body;
+
+        db->setPaper( uuid, title, body, group, date );
+        db->setRevision( uuid, revision );
+
+        int paperId = db->paperUuidId(uuid);
+        for( int i=files.count()-1; i>=0 ; i-- )
+            db->addFileToPaper( paperId, files[i] );
+    }
+    else //! Old method
+    {
+        QString d = d_const;
+
+        EXTRACT_PART(title,d);
+        EXTRACT_PART(date ,d);
+        EXTRACT_PART(group,d);
+        EXTRACT_PART(files,d);
+
+        db->setPaper( uuid, title, d, group, date );
+        db->setRevision( uuid, revision );
+
+        int paperId = db->paperUuidId(uuid);
+
+        const QStringList & flist = files.split(";",QString::SkipEmptyParts);
+        for( int i=flist.count()-1; i>=0 ; i-- )
+            db->addFileToPaper( paperId, flist[i] );
+    }
 
     db->setSignalBlocker(false);
     emit finished();
@@ -410,7 +483,7 @@ void SmartIODBoxSingleCore::groupsPushed(quint64 revision)
     emit finished();
 }
 
-void SmartIODBoxSingleCore::groupsFetched(const QString &data, quint64 revision)
+void SmartIODBoxSingleCore::groupsFetched(const QByteArray &data, quint64 revision)
 {
     if( data.isEmpty() )
     {
@@ -421,14 +494,53 @@ void SmartIODBoxSingleCore::groupsFetched(const QString &data, quint64 revision)
     Database *db = Kaqaz::database();
     db->setSignalBlocker(true);
 
-    const QStringList & list = data.split("\n");
-    for( int i=2; i<list.count(); i+=3 )
+    if( data[0] == '#' ) //! New Method
     {
-        const QString & uuid  = list[i-2];
-        const QString & color = list[i-1];
-        const QString & name  = list[i-0];
+        QByteArray mainData = data.mid(1);
+        QBuffer mainBuffer(&mainData);
+        mainBuffer.open(QBuffer::ReadOnly);
+        QDataStream mainStream(&mainBuffer);
 
-        db->setGroup( uuid, name, color );
+        QString header;
+        QString version;
+
+        mainStream >> header;
+        mainStream >> version;
+
+        while( !mainStream.atEnd() )
+        {
+            QByteArray record;
+            mainStream >> record;
+
+            QBuffer buffer(&record);
+            buffer.open(QBuffer::ReadOnly);
+            QDataStream stream(&buffer);
+
+            QString uuid;
+            QString color;
+            QString name;
+
+            stream >> uuid;
+            stream >> color;
+            stream >> name;
+
+            db->setGroup( uuid, name, color );
+            buffer.close();
+        }
+
+        mainBuffer.close();
+    }
+    else //! Old Method
+    {
+        const QStringList & list = QString(data).split("\n");
+        for( int i=2; i<list.count(); i+=3 )
+        {
+            const QString & uuid  = list[i-2];
+            const QString & color = list[i-1];
+            const QString & name  = list[i-0];
+
+            db->setGroup( uuid, name, color );
+        }
     }
 
     db->setRevision( GROUPS_SYNC_KEY, revision );

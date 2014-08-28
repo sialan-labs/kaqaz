@@ -142,6 +142,11 @@ Item {
                     onTriggered: delete_frame.confirm = false
                 }
 
+                Timer {
+                    id: block_timer
+                    interval: 400
+                }
+
                 Text {
                     id: delete_confirm_text
                     font.weight: Font.Normal
@@ -165,6 +170,8 @@ Item {
                     textFont.bold: false
                     text: qsTr("Delete")
                     onClicked: {
+                        if( block_timer.running )
+                            return
                         if( delete_frame.confirm ) {
                             item.deleteRequest()
                             hideSubMessage()
@@ -172,6 +179,7 @@ Item {
 
                         delete_frame.confirm = !delete_frame.confirm
                         confirm_timer.restart()
+                        block_timer.restart()
                     }
                 }
             }

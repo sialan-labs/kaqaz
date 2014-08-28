@@ -89,7 +89,7 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pixelSize: 13*fontsScale
+                font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
                 font.family: globalFontFamily
                 color: "#ffffff"
             }
