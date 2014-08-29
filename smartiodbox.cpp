@@ -26,11 +26,7 @@
 
 #define APPEND_TO_QUEUE(CMD) \
     p->queue.append(CMD); \
-    p->queued_cnt++; \
-    nextCommand(); \
-    if( p->queued_cnt == 1 ) \
-        emit progressStarted(); \
-    emit progressChanged(progress());
+    p->queued_cnt++;
 
 #include "smartiodbox.h"
 #include "smartiodboxsingle.h"
@@ -217,14 +213,23 @@ bool SmartIODBox::isActive() const
     return p->actived;
 }
 
-void SmartIODBox::nextCommand()
+void SmartIODBox::start()
+{
+    while( nextCommand() );
+
+    if( p->queued_cnt == 1 )
+        emit progressStarted();
+    emit progressChanged(progress());
+}
+
+bool SmartIODBox::nextCommand()
 {
     if( p->queue.isEmpty() )
-        return;
+        return false;
 
     SmartIODBoxSingle *s = getSingle();
     if( !s )
-        return;
+        return false;
 
     p->actived = true;
     const SmartIODBoxCommand & cmd = p->queue.takeFirst();
@@ -256,6 +261,8 @@ void SmartIODBox::nextCommand()
         p->actived = false;
         break;
     }
+
+    return p->actived;
 }
 
 void SmartIODBox::finished(SmartIODBoxSingle *s)

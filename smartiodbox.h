@@ -53,6 +53,9 @@ public:
     qreal progress() const;
     bool isActive() const;
 
+public slots:
+    void start();
+
 signals:
     void progressFinished();
     void progressStarted();
@@ -65,7 +68,7 @@ signals:
     void revisionChanged( const QString & id, qint64 revision );
 
 private slots:
-    void nextCommand();
+    bool nextCommand();
     void finished( SmartIODBoxSingle *s );
 
 private:

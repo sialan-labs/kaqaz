@@ -26,16 +26,54 @@
     emit finished(this); \
     return; }
 
-#define EXTRACT_PART(DEST,QSTR) \
-    QString DEST = QSTR.mid(0,QSTR.indexOf("\n")); \
-    QSTR.remove(0,DEST.length()+1);
-
 #define NAME_OF(METHOD) #METHOD
+
+#define WRITE_REPEAT_FAILED( FILE, DATA ) { \
+    if( DATA.isEmpty() ) \
+        END_FNC \
+    qint64 res = -1; \
+    bool flush = false; \
+    int counter = 0; \
+    do { \
+        if( FILE.open(QDropboxFile::WriteOnly) ) { \
+            res = FILE.write(DATA); \
+            flush = FILE.flush(); \
+            FILE.close(); \
+            if( !flush ) \
+                res = -1; \
+        } \
+        counter++; \
+    } while( res == -1 && counter <= 5 ); \
+    if( res == -1 && counter > 5 ) \
+        END_FNC \
+    }
+
+#define READ_REPEAT_FAILED( FILE, RES, FAILED_CMD ) \
+    QByteArray RES; { \
+    int counter = 0; \
+    do { \
+        if( FILE.open(QDropboxFile::ReadOnly) ) {\
+            RES = FILE.readAll(); \
+            FILE.close(); \
+        } \
+        counter++; \
+    } while( RES.isEmpty() && counter <= 5 ); \
+    if( RES.isEmpty() ) { \
+        FAILED_CMD; \
+        END_FNC \
+    } \
+    }
 
 #define PAPER_DATA_HEADER  QString("KaqazPaper")
 #define PAPER_DATA_VERSION QString("1.0")
 #define GROUP_DATA_HEADER  QString("KaqazGroups")
 #define GROUP_DATA_VERSION QString("1.0")
+
+#define ALLOC_DBOX(NAME) \
+    QDropbox NAME( DROPBOX_APP_KEY, DROPBOX_APP_SECRET, QDropbox::Plaintext, "api.dropbox.com", this ); \
+    NAME.setAuthMethod(QDropbox::Plaintext); \
+    NAME.setToken(p->token); \
+    NAME.setTokenSecret(p->tokenSecret);
 
 #define CALL_CORE_VOID( METHOD ) SialanTools::call(p->core, NAME_OF(METHOD), Qt::QueuedConnection );
 #define CALL_CORE( METHOD, ... ) SialanTools::call(p->core, NAME_OF(METHOD), Qt::QueuedConnection, __VA_ARGS__ );
@@ -67,9 +105,11 @@ public:
 
     bool started;
 
-    QDropbox *dbox;
     QThread *thread;
     QEventLoop *loop;
+
+    QString token;
+    QString tokenSecret;
 
     SmartIODBoxSingleCore *core;
 
@@ -82,9 +122,6 @@ SmartIODBoxSingle::SmartIODBoxSingle(QObject *parent) :
 {
     p = new SmartIODBoxSinglePrivate;
     p->started = false;
-
-    p->dbox = new QDropbox(DROPBOX_APP_KEY, DROPBOX_APP_SECRET, QDropbox::Plaintext, "api.dropbox.com", this);
-    p->dbox->setAuthMethod(QDropbox::Plaintext);
 
     p->loop = new QEventLoop(this);
 
@@ -104,22 +141,22 @@ SmartIODBoxSingle::SmartIODBoxSingle(QObject *parent) :
 
 void SmartIODBoxSingle::setToken(const QString &t)
 {
-    p->dbox->setToken(t);
+    p->token = t;
 }
 
 QString SmartIODBoxSingle::token() const
 {
-    return p->dbox->token();
+    return p->token;
 }
 
 void SmartIODBoxSingle::setTokenSecret(const QString &s)
 {
-    p->dbox->setTokenSecret(s);
+    p->tokenSecret = s;
 }
 
 QString SmartIODBoxSingle::tokenSecret() const
 {
-    return p->dbox->tokenSecret();
+    return p->tokenSecret;
 }
 
 void SmartIODBoxSingle::setPassword(const QString &pass)
@@ -143,12 +180,12 @@ void SmartIODBoxSingle::pushFile(const QString &file, const QString & dest)
     if( !src.open(QFile::ReadOnly) )
         END_FNC
 
-    QDropboxFile dst( dest, p->dbox );
-    if( !dst.open(QDropboxFile::WriteOnly) )
-        END_FNC
+    ALLOC_DBOX(dbox)
+    QDropboxFile dst( dest, &dbox );
+    const QByteArray & _d = encryptData(src.readAll());
 
-    dst.write(encryptData(src.readAll()));
-    dst.close();
+    WRITE_REPEAT_FAILED( dst, _d )
+
     src.close();
     END_FNC
 }
@@ -156,22 +193,19 @@ void SmartIODBoxSingle::pushFile(const QString &file, const QString & dest)
 void SmartIODBoxSingle::fetchFile(const QString &path, const QString & dest)
 {
     BEGIN_FNC
-    QDropboxFile file(path,p->dbox);
-    if( !file.open(QDropboxFile::ReadOnly) )
-        END_FNC
 
     QFile ofile(dest);
     ofile.remove();
     if( !ofile.open(QFile::WriteOnly) )
-    {
-        file.close();
         END_FNC
-    }
 
-    ofile.write(decryptData(file.readAll()));
+    ALLOC_DBOX(dbox)
+    QDropboxFile file(path,&dbox);
+    READ_REPEAT_FAILED( file, _d, ofile.close();ofile.remove(); );
+
+    ofile.write(decryptData(_d));
     ofile.flush();
     ofile.close();
-    file.close();
     END_FNC
 }
 
@@ -184,14 +218,13 @@ void SmartIODBoxSingle::pushPaper(const QString &uuid, qint64 revision, const QS
     CALL_CORE(requestPaperToSync, uuid );
     p->loop->exec();
 
-    QDropboxFile file( dest, p->dbox );
-    if( !file.open(QDropboxFile::WriteOnly) )
-        END_FNC;
-
     const QByteArray cached_data = p->cache;
+    const QByteArray & _d = encryptData(cached_data);
 
-    file.write(encryptData(cached_data));
-    file.close();
+    ALLOC_DBOX(dbox)
+    QDropboxFile file( dest, &dbox );
+
+    WRITE_REPEAT_FAILED( file, _d )
 
     CALL_CORE(requestPaperToSync, uuid );
     p->loop->exec();
@@ -212,12 +245,11 @@ void SmartIODBoxSingle::fetchPaper(const QString &uuid, qint64 revision, const Q
     QString gid = uuid;
     gid.remove("{").remove("}");
 
-    QDropboxFile file(path,p->dbox);
-    if( !file.open(QDropboxFile::ReadOnly) )
-        END_FNC
+    ALLOC_DBOX(dbox)
+    QDropboxFile file(path,&dbox);
+    READ_REPEAT_FAILED( file, _d, (void)path )
 
-    const QByteArray & data = decryptData(file.readAll());
-    file.close();
+    const QByteArray & data = decryptData(_d);
 
     CALL_CORE( paperFetched, uuid, data, revision );
     p->loop->exec();
@@ -229,15 +261,15 @@ void SmartIODBoxSingle::fetchPaper(const QString &uuid, qint64 revision, const Q
 void SmartIODBoxSingle::pushGroups(const QString & path, qint64 revision)
 {
     BEGIN_FNC
-    QDropboxFile file( path, p->dbox );
-    if( !file.open(QDropboxFile::WriteOnly) )
-        END_FNC;
 
     CALL_CORE_VOID( requestGroupsToSync );
     p->loop->exec();
 
-    file.write(encryptData(p->cache));
-    file.close();
+    const QByteArray & _d = encryptData(p->cache);
+
+    ALLOC_DBOX(dbox)
+    QDropboxFile file( path, &dbox );
+    WRITE_REPEAT_FAILED( file, _d )
 
     CALL_CORE( groupsPushed, revision );
     p->loop->exec();
@@ -249,12 +281,12 @@ void SmartIODBoxSingle::pushGroups(const QString & path, qint64 revision)
 void SmartIODBoxSingle::fetchGroups(const QString & path, qint64 revision)
 {
     BEGIN_FNC
-    QDropboxFile file(path,p->dbox);
-    if( !file.open(QDropboxFile::ReadOnly) )
-        END_FNC
 
-    const QByteArray & data = decryptData(file.readAll());
-    file.close();
+    ALLOC_DBOX(dbox)
+    QDropboxFile file(path,&dbox);
+    READ_REPEAT_FAILED( file, _d, (void)path )
+
+    const QByteArray & data = decryptData(_d);
 
     CALL_CORE( groupsFetched, data, revision );
     p->loop->exec();
@@ -266,12 +298,11 @@ void SmartIODBoxSingle::fetchGroups(const QString & path, qint64 revision)
 void SmartIODBoxSingle::setDeleted(const QString &path)
 {
     BEGIN_FNC
-    QDropboxFile file(path,p->dbox);
-    if( !file.open(QDropboxFile::WriteOnly) )
-        END_FNC
 
-    file.write("DELETED");
-    file.close();
+    ALLOC_DBOX(dbox)
+    QDropboxFile file(path,&dbox);
+    WRITE_REPEAT_FAILED( file, QByteArray("DELETED") )
+
     emit revisionChanged(path,-2);
     END_FNC
 }
@@ -357,7 +388,6 @@ void SmartIODBoxSingleCore::requestPaperToSync(const QString &uuid)
     stream << db->paperText(paperId);
 
     buffer.close();
-    d.prepend("#");
 
     emit paperIsReady(d);
     emit finished();
@@ -391,7 +421,6 @@ void SmartIODBoxSingleCore::requestGroupsToSync()
     }
 
     mainBuffer.close();
-    data.prepend("#");
 
     emit groupsIsReady(data);
     emit finished();
@@ -417,58 +446,37 @@ void SmartIODBoxSingleCore::paperFetched(const QString &uuid, const QByteArray &
     Database *db = Kaqaz::database();
     db->setSignalBlocker(true);
 
-    if( d_const[0] == '#' ) //! New Method
-    {
-        QByteArray d = d_const.mid(1);
-        QBuffer buffer(&d);
-        buffer.open(QBuffer::ReadOnly);
-        QDataStream stream(&buffer);
+    QByteArray d = d_const;
+    QBuffer buffer(&d);
+    buffer.open(QBuffer::ReadOnly);
+    QDataStream stream(&buffer);
 
-        QString header;
-        QString version;
-        QString title;
-        QString location;
-        QString date;
-        QString mdate;
-        QString group;
-        QStringList files;
-        QString body;
+    QString header;
+    QString version;
+    QString title;
+    QString location;
+    QString date;
+    QString mdate;
+    QString group;
+    QStringList files;
+    QString body;
 
-        stream >> header;
-        stream >> version;
-        stream >> title;
-        stream >> location;
-        stream >> date;
-        stream >> mdate;
-        stream >> group;
-        stream >> files;
-        stream >> body;
+    stream >> header;
+    stream >> version;
+    stream >> title;
+    stream >> location;
+    stream >> date;
+    stream >> mdate;
+    stream >> group;
+    stream >> files;
+    stream >> body;
 
-        db->setPaper( uuid, title, body, group, date );
-        db->setRevision( uuid, revision );
+    db->setPaper( uuid, title, body, group, date );
+    db->setRevision( uuid, revision );
 
-        int paperId = db->paperUuidId(uuid);
-        for( int i=files.count()-1; i>=0 ; i-- )
-            db->addFileToPaper( paperId, files[i] );
-    }
-    else //! Old method
-    {
-        QString d = d_const;
-
-        EXTRACT_PART(title,d);
-        EXTRACT_PART(date ,d);
-        EXTRACT_PART(group,d);
-        EXTRACT_PART(files,d);
-
-        db->setPaper( uuid, title, d, group, date );
-        db->setRevision( uuid, revision );
-
-        int paperId = db->paperUuidId(uuid);
-
-        const QStringList & flist = files.split(";",QString::SkipEmptyParts);
-        for( int i=flist.count()-1; i>=0 ; i-- )
-            db->addFileToPaper( paperId, flist[i] );
-    }
+    int paperId = db->paperUuidId(uuid);
+    for( int i=files.count()-1; i>=0 ; i-- )
+        db->addFileToPaper( paperId, files[i] );
 
     db->setSignalBlocker(false);
     emit finished();
@@ -494,54 +502,39 @@ void SmartIODBoxSingleCore::groupsFetched(const QByteArray &data, quint64 revisi
     Database *db = Kaqaz::database();
     db->setSignalBlocker(true);
 
-    if( data[0] == '#' ) //! New Method
+    QByteArray mainData = data;
+    QBuffer mainBuffer(&mainData);
+    mainBuffer.open(QBuffer::ReadOnly);
+    QDataStream mainStream(&mainBuffer);
+
+    QString header;
+    QString version;
+
+    mainStream >> header;
+    mainStream >> version;
+
+    while( !mainStream.atEnd() )
     {
-        QByteArray mainData = data.mid(1);
-        QBuffer mainBuffer(&mainData);
-        mainBuffer.open(QBuffer::ReadOnly);
-        QDataStream mainStream(&mainBuffer);
+        QByteArray record;
+        mainStream >> record;
 
-        QString header;
-        QString version;
+        QBuffer buffer(&record);
+        buffer.open(QBuffer::ReadOnly);
+        QDataStream stream(&buffer);
 
-        mainStream >> header;
-        mainStream >> version;
+        QString uuid;
+        QString color;
+        QString name;
 
-        while( !mainStream.atEnd() )
-        {
-            QByteArray record;
-            mainStream >> record;
+        stream >> uuid;
+        stream >> color;
+        stream >> name;
 
-            QBuffer buffer(&record);
-            buffer.open(QBuffer::ReadOnly);
-            QDataStream stream(&buffer);
-
-            QString uuid;
-            QString color;
-            QString name;
-
-            stream >> uuid;
-            stream >> color;
-            stream >> name;
-
-            db->setGroup( uuid, name, color );
-            buffer.close();
-        }
-
-        mainBuffer.close();
+        db->setGroup( uuid, name, color );
+        buffer.close();
     }
-    else //! Old Method
-    {
-        const QStringList & list = QString(data).split("\n");
-        for( int i=2; i<list.count(); i+=3 )
-        {
-            const QString & uuid  = list[i-2];
-            const QString & color = list[i-1];
-            const QString & name  = list[i-0];
 
-            db->setGroup( uuid, name, color );
-        }
-    }
+    mainBuffer.close();
 
     db->setRevision( GROUPS_SYNC_KEY, revision );
     db->setSignalBlocker(false);

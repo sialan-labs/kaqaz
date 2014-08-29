@@ -17,15 +17,14 @@
 */
 
 #define ROOT_FOLDER      "/sandbox/"
-#define PAPERS_FOLDER    ROOT_FOLDER"papers/"
-#define ATTACHS_FOLDER   ROOT_FOLDER"attachs/"
-#define PASSWORD_FILE    ROOT_FOLDER"passwords"
-#define GROUPS_FILE      ROOT_FOLDER"groups"
-#define REVISIONS_FILE   ROOT_FOLDER"revisions"
+#define PAPERS_FOLDER    ROOT_FOLDER"2.0/papers/"
+#define ATTACHS_FOLDER   ROOT_FOLDER"2.0/attachs/"
+#define GROUPS_FILE      ROOT_FOLDER"2.0/groups"
+#define REVISIONS_FILE   ROOT_FOLDER"2.0/revisions"
 #define MAXIMUM_UPLOAD   10
 #define FILE_MAX_SIZE_MB 20
 #define UPDATE_KEY       "DBOX_UPDATE"
-#define DBOX_CLOSE(DBFL) DBFL.close();
+#define DBOX_CLOSE(DBFL) DBFL.flush(); DBFL.close();
 
 #define ALLOC_DBOX(NAME) \
     QDropbox NAME( DROPBOX_APP_KEY, DROPBOX_APP_SECRET, QDropbox::Plaintext, "api.dropbox.com", this ); \
@@ -62,6 +61,7 @@ public:
 
     bool connected;
     QString master_password;
+    bool password_setted;
 
     QMutex mutex;
 
@@ -95,6 +95,7 @@ KaqazDropBox::KaqazDropBox(QObject *parent) :
     p->reupdate_flag = false;
     p->token = false;
     p->fileSyncing = true;
+    p->password_setted = false;
 
     p->settings = new QSettings(CONFIG_PATH,QSettings::IniFormat);
     checkToken();
@@ -138,7 +139,7 @@ SyncItemHash KaqazDropBox::localSyncHash() const
 
 void KaqazDropBox::localListUpdated()
 {
-    if( p->master_password.isEmpty() )
+    if( !p->password_setted )
         return;
     if( !beginPush(UPDATE_KEY) )
         return;
@@ -149,15 +150,14 @@ void KaqazDropBox::localListUpdated()
         return;
     }
 
-    const QDropboxFileInfo &papersInf = p->dbox->requestMetadataAndWait(PAPERS_FOLDER);
-    const QDropboxFileInfo &filesInf = p->dbox->requestMetadataAndWait(ATTACHS_FOLDER);
+    ALLOC_DBOX(papersDbox);
+    ALLOC_DBOX(filesDbox);
+
+    const QDropboxFileInfo &papersInf = papersDbox.requestMetadataAndWait(PAPERS_FOLDER);
+    const QDropboxFileInfo &filesInf = filesDbox.requestMetadataAndWait(ATTACHS_FOLDER);
 
     if( !papersInf.isDir() || !filesInf.isDir() )
-    {
         refresh();
-        endPush(UPDATE_KEY);
-        return;
-    }
 
     emit syncStarted();
 
@@ -257,7 +257,7 @@ void KaqazDropBox::localListUpdated()
                 continue;
             if( item.revision == -2 )
             {
-                p->smartio->setDeleted(ROOT_FOLDER+inf.path());
+                p->smartio->setDeleted(PAPERS_FOLDER+QString(item.id).remove("{").remove("}"));
                 continue;
             }
 
@@ -269,13 +269,14 @@ void KaqazDropBox::localListUpdated()
             qint64 revision = fetchRevision(GROUPS_SYNC_KEY);
             if( revision >= item.revision && item.revision != -1 )
                 continue;
-            if( item.last_revision == -1 && item.revision == -1 )
+            if( item.last_revision == -1 && item.revision == -1 && revision != -1 )
                 continue;
 
             p->smartio->pushGroups(GROUPS_FILE,revision+1);
         }
     }
 
+    p->smartio->start();
     if( !p->smartio->isActive() )
         update_finished();
 }
@@ -291,7 +292,9 @@ void KaqazDropBox::connectDropbox(const QString &password)
 {
     if( p->connected )
     {
-        fetch_password(password);
+        p->password_setted = true;
+        p->master_password = password;
+        p->smartio->setPassword(p->master_password);
         refresh();
         return;
     }
@@ -395,61 +398,6 @@ void KaqazDropBox::refreshForce()
     localListUpdated();
 }
 
-void KaqazDropBox::fetch_password( const QString & password )
-{
-    if( !beginPush(PASSWORD_FILE) )
-        return;
-
-    QDropboxFile file( PASSWORD_FILE, p->dbox );
-    if( !file.open(QDropboxFile::ReadOnly) )
-    {
-        endPush(PASSWORD_FILE);
-        return;
-    }
-
-    const QByteArray & sdata = file.readAll();
-    file.close();
-
-    if( sdata.isEmpty() )
-    {
-        p->master_password = QUuid::createUuid().toString();
-        p->smartio->setPassword(p->master_password);
-        const QByteArray & data = p->master_password.toUtf8();
-
-        QSharedPointer<SimpleQtCryptor::Key> gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(password));
-        SimpleQtCryptor::Encryptor enc( gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB, SimpleQtCryptor::NoChecksum );
-
-        QByteArray enc_new_data;
-        enc.encrypt( data, enc_new_data, true );
-
-        file.setOverwrite(false);
-        if( !file.open(QDropboxFile::WriteOnly) )
-        {
-            endPush(PASSWORD_FILE);
-            return;
-        }
-
-        file.write(enc_new_data);
-        DBOX_CLOSE(file)
-    }
-    else
-    {
-        QSharedPointer<SimpleQtCryptor::Key> gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(password));
-        SimpleQtCryptor::Decryptor dec( gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB );
-        QByteArray enc_code_dec;
-        if( dec.decrypt(sdata,enc_code_dec,true) == SimpleQtCryptor::ErrorInvalidKey )
-        {
-            endPush(PASSWORD_FILE);
-            return;
-        }
-
-        p->master_password = enc_code_dec;
-        p->smartio->setPassword(p->master_password);
-    }
-
-    endPush(PASSWORD_FILE);
-}
-
 QByteArray KaqazDropBox::encryptData(const QByteArray &data)
 {
     QSharedPointer<SimpleQtCryptor::Key> gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(p->master_password));
@@ -503,18 +451,6 @@ void KaqazDropBox::setFileDeleted(const QString &path)
 bool KaqazDropBox::dboxFileIsDeleted(const QString &path)
 {
     return fetchRevision(path) == -2;
-}
-
-void KaqazDropBox::setDboxFileDeleted(const QString &path)
-{
-    QDropboxFile file(path,p->dbox);
-    if( !file.open(QDropboxFile::WriteOnly) )
-        return;
-
-    file.write("DELETED");
-    DBOX_CLOSE(file)
-
-    setRevision(path,-2);
 }
 
 qint64 KaqazDropBox::fetchRevision(const QString &path)
@@ -572,6 +508,7 @@ void KaqazDropBox::fetchRevisions()
         return;
 
     const QString & data = file.readAll();
+    file.flush();
     file.close();
 
     const QStringList & lines = data.split("\n",QString::SkipEmptyParts);
@@ -616,41 +553,6 @@ bool KaqazDropBox::endPush(const QString &id)
 void KaqazDropBox::authorizeDone()
 {
     p->loop->exit();
-}
-
-void KaqazDropBox::setPassword(const QString &password, const QString & old_password)
-{
-    if( !beginPush(PASSWORD_FILE) )
-        return;
-
-    QDropboxFile file( PASSWORD_FILE, p->dbox );
-    if( !file.open(QDropboxFile::ReadOnly) )
-        return;
-
-    const QByteArray & sdata = file.readAll();
-    file.close();
-
-    QSharedPointer<SimpleQtCryptor::Key> old_gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(old_password));
-    SimpleQtCryptor::Decryptor dec( old_gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB );
-    QByteArray enc_code_dec;
-    if( dec.decrypt(sdata,enc_code_dec,true) == SimpleQtCryptor::ErrorInvalidKey )
-        return;
-
-    QSharedPointer<SimpleQtCryptor::Key> new_gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(password));
-    SimpleQtCryptor::Encryptor enc( new_gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB, SimpleQtCryptor::NoChecksum );
-
-    QByteArray enc_new_data;
-    enc.encrypt( enc_code_dec, enc_new_data, true );
-
-    if( !file.open(QDropboxFile::WriteOnly) )
-        return;
-
-    file.write(enc_new_data);
-    DBOX_CLOSE(file)
-
-    emit passwordChanged(password);
-
-    endPush(PASSWORD_FILE);
 }
 
 void KaqazDropBox::authorizeApplication()

@@ -90,8 +90,6 @@ bool QDropboxFile::open(QIODevice::OpenMode mode)
 
 void QDropboxFile::close()
 {
-	if(isMode(QIODevice::WriteOnly))
-		flush();
 	QIODevice::close();
 	return;
 }

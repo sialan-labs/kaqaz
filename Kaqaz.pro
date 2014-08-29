@@ -7,7 +7,7 @@ folder_03.source = database
 folder_03.target = .
 DEPLOYMENTFOLDERS = folder_01 folder_02 folder_03
 
-QT += sql multimedia
+QT += sql multimedia positioning
 
 ios {
     QTPLUGIN += qsqlite

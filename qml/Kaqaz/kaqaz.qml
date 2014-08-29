@@ -18,6 +18,7 @@
 
 import QtQuick 2.2
 import QtMultimedia 5.0
+import QtPositioning 5.2
 
 Rectangle {
     id: kaqaz_root
@@ -59,6 +60,7 @@ Rectangle {
     property alias syncProgressBar: sync_pbar
 
     property alias rollerVisible: roller_dialog.visible
+    property alias position: positioning.position
 
     property alias audioItem: audio_item
 
@@ -129,6 +131,12 @@ Rectangle {
 
         property variant activeBy
         onActiveByChanged: if( !activeBy ) audio_item.stop()
+    }
+
+    PositionSource {
+        id: positioning
+        updateInterval: 10000
+        active: true
     }
 
     PointingDialog{

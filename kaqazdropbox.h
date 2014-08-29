@@ -54,8 +54,6 @@ public slots:
 
     void authorizeDone();
 
-    void setPassword(const QString & password , const QString &old_password);
-
 signals:
     void connectedChanged();
     void tokenAvailableChanged();
@@ -76,7 +74,6 @@ signals:
 
 private slots:
     void authorizeApplication();
-    void fetch_password( const QString & password );
 
     QByteArray encryptData(const QByteArray &data );
     QByteArray decryptData( const QByteArray & sdata );
@@ -85,7 +82,6 @@ private slots:
     void setFileDeleted( const QString & path );
 
     bool dboxFileIsDeleted( const QString & path );
-    void setDboxFileDeleted( const QString & path );
 
     qint64 fetchRevision( const QString & path );
     void setRevision( const QString & path, qint64 revision );
