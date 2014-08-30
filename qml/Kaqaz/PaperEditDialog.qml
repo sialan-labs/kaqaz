@@ -9,6 +9,10 @@ Item {
     property variant item
     property variant paperItem: item? item.paperItem : 0
 
+    property variant coo: edit_dialog.item? database.paperLocation(edit_dialog.item.paperItem.paperItem) : 0
+    property real longitude: coo? coo.longitude : 0
+    property real latitude: coo? coo.latitude : 0
+
     MouseArea {
         anchors.fill: parent
     }
@@ -58,6 +62,7 @@ Item {
         anchors.bottom: parent.bottom
         contentHeight: column.height
         contentWidth: width
+        bottomMargin: 20*physicalPlatformScale
         clip: true
 
         Column {
@@ -168,7 +173,7 @@ Item {
                     textFont.weight: Font.Normal
                     textFont.pixelSize: 13*fontsScale
                     textFont.bold: false
-                    text: qsTr("Delete")
+                    text: qsTr("Delete Paper")
                     onClicked: {
                         if( block_timer.running )
                             return
@@ -182,6 +187,14 @@ Item {
                         block_timer.restart()
                     }
                 }
+            }
+
+            MapView {
+                id: map_image
+                width: column.width
+                height: width/2
+                latitude: edit_dialog.latitude
+                longitude: edit_dialog.longitude
             }
         }
     }

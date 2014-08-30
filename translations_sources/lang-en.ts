@@ -223,7 +223,7 @@
 <context>
     <name>Database</name>
     <message>
-        <location filename="../database.cpp" line="935"/>
+        <location filename="../database.cpp" line="934"/>
         <source>No Label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -639,6 +639,19 @@ left to select categories.</source>
     </message>
 </context>
 <context>
+    <name>MapView</name>
+    <message>
+        <location filename="../qml/Kaqaz/MapView.qml" line="23"/>
+        <source>Unknown point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/MapView.qml" line="23"/>
+        <source>Loading Map...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MusicDialog</name>
     <message>
         <location filename="../qml/Kaqaz/MusicDialog.qml" line="97"/>
@@ -662,32 +675,32 @@ left to select categories.</source>
 <context>
     <name>PaperEditDialog</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="27"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="31"/>
         <source>Untitled Paper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="76"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="80"/>
         <source>Share Paper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="104"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="108"/>
         <source>Force sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="124"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="128"/>
         <source>Add Reminder (Soon)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="157"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="161"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="171"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="175"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -695,7 +708,7 @@ left to select categories.</source>
 <context>
     <name>PaperItem</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperItem.qml" line="546"/>
+        <location filename="../qml/Kaqaz/PaperItem.qml" line="548"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
