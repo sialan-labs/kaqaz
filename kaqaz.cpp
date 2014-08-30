@@ -734,17 +734,6 @@ bool Kaqaz::groupsCount() const
     return kaqaz_settings->value("General/GroupsCount",true).toBool();
 }
 
-void Kaqaz::setModernDelete(bool stt)
-{
-    kaqaz_settings->setValue("General/ModernDelete",stt);
-    emit modernDeleteChanged();
-}
-
-bool Kaqaz::modernDelete() const
-{
-    return kaqaz_settings->value("General/ModernDelete",false).toBool();
-}
-
 void Kaqaz::setAllPaper(bool stt)
 {
     kaqaz_settings->setValue("General/AllPaper",stt);
@@ -765,6 +754,17 @@ void Kaqaz::setKeyboardPredicative(bool stt)
 bool Kaqaz::keyboardPredicative() const
 {
     return kaqaz_settings->value("General/KeyboardPredicative",true).toBool();
+}
+
+void Kaqaz::setPositioning(bool stt)
+{
+    kaqaz_settings->setValue("General/positioning",stt);
+    emit positioningChanged();
+}
+
+bool Kaqaz::positioning() const
+{
+    return kaqaz_settings->value("General/positioning",true).toBool();
 }
 
 QStringList Kaqaz::dirEntryFiles(const QString &path, const QStringList & filters)

@@ -35,6 +35,7 @@
 #include "kaqazdropbox.h"
 #include "qdropbox.h"
 #include "qdropboxfile.h"
+#include "smartiodboxsingle.h"
 #include "database.h"
 #include "smartiodbox.h"
 #include "kaqazmacros.h"
@@ -157,7 +158,14 @@ void KaqazDropBox::localListUpdated()
     const QDropboxFileInfo &filesInf = filesDbox.requestMetadataAndWait(ATTACHS_FOLDER);
 
     if( !papersInf.isDir() || !filesInf.isDir() )
+    {
         refresh();
+        if( SmartIODBoxSingle::fatalError() )
+        {
+            endPush(UPDATE_KEY);
+            return;
+        }
+    }
 
     emit syncStarted();
 

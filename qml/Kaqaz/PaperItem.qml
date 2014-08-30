@@ -103,6 +103,8 @@ AnimationItem {
             paper_item = database.createPaper()
 
         database.setPaper( paper_item, txt.text, label.text, group_chooser.group )
+        if( paperItem == -1 )
+            database.setPaperLocation(paper_item,positioning.position.coordinate)
 
         paperItem = paper_item
         paper.saved(paper_item)

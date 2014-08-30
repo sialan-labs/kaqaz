@@ -24,7 +24,6 @@ Item {
 
     property bool started: false
 
-
     Connections {
         target: sync
         onAuthorizeRequest: authorize_timer.restart()
@@ -106,34 +105,37 @@ Item {
             text: qsTr("Connecting...")
         }
 
-        Rectangle {
-            id: line_edit_frame
+        LineEdit {
+            id: password_line
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: password_repeat.top
+            anchors.margins: 12*physicalPlatformScale
+            visible: btn.visible
+            echoMode: TextInput.Password
+            placeholder: qsTr("Password (optional and unchangable)")
+            onTextChanged: password_repeat.text = ""
+            onAccepted: password_repeat.lineFocus = true
+        }
+
+        LineEdit {
+            id: password_repeat
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: btn.top
             anchors.margins: 12*physicalPlatformScale
-            color: "#88eeeeee"
-            height: 42*physicalPlatformScale
             visible: btn.visible
-
-            Text {
-                anchors.fill: sync_pass
-                font: sync_pass.font
-                color: "#888888"
-                text: qsTr("Enter sync password (optional)")
-                visible: sync_pass.length == 0
-                verticalAlignment: Text.AlignVCenter
-            }
-
-            TextInput {
-                id: sync_pass
-                anchors.fill: parent
-                anchors.margins: 4*physicalPlatformScale
-                font.pixelSize: 11*fontsScale
-                font.family: globalFontFamily
-                color: "#333333"
-                echoMode: TextInput.Password
-                verticalAlignment: Text.AlignVCenter
+            echoMode: TextInput.Password
+            placeholder: qsTr("Password Repeat")
+            onAccepted: done()
+            onTextChanged: {
+                if( text == password_line.text ) {
+                    password_repeat.border.width = 1*physicalPlatformScale
+                    password_repeat.border.color = "#8800ff00"
+                } else {
+                    password_repeat.border.width = 1*physicalPlatformScale
+                    password_repeat.border.color = "#aaff0000"
+                }
             }
         }
 
@@ -149,12 +151,17 @@ Item {
             normalColor: "#88ffffff"
             textColor: "#333333"
             visible: false
-            onClicked: {
-                sync.setPassword(sync_pass.text)
-                sync.authorizeDone()
-                hideSubMessage()
-            }
+            onClicked: done()
         }
+    }
+
+    function done() {
+        if( password_repeat.text != password_line.text )
+            return
+
+        sync.setPassword(password_line.text)
+        sync.authorizeDone()
+        hideSubMessage()
     }
 
     function hide() {

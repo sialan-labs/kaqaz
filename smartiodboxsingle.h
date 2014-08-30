@@ -53,6 +53,8 @@ public slots:
     void close();
     QString cache() const;
 
+    static bool fatalError();
+
 signals:
     void passwordChanged();
 

@@ -32,9 +32,9 @@ class Kaqaz : public QObject
     Q_PROPERTY( int    currentDays          READ currentDays         NOTIFY currentDaysChanged )
     Q_PROPERTY( bool   proBuild             READ proBuild            NOTIFY proBuildChanged )
     Q_PROPERTY( bool   groupsCount          READ groupsCount         WRITE setGroupsCount         NOTIFY groupsCountChanged)
-    Q_PROPERTY( bool   modernDelete         READ modernDelete        WRITE setModernDelete        NOTIFY modernDeleteChanged)
     Q_PROPERTY( bool   allPaper             READ allPaper            WRITE setAllPaper            NOTIFY allPaperChanged)
     Q_PROPERTY( bool   keyboardPredicative  READ keyboardPredicative WRITE setKeyboardPredicative NOTIFY keyboardPredicativeChanged)
+    Q_PROPERTY( bool   positioning          READ positioning         WRITE setPositioning         NOTIFY positioningChanged)
     Q_PROPERTY( Qt::LayoutDirection  languageDirection  READ languageDirection NOTIFY languageDirectionChanged )
 
     Q_OBJECT
@@ -111,14 +111,14 @@ public:
     void setGroupsCount( bool stt );
     bool groupsCount() const;
 
-    void setModernDelete( bool stt );
-    bool modernDelete() const;
-
     void setAllPaper( bool stt );
     bool allPaper() const;
 
     void setKeyboardPredicative( bool stt );
     bool keyboardPredicative() const;
+
+    void setPositioning( bool stt );
+    bool positioning() const;
 
     Q_INVOKABLE static QStringList dirEntryFiles(const QString & path , const QStringList &filters);
     Q_INVOKABLE static QStringList findEntryFiles(const QString & path , const QStringList &filters);
@@ -153,9 +153,9 @@ public slots:
 signals:
     void currentDaysChanged();
     void groupsCountChanged();
-    void modernDeleteChanged();
     void allPaperChanged();
     void keyboardPredicativeChanged();
+    void positioningChanged();
 
     void backRequest();
     void languageChanged();

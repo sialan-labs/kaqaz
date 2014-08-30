@@ -97,7 +97,7 @@ Item {
         function refresh(){
             model.clear()
             if( kaqaz.proBuild ) {
-                model.append({"name": qsTr("Appearance"), "cmd": "Appearance.qml"})
+                model.append({"name": qsTr("General Settings"), "cmd": "GeneralSettings.qml"})
             }
             model.append({"name": qsTr("Languages"), "cmd": "LanguageSelector.qml"})
             model.append({"name": qsTr("Calendars"), "cmd": "Calendar.qml" })

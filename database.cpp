@@ -439,39 +439,13 @@ void Database::setPaper(int id, const QString &title, const QString &text, int g
     if( paper.title == title && paper.text == text && paper.group == group )
         return;
 
-    paper.title = title;
-    paper.text = text;
-    paper.group = group;
+    paper.title     = title;
+    paper.text      = text;
+    paper.group     = group;
     savePaper(paper);
 }
 
-void Database::setPaper(int id, const QString &title, const QString &text)
-{
-    PaperClass paper = getPaper(id);
-    if( paper.id == -1 )
-        return;
-    if( paper.title == title && paper.text == text )
-        return;
-
-    paper.title = title;
-    paper.text = text;
-    savePaper(paper);
-}
-
-void Database::setPaper(int id, const QString &title, int group)
-{
-    PaperClass paper = getPaper(id);
-    if( paper.id == -1 )
-        return;
-    if( paper.title == title && paper.group == group )
-        return;
-
-    paper.title = title;
-    paper.group = group;
-    savePaper(paper);
-}
-
-void Database::setPaper(const QString &uuid, const QString &title, const QString &text, const QString &group, const QString &date)
+void Database::setPaper(const QString &uuid, const QString &title, const QString &text, const QString &group, const QString &date, const QGeoCoordinate & location)
 {
     int paper_id = paperUuidId(uuid);
     if( paper_id == -1 )
@@ -483,11 +457,12 @@ void Database::setPaper(const QString &uuid, const QString &title, const QString
 
     PaperClass paper = getPaper(paper_id);
 
-    paper.uuid   = uuid;
-    paper.title  = title;
-    paper.text   = text;
-    paper.group  = group_id;
-    paper.create = QDateTime::fromString(date);
+    paper.uuid      = uuid;
+    paper.title     = title;
+    paper.text      = text;
+    paper.group     = group_id;
+    paper.location  = location;
+    paper.create    = QDateTime::fromString(date);
 
     savePaper(paper);
     emit datesListChanged();
@@ -562,6 +537,23 @@ QString Database::paperUuid(int id)
 int Database::paperActivity(int id)
 {
     return getPaper(id).activity;
+}
+
+QGeoCoordinate Database::paperLocation(int id)
+{
+    return getPaper(id).location;
+}
+
+void Database::setPaperLocation(int id, const QGeoCoordinate &coo)
+{
+    PaperClass paper = getPaper(id);
+    if( paper.id == -1 )
+        return;
+    if( paper.location == coo )
+        return;
+
+    paper.location = coo;
+    savePaper(paper);
 }
 
 int Database::paperUuidId(const QString &uuid)
@@ -1091,6 +1083,23 @@ void Database::update_database()
 
         setValue("version","1");
     }
+    if( value("version") == "1" )
+    {
+        QStringList query_list;
+        query_list << "BEGIN;";
+        query_list << "ALTER TABLE Papers ADD COLUMN latitude REAL DEFAULT 0;";
+        query_list << "ALTER TABLE Papers ADD COLUMN longitude REAL DEFAULT 0;";
+        query_list << "ALTER TABLE Papers ADD COLUMN altitude REAL DEFAULT 0;";
+        query_list << "CREATE UNIQUE INDEX latitude_p_UNIQUE ON Papers (latitude ASC);";
+        query_list << "CREATE UNIQUE INDEX longitude_p_UNIQUE ON Papers (longitude ASC);";
+        query_list << "CREATE UNIQUE INDEX altitude_p_UNIQUE ON Papers (altitude ASC);";
+        query_list << "COMMIT;";
+
+        foreach( const QString & query_str, query_list )
+            QSqlQuery( query_str, p->db ).exec();
+
+        setValue("version","2");
+    }
 }
 
 PaperClass Database::getPaper(int id)
@@ -1105,7 +1114,7 @@ PaperClass Database::getPaper(int id)
     }
 
     QSqlQuery query(p->db);
-    query.prepare("SELECT id,uuid,title,text,ctime,cdate,mtime,mdate,activity,grp FROM Papers WHERE id=:id");
+    query.prepare("SELECT id,uuid,title,text,ctime,cdate,mtime,mdate,activity,grp,latitude,longitude,altitude FROM Papers WHERE id=:id");
     query.bindValue(":id",id);
     query.exec();
 
@@ -1127,6 +1136,7 @@ PaperClass Database::getPaper(int id)
     result.modified = QDateTime( QDate(1,1,1).addDays(record.value(7).toInt()), QTime(0,0,0).addSecs(record.value(6).toInt()) );
     result.activity = record.value(8).toInt();
     result.group    = record.value(9).toInt();
+    result.location = QGeoCoordinate( record.value(10).toDouble(), record.value(11).toDouble(), record.value(12).toDouble() );
 
     p->papers << result;
     p->cached_papers_ids.insert(result.id);
@@ -1154,8 +1164,8 @@ void Database::savePaper(PaperClass paper)
     paper.modified = QDateTime::currentDateTime();
 
     QSqlQuery query(p->db);
-    query.prepare("INSERT OR REPLACE INTO Papers (id,uuid,title,text,ctime,cdate,mtime,mdate,activity,grp) "
-                  "VALUES (:id,:uuid,:title,:text,:ctime,:cdate,:mtime,:mdate,:actvt,:grp)");
+    query.prepare("INSERT OR REPLACE INTO Papers (id,uuid,title,text,ctime,cdate,mtime,mdate,activity,grp,latitude,longitude,altitude) "
+                  "VALUES (:id,:uuid,:title,:text,:ctime,:cdate,:mtime,:mdate,:actvt,:grp,:ltud,:lgud,:atud)");
     query.bindValue(":id"    ,paper.id);
     query.bindValue(":uuid"  ,paper.uuid);
     query.bindValue(":title" ,paper.title);
@@ -1166,6 +1176,9 @@ void Database::savePaper(PaperClass paper)
     query.bindValue(":mdate" ,QDate(1,1,1).daysTo(paper.modified.date()));
     query.bindValue(":actvt" ,paper.activity);
     query.bindValue(":grp"   ,paper.group);
+    query.bindValue(":ltud"  ,paper.location.latitude());
+    query.bindValue(":lgud"  ,paper.location.longitude());
+    query.bindValue(":atud"  ,paper.location.altitude());
 
     if( allow_exec )
         query.exec();

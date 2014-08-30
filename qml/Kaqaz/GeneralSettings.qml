@@ -98,9 +98,9 @@ Item {
         function refresh() {
             model.clear()
             model.append({ "name": qsTr("All papers item"), "file": "", "check": true, "pr":"allPaper"})
+            model.append({ "name": qsTr("Notes positioning"), "file": "", "check": true, "pr":"positioning"})
             model.append({ "name": qsTr("Word suggestions"), "file": "", "check": true, "pr":"keyboardPredicative"})
             model.append({ "name": qsTr("Groups count"), "file": "", "check": true, "pr":"groupsCount"})
-            model.append({ "name": qsTr("Modern delete dialog"), "file": "", "check": true, "pr":"modernDelete"})
         }
     }
 
@@ -116,7 +116,7 @@ Item {
 
     function initTranslations(){
         prefrences.refresh()
-        title.text = qsTr("Appearance")
+        title.text = qsTr("General Settings")
     }
 
     Component.onCompleted: {

@@ -44,8 +44,9 @@
         } \
         counter++; \
     } while( res == -1 && counter <= 5 ); \
-    if( res == -1 && counter > 5 ) \
-        END_FNC \
+    if( res == -1 && counter > 5 ) { \
+        smart_io_dbox_fatal = true; \
+        END_FNC } \
     }
 
 #define READ_REPEAT_FAILED( FILE, RES, FAILED_CMD ) \
@@ -60,14 +61,23 @@
     } while( RES.isEmpty() && counter <= 5 ); \
     if( RES.isEmpty() ) { \
         FAILED_CMD; \
+        smart_io_dbox_fatal = true; \
         END_FNC \
     } \
     }
 
+#define CHECK_DATA( DATA, RES ) \
+    const QByteArray & RES = DATA; \
+    if( RES.isEmpty() ) \
+        END_FNC
+
 #define PAPER_DATA_HEADER  QString("KaqazPaper")
-#define PAPER_DATA_VERSION QString("1.0")
+#define PAPER_DATA_VERSION QString("1.1")
 #define GROUP_DATA_HEADER  QString("KaqazGroups")
 #define GROUP_DATA_VERSION QString("1.0")
+
+#define CALL_CORE_VOID( METHOD ) SialanTools::call(p->core, NAME_OF(METHOD), Qt::QueuedConnection );
+#define CALL_CORE( METHOD, ... ) SialanTools::call(p->core, NAME_OF(METHOD), Qt::QueuedConnection, __VA_ARGS__ );
 
 #define ALLOC_DBOX(NAME) \
     QDropbox NAME( DROPBOX_APP_KEY, DROPBOX_APP_SECRET, QDropbox::Plaintext, "api.dropbox.com", this ); \
@@ -75,8 +85,9 @@
     NAME.setToken(p->token); \
     NAME.setTokenSecret(p->tokenSecret);
 
-#define CALL_CORE_VOID( METHOD ) SialanTools::call(p->core, NAME_OF(METHOD), Qt::QueuedConnection );
-#define CALL_CORE( METHOD, ... ) SialanTools::call(p->core, NAME_OF(METHOD), Qt::QueuedConnection, __VA_ARGS__ );
+#define ALLOC_DBOX_FILE(FILE,PATH) \
+    ALLOC_DBOX(dbox) \
+    QDropboxFile FILE(PATH,&dbox);
 
 #include "smartiodboxsingle.h"
 #include "kaqaz.h"
@@ -97,6 +108,9 @@
 #include <QDebug>
 #include <QBuffer>
 #include <QDataStream>
+#include <QGeoCoordinate>
+
+bool smart_io_dbox_fatal = false;
 
 class SmartIODBoxSinglePrivate
 {
@@ -180,10 +194,10 @@ void SmartIODBoxSingle::pushFile(const QString &file, const QString & dest)
     if( !src.open(QFile::ReadOnly) )
         END_FNC
 
-    ALLOC_DBOX(dbox)
-    QDropboxFile dst( dest, &dbox );
-    const QByteArray & _d = encryptData(src.readAll());
+    ALLOC_DBOX_FILE(dst,dest);
+    CHECK_DATA(src.readAll(),data);
 
+    const QByteArray & _d = encryptData(data);
     WRITE_REPEAT_FAILED( dst, _d )
 
     src.close();
@@ -199,11 +213,11 @@ void SmartIODBoxSingle::fetchFile(const QString &path, const QString & dest)
     if( !ofile.open(QFile::WriteOnly) )
         END_FNC
 
-    ALLOC_DBOX(dbox)
-    QDropboxFile file(path,&dbox);
+    ALLOC_DBOX_FILE(file,path)
     READ_REPEAT_FAILED( file, _d, ofile.close();ofile.remove(); );
+    CHECK_DATA( decryptData(_d), data );
 
-    ofile.write(decryptData(_d));
+    ofile.write(data);
     ofile.flush();
     ofile.close();
     END_FNC
@@ -219,11 +233,12 @@ void SmartIODBoxSingle::pushPaper(const QString &uuid, qint64 revision, const QS
     p->loop->exec();
 
     const QByteArray cached_data = p->cache;
+    if( cached_data.isEmpty() )
+        END_FNC;
+
     const QByteArray & _d = encryptData(cached_data);
 
-    ALLOC_DBOX(dbox)
-    QDropboxFile file( dest, &dbox );
-
+    ALLOC_DBOX_FILE(file,dest)
     WRITE_REPEAT_FAILED( file, _d )
 
     CALL_CORE(requestPaperToSync, uuid );
@@ -245,11 +260,12 @@ void SmartIODBoxSingle::fetchPaper(const QString &uuid, qint64 revision, const Q
     QString gid = uuid;
     gid.remove("{").remove("}");
 
-    ALLOC_DBOX(dbox)
-    QDropboxFile file(path,&dbox);
+    ALLOC_DBOX_FILE(file,path)
     READ_REPEAT_FAILED( file, _d, (void)path )
 
     const QByteArray & data = decryptData(_d);
+    if( data.isEmpty() )
+        END_FNC
 
     CALL_CORE( paperFetched, uuid, data, revision );
     p->loop->exec();
@@ -265,11 +281,13 @@ void SmartIODBoxSingle::pushGroups(const QString & path, qint64 revision)
     CALL_CORE_VOID( requestGroupsToSync );
     p->loop->exec();
 
+    if( p->cache.isEmpty() )
+        END_FNC
+
     const QByteArray & _d = encryptData(p->cache);
 
-    ALLOC_DBOX(dbox)
-    QDropboxFile file( path, &dbox );
-    WRITE_REPEAT_FAILED( file, _d )
+    ALLOC_DBOX_FILE(file,path);
+    WRITE_REPEAT_FAILED( file, _d );
 
     CALL_CORE( groupsPushed, revision );
     p->loop->exec();
@@ -282,11 +300,12 @@ void SmartIODBoxSingle::fetchGroups(const QString & path, qint64 revision)
 {
     BEGIN_FNC
 
-    ALLOC_DBOX(dbox)
-    QDropboxFile file(path,&dbox);
+    ALLOC_DBOX_FILE(file,path);
     READ_REPEAT_FAILED( file, _d, (void)path )
 
     const QByteArray & data = decryptData(_d);
+    if( data.isEmpty() )
+        END_FNC
 
     CALL_CORE( groupsFetched, data, revision );
     p->loop->exec();
@@ -299,8 +318,7 @@ void SmartIODBoxSingle::setDeleted(const QString &path)
 {
     BEGIN_FNC
 
-    ALLOC_DBOX(dbox)
-    QDropboxFile file(path,&dbox);
+    ALLOC_DBOX_FILE(file,path);
     WRITE_REPEAT_FAILED( file, QByteArray("DELETED") )
 
     emit revisionChanged(path,-2);
@@ -320,6 +338,11 @@ QString SmartIODBoxSingle::cache() const
     QString result = p->cache;
     p->cache_mutex.unlock();
     return result;
+}
+
+bool SmartIODBoxSingle::fatalError()
+{
+    return smart_io_dbox_fatal;
 }
 
 void SmartIODBoxSingle::cacheIsReady(const QByteArray &data)
@@ -380,7 +403,7 @@ void SmartIODBoxSingleCore::requestPaperToSync(const QString &uuid)
     stream << PAPER_DATA_HEADER;
     stream << PAPER_DATA_VERSION;
     stream << db->paperTitle(paperId);
-    stream << QString("0,0");
+    stream << db->paperLocation(paperId);
     stream << db->paperCreatedDate(paperId).toString();
     stream << db->paperModifiedDate(paperId).toString();
     stream << db->groupUuid( db->paperGroup(paperId) );
@@ -451,10 +474,12 @@ void SmartIODBoxSingleCore::paperFetched(const QString &uuid, const QByteArray &
     buffer.open(QBuffer::ReadOnly);
     QDataStream stream(&buffer);
 
+    QString tmp_string;
+
     QString header;
     QString version;
     QString title;
-    QString location;
+    QGeoCoordinate location;
     QString date;
     QString mdate;
     QString group;
@@ -464,14 +489,17 @@ void SmartIODBoxSingleCore::paperFetched(const QString &uuid, const QByteArray &
     stream >> header;
     stream >> version;
     stream >> title;
-    stream >> location;
+    if( version == "1.0" )
+        stream >> tmp_string;
+    else
+        stream >> location;
     stream >> date;
     stream >> mdate;
     stream >> group;
     stream >> files;
     stream >> body;
 
-    db->setPaper( uuid, title, body, group, date );
+    db->setPaper( uuid, title, body, group, date, location );
     db->setRevision( uuid, revision );
 
     int paperId = db->paperUuidId(uuid);

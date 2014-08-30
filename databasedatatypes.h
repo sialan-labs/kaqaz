@@ -22,6 +22,7 @@
 #include <QDateTime>
 #include <QColor>
 #include <QStringList>
+#include <QGeoCoordinate>
 
 class GroupClass
 {
@@ -58,6 +59,7 @@ public:
     QString text;
     QDateTime create;
     QDateTime modified;
+    QGeoCoordinate location;
     int group;
     int activity;
     QStringList files;

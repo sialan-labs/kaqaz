@@ -111,7 +111,6 @@ OTHER_FILES += \
     qml/Kaqaz/SearchPanel.qml \
     qml/Kaqaz/RestoreDialog.qml \
     qml/Kaqaz/GroupManager.qml \
-    qml/Kaqaz/LabelEditPanel.qml \
     qml/Kaqaz/PaperLabel.qml \
     qml/Kaqaz/SideBarList.qml \
     qml/Kaqaz/MusicDialog.qml \
@@ -163,7 +162,8 @@ OTHER_FILES += \
     database/database.sqlite \
     qml/Kaqaz/ModernProgressBar.qml \
     qml/Kaqaz/PaperList.qml \
-    qml/Kaqaz/SplashMessagePage.qml
+    qml/Kaqaz/SplashMessagePage.qml \
+    qml/Kaqaz/GeneralSettings.qml
 
 HEADERS += \
     kaqaz.h \
