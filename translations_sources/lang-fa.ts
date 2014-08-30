@@ -915,12 +915,12 @@ left to select categories.</source>
 <context>
     <name>MapView</name>
     <message>
-        <location filename="../qml/Kaqaz/MapView.qml" line="23"/>
+        <location filename="../qml/Kaqaz/MapView.qml" line="24"/>
         <source>Unknown point</source>
         <translation>نقطه‌ی ناشناخته</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/MapView.qml" line="23"/>
+        <location filename="../qml/Kaqaz/MapView.qml" line="24"/>
         <source>Loading Map...</source>
         <translation>در حال بارگذاری نقشه...</translation>
     </message>
@@ -1007,29 +1007,33 @@ left to select categories.</source>
         <translation>بدون عنوان</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="80"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="81"/>
         <source>Share Paper</source>
         <translation>اشتراک گذاری</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="108"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="109"/>
         <source>Force sync</source>
         <translation>همگام سازی</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="128"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="129"/>
         <source>Add Reminder (Soon)</source>
         <translation>یادآوری کن (به زودی)</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="161"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="162"/>
         <source>Are you sure?</source>
         <translation>آیا مطمئنی؟</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="175"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="176"/>
+        <source>Delete Paper</source>
+        <translation>پاک کردن این کاغذ</translation>
+    </message>
+    <message>
         <source>Delete</source>
-        <translation>پاک کردن</translation>
+        <translation type="obsolete">پاک کردن</translation>
     </message>
 </context>
 <context>

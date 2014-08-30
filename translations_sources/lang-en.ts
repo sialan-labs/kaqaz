@@ -641,12 +641,12 @@ left to select categories.</source>
 <context>
     <name>MapView</name>
     <message>
-        <location filename="../qml/Kaqaz/MapView.qml" line="23"/>
+        <location filename="../qml/Kaqaz/MapView.qml" line="24"/>
         <source>Unknown point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/MapView.qml" line="23"/>
+        <location filename="../qml/Kaqaz/MapView.qml" line="24"/>
         <source>Loading Map...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -680,28 +680,28 @@ left to select categories.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="80"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="81"/>
         <source>Share Paper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="108"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="109"/>
         <source>Force sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="128"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="129"/>
         <source>Add Reminder (Soon)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="161"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="162"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="175"/>
-        <source>Delete</source>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="176"/>
+        <source>Delete Paper</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

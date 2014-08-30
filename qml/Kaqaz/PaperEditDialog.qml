@@ -154,6 +154,7 @@ Item {
 
                 Text {
                     id: delete_confirm_text
+                    width: column.width
                     font.weight: Font.Normal
                     font.pixelSize: 15*fontsScale
                     font.bold: false

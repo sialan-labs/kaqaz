@@ -14,6 +14,7 @@ Rectangle {
         sourceSize: Qt.size(width,height)
         visible: !master_map.visible
         fillMode: Image.PreserveAspectCrop
+        asynchronous: true
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
@@ -52,6 +53,7 @@ Rectangle {
         width: 92*physicalPlatformScale
         height: 92*physicalPlatformScale
         visible: master_map.visible
+        asynchronous: true
         smooth: true
     }
 }
