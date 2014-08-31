@@ -178,7 +178,7 @@ AnimationItem {
     Item {
         id: flick_frame
         anchors.fill: parent
-        anchors.topMargin: txt.y + txt.height
+        anchors.topMargin: txt_frame.y + txt.height
         anchors.bottomMargin: 20+pad + 45*physicalPlatformScale
         z: 20
         clip: true
@@ -287,40 +287,46 @@ AnimationItem {
         color: "#888888"
     }
 
-    TextInput{
-        id: placeholder_txt
-        anchors.fill: txt
-        font: txt.font
-        color: "#cccccc"
-        horizontalAlignment: TextInput.AlignHCenter
-        clip: true
-        visible: (!txt.focus && txt.text == "" && txt.visible)
-        z: 20
-    }
-
-    TextLineCore{
-        id: txt
+    Item {
+        id: txt_frame
         anchors.top: paper.top
         anchors.left: paper.left
         anchors.right: paper.right
         anchors.topMargin: 20+pad + (devices.isMobile? 5*physicalPlatformScale : 15*physicalPlatformScale)
         anchors.leftMargin: group_chooser.x + group_chooser.width
         anchors.rightMargin: group_chooser.x + group_chooser.width
-        font.pixelSize: devices.isLargeTablet? 15*fontsScale : (devices.isMobile? 12*fontsScale : 14*fontsScale)
-        font.family: globalFontFamily
-        color: "#333333"
-        selectionColor: "#0d80ec"
-        selectedTextColor: "#ffffff"
-        horizontalAlignment: TextInput.AlignHCenter
-        inputMethodHints: globalInputMethodHints
+        height: 200*physicalPlatformScale
         clip: true
         z: 20
-        selectByMouse: true
-        onTextChanged: {
-            if( signal_blocker )
-                return
 
-            save_timer.restart()
+        TextInput{
+            id: placeholder_txt
+            anchors.fill: txt
+            font: txt.font
+            color: "#cccccc"
+            horizontalAlignment: TextInput.AlignHCenter
+            visible: (!txt.focus && txt.text == "" && txt.visible)
+        }
+
+        TextLineCore{
+            id: txt
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            font.pixelSize: devices.isLargeTablet? 15*fontsScale : (devices.isMobile? 12*fontsScale : 14*fontsScale)
+            font.family: globalFontFamily
+            color: "#333333"
+            selectionColor: "#0d80ec"
+            selectedTextColor: "#ffffff"
+            horizontalAlignment: TextInput.AlignHCenter
+            inputMethodHints: globalInputMethodHints
+            selectByMouse: true
+            onTextChanged: {
+                if( signal_blocker )
+                    return
+
+                save_timer.restart()
+            }
         }
     }
 

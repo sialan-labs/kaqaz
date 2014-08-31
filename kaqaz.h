@@ -96,6 +96,11 @@ public:
 
     Q_INVOKABLE QString fromMSecSinceEpoch( qint64 t );
     Q_INVOKABLE QString convertDateTimeToString( const QDateTime & dt );
+    Q_INVOKABLE int daysOfMonth( qint64 year, int month );
+    Q_INVOKABLE QString monthName( int month );
+    Q_INVOKABLE qint64 currentYear();
+    Q_INVOKABLE int currentMonth();
+    Q_INVOKABLE int currentDay();
 
     Q_INVOKABLE static QString passToMd5( const QString & pass );
 

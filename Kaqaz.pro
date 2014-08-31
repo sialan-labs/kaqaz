@@ -163,7 +163,8 @@ OTHER_FILES += \
     qml/Kaqaz/ModernProgressBar.qml \
     qml/Kaqaz/PaperList.qml \
     qml/Kaqaz/SplashMessagePage.qml \
-    qml/Kaqaz/GeneralSettings.qml
+    qml/Kaqaz/GeneralSettings.qml \
+    qml/Kaqaz/DateTimeChooser.qml
 
 HEADERS += \
     kaqaz.h \

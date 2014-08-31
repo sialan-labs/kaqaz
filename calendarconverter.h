@@ -57,6 +57,9 @@ public:
     QString dayName( int d );
     QString monthName( int m );
 
+    bool yearIsLeap( qint64 year );
+    int daysOfMonth( qint64 year, int month );
+
 private:
     qint64 fromDateGregorian( qint64 year , int month , int day );
     DateProperty toDateGregorian( qint64 days_from_julian_zero );

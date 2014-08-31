@@ -105,6 +105,7 @@ Item {
             visible: portrait
             onClicked: {
                 showMenu()
+                main.focus = true
                 devices.hideKeyboard()
             }
         }
@@ -121,7 +122,10 @@ Item {
             normalColor: "#00000000"
             highlightColor: "#00000000"
             opacity: press? 1 : 0.1
-            onClicked: paper_label.edit()
+            onClicked: {
+                main.focus = true
+                paper_label.edit()
+            }
         }
     }
 

@@ -120,6 +120,7 @@ Rectangle {
     RollerDialog {
         id: roller_dialog
         anchors.fill: parent
+        z: 10
     }
 
     PasteButton {

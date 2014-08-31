@@ -1,11 +1,54 @@
 import QtQuick 2.0
+import QtPositioning 5.2
 
 Rectangle {
+    id: map_view
     width: 100
     height: 62
 
     property real longitude
     property real latitude
+
+    property bool unknown: !latitude && !longitude
+    property int paperId
+
+    Item{
+        id: fader_item
+        height: 60*physicalPlatformScale
+        visible: false
+
+        Button {
+            id: unpin_map_btn
+            anchors.bottom: fader_item.bottom
+            anchors.left: fader_item.left
+            anchors.margins: 10*physicalPlatformScale
+            width: (fader_item.width - 30*physicalPlatformScale)/2
+            normalColor: "#ffffff"
+            textColor: "#333333"
+            onClicked: {
+                database.setPaperLocation(paperId,QtPositioning.coordinate(0,0))
+                hideRollerDialog()
+            }
+        }
+
+        Button {
+            id: open_map_btn
+            anchors.bottom: fader_item.bottom
+            anchors.left: fader_item.horizontalCenter
+            anchors.leftMargin: 5*physicalPlatformScale
+            anchors.margins: 10*physicalPlatformScale
+            width: (fader_item.width - 30*physicalPlatformScale)/2
+            normalColor: "#ffffff"
+            textColor: "#333333"
+            onClicked: {
+                if( !longitude && !latitude )
+                    Qt.openUrlExternally("http://maps.google.com")
+                else
+                    Qt.openUrlExternally("http://maps.google.com/maps?&q=" + latitude + "," + longitude)
+                hideRollerDialog()
+            }
+        }
+    }
 
     Image {
         id: splash_map
@@ -17,11 +60,19 @@ Rectangle {
         asynchronous: true
 
         Text {
+            anchors.left: parent.left
+            anchors.top: parent.top
+            font.family: globalFontFamily
+            font.pixelSize: 9*fontsScale
+            text: latitude + ", " + longitude
+        }
+
+        Text {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             font.family: globalFontFamily
             font.pixelSize: 13*fontsScale
-            text: !latitude || !longitude? qsTr("Unknown point") : qsTr("Loading Map...")
+            text: unknown? qsTr("Unknown point") : qsTr("Loading Map...")
         }
     }
 
@@ -29,19 +80,9 @@ Rectangle {
         id: master_map
         anchors.fill: parent
         asynchronous: true
-        visible: master_map.status == Image.Ready && (latitude || longitude)
+        visible: master_map.status == Image.Ready && !unknown
         sourceSize: Qt.size(width,height)
         source: "http://maps.google.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=15&size=" + Math.floor(width) + "x" + Math.floor(height) + "&sensor=false"
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                if( !longitude && !latitude )
-                    Qt.openUrlExternally("http://maps.google.com")
-                else
-                    Qt.openUrlExternally("http://maps.google.com/maps?&daddr=" + latitude + "," + longitude)
-            }
-        }
     }
 
     Image {
@@ -56,4 +97,20 @@ Rectangle {
         asynchronous: true
         smooth: true
     }
+
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        visible: !unknown
+        onClicked: {
+            showRollerDialog( map_view.mapToItem(kaqaz_root,0,0).y, map_view.mapToItem(kaqaz_root,0,map_view.height).y, fader_item )
+        }
+    }
+
+    function initTranslations(){
+        unpin_map_btn.text = qsTr("Unpin")
+        open_map_btn.text = qsTr("Open")
+    }
+
+    Component.onCompleted: initTranslations()
 }

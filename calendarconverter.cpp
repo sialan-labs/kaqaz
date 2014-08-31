@@ -20,14 +20,14 @@
 
 #include <QObject>
 
-int gregorian_months_start[12]      = {0,31,59,90,120,151,181,212,243,273,304,334};
-int gregorian_leap_months_start[12] = {0,31,60,91,121,152,182,213,244,274,305,335};
+int gregorian_months_start[13]      = {0,31,59,90,120,151,181,212,243,273,304,334,365};
+int gregorian_leap_months_start[13] = {0,31,60,91,121,152,182,213,244,274,305,335,366};
 
-int jalali_months_start[12]      = {0,31,62,93,124,155,186,216,246,276,306,336};
-int jalali_leap_months_start[12] = {0,31,62,93,124,155,186,216,246,276,306,336};
+int jalali_months_start[13]      = {0,31,62,93,124,155,186,216,246,276,306,336,365};
+int jalali_leap_months_start[13] = {0,31,62,93,124,155,186,216,246,276,306,336,366};
 
-int hijri_months_start[12]      = {0,30,59,89,118,148,177,207,236,266,295,325};
-int hijri_leap_months_start[12] = {0,30,59,89,118,148,177,207,236,266,295,325};
+int hijri_months_start[13]      = {0,30,59,89,118,148,177,207,236,266,295,325,354};
+int hijri_leap_months_start[13] = {0,30,59,89,118,148,177,207,236,266,295,325,355};
 int hijri_leap_years[11] = {2,5,7,10,13,16,18,21,24,26,29};
 
 class CalendarConverterPrivate
@@ -124,6 +124,51 @@ QString CalendarConverter::monthName(int m)
         break;
     case CalendarConverter::Hijri:
         res = monthNamesHijri(m);
+        break;
+    }
+
+    return res;
+}
+
+bool CalendarConverter::yearIsLeap(qint64 year)
+{
+    bool res = false;
+    switch( static_cast<int>(p->calendar) )
+    {
+    case CalendarConverter::Gregorian:
+        res = isLeapGregorian(year);
+        break;
+    case CalendarConverter::Jalali:
+        res = isLeapJalali(year);
+        break;
+    case CalendarConverter::Hijri:
+        res = leapIndexHijri(year) != -1;
+        break;
+    }
+
+    return res;
+}
+
+int CalendarConverter::daysOfMonth(qint64 y, int m)
+{
+    if( m<1 || m>12 )
+        return 0;
+
+    int res = 0;
+    bool leap = yearIsLeap(y);
+    switch( static_cast<int>(p->calendar) )
+    {
+    case CalendarConverter::Gregorian:
+        res = leap? gregorian_leap_months_start[m]-gregorian_leap_months_start[m-1] :
+                gregorian_months_start[m]-gregorian_months_start[m-1];
+        break;
+    case CalendarConverter::Jalali:
+        res = leap? jalali_leap_months_start[m]-jalali_leap_months_start[m-1] :
+                jalali_months_start[m]-jalali_months_start[m-1];
+        break;
+    case CalendarConverter::Hijri:
+        res = leap? hijri_leap_months_start[m]-hijri_leap_months_start[m-1] :
+                hijri_months_start[m]-hijri_months_start[m-1];
         break;
     }
 

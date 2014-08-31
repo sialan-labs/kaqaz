@@ -29,6 +29,7 @@
 #include "database.h"
 #include "backuper.h"
 #include "sialantools/sialanqtlogger.h"
+#include "sialantools/sialantools.h"
 #include "calendarconverter.h"
 #include "resourcemanager.h"
 #include "qtquick2applicationviewer/qtquick2applicationviewer.h"
@@ -138,6 +139,8 @@ public:
     QMimeDatabase mime_db;
 
     SialanDevices *devices;
+    SialanTools *tools;
+
 #ifdef Q_OS_ANDROID
     SialanQtLogger *logger;
     SialanJavaLayer *java_layer;
@@ -155,6 +158,7 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->calendar = new CalendarConverter();
     p->backuper = new Backuper(this);
     p->devices = new SialanDevices(this);
+    p->tools = new SialanTools(this);
 #ifdef Q_OS_ANDROID
     p->logger = new SialanQtLogger(LOG_PATH,this);
     p->java_layer = SialanJavaLayer::instance();
@@ -228,6 +232,7 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->viewer->engine()->rootContext()->setContextProperty( "backuper", p->backuper );
     p->viewer->engine()->rootContext()->setContextProperty( "sync", p->sync );
     p->viewer->engine()->rootContext()->setContextProperty( "devices", p->devices );
+    p->viewer->engine()->rootContext()->setContextProperty( "tools", p->tools );
 #ifdef DESKTOP_LINUX
     p->viewer->engine()->rootContext()->setContextProperty( "mimeApps", p->mimeApps );
     p->viewer->engine()->addImageProvider( "icon", new IconProvider() );
@@ -660,6 +665,31 @@ QString Kaqaz::fromMSecSinceEpoch(qint64 t)
 QString Kaqaz::convertDateTimeToString(const QDateTime &dt)
 {
     return translateNumbers( p->calendar->paperString(dt) );
+}
+
+int Kaqaz::daysOfMonth(qint64 y, int m)
+{
+    return p->calendar->daysOfMonth(y,m);
+}
+
+QString Kaqaz::monthName(int m)
+{
+    return p->calendar->monthName(m);
+}
+
+qint64 Kaqaz::currentYear()
+{
+    return p->calendar->getDate(QDate::currentDate()).year;
+}
+
+int Kaqaz::currentMonth()
+{
+    return p->calendar->getDate(QDate::currentDate()).month;
+}
+
+int Kaqaz::currentDay()
+{
+    return p->calendar->getDate(QDate::currentDate()).day;
 }
 
 QString Kaqaz::passToMd5(const QString &pass)

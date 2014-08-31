@@ -13,6 +13,20 @@ Item {
     property real longitude: coo? coo.longitude : 0
     property real latitude: coo? coo.latitude : 0
 
+    Connections {
+        target: database
+        onPaperChanged: {
+            if( !item )
+                return
+            if( id != item.paperItem.paperItem )
+                return
+
+            var tmp = item
+            item = 0
+            item = tmp
+        }
+    }
+
     MouseArea {
         anchors.fill: parent
     }
@@ -116,17 +130,67 @@ Item {
                 }
             }
 
+            Item {
+                id: update_frame
+                height: editMode? date_chooser.height+update_btn.height : update_btn.height
+                width: column.width
+                clip: true
+
+                property bool editMode: false
+
+                Behavior on height {
+                    NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
+                }
+
+                DateTimeChooser {
+                    id: date_chooser
+                    width: parent.width
+                    height: 125*physicalPlatformScale
+                    color: "#F4F4F4"
+                    textsColor: "#111111"
+                    anchors.bottom: update_btn.top
+                }
+
+                MenuButton {
+                    id: update_btn
+                    height: 50*physicalPlatformScale
+                    width: parent.width
+                    anchors.bottom: parent.bottom
+                    normalColor: update_frame.editMode? "#4098bf" : "#00000000"
+                    highlightColor: "#4098bf"
+                    textColor: press || update_frame.editMode? "#ffffff" : "#4098bf"
+                    textFont.weight: Font.Normal
+                    textFont.pixelSize: 13*fontsScale
+                    textFont.bold: false
+                    text: update_frame.editMode? qsTr("Confirm") : qsTr("Update Date")
+                    onClicked: update_frame.editMode = !update_frame.editMode
+                }
+            }
+
             MenuButton {
                 height: 50*physicalPlatformScale
                 width: column.width
                 normalColor: "#00000000"
-                highlightColor: "#33ccad"
-                textColor: press? "#ffffff" : "#33ccad"
+                highlightColor: "#4098bf"
+                textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
                 textFont.pixelSize: 13*fontsScale
                 textFont.bold: false
-                textFont.strikeout: true
-                text: qsTr("Add Reminder (Soon)")
+                text: qsTr("Update Location")
+                visible: !map_image.visible
+                onClicked: {
+                    database.setPaperLocation(item.paperItem.paperItem,positioning.position.coordinate)
+                }
+            }
+
+            MapView {
+                id: map_image
+                width: column.width
+                height: width/2
+                latitude: edit_dialog.latitude
+                longitude: edit_dialog.longitude
+                visible: !unknown
+                paperId: edit_dialog.item? edit_dialog.item.paperItem.paperItem : 0
             }
 
             Item {
@@ -188,14 +252,6 @@ Item {
                         block_timer.restart()
                     }
                 }
-            }
-
-            MapView {
-                id: map_image
-                width: column.width
-                height: width/2
-                latitude: edit_dialog.latitude
-                longitude: edit_dialog.longitude
             }
         }
     }
