@@ -10,7 +10,10 @@ Rectangle {
 
     Row {
         id: row
-        anchors.fill: parent
+        anchors.top: date_line.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
 
         SelectableList {
             id: year_list
@@ -152,5 +155,53 @@ Rectangle {
 
             return tempString
         }
+    }
+
+    Rectangle {
+        id: date_line
+        height: 2*physicalPlatformScale
+        width: dt_chooser.width/1.777
+        anchors.left: parent.left
+        anchors.top: date_text.bottom
+        color: "#88888888"
+    }
+
+    Rectangle {
+        id: time_line
+        height: 2*physicalPlatformScale
+        width: dt_chooser.width/2.666
+        anchors.right: parent.right
+        anchors.top: time_text.bottom
+        color: "#88888888"
+    }
+
+    Text {
+        id: date_text
+        anchors.horizontalCenter: date_line.horizontalCenter
+        anchors.top: parent.top
+        font.family: globalFontFamily
+        font.pixelSize: 10*fontsScale
+        color: dt_chooser.textsColor
+        text: qsTr("Date")
+    }
+
+    Text {
+        id: time_text
+        anchors.horizontalCenter: time_line.horizontalCenter
+        anchors.top: parent.top
+        font.family: globalFontFamily
+        font.pixelSize: 10*fontsScale
+        color: dt_chooser.textsColor
+        text: qsTr("Time")
+    }
+
+    function getDate() {
+        var date = kaqaz.convertDateToGragorian(year_list.currentItem,month_list.currentItem,day_list.currentItem)
+        date.setHours( clock_list.currentItem*12 + hour_list.currentItem )
+        date.setMinutes( minute_list.currentItem )
+        return date
+    }
+
+    function getTime() {
     }
 }

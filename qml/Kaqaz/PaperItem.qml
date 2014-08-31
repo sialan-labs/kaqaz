@@ -550,10 +550,16 @@ AnimationItem {
         }
     }
 
-    function initTranslations(){
-        placeholder_txt.text = qsTr("Title")
+    function refreshDateLabel() {
         if( paperItem != -1 )
             date_label.text = kaqaz.convertDateTimeToString( database.paperCreatedDate(paperItem) )
+        else
+            date_label.text = ""
+    }
+
+    function initTranslations(){
+        placeholder_txt.text = qsTr("Title")
+        refreshDateLabel()
     }
 
     Component.onCompleted: {

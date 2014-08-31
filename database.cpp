@@ -524,6 +524,18 @@ QDateTime Database::paperCreatedDate(int id)
     return getPaper(id).create;
 }
 
+void Database::setPaperCreatedDate(int id, const QDateTime &dt)
+{
+    PaperClass paper = getPaper(id);
+    if( paper.id == -1 )
+        return;
+    if( paper.create == dt )
+        return;
+
+    paper.create = dt;
+    savePaper(paper);
+}
+
 QDateTime Database::paperModifiedDate(int id)
 {
     return getPaper(id).modified;

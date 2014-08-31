@@ -463,6 +463,11 @@ QString Kaqaz::convertIntToStringDate(qint64 d, const QString &format)
     return translateNumbers( p->calendar->historyString(date) );
 }
 
+QDate Kaqaz::convertDateToGragorian(qint64 y, int m, int d)
+{
+    return p->calendar->toDate(y,m,d);
+}
+
 void Kaqaz::close()
 {
     p->close_blocker = false;

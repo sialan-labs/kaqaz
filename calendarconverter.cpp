@@ -92,6 +92,26 @@ DateProperty CalendarConverter::getDate(const QDate &d)
     return res;
 }
 
+QDate CalendarConverter::toDate(qint64 y, int m, int d)
+{
+    qint64 julian_zero = 0;
+    switch( static_cast<int>(p->calendar) )
+    {
+    case CalendarConverter::Gregorian:
+        julian_zero = fromDateGregorian(y,m,d);
+        break;
+    case CalendarConverter::Jalali:
+        julian_zero = fromDateJalali(y,m,d);
+        break;
+    case CalendarConverter::Hijri:
+        julian_zero = fromDateHijri(y,m,d);
+        break;
+    }
+
+    const DateProperty & pr = toDateGregorian(julian_zero);
+    return QDate(pr.year,pr.month,pr.day);
+}
+
 QString CalendarConverter::dayName(int d)
 {
     QString res;

@@ -74,6 +74,8 @@ public:
     Q_INVOKABLE void setPaperGroup( int id, int group );
 
     Q_INVOKABLE QDateTime paperCreatedDate( int id );
+    Q_INVOKABLE void setPaperCreatedDate( int id, const QDateTime & dt );
+
     Q_INVOKABLE QDateTime paperModifiedDate( int id );
     Q_INVOKABLE QString paperUuid( int id );
     Q_INVOKABLE int paperActivity( int id );

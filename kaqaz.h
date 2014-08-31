@@ -65,6 +65,7 @@ public:
     Q_INVOKABLE QString convertIntToNumStringDate(qint64 d );
     Q_INVOKABLE QString translateInt(qint64 d);
     Q_INVOKABLE QString convertIntToStringDate(qint64 d, const QString & format );
+    Q_INVOKABLE QDate convertDateToGragorian( qint64 year, int month, int day );
 
     Q_INVOKABLE void close();
     Q_INVOKABLE void minimize();

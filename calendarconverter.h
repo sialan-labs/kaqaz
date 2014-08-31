@@ -53,6 +53,7 @@ public:
     QString numberString( const QDate & d );
 
     DateProperty getDate( const QDate & d );
+    QDate toDate( qint64 year, int month, int day );
 
     QString dayName( int d );
     QString monthName( int m );

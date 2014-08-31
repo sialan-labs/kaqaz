@@ -145,7 +145,7 @@ Item {
                 DateTimeChooser {
                     id: date_chooser
                     width: parent.width
-                    height: 125*physicalPlatformScale
+                    height: 150*physicalPlatformScale
                     color: "#F4F4F4"
                     textsColor: "#111111"
                     anchors.bottom: update_btn.top
@@ -163,7 +163,16 @@ Item {
                     textFont.pixelSize: 13*fontsScale
                     textFont.bold: false
                     text: update_frame.editMode? qsTr("Confirm") : qsTr("Update Date")
-                    onClicked: update_frame.editMode = !update_frame.editMode
+                    onClicked: {
+                        if( update_frame.editMode ) {
+                            var date = date_chooser.getDate()
+                            database.setPaperCreatedDate(item.paperItem.paperItem,date)
+                            item.paperItem.refreshDateLabel()
+                            main.refreshMenu()
+                        }
+
+                        update_frame.editMode = !update_frame.editMode
+                    }
                 }
             }
 

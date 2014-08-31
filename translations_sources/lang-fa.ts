@@ -330,9 +330,32 @@
         <translation type="obsolete">بی گروه</translation>
     </message>
     <message>
-        <location filename="../database.cpp" line="934"/>
+        <location filename="../database.cpp" line="946"/>
         <source>No Label</source>
         <translation>بدون برچسب</translation>
+    </message>
+</context>
+<context>
+    <name>DateTimeChooser</name>
+    <message>
+        <location filename="../qml/Kaqaz/DateTimeChooser.qml" line="147"/>
+        <source>AM</source>
+        <translation>AM</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/DateTimeChooser.qml" line="147"/>
+        <source>PM</source>
+        <translation>PM</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/DateTimeChooser.qml" line="185"/>
+        <source>Date</source>
+        <translation>تاریخ</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/DateTimeChooser.qml" line="195"/>
+        <source>Time</source>
+        <translation>زمان</translation>
     </message>
 </context>
 <context>
@@ -772,62 +795,62 @@ left to select categories.</source>
         <translation type="obsolete">نامعلوم</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="374"/>
+        <location filename="../kaqaz.cpp" line="379"/>
         <source>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
         <translation>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="375"/>
+        <location filename="../kaqaz.cpp" line="380"/>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
         <translation>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="533"/>
+        <location filename="../kaqaz.cpp" line="543"/>
         <source>0</source>
         <translation>۰</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="534"/>
+        <location filename="../kaqaz.cpp" line="544"/>
         <source>1</source>
         <translation>۱</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="535"/>
+        <location filename="../kaqaz.cpp" line="545"/>
         <source>2</source>
         <translation>۲</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="536"/>
+        <location filename="../kaqaz.cpp" line="546"/>
         <source>3</source>
         <translation>۳</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="537"/>
+        <location filename="../kaqaz.cpp" line="547"/>
         <source>4</source>
         <translation>۴</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="538"/>
+        <location filename="../kaqaz.cpp" line="548"/>
         <source>5</source>
         <translation>۵</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="539"/>
+        <location filename="../kaqaz.cpp" line="549"/>
         <source>6</source>
         <translation>۶</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="540"/>
+        <location filename="../kaqaz.cpp" line="550"/>
         <source>7</source>
         <translation>۷</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="541"/>
+        <location filename="../kaqaz.cpp" line="551"/>
         <source>8</source>
         <translation>۸</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="542"/>
+        <location filename="../kaqaz.cpp" line="552"/>
         <source>9</source>
         <translation>۹</translation>
     </message>
@@ -836,17 +859,17 @@ left to select categories.</source>
         <translation type="obsolete">بی گروه</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="413"/>
+        <location filename="../kaqaz.cpp" line="418"/>
         <source>Gregorian</source>
         <translation>میلادی</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="416"/>
+        <location filename="../kaqaz.cpp" line="421"/>
         <source>Jalali</source>
         <translation>جلالی</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="419"/>
+        <location filename="../kaqaz.cpp" line="424"/>
         <source>Hijri</source>
         <translation>هجری قمری</translation>
     </message>
@@ -915,14 +938,24 @@ left to select categories.</source>
 <context>
     <name>MapView</name>
     <message>
-        <location filename="../qml/Kaqaz/MapView.qml" line="24"/>
+        <location filename="../qml/Kaqaz/MapView.qml" line="75"/>
         <source>Unknown point</source>
         <translation>نقطه‌ی ناشناخته</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/MapView.qml" line="24"/>
+        <location filename="../qml/Kaqaz/MapView.qml" line="75"/>
         <source>Loading Map...</source>
         <translation>در حال بارگذاری نقشه...</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/MapView.qml" line="111"/>
+        <source>Unpin</source>
+        <translation>حذف نقشه</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/MapView.qml" line="112"/>
+        <source>Open</source>
+        <translation>باز کردن</translation>
     </message>
 </context>
 <context>
@@ -1002,32 +1035,46 @@ left to select categories.</source>
 <context>
     <name>PaperEditDialog</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="31"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="45"/>
         <source>Untitled Paper</source>
         <translation>بدون عنوان</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="81"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="95"/>
         <source>Share Paper</source>
         <translation>اشتراک گذاری</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="109"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="123"/>
         <source>Force sync</source>
         <translation>همگام سازی</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="129"/>
-        <source>Add Reminder (Soon)</source>
-        <translation>یادآوری کن (به زودی)</translation>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="165"/>
+        <source>Confirm</source>
+        <translation>تایید</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="162"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="165"/>
+        <source>Update Date</source>
+        <translation>به روزرسانی تاریخ</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="188"/>
+        <source>Update Location</source>
+        <translation>به روزرسانی مکان</translation>
+    </message>
+    <message>
+        <source>Add Reminder (Soon)</source>
+        <translation type="obsolete">یادآوری کن (به زودی)</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="236"/>
         <source>Are you sure?</source>
         <translation>آیا مطمئنی؟</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="176"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="250"/>
         <source>Delete Paper</source>
         <translation>پاک کردن این کاغذ</translation>
     </message>
@@ -1047,7 +1094,7 @@ left to select categories.</source>
         <translation type="obsolete">همگام نشده</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperItem.qml" line="548"/>
+        <location filename="../qml/Kaqaz/PaperItem.qml" line="561"/>
         <source>Title</source>
         <translation>عنوان</translation>
     </message>
@@ -1059,7 +1106,7 @@ left to select categories.</source>
 <context>
     <name>PaperLabel</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperLabel.qml" line="201"/>
+        <location filename="../qml/Kaqaz/PaperLabel.qml" line="205"/>
         <source>New text</source>
         <translation>نوشته‌ی جدید</translation>
     </message>
@@ -1183,259 +1230,259 @@ left to select categories.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../calendarconverter.cpp" line="143"/>
+        <location filename="../calendarconverter.cpp" line="208"/>
         <source>January</source>
         <translation>ژانویه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="146"/>
+        <location filename="../calendarconverter.cpp" line="211"/>
         <source>February</source>
         <translation>فوریه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="149"/>
+        <location filename="../calendarconverter.cpp" line="214"/>
         <source>March</source>
         <translation>مارس</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="152"/>
+        <location filename="../calendarconverter.cpp" line="217"/>
         <source>April</source>
         <translation>آوریل</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="155"/>
+        <location filename="../calendarconverter.cpp" line="220"/>
         <source>May</source>
         <translation>مه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="158"/>
+        <location filename="../calendarconverter.cpp" line="223"/>
         <source>June</source>
         <translation>ژوئن</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="161"/>
+        <location filename="../calendarconverter.cpp" line="226"/>
         <source>July</source>
         <translation>ژوئیه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="164"/>
+        <location filename="../calendarconverter.cpp" line="229"/>
         <source>August</source>
         <translation>اوت</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="167"/>
+        <location filename="../calendarconverter.cpp" line="232"/>
         <source>September</source>
         <translation>سپتامبر</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="170"/>
+        <location filename="../calendarconverter.cpp" line="235"/>
         <source>October</source>
         <translation>اکتبر</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="173"/>
+        <location filename="../calendarconverter.cpp" line="238"/>
         <source>November</source>
         <translation>نوامبر</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="176"/>
+        <location filename="../calendarconverter.cpp" line="241"/>
         <source>December</source>
         <translation>دسامبر</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="188"/>
-        <location filename="../calendarconverter.cpp" line="550"/>
+        <location filename="../calendarconverter.cpp" line="253"/>
+        <location filename="../calendarconverter.cpp" line="615"/>
         <source>Sunday</source>
         <translation>یکشنبه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="191"/>
-        <location filename="../calendarconverter.cpp" line="553"/>
+        <location filename="../calendarconverter.cpp" line="256"/>
+        <location filename="../calendarconverter.cpp" line="618"/>
         <source>Monday</source>
         <translation>دوشنبه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="194"/>
-        <location filename="../calendarconverter.cpp" line="556"/>
+        <location filename="../calendarconverter.cpp" line="259"/>
+        <location filename="../calendarconverter.cpp" line="621"/>
         <source>Tuesday</source>
         <translation>سه‌شنبه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="197"/>
-        <location filename="../calendarconverter.cpp" line="559"/>
+        <location filename="../calendarconverter.cpp" line="262"/>
+        <location filename="../calendarconverter.cpp" line="624"/>
         <source>Wednesday</source>
         <translation>چهارشنبه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="200"/>
-        <location filename="../calendarconverter.cpp" line="562"/>
+        <location filename="../calendarconverter.cpp" line="265"/>
+        <location filename="../calendarconverter.cpp" line="627"/>
         <source>Thuresday</source>
         <translation>پنج‌شنبه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="203"/>
-        <location filename="../calendarconverter.cpp" line="565"/>
+        <location filename="../calendarconverter.cpp" line="268"/>
+        <location filename="../calendarconverter.cpp" line="630"/>
         <source>Friday</source>
         <translation>جمعه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="206"/>
-        <location filename="../calendarconverter.cpp" line="547"/>
+        <location filename="../calendarconverter.cpp" line="271"/>
+        <location filename="../calendarconverter.cpp" line="612"/>
         <source>Saturday</source>
         <translation>شنبه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="320"/>
+        <location filename="../calendarconverter.cpp" line="385"/>
         <source>Farvardin</source>
         <translation>فروردین</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="323"/>
+        <location filename="../calendarconverter.cpp" line="388"/>
         <source>Ordibehesht</source>
         <translation>اردیبهشت</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="326"/>
+        <location filename="../calendarconverter.cpp" line="391"/>
         <source>Khordad</source>
         <translation>خرداد</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="329"/>
+        <location filename="../calendarconverter.cpp" line="394"/>
         <source>Tir</source>
         <translation>تیر</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="332"/>
+        <location filename="../calendarconverter.cpp" line="397"/>
         <source>Mordad</source>
         <translation>مرداد</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="335"/>
+        <location filename="../calendarconverter.cpp" line="400"/>
         <source>Shahrivar</source>
         <translation>شهریور</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="338"/>
+        <location filename="../calendarconverter.cpp" line="403"/>
         <source>Mehr</source>
         <translation>مهر</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="341"/>
+        <location filename="../calendarconverter.cpp" line="406"/>
         <source>Abaan</source>
         <translation>آبان</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="344"/>
+        <location filename="../calendarconverter.cpp" line="409"/>
         <source>Aazar</source>
         <translation>آذر</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="347"/>
+        <location filename="../calendarconverter.cpp" line="412"/>
         <source>Dey</source>
         <translation>دی</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="350"/>
+        <location filename="../calendarconverter.cpp" line="415"/>
         <source>Bahman</source>
         <translation>بهمن</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="353"/>
+        <location filename="../calendarconverter.cpp" line="418"/>
         <source>Esfand</source>
         <translation>اسفند</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="365"/>
+        <location filename="../calendarconverter.cpp" line="430"/>
         <source>Shanbe</source>
         <translation>شنبه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="368"/>
+        <location filename="../calendarconverter.cpp" line="433"/>
         <source>1Shanbe</source>
         <translation>یک‌شنبه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="371"/>
+        <location filename="../calendarconverter.cpp" line="436"/>
         <source>2Shanbe</source>
         <translation>دوشنبه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="374"/>
+        <location filename="../calendarconverter.cpp" line="439"/>
         <source>3Shanbe</source>
         <translation>سه‌شنبه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="377"/>
+        <location filename="../calendarconverter.cpp" line="442"/>
         <source>4Shanbe</source>
         <translation>چهارشنبه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="380"/>
+        <location filename="../calendarconverter.cpp" line="445"/>
         <source>5Shanbe</source>
         <translation>پنج‌شنبه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="383"/>
+        <location filename="../calendarconverter.cpp" line="448"/>
         <source>Jome</source>
         <translation>جمعه</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="502"/>
+        <location filename="../calendarconverter.cpp" line="567"/>
         <source>Moharram</source>
         <translation>محرم</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="505"/>
+        <location filename="../calendarconverter.cpp" line="570"/>
         <source>Safar</source>
         <translation>wtv</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="508"/>
+        <location filename="../calendarconverter.cpp" line="573"/>
         <source>Rabiol Avval</source>
         <translation>ربیع‌الاول</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="511"/>
+        <location filename="../calendarconverter.cpp" line="576"/>
         <source>Rabio Sani</source>
         <translation>ربیع‌الثانی</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="514"/>
+        <location filename="../calendarconverter.cpp" line="579"/>
         <source>Jamadiol Aval</source>
         <translation>جمادی‌الاول</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="517"/>
+        <location filename="../calendarconverter.cpp" line="582"/>
         <source>Jamadio Sani</source>
         <translation>جمادی‌الثانی</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="520"/>
+        <location filename="../calendarconverter.cpp" line="585"/>
         <source>Rajab</source>
         <translation>رجب</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="523"/>
+        <location filename="../calendarconverter.cpp" line="588"/>
         <source>Shaban</source>
         <translation>شعبان</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="526"/>
+        <location filename="../calendarconverter.cpp" line="591"/>
         <source>Ramadan</source>
         <translation>رمضان</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="529"/>
+        <location filename="../calendarconverter.cpp" line="594"/>
         <source>Shaval</source>
         <translation>شوال</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="532"/>
+        <location filename="../calendarconverter.cpp" line="597"/>
         <source>Zighade</source>
         <translation>ذی‌القعده</translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="535"/>
+        <location filename="../calendarconverter.cpp" line="600"/>
         <source>Zihaje</source>
         <translation>ذی‌الحجه</translation>
     </message>
