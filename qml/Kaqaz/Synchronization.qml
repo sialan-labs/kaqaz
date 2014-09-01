@@ -43,7 +43,7 @@ Item {
                 if( sync.tokenAvailable )
                     sync.stop();
                 else
-                    showSubMessage("DropBoxAuthorize.qml")
+                    showSubMessage(Qt.createComponent("DropBoxAuthorize.qml"))
             }
         }
 

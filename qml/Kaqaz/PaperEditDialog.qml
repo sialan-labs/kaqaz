@@ -101,7 +101,7 @@ Item {
                                            database.paperText(edit_dialog.item.paperItem.paperItem),
                                            path )
 
-                        var msg = showSubMessage("ShareDialog.qml")
+                        var msg = showSubMessage(Qt.createComponent("ShareDialog.qml"))
                         msg.sources = [path]
 
                     } else {
@@ -130,50 +130,23 @@ Item {
                 }
             }
 
-            Item {
-                id: update_frame
-                height: editMode? date_chooser.height+update_btn.height : update_btn.height
-                width: column.width
-                clip: true
-
-                property bool editMode: false
-
-                Behavior on height {
-                    NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
+            MenuButton {
+                id: update_btn
+                height: 50*physicalPlatformScale
+                width: parent.width
+                normalColor: "#00000000"
+                highlightColor: "#4098bf"
+                textColor: press? "#ffffff" : "#4098bf"
+                textFont.weight: Font.Normal
+                textFont.pixelSize: 13*fontsScale
+                textFont.bold: false
+                text: qsTr("Update Date")
+                onClicked: {
+                    if( !dateChooser )
+                        dateChooser = showBottomPanel(date_component)
                 }
 
-                DateTimeChooser {
-                    id: date_chooser
-                    width: parent.width
-                    height: 150*physicalPlatformScale
-                    color: "#F4F4F4"
-                    textsColor: "#111111"
-                    anchors.bottom: update_btn.top
-                }
-
-                MenuButton {
-                    id: update_btn
-                    height: 50*physicalPlatformScale
-                    width: parent.width
-                    anchors.bottom: parent.bottom
-                    normalColor: update_frame.editMode? "#4098bf" : "#00000000"
-                    highlightColor: "#4098bf"
-                    textColor: press || update_frame.editMode? "#ffffff" : "#4098bf"
-                    textFont.weight: Font.Normal
-                    textFont.pixelSize: 13*fontsScale
-                    textFont.bold: false
-                    text: update_frame.editMode? qsTr("Confirm") : qsTr("Update Date")
-                    onClicked: {
-                        if( update_frame.editMode ) {
-                            var date = date_chooser.getDate()
-                            database.setPaperCreatedDate(item.paperItem.paperItem,date)
-                            item.paperItem.refreshDateLabel()
-                            main.refreshMenu()
-                        }
-
-                        update_frame.editMode = !update_frame.editMode
-                    }
-                }
+                property variant dateChooser
             }
 
             MenuButton {
@@ -269,5 +242,53 @@ Item {
         scrollArea: edit_flick; height: edit_flick.height; width: 6*physicalPlatformScale
         anchors.right: parent.right; anchors.top: edit_flick.top; color: "#000000"
         anchors.rightMargin: 4*physicalPlatformScale
+    }
+
+    MouseArea {
+        id: back_marea
+        anchors.fill: parent
+        visible: bottomPanel.item? true : false
+        onClicked: hideBottomPanel()
+    }
+
+    Component {
+        id: date_component
+        Item {
+            id: date_dialog
+            height: 230*physicalPlatformScale
+
+            Button {
+                id: done_btn
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.margins: 10*physicalPlatformScale
+                height: 30*physicalPlatformScale
+                width: 100*physicalPlatformScale
+                color: "#4098bf"
+                highlightColor: "#3B8DB1"
+                textColor: "#ffffff"
+                text: qsTr("Done")
+                onClicked: {
+                    var date = dateChooser.getDate()
+                    database.setPaperCreatedDate(edit_dialog.item.paperItem.paperItem,date)
+                    item.paperItem.refreshDateLabel()
+                    main.refreshMenu()
+                    hideBottomPanel()
+                }
+
+            }
+
+            DateTimeChooser {
+                id: dateChooser
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.top: done_btn.bottom
+                anchors.margins: 20*physicalPlatformScale
+                anchors.topMargin: 10*physicalPlatformScale
+                color: "#D9D9D9"
+                textsColor: "#111111"
+            }
+        }
     }
 }

@@ -28,6 +28,7 @@
 #include "kaqazmacros.h"
 #include "database.h"
 #include "backuper.h"
+#include "searchhighlighter.h"
 #include "sialantools/sialanqtlogger.h"
 #include "sialantools/sialantools.h"
 #include "calendarconverter.h"
@@ -221,6 +222,7 @@ Kaqaz::Kaqaz(QObject *parent) :
     init_languages();
 
     qmlRegisterType<PaperManager>("Kaqaz", 1,0, "PaperManager");
+    qmlRegisterType<SearchHighlighter>("Kaqaz", 1,0, "SearchHighlighter");
 
     p->viewer = new QtQuick2ApplicationViewer();
     p->viewer->installEventFilter(this);

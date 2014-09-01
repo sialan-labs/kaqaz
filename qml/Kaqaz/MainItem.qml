@@ -406,6 +406,9 @@ Rectangle {
     function pressBack(){
         if( backHandler && backHandler.back() )
             return
+        if( bottomPanel.item )
+            hideBottomPanel()
+        else
         if( rollerVisible )
             hideRollerDialog()
         else

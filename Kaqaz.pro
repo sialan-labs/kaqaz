@@ -71,7 +71,8 @@ SOURCES += main.cpp \
     database.cpp \
     kaqazdropbox.cpp \
     smartiodbox.cpp \
-    smartiodboxsingle.cpp
+    smartiodboxsingle.cpp \
+    searchhighlighter.cpp
 
 # Installation path
 # target.path =
@@ -182,6 +183,7 @@ HEADERS += \
     kaqazdropbox.h \
     sialandeveloper_macros.h \
     smartiodbox.h \
-    smartiodboxsingle.h
+    smartiodboxsingle.h \
+    searchhighlighter.h
 
 RESOURCES +=

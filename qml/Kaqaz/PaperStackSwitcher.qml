@@ -184,12 +184,18 @@ Item {
     }
 
     function clean(){
+        lastSearchKeyword = ""
         type = PaperManager.Clean
         current = 0
         switcher_timer.restart()
     }
 
     function show( rid, rtype ){
+        if( rtype == PaperManager.Search )
+            lastSearchKeyword = keyword
+        else
+            lastSearchKeyword = ""
+
         type = rtype
         current = rid
         switcher_timer.restart()

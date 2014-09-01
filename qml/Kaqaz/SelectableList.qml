@@ -55,8 +55,6 @@ Rectangle {
 
                 for( var i=0; i<items.length; i++ )
                     model.append({"index":i,"name":items[i]})
-
-                list.focus = true
             }
         }
     }

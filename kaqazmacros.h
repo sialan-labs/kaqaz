@@ -52,7 +52,7 @@
 #ifdef Q_OS_WIN
 #define HOME_PATH   QString(QDir::homePath() + "/AppData/Local/sialan/kaqaz")
 #else
-#define HOME_PATH   QString(QDir::homePath() + "/.config/sialan/kaqaz")
+#define HOME_PATH   QString(QDir::homePath() + "/.config/sialan/kaqaz.test")
 #endif
 #define LOG_PATH    QString(HOME_PATH+"/log")
 #define BACKUP_PATH QDir::homePath()

@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import Kaqaz 1.0
 
 Item {
     id: paper_label
@@ -82,6 +83,12 @@ Item {
         selectionColor: "#0d80ec"
         selectedTextColor: "#ffffff"
         inputMethodHints: globalInputMethodHints
+        Component.onCompleted: highlighter.textDocument = txt.textDocument
+    }
+
+    SearchHighlighter {
+        id: highlighter
+        searchKeyword: lastSearchKeyword
     }
 
     Item{
@@ -168,7 +175,7 @@ Item {
 
     function edit(){
         main.closePanel()
-        var msg = showSubMessage("PaperEditDialog.qml")
+        var msg = showSubMessage(Qt.createComponent("PaperEditDialog.qml"))
         msg.item = paper_label
         devices.hideKeyboard()
     }

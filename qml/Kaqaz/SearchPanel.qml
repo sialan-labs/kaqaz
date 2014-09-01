@@ -97,6 +97,13 @@ Item {
     Component.onCompleted: {
         active_focus_timer.start()
         touchToBack = true
+        lastSearchKeyword = ""
         initTranslations()
+    }
+
+    Component.onDestruction: {
+        if( lastSearchKeyword.length != 0 ) {
+            showHideHilightPanel()
+        }
     }
 }

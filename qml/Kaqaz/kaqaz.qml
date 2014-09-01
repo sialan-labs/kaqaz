@@ -54,6 +54,7 @@ Rectangle {
 
     property alias sidePanel: main.sidePanel
     property alias panelAnimDuration: main.panelAnimDuration
+    property alias bottomPanel: bottom_panel
 
     property alias menuIsVisible: main.menuIsVisible
     property alias pasteButtonTextObj: paste_btn.textItem
@@ -67,10 +68,12 @@ Rectangle {
     property bool passDone: false
 
     property int publicCounter: 0
+    property string lastSearchKeyword
 
     signal accessChanged()
 
     onHeightChanged: refreshSizes()
+    onLastSearchKeywordChanged: if(lastSearchKeyword.length==0) hideBottomPanel()
 
     function refreshSizes() {
         if( height == 0 )
@@ -115,6 +118,11 @@ Rectangle {
                 NumberAnimation { easing.type: Easing.OutCubic; duration: 250 }
             }
         }
+    }
+
+    BottomPanel {
+        id: bottom_panel
+        z: 10
     }
 
     RollerDialog {
@@ -188,8 +196,7 @@ Rectangle {
         tooltip.showText(text)
     }
 
-    function showSubMessage( file_path ){
-        var item_component = Qt.createComponent(file_path);
+    function showSubMessage( item_component ){
         var item = item_component.createObject(kaqaz_root);
 
         var component = Qt.createComponent("SubMessage.qml");
@@ -204,6 +211,22 @@ Rectangle {
             return
 
         subMessage.hide()
+    }
+
+    function showHideHilightPanel() {
+        showBottomPanel( Qt.createComponent("SearchHideHighlights.qml") )
+    }
+
+    function showBottomPanel( component ){
+        hideBottomPanel()
+        var item = component.createObject(bottom_panel);
+        bottom_panel.item = item
+        return item
+    }
+
+    function hideBottomPanel() {
+        if( bottom_panel.item )
+            bottom_panel.hide()
     }
 
     function newModernProgressBar(){
