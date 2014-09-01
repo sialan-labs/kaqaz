@@ -24,6 +24,20 @@
 #include <QStringList>
 #include <QGeoCoordinate>
 
+class Enums : public QObject
+{
+    Q_OBJECT
+    Q_ENUMS(PaperType)
+public:
+    enum PaperType {
+        Normal = 0,
+        ToDo = 1
+    };
+
+    Enums(QObject *parent = 0);
+    ~Enums();
+};
+
 class GroupClass
 {
 public:
@@ -51,6 +65,7 @@ class PaperClass
 public:
     PaperClass(){
         id = -1;
+        type = Enums::Normal;
     }
 
     int id;
@@ -63,6 +78,7 @@ public:
     int group;
     int activity;
     QStringList files;
+    Enums::PaperType type;
 };
 
 class SyncItem

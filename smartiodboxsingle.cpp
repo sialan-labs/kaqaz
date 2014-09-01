@@ -72,7 +72,7 @@
         END_FNC
 
 #define PAPER_DATA_HEADER  QString("KaqazPaper")
-#define PAPER_DATA_VERSION QString("1.1")
+#define PAPER_DATA_VERSION QString("1.2")
 #define GROUP_DATA_HEADER  QString("KaqazGroups")
 #define GROUP_DATA_VERSION QString("1.0")
 
@@ -409,6 +409,7 @@ void SmartIODBoxSingleCore::requestPaperToSync(const QString &uuid)
     stream << db->groupUuid( db->paperGroup(paperId) );
     stream << db->paperFiles(paperId);
     stream << db->paperText(paperId);
+    stream << db->paperType(paperId);
 
     buffer.close();
 
@@ -485,6 +486,7 @@ void SmartIODBoxSingleCore::paperFetched(const QString &uuid, const QByteArray &
     QString group;
     QStringList files;
     QString body;
+    int type = Enums::Normal;
 
     stream >> header;
     stream >> version;
@@ -498,8 +500,10 @@ void SmartIODBoxSingleCore::paperFetched(const QString &uuid, const QByteArray &
     stream >> group;
     stream >> files;
     stream >> body;
+    if( version.toDouble() > 1.1 )
+        stream >> type;
 
-    db->setPaper( uuid, title, body, group, date, location );
+    db->setPaper( uuid, title, body, group, date, location, type );
     db->setRevision( uuid, revision );
 
     int paperId = db->paperUuidId(uuid);

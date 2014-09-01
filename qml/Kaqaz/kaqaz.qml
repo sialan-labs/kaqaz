@@ -89,7 +89,7 @@ Rectangle {
         target: database
         onPaperChanged: {
             if( !kaqaz.demoHasTrial() )
-                showSubMessage("DemoLimited.qml")
+                showSubMessage(Qt.createComponent("DemoLimited.qml"))
         }
     }
 
@@ -288,7 +288,7 @@ Rectangle {
     }
 
     function showSplash(){
-        return showSubMessage("StartSplash.qml")
+        return showSubMessage(Qt.createComponent("StartSplash.qml"))
     }
 
     function search(){
@@ -362,7 +362,7 @@ Rectangle {
             showSplash()
         else
         if( !kaqaz.demoHasTrial() )
-            showSubMessage("DemoLimited.qml")
+            showSubMessage(Qt.createComponent("DemoLimited.qml"))
 
         main.initPapers()
     }

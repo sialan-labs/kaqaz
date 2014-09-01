@@ -24,6 +24,7 @@ Item {
 
     property variant item
     property variant paperItem
+    property int paperId: paperItem? paperItem.paperItem : -1
 
     property alias text: txt.text
     property alias font: txt.font
@@ -43,6 +44,15 @@ Item {
     property alias cursorPosition: txt.cursorPosition
     property bool resizeOnFull: true
 
+    property int paperType: Enums.Normal
+
+    onPaperIdChanged: {
+        if( paperId != -1 )
+            paperType = database.paperType(paperId)
+        else
+            paperType = Enums.Normal
+    }
+
     onItemChanged: {
         if( !item )
             return
@@ -51,6 +61,8 @@ Item {
     }
 
     onTextChanged: {
+        if( to_do.visible )
+            to_do.text = text
         if( !item )
             return
 
@@ -64,12 +76,28 @@ Item {
     onYChanged: if(paper_label) paper_label.refreshEditPosition()
     onVisibleChanged: if(paper_label) paper_label.refreshEditPosition()
 
+    Connections {
+        target: database
+        onPaperChanged: {
+            if( !paperItem )
+                return
+            if( paperItem.paperItem != id )
+                return
+
+            paperType = database.paperType(paperItem.paperItem)
+        }
+    }
+
+    Item {
+        anchors.fill: parent
+    }
+
     TextEdit{
         id: placeholder_text
         anchors.fill: txt
         font: txt.font
         color: "#cccccc"
-        visible: (!txt.focus && txt.text == "")
+        visible: (!txt.focus && txt.text == "" && txt.visible)
     }
 
     TextAreaCore{
@@ -83,7 +111,17 @@ Item {
         selectionColor: "#0d80ec"
         selectedTextColor: "#ffffff"
         inputMethodHints: globalInputMethodHints
+        visible: paperType == Enums.Normal
         Component.onCompleted: highlighter.textDocument = txt.textDocument
+    }
+
+    PaperToDo {
+        id: to_do
+        anchors.fill: parent
+        anchors.topMargin: 5*physicalPlatformScale
+        visible: paperType == Enums.ToDo
+        onTextChanged: if(visible) paper_label.text = text
+        onVisibleChanged: if(visible) text = paper_label.text
     }
 
     SearchHighlighter {
@@ -189,10 +227,6 @@ Item {
         btn_box.y = 15+10*physicalPlatformScale
         listview_btn.x = btn_box.x + btn_box.width - listview_btn.width
         listview_btn.y = paper.mapToItem(paper,0,paper.height).y - listview_btn.height - 10*physicalPlatformScale - 15
-    }
-
-    function deleteRequest(){
-        paperItem.deleteRequest()
     }
 
     function showPicker() {

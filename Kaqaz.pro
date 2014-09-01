@@ -72,7 +72,8 @@ SOURCES += main.cpp \
     kaqazdropbox.cpp \
     smartiodbox.cpp \
     smartiodboxsingle.cpp \
-    searchhighlighter.cpp
+    searchhighlighter.cpp \
+    databasedatatypes.cpp
 
 # Installation path
 # target.path =

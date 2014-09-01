@@ -31,6 +31,8 @@
 #include "searchhighlighter.h"
 #include "sialantools/sialanqtlogger.h"
 #include "sialantools/sialantools.h"
+#include "sialantools/sialanhashobject.h"
+#include "sialantools/sialanlistobject.h"
 #include "calendarconverter.h"
 #include "resourcemanager.h"
 #include "qtquick2applicationviewer/qtquick2applicationviewer.h"
@@ -223,6 +225,9 @@ Kaqaz::Kaqaz(QObject *parent) :
 
     qmlRegisterType<PaperManager>("Kaqaz", 1,0, "PaperManager");
     qmlRegisterType<SearchHighlighter>("Kaqaz", 1,0, "SearchHighlighter");
+    qmlRegisterType<Enums>("Kaqaz", 1,0, "Enums");
+    qmlRegisterType<SialanHashObject>("Kaqaz", 1,0, "HashObject");
+    qmlRegisterType<SialanListObject>("Kaqaz", 1,0, "ListObject");
 
     p->viewer = new QtQuick2ApplicationViewer();
     p->viewer->installEventFilter(this);
