@@ -28,10 +28,19 @@ class Enums : public QObject
 {
     Q_OBJECT
     Q_ENUMS(PaperType)
+    Q_ENUMS(SearchPaperType)
 public:
     enum PaperType {
         Normal = 0,
         ToDo = 1
+    };
+
+    enum SearchPaperType {
+        NormalPapers = 1,
+        CompletedTasks = 2,
+        UncompletedTasks = 4,
+        ToDoPapers = 6,
+        AllPapers = 7
     };
 
     Enums(QObject *parent = 0);

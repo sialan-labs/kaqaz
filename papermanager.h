@@ -40,6 +40,7 @@ public:
         Group,
         Date,
         Search,
+        AdvanceSearch,
         Clean,
         All
     };
@@ -64,6 +65,7 @@ public:
     int currentIndex();
 
 public slots:
+    void setAdvanceSearch( const QString & keyword, const QDate & startDate, const QDate & endDate, const QTime & startTime, const QTime & endTime, int group, int domain );
     bool hideCurrentAttachments();
 
 signals:

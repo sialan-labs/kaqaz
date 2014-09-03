@@ -336,6 +336,10 @@ Item {
             id: date_dialog
             height: 230*physicalPlatformScale
 
+            MouseArea {
+                anchors.fill: parent
+            }
+
             Button {
                 id: done_btn
                 anchors.right: parent.right

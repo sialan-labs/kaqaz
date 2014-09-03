@@ -334,7 +334,104 @@ bool searchSort( int a, int b )
     return a>b;
 }
 
-QList<int> Database::search(const QString &kw)
+QList<int> Database::search(const QString &keyword)
+{
+    QString query_str = "SELECT id,ctime,cdate FROM Papers WHERE title LIKE :fkwrd OR text LIKE :skwrd";
+    return searchQuery(query_str,keyword);
+}
+
+QList<int> Database::advanceSearch(const QString &keyword, const QDate &startDate, const QDate &endDate, const QTime &startTime, const QTime &endTime, int group, int domain)
+{
+    QString query_str = "SELECT id,ctime,cdate FROM Papers WHERE ";
+    QHash<QString,QVariant> boundValues;
+
+    bool has_previous = false;
+    if( !keyword.isEmpty() )
+    {
+        query_str += "(title LIKE :fkwrd OR text LIKE :skwrd)";
+        has_previous = true;
+    }
+    if( !startDate.isNull() )
+    {
+        if( has_previous )
+            query_str += " AND ";
+
+        query_str += "cdate>=:csdate";
+        boundValues.insert(":csdate",QDate(1,1,1).daysTo(startDate));
+        has_previous = true;
+    }
+    if( !endDate.isNull() )
+    {
+        if( has_previous )
+            query_str += " AND ";
+
+        query_str += "cdate<=:cedate";
+        boundValues.insert(":cedate",QDate(1,1,1).daysTo(endDate));
+        has_previous = true;
+    }
+    if( !startTime.isNull() )
+    {
+        if( has_previous )
+            query_str += " AND ";
+
+        query_str += "ctime>=:cstime";
+        boundValues.insert(":cstime",QTime(0,0,0).secsTo(startTime));
+        has_previous = true;
+    }
+    if( !endTime.isNull() )
+    {
+        if( has_previous )
+            query_str += " AND ";
+
+        query_str += "ctime<=:cetime";
+        boundValues.insert(":cetime",QTime(0,0,0).secsTo(endTime));
+        has_previous = true;
+    }
+    if( group != -1 )
+    {
+        if( has_previous )
+            query_str += " AND ";
+
+        query_str += "grp=:grp";
+        boundValues.insert(":grp",group);
+        has_previous = true;
+    }
+    if( domain != Enums::AllPapers )
+    {
+        if( has_previous )
+            query_str += " AND ";
+
+        query_str += "type=:type";
+        switch( domain )
+        {
+        case Enums::NormalPapers:
+            boundValues.insert(":type",static_cast<int>(Enums::Normal));
+            break;
+        case Enums::ToDoPapers:
+            boundValues.insert(":type",static_cast<int>(Enums::ToDo));
+            break;
+
+        case Enums::UncompletedTasks:
+            query_str += " AND text LIKE :kwd";
+            boundValues.insert(":kwd","%- %");
+            boundValues.insert(":type",static_cast<int>(Enums::ToDo));
+            break;
+        case Enums::CompletedTasks:
+            query_str += " AND text LIKE :kwd";
+            boundValues.insert(":kwd","%* %");
+            boundValues.insert(":type",static_cast<int>(Enums::ToDo));
+            break;
+        }
+        has_previous = true;
+    }
+
+    if( !has_previous )
+        return QList<int>();
+
+    return searchQuery(query_str,keyword,boundValues);
+}
+
+QList<int> Database::searchQuery(const QString &qry_str, const QString & kw, const QHash<QString, QVariant> & boundValues)
 {
     QHash<int,qint64> result;
     QHash<int,int> result_counts;
@@ -347,13 +444,20 @@ QList<int> Database::search(const QString &kw)
     foreach( const QString & keyword, keywords )
     {
         QSqlQuery query(p->db);
-        query.prepare("SELECT id,ctime,cdate FROM Papers WHERE title LIKE :fkwrd OR text LIKE :skwrd");
+        query.prepare(qry_str);
         query.bindValue(":fkwrd","%"+keyword+"%");
         query.bindValue(":skwrd","%"+keyword+"%");
-        query.exec();
 
+        QHashIterator<QString, QVariant> bvi(boundValues);
+        while( bvi.hasNext() )
+        {
+            bvi.next();
+            query.bindValue(bvi.key(),bvi.value());
+        }
+
+        query.exec();
         if( query.lastError().isValid() )
-            qDebug() << query.lastError();
+            qDebug() << query.lastError() << query.lastQuery() << query.boundValues();
 
         while( query.next() )
         {

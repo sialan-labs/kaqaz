@@ -509,10 +509,22 @@ Rectangle {
         stack_switcher.show(0,PaperManager.Search)
     }
 
+    function advanceSearch( keyword, startDate, endDate, startTime, endTime, group, domain ) {
+        stack_switcher.keyword = keyword
+        stack_switcher.startDate = startDate
+        stack_switcher.endDate = endDate
+        stack_switcher.startTime = startTime
+        stack_switcher.endTime = endTime
+        stack_switcher.selectedGid = group
+        stack_switcher.paperType = domain
+        stack_switcher.show(0,PaperManager.AdvanceSearch)
+    }
+
     function showSearch(){
         var component = Qt.createComponent("SearchPanel.qml");
         var item = component.createObject(panel_frame);
         item.keywordChanged.connect(main.search)
+        item.advanceSearchRequest.connect(main.advanceSearch)
         showPanel(item)
     }
 

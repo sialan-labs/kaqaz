@@ -36,6 +36,13 @@ Item {
     property real interval: 400
     property real outScale: 1
 
+    property variant startDate
+    property variant endDate
+    property variant startTime
+    property variant endTime
+    property int paperType: Enums.AllPapers
+    property int selectedGid: -1
+
     Timer {
         id: item_destroyer_timer
         interval: switcher.interval
@@ -148,6 +155,7 @@ Item {
         nextFrame.item = createItem()
         nextFrame.item.type = type
         nextFrame.item.keyword = keyword
+        nextFrame.item.setAdvanceSearch(keyword,startDate,endDate,startTime,endTime,selectedGid,paperType)
         nextFrame.item.root = current
         nextFrame.visible = true
 
@@ -191,7 +199,7 @@ Item {
     }
 
     function show( rid, rtype ){
-        if( rtype == PaperManager.Search )
+        if( rtype == PaperManager.Search || rtype == PaperManager.AdvanceSearch )
             lastSearchKeyword = keyword
         else
             lastSearchKeyword = ""

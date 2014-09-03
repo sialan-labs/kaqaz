@@ -166,7 +166,8 @@ OTHER_FILES += \
     qml/Kaqaz/PaperList.qml \
     qml/Kaqaz/SplashMessagePage.qml \
     qml/Kaqaz/GeneralSettings.qml \
-    qml/Kaqaz/DateTimeChooser.qml
+    qml/Kaqaz/DateTimeChooser.qml \
+    qml/Kaqaz/SearchGroupDomain.qml
 
 HEADERS += \
     kaqaz.h \

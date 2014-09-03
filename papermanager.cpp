@@ -41,6 +41,14 @@ public:
     int root;
     QString keyword;
 
+    QString advsearch_keyword;
+    QDate advsearch_startDate;
+    QDate advsearch_endDate;
+    QTime advsearch_startTime;
+    QTime advsearch_endTime;
+    int advsearch_group;
+    int advsearch_domain;
+
     QList<int> papers;
 
     Kaqaz *kaqaz;
@@ -110,7 +118,14 @@ void PaperManager::setRoot(int id)
             break;
 
         p->papers = Kaqaz::database()->search(p->keyword);
-//        qSort( p->papers.begin(), p->papers.end(), actionLessThan );
+        break;
+
+    case AdvanceSearch:
+        p->papers.clear();
+        p->papers = Kaqaz::database()->advanceSearch(p->advsearch_keyword, p->advsearch_startDate,
+                                                     p->advsearch_endDate, p->advsearch_startTime,
+                                                     p->advsearch_endTime, p->advsearch_group,
+                                                     p->advsearch_domain);
         break;
 
     case Date:
@@ -355,6 +370,17 @@ void PaperManager::setKeyword(const QString &kw)
 QString PaperManager::keyword() const
 {
     return p->keyword;
+}
+
+void PaperManager::setAdvanceSearch(const QString &keyword, const QDate &startDate, const QDate &endDate, const QTime &startTime, const QTime &endTime, int group, int domain)
+{
+    p->advsearch_keyword = keyword;
+    p->advsearch_startDate = startDate;
+    p->advsearch_endDate = endDate;
+    p->advsearch_startTime = startTime;
+    p->advsearch_endTime = endTime;
+    p->advsearch_group = group;
+    p->advsearch_domain = domain;
 }
 
 QQuickItem *PaperManager::currentPaper() const

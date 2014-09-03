@@ -28,7 +28,10 @@
 #include <QDate>
 #include <QGeoCoordinate>
 #include <QList>
+#include <QHash>
+#include <QVariant>
 
+class QSqlQuery;
 class DatabasePrivate;
 class Database : public QObject
 {
@@ -54,6 +57,7 @@ public:
     Q_INVOKABLE QList<int> papersOf( int group_id );
     Q_INVOKABLE QList<int> papers();
     Q_INVOKABLE QList<int> search(const QString & keyword );
+    Q_INVOKABLE QList<int> advanceSearch(const QString & keyword, const QDate & startDate, const QDate & endDate, const QTime & startTime, const QTime & endTime, int group, int domain );
 
     Q_INVOKABLE int createPaper(const QString &uuid = QString());
     Q_INVOKABLE void deletePaper( int id );
@@ -152,6 +156,8 @@ private:
     void savePaper(PaperClass paper);
     void saveGroup(GroupClass group);
     void saveActivity(ActivityClass activity);
+
+    QList<int> searchQuery(const QString &query , const QString &keyword, const QHash<QString, QVariant> &boundValues = QHash<QString, QVariant>());
 
 protected:
     void timerEvent(QTimerEvent *e);

@@ -30,6 +30,9 @@ Rectangle {
     property alias fontSize: txt.font.pixelSize
     property alias textFont: txt.font
 
+    property alias splitter: splitter_rect.visible
+    property alias splitterColor: splitter_rect.color
+
     property alias hoverEnabled: marea.hoverEnabled
 
     property bool iconCenter: false
@@ -40,6 +43,7 @@ Rectangle {
     property string highlightColor: "#0d80ec"
     property string normalColor: "#00000000"
     property alias textColor: txt.color
+    property alias textAlignment: txt.horizontalAlignment
 
     signal clicked()
 
@@ -61,5 +65,15 @@ Rectangle {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: button.clicked()
+    }
+
+    Rectangle {
+        id: splitter_rect
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: 1*physicalPlatformScale
+        visible: false
+        opacity: 0.3
     }
 }

@@ -5,6 +5,9 @@ Item {
     width: 100
     height: 62
 
+    property alias startTime: start_tm
+    property alias endTime: end_tm
+
     Row {
         id: row
         anchors.fill: parent
@@ -12,7 +15,7 @@ Item {
         spacing: 20*physicalPlatformScale
 
         DateTimeChooser {
-            id: start_dt
+            id: start_tm
             timeVisible: true
             dateVisible: false
             width: parent.width/2 - row.spacing/2
@@ -23,7 +26,7 @@ Item {
         }
 
         DateTimeChooser {
-            id: end_dt
+            id: end_tm
             timeVisible: true
             dateVisible: false
             width: parent.width/2 - row.spacing/2

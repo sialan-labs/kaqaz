@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import Kaqaz 1.0
 
 Item {
     id: search_panel
@@ -26,12 +27,25 @@ Item {
     property alias text: txt.text
 
     signal keywordChanged( string text )
+    signal advanceSearchRequest( string keyword, variant startDate, variant endDate, variant startTime, variant endTime, int group, int domain )
 
     onTextChanged: search_timer.restart()
 
     QtObject {
         id: privates
         property variant moreDialog
+
+        property date startDate
+        property date endDate
+        property bool dateIsSet: false
+
+        property date startTime
+        property date endTime
+        property bool timeIsSet: false
+
+        property string domainSelectedText
+        property int paperType: Enums.AllPapers
+        property int selectedGid: -1
 
         onMoreDialogChanged: more_btn.more = moreDialog? true : false
     }
@@ -92,6 +106,7 @@ Item {
         highlightColor: "#00000000"
         onClicked: {
             more = !more
+            devices.hideKeyboard()
             if( more )
                 privates.moreDialog = showBottomPanel(more_dialog_component)
             else
@@ -112,7 +127,7 @@ Item {
         id: search_timer
         interval: 700
         repeat: false
-        onTriggered: search_panel.keywordChanged(text)
+        onTriggered: startSearch()
     }
 
     Connections{
@@ -123,11 +138,48 @@ Item {
     Component {
         id: more_dialog_component
         SearchMorePanel {
+            onDateIsSetChanged: { privates.dateIsSet = dateIsSet; refreshSearch() }
+            onStartDateChanged: { privates.startDate = startDate; refreshSearch() }
+            onEndDateChanged: { privates.endDate = endDate; refreshSearch() }
+            onTimeIsSetChanged: { privates.timeIsSet = timeIsSet; refreshSearch() }
+            onStartTimeChanged: { privates.startTime = startTime; refreshSearch() }
+            onEndTimeChanged: { privates.endTime = endTime; refreshSearch() }
+            onPaperTypeChanged: { privates.paperType = paperType; refreshSearch() }
+            onSelectedGidChanged: { privates.selectedGid = selectedGid; refreshSearch() }
+            onDomainSelectedTextChanged: { privates.domainSelectedText = domainSelectedText; refreshSearch() }
+
+            Component.onCompleted: {
+                dateIsSet = privates.dateIsSet
+                startDate = privates.startDate
+                endDate = privates.endDate
+                timeIsSet = privates.timeIsSet
+                startTime = privates.startTime
+                endTime = privates.endTime
+                paperType = privates.paperType
+                selectedGid = privates.selectedGid
+                domainSelectedText = privates.domainSelectedText
+            }
         }
     }
 
     function initTranslations(){
         placeholder_txt.text = qsTr("Search keyword")
+    }
+
+    function startSearch() {
+        if( privates.dateIsSet || privates.timeIsSet || privates.paperType!=Enums.AllPapers || privates.selectedGid!=-1 ) {
+            search_panel.advanceSearchRequest(text, privates.dateIsSet? privates.startDate : 0,
+                                                    privates.dateIsSet? privates.endDate : 0,
+                                                    privates.timeIsSet? privates.startTime : 0,
+                                                    privates.timeIsSet? privates.endTime : 0,
+                                                    privates.selectedGid, privates.paperType )
+        } else {
+            search_panel.keywordChanged(text)
+        }
+    }
+
+    function refreshSearch() {
+        search_timer.restart()
     }
 
     Component.onCompleted: {

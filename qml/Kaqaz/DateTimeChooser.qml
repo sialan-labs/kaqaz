@@ -148,7 +148,7 @@ Rectangle {
                     objs[i] = i
 
                 items = objs
-                positionViewAtIndex(minute-1)
+                positionViewAtIndex(minute)
             }
         }
 
@@ -234,8 +234,5 @@ Rectangle {
         date.setHours( clock_list.currentItem*12 + hour_list.currentItem )
         date.setMinutes( minute_list.currentItem )
         return date
-    }
-
-    function getTime() {
     }
 }

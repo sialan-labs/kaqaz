@@ -22,6 +22,10 @@ Item {
     width: 100
     height: hide_btn.height + 20*physicalPlatformScale
 
+    MouseArea {
+        anchors.fill: parent
+    }
+
     Button {
         id: hide_btn
         anchors.right: parent.right

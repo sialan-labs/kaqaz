@@ -5,6 +5,9 @@ Item {
     width: 100
     height: 62
 
+    property alias startDate: start_dt
+    property alias endDate: end_dt
+
     Row {
         id: row
         anchors.fill: parent
