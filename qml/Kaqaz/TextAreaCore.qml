@@ -23,6 +23,7 @@ TextEdit {
 
     property alias press: cpicker.press
     property alias commitBlocker: cpicker.commitBlocker
+    property alias pickersVisible: cpicker.pickersVisible
 
     onTextChanged: {
         if( privates.last_text != text )

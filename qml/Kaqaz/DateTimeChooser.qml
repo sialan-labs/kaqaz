@@ -25,6 +25,11 @@ Rectangle {
     clip: true
 
     property color textsColor
+    property bool dateVisible: true
+    property bool timeVisible: true
+
+    property alias dateLabel: date_text.text
+    property alias timeLabel: time_text.text
 
     Row {
         id: row
@@ -36,9 +41,10 @@ Rectangle {
         SelectableList {
             id: year_list
             height: parent.height
-            width: dt_chooser.width/5.333
+            width: timeVisible? dt_chooser.width/5.333 : dt_chooser.width*(75*physicalPlatformScale)/(225*physicalPlatformScale)
             textsColor: dt_chooser.textsColor
             color: dt_chooser.color
+            visible: dateVisible
 
             Component.onCompleted: {
                 var objs = new Array
@@ -54,9 +60,10 @@ Rectangle {
         SelectableList {
             id: month_list
             height: parent.height
-            width: dt_chooser.width/4
+            width: timeVisible? dt_chooser.width/4 : dt_chooser.width*(100*physicalPlatformScale)/(225*physicalPlatformScale)
             textsColor: dt_chooser.textsColor
             color: dt_chooser.color
+            visible: dateVisible
             nameMethodObject: kaqaz
             nameMethodFunction: "monthName"
 
@@ -74,9 +81,10 @@ Rectangle {
         SelectableList {
             id: day_list
             height: parent.height
-            width: dt_chooser.width/8
+            width: timeVisible? dt_chooser.width/8 : dt_chooser.width*(50*physicalPlatformScale)/(225*physicalPlatformScale)
             textsColor: dt_chooser.textsColor
             color: dt_chooser.color
+            visible: dateVisible
 
             property int daysCount: kaqaz.daysOfMonth(year_list.currentItem,month_list.currentItem)
             property int currentDay: kaqaz.currentDay()
@@ -97,14 +105,16 @@ Rectangle {
         Item {
             height: parent.height
             width: dt_chooser.width/16
+            visible: dateVisible && timeVisible
         }
 
         SelectableList {
             id: hour_list
             height: parent.height
-            width: dt_chooser.width/8
+            width: dateVisible? dt_chooser.width/8 : dt_chooser.width*(50*physicalPlatformScale)/(150*physicalPlatformScale)
             textsColor: dt_chooser.textsColor
             color: dt_chooser.color
+            visible: timeVisible
             nameMethodObject: row
             nameMethodFunction: "rightJustify"
 
@@ -123,9 +133,10 @@ Rectangle {
         SelectableList {
             id: minute_list
             height: parent.height
-            width: dt_chooser.width/8
+            width: dateVisible? dt_chooser.width/8 : dt_chooser.width*(50*physicalPlatformScale)/(150*physicalPlatformScale)
             textsColor: dt_chooser.textsColor
             color: dt_chooser.color
+            visible: timeVisible
             nameMethodObject: row
             nameMethodFunction: "rightJustify"
 
@@ -134,7 +145,7 @@ Rectangle {
                 var data = new Date()
                 var minute = data.getMinutes()
                 for( var i = 0; i<60; i++ )
-                    objs[i] = i+1
+                    objs[i] = i
 
                 items = objs
                 positionViewAtIndex(minute-1)
@@ -144,9 +155,10 @@ Rectangle {
         SelectableList {
             id: clock_list
             height: parent.height
-            width: dt_chooser.width/8
+            width: dateVisible? dt_chooser.width/8 : dt_chooser.width*(50*physicalPlatformScale)/(150*physicalPlatformScale)
             textsColor: dt_chooser.textsColor
             color: dt_chooser.color
+            visible: timeVisible
             nameMethodObject: clock_list
             nameMethodFunction: "clockType"
 
@@ -177,19 +189,21 @@ Rectangle {
 
     Rectangle {
         id: date_line
+        x: 0
         height: 2*physicalPlatformScale
-        width: dt_chooser.width/1.777
-        anchors.left: parent.left
+        width: timeVisible? dt_chooser.width/1.777 : dt_chooser.width
         anchors.top: date_text.bottom
+        visible: dateVisible
         color: "#88888888"
     }
 
     Rectangle {
         id: time_line
+        x: parent.width-width
         height: 2*physicalPlatformScale
-        width: dt_chooser.width/2.666
-        anchors.right: parent.right
+        width: dateVisible? dt_chooser.width/2.666 : dt_chooser.width
         anchors.top: time_text.bottom
+        visible: timeVisible
         color: "#88888888"
     }
 
@@ -200,6 +214,7 @@ Rectangle {
         font.family: globalFontFamily
         font.pixelSize: 10*fontsScale
         color: dt_chooser.textsColor
+        visible: dateVisible
         text: qsTr("Date")
     }
 
@@ -210,6 +225,7 @@ Rectangle {
         font.family: globalFontFamily
         font.pixelSize: 10*fontsScale
         color: dt_chooser.textsColor
+        visible: timeVisible
         text: qsTr("Time")
     }
 

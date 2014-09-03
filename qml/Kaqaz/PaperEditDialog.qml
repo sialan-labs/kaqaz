@@ -159,7 +159,7 @@ Item {
                 textFont.pixelSize: 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Paper Type")
-                visible: false
+//                visible: false
                 onClicked: {
                     if( !paperTypeObj )
                         paperTypeObj = showBottomPanel(paper_type_component)
@@ -322,6 +322,7 @@ Item {
                 textFont.bold: false
                 text: qsTr("To-Do")
                 onClicked: {
+                    item.paperItem.save()
                     database.setPaperType(item.paperItem.paperItem,Enums.ToDo)
                     hideBottomPanel()
                 }
@@ -353,7 +354,6 @@ Item {
                     main.refreshMenu()
                     hideBottomPanel()
                 }
-
             }
 
             DateTimeChooser {
@@ -364,6 +364,8 @@ Item {
                 anchors.top: done_btn.bottom
                 anchors.margins: 20*physicalPlatformScale
                 anchors.topMargin: 10*physicalPlatformScale
+                dateVisible: true
+                timeVisible: true
                 color: "#D9D9D9"
                 textsColor: "#111111"
             }

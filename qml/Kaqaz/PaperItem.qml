@@ -36,6 +36,7 @@ AnimationItem {
     property alias font: txt.font
 
     property alias bodyText: label.text
+    property alias groupColor: group_chooser.color
 
     property real pad: -5
     property real closeX: -20 - pad -width

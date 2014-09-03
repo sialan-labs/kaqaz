@@ -31,6 +31,7 @@ Item {
     property bool moving: false
     property bool press: top_handler.press || bottom_handler.press
     property bool commitBlocker: false
+    property bool pickersVisible: top_picker.visible || bottom_picker.visible
 
     property variant textItem
 

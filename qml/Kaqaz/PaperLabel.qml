@@ -22,18 +22,18 @@ import Kaqaz 1.0
 Item {
     id: paper_label
 
-    property variant item
     property variant paperItem
     property int paperId: paperItem? paperItem.paperItem : -1
 
     property alias text: txt.text
     property alias font: txt.font
     property alias horizontalAlignment: txt.horizontalAlignment
-    property alias paintedHeight: txt.paintedHeight
-    property alias paintedWidth: txt.paintedWidth
+    property real paintedHeight: txt.visible? txt.paintedHeight : to_do.height
+    property real paintedWidth: txt.paintedWidth
     property alias textFocus: txt.focus
     property alias cursorRectangle: txt.cursorRectangle
 
+    property alias pickersVisible: txt.pickersVisible
     property alias pickersPressed: txt.press
     property alias selectedText: txt.selectedText
     property alias commitBlocker: txt.commitBlocker
@@ -53,21 +53,9 @@ Item {
             paperType = Enums.Normal
     }
 
-    onItemChanged: {
-        if( !item )
-            return
-
-        paper_label.text = item.text
-    }
-
     onTextChanged: {
         if( to_do.visible )
             to_do.text = text
-        if( !item )
-            return
-
-        item.text = paper_label.text
-        item.html = paper_label.text
     }
 
     onWidthChanged: if(paper_label) paper_label.refreshEditPosition()
@@ -117,11 +105,16 @@ Item {
 
     PaperToDo {
         id: to_do
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
         anchors.topMargin: 5*physicalPlatformScale
         visible: paperType == Enums.ToDo
-        onTextChanged: if(visible) paper_label.text = text
-        onVisibleChanged: if(visible) text = paper_label.text
+        alignment: txt.horizontalAlignment
+        font: txt.font
+        color: paperItem? paperItem.groupColor : "#888888"
+        onTextChanged: if(visible) paper_label.text = to_do.text
+        onVisibleChanged: if(to_do && to_do.visible) to_do.text = paper_label.text
     }
 
     SearchHighlighter {
@@ -193,7 +186,8 @@ Item {
     }
 
     function isPointOnPickers( x, y ) {
-        return txt.isPointOnPickers(x,y)
+        var pnt = mapToItem(txt,x,y)
+        return txt.isPointOnPickers(pnt.x,pnt.y)
     }
 
     function insertAtCurrent( str ){
@@ -201,13 +195,20 @@ Item {
     }
 
     function focusOn( x, y ){
-        txt.focus = true
-        txt.cursorPosition = txt.positionAt(x,y)
-        showPicker()
+        if( txt.visible ) {
+            var pnt = mapToItem(txt,x,y)
+            txt.focus = true
+            txt.cursorPosition = txt.positionAt(pnt.x,pnt.y)
+            showPicker()
+        } else {
+            var pnt = mapToItem(to_do,x,y)
+            to_do.focusOn(pnt.x,pnt.y)
+        }
     }
 
     function selectWord( x, y ){
-        focusOn(x,y)
+        var pnt = mapToItem(txt,x,y)
+        focusOn(pnt.x,pnt.y)
         txt.selectWord()
     }
 

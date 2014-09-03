@@ -27,6 +27,7 @@ Rectangle {
     height: 0
 
     property variant item
+    property bool destroyOnHide: false
 
     Behavior on height {
         NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
@@ -55,7 +56,12 @@ Rectangle {
     Timer {
         id: destroy_timer
         interval: 400
-        onTriggered: if(bpanel.item) bpanel.item.destroy()
+        onTriggered: {
+            if(bpanel.item)
+                bpanel.item.destroy()
+            if(destroyOnHide)
+                bpanel.destroy()
+        }
     }
 
     function hide() {

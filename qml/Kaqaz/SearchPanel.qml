@@ -29,6 +29,13 @@ Item {
 
     onTextChanged: search_timer.restart()
 
+    QtObject {
+        id: privates
+        property variant moreDialog
+
+        onMoreDialogChanged: more_btn.more = moreDialog? true : false
+    }
+
     Rectangle{
         id: back
         color: "#66ffffff"
@@ -64,11 +71,34 @@ Item {
         id: txt
         anchors.verticalCenter: back.verticalCenter
         anchors.left: icon.right
-        anchors.right: back.right
+        anchors.right: more_btn.left
         anchors.margins: 10*physicalPlatformScale
         font.pixelSize: 13*fontsScale
         font.family: globalFontFamily
         inputMethodHints: Qt.ImhNoPredictiveText
+    }
+
+    Button {
+        id: more_btn
+        anchors.topMargin: 2*physicalPlatformScale
+        anchors.top: back.top
+        anchors.bottom: back.bottom
+        anchors.right: back.right
+        width: 60*physicalPlatformScale
+        text: more? qsTr("Less") : qsTr("More")
+        textFont.pixelSize: 10*fontsScale
+        textFont.family: globalFontFamily
+        textColor: press? "#0d80ec" : "#333333"
+        highlightColor: "#00000000"
+        onClicked: {
+            more = !more
+            if( more )
+                privates.moreDialog = showBottomPanel(more_dialog_component)
+            else
+                hideBottomPanel()
+        }
+
+        property bool more: false
     }
 
     Timer{
@@ -88,6 +118,12 @@ Item {
     Connections{
         target: kaqaz
         onLanguageChanged: initTranslations()
+    }
+
+    Component {
+        id: more_dialog_component
+        SearchMorePanel {
+        }
     }
 
     function initTranslations(){
