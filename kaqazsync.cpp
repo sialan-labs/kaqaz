@@ -140,10 +140,10 @@ void KaqazSync::reload()
 
     p->thread = new QThread(this);
 
-#ifdef PRO_BUILD
-    bool file_sync_default = true;
-#else
+#ifdef FREE_BUILD
     bool file_sync_default = false;
+#else
+    bool file_sync_default = true;
 #endif
 
     p->kdbox = new KaqazDropBox();

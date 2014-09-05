@@ -90,15 +90,7 @@ Database::Database(const QString & path, QObject *parent) :
 
     if( !Kaqaz::settings()->value("initialize/userdata_db",false).toBool() )
     {
-#ifdef Q_OS_ANDROID
-        QFile::copy("assets:/database/database.sqlite",p->path);
-#else
-#ifdef Q_OS_MAC
-        QFile::copy(QCoreApplication::applicationDirPath()+"/../Resources/database/database.sqlite",p->path);
-#else
-        QFile::copy("database/database.sqlite",p->path);
-#endif
-#endif
+        QFile::copy(":/database/database.sqlite",p->path);
         QFile(p->path).setPermissions(QFileDevice::WriteOwner|QFileDevice::WriteGroup|QFileDevice::ReadUser|QFileDevice::ReadGroup);
     }
 

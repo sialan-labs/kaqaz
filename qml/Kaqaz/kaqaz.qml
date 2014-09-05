@@ -95,12 +95,12 @@ Rectangle {
 
     FontLoader{
         id: kaqaz_normal_font
-        source: "fonts/DroidKaqazSans.ttf"
+        source: kaqaz.resourcePath + "/fonts/DroidKaqazSans.ttf"
     }
 
     FontLoader{
         id: kaqaz_mono_font
-        source: "fonts/DroidSansMono.ttf"
+        source: kaqaz.resourcePath + "/fonts/DroidSansMono.ttf"
     }
 
     Item {

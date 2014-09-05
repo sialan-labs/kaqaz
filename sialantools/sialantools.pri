@@ -2,7 +2,7 @@
 android {
     manifest.source = android-build
     manifest.target = .
-    COPYFOLDERS = manifest
+    COPYFOLDERS += manifest
     include(qmake/copyData.pri)
     copyData()
 

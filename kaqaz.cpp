@@ -35,7 +35,6 @@
 #include "sialantools/sialanlistobject.h"
 #include "calendarconverter.h"
 #include "resourcemanager.h"
-#include "qtquick2applicationviewer/qtquick2applicationviewer.h"
 #include "SimpleQtCryptor/simpleqtcryptor.h"
 #include "sialantools/sialandevices.h"
 
@@ -48,10 +47,15 @@
 #include "iconprovider.h"
 #endif
 
+#ifdef KAQAZ_DESKTOP
+#include "desktop/kaqazdesktop.h"
+#endif
+
 #ifdef DESKTOP_DEVICE
 #include <QFileDialog>
 #endif
 
+#include <QQuickView>
 #include <QGuiApplication>
 #include <QClipboard>
 #include <QTranslator>
@@ -110,7 +114,11 @@ QSettings *kaqaz_settings = 0;
 class KaqazPrivate
 {
 public:
-    QtQuick2ApplicationViewer *viewer;
+#ifdef KAQAZ_DESKTOP
+    KaqazDesktop *viewer;
+#else
+    QQuickView *viewer;
+#endif
 
     QString homePath;
     QString translationsPath;
@@ -194,13 +202,8 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->translationsPath = "assets:/files/translations";
     p->confPath = p->homePath + "/config.ini";
 #else
-#ifdef Q_OS_MAC
-    p->translationsPath = QCoreApplication::applicationDirPath() + "/../Resources/files/translations/";
+    p->translationsPath = resourcePath().mid(7) + "/files/translations/";
     p->confPath = p->homePath + "/config.ini";
-#else
-    p->translationsPath = QCoreApplication::applicationDirPath() + "/files/translations/";
-    p->confPath = p->homePath + "/config.ini";
-#endif
 #endif
 
     if( !kaqaz_settings )
@@ -229,8 +232,19 @@ Kaqaz::Kaqaz(QObject *parent) :
     qmlRegisterType<SialanHashObject>("Kaqaz", 1,0, "HashObject");
     qmlRegisterType<SialanListObject>("Kaqaz", 1,0, "ListObject");
 
-    p->viewer = new QtQuick2ApplicationViewer();
+#ifdef KAQAZ_DESKTOP
+    p->viewer = new KaqazDesktop(this);
+    p->viewer->setDatabase(kaqaz_database);
+    p->viewer->setRepository(p->repository);
+    p->viewer->setBackuper(p->backuper);
+    p->viewer->setKaqazSync(p->sync);
+    p->viewer->setSialanDevices(p->devices);
+    p->viewer->setSialanTools(p->tools);
+    p->viewer->setMimeApps(p->mimeApps);
+#else
+    p->viewer = new QQuickView();
     p->viewer->installEventFilter(this);
+    p->viewer->setResizeMode(QQuickView::SizeRootObjectToView);
     p->viewer->engine()->rootContext()->setContextProperty( "kaqaz", this );
     p->viewer->engine()->rootContext()->setContextProperty( "view", p->viewer );
     p->viewer->engine()->rootContext()->setContextProperty( "database", kaqaz_database );
@@ -247,6 +261,9 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->viewer->engine()->rootContext()->setContextProperty( "keyboard", QGuiApplication::inputMethod() );
     if( !QGuiApplication::screens().isEmpty() )
         p->viewer->engine()->rootContext()->setContextProperty( "screen", QGuiApplication::screens().first() );
+
+    connect(p->viewer->engine(), SIGNAL(quit()), SLOT(close()));
+#endif
 
     connect( kaqaz_database, SIGNAL(fileDeleted(QString)), p->repository, SLOT(deleteFile(QString)) );
 
@@ -285,8 +302,12 @@ void Kaqaz::init_languages()
 
 void Kaqaz::start()
 {
-    p->viewer->setMainQmlFile(QStringLiteral("qml/Kaqaz/kaqaz.qml"));
-    p->viewer->showExpanded();
+#ifdef KAQAZ_DESKTOP
+    p->viewer->start();
+#else
+    p->viewer->setSource(QStringLiteral("qrc:///qml/Kaqaz/kaqaz.qml"));
+    p->viewer->show();
+#endif
 }
 
 void Kaqaz::incomingAppMessage(const QString &msg)
@@ -294,22 +315,35 @@ void Kaqaz::incomingAppMessage(const QString &msg)
     if( msg == "show" )
     {
         p->viewer->show();
+#ifdef KAQAZ_DESKTOP
+        p->viewer->activateWindow();
+#else
         p->viewer->requestActivate();
+#endif
     }
 }
 
 void Kaqaz::incomingShare(const QString &title, const QString &msg)
 {
+#ifdef KAQAZ_DESKTOP
+    Q_UNUSED(title)
+    Q_UNUSED(msg)
+#else
     QVariant title_var = title;
     QVariant msg_var = msg;
 
     QMetaObject::invokeMethod( p->viewer->rootObject(), "incomingShare", Q_ARG(QVariant,title_var), Q_ARG(QVariant,msg_var) );
+#endif
 }
 
 void Kaqaz::incomingImage(const QString &path)
 {
+#ifdef KAQAZ_DESKTOP
+    Q_UNUSED(path)
+#else
     QVariant path_var = path;
     QMetaObject::invokeMethod( p->viewer->rootObject(), "incomingImage", Q_ARG(QVariant,path_var) );
+#endif
 }
 
 void Kaqaz::selectImageResult(const QString &path)
@@ -355,25 +389,26 @@ void Kaqaz::demoActiveTrial() const
 
 bool Kaqaz::proBuild() const
 {
-#ifdef PRO_BUILD
-    return true;
-#else
+#ifdef FREE_BUILD
     return false;
+#else
+    return true;
 #endif
 }
 
 QString Kaqaz::version() const
 {
     return KAQAZ_VERSION
-#ifdef PRO_BUILD
-            " pro";
+#ifndef FREE_BUILD
+            " pro"
 #else
 #ifdef TRIAL_BUILD
-            " trial";
+            " trial"
 #else
-            " free";
+            " free"
 #endif
 #endif
+            ;
 }
 
 QString Kaqaz::qtVersion() const
@@ -669,6 +704,29 @@ QString Kaqaz::sdcardPath() const
     return "/sdcard/Android/data/org.sialan.kaqaz";
 }
 
+QString Kaqaz::resourcePath()
+{
+#ifdef Q_OS_ANDROID
+    return "assets:/";
+#else
+    static QString *resourcePath = 0;
+    if( !resourcePath )
+    {
+#ifdef Q_OS_MAC
+        QFileInfo inf(QCoreApplication::applicationDirPath() + "/../Resources");
+        resourcePath = new QString(inf.filePath());
+#else
+        QFileInfo inf(QCoreApplication::applicationDirPath()+"/../share/kaqaz");
+        if( inf.exists() )
+            resourcePath = new QString(inf.filePath());
+        else
+            resourcePath = new QString(QCoreApplication::applicationDirPath());
+#endif
+    }
+    return "file://" + *resourcePath + "/";
+#endif
+}
+
 QString Kaqaz::fromMSecSinceEpoch(qint64 t)
 {
     return convertDateTimeToString( QDateTime::fromMSecsSinceEpoch(t) );
@@ -732,7 +790,11 @@ void Kaqaz::reconnectAllResources()
 {
     kaqaz_database->connect();
     refreshSettings();
+#ifdef KAQAZ_DESKTOP
+    p->viewer->refresh();
+#else
     QMetaObject::invokeMethod( p->viewer->rootObject(), "refresh" );
+#endif
 }
 
 QString Kaqaz::fileName(const QString &path)
@@ -947,7 +1009,11 @@ void Kaqaz::timerEvent(QTimerEvent *e)
 {
     if( e->timerId() == p->lock_timer )
     {
+#ifdef KAQAZ_DESKTOP
+        p->viewer->lock();
+#else
         QMetaObject::invokeMethod( p->viewer->rootObject(), "lock" );
+#endif
         killTimer( p->lock_timer );
         p->lock_timer = 0;
     }

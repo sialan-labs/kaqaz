@@ -29,12 +29,13 @@ class Database;
 class KaqazPrivate;
 class Kaqaz : public QObject
 {
-    Q_PROPERTY( int    currentDays          READ currentDays         NOTIFY currentDaysChanged )
-    Q_PROPERTY( bool   proBuild             READ proBuild            NOTIFY proBuildChanged )
-    Q_PROPERTY( bool   groupsCount          READ groupsCount         WRITE setGroupsCount         NOTIFY groupsCountChanged)
-    Q_PROPERTY( bool   allPaper             READ allPaper            WRITE setAllPaper            NOTIFY allPaperChanged)
-    Q_PROPERTY( bool   keyboardPredicative  READ keyboardPredicative WRITE setKeyboardPredicative NOTIFY keyboardPredicativeChanged)
-    Q_PROPERTY( bool   positioning          READ positioning         WRITE setPositioning         NOTIFY positioningChanged)
+    Q_PROPERTY( int     currentDays          READ currentDays         NOTIFY currentDaysChanged )
+    Q_PROPERTY( bool    proBuild             READ proBuild            NOTIFY proBuildChanged )
+    Q_PROPERTY( bool    groupsCount          READ groupsCount         WRITE setGroupsCount         NOTIFY groupsCountChanged)
+    Q_PROPERTY( bool    allPaper             READ allPaper            WRITE setAllPaper            NOTIFY allPaperChanged)
+    Q_PROPERTY( bool    keyboardPredicative  READ keyboardPredicative WRITE setKeyboardPredicative NOTIFY keyboardPredicativeChanged)
+    Q_PROPERTY( bool    positioning          READ positioning         WRITE setPositioning         NOTIFY positioningChanged)
+    Q_PROPERTY( QString resourcePath         READ resourcePath        NOTIFY resourcePathChanged)
     Q_PROPERTY( Qt::LayoutDirection  languageDirection  READ languageDirection NOTIFY languageDirectionChanged )
 
     Q_OBJECT
@@ -94,6 +95,7 @@ public:
     Q_INVOKABLE QString profilePath() const;
     Q_INVOKABLE QString repositoryPath() const;
     Q_INVOKABLE QString sdcardPath() const;
+    static QString resourcePath();
 
     Q_INVOKABLE QString fromMSecSinceEpoch( qint64 t );
     Q_INVOKABLE QString convertDateTimeToString( const QDateTime & dt );
@@ -162,6 +164,7 @@ signals:
     void allPaperChanged();
     void keyboardPredicativeChanged();
     void positioningChanged();
+    void resourcePathChanged();
 
     void backRequest();
     void languageChanged();
