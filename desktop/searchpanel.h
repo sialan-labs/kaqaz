@@ -16,31 +16,34 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PANELBOX_H
-#define PANELBOX_H
+#ifndef SEARCHPANEL_H
+#define SEARCHPANEL_H
 
-#include <QToolBox>
-#include <QModelIndex>
+#include <QWidget>
 
-class Kaqaz;
-class PanelBoxPrivate;
-class PanelBox : public QToolBox
+class SearchPanelPrivate;
+class SearchPanel : public QWidget
 {
     Q_OBJECT
 public:
-    PanelBox(Kaqaz *kaqaz, QWidget *parent = 0);
-    ~PanelBox();
+    SearchPanel(QWidget *parent = 0);
+    ~SearchPanel();
 
 signals:
-    void showPaperRequest( const QList<int> & papers );
+    void founded( const QList<int> & list );
+
+public slots:
+    void refreshResult();
 
 private slots:
-    void date_selected( const QModelIndex & idx );
-    void group_selected( const QModelIndex & idx );
-    void showGroupMenu();
+    void keyword_changed();
+
+protected:
+    void paintEvent(QPaintEvent *e);
+    void timerEvent(QTimerEvent *e);
 
 private:
-    PanelBoxPrivate *p;
+    SearchPanelPrivate *p;
 };
 
-#endif // PANELBOX_H
+#endif // SEARCHPANEL_H

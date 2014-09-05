@@ -31,6 +31,8 @@ public:
     ~CategoriesModel();
 
     int id( const QModelIndex &index ) const;
+    int id( int row ) const;
+    int indexOf( int gid ) const;
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;

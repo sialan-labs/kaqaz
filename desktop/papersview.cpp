@@ -53,7 +53,8 @@ PapersView::PapersView(Database *db, QWidget *parent) :
                   "QScrollBar::add-line:vertical { border: 0px solid transparent; background: transparent; height: 0px; subcontrol-position: bottom; subcontrol-origin: margin; }"
                   "QScrollBar::sub-line:vertical { border: 0px solid transparent; background: transparent; height: 0px; subcontrol-position: top; subcontrol-origin: margin; }");
 
-    connect( this, SIGNAL(clicked(QModelIndex)), SLOT(paper_selected(QModelIndex)) );
+    connect( this, SIGNAL(clicked(QModelIndex))      , SLOT(paper_selected(QModelIndex)) );
+    connect( this, SIGNAL(doubleClicked(QModelIndex)), SLOT(paper_opened(QModelIndex))   );
 }
 
 void PapersView::showPapers(const QList<int> &papers)
@@ -65,6 +66,12 @@ void PapersView::paper_selected(const QModelIndex &idx)
 {
     const int pid = p->model->id(idx);
     emit paperSelected(pid);
+}
+
+void PapersView::paper_opened(const QModelIndex &idx)
+{
+    const int pid = p->model->id(idx);
+    emit paperOpened(pid);
 }
 
 PapersView::~PapersView()

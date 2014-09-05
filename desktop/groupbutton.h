@@ -16,31 +16,35 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PANELBOX_H
-#define PANELBOX_H
+#ifndef GROUPBUTTON_H
+#define GROUPBUTTON_H
 
-#include <QToolBox>
-#include <QModelIndex>
+#include <QComboBox>
 
-class Kaqaz;
-class PanelBoxPrivate;
-class PanelBox : public QToolBox
+class GroupButtonPrivate;
+class GroupButton : public QComboBox
 {
     Q_OBJECT
 public:
-    PanelBox(Kaqaz *kaqaz, QWidget *parent = 0);
-    ~PanelBox();
+    GroupButton(QWidget *parent = 0);
+    ~GroupButton();
+
+    int group() const;
+
+public slots:
+    void setGroup( int gid );
 
 signals:
-    void showPaperRequest( const QList<int> & papers );
+    void groupSelected( int gid );
 
 private slots:
-    void date_selected( const QModelIndex & idx );
-    void group_selected( const QModelIndex & idx );
-    void showGroupMenu();
+    void indexChanged(int row);
+
+protected:
+    void paintEvent(QPaintEvent *e);
 
 private:
-    PanelBoxPrivate *p;
+    GroupButtonPrivate *p;
 };
 
-#endif // PANELBOX_H
+#endif // GROUPBUTTON_H

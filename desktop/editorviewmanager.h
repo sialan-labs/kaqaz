@@ -16,31 +16,35 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PANELBOX_H
-#define PANELBOX_H
+#ifndef EDITORVIEWMANAGER_H
+#define EDITORVIEWMANAGER_H
 
-#include <QToolBox>
-#include <QModelIndex>
+#include <QWidget>
 
-class Kaqaz;
-class PanelBoxPrivate;
-class PanelBox : public QToolBox
+class QTabBar;
+class EditorViewManagerPrivate;
+class EditorViewManager : public QWidget
 {
     Q_OBJECT
 public:
-    PanelBox(Kaqaz *kaqaz, QWidget *parent = 0);
-    ~PanelBox();
+    EditorViewManager(QWidget *parent = 0);
+    ~EditorViewManager();
 
-signals:
-    void showPaperRequest( const QList<int> & papers );
+    QTabBar *tabBar() const;
+
+public slots:
+    void addPaper( int pid = 0 );
+    void setMainPaper( int pid );
 
 private slots:
-    void date_selected( const QModelIndex & idx );
-    void group_selected( const QModelIndex & idx );
-    void showGroupMenu();
+    void tabMoved( int from, int to );
+    void close( int row );
+
+protected:
+    void resizeEvent(QResizeEvent *e);
 
 private:
-    PanelBoxPrivate *p;
+    EditorViewManagerPrivate *p;
 };
 
-#endif // PANELBOX_H
+#endif // EDITORVIEWMANAGER_H

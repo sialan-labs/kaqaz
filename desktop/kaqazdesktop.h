@@ -19,7 +19,7 @@
 #ifndef KAQAZDESKTOP_H
 #define KAQAZDESKTOP_H
 
-#include <QMainWindow>
+#include <QWidget>
 
 class MimeApps;
 class SialanTools;
@@ -30,7 +30,7 @@ class Repository;
 class Database;
 class Kaqaz;
 class KaqazDesktopPrivate;
-class KaqazDesktop : public QMainWindow
+class KaqazDesktop : public QWidget
 {
     Q_OBJECT
 public:
@@ -50,12 +50,15 @@ public slots:
     void refresh();
     void lock();
 
+    void addGroup();
+
 private slots:
     void save_splitter();
 
 protected:
     void timerEvent(QTimerEvent *e);
     void resizeEvent(QResizeEvent *e);
+    void paintEvent(QPaintEvent *e);
 
 private:
     void init_toolbar();

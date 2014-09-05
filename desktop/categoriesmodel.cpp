@@ -37,14 +37,23 @@ CategoriesModel::CategoriesModel(Database *db, QObject *parent) :
     p->db = db;
 
     connect(p->db, SIGNAL(groupsListChanged()), SLOT(groupsChanged()), Qt::QueuedConnection );
-
-    p->groups = p->db->groups();
+    groupsChanged();
 }
 
 int CategoriesModel::id(const QModelIndex &index) const
 {
     int row = index.row();
+    return id(row);
+}
+
+int CategoriesModel::id(int row) const
+{
     return p->groups.at(row);
+}
+
+int CategoriesModel::indexOf(int gid) const
+{
+    return p->groups.indexOf(gid);
 }
 
 int CategoriesModel::rowCount(const QModelIndex &parent) const
@@ -82,7 +91,16 @@ QVariant CategoriesModel::data(const QModelIndex &index, int role) const
 
 void CategoriesModel::groupsChanged()
 {
-    const QList<int> & list = p->db->groups();
+    QList<int> list = p->db->groups();
+    for( int i=0; i<list.count(); i++ )
+    {
+        const int gid = list.at(i);
+        if( !p->db->groupName(gid).isEmpty() )
+            continue;
+
+        list.removeAt(i);
+        i--;
+    }
 
     for( int i=0; i<p->groups.length(); i++ )
     {

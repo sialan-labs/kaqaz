@@ -51,7 +51,11 @@ android {
         desktop/papersview.h \
         desktop/paperviewdelegate.h \
         desktop/papersmodel.h \
-        desktop/editorview.h
+        desktop/editorview.h \
+        desktop/editorviewmanager.h \
+        desktop/searchpanel.h \
+        desktop/groupbutton.h \
+        desktop/addgroupdialog.h
 
     SOURCES += \
         mimeapps.cpp \
@@ -67,7 +71,11 @@ android {
         desktop/papersview.cpp \
         desktop/paperviewdelegate.cpp \
         desktop/papersmodel.cpp \
-        desktop/editorview.cpp
+        desktop/editorview.cpp \
+        desktop/editorviewmanager.cpp \
+        desktop/searchpanel.cpp \
+        desktop/groupbutton.cpp \
+        desktop/addgroupdialog.cpp
 
     win32: SOURCES += qtsingleapplication/qtlockedfile_win.cpp
     unix:  SOURCES += qtsingleapplication/qtlockedfile_unix.cpp

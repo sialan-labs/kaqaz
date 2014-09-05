@@ -21,8 +21,14 @@
 #include "datesmodel.h"
 #include "kaqaz.h"
 #include "database.h"
+#include "searchpanel.h"
+#include "addgroupdialog.h"
 
 #include <QListView>
+#include <QMenu>
+#include <QAction>
+#include <QMessageBox>
+#include <QDebug>
 
 class PanelBoxPrivate
 {
@@ -32,6 +38,7 @@ public:
 
     QListView *groups;
     QListView *dates;
+    SearchPanel *search;
 
     Kaqaz *kaqaz;
 };
@@ -53,10 +60,15 @@ PanelBox::PanelBox(Kaqaz *kaqaz, QWidget *parent) :
     p->groups->setModel(p->groups_model);
     p->groups->setVerticalScrollMode(QListView::ScrollPerPixel);
     p->groups->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    p->groups->setContextMenuPolicy(Qt::CustomContextMenu);
 
+    p->search = new SearchPanel();
+
+    addItem( p->search, tr("Search") );
     addItem( p->groups, tr("Labels") );
-    addItem( p->dates , tr("Dates") );
+    addItem( p->dates , tr("Dates")  );
 
+    setCurrentIndex(1);
     setStyleSheet("QToolBox{ background: #222222; border: 0px solid transparent; }"
                   "QToolBox::tab { background: #222222; color: #ffffff }"
                   "QToolBox::tab:selected { background: #222222; font: bold; color: white; border-top: 1px solid #333333 }"
@@ -71,6 +83,9 @@ PanelBox::PanelBox(Kaqaz *kaqaz, QWidget *parent) :
 
     connect( p->dates , SIGNAL(clicked(QModelIndex)), SLOT(date_selected(QModelIndex))  );
     connect( p->groups, SIGNAL(clicked(QModelIndex)), SLOT(group_selected(QModelIndex)) );
+    connect( p->search, SIGNAL(founded(QList<int>)) , SIGNAL(showPaperRequest(QList<int>)) );
+
+    connect( p->groups, SIGNAL(customContextMenuRequested(QPoint)), SLOT(showGroupMenu()) );
 }
 
 void PanelBox::date_selected(const QModelIndex &idx)
@@ -83,6 +98,36 @@ void PanelBox::group_selected(const QModelIndex &idx)
 {
     const int gid = p->groups_model->id(idx);
     emit showPaperRequest( p->kaqaz->database()->papersOf(gid) );
+}
+
+void PanelBox::showGroupMenu()
+{
+    QModelIndex idx = p->groups->indexAt( p->groups->mapFromGlobal(QCursor::pos()) );
+    const int row = idx.row();
+    if( !idx.isValid() || row == 0 )
+        return;
+
+    QMenu menu;
+    QAction *edit = menu.addAction( tr("Edit") );
+    QAction *dlte = menu.addAction( tr("Delete") );
+    QAction *res  = menu.exec( QCursor::pos() );
+
+    if( !res )
+        return;
+
+    const int gid = p->groups_model->id(row);
+    if( res == edit )
+    {
+        AddGroupDialog dialog(gid);
+        dialog.exec();
+    }
+    if( res == dlte )
+    {
+        Database *db = Kaqaz::database();
+        int del = QMessageBox::warning(this, tr("Delete Label"), tr("Do you realy want to delete \"%1\" label?").arg(db->groupName(gid)), QMessageBox::Yes|QMessageBox::No);
+        if( del == QMessageBox::Yes )
+            db->deleteGroup(gid);
+    }
 }
 
 PanelBox::~PanelBox()

@@ -16,31 +16,24 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PANELBOX_H
-#define PANELBOX_H
+#ifndef ADDGROUPDIALOG_H
+#define ADDGROUPDIALOG_H
 
-#include <QToolBox>
-#include <QModelIndex>
+#include <QDialog>
 
-class Kaqaz;
-class PanelBoxPrivate;
-class PanelBox : public QToolBox
+class AddGroupDialogPrivate;
+class AddGroupDialog : public QDialog
 {
     Q_OBJECT
 public:
-    PanelBox(Kaqaz *kaqaz, QWidget *parent = 0);
-    ~PanelBox();
+    AddGroupDialog(int gid = -1, QWidget *parent = 0);
+    ~AddGroupDialog();
 
-signals:
-    void showPaperRequest( const QList<int> & papers );
-
-private slots:
-    void date_selected( const QModelIndex & idx );
-    void group_selected( const QModelIndex & idx );
-    void showGroupMenu();
+public slots:
+    void accept();
 
 private:
-    PanelBoxPrivate *p;
+    AddGroupDialogPrivate *p;
 };
 
-#endif // PANELBOX_H
+#endif // ADDGROUPDIALOG_H

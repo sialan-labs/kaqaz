@@ -35,9 +35,11 @@ public slots:
 
 signals:
     void paperSelected( int pid );
+    void paperOpened( int pid );
 
 private slots:
     void paper_selected( const QModelIndex & idx );
+    void paper_opened( const QModelIndex & idx );
 
 private:
     PapersViewPrivate *p;
