@@ -158,16 +158,19 @@ public:
 #endif
 };
 
+QPointer<Kaqaz> kaqaz_obj;
 Kaqaz::Kaqaz(QObject *parent) :
     QObject(parent)
 {
+    kaqaz_obj = this;
+
     p = new KaqazPrivate;
     p->demo_active_until_next = false;
     p->lock_timer = 0;
     p->keyboard = false;
     p->translator = new QTranslator(this);
     p->calendar = new CalendarConverter();
-    p->backuper = new Backuper(this);
+    p->backuper = new Backuper();
     p->devices = new SialanDevices(this);
     p->tools = new SialanTools(this);
 #ifdef Q_OS_ANDROID
@@ -233,7 +236,7 @@ Kaqaz::Kaqaz(QObject *parent) :
     qmlRegisterType<SialanListObject>("Kaqaz", 1,0, "ListObject");
 
 #ifdef KAQAZ_DESKTOP
-    p->viewer = new KaqazDesktop(this);
+    p->viewer = new KaqazDesktop();
     p->viewer->setDatabase(kaqaz_database);
     p->viewer->setRepository(p->repository);
     p->viewer->setBackuper(p->backuper);
@@ -272,6 +275,23 @@ Kaqaz::Kaqaz(QObject *parent) :
     connect( p->devices, SIGNAL(selectImageResult(QString)), SLOT(selectImageResult(QString)) );
     connect( p->devices, SIGNAL(activityPaused()), SLOT(activityPaused()) );
     connect( p->devices, SIGNAL(activityResumed()), SLOT(activityResumed()) );
+}
+
+Kaqaz *Kaqaz::instance()
+{
+    if( !kaqaz_obj )
+        kaqaz_obj = new Kaqaz( QCoreApplication::instance() );
+
+    return kaqaz_obj;
+}
+
+#ifdef KAQAZ_DESKTOP
+QWidget *Kaqaz::view()
+#else
+QWindow *Kaqaz::view()
+#endif
+{
+    return p->viewer;
 }
 
 void Kaqaz::init_languages()
@@ -762,6 +782,11 @@ int Kaqaz::currentDay()
     return p->calendar->getDate(QDate::currentDate()).day;
 }
 
+DateProperty Kaqaz::convertDate(const QDate &date)
+{
+    return p->calendar->getDate(date);
+}
+
 QString Kaqaz::passToMd5(const QString &pass)
 {
     if( pass.isEmpty() )
@@ -1049,7 +1074,7 @@ Kaqaz::~Kaqaz()
 {
     p->backuper->deleteLater();
 
-    delete p->viewer;
+//    delete p->viewer;
     delete p->calendar;
     delete p;
 }

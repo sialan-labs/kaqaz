@@ -29,9 +29,14 @@ public:
     EditorView(QWidget *parent = 0);
     ~EditorView();
 
+    int paperId() const;
+
 public slots:
     void setPaper( int id );
     void save();
+
+signals:
+    void saved( int pid );
 
 private slots:
     void delayedSave();

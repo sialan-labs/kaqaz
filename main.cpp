@@ -52,11 +52,11 @@ int main(int argc, char *argv[])
     }
 #endif
 
-    Kaqaz kaqaz;
-    kaqaz.start();
+    Kaqaz *kaqaz = Kaqaz::instance();
+    kaqaz->start();
 
 #ifdef DESKTOP_DEVICE
-    QObject::connect( &app, SIGNAL(messageReceived(QString)), &kaqaz, SLOT(incomingAppMessage(QString)) );
+    QObject::connect( &app, SIGNAL(messageReceived(QString)), kaqaz, SLOT(incomingAppMessage(QString)) );
 #endif
 
     return app.exec();

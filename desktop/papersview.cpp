@@ -20,30 +20,38 @@
 #include "papersmodel.h"
 #include "database.h"
 #include "paperviewdelegate.h"
+#include "kaqaz.h"
+#include "paperconfigure.h"
 
 #include <QScrollBar>
+#include <QMenu>
+#include <QAction>
+#include <QMessageBox>
+#include <QPointer>
+#include <QHash>
 
 class PapersViewPrivate
 {
 public:
-    Database *db;
+    Kaqaz *kaqaz;
     PapersModel *model;
     PaperViewDelegate *delegate;
 };
 
-PapersView::PapersView(Database *db, QWidget *parent) :
+PapersView::PapersView(QWidget *parent) :
     QListView(parent)
 {
     p = new PapersViewPrivate;
-    p->db = db;
+    p->kaqaz = Kaqaz::instance();
 
-    p->model = new PapersModel(p->db,this);
+    p->model = new PapersModel(Kaqaz::database(),this);
     p->delegate = new PaperViewDelegate;
 
     setModel(p->model);
     setItemDelegate(p->delegate);
     setVerticalScrollMode(QListView::ScrollPerPixel);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setContextMenuPolicy(Qt::CustomContextMenu);
     setStyleSheet("QListView{ background: #f3f3f3; border: 0px solid transparent }"
                   "QListView::item{ color: #333333; padding: 4px }"
                   "QListView::item:selected{ background: palette(highlight); color: #ffffff }"
@@ -53,8 +61,9 @@ PapersView::PapersView(Database *db, QWidget *parent) :
                   "QScrollBar::add-line:vertical { border: 0px solid transparent; background: transparent; height: 0px; subcontrol-position: bottom; subcontrol-origin: margin; }"
                   "QScrollBar::sub-line:vertical { border: 0px solid transparent; background: transparent; height: 0px; subcontrol-position: top; subcontrol-origin: margin; }");
 
-    connect( this, SIGNAL(clicked(QModelIndex))      , SLOT(paper_selected(QModelIndex)) );
-    connect( this, SIGNAL(doubleClicked(QModelIndex)), SLOT(paper_opened(QModelIndex))   );
+    connect( this, SIGNAL(clicked(QModelIndex))              , SLOT(paper_selected(QModelIndex)) );
+    connect( this, SIGNAL(doubleClicked(QModelIndex))        , SLOT(paper_opened(QModelIndex))   );
+    connect( this, SIGNAL(customContextMenuRequested(QPoint)), SLOT(showPaperMenu())             );
 }
 
 void PapersView::showPapers(const QList<int> &papers)
@@ -72,6 +81,35 @@ void PapersView::paper_opened(const QModelIndex &idx)
 {
     const int pid = p->model->id(idx);
     emit paperOpened(pid);
+}
+
+void PapersView::showPaperMenu()
+{
+    QModelIndex idx = indexAt( mapFromGlobal(QCursor::pos()) );
+    const int row = idx.row();
+    if( !idx.isValid() )
+        return;
+
+    QMenu menu;
+    QAction *cnf  = menu.addAction( QIcon::fromTheme("document-properties"), tr("Properties") );
+    QAction *dlte = menu.addAction( QIcon::fromTheme("edit-delete"), tr("Delete") );
+    QAction *res  = menu.exec( QCursor::pos() );
+
+    if( !res )
+        return;
+
+    const int pid = p->model->id(row);
+    if( res == cnf )
+    {
+        PaperConfigure::showConfigure(pid);
+    }
+    if( res == dlte )
+    {
+        Database *db = Kaqaz::database();
+        int del = QMessageBox::warning(this, tr("Delete Label"), tr("Do you realy want to delete \"%1\"?").arg(db->paperTitle(pid)), QMessageBox::Yes|QMessageBox::No);
+        if( del == QMessageBox::Yes )
+            db->deletePaper(pid);
+    }
 }
 
 PapersView::~PapersView()

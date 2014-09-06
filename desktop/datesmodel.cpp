@@ -30,12 +30,12 @@ public:
     QList<int> dates;
 };
 
-DatesModel::DatesModel(Kaqaz *kaqaz, Database *db, QObject *parent) :
+DatesModel::DatesModel(QObject *parent) :
     QAbstractListModel(parent)
 {
     p = new DatesModelPrivate;
-    p->kaqaz = kaqaz;
-    p->db = db;
+    p->kaqaz = Kaqaz::instance();
+    p->db = Kaqaz::database();
 
     connect(p->db, SIGNAL(datesListChanged()), SLOT(datesChanged()), Qt::QueuedConnection );
 

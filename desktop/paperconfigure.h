@@ -16,29 +16,32 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DATESMODEL_H
-#define DATESMODEL_H
+#ifndef PAPERCONFIGURE_H
+#define PAPERCONFIGURE_H
 
-#include <QAbstractListModel>
+#include <QDialog>
 
-class DatesModelPrivate;
-class DatesModel : public QAbstractListModel
+class PaperConfigurePrivate;
+class PaperConfigure : public QDialog
 {
     Q_OBJECT
 public:
-    DatesModel(QObject *parent = 0);
-    ~DatesModel();
+    PaperConfigure(int paperId, QWidget *parent = 0);
+    ~PaperConfigure();
 
-    int id( const QModelIndex &index ) const;
+    static void showConfigure( int paperId );
 
-    int rowCount(const QModelIndex & parent = QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+public slots:
+    void refresh();
 
 private slots:
-    void datesChanged();
+    void paper_changed( int pid );
+    void show_date_menu();
+    void apply_date();
+    void typeChanged( int type );
 
 private:
-    DatesModelPrivate *p;
+    PaperConfigurePrivate *p;
 };
 
-#endif // DATESMODEL_H
+#endif // PAPERCONFIGURE_H

@@ -34,7 +34,7 @@ class KaqazDesktop : public QWidget
 {
     Q_OBJECT
 public:
-    KaqazDesktop(Kaqaz *parent);
+    KaqazDesktop();
     ~KaqazDesktop();
 
     void setDatabase( Database *db );
@@ -51,9 +51,14 @@ public slots:
     void lock();
 
     void addGroup();
+    void showConfigure();
 
 private slots:
     void save_splitter();
+    void syncStarted();
+    void syncProgress( qreal val );
+    void syncFinished();
+    void refreshSync();
 
 protected:
     void timerEvent(QTimerEvent *e);

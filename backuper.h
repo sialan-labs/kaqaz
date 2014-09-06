@@ -27,7 +27,7 @@ class Backuper : public QObject
 {
     Q_OBJECT
 public:
-    Backuper( Kaqaz *kaqaz );
+    Backuper();
     ~Backuper();
 
 public slots:
@@ -48,7 +48,7 @@ class BackuperCore : public QObject
 {
     Q_OBJECT
 public:
-    BackuperCore( Kaqaz *kaqaz );
+    BackuperCore();
     ~BackuperCore();
 
 public slots:

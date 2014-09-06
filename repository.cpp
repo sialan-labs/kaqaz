@@ -40,11 +40,11 @@ public:
     Kaqaz *kaqaz;
 };
 
-Repository::Repository(Kaqaz *kaqaz) :
-    QObject(kaqaz)
+Repository::Repository(QObject *parent) :
+    QObject(parent)
 {
     p = new RepositoryPrivate;
-    p->kaqaz = kaqaz;
+    p->kaqaz = Kaqaz::instance();
 }
 
 QString Repository::insert(QString path)

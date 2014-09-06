@@ -16,29 +16,39 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DATESMODEL_H
-#define DATESMODEL_H
+#ifndef DATEWIDGET_H
+#define DATEWIDGET_H
 
-#include <QAbstractListModel>
+#include <QWidget>
+#include <QDateTime>
 
-class DatesModelPrivate;
-class DatesModel : public QAbstractListModel
+class DateWidgetPrivate;
+class DateWidget : public QWidget
 {
     Q_OBJECT
 public:
-    DatesModel(QObject *parent = 0);
-    ~DatesModel();
+    DateWidget(QWidget *parent = 0);
+    ~DateWidget();
 
-    int id( const QModelIndex &index ) const;
+    void setDateVisible( bool stt );
+    bool dateVisible() const;
 
-    int rowCount(const QModelIndex & parent = QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    void setTimeVisible( bool stt );
+    bool timeVisible() const;
+
+    QDateTime dateTime() const;
+
+public slots:
+    void setDateTime( const QDateTime & dt );
+
+signals:
+    void dateTimeChanged();
 
 private slots:
-    void datesChanged();
+    void refresh_days();
 
 private:
-    DatesModelPrivate *p;
+    DateWidgetPrivate *p;
 };
 
-#endif // DATESMODEL_H
+#endif // DATEWIDGET_H

@@ -44,6 +44,11 @@ int PapersModel::rowCount(const QModelIndex &parent) const
 int PapersModel::id(const QModelIndex &index) const
 {
     int row = index.row();
+    return id(row);
+}
+
+int PapersModel::id(int row) const
+{
     return p->papers.at(row);
 }
 

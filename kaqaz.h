@@ -25,6 +25,7 @@
 #include <QSettings>
 #include <QScreen>
 
+class DateProperty;
 class Database;
 class KaqazPrivate;
 class Kaqaz : public QObject
@@ -39,9 +40,18 @@ class Kaqaz : public QObject
     Q_PROPERTY( Qt::LayoutDirection  languageDirection  READ languageDirection NOTIFY languageDirectionChanged )
 
     Q_OBJECT
-public:
+private:
     Kaqaz(QObject *parent = 0);
     ~Kaqaz();
+
+public:
+    static Kaqaz *instance();
+
+#ifdef KAQAZ_DESKTOP
+    QWidget *view();
+#else
+    QWindow *view();
+#endif
 
     Q_INVOKABLE bool demoHasTrial() const;
     Q_INVOKABLE void demoActiveTrial() const;
@@ -104,6 +114,7 @@ public:
     Q_INVOKABLE qint64 currentYear();
     Q_INVOKABLE int currentMonth();
     Q_INVOKABLE int currentDay();
+    DateProperty convertDate( const QDate & date );
 
     Q_INVOKABLE static QString passToMd5( const QString & pass );
 

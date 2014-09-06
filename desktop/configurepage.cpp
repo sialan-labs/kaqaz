@@ -16,29 +16,24 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DATESMODEL_H
-#define DATESMODEL_H
+#include "configurepage.h"
+#include "ui_configurepage.h"
 
-#include <QAbstractListModel>
-
-class DatesModelPrivate;
-class DatesModel : public QAbstractListModel
+class ConfigurePagePrivate
 {
-    Q_OBJECT
 public:
-    DatesModel(QObject *parent = 0);
-    ~DatesModel();
-
-    int id( const QModelIndex &index ) const;
-
-    int rowCount(const QModelIndex & parent = QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-
-private slots:
-    void datesChanged();
-
-private:
-    DatesModelPrivate *p;
+    Ui::ConfigurePage *ui;
 };
 
-#endif // DATESMODEL_H
+ConfigurePage::ConfigurePage(QWidget *parent) :
+    QDialog(parent)
+{
+    p = new ConfigurePagePrivate;
+    p->ui = new Ui::ConfigurePage;
+    p->ui->setupUi(this);
+}
+
+ConfigurePage::~ConfigurePage()
+{
+    delete p;
+}

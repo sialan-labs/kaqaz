@@ -16,6 +16,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#define PAPER_TOP 23
+#define PAPER_LFT 22
+#define PAPER_RGT 31
+#define PAPER_BTM 41
+#define PAPER_WDT 600
+#define PAPER_HGT 836
+#define PAPER_BRD 15
+
 #include "editorview.h"
 #include "kaqaz.h"
 #include "database.h"
@@ -84,7 +92,7 @@ EditorView::EditorView(QWidget *parent) :
     p->date_font.setPointSize(8);
 
     p->group = new GroupButton(this);
-    p->group->move(25,12*(height()+20)/836);
+    p->group->move(25,PAPER_BRD-1);
     p->group->setFixedSize(110,30);
     p->group->setFont(p->group_font);
 
@@ -127,6 +135,11 @@ EditorView::EditorView(QWidget *parent) :
     connect( p->group, SIGNAL(groupSelected(int))  , SLOT(delayedSave()) );
 }
 
+int EditorView::paperId() const
+{
+    return p->paperId;
+}
+
 void EditorView::setPaper(int pid)
 {
     p->signal_blocker = true;
@@ -158,6 +171,7 @@ void EditorView::save()
         p->paperId = db->createPaper();
 
     db->setPaper( p->paperId, p->title->text(), p->body->toPlainText(), p->group->group() );
+    emit saved(p->paperId);
 }
 
 void EditorView::delayedSave()
@@ -179,16 +193,40 @@ void EditorView::paintEvent(QPaintEvent *e)
     sourceRect.setWidth(rct.width());
     sourceRect.setHeight(rct.height());
 
-    QRect paperRect = papers_image->rect();
-    paperRect.setX(10);
-    paperRect.setY(10);
-    paperRect.setWidth( paperRect.width()-20 );
-    paperRect.setHeight( paperRect.height()-20 );
-
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
     painter.drawImage( rct, *back_image, sourceRect );
-    painter.drawImage( rect(), *papers_image, paperRect );
+
+    QRect tl_rct_src( 0, 0, PAPER_LFT, PAPER_TOP );
+    QRect t_rct_src( PAPER_LFT, 0, PAPER_WDT-PAPER_LFT-PAPER_RGT, PAPER_TOP );
+    QRect tr_rct_src( PAPER_WDT-PAPER_RGT, 0, PAPER_RGT, PAPER_TOP );
+    QRect r_rct_src( PAPER_WDT-PAPER_RGT, PAPER_TOP, PAPER_RGT, PAPER_HGT-PAPER_TOP-PAPER_BTM );
+    QRect br_rct_src( PAPER_WDT-PAPER_RGT, PAPER_HGT-PAPER_BTM, PAPER_RGT, PAPER_BTM );
+    QRect b_rct_src( PAPER_LFT, PAPER_HGT-PAPER_BTM, PAPER_WDT-PAPER_LFT-PAPER_RGT, PAPER_BTM );
+    QRect bl_rct_src( 0, PAPER_HGT-PAPER_BTM, PAPER_LFT, PAPER_BTM );
+    QRect l_rct_src( 0, PAPER_TOP, PAPER_LFT, PAPER_HGT-PAPER_TOP-PAPER_BTM );
+
+    QRect tl_rct_dst( 0, 0, PAPER_BRD, PAPER_BRD );
+    QRect t_rct_dst( PAPER_BRD, 0, width()-2*PAPER_BRD, PAPER_BRD );
+    QRect tr_rct_dst( width()-PAPER_BRD, 0, PAPER_BRD, PAPER_BRD );
+    QRect r_rct_dst( width()-PAPER_BRD, PAPER_BRD, PAPER_BRD, height()-2*PAPER_BRD );
+    QRect br_rct_dst( width()-PAPER_BRD, height()-PAPER_BRD, PAPER_BRD, PAPER_BRD );
+    QRect b_rct_dst( PAPER_BRD, height()-PAPER_BRD, width()-2*PAPER_BRD, PAPER_BRD );
+    QRect bl_rct_dst( 0, height()-PAPER_BRD, PAPER_BRD, PAPER_BRD );
+    QRect l_rct_dst( 0, PAPER_BRD, PAPER_BRD, height()-2*PAPER_BRD );
+
+    QRect paper_rect( PAPER_BRD, PAPER_BRD, width()-2*PAPER_BRD, height()-2*PAPER_BRD );
+
+    painter.drawImage( tl_rct_dst, *papers_image, tl_rct_src );
+    painter.drawImage( t_rct_dst , *papers_image, t_rct_src  );
+    painter.drawImage( tr_rct_dst, *papers_image, tr_rct_src );
+    painter.drawImage( r_rct_dst , *papers_image, r_rct_src  );
+    painter.drawImage( br_rct_dst, *papers_image, br_rct_src );
+    painter.drawImage( b_rct_dst , *papers_image, b_rct_src  );
+    painter.drawImage( bl_rct_dst, *papers_image, bl_rct_src );
+    painter.drawImage( l_rct_dst , *papers_image, l_rct_src  );
+
+    painter.fillRect( paper_rect, "#EDEDED" );
 }
 
 void EditorView::timerEvent(QTimerEvent *e)
@@ -207,8 +245,7 @@ void EditorView::timerEvent(QTimerEvent *e)
 void EditorView::resizeEvent(QResizeEvent *e)
 {
     Q_UNUSED(e)
-    p->group->move(25,12*(height()+20)/836);
-    p->date->move(20, height()-15-p->date->height());
+    p->date->move(20, height()-PAPER_BRD-p->date->height());
 }
 
 EditorView::~EditorView()

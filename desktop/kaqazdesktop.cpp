@@ -16,7 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define TOOLBAR_HEIGHT 40
+#define TOOLBAR_HEIGHT   40
+#define SYNC_PBAR_HEIGHT 8
 
 #include "kaqazdesktop.h"
 #include "kaqaz.h"
@@ -31,6 +32,7 @@
 #include "papersview.h"
 #include "editorview.h"
 #include "editorviewmanager.h"
+#include "configurepage.h"
 #include "addgroupdialog.h"
 #include "sialantools/sialandesktoptools.h"
 
@@ -46,6 +48,8 @@
 #include <QTabBar>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QProgressBar>
+#include <QDebug>
 
 class KaqazDesktopPrivate
 {
@@ -60,6 +64,7 @@ public:
     QAction *new_act;
     QAction *new_grp_act;
     QAction *conf_act;
+    QAction *rsync_act;
 
     Database *db;
     Repository *repository;
@@ -76,6 +81,7 @@ public:
 
     QTabBar *tabbar;
     QVBoxLayout *tabbar_layout;
+    QProgressBar *sync_pbar;
 
     QFont font;
 
@@ -83,13 +89,13 @@ public:
     int resize_save_timer;
 };
 
-KaqazDesktop::KaqazDesktop(Kaqaz *parent) :
+KaqazDesktop::KaqazDesktop() :
     QWidget()
 {
     p = new KaqazDesktopPrivate;
     p->splitter_save_timer = 0;
     p->resize_save_timer = 0;
-    p->kaqaz = parent;
+    p->kaqaz = Kaqaz::instance();
 
     p->desktop = new SialanDesktopTools(this);
 
@@ -112,11 +118,14 @@ void KaqazDesktop::init_toolbar()
 {
     p->new_act = new QAction( QIcon::fromTheme("document-new"), tr("Add Paper"), this );
     p->new_grp_act = new QAction( QIcon::fromTheme("document-new"), tr("Add Label"), this );
+    p->rsync_act = new QAction( QIcon::fromTheme("view-refresh"), tr("Sync"), this );
     p->conf_act = new QAction( QIcon::fromTheme("configure"), tr("Configure"), this );
 
     p->toolbar = new QToolBar();
     p->toolbar->addAction(p->new_act);
     p->toolbar->addAction(p->new_grp_act);
+    p->toolbar->addSeparator();
+    p->toolbar->addAction(p->rsync_act);
     p->toolbar->addSeparator();
     p->toolbar->addAction(p->conf_act);
     p->toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
@@ -148,8 +157,8 @@ void KaqazDesktop::init_toolbar()
 
 void KaqazDesktop::init_mainWidget()
 {
-    p->panel = new PanelBox(p->kaqaz,this);
-    p->papers_view = new PapersView(Kaqaz::database(),this);
+    p->panel = new PanelBox(this);
+    p->papers_view = new PapersView(this);
 
     p->editor = new EditorViewManager(this);
 
@@ -165,12 +174,20 @@ void KaqazDesktop::init_mainWidget()
 
     p->main_layout->addWidget(p->splitter);
 
+    p->sync_pbar = new QProgressBar(this);
+    p->sync_pbar->resize( p->editor->width(), SYNC_PBAR_HEIGHT );
+    p->sync_pbar->move( width()-p->sync_pbar->width(), height()-SYNC_PBAR_HEIGHT );
+    p->sync_pbar->setTextVisible(false);
+    p->sync_pbar->setVisible(false);
+
     connect( p->splitter   , SIGNAL(splitterMoved(int,int))      , this          , SLOT(save_splitter())        );
     connect( p->panel      , SIGNAL(showPaperRequest(QList<int>)), p->papers_view, SLOT(showPapers(QList<int>)) );
     connect( p->papers_view, SIGNAL(paperSelected(int))          , p->editor     , SLOT(setMainPaper(int))      );
     connect( p->papers_view, SIGNAL(paperOpened(int))            , p->editor     , SLOT(addPaper(int))          );
     connect( p->new_act    , SIGNAL(triggered())                 , p->editor     , SLOT(addPaper())             );
     connect( p->new_grp_act, SIGNAL(triggered())                 , this          , SLOT(addGroup())             );
+    connect( p->rsync_act  , SIGNAL(triggered())                 , this          , SLOT(refreshSync())          );
+    connect( p->conf_act   , SIGNAL(triggered())                 , this          , SLOT(showConfigure())        );
 }
 
 void KaqazDesktop::setDatabase(Database *db)
@@ -191,6 +208,10 @@ void KaqazDesktop::setBackuper(Backuper *bkpr)
 void KaqazDesktop::setKaqazSync(KaqazSync *ksync)
 {
     p->sync = ksync;
+
+    connect( p->sync, SIGNAL(syncStarted())      , SLOT(syncStarted())       );
+    connect( p->sync, SIGNAL(syncProgress(qreal)), SLOT(syncProgress(qreal)) );
+    connect( p->sync, SIGNAL(syncFinished())     , SLOT(syncFinished())      );
 }
 
 void KaqazDesktop::setSialanDevices(SialanDevices *sdev)
@@ -229,12 +250,43 @@ void KaqazDesktop::addGroup()
     dialog.exec();
 }
 
+void KaqazDesktop::showConfigure()
+{
+    ConfigurePage configure;
+    configure.exec();
+}
+
 void KaqazDesktop::save_splitter()
 {
     if( p->splitter_save_timer )
         killTimer(p->splitter_save_timer);
 
     p->splitter_save_timer = startTimer(500);
+}
+
+void KaqazDesktop::syncStarted()
+{
+    p->sync_pbar->setVisible(true);
+}
+
+void KaqazDesktop::syncProgress(qreal val)
+{
+    p->sync_pbar->setVisible(true);
+    p->sync_pbar->setValue( val*100 );
+}
+
+void KaqazDesktop::syncFinished()
+{
+    p->sync_pbar->setVisible(false);
+}
+
+void KaqazDesktop::refreshSync()
+{
+    if( !p->sync->tokenAvailable() )
+        return;
+
+    p->sync->refreshForce();
+    p->sync_pbar->setVisible(true);
 }
 
 void KaqazDesktop::timerEvent(QTimerEvent *e)
@@ -264,6 +316,10 @@ void KaqazDesktop::resizeEvent(QResizeEvent *e)
         killTimer(p->resize_save_timer);
 
     p->resize_save_timer = startTimer(500);
+
+    p->sync_pbar->resize( p->editor->width(), SYNC_PBAR_HEIGHT );
+    p->sync_pbar->move( width()-p->sync_pbar->width(), height()-SYNC_PBAR_HEIGHT );
+
     QWidget::resizeEvent(e);
 }
 

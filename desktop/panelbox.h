@@ -28,7 +28,7 @@ class PanelBox : public QToolBox
 {
     Q_OBJECT
 public:
-    PanelBox(Kaqaz *kaqaz, QWidget *parent = 0);
+    PanelBox(QWidget *parent = 0);
     ~PanelBox();
 
 signals:

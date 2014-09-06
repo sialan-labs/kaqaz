@@ -16,38 +16,46 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EDITORVIEWMANAGER_H
-#define EDITORVIEWMANAGER_H
+#ifndef MAPWIDGET_H
+#define MAPWIDGET_H
 
 #include <QWidget>
+#include <QGeoCoordinate>
 
-class QTabBar;
-class EditorViewManagerPrivate;
-class EditorViewManager : public QWidget
+class QNetworkReply;
+class QSslError;
+class MapWidgetPrivate;
+class MapWidget : public QWidget
 {
     Q_OBJECT
 public:
-    EditorViewManager(QWidget *parent = 0);
-    ~EditorViewManager();
-
-    QTabBar *tabBar() const;
+    MapWidget(QWidget *parent = 0);
+    ~MapWidget();
 
 public slots:
-    void addPaper( int pid = 0 );
-    void setMainPaper( int pid );
+    void setGeo( const QGeoCoordinate & geo );
+
+signals:
+    void recievedBytesChanged();
+    void totalBytesChanged();
+    void error( const QStringList & error );
+    void finished();
+    void failed();
 
 private slots:
-    void tabMoved( int from, int to );
-    void close( int row );
-    void showTabMenu();
-    void paperSaved( int pid );
-    void paperChanged( int pid );
-
-protected:
-    void resizeEvent(QResizeEvent *e);
+    void downloadFinished(QNetworkReply *reply);
+    void sslErrors(const QList<QSslError> &list);
+    void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 
 private:
-    EditorViewManagerPrivate *p;
+    void init_manager();
+
+protected:
+    void paintEvent(QPaintEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
+
+private:
+    MapWidgetPrivate *p;
 };
 
-#endif // EDITORVIEWMANAGER_H
+#endif // MAPWIDGET_H

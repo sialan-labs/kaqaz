@@ -21,13 +21,12 @@
 
 #include <QObject>
 
-class Kaqaz;
 class RepositoryPrivate;
 class Repository : public QObject
 {
     Q_OBJECT
 public:
-    Repository( Kaqaz *kaqaz );
+    Repository(QObject *parent);
     ~Repository();
 
     Q_INVOKABLE QString insert(QString path );

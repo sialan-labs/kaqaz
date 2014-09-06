@@ -118,10 +118,15 @@ AddGroupDialog::AddGroupDialog(int gid, QWidget *parent) :
 void AddGroupDialog::accept()
 {
     Database *db = Kaqaz::database();
+    if( p->name_line->text().trimmed().isEmpty() )
+    {
+        p->color->show();
+        return;
+    }
     if( p->groupId == -1 )
         p->groupId = db->createGroup();
 
-    db->setGroupName( p->groupId, p->name_line->text() );
+    db->setGroupName( p->groupId, p->name_line->text().trimmed() );
     db->setGroupColor( p->groupId, p->color->selectedColor() );
 
     QDialog::accept();

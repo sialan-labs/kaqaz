@@ -20,12 +20,15 @@
 #include "editorview.h"
 #include "kaqaz.h"
 #include "database.h"
+#include "paperconfigure.h"
 
 #include <QStackedWidget>
 #include <QTabBar>
 #include <QVBoxLayout>
 #include <QResizeEvent>
 #include <QHash>
+#include <QMenu>
+#include <QAction>
 #include <QDebug>
 
 class EditorViewManagerPrivate
@@ -52,6 +55,7 @@ EditorViewManager::EditorViewManager(QWidget *parent) :
     p->tabbar->setFocusPolicy(Qt::NoFocus);
     p->tabbar->addTab( tr("Main Paper") );
     p->tabbar->tabButton(0, QTabBar::RightSide)->setDisabled(true);
+    p->tabbar->setContextMenuPolicy(Qt::CustomContextMenu);
 
     p->tabs << 0;
 
@@ -66,9 +70,12 @@ EditorViewManager::EditorViewManager(QWidget *parent) :
     p->layout->setContentsMargins(0,0,0,0);
     p->layout->setSpacing(0);
 
-    connect( p->tabbar, SIGNAL(tabMoved(int,int))     , this      , SLOT(tabMoved(int,int))    );
-    connect( p->tabbar, SIGNAL(currentChanged(int))   , p->stacked, SLOT(setCurrentIndex(int)) );
-    connect( p->tabbar, SIGNAL(tabCloseRequested(int)), this      , SLOT(close(int))           );
+    connect( p->main_editor   , SIGNAL(saved(int))            , this      , SLOT(paperSaved(int))      );
+    connect( p->tabbar        , SIGNAL(tabMoved(int,int))     , this      , SLOT(tabMoved(int,int))    );
+    connect( p->tabbar        , SIGNAL(currentChanged(int))   , p->stacked, SLOT(setCurrentIndex(int)) );
+    connect( p->tabbar        , SIGNAL(tabCloseRequested(int)), this      , SLOT(close(int))           );
+    connect( p->tabbar        , SIGNAL(customContextMenuRequested(QPoint)), SLOT(showTabMenu())        );
+    connect( Kaqaz::database(), SIGNAL(paperChanged(int))     , this      , SLOT(paperChanged(int)) );
 }
 
 QTabBar *EditorViewManager::tabBar() const
@@ -94,6 +101,8 @@ void EditorViewManager::addPaper(int pid)
     p->tabbar->setCurrentIndex( p->tabbar->count()-1 );
 
     p->tabs << pid;
+
+    connect( editor, SIGNAL(saved(int)), SLOT(paperSaved(int)) );
 }
 
 void EditorViewManager::setMainPaper(int pid)
@@ -123,6 +132,58 @@ void EditorViewManager::close(int row)
     p->tabs.removeAt(row);
     p->tabbar->removeTab(row);
     p->stacked->removeWidget( p->stacked->widget(row) );
+}
+
+void EditorViewManager::showTabMenu()
+{
+    const QPoint & pnt = p->tabbar->mapFromGlobal(QCursor::pos());
+    int idx = p->tabbar->tabAt(pnt);
+    if( idx == -1 )
+        return;
+
+    const int pid = static_cast<EditorView*>(p->stacked->widget(idx))->paperId();
+    if( !pid )
+        return;
+
+    QMenu menu;
+    QAction *cnf = menu.addAction( QIcon::fromTheme("document-properties"), tr("Properties") );
+    QAction *cls = menu.addAction( QIcon::fromTheme("tab-close"), tr("Close") );
+    if( !p->tabs.at(idx) )
+        cls->setDisabled(true);
+
+    QAction *res = menu.exec( QCursor::pos() );
+
+    if( res == cnf )
+    {
+        PaperConfigure::showConfigure(pid);
+    }
+    if( res == cls )
+    {
+        close(idx);
+    }
+}
+
+void EditorViewManager::paperSaved(int pid)
+{
+    EditorView *view = static_cast<EditorView*>(sender());
+    if( !view )
+        return;
+
+    int idx = p->stacked->indexOf(view);
+    if( idx == -1 )
+        return;
+
+    p->tabs[idx] = pid;
+    p->tabbar->setTabText( idx, Kaqaz::database()->paperTitle(pid) );
+}
+
+void EditorViewManager::paperChanged(int pid)
+{
+    if( !p->tabs.contains(pid) )
+        return;
+
+    int idx = p->tabs.indexOf(pid);
+    p->tabbar->setTabText( idx, Kaqaz::database()->paperTitle(pid) );
 }
 
 void EditorViewManager::resizeEvent(QResizeEvent *e)

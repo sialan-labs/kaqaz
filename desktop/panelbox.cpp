@@ -43,13 +43,13 @@ public:
     Kaqaz *kaqaz;
 };
 
-PanelBox::PanelBox(Kaqaz *kaqaz, QWidget *parent) :
+PanelBox::PanelBox(QWidget *parent) :
     QToolBox(parent)
 {
     p = new PanelBoxPrivate;
-    p->kaqaz = kaqaz;
+    p->kaqaz = Kaqaz::instance();
     p->groups_model = new CategoriesModel(Kaqaz::database(), this);
-    p->dates_model = new DatesModel(p->kaqaz, Kaqaz::database(), this);
+    p->dates_model = new DatesModel(this);
 
     p->dates = new QListView(this);
     p->dates->setModel(p->dates_model);
@@ -108,8 +108,8 @@ void PanelBox::showGroupMenu()
         return;
 
     QMenu menu;
-    QAction *edit = menu.addAction( tr("Edit") );
-    QAction *dlte = menu.addAction( tr("Delete") );
+    QAction *edit = menu.addAction( QIcon::fromTheme("edit-rename"), tr("Edit") );
+    QAction *dlte = menu.addAction( QIcon::fromTheme("edit-delete"), tr("Delete") );
     QAction *res  = menu.exec( QCursor::pos() );
 
     if( !res )
@@ -124,7 +124,7 @@ void PanelBox::showGroupMenu()
     if( res == dlte )
     {
         Database *db = Kaqaz::database();
-        int del = QMessageBox::warning(this, tr("Delete Label"), tr("Do you realy want to delete \"%1\" label?").arg(db->groupName(gid)), QMessageBox::Yes|QMessageBox::No);
+        int del = QMessageBox::warning(this, tr("Delete Label"), tr("Do you realy want to delete \"%1\"?").arg(db->groupName(gid)), QMessageBox::Yes|QMessageBox::No);
         if( del == QMessageBox::Yes )
             db->deleteGroup(gid);
     }

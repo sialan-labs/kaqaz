@@ -21,13 +21,12 @@
 
 #include <QListView>
 
-class Database;
 class PapersViewPrivate;
 class PapersView : public QListView
 {
     Q_OBJECT
 public:
-    PapersView(Database *db, QWidget *parent = 0);
+    PapersView(QWidget *parent = 0);
     ~PapersView();
 
 public slots:
@@ -40,6 +39,7 @@ signals:
 private slots:
     void paper_selected( const QModelIndex & idx );
     void paper_opened( const QModelIndex & idx );
+    void showPaperMenu();
 
 private:
     PapersViewPrivate *p;

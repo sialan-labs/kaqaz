@@ -23,6 +23,7 @@
 #include "database.h"
 
 #include <QThread>
+#include <QDebug>
 
 class BackuperPrivate
 {
@@ -32,14 +33,14 @@ public:
     BackuperCore *core;
 };
 
-Backuper::Backuper(Kaqaz *kaqaz) :
+Backuper::Backuper() :
     QObject()
 {
     p = new BackuperPrivate;
-    p->kaqaz = kaqaz;
+    p->kaqaz = Kaqaz::instance();
     p->thread = new QThread();
 
-    p->core = new BackuperCore(p->kaqaz);
+    p->core = new BackuperCore();
     p->core->moveToThread(p->thread);
 
     connect( p->core, SIGNAL(success())     , SIGNAL(success())     , Qt::QueuedConnection );
@@ -91,10 +92,10 @@ public:
     Kaqaz *kaqaz;
 };
 
-BackuperCore::BackuperCore(Kaqaz *kaqaz)
+BackuperCore::BackuperCore()
 {
     p = new BackuperCorePrivate;
-    p->kaqaz = kaqaz;
+    p->kaqaz = Kaqaz::instance();
 }
 
 void BackuperCore::makeBackup(const QString &repository_path, const QString &db_path, const QString &cnf_path, const QString &password)

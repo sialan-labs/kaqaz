@@ -31,7 +31,7 @@ android {
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android/pro
     }
 } else {
-    QT += widgets
+    QT += widgets network
 
     contains(BUILD_MODE,desktop) {
         DEFINES += KAQAZ_DESKTOP
@@ -55,7 +55,11 @@ android {
         desktop/editorviewmanager.h \
         desktop/searchpanel.h \
         desktop/groupbutton.h \
-        desktop/addgroupdialog.h
+        desktop/addgroupdialog.h \
+        desktop/paperconfigure.h \
+        desktop/mapwidget.h \
+        desktop/datewidget.h \
+        desktop/configurepage.h
 
     SOURCES += \
         mimeapps.cpp \
@@ -75,7 +79,15 @@ android {
         desktop/editorviewmanager.cpp \
         desktop/searchpanel.cpp \
         desktop/groupbutton.cpp \
-        desktop/addgroupdialog.cpp
+        desktop/addgroupdialog.cpp \
+        desktop/paperconfigure.cpp \
+        desktop/mapwidget.cpp \
+        desktop/datewidget.cpp \
+        desktop/configurepage.cpp
+
+    FORMS += \
+        desktop/paperconfigure.ui \
+        desktop/configurepage.ui
 
     win32: SOURCES += qtsingleapplication/qtlockedfile_win.cpp
     unix:  SOURCES += qtsingleapplication/qtlockedfile_unix.cpp
@@ -103,28 +115,6 @@ SOURCES += main.cpp \
     searchhighlighter.cpp \
     databasedatatypes.cpp
 
-include(qmake/qtcAddDeployment.pri)
-include(qtdropbox/qtdropbox.pri)
-include(sialantools/sialantools.pri)
-qtcAddDeployment()
-
-TRANSLATIONS += \
-    translations_sources/lang-en.ts \
-    translations_sources/lang-fa.ts
-
-FONTS += \
-    fonts/DroidKaqazSans.ttf \
-    fonts/DroidSansMono.ttf
-
-OTHER_FILES += \
-    android/pro/AndroidManifest.xml \
-    android/free/AndroidManifest.xml \
-    android-build/src/org/sialan/android/SialanActivity.java \
-    android-build/src/org/sialan/android/SialanApplication.java \
-    android-build/src/org/sialan/android/SialanJavaLayer.java \
-    iOS/Info.plist \
-    database/database.sqlite
-
 HEADERS += \
     kaqaz.h \
     papermanager.h \
@@ -144,8 +134,30 @@ HEADERS += \
     smartiodboxsingle.h \
     searchhighlighter.h
 
+TRANSLATIONS += \
+    translations_sources/lang-en.ts \
+    translations_sources/lang-fa.ts
+
+FONTS += \
+    fonts/DroidKaqazSans.ttf \
+    fonts/DroidSansMono.ttf
+
+OTHER_FILES += \
+    android/pro/AndroidManifest.xml \
+    android/free/AndroidManifest.xml \
+    android-build/src/org/sialan/android/SialanActivity.java \
+    android-build/src/org/sialan/android/SialanApplication.java \
+    android-build/src/org/sialan/android/SialanJavaLayer.java \
+    iOS/Info.plist \
+    database/database.sqlite
+
 RESOURCES += \
     resource.qrc
+
+include(qmake/qtcAddDeployment.pri)
+include(qtdropbox/qtdropbox.pri)
+include(sialantools/sialantools.pri)
+qtcAddDeployment()
 
 isEmpty(PREFIX) {
     PREFIX = /usr
