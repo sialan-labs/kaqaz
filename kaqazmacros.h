@@ -51,7 +51,7 @@
 #define HOME_PATH   QString(QDir::homePath() + "/.config/sialan/kaqaz")
 #endif
 #define LOG_PATH    QString(HOME_PATH+"/log")
-#define BACKUP_PATH QDir::homePath()
+#define BACKUP_PATH QString(HOME_PATH+"/backups")
 #define TEMP_PATH   QDir::tempPath()
 #define CAMERA_PATH QString(QDir::homePath() + "/Pictures/Camera")
 #endif

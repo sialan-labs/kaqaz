@@ -29,6 +29,7 @@
 #include "sialantools/sialandevices.h"
 #include "sialantools/sialantools.h"
 #include "mimeapps.h"
+#include "aboutdialog.h"
 #include "papersview.h"
 #include "editorview.h"
 #include "editorviewmanager.h"
@@ -49,6 +50,8 @@
 #include <QPaintEvent>
 #include <QPainter>
 #include <QProgressBar>
+#include <QInputDialog>
+#include <QMessageBox>
 #include <QDebug>
 
 class KaqazDesktopPrivate
@@ -65,6 +68,7 @@ public:
     QAction *new_grp_act;
     QAction *conf_act;
     QAction *rsync_act;
+    QAction *about_act;
 
     Database *db;
     Repository *repository;
@@ -120,6 +124,7 @@ void KaqazDesktop::init_toolbar()
     p->new_grp_act = new QAction( QIcon::fromTheme("document-new"), tr("Add Label"), this );
     p->rsync_act = new QAction( QIcon::fromTheme("view-refresh"), tr("Sync"), this );
     p->conf_act = new QAction( QIcon::fromTheme("configure"), tr("Configure"), this );
+    p->about_act = new QAction( QIcon::fromTheme("help-about"), tr("About"), this );
 
     p->toolbar = new QToolBar();
     p->toolbar->addAction(p->new_act);
@@ -128,6 +133,7 @@ void KaqazDesktop::init_toolbar()
     p->toolbar->addAction(p->rsync_act);
     p->toolbar->addSeparator();
     p->toolbar->addAction(p->conf_act);
+    p->toolbar->addAction(p->about_act);
     p->toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     p->toolbar->setMovable(false);
 
@@ -188,6 +194,7 @@ void KaqazDesktop::init_mainWidget()
     connect( p->new_grp_act, SIGNAL(triggered())                 , this          , SLOT(addGroup())             );
     connect( p->rsync_act  , SIGNAL(triggered())                 , this          , SLOT(refreshSync())          );
     connect( p->conf_act   , SIGNAL(triggered())                 , this          , SLOT(showConfigure())        );
+    connect( p->about_act  , SIGNAL(triggered())                 , this          , SLOT(showAbout())            );
 }
 
 void KaqazDesktop::setDatabase(Database *db)
@@ -229,9 +236,22 @@ void KaqazDesktop::setMimeApps(MimeApps *mapp)
     p->mimeApps = mapp;
 }
 
-void KaqazDesktop::start()
+bool KaqazDesktop::start()
 {
+    if( !p->db->password().isEmpty() )
+    {
+        const QString & pass = QInputDialog::getText(this, tr("Kaqaz security"), tr("Please enter password:"), QLineEdit::Password);
+        const QString & md5 = p->kaqaz->passToMd5(pass);
+        if( md5 != p->db->password() )
+        {
+            QMessageBox::critical(this, tr("Incorrect"), tr("Password is incorrect!"));
+            QApplication::exit();
+            return false;
+        }
+    }
+
     show();
+    return true;
 }
 
 void KaqazDesktop::refresh()
@@ -254,6 +274,12 @@ void KaqazDesktop::showConfigure()
 {
     ConfigurePage configure;
     configure.exec();
+}
+
+void KaqazDesktop::showAbout()
+{
+    AboutDialog about;
+    about.exec();
 }
 
 void KaqazDesktop::save_splitter()
@@ -287,6 +313,7 @@ void KaqazDesktop::refreshSync()
 
     p->sync->refreshForce();
     p->sync_pbar->setVisible(true);
+    p->sync_pbar->setValue(0);
 }
 
 void KaqazDesktop::timerEvent(QTimerEvent *e)

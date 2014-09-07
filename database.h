@@ -131,7 +131,7 @@ public:
     Q_INVOKABLE SyncItemHash revisions() const;
 
 public slots:
-    void setSignalBlocker( int stt );
+    void setSignalBlocker(bool stt );
 
     void begin();
     void commit();

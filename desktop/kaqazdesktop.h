@@ -46,12 +46,13 @@ public:
     void setMimeApps( MimeApps *mapp );
 
 public slots:
-    void start();
+    bool start();
     void refresh();
     void lock();
 
     void addGroup();
     void showConfigure();
+    void showAbout();
 
 private slots:
     void save_splitter();

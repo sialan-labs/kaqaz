@@ -53,7 +53,8 @@ int main(int argc, char *argv[])
 #endif
 
     Kaqaz *kaqaz = Kaqaz::instance();
-    kaqaz->start();
+    if( !kaqaz->start() )
+        return 0;
 
 #ifdef DESKTOP_DEVICE
     QObject::connect( &app, SIGNAL(messageReceived(QString)), kaqaz, SLOT(incomingAppMessage(QString)) );

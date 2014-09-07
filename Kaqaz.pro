@@ -59,7 +59,8 @@ android {
         desktop/paperconfigure.h \
         desktop/mapwidget.h \
         desktop/datewidget.h \
-        desktop/configurepage.h
+        desktop/configurepage.h \
+        desktop/aboutdialog.h
 
     SOURCES += \
         mimeapps.cpp \
@@ -83,11 +84,13 @@ android {
         desktop/paperconfigure.cpp \
         desktop/mapwidget.cpp \
         desktop/datewidget.cpp \
-        desktop/configurepage.cpp
+        desktop/configurepage.cpp \
+        desktop/aboutdialog.cpp
 
     FORMS += \
         desktop/paperconfigure.ui \
-        desktop/configurepage.ui
+        desktop/configurepage.ui \
+        desktop/aboutdialog.ui
 
     win32: SOURCES += qtsingleapplication/qtlockedfile_win.cpp
     unix:  SOURCES += qtsingleapplication/qtlockedfile_unix.cpp

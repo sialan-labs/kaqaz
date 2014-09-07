@@ -25,9 +25,11 @@
 #include <QSettings>
 #include <QScreen>
 
+class KaqazSync;
 class DateProperty;
 class Database;
 class KaqazPrivate;
+class Backuper;
 class Kaqaz : public QObject
 {
     Q_PROPERTY( int     currentDays          READ currentDays         NOTIFY currentDaysChanged )
@@ -53,13 +55,16 @@ public:
     QWindow *view();
 #endif
 
+    Backuper *backuper() const;
+    KaqazSync *kaqazSync() const;
+
     Q_INVOKABLE bool demoHasTrial() const;
     Q_INVOKABLE void demoActiveTrial() const;
     Q_INVOKABLE bool proBuild() const;
 
-    Q_INVOKABLE QString version() const;
-    Q_INVOKABLE QString qtVersion() const;
-    Q_INVOKABLE QString aboutSialan() const;
+    Q_INVOKABLE static QString version();
+    Q_INVOKABLE static QString qtVersion();
+    Q_INVOKABLE static QString aboutSialan();
 
     Q_INVOKABLE void deleteFileIfPossible( const QString & id );
 
@@ -68,6 +73,7 @@ public:
     Q_INVOKABLE void setCalendar( int t );
     Q_INVOKABLE QStringList calendarsID() const;
     Q_INVOKABLE QString calendarName( int t );
+    Q_INVOKABLE int calendar() const;
 
     Q_INVOKABLE static int currentDays();
 
@@ -139,6 +145,12 @@ public:
     void setPositioning( bool stt );
     bool positioning() const;
 
+    void setTitleFont( const QFont & fnt );
+    QFont titleFont() const;
+
+    void setBodyFont( const QFont & fnt );
+    QFont bodyFont() const;
+
     Q_INVOKABLE static QStringList dirEntryFiles(const QString & path , const QStringList &filters);
     Q_INVOKABLE static QStringList findEntryFiles(const QString & path , const QStringList &filters);
     Q_INVOKABLE static QStringList dirEntryDirs(const QString & path);
@@ -163,7 +175,7 @@ public:
     Q_INVOKABLE QVariant property( QObject *obj, const QString & property );
 
 public slots:
-    void start();
+    bool start();
     void incomingAppMessage( const QString & msg );
 
     void disconnectAllResources();
@@ -176,6 +188,9 @@ signals:
     void keyboardPredicativeChanged();
     void positioningChanged();
     void resourcePathChanged();
+
+    void titleFontChanged();
+    void bodyFontChanged();
 
     void backRequest();
     void languageChanged();

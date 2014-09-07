@@ -172,6 +172,8 @@ void EditorViewManager::paperSaved(int pid)
     int idx = p->stacked->indexOf(view);
     if( idx == -1 )
         return;
+    if( p->main_editor == p->stacked->widget(idx) )
+        return;
 
     p->tabs[idx] = pid;
     p->tabbar->setTabText( idx, Kaqaz::database()->paperTitle(pid) );

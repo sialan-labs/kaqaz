@@ -294,6 +294,16 @@ QWindow *Kaqaz::view()
     return p->viewer;
 }
 
+Backuper *Kaqaz::backuper() const
+{
+    return p->backuper;
+}
+
+KaqazSync *Kaqaz::kaqazSync() const
+{
+    return p->sync;
+}
+
 void Kaqaz::init_languages()
 {
     QDir dir(p->translationsPath);
@@ -320,13 +330,14 @@ void Kaqaz::init_languages()
     }
 }
 
-void Kaqaz::start()
+bool Kaqaz::start()
 {
 #ifdef KAQAZ_DESKTOP
-    p->viewer->start();
+    return p->viewer->start();
 #else
     p->viewer->setSource(QStringLiteral("qrc:///qml/Kaqaz/kaqaz.qml"));
     p->viewer->show();
+    return true;
 #endif
 }
 
@@ -416,7 +427,7 @@ bool Kaqaz::proBuild() const
 #endif
 }
 
-QString Kaqaz::version() const
+QString Kaqaz::version()
 {
     return KAQAZ_VERSION
 #ifndef FREE_BUILD
@@ -431,12 +442,12 @@ QString Kaqaz::version() const
             ;
 }
 
-QString Kaqaz::qtVersion() const
+QString Kaqaz::qtVersion()
 {
     return qVersion();
 }
 
-QString Kaqaz::aboutSialan() const
+QString Kaqaz::aboutSialan()
 {
     return tr("Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.") + "\n\n" +
            tr("By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.");
@@ -488,6 +499,11 @@ QString Kaqaz::calendarName(int t)
     }
 
     return QString();
+}
+
+int Kaqaz::calendar() const
+{
+    return kaqaz_settings->value("General/Calendar",0).toInt();
 }
 
 int Kaqaz::currentDays()
@@ -894,6 +910,36 @@ void Kaqaz::setPositioning(bool stt)
 bool Kaqaz::positioning() const
 {
     return kaqaz_settings->value("General/positioning",true).toBool();
+}
+
+void Kaqaz::setTitleFont(const QFont &fnt)
+{
+    kaqaz_settings->setValue("General/titleFont", fnt);
+    emit titleFontChanged();
+}
+
+QFont Kaqaz::titleFont() const
+{
+    QFont font;
+    font.setFamily("Droid Kaqaz Sans");
+    font.setPointSize(15);
+
+    return kaqaz_settings->value("General/titleFont",font).value<QFont>();
+}
+
+void Kaqaz::setBodyFont(const QFont &fnt)
+{
+    kaqaz_settings->setValue("General/bodyFont", fnt);
+    emit bodyFontChanged();
+}
+
+QFont Kaqaz::bodyFont() const
+{
+    QFont font;
+    font.setFamily("Droid Kaqaz Sans");
+    font.setPointSize(10);
+
+    return kaqaz_settings->value("General/bodyFont",font).value<QFont>();
 }
 
 QStringList Kaqaz::dirEntryFiles(const QString &path, const QStringList & filters)

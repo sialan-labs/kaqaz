@@ -16,49 +16,24 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONFIGUREPAGE_H
-#define CONFIGUREPAGE_H
+#ifndef ABOUTDIALOG_H
+#define ABOUTDIALOG_H
 
 #include <QDialog>
 
-class ConfigurePagePrivate;
-class ConfigurePage : public QDialog
+class AboutDialogPrivate;
+class AboutDialog : public QDialog
 {
     Q_OBJECT
 public:
-    ConfigurePage(QWidget *parent = 0);
-    ~ConfigurePage();
-
-public slots:
-    void refresh();
+    AboutDialog(QWidget *parent = 0);
+    ~AboutDialog();
 
 private slots:
-    void calendarChanged( int id );
-    void languageChanged( int id );
-    void titleFontChanged();
-    void bodyFontChanged();
-
-    void makeBackup();
-    void restoreSelected();
-    void deleteBackup();
-    void copyBackup();
-
-    void backupProgress( int percent );
-    void backupFailed();
-    void backupFinished();
-
-    void getToken();
-    void syncAuthorizeRequest();
-    void syncLoginFinished();
-    void syncDisconnect();
-
-    void changePassword();
-
-protected:
-    void closeEvent(QCloseEvent *e);
+    void donateUs();
 
 private:
-    ConfigurePagePrivate *p;
+    AboutDialogPrivate *p;
 };
 
-#endif // CONFIGUREPAGE_H
+#endif // ABOUTDIALOG_H

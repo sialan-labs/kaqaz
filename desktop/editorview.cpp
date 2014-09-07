@@ -23,12 +23,14 @@
 #define PAPER_WDT 600
 #define PAPER_HGT 836
 #define PAPER_BRD 15
+#define PAPER_SNC 4
 
 #include "editorview.h"
 #include "kaqaz.h"
 #include "database.h"
 #include "editorview.h"
 #include "groupbutton.h"
+#include "kaqazsync.h"
 
 #include <QTextEdit>
 #include <QVBoxLayout>
@@ -40,6 +42,7 @@
 #include <QCoreApplication>
 #include <QTimerEvent>
 #include <QLabel>
+#include <QLinearGradient>
 #include <QDebug>
 
 static QImage *back_image = 0;
@@ -64,6 +67,7 @@ public:
     int paperId;
     int save_timer;
     bool signal_blocker;
+    bool synced;
 };
 
 EditorView::EditorView(QWidget *parent) :
@@ -73,17 +77,15 @@ EditorView::EditorView(QWidget *parent) :
     p->save_timer = 0;
     p->paperId = 0;
     p->signal_blocker = false;
+    p->synced = true;
 
     if( !back_image )
         back_image = new QImage(":/qml/Kaqaz/files/background.jpg");
     if( !papers_image )
         papers_image = new QImage(":/qml/Kaqaz/files/paper.png");
 
-    p->title_font.setFamily("Droid Kaqaz Sans");
-    p->title_font.setPointSize(15);
-
-    p->body_font.setFamily("Droid Kaqaz Sans");
-    p->body_font.setPointSize(9);
+    p->title_font = Kaqaz::instance()->titleFont();
+    p->body_font = Kaqaz::instance()->bodyFont();
 
     p->group_font.setFamily("Droid Kaqaz Sans");
     p->group_font.setPointSize(9);
@@ -133,6 +135,11 @@ EditorView::EditorView(QWidget *parent) :
     connect( p->title, SIGNAL(textChanged(QString)), SLOT(delayedSave()) );
     connect( p->body , SIGNAL(textChanged())       , SLOT(delayedSave()) );
     connect( p->group, SIGNAL(groupSelected(int))  , SLOT(delayedSave()) );
+
+    connect( Kaqaz::instance(), SIGNAL(titleFontChanged())          , SLOT(titleFontChanged())           );
+    connect( Kaqaz::instance(), SIGNAL(bodyFontChanged())           , SLOT(bodyFontChanged())            );
+    connect( Kaqaz::database(), SIGNAL(revisionChanged(QString,int)), SLOT(revisionChanged(QString,int)) );
+    connect( Kaqaz::database(), SIGNAL(paperChanged(int))           , SLOT(paperChanged(int))            );
 }
 
 int EditorView::paperId() const
@@ -160,8 +167,10 @@ void EditorView::setPaper(int pid)
     p->body->setText( db->paperText(pid) );
     p->group->setGroup( db->paperGroup(pid) );
     p->date->setText( "<font color=\"#888888\">" + db->paperCreatedDate(pid).toString() + "</font>" );
+    p->synced = (db->revisionOf(db->paperUuid(pid))!=-1);
 
     p->signal_blocker = false;
+    update();
 }
 
 void EditorView::save()
@@ -170,7 +179,10 @@ void EditorView::save()
     if( p->paperId == 0 )
         p->paperId = db->createPaper();
 
+    db->setSignalBlocker(true);
     db->setPaper( p->paperId, p->title->text(), p->body->toPlainText(), p->group->group() );
+    db->setSignalBlocker(false);
+
     emit saved(p->paperId);
 }
 
@@ -182,6 +194,39 @@ void EditorView::delayedSave()
         killTimer(p->save_timer);
 
     p->save_timer = startTimer(1000);
+}
+
+void EditorView::titleFontChanged()
+{
+    p->title_font = Kaqaz::instance()->titleFont();
+    p->title->setFont(p->title_font);
+}
+
+void EditorView::bodyFontChanged()
+{
+    p->body_font = Kaqaz::instance()->bodyFont();
+    p->body->setFont(p->body_font);
+}
+
+void EditorView::revisionChanged(const QString &iid, int revision)
+{
+    if( !p->paperId )
+        return;
+
+    const QString & uuid = Kaqaz::database()->paperUuid(p->paperId);
+    if( uuid != iid )
+        return;
+
+    p->synced = (revision!=-1);
+    update();
+}
+
+void EditorView::paperChanged(int id)
+{
+    if( p->paperId != id )
+        return;
+
+    setPaper(p->paperId);
 }
 
 void EditorView::paintEvent(QPaintEvent *e)
@@ -216,6 +261,7 @@ void EditorView::paintEvent(QPaintEvent *e)
     QRect l_rct_dst( 0, PAPER_BRD, PAPER_BRD, height()-2*PAPER_BRD );
 
     QRect paper_rect( PAPER_BRD, PAPER_BRD, width()-2*PAPER_BRD, height()-2*PAPER_BRD );
+    QRect sync_rect( PAPER_BRD, height()-PAPER_BRD-PAPER_SNC, width()-2*PAPER_BRD, PAPER_SNC );
 
     painter.drawImage( tl_rct_dst, *papers_image, tl_rct_src );
     painter.drawImage( t_rct_dst , *papers_image, t_rct_src  );
@@ -227,6 +273,16 @@ void EditorView::paintEvent(QPaintEvent *e)
     painter.drawImage( l_rct_dst , *papers_image, l_rct_src  );
 
     painter.fillRect( paper_rect, "#EDEDED" );
+
+    QLinearGradient gradient( QPoint(PAPER_BRD,height()-PAPER_BRD),
+                              QPoint(width()-PAPER_BRD,height()-PAPER_BRD) );
+    gradient.setColorAt(0.1, QColor(0,0,0,0));
+    gradient.setColorAt(0.3, QColor(p->synced?"#50ab99":"#C51313"));
+    gradient.setColorAt(0.7, QColor(p->synced?"#50ab99":"#C51313"));
+    gradient.setColorAt(0.9, QColor(0,0,0,0));
+
+    if( p->paperId && Kaqaz::instance()->kaqazSync()->tokenAvailable() )
+        painter.fillRect( sync_rect, gradient );
 }
 
 void EditorView::timerEvent(QTimerEvent *e)

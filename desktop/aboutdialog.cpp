@@ -16,42 +16,36 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EDITORVIEW_H
-#define EDITORVIEW_H
+#include "aboutdialog.h"
+#include "ui_aboutdialog.h"
+#include "kaqaz.h"
 
-#include <QWidget>
+#include <QDesktopServices>
+#include <QUrl>
 
-class EditorViewPrivate;
-class EditorView : public QWidget
+class AboutDialogPrivate
 {
-    Q_OBJECT
 public:
-    EditorView(QWidget *parent = 0);
-    ~EditorView();
-
-    int paperId() const;
-
-public slots:
-    void setPaper( int id );
-    void save();
-
-signals:
-    void saved( int pid );
-
-private slots:
-    void delayedSave();
-    void titleFontChanged();
-    void bodyFontChanged();
-    void revisionChanged( const QString &iid, int revision );
-    void paperChanged( int id );
-
-protected:
-    void paintEvent(QPaintEvent *e);
-    void timerEvent(QTimerEvent *e);
-    void resizeEvent(QResizeEvent *e);
-
-private:
-    EditorViewPrivate *p;
+    Ui::AboutDialog *ui;
 };
 
-#endif // EDITORVIEW_H
+AboutDialog::AboutDialog(QWidget *parent) :
+    QDialog(parent)
+{
+    p = new AboutDialogPrivate;
+    p->ui = new Ui::AboutDialog;
+    p->ui->setupUi(this);
+    p->ui->name_label->setText( p->ui->name_label->text() + " " + Kaqaz::version() );
+    p->ui->qtversion_lbl->setText( p->ui->qtversion_lbl->text() + " Qt" + Kaqaz::qtVersion() );
+}
+
+void AboutDialog::donateUs()
+{
+    QDesktopServices::openUrl( QUrl("http://labs.sialan.org/donate") );
+}
+
+AboutDialog::~AboutDialog()
+{
+    delete p->ui;
+    delete p;
+}

@@ -149,5 +149,6 @@ void PaperConfigure::typeChanged(int type)
 PaperConfigure::~PaperConfigure()
 {
     paper_configure_objs.remove(p->paperId);
+    delete p->ui;
     delete p;
 }

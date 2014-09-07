@@ -1032,7 +1032,7 @@ SyncItemHash Database::revisions() const
     return p->syncs;
 }
 
-void Database::setSignalBlocker(int stt)
+void Database::setSignalBlocker(bool stt)
 {
     p->signal_blocker = stt;
 }
