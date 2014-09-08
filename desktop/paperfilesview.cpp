@@ -31,6 +31,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QMenu>
+#include <QDebug>
 
 class PaperFilesViewPrivate
 {

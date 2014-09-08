@@ -225,6 +225,7 @@ void EditorView::save()
     db->setSignalBlocker(false);
 
     p->attach_img = SImage(*paper_clip).colorize(db->groupColor(p->group->group()).rgba());
+    p->files->setPaper(p->paperId);
 
     emit saved(p->paperId);
     update();
