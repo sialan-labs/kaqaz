@@ -805,12 +805,12 @@
 <context>
     <name>EditorView</name>
     <message>
-        <location filename="../desktop/editorview.cpp" line="102"/>
+        <location filename="../desktop/editorview.cpp" line="124"/>
         <source>Title</source>
         <translation>عنوان</translation>
     </message>
     <message>
-        <location filename="../desktop/editorview.cpp" line="108"/>
+        <location filename="../desktop/editorview.cpp" line="130"/>
         <source>Text...</source>
         <translation>متن...</translation>
     </message>
@@ -1558,6 +1558,34 @@ left to select categories.</source>
     <message>
         <source>Delete</source>
         <translation type="obsolete">پاک کردن</translation>
+    </message>
+</context>
+<context>
+    <name>PaperFilesView</name>
+    <message>
+        <location filename="../desktop/paperfilesview.cpp" line="117"/>
+        <source>Open File</source>
+        <translation>باز کردن فایل</translation>
+    </message>
+    <message>
+        <location filename="../desktop/paperfilesview.cpp" line="118"/>
+        <source>Copy To</source>
+        <translation>کپی به</translation>
+    </message>
+    <message>
+        <location filename="../desktop/paperfilesview.cpp" line="119"/>
+        <source>Delete</source>
+        <translation>پاک کردن</translation>
+    </message>
+    <message>
+        <location filename="../desktop/paperfilesview.cpp" line="142"/>
+        <source>Delete File</source>
+        <translation>پاک کردن</translation>
+    </message>
+    <message>
+        <location filename="../desktop/paperfilesview.cpp" line="142"/>
+        <source>Do you realy want to delete selected file?</source>
+        <translation>آیا از پاک شدن فایل‌های انتخاب شده مطمئن هستید؟</translation>
     </message>
 </context>
 <context>

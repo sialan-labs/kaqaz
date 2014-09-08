@@ -628,12 +628,12 @@
 <context>
     <name>EditorView</name>
     <message>
-        <location filename="../desktop/editorview.cpp" line="102"/>
+        <location filename="../desktop/editorview.cpp" line="124"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/editorview.cpp" line="108"/>
+        <location filename="../desktop/editorview.cpp" line="130"/>
         <source>Text...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1214,6 +1214,34 @@ left to select categories.</source>
     <message>
         <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="353"/>
         <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaperFilesView</name>
+    <message>
+        <location filename="../desktop/paperfilesview.cpp" line="117"/>
+        <source>Open File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/paperfilesview.cpp" line="118"/>
+        <source>Copy To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/paperfilesview.cpp" line="119"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/paperfilesview.cpp" line="142"/>
+        <source>Delete File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/paperfilesview.cpp" line="142"/>
+        <source>Do you realy want to delete selected file?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
