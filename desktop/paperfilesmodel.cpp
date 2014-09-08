@@ -16,12 +16,18 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#define ICON_SIZE 64
+
 #include "paperfilesmodel.h"
 #include "database.h"
 #include "kaqaz.h"
 
 #include <QMimeDatabase>
 #include <QIcon>
+#include <QHash>
+#include <QImageReader>
+#include <QImage>
+#include <QPainter>
 
 class PaperFilesModelPrivate
 {
@@ -31,6 +37,8 @@ public:
 
     QStringList files;
     QMimeDatabase mime_db;
+
+    QHash<QString,QImage> cached_images;
 };
 
 PaperFilesModel::PaperFilesModel(Database *db, QObject *parent) :
@@ -94,7 +102,40 @@ QVariant PaperFilesModel::data(const QModelIndex &index, int role) const
         break;
 
     case Qt::DecorationRole:
-        res = QIcon::fromTheme(p->mime_db.mimeTypeForFile(path).iconName());
+    {
+        const QMimeType & t = p->mime_db.mimeTypeForFile(path);
+        if( t.name().contains("image") )
+        {
+            QImage img(ICON_SIZE,ICON_SIZE,QImage::Format_ARGB32);
+            img.fill(QColor(0,0,0,0));
+
+            if( p->cached_images.contains(path) )
+                img = p->cached_images.value(path);
+            else
+            {
+                QImageReader reader(path);
+                const QSize & size = reader.size();
+                QSize readSize(ICON_SIZE,ICON_SIZE);
+                if( size.width()>size.height() )
+                    readSize.setHeight( ICON_SIZE*size.height()/size.width() );
+                else
+                    readSize.setWidth( ICON_SIZE*size.width()/size.height() );
+
+                reader.setScaledSize(readSize);
+                const QImage & tmp_img = reader.read();
+
+                QPainter painter(&img);
+                painter.fillRect(img.rect(),QColor(0,0,0,0));
+                painter.drawImage( QRect(ICON_SIZE/2-readSize.width()/2,ICON_SIZE/2-readSize.height()/2,readSize.width(),readSize.height()),
+                                   tmp_img, tmp_img.rect());
+
+                p->cached_images[path] = img;
+            }
+            res = img;
+        }
+        else
+            res = QIcon::fromTheme(t.iconName());
+    }
         break;
     }
 

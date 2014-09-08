@@ -106,7 +106,7 @@ QColor SialanDesktopTools::titleBarColor() const
                 res = new QColor("#DFD7CF");
             else
             if( sres == "adwaita" )
-                res = new QColor("#D7D3D2");
+                res = new QColor("#EDEDED");
             else
                 res = new QColor("#E5E5E5");
         }

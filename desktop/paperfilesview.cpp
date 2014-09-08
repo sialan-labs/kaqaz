@@ -54,6 +54,8 @@ PaperFilesView::PaperFilesView(QWidget *parent) :
     p->model = new PaperFilesModel(Kaqaz::database(),this);
     p->view = new QListView();
     p->view->setModel(p->model);
+    p->view->setViewMode(QListView::IconMode);
+    p->view->setGridSize(QSize(92,92));
     p->view->setContextMenuPolicy(Qt::CustomContextMenu);
 
     p->close_btn = new QToolButton();

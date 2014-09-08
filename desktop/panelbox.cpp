@@ -54,11 +54,17 @@ PanelBox::PanelBox(QWidget *parent) :
     p->dates = new QListView(this);
     p->dates->setModel(p->dates_model);
     p->dates->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    p->dates->setStyleSheet("QListView{ background: #333333; border: 0px solid transparent }"
+                            "QListView::item{ color: #ffffff }"
+                            "QListView::item:selected{ background: palette(highlight) }");
 
     p->groups = new QListView(this);
     p->groups->setModel(p->groups_model);
     p->groups->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     p->groups->setContextMenuPolicy(Qt::CustomContextMenu);
+    p->groups->setStyleSheet("QListView{ background: #333333; border: 0px solid transparent }"
+                             "QListView::item{ color: #ffffff }"
+                             "QListView::item:selected{ background: palette(highlight) }");
 
     p->search = new SearchPanel();
 
@@ -70,9 +76,6 @@ PanelBox::PanelBox(QWidget *parent) :
     setStyleSheet("QToolBox{ background: #222222; border: 0px solid transparent; }"
                   "QToolBox::tab { background: #222222; color: #ffffff }"
                   "QToolBox::tab:selected { background: #222222; font: bold; color: white; border-top: 1px solid #333333 }"
-                  "QListView{ background: #333333; border: 0px solid transparent }"
-                  "QListView::item{ color: #ffffff }"
-                  "QListView::item:selected{ background: palette(highlight) }"
                   "QScrollBar:vertical { border: 0px solid transparent; background: transparent; max-width: 5px; min-width: 5px; }"
                   "QScrollBar::handle:vertical { border: 0px solid transparent; background: #666666; width: 5px; min-width: 5px; min-height: 30px }"
                   "QScrollBar::handle:hover { background: palette(highlight); }"
