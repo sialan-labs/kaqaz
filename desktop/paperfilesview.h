@@ -36,6 +36,7 @@ private slots:
     void fileClicked( const QModelIndex & idx );
     void fileDoubleClicked( const QModelIndex & idx );
     void showFileMenu();
+    void addFiles();
 
 protected:
     void paintEvent(QPaintEvent *e);

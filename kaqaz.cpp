@@ -243,7 +243,9 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->viewer->setKaqazSync(p->sync);
     p->viewer->setSialanDevices(p->devices);
     p->viewer->setSialanTools(p->tools);
+#ifdef DESKTOP_LINUX
     p->viewer->setMimeApps(p->mimeApps);
+#endif
 #else
     p->viewer = new QQuickView();
     p->viewer->installEventFilter(this);
@@ -302,6 +304,11 @@ Backuper *Kaqaz::backuper() const
 KaqazSync *Kaqaz::kaqazSync() const
 {
     return p->sync;
+}
+
+Repository *Kaqaz::repository() const
+{
+    return p->repository;
 }
 
 void Kaqaz::init_languages()

@@ -193,5 +193,6 @@
         <file>qml/Kaqaz/files/paper-item.png</file>
         <file>qml/Kaqaz/files/paper-clip.png</file>
         <file>qml/Kaqaz/files/paper-clip-off.png</file>
+        <file>qml/Kaqaz/files/add-desktop.png</file>
     </qresource>
 </RCC>

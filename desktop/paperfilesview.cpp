@@ -20,6 +20,7 @@
 #include "paperfilesmodel.h"
 #include "kaqaz.h"
 #include "database.h"
+#include "repository.h"
 
 #include <QListView>
 #include <QVBoxLayout>
@@ -39,6 +40,7 @@ public:
     QHBoxLayout *title_layout;
 
     QToolButton *close_btn;
+    QToolButton *add_btn;
 
     PaperFilesModel *model;
 
@@ -58,6 +60,11 @@ PaperFilesView::PaperFilesView(QWidget *parent) :
     p->view->setGridSize(QSize(92,92));
     p->view->setContextMenuPolicy(Qt::CustomContextMenu);
 
+    p->add_btn = new QToolButton();
+    p->add_btn->setAutoRaise(true);
+    p->add_btn->setIcon( QIcon(":/qml/Kaqaz/files/add-desktop.png") );
+    p->add_btn->setFixedSize(24,24);
+
     p->close_btn = new QToolButton();
     p->close_btn->setAutoRaise(true);
     p->close_btn->setIcon( QIcon(":/qml/Kaqaz/files/back_64.png") );
@@ -66,6 +73,7 @@ PaperFilesView::PaperFilesView(QWidget *parent) :
     p->title_layout = new QHBoxLayout();
     p->title_layout->addWidget(p->close_btn);
     p->title_layout->addStretch();
+    p->title_layout->addWidget(p->add_btn);
     p->title_layout->setContentsMargins(4,4,4,4);
     p->title_layout->setSpacing(1);
 
@@ -83,11 +91,13 @@ PaperFilesView::PaperFilesView(QWidget *parent) :
     connect( p->view, SIGNAL(doubleClicked(QModelIndex))        , SLOT(fileDoubleClicked(QModelIndex)) );
     connect( p->view, SIGNAL(customContextMenuRequested(QPoint)), SLOT(showFileMenu())                 );
 
-    connect( p->close_btn, SIGNAL(clicked()), SLOT(hide()) );
+    connect( p->close_btn, SIGNAL(clicked()), SLOT(hide())     );
+    connect( p->add_btn  , SIGNAL(clicked()), SLOT(addFiles()) );
 }
 
 void PaperFilesView::setPaper(int pid)
 {
+    p->paperId = pid;
     p->model->setPaper(pid);
 }
 
@@ -144,6 +154,19 @@ void PaperFilesView::showFileMenu()
         int del = QMessageBox::warning(this, tr("Delete File"), tr("Do you realy want to delete selected file?"), QMessageBox::Yes|QMessageBox::No);
         if( del == QMessageBox::Yes )
             db->removeFileFromPaper(p->paperId, fileId);
+    }
+}
+
+void PaperFilesView::addFiles()
+{
+    QStringList files = QFileDialog::getOpenFileNames(this);
+    if( files.isEmpty() )
+        return;
+
+    foreach( const QString & file, files )
+    {
+        const QString & fileId = Kaqaz::instance()->repository()->insert(file);
+        Kaqaz::database()->addFileToPaper(p->paperId,fileId);
     }
 }
 

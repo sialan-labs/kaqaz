@@ -25,6 +25,7 @@
 #include <QSettings>
 #include <QScreen>
 
+class Repository;
 class KaqazSync;
 class DateProperty;
 class Database;
@@ -57,6 +58,7 @@ public:
 
     Backuper *backuper() const;
     KaqazSync *kaqazSync() const;
+    Repository *repository() const;
 
     Q_INVOKABLE bool demoHasTrial() const;
     Q_INVOKABLE void demoActiveTrial() const;

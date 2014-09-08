@@ -47,6 +47,8 @@ PaperFilesModel::PaperFilesModel(Database *db, QObject *parent) :
     p = new PaperFilesModelPrivate;
     p->db = db;
     p->paperId = 0;
+
+    connect( p->db, SIGNAL(filesListChanged()), SLOT(filesChanged()) );
 }
 
 void PaperFilesModel::setPaper(int pid)
