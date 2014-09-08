@@ -31,6 +31,7 @@ public:
     ~SialanTools();
 
 public slots:
+    static Qt::LayoutDirection directionOf( const QString & str );
     static QVariant call( QObject *obj, const QString & member, Qt::ConnectionType type,
                                                                 const QVariant & v0 = QVariant(),
                                                                 const QVariant & v1 = QVariant(),

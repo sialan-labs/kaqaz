@@ -24,13 +24,19 @@
 #define PAPER_HGT 836
 #define PAPER_BRD 15
 #define PAPER_SNC 4
+#define PAPER_CLP 64
+
+#define FILES_HEIGHT 250
 
 #include "editorview.h"
 #include "kaqaz.h"
 #include "database.h"
 #include "editorview.h"
 #include "groupbutton.h"
+#include "sialantools/sialantools.h"
 #include "kaqazsync.h"
+#include "paperfilesview.h"
+#include "simage.h"
 
 #include <QTextEdit>
 #include <QVBoxLayout>
@@ -43,10 +49,13 @@
 #include <QTimerEvent>
 #include <QLabel>
 #include <QLinearGradient>
+#include <QPushButton>
 #include <QDebug>
 
-static QImage *back_image = 0;
-static QImage *papers_image = 0;
+QImage *back_image = 0;
+QImage *papers_image = 0;
+QImage *paper_clip = 0;
+QImage *paper_clip_off = 0;
 
 class EditorViewPrivate
 {
@@ -58,16 +67,22 @@ public:
     QLineEdit *title;
     GroupButton *group;
     QLabel *date;
+    PaperFilesView *files;
 
     QFont title_font;
     QFont body_font;
     QFont group_font;
     QFont date_font;
 
+    QPushButton *attach_btn;
+
     int paperId;
     int save_timer;
     bool signal_blocker;
     bool synced;
+    bool has_files;
+
+    QImage attach_img;
 };
 
 EditorView::EditorView(QWidget *parent) :
@@ -78,11 +93,18 @@ EditorView::EditorView(QWidget *parent) :
     p->paperId = 0;
     p->signal_blocker = false;
     p->synced = true;
+    p->has_files = false;
 
     if( !back_image )
         back_image = new QImage(":/qml/Kaqaz/files/background.jpg");
     if( !papers_image )
         papers_image = new QImage(":/qml/Kaqaz/files/paper.png");
+    if( !paper_clip )
+        paper_clip = new QImage(":/qml/Kaqaz/files/paper-clip.png");
+    if( !paper_clip_off )
+        paper_clip_off = new QImage(":/qml/Kaqaz/files/paper-clip-off.png");
+
+    p->attach_img = *paper_clip;
 
     p->title_font = Kaqaz::instance()->titleFont();
     p->body_font = Kaqaz::instance()->bodyFont();
@@ -123,8 +145,19 @@ EditorView::EditorView(QWidget *parent) :
     p->main_layout = new QVBoxLayout(this);
     p->main_layout->addLayout(p->top_layout);
     p->main_layout->addWidget(p->body);
-    p->main_layout->setContentsMargins(30,20,30,30);
+    p->main_layout->setContentsMargins(30,20,30,45);
     p->main_layout->setSpacing(0);
+
+    p->attach_btn = new QPushButton(this);
+    p->attach_btn->setFixedSize( PAPER_CLP, PAPER_CLP );
+    p->attach_btn->move( width()-PAPER_CLP, height()-PAPER_CLP );
+    p->attach_btn->setStyleSheet("QPushButton{ border: 0px solid transparent; background: transparent }");
+    p->attach_btn->setCursor(Qt::PointingHandCursor);
+
+    p->files = new PaperFilesView(this);
+    p->files->setFixedSize( width(), FILES_HEIGHT );
+    p->files->move( 0, height()-FILES_HEIGHT );
+    p->files->hide();
 
     setStyleSheet("QScrollBar:vertical { border: 0px solid transparent; background: transparent; max-width: 5px; min-width: 5px; }"
                   "QScrollBar::handle:vertical { border: 0px solid transparent; background: #aaaaaa; width: 5px; min-width: 5px; min-height: 30px }"
@@ -135,6 +168,8 @@ EditorView::EditorView(QWidget *parent) :
     connect( p->title, SIGNAL(textChanged(QString)), SLOT(delayedSave()) );
     connect( p->body , SIGNAL(textChanged())       , SLOT(delayedSave()) );
     connect( p->group, SIGNAL(groupSelected(int))  , SLOT(delayedSave()) );
+
+    connect( p->attach_btn, SIGNAL(clicked()), p->files, SLOT(show()) );
 
     connect( Kaqaz::instance(), SIGNAL(titleFontChanged())          , SLOT(titleFontChanged())           );
     connect( Kaqaz::instance(), SIGNAL(bodyFontChanged())           , SLOT(bodyFontChanged())            );
@@ -152,22 +187,28 @@ void EditorView::setPaper(int pid)
     p->signal_blocker = true;
 
     p->paperId = pid;
+    Database *db = Kaqaz::database();
     if( !p->paperId )
     {
         p->title->setText(QString());
         p->body->setText(QString());
         p->group->setGroup(0);
         p->date->setText(QString());
+        p->files->setPaper(0);
         p->signal_blocker = false;
+        p->has_files = false;
+        update();
         return;
     }
 
-    Database *db = Kaqaz::database();
     p->title->setText( db->paperTitle(pid) );
     p->body->setText( db->paperText(pid) );
     p->group->setGroup( db->paperGroup(pid) );
     p->date->setText( "<font color=\"#888888\">" + Kaqaz::instance()->convertDateTimeToString(db->paperCreatedDate(pid)) + "</font>" );
+    p->files->setPaper(pid);
     p->synced = (db->revisionOf(db->paperUuid(pid))!=-1);
+    p->attach_img = SImage(*paper_clip).colorize(db->groupColor(p->group->group()).rgba());
+    p->has_files = !db->paperFiles(pid).isEmpty();
 
     p->signal_blocker = false;
     update();
@@ -183,7 +224,10 @@ void EditorView::save()
     db->setPaper( p->paperId, p->title->text(), p->body->toPlainText(), p->group->group() );
     db->setSignalBlocker(false);
 
+    p->attach_img = SImage(*paper_clip).colorize(db->groupColor(p->group->group()).rgba());
+
     emit saved(p->paperId);
+    update();
 }
 
 void EditorView::delayedSave()
@@ -231,16 +275,10 @@ void EditorView::paperChanged(int id)
 
 void EditorView::paintEvent(QPaintEvent *e)
 {
-    const QRect & rct = e->rect();
-    QRect sourceRect;
-    sourceRect.setX( back_image->width()/2-rct.width()/2+rct.x() );
-    sourceRect.setY( back_image->height()/2-rct.height()/2+rct.y() );
-    sourceRect.setWidth(rct.width());
-    sourceRect.setHeight(rct.height());
-
+    Q_UNUSED(e)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
-    painter.drawImage( rct, *back_image, sourceRect );
+    painter.drawImage( rect(), *back_image, back_image->rect() );
 
     QRect tl_rct_src( 0, 0, PAPER_LFT, PAPER_TOP );
     QRect t_rct_src( PAPER_LFT, 0, PAPER_WDT-PAPER_LFT-PAPER_RGT, PAPER_TOP );
@@ -283,6 +321,10 @@ void EditorView::paintEvent(QPaintEvent *e)
 
     if( p->paperId && Kaqaz::instance()->kaqazSync()->tokenAvailable() )
         painter.fillRect( sync_rect, gradient );
+
+    QImage & clip_img = !p->has_files? *paper_clip_off : p->attach_img;
+    painter.drawImage( QRect(width()-PAPER_CLP,height()-PAPER_CLP,PAPER_CLP,PAPER_CLP),
+                       clip_img, clip_img.rect() );
 }
 
 void EditorView::timerEvent(QTimerEvent *e)
@@ -302,6 +344,9 @@ void EditorView::resizeEvent(QResizeEvent *e)
 {
     Q_UNUSED(e)
     p->date->move(20, height()-PAPER_BRD-p->date->height());
+    p->attach_btn->move( width()-PAPER_CLP, height()-PAPER_CLP );
+    p->files->setFixedSize( width(), FILES_HEIGHT );
+    p->files->move( 0, height()-FILES_HEIGHT );
 }
 
 EditorView::~EditorView()

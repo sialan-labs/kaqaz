@@ -61,7 +61,8 @@ android {
         desktop/datewidget.h \
         desktop/configurepage.h \
         desktop/aboutdialog.h \
-        desktop/simage.h
+        desktop/simage.h \
+        desktop/paperfilesview.h
 
     SOURCES += \
         mimeapps.cpp \
@@ -87,7 +88,8 @@ android {
         desktop/datewidget.cpp \
         desktop/configurepage.cpp \
         desktop/aboutdialog.cpp \
-        desktop/simage.cpp
+        desktop/simage.cpp \
+        desktop/paperfilesview.cpp
 
     FORMS += \
         desktop/paperconfigure.ui \
@@ -118,7 +120,8 @@ SOURCES += main.cpp \
     smartiodbox.cpp \
     smartiodboxsingle.cpp \
     searchhighlighter.cpp \
-    databasedatatypes.cpp
+    databasedatatypes.cpp \
+    desktop/paperfilesmodel.cpp
 
 HEADERS += \
     kaqaz.h \
@@ -137,7 +140,8 @@ HEADERS += \
     sialandeveloper_macros.h \
     smartiodbox.h \
     smartiodboxsingle.h \
-    searchhighlighter.h
+    searchhighlighter.h \
+    desktop/paperfilesmodel.h
 
 TRANSLATIONS += \
     translations_sources/lang-en.ts \

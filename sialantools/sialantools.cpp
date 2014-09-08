@@ -32,6 +32,44 @@ SialanTools::SialanTools(QObject *parent) :
     p = new SialanToolsPrivate;
 }
 
+Qt::LayoutDirection SialanTools::directionOf(const QString &str)
+{
+    Qt::LayoutDirection res = Qt::LeftToRight;
+    if( str.isEmpty() )
+        return res;
+
+    int ltr = 0;
+    int rtl = 0;
+
+    foreach( const QChar & ch, str )
+    {
+        QChar::Direction dir = ch.direction();
+        switch( static_cast<int>(dir) )
+        {
+        case QChar::DirL:
+        case QChar::DirLRE:
+        case QChar::DirLRO:
+        case QChar::DirEN:
+            ltr++;
+            break;
+
+        case QChar::DirR:
+        case QChar::DirRLE:
+        case QChar::DirRLO:
+        case QChar::DirAL:
+            rtl++;
+            break;
+        }
+    }
+
+    if( ltr >= rtl )
+        res = Qt::LeftToRight;
+    else
+        res = Qt::RightToLeft;
+
+    return res;
+}
+
 QVariant SialanTools::call(QObject *obj, const QString &member, Qt::ConnectionType ctype, const QVariant &v0, const QVariant &v1, const QVariant &v2, const QVariant &v3, const QVariant &v4, const QVariant &v5, const QVariant &v6, const QVariant &v7, const QVariant &v8, const QVariant &v9)
 {
     const QMetaObject *meta_obj = obj->metaObject();

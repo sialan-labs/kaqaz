@@ -191,5 +191,7 @@
         <file>qml/Kaqaz/helper/title.png</file>
         <file>database/database.sqlite</file>
         <file>qml/Kaqaz/files/paper-item.png</file>
+        <file>qml/Kaqaz/files/paper-clip.png</file>
+        <file>qml/Kaqaz/files/paper-clip-off.png</file>
     </qresource>
 </RCC>
