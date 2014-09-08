@@ -773,6 +773,11 @@ QString Kaqaz::convertDateTimeToString(const QDateTime &dt)
     return translateNumbers( p->calendar->paperString(dt) );
 }
 
+QString Kaqaz::convertDateTimeToLittleString(const QDate &dt)
+{
+    return translateNumbers( p->calendar->littleString(dt) );
+}
+
 int Kaqaz::daysOfMonth(qint64 y, int m)
 {
     return p->calendar->daysOfMonth(y,m);

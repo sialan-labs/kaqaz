@@ -30,6 +30,10 @@ class DateWidgetPrivate
 public:
     bool dateVisible;
     bool timeVisible;
+
+    QString dateText;
+    QString timeText;
+
     QDateTime dateTime;
 
     QSpinBox *year_spin;
@@ -64,10 +68,7 @@ DateWidget::DateWidget(QWidget *parent) :
     p->minute_spin = new QSpinBox();
 
     p->date_label = new QLabel();
-    p->date_label->setText( "<center><b>" + tr("Date") + "</b></center>" );
-
     p->time_label = new QLabel();
-    p->time_label->setText( "<center><b>" + tr("Time") + "</b></center>" );
 
     p->date_items_layout = new QHBoxLayout();
     p->date_items_layout->addWidget(p->year_spin);
@@ -104,6 +105,9 @@ DateWidget::DateWidget(QWidget *parent) :
 
     connect( p->year_spin , SIGNAL(valueChanged(int)), SLOT(refresh_days()) );
     connect( p->month_spin, SIGNAL(valueChanged(int)), SLOT(refresh_days()) );
+
+    setDateText( tr("Date") );
+    setTimeText( tr("Time") );
 }
 
 void DateWidget::setDateVisible(bool stt)
@@ -131,6 +135,34 @@ void DateWidget::setTimeVisible(bool stt)
 bool DateWidget::timeVisible() const
 {
     return p->timeVisible;
+}
+
+void DateWidget::setDateText(const QString &text)
+{
+    if( text == p->dateText )
+        return;
+
+    p->dateText = text;
+    p->date_label->setText( "<center><b>" + p->dateText + "</b></center>" );
+}
+
+QString DateWidget::dateText() const
+{
+    return p->dateText;
+}
+
+void DateWidget::setTimeText(const QString &text)
+{
+    if( text == p->timeText )
+        return;
+
+    p->timeText = text;
+    p->time_label->setText( "<center><b>" + p->timeText + "</b></center>" );
+}
+
+QString DateWidget::timeText() const
+{
+    return p->timeText;
 }
 
 QDateTime DateWidget::dateTime() const

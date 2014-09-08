@@ -49,7 +49,6 @@ PapersView::PapersView(QWidget *parent) :
 
     setModel(p->model);
     setItemDelegate(p->delegate);
-    setVerticalScrollMode(QListView::ScrollPerPixel);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setContextMenuPolicy(Qt::CustomContextMenu);
     setStyleSheet("QListView{ background: #f3f3f3; border: 0px solid transparent }"

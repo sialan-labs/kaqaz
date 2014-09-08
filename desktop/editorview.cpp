@@ -166,7 +166,7 @@ void EditorView::setPaper(int pid)
     p->title->setText( db->paperTitle(pid) );
     p->body->setText( db->paperText(pid) );
     p->group->setGroup( db->paperGroup(pid) );
-    p->date->setText( "<font color=\"#888888\">" + db->paperCreatedDate(pid).toString() + "</font>" );
+    p->date->setText( "<font color=\"#888888\">" + Kaqaz::instance()->convertDateTimeToString(db->paperCreatedDate(pid)) + "</font>" );
     p->synced = (db->revisionOf(db->paperUuid(pid))!=-1);
 
     p->signal_blocker = false;

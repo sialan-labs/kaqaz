@@ -59,6 +59,13 @@ QString CalendarConverter::paperString(const QDateTime &dt)
     return res;
 }
 
+QString CalendarConverter::littleString(const QDate &d)
+{
+    const DateProperty & dp = getDate(d);
+    QString res = QString("%1 %2 %3").arg(dp.day).arg(monthName(dp.month)).arg(dp.year);
+    return res;
+}
+
 QString CalendarConverter::historyString(const QDate &d)
 {
     const DateProperty & dp = getDate(d);

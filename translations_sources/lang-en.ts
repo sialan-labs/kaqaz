@@ -43,17 +43,53 @@
     </message>
     <message>
         <location filename="../desktop/aboutdialog.ui" line="55"/>
+        <location filename="../desktop/aboutdialog.ui" line="167"/>
         <source>Kaqaz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/aboutdialog.ui" line="136"/>
+        <location filename="../desktop/aboutdialog.ui" line="177"/>
+        <source>License: GNU GPL Version 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/aboutdialog.ui" line="187"/>
+        <source>Based on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/aboutdialog.ui" line="197"/>
+        <source>(C) 2014 Sialan Labs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/aboutdialog.ui" line="220"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;http://kaqaz.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;kaqaz.org&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/aboutdialog.ui" line="250"/>
         <source>Sialan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/aboutdialog.ui" line="202"/>
+        <location filename="../desktop/aboutdialog.ui" line="381"/>
+        <source>SIALAN LABS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/aboutdialog.ui" line="404"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;http://labs.sialan.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;labs.sialan.org&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/aboutdialog.ui" line="434"/>
         <source>Donate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/aboutdialog.ui" line="496"/>
+        <source>Donate Us</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -220,116 +256,179 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="69"/>
-        <location filename="../desktop/configurepage.ui" line="134"/>
+        <location filename="../desktop/configurepage.ui" line="72"/>
+        <location filename="../desktop/configurepage.ui" line="137"/>
         <source>General</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="79"/>
+        <location filename="../desktop/configurepage.ui" line="82"/>
         <source>Backup &amp; Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="89"/>
-        <source>Synchronization</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../desktop/configurepage.ui" line="99"/>
+        <location filename="../desktop/configurepage.ui" line="102"/>
         <source>Security</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="183"/>
+        <location filename="../desktop/configurepage.ui" line="186"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="200"/>
+        <location filename="../desktop/configurepage.ui" line="203"/>
         <source>Calendar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="233"/>
+        <location filename="../desktop/configurepage.ui" line="236"/>
         <source>Title Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="294"/>
+        <location filename="../desktop/configurepage.ui" line="297"/>
         <source>Body Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="371"/>
+        <location filename="../desktop/configurepage.ui" line="398"/>
         <source>Backup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="384"/>
+        <location filename="../desktop/configurepage.ui" line="411"/>
         <source>Create new backup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="391"/>
-        <location filename="../desktop/configurepage.ui" line="463"/>
+        <location filename="../desktop/configurepage.ui" line="418"/>
+        <location filename="../desktop/configurepage.ui" line="490"/>
+        <location filename="../desktop/configurepage.cpp" line="185"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="449"/>
+        <location filename="../desktop/configurepage.ui" line="476"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="456"/>
+        <location filename="../desktop/configurepage.ui" line="483"/>
         <source>Copy To</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="495"/>
+        <location filename="../desktop/configurepage.ui" line="545"/>
         <source>Dropbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="656"/>
+        <location filename="../desktop/configurepage.ui" line="724"/>
         <source>Sync password (Optional &amp; Unchangable)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="666"/>
-        <location filename="../desktop/configurepage.ui" line="908"/>
+        <location filename="../desktop/configurepage.ui" line="734"/>
+        <location filename="../desktop/configurepage.ui" line="979"/>
         <source>Password repeat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="673"/>
+        <location filename="../desktop/configurepage.ui" line="754"/>
         <source>Get Token</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="683"/>
+        <location filename="../desktop/configurepage.ui" line="741"/>
         <source>Finished</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="690"/>
+        <location filename="../desktop/configurepage.ui" line="92"/>
+        <source>Encrypted Sync</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.ui" line="761"/>
         <source>Disconnect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="882"/>
+        <location filename="../desktop/configurepage.ui" line="953"/>
         <source>Current password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="898"/>
+        <location filename="../desktop/configurepage.ui" line="969"/>
         <source>New password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="915"/>
+        <location filename="../desktop/configurepage.ui" line="986"/>
         <source>Change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.cpp" line="167"/>
+        <location filename="../desktop/configurepage.cpp" line="192"/>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.cpp" line="167"/>
+        <location filename="../desktop/configurepage.cpp" line="192"/>
+        <source>Please enter password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.cpp" line="185"/>
+        <source>Do you realy want to restore? all of your current data will be deleted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.cpp" line="207"/>
+        <source>Delete Backup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.cpp" line="207"/>
+        <source>Do you realy want to delete selected backup?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.cpp" line="261"/>
+        <source>Please Wait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.cpp" line="293"/>
+        <source>Incorrect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.cpp" line="293"/>
+        <source>Current password is incorrect!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.cpp" line="302"/>
+        <source>Incorrect repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.cpp" line="302"/>
+        <source>Password repeat is incorrect!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.cpp" line="312"/>
+        <source>Successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.cpp" line="312"/>
+        <source>Password changed successfully :)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -408,12 +507,12 @@
 <context>
     <name>DateWidget</name>
     <message>
-        <location filename="../desktop/datewidget.cpp" line="67"/>
+        <location filename="../desktop/datewidget.cpp" line="109"/>
         <source>Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/datewidget.cpp" line="70"/>
+        <location filename="../desktop/datewidget.cpp" line="110"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
@@ -529,12 +628,12 @@
 <context>
     <name>EditorView</name>
     <message>
-        <location filename="../desktop/editorview.cpp" line="100"/>
+        <location filename="../desktop/editorview.cpp" line="102"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/editorview.cpp" line="106"/>
+        <location filename="../desktop/editorview.cpp" line="108"/>
         <source>Text...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -763,77 +862,77 @@ left to select categories.</source>
 <context>
     <name>Kaqaz</name>
     <message>
-        <location filename="../kaqaz.cpp" line="610"/>
+        <location filename="../kaqaz.cpp" line="621"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="611"/>
+        <location filename="../kaqaz.cpp" line="622"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="612"/>
+        <location filename="../kaqaz.cpp" line="623"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="613"/>
+        <location filename="../kaqaz.cpp" line="624"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="614"/>
+        <location filename="../kaqaz.cpp" line="625"/>
         <source>4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="615"/>
+        <location filename="../kaqaz.cpp" line="626"/>
         <source>5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="616"/>
+        <location filename="../kaqaz.cpp" line="627"/>
         <source>6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="617"/>
+        <location filename="../kaqaz.cpp" line="628"/>
         <source>7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="618"/>
+        <location filename="../kaqaz.cpp" line="629"/>
         <source>8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="619"/>
+        <location filename="../kaqaz.cpp" line="630"/>
         <source>9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="480"/>
+        <location filename="../kaqaz.cpp" line="491"/>
         <source>Gregorian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="441"/>
+        <location filename="../kaqaz.cpp" line="452"/>
         <source>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="442"/>
+        <location filename="../kaqaz.cpp" line="453"/>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="483"/>
+        <location filename="../kaqaz.cpp" line="494"/>
         <source>Jalali</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="486"/>
+        <location filename="../kaqaz.cpp" line="497"/>
         <source>Hijri</source>
         <translation type="unfinished"></translation>
     </message>
@@ -841,28 +940,48 @@ left to select categories.</source>
 <context>
     <name>KaqazDesktop</name>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="121"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="123"/>
         <source>Add Paper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="122"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="124"/>
         <source>Add Label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="123"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="125"/>
         <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="124"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="126"/>
         <source>Configure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="125"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="127"/>
         <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/kaqazdesktop.cpp" line="243"/>
+        <source>Kaqaz security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/kaqazdesktop.cpp" line="243"/>
+        <source>Please enter password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/kaqazdesktop.cpp" line="247"/>
+        <source>Incorrect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/kaqazdesktop.cpp" line="247"/>
+        <source>Password is incorrect!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -916,6 +1035,19 @@ left to select categories.</source>
     </message>
 </context>
 <context>
+    <name>MapWidget</name>
+    <message>
+        <location filename="../desktop/mapwidget.cpp" line="166"/>
+        <source>Loading</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/mapwidget.cpp" line="166"/>
+        <source>No Position</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MusicDialog</name>
     <message>
         <location filename="../qml/Kaqaz/MusicDialog.qml" line="97"/>
@@ -931,37 +1063,37 @@ left to select categories.</source>
 <context>
     <name>PanelBox</name>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="67"/>
+        <location filename="../desktop/panelbox.cpp" line="65"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="68"/>
+        <location filename="../desktop/panelbox.cpp" line="66"/>
         <source>Labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="69"/>
+        <location filename="../desktop/panelbox.cpp" line="67"/>
         <source>Dates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="111"/>
+        <location filename="../desktop/panelbox.cpp" line="109"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="112"/>
+        <location filename="../desktop/panelbox.cpp" line="110"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="127"/>
+        <location filename="../desktop/panelbox.cpp" line="125"/>
         <source>Delete Label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="127"/>
+        <location filename="../desktop/panelbox.cpp" line="125"/>
         <source>Do you realy want to delete &quot;%1&quot;?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1112,22 +1244,22 @@ left to select categories.</source>
 <context>
     <name>PapersView</name>
     <message>
-        <location filename="../desktop/papersview.cpp" line="94"/>
+        <location filename="../desktop/papersview.cpp" line="93"/>
         <source>Properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/papersview.cpp" line="95"/>
+        <location filename="../desktop/papersview.cpp" line="94"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/papersview.cpp" line="109"/>
+        <location filename="../desktop/papersview.cpp" line="108"/>
         <source>Delete Label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/papersview.cpp" line="109"/>
+        <location filename="../desktop/papersview.cpp" line="108"/>
         <source>Do you realy want to delete &quot;%1&quot;?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1219,259 +1351,259 @@ left to select categories.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../calendarconverter.cpp" line="208"/>
+        <location filename="../calendarconverter.cpp" line="215"/>
         <source>January</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="211"/>
+        <location filename="../calendarconverter.cpp" line="218"/>
         <source>February</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="214"/>
+        <location filename="../calendarconverter.cpp" line="221"/>
         <source>March</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="217"/>
+        <location filename="../calendarconverter.cpp" line="224"/>
         <source>April</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="220"/>
+        <location filename="../calendarconverter.cpp" line="227"/>
         <source>May</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="223"/>
+        <location filename="../calendarconverter.cpp" line="230"/>
         <source>June</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="226"/>
+        <location filename="../calendarconverter.cpp" line="233"/>
         <source>July</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="229"/>
+        <location filename="../calendarconverter.cpp" line="236"/>
         <source>August</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="232"/>
+        <location filename="../calendarconverter.cpp" line="239"/>
         <source>September</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="235"/>
+        <location filename="../calendarconverter.cpp" line="242"/>
         <source>October</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="238"/>
+        <location filename="../calendarconverter.cpp" line="245"/>
         <source>November</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="241"/>
+        <location filename="../calendarconverter.cpp" line="248"/>
         <source>December</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="253"/>
-        <location filename="../calendarconverter.cpp" line="615"/>
+        <location filename="../calendarconverter.cpp" line="260"/>
+        <location filename="../calendarconverter.cpp" line="622"/>
         <source>Sunday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="256"/>
-        <location filename="../calendarconverter.cpp" line="618"/>
+        <location filename="../calendarconverter.cpp" line="263"/>
+        <location filename="../calendarconverter.cpp" line="625"/>
         <source>Monday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="259"/>
-        <location filename="../calendarconverter.cpp" line="621"/>
+        <location filename="../calendarconverter.cpp" line="266"/>
+        <location filename="../calendarconverter.cpp" line="628"/>
         <source>Tuesday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="262"/>
-        <location filename="../calendarconverter.cpp" line="624"/>
+        <location filename="../calendarconverter.cpp" line="269"/>
+        <location filename="../calendarconverter.cpp" line="631"/>
         <source>Wednesday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="265"/>
-        <location filename="../calendarconverter.cpp" line="627"/>
+        <location filename="../calendarconverter.cpp" line="272"/>
+        <location filename="../calendarconverter.cpp" line="634"/>
         <source>Thuresday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="268"/>
-        <location filename="../calendarconverter.cpp" line="630"/>
+        <location filename="../calendarconverter.cpp" line="275"/>
+        <location filename="../calendarconverter.cpp" line="637"/>
         <source>Friday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="271"/>
-        <location filename="../calendarconverter.cpp" line="612"/>
+        <location filename="../calendarconverter.cpp" line="278"/>
+        <location filename="../calendarconverter.cpp" line="619"/>
         <source>Saturday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="385"/>
+        <location filename="../calendarconverter.cpp" line="392"/>
         <source>Farvardin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="388"/>
+        <location filename="../calendarconverter.cpp" line="395"/>
         <source>Ordibehesht</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="391"/>
+        <location filename="../calendarconverter.cpp" line="398"/>
         <source>Khordad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="394"/>
+        <location filename="../calendarconverter.cpp" line="401"/>
         <source>Tir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="397"/>
+        <location filename="../calendarconverter.cpp" line="404"/>
         <source>Mordad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="400"/>
+        <location filename="../calendarconverter.cpp" line="407"/>
         <source>Shahrivar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="403"/>
+        <location filename="../calendarconverter.cpp" line="410"/>
         <source>Mehr</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="406"/>
+        <location filename="../calendarconverter.cpp" line="413"/>
         <source>Abaan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="409"/>
+        <location filename="../calendarconverter.cpp" line="416"/>
         <source>Aazar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="412"/>
+        <location filename="../calendarconverter.cpp" line="419"/>
         <source>Dey</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="415"/>
+        <location filename="../calendarconverter.cpp" line="422"/>
         <source>Bahman</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="418"/>
+        <location filename="../calendarconverter.cpp" line="425"/>
         <source>Esfand</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="430"/>
+        <location filename="../calendarconverter.cpp" line="437"/>
         <source>Shanbe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="433"/>
+        <location filename="../calendarconverter.cpp" line="440"/>
         <source>1Shanbe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="436"/>
+        <location filename="../calendarconverter.cpp" line="443"/>
         <source>2Shanbe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="439"/>
+        <location filename="../calendarconverter.cpp" line="446"/>
         <source>3Shanbe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="442"/>
+        <location filename="../calendarconverter.cpp" line="449"/>
         <source>4Shanbe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="445"/>
+        <location filename="../calendarconverter.cpp" line="452"/>
         <source>5Shanbe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="448"/>
+        <location filename="../calendarconverter.cpp" line="455"/>
         <source>Jome</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="567"/>
+        <location filename="../calendarconverter.cpp" line="574"/>
         <source>Moharram</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="570"/>
+        <location filename="../calendarconverter.cpp" line="577"/>
         <source>Safar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="573"/>
+        <location filename="../calendarconverter.cpp" line="580"/>
         <source>Rabiol Avval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="576"/>
+        <location filename="../calendarconverter.cpp" line="583"/>
         <source>Rabio Sani</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="579"/>
+        <location filename="../calendarconverter.cpp" line="586"/>
         <source>Jamadiol Aval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="582"/>
+        <location filename="../calendarconverter.cpp" line="589"/>
         <source>Jamadio Sani</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="585"/>
+        <location filename="../calendarconverter.cpp" line="592"/>
         <source>Rajab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="588"/>
+        <location filename="../calendarconverter.cpp" line="595"/>
         <source>Shaban</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="591"/>
+        <location filename="../calendarconverter.cpp" line="598"/>
         <source>Ramadan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="594"/>
+        <location filename="../calendarconverter.cpp" line="601"/>
         <source>Shaval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="597"/>
+        <location filename="../calendarconverter.cpp" line="604"/>
         <source>Zighade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../calendarconverter.cpp" line="600"/>
+        <location filename="../calendarconverter.cpp" line="607"/>
         <source>Zihaje</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1589,68 +1721,102 @@ left to select categories.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/searchpanel.cpp" line="71"/>
+        <location filename="../desktop/searchpanel.cpp" line="73"/>
         <source>Keyword</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/searchpanel.cpp" line="74"/>
+        <location filename="../desktop/searchpanel.cpp" line="76"/>
         <source>keyword</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/searchpanel.cpp" line="77"/>
+        <location filename="../desktop/searchpanel.cpp" line="79"/>
         <source>Date Domain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/searchpanel.cpp" line="80"/>
+        <location filename="../desktop/searchpanel.cpp" line="82"/>
+        <location filename="../desktop/searchpanel.cpp" line="211"/>
         <source>Select Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/searchpanel.cpp" line="83"/>
+        <location filename="../desktop/searchpanel.cpp" line="85"/>
         <source>Time Domain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/searchpanel.cpp" line="86"/>
+        <location filename="../desktop/searchpanel.cpp" line="88"/>
+        <location filename="../desktop/searchpanel.cpp" line="261"/>
         <source>Select Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/searchpanel.cpp" line="89"/>
+        <location filename="../desktop/searchpanel.cpp" line="91"/>
         <source>Label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/searchpanel.cpp" line="96"/>
+        <location filename="../desktop/searchpanel.cpp" line="98"/>
         <source>Paper Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/searchpanel.cpp" line="99"/>
+        <location filename="../desktop/searchpanel.cpp" line="101"/>
         <source>All Papers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/searchpanel.cpp" line="100"/>
+        <location filename="../desktop/searchpanel.cpp" line="102"/>
         <source>Normal Papers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/searchpanel.cpp" line="101"/>
+        <location filename="../desktop/searchpanel.cpp" line="103"/>
         <source>To-Do Papers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/searchpanel.cpp" line="102"/>
+        <location filename="../desktop/searchpanel.cpp" line="104"/>
         <source>Completed tasks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/searchpanel.cpp" line="103"/>
+        <location filename="../desktop/searchpanel.cpp" line="105"/>
         <source>Uncompleted tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/searchpanel.cpp" line="171"/>
+        <source>From date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/searchpanel.cpp" line="175"/>
+        <source>To date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/searchpanel.cpp" line="204"/>
+        <location filename="../desktop/searchpanel.cpp" line="254"/>
+        <source>From: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/searchpanel.cpp" line="205"/>
+        <location filename="../desktop/searchpanel.cpp" line="255"/>
+        <source>To: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/searchpanel.cpp" line="221"/>
+        <source>From time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/searchpanel.cpp" line="225"/>
+        <source>To time</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

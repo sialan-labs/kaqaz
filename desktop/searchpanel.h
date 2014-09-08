@@ -37,6 +37,8 @@ public slots:
 
 private slots:
     void keyword_changed();
+    void showDateDomain();
+    void showTimeDomain();
 
 protected:
     void paintEvent(QPaintEvent *e);

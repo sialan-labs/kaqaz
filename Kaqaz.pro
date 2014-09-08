@@ -60,7 +60,8 @@ android {
         desktop/mapwidget.h \
         desktop/datewidget.h \
         desktop/configurepage.h \
-        desktop/aboutdialog.h
+        desktop/aboutdialog.h \
+        desktop/simage.h
 
     SOURCES += \
         mimeapps.cpp \
@@ -85,7 +86,8 @@ android {
         desktop/mapwidget.cpp \
         desktop/datewidget.cpp \
         desktop/configurepage.cpp \
-        desktop/aboutdialog.cpp
+        desktop/aboutdialog.cpp \
+        desktop/simage.cpp
 
     FORMS += \
         desktop/paperconfigure.ui \

@@ -18,8 +18,12 @@
 
 #include "papersmodel.h"
 #include "database.h"
+#include "simage.h"
 
 #include <QIcon>
+#include <QHash>
+
+QHash<QString,SImage> paper_model_colored_imgs;
 
 class PapersModelPrivate
 {
@@ -63,8 +67,21 @@ QVariant PapersModel::data(const QModelIndex &index, int role) const
         break;
 
     case Qt::DecorationRole:
-        res = p->db->paperType(pid)==Enums::Normal? QVariant::fromValue<QIcon>(QIcon::fromTheme("text-plain")) :
-                                                    QVariant::fromValue<QIcon>(QIcon::fromTheme("x-office-spreadsheet"));
+    {
+        const QColor & clr = p->db->groupColor( p->db->paperGroup(pid) );
+        if( paper_model_colored_imgs.contains(clr.name()) )
+        {
+            res = paper_model_colored_imgs.value(clr.name());
+            break;
+        }
+
+        SImage image(":/qml/Kaqaz/files/paper-item.png");
+        image = image.scaled(32,32,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
+        image = image.colorize(clr.rgb());
+
+        paper_model_colored_imgs[clr.name()] = image;
+        res = image;
+    }
         break;
     }
 

@@ -157,8 +157,18 @@ void MapWidget::paintEvent(QPaintEvent *e)
     painter.setRenderHint(QPainter::Antialiasing);
     painter.drawImage( rect(), p->image, p->image.rect() );
     if( p->image_loaded )
+    {
         painter.drawImage( QRect(width()/2-MAP_PIN_WIDTH/2, height()/2-MAP_PIN_WIDTH,MAP_PIN_WIDTH,MAP_PIN_WIDTH),
                            *map_widget_pin, map_widget_pin->rect() );
+    }
+    else
+    {
+        const QString & text = (p->reply? tr("Loading") : tr("No Position"));
+        QFontMetrics metric( painter.font() );
+
+        painter.drawText( QRect(0,height()-metric.height(),width(),metric.height()),
+                          Qt::AlignCenter | Qt::AlignVCenter, text );
+    }
 }
 
 void MapWidget::mouseReleaseEvent(QMouseEvent *e)

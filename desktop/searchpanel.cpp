@@ -32,6 +32,8 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QTimerEvent>
+#include <QMenu>
+#include <QDebug>
 
 class SearchPanelPrivate
 {
@@ -42,13 +44,13 @@ public:
     QLineEdit *keyword_line;
 
     QLabel *date_label;
-    DateWidget *date_from;
-    DateWidget *date_to;
+    QDateTime date_from;
+    QDateTime date_to;
     QPushButton *date_btn;
 
     QLabel *time_label;
-    DateWidget *time_from;
-    DateWidget *time_to;
+    QDateTime time_from;
+    QDateTime time_to;
     QPushButton *time_btn;
 
     QLabel *group_label;
@@ -127,18 +129,27 @@ SearchPanel::SearchPanel(QWidget *parent) :
                    "QLineEdit:focus{ border-color: palette(highlight) }");
 
     connect( p->keyword_line, SIGNAL(textChanged(QString)), SLOT(keyword_changed()) );
+    connect( p->date_btn    , SIGNAL(clicked())           , SLOT(showDateDomain())  );
+    connect( p->time_btn    , SIGNAL(clicked())           , SLOT(showTimeDomain())  );
+
+    connect( p->group_combo, SIGNAL(currentIndexChanged(int)), SLOT(refreshResult()) );
+    connect( p->type_combo , SIGNAL(currentIndexChanged(int)), SLOT(refreshResult()) );
 }
 
 void SearchPanel::refreshResult()
 {
     const QString & kwd = p->keyword_line->text();
-    if( kwd.isEmpty() )
+    if( kwd.isEmpty() && p->date_from.isNull() && p->date_to.isNull() && p->time_from.isNull() &&
+        p->time_to.isNull() && p->group_combo->currentIndex()==0 && p->type_combo->currentIndex()==0 )
     {
         emit founded( QList<int>() );
         return;
     }
 
-    QList<int> result = Kaqaz::database()->search(kwd);
+    QList<int> result = Kaqaz::database()->advanceSearch(kwd, p->date_from.date(), p->date_to.date(),
+                                                         p->time_from.time(), p->time_to.time(),
+                                                         p->group_combo->currentIndex()? p->group_model->id(p->group_combo->currentIndex()) : -1,
+                                                         Enums::AllPapers);
     for( int i=0; i<result.count()/2; i++ )
         result.swap( i, result.count()-i-1 );
 
@@ -151,6 +162,106 @@ void SearchPanel::keyword_changed()
         killTimer(p->search_timer);
 
     p->search_timer = startTimer(500);
+}
+
+void SearchPanel::showDateDomain()
+{
+    DateWidget *from_date = new DateWidget();
+    from_date->setTimeVisible(false);
+    from_date->setDateText( tr("From date") );
+
+    DateWidget *to_date = new DateWidget();
+    to_date->setTimeVisible(false);
+    to_date->setDateText( tr("To date") );
+
+    QPushButton *ok_btn = new QPushButton();
+    ok_btn->setText("Ok");
+    ok_btn->setCheckable(true);
+
+    QPushButton *reset_btn = new QPushButton();
+    reset_btn->setText("Reset");
+    reset_btn->setCheckable(true);
+
+    QMenu menu;
+    QVBoxLayout *layout = new QVBoxLayout(&menu);
+    layout->addWidget(from_date);
+    layout->addWidget(to_date);
+    layout->addWidget(ok_btn);
+    layout->addWidget(reset_btn);
+    layout->setContentsMargins(6,6,6,6);
+    layout->setSpacing(1);
+
+    connect( ok_btn   , SIGNAL(clicked()), &menu, SLOT(close()) );
+    connect( reset_btn, SIGNAL(clicked()), &menu, SLOT(close()) );
+
+    menu.setFixedWidth( p->date_btn->width() );
+    menu.exec( p->date_btn->mapToGlobal(QPoint(0,p->date_btn->height())) );
+
+    if( ok_btn->isChecked() )
+    {
+        p->date_from = from_date->dateTime();
+        p->date_to   = to_date->dateTime();
+        p->date_btn->setText( tr("From: %1").arg(Kaqaz::instance()->convertDateTimeToLittleString(p->date_from.date())) + "\n" +
+                              tr("To: %1").arg(Kaqaz::instance()->convertDateTimeToLittleString(p->date_to.date())));
+    }
+    if( reset_btn->isChecked() )
+    {
+        p->date_from = QDateTime();
+        p->date_to   = QDateTime();
+        p->date_btn->setText( tr("Select Date") );
+    }
+
+    refreshResult();
+}
+
+void SearchPanel::showTimeDomain()
+{
+    DateWidget *from_time = new DateWidget();
+    from_time->setDateVisible(false);
+    from_time->setTimeText( tr("From time") );
+
+    DateWidget *to_time = new DateWidget();
+    to_time->setDateVisible(false);
+    to_time->setTimeText( tr("To time") );
+
+    QPushButton *ok_btn = new QPushButton();
+    ok_btn->setText("Ok");
+    ok_btn->setCheckable(true);
+
+    QPushButton *reset_btn = new QPushButton();
+    reset_btn->setText("Reset");
+    reset_btn->setCheckable(true);
+
+    QMenu menu;
+    QVBoxLayout *layout = new QVBoxLayout(&menu);
+    layout->addWidget(from_time);
+    layout->addWidget(to_time);
+    layout->addWidget(ok_btn);
+    layout->addWidget(reset_btn);
+    layout->setContentsMargins(6,6,6,6);
+    layout->setSpacing(1);
+
+    connect( ok_btn   , SIGNAL(clicked()), &menu, SLOT(close()) );
+    connect( reset_btn, SIGNAL(clicked()), &menu, SLOT(close()) );
+
+    menu.setFixedWidth( p->time_btn->width() );
+    menu.exec( p->time_btn->mapToGlobal(QPoint(0,p->time_btn->height())) );
+
+    if( ok_btn->isChecked() )
+    {
+        p->time_from = from_time->dateTime();
+        p->time_to   = to_time->dateTime();
+        p->time_btn->setText( tr("From: %1").arg(p->time_from.toString("hh:mm")) + "\n" +
+                              tr("To: %1").arg(p->time_to.toString("hh:mm")) );
+    }
+    if( reset_btn->isChecked() )
+    {
+        p->time_from = QDateTime();
+        p->time_to   = QDateTime();
+        p->time_btn->setText( tr("Select Time") );
+    }
+
+    refreshResult();
 }
 
 void SearchPanel::paintEvent(QPaintEvent *e)

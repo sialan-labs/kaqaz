@@ -53,12 +53,10 @@ PanelBox::PanelBox(QWidget *parent) :
 
     p->dates = new QListView(this);
     p->dates->setModel(p->dates_model);
-    p->dates->setVerticalScrollMode(QListView::ScrollPerPixel);
     p->dates->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     p->groups = new QListView(this);
     p->groups->setModel(p->groups_model);
-    p->groups->setVerticalScrollMode(QListView::ScrollPerPixel);
     p->groups->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     p->groups->setContextMenuPolicy(Qt::CustomContextMenu);
 

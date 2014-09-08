@@ -22,6 +22,7 @@
 #include <QTextDocument>
 #include <QAbstractTextDocumentLayout>
 #include <QPainter>
+#include <QDebug>
 
 void PaperViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
@@ -35,7 +36,7 @@ void PaperViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opt
 
     /// Painting item without text
     optionV4.text = QString();
-    optionV4.state = optionV4.state & !QStyle::State_Selected;
+    optionV4.state = QStyle::State_Enabled;
 
     QAbstractTextDocumentLayout::PaintContext ctx;
 

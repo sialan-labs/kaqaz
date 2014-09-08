@@ -36,6 +36,12 @@ public:
     void setTimeVisible( bool stt );
     bool timeVisible() const;
 
+    void setDateText( const QString & text );
+    QString dateText() const;
+
+    void setTimeText( const QString & text );
+    QString timeText() const;
+
     QDateTime dateTime() const;
 
 public slots:

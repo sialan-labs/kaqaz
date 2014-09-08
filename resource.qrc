@@ -190,5 +190,6 @@
         <file>qml/Kaqaz/helper/swype_right.png</file>
         <file>qml/Kaqaz/helper/title.png</file>
         <file>database/database.sqlite</file>
+        <file>qml/Kaqaz/files/paper-item.png</file>
     </qresource>
 </RCC>
