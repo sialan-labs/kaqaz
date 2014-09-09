@@ -64,6 +64,7 @@ Item {
             alignment: paper_todo.alignment
             font: paper_todo.font
             checkColor: paper_todo.color
+            visible: paper_todo.visible
         }
     }
 

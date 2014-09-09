@@ -72,6 +72,8 @@ Item {
         verticalAlignment: TextInput.AlignVCenter
         wrapMode: TextEdit.WrapAtWordBoundaryOrAnywhere
         Keys.onPressed: {
+            if( !todo_item.visible )
+                return
             if( event.key == Qt.Key_Return || event.key == Qt.Key_Enter ) {
                 if( event.modifiers == Qt.NoModifier ) {
                     todo_item.accepted(todo_item)

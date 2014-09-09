@@ -1,8 +1,8 @@
+folder_01.source = fonts
+folder_01.target = .
 folder_02.source = translations
 folder_02.target = files
-folder_03.source = fonts
-folder_03.target = .
-DEPLOYMENTFOLDERS = folder_02 folder_03
+DEPLOYMENTFOLDERS = folder_01 folder_02 folder_03
 
 QT += sql multimedia positioning qml quick
 
@@ -63,7 +63,8 @@ android {
         desktop/aboutdialog.h \
         desktop/simage.h \
         desktop/paperfilesview.h \
-        desktop/paperfilesmodel.h
+        desktop/paperfilesmodel.h \
+        desktop/todopapers.h
 
     SOURCES += \
         mimeapps.cpp \
@@ -91,7 +92,8 @@ android {
         desktop/aboutdialog.cpp \
         desktop/simage.cpp \
         desktop/paperfilesview.cpp \
-        desktop/paperfilesmodel.cpp
+        desktop/paperfilesmodel.cpp \
+        desktop/todopapers.cpp
 
     FORMS += \
         desktop/paperconfigure.ui \
@@ -172,15 +174,20 @@ isEmpty(PREFIX) {
     PREFIX = /usr
 }
 
-target = $$TARGET
-target.path = $$PREFIX/bin
-translations.files = $$TRANSLATIONS
-translations.path = $$PREFIX/share/kaqaz/files/translations
-fonts.files = $$FONTS
-fonts.path = $$PREFIX/share/kaqaz/fonts/
-icons.files = icons/kaqaz.png
-icons.path = $$PREFIX/share/kaqaz/icons/
-desktopFile.files = files/Kaqaz.desktop
-desktopFile.path = $$PREFIX/share/applications
+android {
+} else {
+linux {
+    target = $$TARGET
+    target.path = $$PREFIX/bin
+    translations.files = $$TRANSLATIONS
+    translations.path = $$PREFIX/share/kaqaz/files/translations
+    fonts.files = $$FONTS
+    fonts.path = $$PREFIX/share/kaqaz/fonts/
+    icons.files = icons/kaqaz.png
+    icons.path = $$PREFIX/share/kaqaz/icons/
+    desktopFile.files = files/Kaqaz.desktop
+    desktopFile.path = $$PREFIX/share/applications
 
-INSTALLS = target fonts translations icons desktopFile
+    INSTALLS = target fonts translations icons desktopFile
+}
+}

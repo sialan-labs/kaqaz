@@ -750,7 +750,7 @@ QString Kaqaz::sdcardPath() const
 QString Kaqaz::resourcePath()
 {
 #ifdef Q_OS_ANDROID
-    return "assets:/";
+    return "assets:";
 #else
     static QString *resourcePath = 0;
     if( !resourcePath )

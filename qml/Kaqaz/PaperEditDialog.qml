@@ -273,6 +273,11 @@ Item {
                     }
                 }
             }
+
+            Item {
+                width: 10
+                height: 100*physicalPlatformScale
+            }
         }
     }
 
