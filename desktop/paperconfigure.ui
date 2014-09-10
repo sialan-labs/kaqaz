@@ -39,7 +39,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QGroupBox" name="formGroupBox">
+       <widget class="QWidget" name="formWidget" native="true">
         <layout class="QFormLayout" name="formLayout">
          <property name="fieldGrowthPolicy">
           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
