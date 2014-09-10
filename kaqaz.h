@@ -111,6 +111,8 @@ public:
     Q_INVOKABLE QString profilePath() const;
     Q_INVOKABLE QString repositoryPath() const;
     Q_INVOKABLE QString sdcardPath() const;
+
+    static QString resourcePathAbs();
     static QString resourcePath();
 
     Q_INVOKABLE QString fromMSecSinceEpoch( qint64 t );

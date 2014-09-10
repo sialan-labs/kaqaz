@@ -16,9 +16,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define TOOLBAR_HEIGHT   40
-#define SYNC_PBAR_HEIGHT 8
-
 #include "kaqazdesktop.h"
 #include "kaqaz.h"
 #include "database.h"
@@ -53,6 +50,17 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QDebug>
+
+#ifdef Q_OS_WIN
+#include <QtWin>
+#endif
+
+#ifdef Q_OS_WIN
+#define TOOLBAR_HEIGHT   32
+#else
+#define TOOLBAR_HEIGHT   40
+#endif
+#define SYNC_PBAR_HEIGHT 8
 
 class KaqazDesktopPrivate
 {
@@ -103,10 +111,9 @@ KaqazDesktop::KaqazDesktop() :
 
     p->desktop = new SialanDesktopTools(this);
 
-    QFontDatabase::addApplicationFont( p->kaqaz->resourcePath() + "/fonts/DroidKaqazSans.ttf" );
+    QFontDatabase::addApplicationFont( p->kaqaz->resourcePathAbs() + "/fonts/DroidKaqazSans.ttf" );
 
     p->font.setPointSize(10);
-//    QApplication::setFont(p->font);
 
     resize( Kaqaz::instance()->size() );
 
@@ -116,6 +123,12 @@ KaqazDesktop::KaqazDesktop() :
 
     init_toolbar();
     init_mainWidget();
+
+#ifdef Q_OS_WIN
+    QtWin::enableBlurBehindWindow(this);
+    QtWin::extendFrameIntoClientArea(this,-1,-1,-1,-1);
+    setStyleSheet("KaqazDesktop{border: 0px solid transparent; background: transparent}");
+#endif
 }
 
 void KaqazDesktop::init_toolbar()
@@ -125,6 +138,12 @@ void KaqazDesktop::init_toolbar()
     p->rsync_act = new QAction( QIcon::fromTheme("view-refresh"), tr("Sync"), this );
     p->conf_act = new QAction( QIcon::fromTheme("configure"), tr("Configure"), this );
     p->about_act = new QAction( QIcon::fromTheme("help-about"), tr("About"), this );
+
+    QPalette palette;
+    palette.setColor( QPalette::Window, p->desktop->titleBarColor() );
+    palette.setColor( QPalette::WindowText, p->desktop->titleBarTextColor() );
+    palette.setColor( QPalette::Button, p->desktop->titleBarColor() );
+    palette.setColor( QPalette::ButtonText, p->desktop->titleBarTextColor() );
 
     p->toolbar = new QToolBar();
     p->toolbar->addAction(p->new_act);
@@ -136,22 +155,17 @@ void KaqazDesktop::init_toolbar()
     p->toolbar->addAction(p->about_act);
     p->toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     p->toolbar->setMovable(false);
+    p->toolbar->setPalette(palette);
+    p->toolbar->setStyleSheet("QToolBar{border: 0px solid transparent; background: transparent}");
 
     p->tabbar_layout = new QVBoxLayout();
     p->tabbar_layout->addStretch();
     p->tabbar_layout->setContentsMargins(0,0,0,0);
     p->tabbar_layout->setSpacing(0);
 
-    QPalette palette;
-    palette.setColor( QPalette::Window, p->desktop->titleBarColor() );
-    palette.setColor( QPalette::WindowText, p->desktop->titleBarTextColor() );
-    palette.setColor( QPalette::Button, p->desktop->titleBarColor() );
-    palette.setColor( QPalette::ButtonText, p->desktop->titleBarTextColor() );
-
     QWidget *wgt = new QWidget();
     wgt->setFixedHeight(TOOLBAR_HEIGHT);
 
-    p->toolbar->setPalette(palette);
     p->toolbar_layout = new QHBoxLayout(wgt);
     p->toolbar_layout->addWidget(p->toolbar);
     p->toolbar_layout->addLayout(p->tabbar_layout);
@@ -168,7 +182,9 @@ void KaqazDesktop::init_mainWidget()
 
     p->editor = new EditorViewManager(this);
 
-    p->tabbar_layout->addWidget(p->editor->tabBar());
+    p->tabbar = p->editor->tabBar();
+
+    p->tabbar_layout->addWidget(p->tabbar);
 
     p->splitter = new QSplitter();
     p->splitter->addWidget(p->panel);
@@ -354,7 +370,9 @@ void KaqazDesktop::paintEvent(QPaintEvent *e)
 {
     Q_UNUSED(e)
     QPainter painter(this);
+#ifndef Q_OS_WIN
     painter.fillRect(0,0,width(),TOOLBAR_HEIGHT,p->desktop->titleBarColor());
+#endif
     painter.fillRect(0,TOOLBAR_HEIGHT,width(),height()-TOOLBAR_HEIGHT,palette().window());
 }
 

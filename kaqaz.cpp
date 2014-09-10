@@ -185,6 +185,10 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->mimeApps = new MimeApps(this);
     QIcon::setThemeName("FaenzaFlattr");
 #endif
+#ifdef Q_OS_WIN
+    QIcon::setThemeSearchPaths( QStringList() << QCoreApplication::applicationDirPath() + "/files/icons/" );
+    QIcon::setThemeName("FaenzaFlattr");
+#endif
     QDir().mkpath(CAMERA_PATH);
 
     p->filesystem = new QFileSystemWatcher(this);
@@ -762,7 +766,7 @@ QString Kaqaz::sdcardPath() const
     return "/sdcard/Android/data/org.sialan.kaqaz";
 }
 
-QString Kaqaz::resourcePath()
+QString Kaqaz::resourcePathAbs()
 {
 #ifdef Q_OS_ANDROID
     return "assets:";
@@ -781,7 +785,16 @@ QString Kaqaz::resourcePath()
             resourcePath = new QString(QCoreApplication::applicationDirPath());
 #endif
     }
-    return "file://" + *resourcePath + "/";
+    return *resourcePath + "/";
+#endif
+}
+
+QString Kaqaz::resourcePath()
+{
+#ifdef Q_OS_ANDROID
+    return resourcePathAbs();
+#else
+    return "file://" + resourcePathAbs();
 #endif
 }
 
