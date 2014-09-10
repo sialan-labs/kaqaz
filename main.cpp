@@ -53,6 +53,11 @@ int main(int argc, char *argv[])
 #endif
 
     Kaqaz *kaqaz = Kaqaz::instance();
+#ifdef DESKTOP_DEVICE
+    if( app.arguments().contains("--touch") )
+        kaqaz->setDesktopTouchMode(true);
+#endif
+
     if( !kaqaz->start() )
         return 0;
 

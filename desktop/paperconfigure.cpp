@@ -88,7 +88,7 @@ void PaperConfigure::showConfigure(int paperId)
 {
     PaperConfigure *conf = paper_configure_objs.value(paperId);
     if( !conf )
-        conf = new PaperConfigure(paperId, Kaqaz::instance()->view() );
+        conf = new PaperConfigure(paperId, static_cast<QWidget*>(Kaqaz::instance()->view()) );
 
     conf->show();
 }

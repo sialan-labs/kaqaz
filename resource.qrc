@@ -194,5 +194,7 @@
         <file>qml/Kaqaz/files/paper-clip.png</file>
         <file>qml/Kaqaz/files/paper-clip-off.png</file>
         <file>qml/Kaqaz/files/add-desktop.png</file>
+        <file>qml/Kaqaz/KTextEdit.qml</file>
+        <file>qml/Kaqaz/KTextInput.qml</file>
     </qresource>
 </RCC>

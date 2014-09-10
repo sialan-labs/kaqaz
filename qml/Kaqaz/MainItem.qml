@@ -163,7 +163,7 @@ Rectangle {
         width: list.width
         x: main_item.parent.x + main_item.width - width
         clip: true
-        visible: !portrait
+        visible: !portrait && preferenceArray.length==0
 
         MirrorItem {
             source: background

@@ -131,7 +131,7 @@ Item {
             anchors.leftMargin: 40*physicalPlatformScale
             anchors.rightMargin: 40*physicalPlatformScale
 
-            TextInput{
+            KTextInput{
                 id: pass_placeholder
                 color: "#bbbbbb"
                 font.pixelSize: pass.font.pixelSize
@@ -143,7 +143,7 @@ Item {
                 visible: (!pass.focus && pass.text == "")
             }
 
-            TextInput{
+            KTextInput{
                 id: pass
                 color: "#333333"
                 font.pixelSize: 13*fontsScale

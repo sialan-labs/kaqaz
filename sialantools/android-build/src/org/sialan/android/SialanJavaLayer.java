@@ -15,6 +15,9 @@ import android.graphics.BitmapFactory;
 import android.view.WindowManager;
 import android.os.Build;
 import android.content.res.Configuration;
+import android.view.View;
+import android.view.Window;
+import android.graphics.Rect;
 
 import java.io.File;
 import java.io.InputStream;
@@ -61,6 +64,16 @@ public class SialanJavaLayer {
             msg = "";
 
         _sendNote(title,msg);
+    }
+
+    public static int menuHeight()
+    {
+        Rect r = new Rect();
+        Window window = SialanActivity.getActivityInstance().getWindow();
+        View rootview = window.getDecorView();
+        rootview.getWindowVisibleDisplayFrame(r);
+
+        return r.top;
     }
 
     public static void sendImage( Uri data ) {
@@ -187,6 +200,11 @@ public class SialanJavaLayer {
     boolean transparentStatusBar()
     {
         return SialanActivity.getActivityInstance().transparentStatusBar();
+    }
+
+    boolean transparentNavigationBar()
+    {
+        return SialanActivity.getActivityInstance().transparentNavigationBar();
     }
 
     int densityDpi()

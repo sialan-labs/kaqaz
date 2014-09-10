@@ -108,7 +108,7 @@ KaqazDesktop::KaqazDesktop() :
     p->font.setPointSize(10);
 //    QApplication::setFont(p->font);
 
-    resize( p->kaqaz->settings()->value("UserInterface/size",QSize(1024,600)).toSize() );
+    resize( Kaqaz::instance()->size() );
 
     p->main_layout = new QVBoxLayout(this);
     p->main_layout->setContentsMargins(0,0,0,0);
@@ -331,7 +331,7 @@ void KaqazDesktop::timerEvent(QTimerEvent *e)
         killTimer(p->resize_save_timer);
         p->resize_save_timer = 0;
 
-        p->kaqaz->settings()->setValue("UserInterface/size", size() );
+        Kaqaz::instance()->setSize(size());
     }
 
     QWidget::timerEvent(e);

@@ -47,11 +47,8 @@
 #include "iconprovider.h"
 #endif
 
-#ifdef KAQAZ_DESKTOP
-#include "desktop/kaqazdesktop.h"
-#endif
-
 #ifdef DESKTOP_DEVICE
+#include "desktop/kaqazdesktop.h"
 #include <QFileDialog>
 #endif
 
@@ -114,11 +111,11 @@ QSettings *kaqaz_settings = 0;
 class KaqazPrivate
 {
 public:
-#ifdef KAQAZ_DESKTOP
-    KaqazDesktop *viewer;
-#else
-    QQuickView *viewer;
+#ifdef DESKTOP_DEVICE
+    KaqazDesktop *viewer_classic;
 #endif
+
+    QQuickView *viewer;
 
     QString homePath;
     QString translationsPath;
@@ -130,6 +127,7 @@ public:
     bool keyboard;
 
     bool demo_active_until_next;
+    bool desktop_touch_mode;
 
     QTranslator *translator;
     KaqazSync *sync;
@@ -166,8 +164,13 @@ Kaqaz::Kaqaz(QObject *parent) :
 
     p = new KaqazPrivate;
     p->demo_active_until_next = false;
+    p->desktop_touch_mode = false;
     p->lock_timer = 0;
     p->keyboard = false;
+    p->viewer = 0;
+#ifdef DESKTOP_DEVICE
+    p->viewer_classic = 0;
+#endif
     p->translator = new QTranslator(this);
     p->calendar = new CalendarConverter();
     p->backuper = new Backuper();
@@ -234,49 +237,6 @@ Kaqaz::Kaqaz(QObject *parent) :
     qmlRegisterType<Enums>("Kaqaz", 1,0, "Enums");
     qmlRegisterType<SialanHashObject>("Kaqaz", 1,0, "HashObject");
     qmlRegisterType<SialanListObject>("Kaqaz", 1,0, "ListObject");
-
-#ifdef KAQAZ_DESKTOP
-    p->viewer = new KaqazDesktop();
-    p->viewer->setDatabase(kaqaz_database);
-    p->viewer->setRepository(p->repository);
-    p->viewer->setBackuper(p->backuper);
-    p->viewer->setKaqazSync(p->sync);
-    p->viewer->setSialanDevices(p->devices);
-    p->viewer->setSialanTools(p->tools);
-#ifdef DESKTOP_LINUX
-    p->viewer->setMimeApps(p->mimeApps);
-#endif
-#else
-    p->viewer = new QQuickView();
-    p->viewer->installEventFilter(this);
-    p->viewer->setResizeMode(QQuickView::SizeRootObjectToView);
-    p->viewer->engine()->rootContext()->setContextProperty( "kaqaz", this );
-    p->viewer->engine()->rootContext()->setContextProperty( "view", p->viewer );
-    p->viewer->engine()->rootContext()->setContextProperty( "database", kaqaz_database );
-    p->viewer->engine()->rootContext()->setContextProperty( "filesystem", p->filesystem );
-    p->viewer->engine()->rootContext()->setContextProperty( "repository", p->repository );
-    p->viewer->engine()->rootContext()->setContextProperty( "backuper", p->backuper );
-    p->viewer->engine()->rootContext()->setContextProperty( "sync", p->sync );
-    p->viewer->engine()->rootContext()->setContextProperty( "devices", p->devices );
-    p->viewer->engine()->rootContext()->setContextProperty( "tools", p->tools );
-#ifdef DESKTOP_LINUX
-    p->viewer->engine()->rootContext()->setContextProperty( "mimeApps", p->mimeApps );
-    p->viewer->engine()->addImageProvider( "icon", new IconProvider() );
-#endif
-    p->viewer->engine()->rootContext()->setContextProperty( "keyboard", QGuiApplication::inputMethod() );
-    if( !QGuiApplication::screens().isEmpty() )
-        p->viewer->engine()->rootContext()->setContextProperty( "screen", QGuiApplication::screens().first() );
-
-    connect(p->viewer->engine(), SIGNAL(quit()), SLOT(close()));
-#endif
-
-    connect( kaqaz_database, SIGNAL(fileDeleted(QString)), p->repository, SLOT(deleteFile(QString)) );
-
-    connect( p->devices, SIGNAL(incomingImage(QString)), SLOT(incomingImage(QString)) );
-    connect( p->devices, SIGNAL(incomingShare(QString,QString)), SLOT(incomingShare(QString,QString)) );
-    connect( p->devices, SIGNAL(selectImageResult(QString)), SLOT(selectImageResult(QString)) );
-    connect( p->devices, SIGNAL(activityPaused()), SLOT(activityPaused()) );
-    connect( p->devices, SIGNAL(activityResumed()), SLOT(activityResumed()) );
 }
 
 Kaqaz *Kaqaz::instance()
@@ -287,11 +247,7 @@ Kaqaz *Kaqaz::instance()
     return kaqaz_obj;
 }
 
-#ifdef KAQAZ_DESKTOP
-QWidget *Kaqaz::view()
-#else
-QWindow *Kaqaz::view()
-#endif
+QObject *Kaqaz::view()
 {
     return p->viewer;
 }
@@ -339,49 +295,108 @@ void Kaqaz::init_languages()
 
 bool Kaqaz::start()
 {
-#ifdef KAQAZ_DESKTOP
-    return p->viewer->start();
-#else
-    p->viewer->setSource(QStringLiteral("qrc:///qml/Kaqaz/kaqaz.qml"));
-    p->viewer->show();
-    return true;
+    if( p->viewer )
+        return true;
+
+#ifdef DESKTOP_DEVICE
+    if( !p->desktop_touch_mode )
+    {
+        p->viewer_classic = new KaqazDesktop();
+        p->viewer_classic->setDatabase(kaqaz_database);
+        p->viewer_classic->setRepository(p->repository);
+        p->viewer_classic->setBackuper(p->backuper);
+        p->viewer_classic->setKaqazSync(p->sync);
+        p->viewer_classic->setSialanDevices(p->devices);
+        p->viewer_classic->setSialanTools(p->tools);
+#ifdef DESKTOP_LINUX
+        p->viewer_classic->setMimeApps(p->mimeApps);
 #endif
+    }
+    else
+#endif
+    {
+        p->viewer = new QQuickView();
+        p->viewer->installEventFilter(this);
+        p->viewer->setResizeMode(QQuickView::SizeRootObjectToView);
+        p->viewer->engine()->rootContext()->setContextProperty( "kaqaz", this );
+        p->viewer->engine()->rootContext()->setContextProperty( "view", p->viewer );
+        p->viewer->engine()->rootContext()->setContextProperty( "database", kaqaz_database );
+        p->viewer->engine()->rootContext()->setContextProperty( "filesystem", p->filesystem );
+        p->viewer->engine()->rootContext()->setContextProperty( "repository", p->repository );
+        p->viewer->engine()->rootContext()->setContextProperty( "backuper", p->backuper );
+        p->viewer->engine()->rootContext()->setContextProperty( "sync", p->sync );
+        p->viewer->engine()->rootContext()->setContextProperty( "devices", p->devices );
+        p->viewer->engine()->rootContext()->setContextProperty( "tools", p->tools );
+#ifdef DESKTOP_LINUX
+        p->viewer->engine()->rootContext()->setContextProperty( "mimeApps", p->mimeApps );
+        p->viewer->engine()->addImageProvider( "icon", new IconProvider() );
+#endif
+        p->viewer->engine()->rootContext()->setContextProperty( "keyboard", QGuiApplication::inputMethod() );
+        if( !QGuiApplication::screens().isEmpty() )
+            p->viewer->engine()->rootContext()->setContextProperty( "screen", QGuiApplication::screens().first() );
+
+        connect(p->viewer->engine(), SIGNAL(quit()), SLOT(close()));
+    }
+
+    connect( kaqaz_database, SIGNAL(fileDeleted(QString)), p->repository, SLOT(deleteFile(QString)) );
+
+    connect( p->devices, SIGNAL(incomingImage(QString)), SLOT(incomingImage(QString)) );
+    connect( p->devices, SIGNAL(incomingShare(QString,QString)), SLOT(incomingShare(QString,QString)) );
+    connect( p->devices, SIGNAL(selectImageResult(QString)), SLOT(selectImageResult(QString)) );
+    connect( p->devices, SIGNAL(activityPaused()), SLOT(activityPaused()) );
+    connect( p->devices, SIGNAL(activityResumed()), SLOT(activityResumed()) );
+
+#ifdef DESKTOP_DEVICE
+    if( !p->desktop_touch_mode )
+    {
+        return p->viewer_classic->start();
+    }
+    else
+#endif
+    {
+        p->viewer->setSource(QStringLiteral("qrc:///qml/Kaqaz/kaqaz.qml"));
+        p->viewer->show();
+        return true;
+    }
 }
 
 void Kaqaz::incomingAppMessage(const QString &msg)
 {
     if( msg == "show" )
     {
-        p->viewer->show();
-#ifdef KAQAZ_DESKTOP
-        p->viewer->activateWindow();
-#else
-        p->viewer->requestActivate();
+#ifdef DESKTOP_DEVICE
+        if( !p->desktop_touch_mode )
+        {
+            p->viewer_classic->show();
+            p->viewer_classic->activateWindow();
+        }
+        else
 #endif
+        {
+            p->viewer->show();
+            p->viewer->requestActivate();
+        }
     }
 }
 
 void Kaqaz::incomingShare(const QString &title, const QString &msg)
 {
-#ifdef KAQAZ_DESKTOP
-    Q_UNUSED(title)
-    Q_UNUSED(msg)
-#else
+    if( !p->desktop_touch_mode )
+        return;
+
     QVariant title_var = title;
     QVariant msg_var = msg;
 
     QMetaObject::invokeMethod( p->viewer->rootObject(), "incomingShare", Q_ARG(QVariant,title_var), Q_ARG(QVariant,msg_var) );
-#endif
 }
 
 void Kaqaz::incomingImage(const QString &path)
 {
-#ifdef KAQAZ_DESKTOP
-    Q_UNUSED(path)
-#else
+    if( !p->desktop_touch_mode )
+        return;
+
     QVariant path_var = path;
     QMetaObject::invokeMethod( p->viewer->rootObject(), "incomingImage", Q_ARG(QVariant,path_var) );
-#endif
 }
 
 void Kaqaz::selectImageResult(const QString &path)
@@ -843,11 +858,12 @@ void Kaqaz::reconnectAllResources()
 {
     kaqaz_database->connect();
     refreshSettings();
-#ifdef KAQAZ_DESKTOP
-    p->viewer->refresh();
-#else
-    QMetaObject::invokeMethod( p->viewer->rootObject(), "refresh" );
+#ifdef DESKTOP_DEVICE
+    if( !p->desktop_touch_mode )
+        p->viewer_classic->refresh();
+    else
 #endif
+        QMetaObject::invokeMethod( p->viewer->rootObject(), "refresh" );
 }
 
 QString Kaqaz::fileName(const QString &path)
@@ -952,6 +968,44 @@ QFont Kaqaz::bodyFont() const
     font.setPointSize(10);
 
     return kaqaz_settings->value("General/bodyFont",font).value<QFont>();
+}
+
+void Kaqaz::setSize(const QSize &size)
+{
+#ifdef DESKTOP_DEVICE
+    if( !p->desktop_touch_mode )
+        kaqaz_settings->setValue("UserInterface/sizeClassic", size);
+    else
+        kaqaz_settings->setValue("UserInterface/size", size);
+#else
+    Q_UNUSED(size)
+#endif
+}
+
+QSize Kaqaz::size() const
+{
+#ifdef DESKTOP_DEVICE
+    if( !p->desktop_touch_mode )
+        return kaqaz_settings->value("UserInterface/sizeClassic", QSize(1024,640)).value<QSize>();
+    else
+        return kaqaz_settings->value("UserInterface/size",QSize(1024*p->devices->density(),600*p->devices->density())).value<QSize>();
+#else
+    return QSize(0,0);
+#endif
+}
+
+void Kaqaz::setDesktopTouchMode(bool stt)
+{
+    if( p->desktop_touch_mode == stt )
+        return;
+
+    p->desktop_touch_mode = stt;
+    emit desktopTouchModeChanged();
+}
+
+bool Kaqaz::desktopTouchMode() const
+{
+    return p->desktop_touch_mode;
 }
 
 QStringList Kaqaz::dirEntryFiles(const QString &path, const QStringList & filters)
@@ -1092,11 +1146,13 @@ void Kaqaz::timerEvent(QTimerEvent *e)
 {
     if( e->timerId() == p->lock_timer )
     {
-#ifdef KAQAZ_DESKTOP
-        p->viewer->lock();
-#else
-        QMetaObject::invokeMethod( p->viewer->rootObject(), "lock" );
+#ifdef DESKTOP_DEVICE
+        if( !p->desktop_touch_mode )
+            p->viewer_classic->lock();
+        else
 #endif
+            QMetaObject::invokeMethod( p->viewer->rootObject(), "lock" );
+
         killTimer( p->lock_timer );
         p->lock_timer = 0;
     }

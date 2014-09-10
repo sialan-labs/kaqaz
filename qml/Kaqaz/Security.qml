@@ -57,7 +57,7 @@ Item {
         anchors.leftMargin: 20*physicalPlatformScale
         anchors.rightMargin: 20*physicalPlatformScale
 
-        TextInput{
+        KTextInput{
             id: pass_placeholder
             color: "#bbbbbb"
             font.pixelSize: pass.font.pixelSize
@@ -69,7 +69,7 @@ Item {
             visible: (!pass.focus && pass.text == "")
         }
 
-        TextInput{
+        KTextInput{
             id: pass
             color: "#333333"
             font.pixelSize: 11*fontsScale
@@ -97,7 +97,7 @@ Item {
         anchors.leftMargin: 20*physicalPlatformScale
         anchors.rightMargin: 20*physicalPlatformScale
 
-        TextInput{
+        KTextInput{
             id: pass_repeat_placeholder
             color: "#bbbbbb"
             font.pixelSize: pass_repeat.font.pixelSize
@@ -109,7 +109,7 @@ Item {
             visible: (!pass_repeat.focus && pass_repeat.text == "")
         }
 
-        TextInput{
+        KTextInput{
             id: pass_repeat
             color: "#333333"
             font.pixelSize: 11*fontsScale

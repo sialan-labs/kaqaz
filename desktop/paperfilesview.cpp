@@ -143,7 +143,7 @@ void PaperFilesView::showFileMenu()
     }
     if( res == copy )
     {
-        const QString & dest = QFileDialog::getExistingDirectory(Kaqaz::instance()->view());
+        const QString & dest = QFileDialog::getExistingDirectory(0);
         if( dest.isEmpty() )
             return;
 

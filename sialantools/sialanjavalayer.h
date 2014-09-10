@@ -38,11 +38,14 @@ public:
     bool getOpenPictures();
 
     bool transparentStatusBar();
+    bool transparentNavigationBar();
 
     int densityDpi();
     int getSizeName();
     bool isTablet();
     qreal density();
+
+    QRect keyboardRect();
 
 signals:
     void incomingShare( const QString & title, const QString & msg );

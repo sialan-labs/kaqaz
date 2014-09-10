@@ -62,7 +62,7 @@ Item {
                      contentY = r.y+r.height-height;
              }
 
-             TextEdit {
+             KTextEdit {
                  id: desc
                  color: "#000000"
                  width: flick.width

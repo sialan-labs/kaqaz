@@ -2,7 +2,7 @@ folder_01.source = fonts
 folder_01.target = .
 folder_02.source = translations
 folder_02.target = files
-DEPLOYMENTFOLDERS = folder_01 folder_02 folder_03
+DEPLOYMENTFOLDERS = folder_01 folder_02
 
 QT += sql multimedia positioning qml quick
 
@@ -32,10 +32,6 @@ android {
     }
 } else {
     QT += widgets network
-
-    contains(BUILD_MODE,desktop) {
-        DEFINES += KAQAZ_DESKTOP
-    }
 
     HEADERS += \
         mimeapps.h \
@@ -187,7 +183,9 @@ linux {
     icons.path = $$PREFIX/share/kaqaz/icons/
     desktopFile.files = files/Kaqaz.desktop
     desktopFile.path = $$PREFIX/share/applications
+    desktopTouchFile.files = files/Kaqaz-touch.desktop
+    desktopTouchFile.path = $$PREFIX/share/applications
 
-    INSTALLS = target fonts translations icons desktopFile
+    INSTALLS = target fonts translations icons desktopFile desktopTouchFile
 }
 }

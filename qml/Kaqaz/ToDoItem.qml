@@ -63,7 +63,7 @@ Item {
         }
     }
 
-    TextEdit {
+    KTextEdit {
         id: txt
         anchors.top: parent.top
         anchors.bottom: parent.bottom

@@ -18,7 +18,7 @@
 
 import QtQuick 2.0
 
-TextEdit {
+KTextEdit {
     id: core
 
     property alias press: cpicker.press

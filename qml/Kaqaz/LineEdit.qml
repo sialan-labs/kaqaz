@@ -40,7 +40,7 @@ Rectangle {
         verticalAlignment: Text.AlignVCenter
     }
 
-    TextInput {
+    KTextInput {
         id: main_item
         anchors.fill: parent
         anchors.margins: 4*physicalPlatformScale

@@ -18,7 +18,7 @@
 
 import QtQuick 2.0
 
-TextInput {
+KTextInput {
     id: core
 
     property alias press: cpicker.press

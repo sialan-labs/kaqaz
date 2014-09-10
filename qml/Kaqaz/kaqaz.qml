@@ -22,8 +22,8 @@ import QtPositioning 5.2
 
 Rectangle {
     id: kaqaz_root
-    width: devices.isTouchDevice? 0 : 460*devices.density
-    height: devices.isTouchDevice? 0 : 680*devices.density
+    width: devices.isTouchDevice? 0 : kaqaz.size.width
+    height: devices.isTouchDevice? 0 : kaqaz.size.height
 
     property real fixedPortraitHeight: 0
     property real fixedLandscapeHeight: 0
@@ -40,7 +40,7 @@ Rectangle {
 
     property int globalInputMethodHints: kaqaz.keyboardPredicative? Qt.ImhNoPredictiveText : Qt.ImhNone
     property real statusBarHeight: devices.transparentStatusBar? 24*physicalPlatformScale : 0
-    property real navigationBarHeight: devices.transparentStatusBar? 45*physicalPlatformScale : 0
+    property real navigationBarHeight: devices.transparentNavigationBar? 45*physicalPlatformScale : 0
 
     property bool rotated: true
     property alias touchToBack: main.touchToBack
@@ -72,7 +72,14 @@ Rectangle {
 
     signal accessChanged()
 
-    onHeightChanged: refreshSizes()
+    onHeightChanged: {
+        size_save_timer.restart()
+        refreshSizes()
+    }
+    onWidthChanged: {
+        size_save_timer.restart()
+    }
+
     onLastSearchKeywordChanged: if(lastSearchKeyword.length==0) hideBottomPanel()
 
     function refreshSizes() {
@@ -91,6 +98,13 @@ Rectangle {
             if( !kaqaz.demoHasTrial() )
                 showSubMessage(Qt.createComponent("DemoLimited.qml"))
         }
+    }
+
+    Timer {
+        id: size_save_timer
+        interval: 300
+        repeat: false
+        onTriggered: kaqaz.size = Qt.size(width,height)
     }
 
     FontLoader{

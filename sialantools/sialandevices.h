@@ -51,7 +51,8 @@ class SialanDevices : public QObject
     Q_PROPERTY(qreal density     READ density     NOTIFY densityChanged     )
     Q_PROPERTY(qreal fontDensity READ fontDensity NOTIFY fontDensityChanged )
 
-    Q_PROPERTY(bool transparentStatusBar READ transparentStatusBar NOTIFY transparentStatusBarChanged)
+    Q_PROPERTY(bool transparentStatusBar     READ transparentStatusBar     NOTIFY transparentStatusBarChanged    )
+    Q_PROPERTY(bool transparentNavigationBar READ transparentNavigationBar NOTIFY transparentNavigationBarChanged)
 
     Q_PROPERTY(QString clipboard READ clipboard WRITE setClipboard NOTIFY clipboardChanged)
 
@@ -93,6 +94,7 @@ public:
     qreal fontDensity() const;
 
     bool transparentStatusBar() const;
+    bool transparentNavigationBar() const;
 
     QString clipboard() const;
     bool keyboard() const;
@@ -105,6 +107,8 @@ public:
 
 public slots:
     void hideKeyboard();
+    void showKeyboard();
+
     void share(const QString & subject, const QString & message );
     void openFile( const QString & address );
     void setClipboard( const QString & text );
@@ -141,6 +145,7 @@ signals:
     void lcdDpiYChanged();
 
     void transparentStatusBarChanged();
+    void transparentNavigationBarChanged();
 
     void densityDpiChanged();
     void densityChanged();

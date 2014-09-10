@@ -230,6 +230,15 @@ bool SialanDevices::transparentStatusBar() const
 #endif
 }
 
+bool SialanDevices::transparentNavigationBar() const
+{
+#ifdef Q_OS_ANDROID
+    return p->java_layer->transparentNavigationBar();
+#else
+    return false;
+#endif
+}
+
 int SialanDevices::densityDpi() const
 {
 #ifdef Q_OS_ANDROID
@@ -377,6 +386,16 @@ void SialanDevices::hideKeyboard()
     p->hide_keyboard_timer = startTimer(250);
 }
 
+void SialanDevices::showKeyboard()
+{
+    p->keyboard_signal_blocker = startTimer(1000);
+
+    QGuiApplication::inputMethod()->show();
+    p->keyboard_stt = true;
+
+    emit keyboardChanged();
+}
+
 void SialanDevices::share(const QString &subject, const QString &message)
 {
 #ifdef Q_OS_ANDROID
@@ -451,12 +470,6 @@ void SialanDevices::keyboard_changed()
         return;
 
     p->keyboard_stt = !p->keyboard_stt;
-    if( p->keyboard_stt )
-        QGuiApplication::inputMethod()->show();
-    else
-        QGuiApplication::inputMethod()->hide();
-
-    p->keyboard_signal_blocker = startTimer(1000);
     emit keyboardChanged();
 }
 
@@ -466,7 +479,12 @@ void SialanDevices::timerEvent(QTimerEvent *e)
     {
         killTimer(p->hide_keyboard_timer);
         p->hide_keyboard_timer = 0;
+
+        p->keyboard_signal_blocker = startTimer(500);
         QGuiApplication::inputMethod()->hide();
+        p->keyboard_stt = false;
+
+        emit keyboardChanged();
     }
     else
     if( e->timerId() == p->keyboard_signal_blocker )

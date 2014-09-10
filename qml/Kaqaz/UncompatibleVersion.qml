@@ -67,7 +67,7 @@ Image {
         anchors.leftMargin: 40*platformScale
         anchors.rightMargin: 40*platformScale
 
-        TextInput{
+        KTextInput{
             id: email
             color: "#333333"
             font.pixelSize: 13*platformScale

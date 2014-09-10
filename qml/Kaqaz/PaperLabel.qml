@@ -80,7 +80,7 @@ Item {
         anchors.fill: parent
     }
 
-    TextEdit{
+    KTextEdit{
         id: placeholder_text
         anchors.fill: txt
         font: txt.font

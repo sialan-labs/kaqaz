@@ -28,6 +28,8 @@
 #include <QFile>
 #include <QCoreApplication>
 #include <QTimer>
+#include <QScreen>
+#include <QGuiApplication>
 
 #include <jni.h>
 
@@ -99,6 +101,12 @@ bool SialanJavaLayer::transparentStatusBar()
     return res;
 }
 
+bool SialanJavaLayer::transparentNavigationBar()
+{
+    jboolean res = p->object.callMethod<jboolean>(__FUNCTION__, "()Z");
+    return res;
+}
+
 int SialanJavaLayer::densityDpi()
 {
     jint res = p->object.callMethod<jint>(__FUNCTION__, "()I" );
@@ -121,6 +129,47 @@ qreal SialanJavaLayer::density()
 {
     jfloat res = p->object.callMethod<jfloat>(__FUNCTION__, "()F" );
     return res;
+}
+
+QRect SialanJavaLayer::keyboardRect()
+{
+    jint jheight = p->object.callMethod<jfloat>("menuHeight", "()I" );
+    int menuheight = jheight;
+
+    const QList<QScreen*> & screens = QGuiApplication::screens();
+    if( screens.isEmpty() )
+        return QRect();
+
+    qDebug() << menuheight;
+
+    QScreen *screen = screens.first();
+    QRect rect = screen->availableGeometry();
+    QRect geom = screen->geometry();
+
+    rect.moveTop(rect.top() + menuheight);
+    geom.setTop(geom.top() + menuheight);
+
+    QRect final;
+
+    if (rect != geom)
+    {
+        int ftop, fleft, fwidth, fheight;
+
+        geom.getRect(&fleft, &ftop, &fwidth, &fheight);
+
+        if (rect.top() != ftop)
+            fheight = rect.top();
+        else if (rect.left() != fleft)
+            fwidth = rect.left();
+        else if (rect.height() != fheight)
+            ftop = rect.height();
+        else if (rect.width() != fwidth)
+            fleft = rect.width();
+
+        final = QRect(fleft, ftop, fwidth - fleft, fheight - ftop);
+    }
+
+    return final;
 }
 
 void SialanJavaLayer::load_buffer()

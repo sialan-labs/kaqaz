@@ -160,6 +160,7 @@ public class SialanActivity extends Activity
 
     private static SialanActivity instance;
     public boolean _transparentStatusBar = false;
+    public boolean _transparentNavigationBar = false;
     public static final int SELECT_IMAGE = 1;
 
 //    SialanActivity(){
@@ -172,6 +173,10 @@ public class SialanActivity extends Activity
 
     public boolean transparentStatusBar() {
         return _transparentStatusBar;
+    }
+
+    public boolean transparentNavigationBar() {
+        return _transparentNavigationBar;
     }
 
     // this function is used to load and start the loader
@@ -729,10 +734,15 @@ public class SialanActivity extends Activity
             SialanApplication.invokeDelegateMethod(SialanApplication.onCreate, savedInstanceState);
             return;
         }
+
+        Window w = getWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow(); // in Activity's onCreate() for instance
             w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            _transparentStatusBar = true;
+            _transparentNavigationBar = true;
+        } else {
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             _transparentStatusBar = true;
         }
 

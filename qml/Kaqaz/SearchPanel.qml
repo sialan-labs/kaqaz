@@ -81,7 +81,7 @@ Item {
         font: txt.font
     }
 
-    TextInput{
+    KTextInput{
         id: txt
         anchors.verticalCenter: back.verticalCenter
         anchors.left: icon.right

@@ -300,7 +300,7 @@ AnimationItem {
         clip: true
         z: 20
 
-        TextInput{
+        KTextInput{
             id: placeholder_txt
             anchors.fill: txt
             font: txt.font
