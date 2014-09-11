@@ -16,27 +16,37 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TODOPAPERS_H
-#define TODOPAPERS_H
+#ifndef PAPERTEXTAREA_H
+#define PAPERTEXTAREA_H
 
 #include <QWidget>
 
-class ToDoPapersPrivate;
-class ToDoPapers : public QWidget
+class PaperTextAreaPrivate;
+class PaperTextArea : public QWidget
 {
     Q_OBJECT
 public:
-    ToDoPapers(QWidget *parent = 0);
-    ~ToDoPapers();
+    PaperTextArea(QWidget *parent = 0);
+    ~PaperTextArea();
+
+    void setType( int t );
+    int type() const;
 
     void setText( const QString & text );
     QString text() const;
 
+    void setPlaceholderText( const QString & txt );
+    QString placeholderText() const;
+
 signals:
     void textChanged();
+    void typeChanged();
+
+private slots:
+    void text_changed();
 
 private:
-    ToDoPapersPrivate *p;
+    PaperTextAreaPrivate *p;
 };
 
-#endif // TODOPAPERS_H
+#endif // PAPERTEXTAREA_H

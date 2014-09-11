@@ -16,27 +16,20 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TODOPAPERS_H
-#define TODOPAPERS_H
+#include "todopapersitem.h"
 
-#include <QWidget>
-
-class ToDoPapersPrivate;
-class ToDoPapers : public QWidget
+class ToDoPapersItemPrivate
 {
-    Q_OBJECT
 public:
-    ToDoPapers(QWidget *parent = 0);
-    ~ToDoPapers();
-
-    void setText( const QString & text );
-    QString text() const;
-
-signals:
-    void textChanged();
-
-private:
-    ToDoPapersPrivate *p;
 };
 
-#endif // TODOPAPERS_H
+ToDoPapersItem::ToDoPapersItem(QWidget *parent) :
+    QWidget(parent)
+{
+    p = new ToDoPapersItemPrivate;
+}
+
+ToDoPapersItem::~ToDoPapersItem()
+{
+    delete p;
+}

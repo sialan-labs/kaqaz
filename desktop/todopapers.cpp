@@ -17,16 +17,57 @@
 */
 
 #include "todopapers.h"
+#include "todopapersitem.h"
+
+#include <QScrollArea>
+#include <QHBoxLayout>
 
 class ToDoPapersPrivate
 {
 public:
+    QWidget *base_wgt;
+    QHBoxLayout *base_layout;
+
+    QScrollArea *area;
+    QHBoxLayout *layout;
+
+    QString text;
+    QList<ToDoPapersItem*> items;
 };
 
 ToDoPapers::ToDoPapers(QWidget *parent) :
     QWidget(parent)
 {
     p = new ToDoPapersPrivate;
+
+    p->base_wgt = new QWidget();
+    p->base_layout = new QHBoxLayout(p->base_wgt);
+    p->base_layout->setContentsMargins(8,8,8,8);
+    p->base_layout->setSpacing(4);
+
+    p->area = new QScrollArea();
+    p->area->setWidget(p->base_wgt);
+
+    p->layout = new QHBoxLayout(this);
+    p->layout->addWidget(p->area);
+    p->layout->setContentsMargins(0,0,0,0);
+    p->layout->setSpacing(1);
+
+    setStyleSheet( "QScrollArea{border: 0px solid transparent; background: transparent}" );
+}
+
+void ToDoPapers::setText(const QString &text)
+{
+    if( p->text == text )
+        return;
+
+    p->text = text;
+    emit textChanged();
+}
+
+QString ToDoPapers::text() const
+{
+    return p->text;
 }
 
 ToDoPapers::~ToDoPapers()

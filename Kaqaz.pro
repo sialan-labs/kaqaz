@@ -63,7 +63,9 @@ android {
         desktop/paperfilesview.h \
         desktop/paperfilesmodel.h \
         desktop/todopapers.h \
-        desktop/scolor.h
+        desktop/scolor.h \
+        desktop/papertextarea.h \
+        desktop/todopapersitem.h
 
     SOURCES += \
         mimeapps.cpp \
@@ -93,7 +95,9 @@ android {
         desktop/paperfilesview.cpp \
         desktop/paperfilesmodel.cpp \
         desktop/todopapers.cpp \
-        desktop/scolor.cpp
+        desktop/scolor.cpp \
+        desktop/papertextarea.cpp \
+        desktop/todopapersitem.cpp
 
     FORMS += \
         desktop/paperconfigure.ui \

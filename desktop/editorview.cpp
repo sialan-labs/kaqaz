@@ -37,6 +37,7 @@
 #include "kaqazsync.h"
 #include "paperfilesview.h"
 #include "simage.h"
+#include "papertextarea.h"
 
 #include <QTextEdit>
 #include <QVBoxLayout>
@@ -63,7 +64,7 @@ public:
     QVBoxLayout *main_layout;
     QHBoxLayout *top_layout;
 
-    QTextEdit *body;
+    PaperTextArea *body;
     QLineEdit *title;
     GroupButton *group;
     QLabel *date;
@@ -126,7 +127,7 @@ EditorView::EditorView(QWidget *parent) :
     p->title->setFont(p->title_font);
     p->title->setStyleSheet("QLineEdit{background: transparent; border: 0px solid translarent}");
 
-    p->body = new QTextEdit();
+    p->body = new PaperTextArea();
     p->body->setPlaceholderText( tr("Text...") );
     p->body->setFont(p->body_font);
     p->body->setStyleSheet("QTextEdit{background: transparent; border: 0px solid translarent}");
@@ -221,7 +222,7 @@ void EditorView::save()
         p->paperId = db->createPaper();
 
     db->setSignalBlocker(true);
-    db->setPaper( p->paperId, p->title->text(), p->body->toPlainText(), p->group->group() );
+    db->setPaper( p->paperId, p->title->text(), p->body->text(), p->group->group() );
     db->setSignalBlocker(false);
 
     p->attach_img = SImage(*paper_clip).colorize(db->groupColor(p->group->group()).rgba());
