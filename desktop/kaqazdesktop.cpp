@@ -176,7 +176,7 @@ void KaqazDesktop::init_toolbar()
     p->toolbar->setMovable(false);
     p->toolbar->setPalette(palette);
     p->toolbar->setIconSize(QSize(22,22));
-#ifdef Q_OS_WIN
+#ifndef Q_OS_LINUX
     p->toolbar->setStyleSheet("QToolBar{border: 0px solid transparent; background: transparent}");
 #endif
 

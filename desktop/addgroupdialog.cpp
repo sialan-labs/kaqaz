@@ -86,6 +86,7 @@ AddGroupDialog::AddGroupDialog(int gid, QWidget *parent) :
 
     p->color = new QColorDialog();
     p->color->setWindowFlags(Qt::Widget);
+    p->color->setOption( QColorDialog::DontUseNativeDialog, true );
 
     p->name_line = new QLineEdit();
     p->name_line->setPlaceholderText( tr("Label Name") );
@@ -105,7 +106,11 @@ AddGroupDialog::AddGroupDialog(int gid, QWidget *parent) :
     connect( p->color, SIGNAL(rejected()), SLOT(close())  );
 
     setWindowTitle(tr("Add Label"));
+#ifdef Q_OS_MAC
+    setFixedSize(687,478);
+#else
     setFixedSize(607,438);
+#endif
 
     if( p->groupId != -1 )
     {

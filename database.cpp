@@ -607,7 +607,7 @@ int Database::paperType(int id)
 void Database::setPaperType(int id, int type)
 {
     PaperClass paper = getPaper(id);
-    if( paper.type == -1 )
+    if( type == -1 )
         return;
     if( paper.type == type )
         return;
