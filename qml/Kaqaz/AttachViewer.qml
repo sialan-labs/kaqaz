@@ -144,8 +144,13 @@ Item {
 
             MouseArea{
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
                 onClicked: attach_list.edited = item.fileId
                 onPressed: hideRollerDialog()
+                onDoubleClicked: {
+                    var p = kaqaz.cacheFile(item.path)
+                    devices.openFile( "file://" + p )
+                }
             }
 
             Item {

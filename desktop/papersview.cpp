@@ -60,6 +60,10 @@ PapersView::PapersView(QWidget *parent) :
                   "QScrollBar::add-line:vertical { border: 0px solid transparent; background: transparent; height: 0px; subcontrol-position: bottom; subcontrol-origin: margin; }"
                   "QScrollBar::sub-line:vertical { border: 0px solid transparent; background: transparent; height: 0px; subcontrol-position: top; subcontrol-origin: margin; }");
 
+#ifdef Q_OS_MAC
+    setFocusPolicy(Qt::NoFocus);
+#endif
+
     connect( this, SIGNAL(clicked(QModelIndex))              , SLOT(paper_selected(QModelIndex)) );
     connect( this, SIGNAL(doubleClicked(QModelIndex))        , SLOT(paper_opened(QModelIndex))   );
     connect( this, SIGNAL(customContextMenuRequested(QPoint)), SLOT(showPaperMenu())             );

@@ -183,10 +183,9 @@ Kaqaz::Kaqaz(QObject *parent) :
 
 #ifdef DESKTOP_LINUX
     p->mimeApps = new MimeApps(this);
-    QIcon::setThemeName("FaenzaFlattr");
 #endif
-#ifdef Q_OS_WIN
-    QIcon::setThemeSearchPaths( QStringList() << QCoreApplication::applicationDirPath() + "/files/icons/" );
+#ifdef DESKTOP_DEVICE
+    QIcon::setThemeSearchPaths( QStringList() << resourcePathAbs() + "/files/icons/" );
     QIcon::setThemeName("FaenzaFlattr");
 #endif
     QDir().mkpath(CAMERA_PATH);

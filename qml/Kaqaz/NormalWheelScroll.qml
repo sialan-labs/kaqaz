@@ -19,14 +19,30 @@
 import QtQuick 2.0
 
 MouseArea {
-    anchors.fill: parent
+    anchors.fill: flick
 
     property Flickable flick
 
     onPressed: mouse.accepted = false
     onWheel: {
         wheel.accepted = true
-        flick.contentY -= wheel.angleDelta.y/2
+        if( flick.orientation ) {
+            if( flick.orientation == Qt.Horizontal )
+                flick.contentX -= wheel.angleDelta.y/2
+            else
+                flick.contentY -= wheel.angleDelta.y/2
+        } else {
+            if( flick.flickableDirection == Flickable.HorizontalFlick )
+                flick.contentY -= wheel.angleDelta.y/2
+            else
+            if( flick.flickableDirection == Flickable.VerticalFlick )
+                flick.contentX -= wheel.angleDelta.y/2
+            else {
+                flick.contentY -= wheel.angleDelta.y/2
+                flick.contentX -= wheel.angleDelta.x/2
+            }
+        }
+
         flick.returnToBounds()
     }
 }

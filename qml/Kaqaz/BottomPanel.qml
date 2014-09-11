@@ -25,6 +25,7 @@ Rectangle {
     anchors.bottom: parent.bottom
     color: "#D9D9D9"
     height: 0
+    clip: true
 
     property variant item
     property bool destroyOnHide: false

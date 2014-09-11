@@ -35,6 +35,7 @@ Rectangle {
     property variant backHandler
 
     property real panelHeight: 50*physicalPlatformScale
+    property alias panelWidth: panel.width
 
     property alias touchToBack: back_area.visible
     property alias darkBackground: dark_background.visible
@@ -294,6 +295,7 @@ Rectangle {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 visible: portrait
+                anim_time: portrait? 250 : 10
                 onItemSelected: {
                     stack_switcher.show(id, type)
                 }

@@ -108,7 +108,7 @@ Item {
             more = !more
             devices.hideKeyboard()
             if( more )
-                privates.moreDialog = showBottomPanel(more_dialog_component)
+                privates.moreDialog = showBottomPanel(more_dialog_component,portrait)
             else
                 hideBottomPanel()
         }

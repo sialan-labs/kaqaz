@@ -231,8 +231,10 @@ Rectangle {
         showBottomPanel( Qt.createComponent("SearchHideHighlights.qml") )
     }
 
-    function showBottomPanel( component ){
+    function showBottomPanel( component, fullWidth ){
         hideBottomPanel()
+        bottom_panel.anchors.rightMargin = fullWidth? 0 : main.panelWidth
+
         var item = component.createObject(bottom_panel);
         bottom_panel.item = item
         return item

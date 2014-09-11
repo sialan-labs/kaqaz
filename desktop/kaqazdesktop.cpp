@@ -31,6 +31,7 @@
 #include "editorview.h"
 #include "editorviewmanager.h"
 #include "configurepage.h"
+#include "scolor.h"
 #include "addgroupdialog.h"
 #include "sialantools/sialandesktoptools.h"
 
@@ -49,6 +50,7 @@
 #include <QProgressBar>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QStyleFactory>
 #include <QDebug>
 
 #ifdef Q_OS_WIN
@@ -58,7 +60,11 @@
 #ifdef Q_OS_WIN
 #define TOOLBAR_HEIGHT   32
 #else
+#ifdef Q_OS_MAC
+#define TOOLBAR_HEIGHT   34
+#else
 #define TOOLBAR_HEIGHT   40
+#endif
 #endif
 #define SYNC_PBAR_HEIGHT 8
 
@@ -68,6 +74,7 @@ public:
     Kaqaz *kaqaz;
     SialanDesktopTools *desktop;
 
+    QWidget *main_widget;
     QVBoxLayout *main_layout;
 
     QHBoxLayout *toolbar_layout;
@@ -102,7 +109,7 @@ public:
 };
 
 KaqazDesktop::KaqazDesktop() :
-    QWidget()
+    QMainWindow()
 {
     p = new KaqazDesktopPrivate;
     p->splitter_save_timer = 0;
@@ -117,7 +124,19 @@ KaqazDesktop::KaqazDesktop() :
 
     resize( Kaqaz::instance()->size() );
 
-    p->main_layout = new QVBoxLayout(this);
+#ifdef Q_OS_MAC
+    QToolBar *mac_toolbar = new QToolBar();
+    mac_toolbar->setFixedHeight(TOOLBAR_HEIGHT);
+    mac_toolbar->setMovable(false);
+
+    addToolBar(mac_toolbar);
+    setUnifiedTitleAndToolBarOnMac(true);
+#endif
+
+    p->main_widget = new QWidget(this);
+    p->main_widget->resize(size());
+
+    p->main_layout = new QVBoxLayout(p->main_widget);
     p->main_layout->setContentsMargins(0,0,0,0);
     p->main_layout->setSpacing(0);
 
@@ -156,7 +175,10 @@ void KaqazDesktop::init_toolbar()
     p->toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     p->toolbar->setMovable(false);
     p->toolbar->setPalette(palette);
+    p->toolbar->setIconSize(QSize(22,22));
+#ifdef Q_OS_WIN
     p->toolbar->setStyleSheet("QToolBar{border: 0px solid transparent; background: transparent}");
+#endif
 
     p->tabbar_layout = new QVBoxLayout();
     p->tabbar_layout->addStretch();
@@ -177,12 +199,22 @@ void KaqazDesktop::init_toolbar()
 
 void KaqazDesktop::init_mainWidget()
 {
-    p->panel = new PanelBox(this);
-    p->papers_view = new PapersView(this);
+    p->panel = new PanelBox();
+    p->papers_view = new PapersView();
+    p->editor = new EditorViewManager();
 
-    p->editor = new EditorViewManager(this);
+    SColor titleBarColor = p->desktop->titleBarColor();
+    if( p->desktop->titleBarIsDark() )
+        titleBarColor = titleBarColor*1.3;
+
+    QPalette palette;
+    palette.setColor( QPalette::Window, titleBarColor );
+    palette.setColor( QPalette::WindowText, p->desktop->titleBarTextColor() );
 
     p->tabbar = p->editor->tabBar();
+    p->tabbar->setStyle( QStyleFactory::create("Fusion") );
+    p->tabbar->setDrawBase(false);
+    p->tabbar->setPalette(palette);
 
     p->tabbar_layout->addWidget(p->tabbar);
 
@@ -196,7 +228,7 @@ void KaqazDesktop::init_mainWidget()
 
     p->main_layout->addWidget(p->splitter);
 
-    p->sync_pbar = new QProgressBar(this);
+    p->sync_pbar = new QProgressBar(p->main_widget);
     p->sync_pbar->resize( p->editor->width(), SYNC_PBAR_HEIGHT );
     p->sync_pbar->move( width()-p->sync_pbar->width(), height()-SYNC_PBAR_HEIGHT );
     p->sync_pbar->setTextVisible(false);
@@ -360,6 +392,7 @@ void KaqazDesktop::resizeEvent(QResizeEvent *e)
 
     p->resize_save_timer = startTimer(500);
 
+    p->main_widget->resize(size());
     p->sync_pbar->resize( p->editor->width(), SYNC_PBAR_HEIGHT );
     p->sync_pbar->move( width()-p->sync_pbar->width(), height()-SYNC_PBAR_HEIGHT );
 

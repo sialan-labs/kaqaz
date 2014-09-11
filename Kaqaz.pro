@@ -1,8 +1,10 @@
-folder_01.source = fonts
+folder_01.source = files/fonts
 folder_01.target = .
-folder_02.source = translations
+folder_02.source = files/translations
 folder_02.target = files
-DEPLOYMENTFOLDERS = folder_01 folder_02
+folder_03.source = files/FaenzaFlattr
+folder_03.target = files/icons/
+DEPLOYMENTFOLDERS = folder_01 folder_02 folder_03
 
 QT += sql multimedia positioning qml quick
 
@@ -60,7 +62,8 @@ android {
         desktop/simage.h \
         desktop/paperfilesview.h \
         desktop/paperfilesmodel.h \
-        desktop/todopapers.h
+        desktop/todopapers.h \
+        desktop/scolor.h
 
     SOURCES += \
         mimeapps.cpp \
@@ -89,7 +92,8 @@ android {
         desktop/simage.cpp \
         desktop/paperfilesview.cpp \
         desktop/paperfilesmodel.cpp \
-        desktop/todopapers.cpp
+        desktop/todopapers.cpp \
+        desktop/scolor.cpp
 
     FORMS += \
         desktop/paperconfigure.ui \
@@ -103,7 +107,7 @@ android {
 
 win32 {
     QT += winextras
-    RC_FILE = kaqaz.rc
+    RC_FILE = files/kaqaz.rc
 }
 
 SOURCES += main.cpp \
@@ -142,12 +146,12 @@ HEADERS += \
     searchhighlighter.h
 
 TRANSLATIONS += \
-    translations_sources/lang-en.ts \
-    translations_sources/lang-fa.ts
+    files/translations/lang-en.qm \
+    files/translations/lang-fa.qm
 
 FONTS += \
-    fonts/DroidKaqazSans.ttf \
-    fonts/DroidSansMono.ttf
+    files/fonts/DroidKaqazSans.ttf \
+    files/fonts/DroidSansMono.ttf
 
 OTHER_FILES += \
     android/pro/AndroidManifest.xml \
@@ -156,7 +160,7 @@ OTHER_FILES += \
     android-build/src/org/sialan/android/SialanApplication.java \
     android-build/src/org/sialan/android/SialanJavaLayer.java \
     iOS/Info.plist \
-    database/database.sqlite
+    files/database/database.sqlite
 
 RESOURCES += \
     resource.qrc
@@ -179,13 +183,15 @@ linux {
     translations.path = $$PREFIX/share/kaqaz/files/translations
     fonts.files = $$FONTS
     fonts.path = $$PREFIX/share/kaqaz/fonts/
-    icons.files = icons/kaqaz.png
+    icons.files = files/icons/kaqaz.png
     icons.path = $$PREFIX/share/kaqaz/icons/
-    desktopFile.files = files/Kaqaz.desktop
+    faenza.files = files/FaenzaFlattr
+    faenza.path = $$PREFIX/share/kaqaz/files/icons/
+    desktopFile.files = files/shortcuts/Kaqaz.desktop
     desktopFile.path = $$PREFIX/share/applications
-    desktopTouchFile.files = files/Kaqaz-touch.desktop
+    desktopTouchFile.files = files/shortcuts/Kaqaz-touch.desktop
     desktopTouchFile.path = $$PREFIX/share/applications
 
-    INSTALLS = target fonts translations icons desktopFile desktopTouchFile
+    INSTALLS = target fonts translations icons desktopFile desktopTouchFile faenza
 }
 }

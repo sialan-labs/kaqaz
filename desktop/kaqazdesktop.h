@@ -19,7 +19,7 @@
 #ifndef KAQAZDESKTOP_H
 #define KAQAZDESKTOP_H
 
-#include <QWidget>
+#include <QMainWindow>
 
 class MimeApps;
 class SialanTools;
@@ -30,7 +30,7 @@ class Repository;
 class Database;
 class Kaqaz;
 class KaqazDesktopPrivate;
-class KaqazDesktop : public QWidget
+class KaqazDesktop : public QMainWindow
 {
     Q_OBJECT
 public:

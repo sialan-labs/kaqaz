@@ -54,8 +54,12 @@ EditorViewManager::EditorViewManager(QWidget *parent) :
     p->tabbar->setUsesScrollButtons(true);
     p->tabbar->setFocusPolicy(Qt::NoFocus);
     p->tabbar->addTab( tr("Main Paper") );
-    p->tabbar->tabButton(0, QTabBar::RightSide)->setDisabled(true);
     p->tabbar->setContextMenuPolicy(Qt::CustomContextMenu);
+    QWidget *tab_wgt = p->tabbar->tabButton(0, QTabBar::RightSide);
+    if( !tab_wgt )
+        tab_wgt = p->tabbar->tabButton(0, QTabBar::LeftSide);
+    if( tab_wgt )
+        tab_wgt->setDisabled(true);
 
     p->tabs << 0;
 

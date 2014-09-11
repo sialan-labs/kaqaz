@@ -62,7 +62,7 @@ Item {
         y: 60*physicalPlatformScale
         width: parent.width-2*x
         text: paperItem && paperItem.text.length!=0? paperItem.text: qsTr("Untitled Paper")
-        font.pixelSize: 25*fontsScale
+        font.pixelSize: devices.isMobile? 22*fontsScale : 25*fontsScale
         font.weight: Font.Light
         font.family: globalFontFamily
         color: "#333333"
@@ -77,7 +77,7 @@ Item {
         width: parent.width-2*x
         anchors.top: title.bottom
         text: paperItem? paperItem.bodyText : ""
-        font.pixelSize: 10*fontsScale
+        font.pixelSize: devices.isMobile? 9*fontsScale : 10*fontsScale
         font.weight: Font.Light
         font.family: globalFontFamily
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
@@ -109,7 +109,7 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: 13*fontsScale
+                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Share Paper")
                 onClicked: {
@@ -137,7 +137,7 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: 13*fontsScale
+                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Force sync")
                 onClicked: {
@@ -156,13 +156,13 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: 13*fontsScale
+                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Paper Type")
 //                visible: false
                 onClicked: {
                     if( !paperTypeObj )
-                        paperTypeObj = showBottomPanel(paper_type_component)
+                        paperTypeObj = showBottomPanel(paper_type_component,true)
                 }
 
                 property variant paperTypeObj
@@ -176,12 +176,12 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: 13*fontsScale
+                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Update Date")
                 onClicked: {
                     if( !dateChooser )
-                        dateChooser = showBottomPanel(date_component)
+                        dateChooser = showBottomPanel(date_component,true)
                 }
 
                 property variant dateChooser
@@ -194,7 +194,7 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: 13*fontsScale
+                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Update Location")
                 visible: !map_image.visible
@@ -240,7 +240,8 @@ Item {
                     id: delete_confirm_text
                     width: column.width
                     font.weight: Font.Normal
-                    font.pixelSize: 15*fontsScale
+                    font.pixelSize: devices.isMobile? 13*fontsScale : 15*fontsScale
+                    font.family: globalFontFamily
                     font.bold: false
                     anchors.bottom: delete_btn.top
                     color: "#ff5532"
@@ -256,7 +257,7 @@ Item {
                     highlightColor: "#ff5532"
                     textColor: press? "#ffffff" : "#ff5532"
                     textFont.weight: Font.Normal
-                    textFont.pixelSize: 13*fontsScale
+                    textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
                     textFont.bold: false
                     text: qsTr("Delete Paper")
                     onClicked: {
@@ -307,7 +308,7 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: 13*fontsScale
+                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Normal")
                 onClicked: {
@@ -323,7 +324,7 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: 13*fontsScale
+                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("To-Do")
                 onClicked: {

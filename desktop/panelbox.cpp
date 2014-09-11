@@ -55,6 +55,7 @@ PanelBox::PanelBox(QWidget *parent) :
     p->dates->setModel(p->dates_model);
     p->dates->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     p->dates->setStyleSheet("QListView{ background: #333333; border: 0px solid transparent }"
+                            "QListView:focus{ border: 0px solid transparent }"
                             "QListView::item{ color: #ffffff }"
                             "QListView::item:selected{ background: palette(highlight) }");
 
@@ -63,8 +64,14 @@ PanelBox::PanelBox(QWidget *parent) :
     p->groups->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     p->groups->setContextMenuPolicy(Qt::CustomContextMenu);
     p->groups->setStyleSheet("QListView{ background: #333333; border: 0px solid transparent }"
+                             "QListView:focus{ border: 0px solid transparent }"
                              "QListView::item{ color: #ffffff }"
                              "QListView::item:selected{ background: palette(highlight) }");
+
+#ifdef Q_OS_MAC
+    p->dates->setFocusPolicy(Qt::NoFocus);
+    p->groups->setFocusPolicy(Qt::NoFocus);
+#endif
 
     p->search = new SearchPanel();
 
