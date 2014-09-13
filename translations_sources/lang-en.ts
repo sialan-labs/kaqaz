@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.1">
 <context>
     <name>About</name>
     <message>
@@ -78,17 +78,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/aboutdialog.ui" line="404"/>
+        <location filename="../desktop/aboutdialog.ui" line="391"/>
+        <source>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../desktop/aboutdialog.ui" line="417"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;http://labs.sialan.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;labs.sialan.org&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/aboutdialog.ui" line="434"/>
+        <location filename="../desktop/aboutdialog.ui" line="447"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/aboutdialog.ui" line="496"/>
+        <location filename="../desktop/aboutdialog.ui" line="509"/>
         <source>Donate Us</source>
         <translation type="unfinished"></translation>
     </message>
@@ -114,12 +119,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/addgroupdialog.cpp" line="91"/>
+        <location filename="../desktop/addgroupdialog.cpp" line="92"/>
         <source>Label Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/addgroupdialog.cpp" line="107"/>
+        <location filename="../desktop/addgroupdialog.cpp" line="108"/>
         <source>Add Label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -163,17 +168,17 @@
 <context>
     <name>AttachViewer</name>
     <message>
-        <location filename="../qml/Kaqaz/AttachViewer.qml" line="268"/>
+        <location filename="../qml/Kaqaz/AttachViewer.qml" line="273"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/AttachViewer.qml" line="269"/>
+        <location filename="../qml/Kaqaz/AttachViewer.qml" line="274"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/AttachViewer.qml" line="270"/>
+        <location filename="../qml/Kaqaz/AttachViewer.qml" line="275"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -628,12 +633,12 @@
 <context>
     <name>EditorView</name>
     <message>
-        <location filename="../desktop/editorview.cpp" line="124"/>
+        <location filename="../desktop/editorview.cpp" line="125"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/editorview.cpp" line="130"/>
+        <location filename="../desktop/editorview.cpp" line="131"/>
         <source>Text...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -646,17 +651,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/editorviewmanager.cpp" line="100"/>
+        <location filename="../desktop/editorviewmanager.cpp" line="104"/>
         <source>New Paper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/editorviewmanager.cpp" line="149"/>
+        <location filename="../desktop/editorviewmanager.cpp" line="153"/>
         <source>Properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/editorviewmanager.cpp" line="150"/>
+        <location filename="../desktop/editorviewmanager.cpp" line="154"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -687,17 +692,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="102"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="103"/>
+        <source>Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="104"/>
         <source>Word suggestions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="103"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="105"/>
         <source>Groups count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="119"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="121"/>
         <source>General Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -862,77 +872,77 @@ left to select categories.</source>
 <context>
     <name>Kaqaz</name>
     <message>
-        <location filename="../kaqaz.cpp" line="621"/>
+        <location filename="../kaqaz.cpp" line="655"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="622"/>
+        <location filename="../kaqaz.cpp" line="656"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="623"/>
+        <location filename="../kaqaz.cpp" line="657"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="624"/>
+        <location filename="../kaqaz.cpp" line="658"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="625"/>
+        <location filename="../kaqaz.cpp" line="659"/>
         <source>4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="626"/>
+        <location filename="../kaqaz.cpp" line="660"/>
         <source>5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="627"/>
+        <location filename="../kaqaz.cpp" line="661"/>
         <source>6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="628"/>
+        <location filename="../kaqaz.cpp" line="662"/>
         <source>7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="629"/>
+        <location filename="../kaqaz.cpp" line="663"/>
         <source>8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="630"/>
+        <location filename="../kaqaz.cpp" line="664"/>
         <source>9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="491"/>
+        <location filename="../kaqaz.cpp" line="525"/>
         <source>Gregorian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="452"/>
+        <location filename="../kaqaz.cpp" line="486"/>
         <source>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="453"/>
+        <location filename="../kaqaz.cpp" line="487"/>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="494"/>
+        <location filename="../kaqaz.cpp" line="528"/>
         <source>Jalali</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="497"/>
+        <location filename="../kaqaz.cpp" line="531"/>
         <source>Hijri</source>
         <translation type="unfinished"></translation>
     </message>
@@ -940,47 +950,47 @@ left to select categories.</source>
 <context>
     <name>KaqazDesktop</name>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="123"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="155"/>
         <source>Add Paper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="124"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="156"/>
         <source>Add Label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="125"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="157"/>
         <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="126"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="158"/>
         <source>Configure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="127"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="159"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="243"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="291"/>
         <source>Kaqaz security</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="243"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="291"/>
         <source>Please enter password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="247"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="295"/>
         <source>Incorrect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="247"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="295"/>
         <source>Password is incorrect!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1001,12 +1011,12 @@ left to select categories.</source>
 <context>
     <name>MainItem</name>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="121"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="122"/>
         <source>Press again to exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="550"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="552"/>
         <source>List is empty</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1063,37 +1073,37 @@ left to select categories.</source>
 <context>
     <name>PanelBox</name>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="65"/>
+        <location filename="../desktop/panelbox.cpp" line="78"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="66"/>
+        <location filename="../desktop/panelbox.cpp" line="79"/>
         <source>Labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="67"/>
+        <location filename="../desktop/panelbox.cpp" line="80"/>
         <source>Dates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="109"/>
+        <location filename="../desktop/panelbox.cpp" line="119"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="110"/>
+        <location filename="../desktop/panelbox.cpp" line="120"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="125"/>
+        <location filename="../desktop/panelbox.cpp" line="135"/>
         <source>Delete Label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/panelbox.cpp" line="125"/>
+        <location filename="../desktop/panelbox.cpp" line="135"/>
         <source>Do you realy want to delete &quot;%1&quot;?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1192,27 +1202,27 @@ left to select categories.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="247"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="248"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="261"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="262"/>
         <source>Delete Paper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="307"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="313"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="323"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="329"/>
         <source>To-Do</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="353"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="359"/>
         <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1220,27 +1230,27 @@ left to select categories.</source>
 <context>
     <name>PaperFilesView</name>
     <message>
-        <location filename="../desktop/paperfilesview.cpp" line="117"/>
+        <location filename="../desktop/paperfilesview.cpp" line="130"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/paperfilesview.cpp" line="118"/>
+        <location filename="../desktop/paperfilesview.cpp" line="131"/>
         <source>Copy To</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/paperfilesview.cpp" line="119"/>
+        <location filename="../desktop/paperfilesview.cpp" line="132"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/paperfilesview.cpp" line="142"/>
+        <location filename="../desktop/paperfilesview.cpp" line="155"/>
         <source>Delete File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/paperfilesview.cpp" line="142"/>
+        <location filename="../desktop/paperfilesview.cpp" line="155"/>
         <source>Do you realy want to delete selected file?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1272,22 +1282,22 @@ left to select categories.</source>
 <context>
     <name>PapersView</name>
     <message>
-        <location filename="../desktop/papersview.cpp" line="93"/>
+        <location filename="../desktop/papersview.cpp" line="97"/>
         <source>Properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/papersview.cpp" line="94"/>
+        <location filename="../desktop/papersview.cpp" line="98"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/papersview.cpp" line="108"/>
+        <location filename="../desktop/papersview.cpp" line="112"/>
         <source>Delete Label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/papersview.cpp" line="108"/>
+        <location filename="../desktop/papersview.cpp" line="112"/>
         <source>Do you realy want to delete &quot;%1&quot;?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1948,32 +1958,37 @@ left to select categories.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="175"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="178"/>
         <source>Clean Papers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="177"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="180"/>
         <source>All Papers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="178"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="181"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="180"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="184"/>
         <source>Lock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="181"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="186"/>
+        <source>Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="188"/>
         <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="185"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="192"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>

@@ -150,6 +150,9 @@ Rectangle {
                     if( item.command === "lock" )
                         lock()
                     else
+                    if( item.command === "fullscreen" )
+                        kaqaz.fullscreen = !kaqaz.fullscreen
+                    else
                     if( item.command === "preferences" )
                         main.showPrefrences()
                     else
@@ -176,8 +179,12 @@ Rectangle {
             if( kaqaz.allPaper )
                 model.append({"textValue": qsTr("All Papers"), "cmdValue": "all", "typeValue": 0, "guidValue": -1, "iconValue": "files/all-papers.png"})
             model.append({"textValue": qsTr("Search"), "cmdValue": "search", "typeValue": 0, "guidValue": -1, "iconValue": "files/search.png"})
-            if( devices.isDesktop && database.password().length != 0 )
-                model.append({"textValue": qsTr("Lock"), "cmdValue": "lock", "typeValue": 0, "guidValue": -1, "iconValue": "files/lock.png"})
+            if( devices.isDesktop ) {
+                if( database.password().length != 0 )
+                    model.append({"textValue": qsTr("Lock"), "cmdValue": "lock", "typeValue": 0, "guidValue": -1, "iconValue": "files/lock.png"})
+
+                model.append({"textValue": qsTr("Fullscreen"), "cmdValue": "fullscreen", "typeValue": 0, "guidValue": -1, "iconValue": "files/fullscreen.png"})
+            }
             model.append({"textValue": qsTr("Preferences"), "cmdValue": "preferences", "typeValue": 0, "guidValue": -1, "iconValue": "files/preferences.png"})
 
             model.append({"textValue": "", "cmdValue": "", "typeValue": -1, "guidValue": -1, "iconValue": ""})
@@ -215,7 +222,7 @@ Rectangle {
 
     Timer {
         id: show_list_timer
-        interval: 1000
+        interval: portrait? 1000 : 250
         onTriggered: main.showListView()
     }
 

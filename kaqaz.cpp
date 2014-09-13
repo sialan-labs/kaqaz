@@ -125,6 +125,7 @@ public:
     int lock_timer;
     bool close_blocker;
     bool keyboard;
+    bool fullscreen;
 
     bool demo_active_until_next;
     bool desktop_touch_mode;
@@ -167,6 +168,7 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->desktop_touch_mode = false;
     p->lock_timer = 0;
     p->keyboard = false;
+    p->fullscreen = false;
     p->viewer = 0;
 #ifdef DESKTOP_DEVICE
     p->viewer_classic = 0;
@@ -349,18 +351,25 @@ bool Kaqaz::start()
     connect( p->devices, SIGNAL(activityPaused()), SLOT(activityPaused()) );
     connect( p->devices, SIGNAL(activityResumed()), SLOT(activityResumed()) );
 
+    bool res = false;
 #ifdef DESKTOP_DEVICE
     if( !p->desktop_touch_mode )
     {
-        return p->viewer_classic->start();
+        res = p->viewer_classic->start();
     }
     else
 #endif
     {
         p->viewer->setSource(QStringLiteral("qrc:///qml/Kaqaz/kaqaz.qml"));
         p->viewer->show();
-        return true;
+        res = true;
     }
+
+#ifndef DESKTOP_DEVICE
+    setFullscreen( kaqaz_settings->value("UserInterface/fullscreen", false).toBool() );
+#endif
+
+    return res;
 }
 
 void Kaqaz::incomingAppMessage(const QString &msg)
@@ -984,6 +993,9 @@ QFont Kaqaz::bodyFont() const
 
 void Kaqaz::setSize(const QSize &size)
 {
+    if( p->fullscreen )
+        return;
+
 #ifdef DESKTOP_DEVICE
     if( !p->desktop_touch_mode )
         kaqaz_settings->setValue("UserInterface/sizeClassic", size);
@@ -1018,6 +1030,44 @@ void Kaqaz::setDesktopTouchMode(bool stt)
 bool Kaqaz::desktopTouchMode() const
 {
     return p->desktop_touch_mode;
+}
+
+void Kaqaz::setFullscreen(bool stt)
+{
+    if( p->fullscreen == stt )
+        return;
+
+    p->fullscreen = stt;
+
+#ifndef DESKTOP_DEVICE
+    kaqaz_settings->setValue("UserInterface/fullscreen", p->fullscreen);
+#endif
+
+    if( p->fullscreen )
+    {
+#ifdef DESKTOP_DEVICE
+        if( !p->desktop_touch_mode )
+            p->viewer_classic->showFullScreen();
+        else
+#endif
+            p->viewer->showFullScreen();
+    }
+    else
+    {
+#ifdef DESKTOP_DEVICE
+        if( !p->desktop_touch_mode )
+            p->viewer_classic->showNormal();
+        else
+#endif
+            p->viewer->showNormal();
+    }
+
+    emit fullscreenChanged();
+}
+
+bool Kaqaz::fullscreen() const
+{
+    return p->fullscreen;
 }
 
 QStringList Kaqaz::dirEntryFiles(const QString &path, const QStringList & filters)

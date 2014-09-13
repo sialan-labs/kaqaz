@@ -38,8 +38,9 @@ class Kaqaz : public QObject
     Q_PROPERTY( bool    groupsCount          READ groupsCount         WRITE setGroupsCount         NOTIFY groupsCountChanged)
     Q_PROPERTY( bool    allPaper             READ allPaper            WRITE setAllPaper            NOTIFY allPaperChanged)
     Q_PROPERTY( bool    keyboardPredicative  READ keyboardPredicative WRITE setKeyboardPredicative NOTIFY keyboardPredicativeChanged)
-    Q_PROPERTY( bool    desktopTouchMode   READ desktopTouchMode  WRITE setDesktopTouchMode  NOTIFY desktopTouchModeChanged)
+    Q_PROPERTY( bool    desktopTouchMode     READ desktopTouchMode    WRITE setDesktopTouchMode    NOTIFY desktopTouchModeChanged)
     Q_PROPERTY( bool    positioning          READ positioning         WRITE setPositioning         NOTIFY positioningChanged)
+    Q_PROPERTY( bool    fullscreen           READ fullscreen          WRITE setFullscreen          NOTIFY fullscreenChanged)
     Q_PROPERTY( QSize   size                 READ size                WRITE setSize                NOTIFY sizeChanged)
     Q_PROPERTY( QString resourcePath         READ resourcePath        NOTIFY resourcePathChanged)
     Q_PROPERTY( Qt::LayoutDirection  languageDirection  READ languageDirection NOTIFY languageDirectionChanged )
@@ -160,6 +161,9 @@ public:
     void setDesktopTouchMode( bool stt );
     bool desktopTouchMode() const;
 
+    void setFullscreen( bool stt );
+    bool fullscreen() const;
+
     Q_INVOKABLE static QStringList dirEntryFiles(const QString & path , const QStringList &filters);
     Q_INVOKABLE static QStringList findEntryFiles(const QString & path , const QStringList &filters);
     Q_INVOKABLE static QStringList dirEntryDirs(const QString & path);
@@ -199,6 +203,7 @@ signals:
     void resourcePathChanged();
     void sizeChanged();
     void desktopTouchModeChanged();
+    void fullscreenChanged();
 
     void titleFontChanged();
     void bodyFontChanged();

@@ -25,22 +25,20 @@ Rectangle {
     width: devices.isTouchDevice? 0 : kaqaz.size.width
     height: devices.isTouchDevice? 0 : kaqaz.size.height
 
-    property real fixedPortraitHeight: 0
-    property real fixedLandscapeHeight: 0
-    property real fixedHeight: devices.isDesktop? height : fixedPortraitHeight-statusBarHeight-navigationBarHeight// (devices.screen.primaryOrientation==Qt.PortraitOrientation? fixedPortraitHeight : fixedLandscapeHeight)-statusBarHeight-navigationBarHeight
+    property real fixedHeight: height-statusBarHeight-navigationBarHeight
 
     property alias physicalPlatformScale: main.physicalPlatformScale
     property alias fontsScale: main.fontsScale
     property alias platformScale: main.platformScale
 
-    property bool portrait: devices.isDesktop? width<height : true//(devices.screen.primaryOrientation==Qt.PortraitOrientation)
+    property bool portrait: width<height
 
     property string globalFontFamily: devices.isIOS? "Droid Kaqaz Sans" : kaqaz_normal_font.name
     property string globalMonoFontFamily: devices.isIOS? "Droid Sans Mono" : kaqaz_mono_font.name
 
     property int globalInputMethodHints: kaqaz.keyboardPredicative? Qt.ImhNoPredictiveText : Qt.ImhNone
-    property real statusBarHeight: devices.transparentStatusBar? 24*physicalPlatformScale : 0
-    property real navigationBarHeight: devices.transparentNavigationBar? 45*physicalPlatformScale : 0
+    property real statusBarHeight: devices.transparentStatusBar && !kaqaz.fullscreen? 24*physicalPlatformScale : 0
+    property real navigationBarHeight: devices.transparentNavigationBar && !kaqaz.fullscreen? 45*physicalPlatformScale : 0
 
     property bool rotated: true
     property alias touchToBack: main.touchToBack
@@ -74,23 +72,12 @@ Rectangle {
 
     onHeightChanged: {
         size_save_timer.restart()
-        refreshSizes()
     }
     onWidthChanged: {
         size_save_timer.restart()
     }
 
     onLastSearchKeywordChanged: if(lastSearchKeyword.length==0) hideBottomPanel()
-
-    function refreshSizes() {
-        if( height == 0 )
-            return;
-        if( devices.isDesktop )
-            return
-
-        if( devices.screen.primaryOrientation==Qt.PortraitOrientation && height>width*4/3 ) fixedPortraitHeight = height
-        if( devices.screen.primaryOrientation==Qt.LandscapeOrientation && fixedLandscapeHeight == 0 ) fixedLandscapeHeight = height
-    }
 
     Connections {
         target: database
@@ -179,6 +166,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
+        anchors.rightMargin: portrait? 0 : main.panelWidth
         color: "#aaffffff"
         radius: 0
         visible: false

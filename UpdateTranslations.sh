@@ -14,7 +14,7 @@ fi
 cd $KAQAZ_SRC_PATH
 for TRANSLATION in ./translations_sources/*.ts
 do
-    /opt/Qt5.1.1/5.1.1/gcc_64/bin/lupdate `find -name '*.cpp' -type f` \
+    lupdate `find -name '*.cpp' -type f` \
             `find -name '*.qml' -type f` \
             `find -name '*.h' -type f` \
             `find -name '*.ui' -type f` \
