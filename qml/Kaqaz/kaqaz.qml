@@ -146,7 +146,7 @@ Rectangle {
     PositionSource {
         id: positioning
         updateInterval: 10000
-        active: kaqaz.positioning
+        active: kaqaz.positioning && kaqaz.proBuild
     }
 
     PointingDialog{

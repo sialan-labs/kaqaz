@@ -687,27 +687,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="101"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="102"/>
         <source>Notes positioning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="103"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="104"/>
         <source>Fullscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="104"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="105"/>
         <source>Word suggestions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="105"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="106"/>
         <source>Groups count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="121"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="122"/>
         <source>General Settings</source>
         <translation type="unfinished"></translation>
     </message>

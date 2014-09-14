@@ -802,7 +802,11 @@ QString Kaqaz::resourcePath()
 #ifdef Q_OS_ANDROID
     return resourcePathAbs();
 #else
+#ifdef Q_OS_WIN
+    return "file:///" + resourcePathAbs();
+#else
     return "file://" + resourcePathAbs();
+#endif
 #endif
 }
 

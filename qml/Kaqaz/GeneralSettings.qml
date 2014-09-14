@@ -98,7 +98,8 @@ Item {
         function refresh() {
             model.clear()
             model.append({ "name": qsTr("All papers item"), "file": "", "check": true, "pr":"allPaper"})
-            model.append({ "name": qsTr("Notes positioning"), "file": "", "check": true, "pr":"positioning"})
+            if( kaqaz.proBuild )
+                model.append({ "name": qsTr("Notes positioning"), "file": "", "check": true, "pr":"positioning"})
             if( !devices.isDesktop )
                 model.append({ "name": qsTr("Fullscreen"), "file": "", "check": true, "pr":"fullscreen"})
             model.append({ "name": qsTr("Word suggestions"), "file": "", "check": true, "pr":"keyboardPredicative"})

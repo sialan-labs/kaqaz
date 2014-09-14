@@ -1,9 +1,9 @@
 <project>
     <shortName>kaqaz</shortName>
     <fullName>Kaqaz</fullName>
-    <version>1.0.7</version>
-    <licenseFile>LICENSE</licenseFile>
-    <htmlLicenseFile>LICENSE.html</htmlLicenseFile>
+    <version>1.1.0</version>
+    <licenseFile>../LICENSE</licenseFile>
+    <htmlLicenseFile>../LICENSE.html</htmlLicenseFile>
     <leftImage>installer/logo.png</leftImage>
     <logoImage>installer/kaqaz.png</logoImage>
     <splashImage>icons/kaqaz.png</splashImage>
@@ -26,6 +26,20 @@
                     <runInTerminal>0</runInTerminal>
                     <windowsExec>${installdir}/Kaqaz/Kaqaz.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
+                    <windowsIcon>${installdir}/Kaqaz/icons/kaqaz.ico</windowsIcon>
+                    <windowsPath>${installdir}/Kaqaz/</windowsPath>
+                </shortcut>
+                <shortcut>
+                    <comment>Kaqaz Note Manager</comment>
+                    <exec>${installdir}/kaqaz/run --touch</exec>
+                    <icon>${installdir}/kaqaz/icons/kaqaz.png</icon>
+                    <name>Kaqaz Touch</name>
+                    <path>${installdir}/kaqaz/</path>
+                    <platforms>all</platforms>
+                    <runAsAdmin>0</runAsAdmin>
+                    <runInTerminal>0</runInTerminal>
+                    <windowsExec>${installdir}/Kaqaz/Kaqaz.exe</windowsExec>
+                    <windowsExecArgs>--touch</windowsExecArgs>
                     <windowsIcon>${installdir}/Kaqaz/icons/kaqaz.ico</windowsIcon>
                     <windowsPath>${installdir}/Kaqaz/</windowsPath>
                 </shortcut>
@@ -60,7 +74,7 @@
                     <platforms>linux</platforms>
                     <distributionFileList>
                         <distributionDirectory>
-                            <origin>../Releases/Kaqaz/Linux/32/kaqaz</origin>
+                            <origin>../../Releases/Kaqaz/Linux/32/kaqaz</origin>
                         </distributionDirectory>
                     </distributionFileList>
                 </folder>
@@ -71,7 +85,7 @@
                     <platforms>windows</platforms>
                     <distributionFileList>
                         <distributionDirectory>
-                            <origin>../Releases/Kaqaz/Windows/Kaqaz</origin>
+                            <origin>../../Releases/Kaqaz/Windows/Kaqaz</origin>
                         </distributionDirectory>
                     </distributionFileList>
                 </folder>
@@ -88,7 +102,7 @@
                     <platforms>linux-x64</platforms>
                     <distributionFileList>
                         <distributionDirectory>
-                            <origin>../Releases/Kaqaz/Linux/64/kaqaz</origin>
+                            <origin>../../Releases/Kaqaz/Linux/64/kaqaz</origin>
                         </distributionDirectory>
                     </distributionFileList>
                 </folder>
@@ -111,6 +125,16 @@
                     <runInTerminal>0</runInTerminal>
                     <windowsExec>${installdir}/Kaqaz/Kaqaz.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
+                    <windowsIcon>${installdir}/Kaqaz/icons/kaqaz.ico</windowsIcon>
+                    <windowsPath>${installdir}/Kaqaz/</windowsPath>
+                </startMenuShortcut>
+                <startMenuShortcut>
+                    <comment>Kaqaz Note Manager</comment>
+                    <name>Kaqaz Touch</name>
+                    <runAsAdmin>0</runAsAdmin>
+                    <runInTerminal>0</runInTerminal>
+                    <windowsExec>${installdir}/Kaqaz/Kaqaz.exe</windowsExec>
+                    <windowsExecArgs>--touch</windowsExecArgs>
                     <windowsIcon>${installdir}/Kaqaz/icons/kaqaz.ico</windowsIcon>
                     <windowsPath>${installdir}/Kaqaz/</windowsPath>
                 </startMenuShortcut>
