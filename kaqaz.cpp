@@ -221,6 +221,9 @@ Kaqaz::Kaqaz(QObject *parent) :
         kaqaz_settings = new QSettings( p->confPath, QSettings::IniFormat );
 
     p->profilePath = kaqaz_settings->value( "General/ProfilePath", p->homePath ).toString();
+#ifdef Q_OS_MAC
+    p->desktop_touch_mode = kaqaz_settings->value("UserInterface/type", false).toBool();
+#endif
 
     QDir().mkpath(p->homePath);
     QDir().mkpath(profilePath());
@@ -1028,6 +1031,11 @@ void Kaqaz::setDesktopTouchMode(bool stt)
         return;
 
     p->desktop_touch_mode = stt;
+
+#ifdef Q_OS_MAC
+    kaqaz_settings->setValue("UserInterface/type", p->desktop_touch_mode);
+#endif
+
     emit desktopTouchModeChanged();
 }
 

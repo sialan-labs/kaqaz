@@ -33,6 +33,7 @@ public slots:
     void refresh();
 
 private slots:
+    void uiChanged(int row );
     void calendarChanged( int id );
     void languageChanged( int id );
     void titleFontChanged();

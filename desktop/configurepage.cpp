@@ -65,6 +65,13 @@ ConfigurePage::ConfigurePage(QWidget *parent) :
     p->ui = new Ui::ConfigurePage;
     p->ui->setupUi(this);
 
+#ifdef Q_OS_MAC
+    p->ui->ui_combo->setCurrentIndex(0);
+#else
+    p->ui->ui_combo->setVisible(false);
+    p->ui->ui_lbl->setVisible(false);
+#endif
+
     p->ui->restore_list->setModel(p->backups_model);
     p->ui->restore_list->setRootIndex(p->backups_model->index(BACKUP_PATH));
 
@@ -118,6 +125,11 @@ void ConfigurePage::refresh()
     p->ui->security_cpass->setVisible( !p->kqz->database()->password().isEmpty() );
 
     p->signal_blocker = false;
+}
+
+void ConfigurePage::uiChanged(int row)
+{
+    Kaqaz::instance()->setDesktopTouchMode(row);
 }
 
 void ConfigurePage::calendarChanged(int id)

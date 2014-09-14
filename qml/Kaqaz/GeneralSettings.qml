@@ -100,6 +100,8 @@ Item {
             model.append({ "name": qsTr("All papers item"), "file": "", "check": true, "pr":"allPaper"})
             if( kaqaz.proBuild )
                 model.append({ "name": qsTr("Notes positioning"), "file": "", "check": true, "pr":"positioning"})
+            if( devices.isMacX )
+                model.append({ "name": qsTr("Desktop Touch"), "file": "", "check": true, "pr":"desktopTouchMode"})
             if( !devices.isDesktop )
                 model.append({ "name": qsTr("Fullscreen"), "file": "", "check": true, "pr":"fullscreen"})
             model.append({ "name": qsTr("Word suggestions"), "file": "", "check": true, "pr":"keyboardPredicative"})
