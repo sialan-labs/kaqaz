@@ -17,6 +17,8 @@
 */
 
 #include "kaqazmacros.h"
+#include "kaqaz.h"
+#include "resourcemanager.h"
 
 #ifdef DESKTOP_DEVICE
 #include <QApplication>
@@ -25,11 +27,9 @@
 #include <QtGui/QGuiApplication>
 #endif
 
-#include "kaqaz.h"
-
 #include <QFile>
 #include <QIcon>
-#include "resourcemanager.h"
+#include <QSettings>
 
 int main(int argc, char *argv[])
 {
