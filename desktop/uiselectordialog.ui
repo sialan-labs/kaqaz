@@ -32,7 +32,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Select user interface. You can change it later from settings.</string>
+      <string>Please select user interface. You can change it later from settings.</string>
      </property>
     </widget>
    </item>

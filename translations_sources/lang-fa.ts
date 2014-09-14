@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fa_IR">
+<TS version="2.0" language="fa_IR">
 <context>
     <name>About</name>
     <message>
@@ -381,74 +381,89 @@
     </message>
     <message>
         <location filename="../desktop/configurepage.ui" line="186"/>
+        <source>User Interface</source>
+        <translation>رابط کاربری</translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.ui" line="200"/>
+        <source>Classic</source>
+        <translation>کلاسیک</translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.ui" line="205"/>
+        <source>Touch</source>
+        <translation>لمسی</translation>
+    </message>
+    <message>
+        <location filename="../desktop/configurepage.ui" line="213"/>
         <source>Language</source>
         <translation>زبان برنامه</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="203"/>
+        <location filename="../desktop/configurepage.ui" line="230"/>
         <source>Calendar</source>
         <translation>تقویم</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="236"/>
+        <location filename="../desktop/configurepage.ui" line="247"/>
         <source>Title Font</source>
         <translation>قلم عنوان</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="297"/>
+        <location filename="../desktop/configurepage.ui" line="308"/>
         <source>Body Font</source>
         <translation>قلم متن</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="398"/>
+        <location filename="../desktop/configurepage.ui" line="425"/>
         <source>Backup</source>
         <translation>بکاپ</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="411"/>
+        <location filename="../desktop/configurepage.ui" line="438"/>
         <source>Create new backup</source>
         <translation>ساختن بکاپ جدید</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="418"/>
-        <location filename="../desktop/configurepage.ui" line="490"/>
-        <location filename="../desktop/configurepage.cpp" line="185"/>
+        <location filename="../desktop/configurepage.ui" line="445"/>
+        <location filename="../desktop/configurepage.ui" line="517"/>
+        <location filename="../desktop/configurepage.cpp" line="197"/>
         <source>Restore</source>
         <translation>بازیابی</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="476"/>
+        <location filename="../desktop/configurepage.ui" line="503"/>
         <source>Delete</source>
         <translation>پاک کردن</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="483"/>
+        <location filename="../desktop/configurepage.ui" line="510"/>
         <source>Copy To</source>
         <translation>کپی به</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="545"/>
+        <location filename="../desktop/configurepage.ui" line="572"/>
         <source>Dropbox</source>
         <translation>دراپ باکس</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="724"/>
+        <location filename="../desktop/configurepage.ui" line="751"/>
         <source>Sync password (Optional &amp; Unchangable)</source>
         <translation>کلمه عبور همگام سازی (اختیاری و غیرقابل تغییر)</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="734"/>
-        <location filename="../desktop/configurepage.ui" line="979"/>
+        <location filename="../desktop/configurepage.ui" line="761"/>
+        <location filename="../desktop/configurepage.ui" line="1006"/>
         <source>Password repeat</source>
         <translation>تکرار کلمه عبور</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="754"/>
+        <location filename="../desktop/configurepage.ui" line="781"/>
         <source>Get Token</source>
         <translation>دریافت شناسه</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="741"/>
+        <location filename="../desktop/configurepage.ui" line="768"/>
         <source>Finished</source>
         <translation>پایان</translation>
     </message>
@@ -458,84 +473,84 @@
         <translation>همگام سازی رمزنگاری شده</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="761"/>
+        <location filename="../desktop/configurepage.ui" line="788"/>
         <source>Disconnect</source>
         <translation>لغو</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="953"/>
+        <location filename="../desktop/configurepage.ui" line="980"/>
         <source>Current password</source>
         <translation>پسورد فعلی</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="969"/>
+        <location filename="../desktop/configurepage.ui" line="996"/>
         <source>New password</source>
         <translation>کلمه‌ی عبور جدید</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.ui" line="986"/>
+        <location filename="../desktop/configurepage.ui" line="1013"/>
         <source>Change</source>
         <translation>تغییر</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="167"/>
-        <location filename="../desktop/configurepage.cpp" line="192"/>
+        <location filename="../desktop/configurepage.cpp" line="179"/>
+        <location filename="../desktop/configurepage.cpp" line="204"/>
         <source>Password</source>
         <translation>کلمه‌ی عبور</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="167"/>
-        <location filename="../desktop/configurepage.cpp" line="192"/>
+        <location filename="../desktop/configurepage.cpp" line="179"/>
+        <location filename="../desktop/configurepage.cpp" line="204"/>
         <source>Please enter password</source>
         <translation>لطفا کلمه‌ی عبور را وارد کنید</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="185"/>
+        <location filename="../desktop/configurepage.cpp" line="197"/>
         <source>Do you realy want to restore? all of your current data will be deleted.</source>
         <translation>آیا واقعا می‌خواهید بازیابی شود؟ تمام اطلاعات فعلی شما پاک خواهد شد.</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="207"/>
+        <location filename="../desktop/configurepage.cpp" line="219"/>
         <source>Delete Backup</source>
         <translation>پاک کردن بکاپ</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="207"/>
+        <location filename="../desktop/configurepage.cpp" line="219"/>
         <source>Do you realy want to delete selected backup?</source>
         <translation>آیا واقعا مایل به پاک کردن بکاپ انتخاب شده هستید؟</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="261"/>
+        <location filename="../desktop/configurepage.cpp" line="273"/>
         <source>Please Wait</source>
         <translation>لطفا صبر کنید</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="293"/>
+        <location filename="../desktop/configurepage.cpp" line="305"/>
         <source>Incorrect</source>
         <translation>اشتباه است</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="293"/>
+        <location filename="../desktop/configurepage.cpp" line="305"/>
         <source>Current password is incorrect!</source>
         <translation>پسورد فعلی اشتباه است!</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="302"/>
+        <location filename="../desktop/configurepage.cpp" line="314"/>
         <source>Incorrect repeat</source>
         <translation>اشتباه تکرار</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="302"/>
+        <location filename="../desktop/configurepage.cpp" line="314"/>
         <source>Password repeat is incorrect!</source>
         <translation>تکرار پسورد اشتباه است!</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="312"/>
+        <location filename="../desktop/configurepage.cpp" line="324"/>
         <source>Successfully</source>
         <translation>اتمام</translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="312"/>
+        <location filename="../desktop/configurepage.cpp" line="324"/>
         <source>Password changed successfully :)</source>
         <translation>پسورد با موفقیت تغییر کرد :)</translation>
     </message>
@@ -870,21 +885,26 @@
     </message>
     <message>
         <location filename="../qml/Kaqaz/GeneralSettings.qml" line="104"/>
+        <source>Desktop Touch</source>
+        <translation>میزکار لمسی</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="106"/>
         <source>Fullscreen</source>
         <translation>تمام صفحه</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="105"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="107"/>
         <source>Word suggestions</source>
         <translation>پیشنهاد کلمه ها</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="106"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="108"/>
         <source>Groups count</source>
         <translation>نمایش تعداد کاغذهای گروه‌ها</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="122"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="124"/>
         <source>General Settings</source>
         <translation>تنظیمات عمومی</translation>
     </message>
@@ -1111,62 +1131,62 @@ left to select categories.</source>
         <translation type="obsolete">نامعلوم</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="486"/>
+        <location filename="../kaqaz.cpp" line="489"/>
         <source>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
         <translation>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="487"/>
+        <location filename="../kaqaz.cpp" line="490"/>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
         <translation>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="655"/>
+        <location filename="../kaqaz.cpp" line="658"/>
         <source>0</source>
         <translation>۰</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="656"/>
+        <location filename="../kaqaz.cpp" line="659"/>
         <source>1</source>
         <translation>۱</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="657"/>
+        <location filename="../kaqaz.cpp" line="660"/>
         <source>2</source>
         <translation>۲</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="658"/>
+        <location filename="../kaqaz.cpp" line="661"/>
         <source>3</source>
         <translation>۳</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="659"/>
+        <location filename="../kaqaz.cpp" line="662"/>
         <source>4</source>
         <translation>۴</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="660"/>
+        <location filename="../kaqaz.cpp" line="663"/>
         <source>5</source>
         <translation>۵</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="661"/>
+        <location filename="../kaqaz.cpp" line="664"/>
         <source>6</source>
         <translation>۶</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="662"/>
+        <location filename="../kaqaz.cpp" line="665"/>
         <source>7</source>
         <translation>۷</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="663"/>
+        <location filename="../kaqaz.cpp" line="666"/>
         <source>8</source>
         <translation>۸</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="664"/>
+        <location filename="../kaqaz.cpp" line="667"/>
         <source>9</source>
         <translation>۹</translation>
     </message>
@@ -1175,17 +1195,17 @@ left to select categories.</source>
         <translation type="obsolete">بی گروه</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="525"/>
+        <location filename="../kaqaz.cpp" line="528"/>
         <source>Gregorian</source>
         <translation>میلادی</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="528"/>
+        <location filename="../kaqaz.cpp" line="531"/>
         <source>Jalali</source>
         <translation>جلالی</translation>
     </message>
     <message>
-        <location filename="../kaqaz.cpp" line="531"/>
+        <location filename="../kaqaz.cpp" line="534"/>
         <source>Hijri</source>
         <translation>هجری قمری</translation>
     </message>
@@ -2514,6 +2534,34 @@ Trust us...</source>
         <location filename="../qml/Kaqaz/Synchronization.qml" line="95"/>
         <source>Synchronization</source>
         <translation>همگام سازی</translation>
+    </message>
+</context>
+<context>
+    <name>UiSelectorDialog</name>
+    <message>
+        <location filename="../desktop/uiselectordialog.ui" line="14"/>
+        <source>User interface</source>
+        <translation>رابط کاربری</translation>
+    </message>
+    <message>
+        <location filename="../desktop/uiselectordialog.ui" line="35"/>
+        <source>Please select user interface. You can change it later from settings.</source>
+        <translation>لطفا رابط کاریری را انتخاب کنید. بعدا می‌توانید آن را از تنظیمات تغییر دهید.</translation>
+    </message>
+    <message>
+        <location filename="../desktop/uiselectordialog.ui" line="76"/>
+        <source>Classic user interface</source>
+        <translation>رابط کاربری کلاسیک</translation>
+    </message>
+    <message>
+        <location filename="../desktop/uiselectordialog.ui" line="115"/>
+        <source>Touch/Modern user interface</source>
+        <translation>رابط کاربری لمسی/مدرن</translation>
+    </message>
+    <message>
+        <location filename="../desktop/uiselectordialog.ui" line="172"/>
+        <source>Done</source>
+        <translation>تایید</translation>
     </message>
 </context>
 <context>
