@@ -23,6 +23,7 @@
 #ifdef DESKTOP_DEVICE
 #include <QApplication>
 #include "qtsingleapplication/qtsingleapplication.h"
+#include "desktop/uiselectordialog.h"
 #else
 #include <QtGui/QGuiApplication>
 #endif
@@ -53,9 +54,27 @@ int main(int argc, char *argv[])
 #endif
 
     Kaqaz *kaqaz = Kaqaz::instance();
+
 #ifdef DESKTOP_DEVICE
+#ifdef Q_OS_MAC
+    if( !kaqaz->settings()->value("General/uiselected",false).toBool() )
+    {
+        UiSelectorDialog dialog;
+        dialog.exec();
+
+        if( !dialog.isAccepted() )
+            return 0;
+        if( dialog.isDesktopTouch() )
+            kaqaz->setDesktopTouchMode(true);
+        else
+            kaqaz->setDesktopTouchMode(false);
+
+        kaqaz->settings()->setValue("General/uiselected",true);
+    }
+#else
     if( app.arguments().contains("--touch") )
         kaqaz->setDesktopTouchMode(true);
+#endif
 #endif
 
     if( !kaqaz->start() )

@@ -196,5 +196,7 @@
         <file>qml/Kaqaz/files/add-desktop.png</file>
         <file>qml/Kaqaz/KTextEdit.qml</file>
         <file>qml/Kaqaz/KTextInput.qml</file>
+        <file>qml/Kaqaz/files/ui-classic-scshot.png</file>
+        <file>qml/Kaqaz/files/ui-touch-scshot.png</file>
     </qresource>
 </RCC>

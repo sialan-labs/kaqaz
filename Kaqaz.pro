@@ -65,7 +65,8 @@ android {
         desktop/todopapers.h \
         desktop/scolor.h \
         desktop/papertextarea.h \
-        desktop/todopapersitem.h
+        desktop/todopapersitem.h \
+        desktop/uiselectordialog.h
 
     SOURCES += \
         mimeapps.cpp \
@@ -97,12 +98,14 @@ android {
         desktop/todopapers.cpp \
         desktop/scolor.cpp \
         desktop/papertextarea.cpp \
-        desktop/todopapersitem.cpp
+        desktop/todopapersitem.cpp \
+        desktop/uiselectordialog.cpp
 
     FORMS += \
         desktop/paperconfigure.ui \
         desktop/configurepage.ui \
-        desktop/aboutdialog.ui
+        desktop/aboutdialog.ui\
+        desktop/uiselectordialog.ui
 
     win32: SOURCES += qtsingleapplication/qtlockedfile_win.cpp
     unix:  SOURCES += qtsingleapplication/qtlockedfile_unix.cpp
