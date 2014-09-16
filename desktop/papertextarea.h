@@ -38,9 +38,13 @@ public:
     void setPlaceholderText( const QString & txt );
     QString placeholderText() const;
 
+    void setViewFont( const QFont & font );
+    QFont viewFont() const;
+
 signals:
     void textChanged();
     void typeChanged();
+    void viewFontChanged();
 
 private slots:
     void text_changed();

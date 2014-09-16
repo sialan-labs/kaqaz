@@ -34,6 +34,7 @@ public:
 
 public slots:
     void addPaper( int pid = 0 );
+    void addToDo( int pid = 0 );
     void setMainPaper( int pid );
 
 private slots:

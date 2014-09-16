@@ -51,6 +51,7 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QStyleFactory>
+#include <QMenu>
 #include <QDebug>
 
 #ifdef Q_OS_WIN
@@ -80,6 +81,7 @@ public:
     QHBoxLayout *toolbar_layout;
     QToolBar *toolbar;
     QAction *new_act;
+    QAction *new_todo_act;
     QAction *new_grp_act;
     QAction *conf_act;
     QAction *rsync_act;
@@ -153,6 +155,7 @@ KaqazDesktop::KaqazDesktop() :
 void KaqazDesktop::init_toolbar()
 {
     p->new_act = new QAction( QIcon::fromTheme("document-new"), tr("Add Paper"), this );
+    p->new_todo_act = new QAction( QIcon::fromTheme("document-new"), tr("Add To-Do"), this );
     p->new_grp_act = new QAction( QIcon::fromTheme("document-new"), tr("Add Label"), this );
     p->rsync_act = new QAction( QIcon::fromTheme("view-refresh"), tr("Sync"), this );
     p->conf_act = new QAction( QIcon::fromTheme("configure"), tr("Configure"), this );
@@ -164,8 +167,16 @@ void KaqazDesktop::init_toolbar()
     palette.setColor( QPalette::Button, p->desktop->titleBarColor() );
     palette.setColor( QPalette::ButtonText, p->desktop->titleBarTextColor() );
 
+    QAction *new_menu_act = new QAction(QIcon::fromTheme("document-new"), tr("Add Paper"), this);
+
+    new_menu_act->setMenu( new QMenu() );
+    new_menu_act->menu()->addAction(p->new_act);
+    new_menu_act->menu()->addAction(p->new_todo_act);
+
+    connect( new_menu_act, SIGNAL(triggered()), p->new_act, SLOT(trigger()) );
+
     p->toolbar = new QToolBar();
-    p->toolbar->addAction(p->new_act);
+    p->toolbar->addAction(new_menu_act);
     p->toolbar->addAction(p->new_grp_act);
     p->toolbar->addSeparator();
     p->toolbar->addAction(p->rsync_act);
@@ -234,15 +245,16 @@ void KaqazDesktop::init_mainWidget()
     p->sync_pbar->setTextVisible(false);
     p->sync_pbar->setVisible(false);
 
-    connect( p->splitter   , SIGNAL(splitterMoved(int,int))      , this          , SLOT(save_splitter())        );
-    connect( p->panel      , SIGNAL(showPaperRequest(QList<int>)), p->papers_view, SLOT(showPapers(QList<int>)) );
-    connect( p->papers_view, SIGNAL(paperSelected(int))          , p->editor     , SLOT(setMainPaper(int))      );
-    connect( p->papers_view, SIGNAL(paperOpened(int))            , p->editor     , SLOT(addPaper(int))          );
-    connect( p->new_act    , SIGNAL(triggered())                 , p->editor     , SLOT(addPaper())             );
-    connect( p->new_grp_act, SIGNAL(triggered())                 , this          , SLOT(addGroup())             );
-    connect( p->rsync_act  , SIGNAL(triggered())                 , this          , SLOT(refreshSync())          );
-    connect( p->conf_act   , SIGNAL(triggered())                 , this          , SLOT(showConfigure())        );
-    connect( p->about_act  , SIGNAL(triggered())                 , this          , SLOT(showAbout())            );
+    connect( p->splitter    , SIGNAL(splitterMoved(int,int))      , this          , SLOT(save_splitter())        );
+    connect( p->panel       , SIGNAL(showPaperRequest(QList<int>)), p->papers_view, SLOT(showPapers(QList<int>)) );
+    connect( p->papers_view , SIGNAL(paperSelected(int))          , p->editor     , SLOT(setMainPaper(int))      );
+    connect( p->papers_view , SIGNAL(paperOpened(int))            , p->editor     , SLOT(addPaper(int))          );
+    connect( p->new_act     , SIGNAL(triggered())                 , p->editor     , SLOT(addPaper())             );
+    connect( p->new_todo_act, SIGNAL(triggered())                 , p->editor     , SLOT(addToDo())              );
+    connect( p->new_grp_act , SIGNAL(triggered())                 , this          , SLOT(addGroup())             );
+    connect( p->rsync_act   , SIGNAL(triggered())                 , this          , SLOT(refreshSync())          );
+    connect( p->conf_act    , SIGNAL(triggered())                 , this          , SLOT(showConfigure())        );
+    connect( p->about_act   , SIGNAL(triggered())                 , this          , SLOT(showAbout())            );
 }
 
 void KaqazDesktop::setDatabase(Database *db)

@@ -21,6 +21,7 @@
 
 #include <QWidget>
 
+class ToDoPapersItem;
 class ToDoPapersPrivate;
 class ToDoPapers : public QWidget
 {
@@ -34,6 +35,20 @@ public:
 
 signals:
     void textChanged();
+
+private slots:
+    void cleanAndRefresh();
+    void refreshText();
+
+    void createItemAfter(ToDoPapersItem *item);
+    void removeItem(ToDoPapersItem *item);
+    void removeNextItem(ToDoPapersItem *item);
+
+    void focusOnUp(ToDoPapersItem *item);
+    void focusOnDown(ToDoPapersItem *item);
+
+private:
+    void deleteItem(ToDoPapersItem *item);
 
 private:
     ToDoPapersPrivate *p;

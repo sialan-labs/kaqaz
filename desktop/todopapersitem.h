@@ -29,6 +29,44 @@ public:
     ToDoPapersItem(QWidget *parent = 0);
     ~ToDoPapersItem();
 
+    QString text() const;
+    void setText( const QString & txt );
+
+    void setViewFont( const QFont & font );
+    QFont viewFont() const;
+
+    void setCheckable( bool stt );
+    bool isCheckable() const;
+
+    void setChecked( bool stt );
+    bool isChecked() const;
+
+    void setTextFocus( bool stt );
+    bool textFocus() const;
+
+    int cursorPosition() const;
+    void setCursorPosition( int pos );
+
+signals:
+    void textChanged();
+    void viewFontChanged();
+    void checkableChanged();
+    void checkedChanged();
+    void textFocusChanged();
+
+    void accepted(ToDoPapersItem *item);
+    void removed(ToDoPapersItem *item);
+    void removeNext(ToDoPapersItem *item);
+
+    void upPressed(ToDoPapersItem *item);
+    void downPressed(ToDoPapersItem *item);
+
+private slots:
+    void refreshSize();
+
+protected:
+    bool eventFilter(QObject *o, QEvent *e);
+
 private:
     ToDoPapersItemPrivate *p;
 };

@@ -129,7 +129,7 @@ EditorView::EditorView(QWidget *parent) :
 
     p->body = new PaperTextArea();
     p->body->setPlaceholderText( tr("Text...") );
-    p->body->setFont(p->body_font);
+    p->body->setViewFont(p->body_font);
     p->body->setStyleSheet("QTextEdit{background: transparent; border: 0px solid translarent}");
 
     p->date = new QLabel(this);
@@ -183,8 +183,15 @@ int EditorView::paperId() const
     return p->paperId;
 }
 
+void EditorView::setType(int type)
+{
+    p->body->setType(type);
+}
+
 void EditorView::setPaper(int pid)
 {
+    save();
+
     p->signal_blocker = true;
 
     p->paperId = pid;
@@ -193,6 +200,7 @@ void EditorView::setPaper(int pid)
     {
         p->title->setText(QString());
         p->body->setText(QString());
+        p->body->setType(0);
         p->group->setGroup(0);
         p->date->setText(QString());
         p->files->setPaper(0);
@@ -204,6 +212,7 @@ void EditorView::setPaper(int pid)
 
     p->title->setText( db->paperTitle(pid) );
     p->body->setText( db->paperText(pid) );
+    p->body->setType( db->paperType(pid) );
     p->group->setGroup( db->paperGroup(pid) );
     p->date->setText( "<font color=\"#888888\">" + Kaqaz::instance()->convertDateTimeToString(db->paperCreatedDate(pid)) + "</font>" );
     p->files->setPaper(pid);
@@ -217,6 +226,9 @@ void EditorView::setPaper(int pid)
 
 void EditorView::save()
 {
+    if( p->title->text().isEmpty() && p->body->text().isEmpty() )
+        return;
+
     Database *db = Kaqaz::database();
     if( p->paperId == 0 )
         p->paperId = db->createPaper();
@@ -251,7 +263,7 @@ void EditorView::titleFontChanged()
 void EditorView::bodyFontChanged()
 {
     p->body_font = Kaqaz::instance()->bodyFont();
-    p->body->setFont(p->body_font);
+    p->body->setViewFont(p->body_font);
 }
 
 void EditorView::revisionChanged(const QString &iid, int revision)

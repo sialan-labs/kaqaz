@@ -33,6 +33,7 @@ public:
     QString placeholder;
 
     int type;
+    QFont font;
 
     QPointer<QTextEdit> text;
     QPointer<ToDoPapers> todo;
@@ -74,6 +75,7 @@ void PaperTextArea::setType(int t)
         p->text = new QTextEdit();
         p->text->setText(p->txt);
         p->text->setPlaceholderText(p->placeholder);
+        p->text->setFont(p->font);
 
         p->layout->addWidget(p->text);
         connect( p->text, SIGNAL(textChanged()), SLOT(text_changed()) );
@@ -88,6 +90,7 @@ void PaperTextArea::setType(int t)
 
         p->todo = new ToDoPapers();
         p->todo->setText(p->txt);
+        p->todo->setFont(p->font);
 
         p->layout->addWidget(p->todo);
         connect( p->todo, SIGNAL(textChanged()), SLOT(text_changed()) );
@@ -137,6 +140,31 @@ void PaperTextArea::setPlaceholderText(const QString &txt)
 QString PaperTextArea::placeholderText() const
 {
     return p->placeholder;
+}
+
+void PaperTextArea::setViewFont(const QFont &font)
+{
+    if( p->font == font )
+        return;
+
+    p->font = font;
+    switch( p->type )
+    {
+    case Enums::Normal:
+        p->text->setFont(p->font);
+        break;
+
+    case Enums::ToDo:
+        p->todo->setFont(p->font);
+        break;
+    }
+
+    emit viewFontChanged();
+}
+
+QFont PaperTextArea::viewFont() const
+{
+    return p->font;
 }
 
 void PaperTextArea::text_changed()

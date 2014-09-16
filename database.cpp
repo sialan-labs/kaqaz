@@ -90,7 +90,7 @@ Database::Database(const QString & path, QObject *parent) :
 
     if( !Kaqaz::settings()->value("initialize/userdata_db",false).toBool() )
     {
-        QFile::copy(":/database/database.sqlite",p->path);
+        QFile::copy(":/files/database/database.sqlite",p->path);
         QFile(p->path).setPermissions(QFileDevice::WriteOwner|QFileDevice::WriteGroup|QFileDevice::ReadUser|QFileDevice::ReadGroup);
     }
 

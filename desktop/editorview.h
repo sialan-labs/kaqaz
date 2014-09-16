@@ -31,6 +31,8 @@ public:
 
     int paperId() const;
 
+    void setType( int type );
+
 public slots:
     void setPaper( int id );
     void save();

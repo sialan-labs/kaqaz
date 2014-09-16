@@ -109,6 +109,13 @@ void EditorViewManager::addPaper(int pid)
     connect( editor, SIGNAL(saved(int)), SLOT(paperSaved(int)) );
 }
 
+void EditorViewManager::addToDo(int pid)
+{
+    addPaper(pid);
+    EditorView *editor = static_cast<EditorView*>(p->stacked->widget(p->stacked->count()-1));
+    editor->setType(Enums::ToDo);
+}
+
 void EditorViewManager::setMainPaper(int pid)
 {
     if( pid && p->tabs.contains(pid) )
