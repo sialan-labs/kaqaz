@@ -29,7 +29,6 @@ Rectangle {
 
     property alias physicalPlatformScale: main.physicalPlatformScale
     property alias fontsScale: main.fontsScale
-    property alias platformScale: main.platformScale
 
     property bool portrait: width<height
 

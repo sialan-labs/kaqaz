@@ -29,8 +29,6 @@
 #define DEMO_PAPERS_LIMIT 20
 
 #define LANG_ON_STARTUP
-#define LINUX_DEFAULT_DPI 96
-#define WINDOWS_DEFAULT_DPI 96
 
 #ifdef Q_OS_ANDROID
 #define HOME_PATH   QDir::homePath()

@@ -111,7 +111,6 @@
         <file>qml/Kaqaz/TextViewer.qml</file>
         <file>qml/Kaqaz/ToDoItem.qml</file>
         <file>qml/Kaqaz/Tooltip.qml</file>
-        <file>qml/Kaqaz/UncompatibleVersion.qml</file>
         <file>qml/Kaqaz/files/active-troll.png</file>
         <file>qml/Kaqaz/files/add.png</file>
         <file>qml/Kaqaz/files/all-papers.png</file>

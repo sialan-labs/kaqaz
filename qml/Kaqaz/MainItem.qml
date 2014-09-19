@@ -26,7 +26,6 @@ Rectangle {
 
     property real physicalPlatformScale: devices.density
     property real fontsScale: 1
-    property real platformScale: width/480
 
     property variant preferenceArray: new Array
     property variant dialogItem
