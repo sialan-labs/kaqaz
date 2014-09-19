@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: restore_dialog
@@ -33,7 +34,7 @@ Item {
         Text {
             id: delete_warn
             font.pixelSize: 17*fontsScale
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             anchors.margins: 10*physicalPlatformScale
             anchors.left: parent.left
             anchors.right: parent.horizontalCenter
@@ -120,7 +121,7 @@ Item {
                 y: parent.height/2 - height/2
                 text: parent.text
                 font.pixelSize: 12*fontsScale
-                font.family: globalFontFamily
+                font.family: SApp.globalFontFamily
                 color: item.press? "#ffffff" : "#333333"
             }
 

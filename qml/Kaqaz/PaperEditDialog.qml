@@ -18,12 +18,13 @@
 
 import QtQuick 2.0
 import Kaqaz 1.0
+import SialanTools 1.0
 
 Item {
     id: edit_dialog
     anchors.fill: parent
-    anchors.topMargin: statusBarHeight
-    anchors.bottomMargin: navigationBarHeight
+    anchors.topMargin: View.statusBarHeight
+    anchors.bottomMargin: View.navigationBarHeight
 
     property variant item
     property variant paperItem: item? item.paperItem : 0
@@ -62,9 +63,9 @@ Item {
         y: 60*physicalPlatformScale
         width: parent.width-2*x
         text: paperItem && paperItem.text.length!=0? paperItem.text: qsTr("Untitled Paper")
-        font.pixelSize: devices.isMobile? 22*fontsScale : 25*fontsScale
+        font.pixelSize: Devices.isMobile? 22*fontsScale : 25*fontsScale
         font.weight: Font.Light
-        font.family: globalFontFamily
+        font.family: SApp.globalFontFamily
         color: "#333333"
         elide: Text.ElideRight
         wrapMode: Text.WrapAnywhere
@@ -77,9 +78,9 @@ Item {
         width: parent.width-2*x
         anchors.top: title.bottom
         text: paperItem? paperItem.bodyText : ""
-        font.pixelSize: devices.isMobile? 9*fontsScale : 10*fontsScale
+        font.pixelSize: Devices.isMobile? 9*fontsScale : 10*fontsScale
         font.weight: Font.Light
-        font.family: globalFontFamily
+        font.family: SApp.globalFontFamily
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         maximumLineCount: 2
         elide: Text.ElideRight
@@ -109,11 +110,11 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
+                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Share Paper")
                 onClicked: {
-                    if( devices.isLinux && !devices.isAndroid ) {
+                    if( Devices.isLinux && !Devices.isAndroid ) {
                         hideSubMessage()
                         var path = kaqaz.getStaticTempPath()
                         kaqaz.shareToFile( database.paperTitle(edit_dialog.item.paperItem.paperItem),
@@ -124,7 +125,7 @@ Item {
                         msg.sources = [path]
 
                     } else {
-                        devices.share( database.paperTitle(edit_dialog.item.paperItem.paperItem),
+                        Devices.share( database.paperTitle(edit_dialog.item.paperItem.paperItem),
                                      database.paperText(edit_dialog.item.paperItem.paperItem) )
                     }
                 }
@@ -137,7 +138,7 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
+                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Force sync")
                 onClicked: {
@@ -156,7 +157,7 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
+                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Paper Type")
 //                visible: false
@@ -176,7 +177,7 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
+                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Update Date")
                 onClicked: {
@@ -194,7 +195,7 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
+                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Update Location")
                 visible: !map_image.visible && kaqaz.proBuild
@@ -240,8 +241,8 @@ Item {
                     id: delete_confirm_text
                     width: column.width
                     font.weight: Font.Normal
-                    font.pixelSize: devices.isMobile? 13*fontsScale : 15*fontsScale
-                    font.family: globalFontFamily
+                    font.pixelSize: Devices.isMobile? 13*fontsScale : 15*fontsScale
+                    font.family: SApp.globalFontFamily
                     font.bold: false
                     anchors.bottom: delete_btn.top
                     color: "#ff5532"
@@ -257,7 +258,7 @@ Item {
                     highlightColor: "#ff5532"
                     textColor: press? "#ffffff" : "#ff5532"
                     textFont.weight: Font.Normal
-                    textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
+                    textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
                     textFont.bold: false
                     text: qsTr("Delete Paper")
                     onClicked: {
@@ -308,7 +309,7 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
+                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Normal")
                 onClicked: {
@@ -324,7 +325,7 @@ Item {
                 highlightColor: "#4098bf"
                 textColor: press? "#ffffff" : "#4098bf"
                 textFont.weight: Font.Normal
-                textFont.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
+                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("To-Do")
                 onClicked: {

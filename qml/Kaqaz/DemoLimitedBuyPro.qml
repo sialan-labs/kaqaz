@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     id: buy_pro
@@ -37,7 +38,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             font.pixelSize: 30*fontsScale
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             height: 70*physicalPlatformScale
             horizontalAlignment: Text.AlignHCenter
             color: "#333333"
@@ -51,7 +52,7 @@ Item {
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 12*fontsScale
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             color: "#333333"
             text: qsTr("Buy kaqaz unlimited version")
         }

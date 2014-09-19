@@ -19,13 +19,10 @@
 #include "kaqazmacros.h"
 #include "kaqaz.h"
 #include "resourcemanager.h"
+#include "sialantools/sialanapplication.h"
 
 #ifdef DESKTOP_DEVICE
-#include <QApplication>
-#include "qtsingleapplication/qtsingleapplication.h"
 #include "desktop/uiselectordialog.h"
-#else
-#include <QtGui/QGuiApplication>
 #endif
 
 #include <QFile>
@@ -34,11 +31,7 @@
 
 int main(int argc, char *argv[])
 {
-#ifdef DESKTOP_DEVICE
-    QtSingleApplication app(argc, argv);
-#else
-    QGuiApplication app(argc, argv);
-#endif
+    SialanApplication app(argc, argv);
     app.setApplicationName("Kaqaz");
     app.setApplicationDisplayName("Kaqaz");
     app.setOrganizationDomain("org.sialan.kaqaz");

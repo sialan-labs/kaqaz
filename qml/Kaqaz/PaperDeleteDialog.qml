@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     id: paper_delete
@@ -88,7 +89,7 @@ Item {
             id: cancel_txt
             anchors.centerIn: parent
             text: qsTr("Cancel")
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             font.pixelSize: 15*fontsScale
             color: "#333333"
         }

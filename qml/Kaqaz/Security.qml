@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: security
@@ -37,7 +38,7 @@ Item {
         anchors.right: parent.right
         anchors.margins: 10*physicalPlatformScale
         font.pixelSize: 15*fontsScale
-        font.family: globalFontFamily
+        font.family: SApp.globalFontFamily
         color: "#333333"
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter
@@ -57,11 +58,11 @@ Item {
         anchors.leftMargin: 20*physicalPlatformScale
         anchors.rightMargin: 20*physicalPlatformScale
 
-        KTextInput{
+        STextInput{
             id: pass_placeholder
             color: "#bbbbbb"
             font.pixelSize: pass.font.pixelSize
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             y: pass.y
             anchors.left: pass.left
             anchors.right: pass.right
@@ -69,11 +70,11 @@ Item {
             visible: (!pass.focus && pass.text == "")
         }
 
-        KTextInput{
+        STextInput{
             id: pass
             color: "#333333"
             font.pixelSize: 11*fontsScale
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             y: pass_frame.height/2-height/2
             anchors.left: parent.left
             anchors.right: parent.right
@@ -97,11 +98,11 @@ Item {
         anchors.leftMargin: 20*physicalPlatformScale
         anchors.rightMargin: 20*physicalPlatformScale
 
-        KTextInput{
+        STextInput{
             id: pass_repeat_placeholder
             color: "#bbbbbb"
             font.pixelSize: pass_repeat.font.pixelSize
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             y: pass_repeat.y
             anchors.left: pass_repeat.left
             anchors.right: pass_repeat.right
@@ -109,11 +110,11 @@ Item {
             visible: (!pass_repeat.focus && pass_repeat.text == "")
         }
 
-        KTextInput{
+        STextInput{
             id: pass_repeat
             color: "#333333"
             font.pixelSize: 11*fontsScale
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             y: pass_repeat_frame.height/2-height/2
             anchors.left: parent.left
             anchors.right: parent.right
@@ -146,7 +147,7 @@ Item {
             textColor: "#333333"
             visible: pass.text == pass_repeat.text
             onClicked: {
-                database.setPassword( kaqaz.passToMd5(pass.text) )
+                database.setPassword( Tools.passToMd5(pass.text) )
                 showTooltip( qsTr("Password changed") )
                 kaqaz_root.refresh()
                 popPreference()

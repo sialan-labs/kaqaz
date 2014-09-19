@@ -22,6 +22,7 @@
 #include "database.h"
 #include "mapwidget.h"
 #include "datewidget.h"
+#include "sialantools/sialancalendarconverter.h"
 
 #include <QTimer>
 #include <QMenu>
@@ -100,8 +101,8 @@ void PaperConfigure::refresh()
     Database *db = Kaqaz::database();
 
     p->ui->title_line->setText( db->paperTitle(p->paperId) );
-    p->ui->cdate_line->setText( p->kaqaz->convertDateTimeToString(db->paperCreatedDate(p->paperId)) );
-    p->ui->mdate_line->setText( p->kaqaz->convertDateTimeToString(db->paperModifiedDate(p->paperId)) );
+    p->ui->cdate_line->setText( p->kaqaz->calendarConverter()->convertDateTimeToString(db->paperCreatedDate(p->paperId)) );
+    p->ui->mdate_line->setText( p->kaqaz->calendarConverter()->convertDateTimeToString(db->paperModifiedDate(p->paperId)) );
 
     p->ui->type_combo->setCurrentIndex( db->paperType(p->paperId) );
     p->map->setGeo( db->paperLocation(p->paperId) );

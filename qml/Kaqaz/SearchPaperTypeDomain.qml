@@ -18,6 +18,7 @@
 
 import QtQuick 2.0
 import Kaqaz 1.0
+import SialanTools 1.0
 
 Item {
     id: ptype_domain

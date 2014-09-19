@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     id: pitem
@@ -60,9 +61,9 @@ Item {
                 anchors.right: parent.right
                 anchors.margins: 7*physicalPlatformScale
                 font.pixelSize: 7*fontsScale
-                font.family: globalFontFamily
+                font.family: SApp.globalFontFamily
                 color: "#aaaaaa"
-                text: kaqaz.convertDateTimeToString( database.paperCreatedDate(pitem.paperId) )
+                text: CalendarConv.convertDateTimeToString( database.paperCreatedDate(pitem.paperId) )
             }
 
             Text{
@@ -74,7 +75,7 @@ Item {
                 anchors.leftMargin: gc_back.x + gc_back.width
                 anchors.rightMargin: gc_back.x + gc_back.width
                 font.pixelSize: 14*fontsScale
-                font.family: globalFontFamily
+                font.family: SApp.globalFontFamily
                 color: title.length==0? "#cccccc" : "#333333"
                 text: title.length==0? qsTr("Title") : title
                 horizontalAlignment: Text.AlignHCenter
@@ -91,7 +92,7 @@ Item {
                 anchors.margins: 20*physicalPlatformScale
                 anchors.topMargin: 0
                 font.pixelSize: 9*fontsScale
-                font.family: globalFontFamily
+                font.family: SApp.globalFontFamily
                 wrapMode: Text.Wrap
                 smooth: true
                 color: "#333333"

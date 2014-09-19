@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     id: done_page
@@ -46,7 +47,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             font.pixelSize: 18*fontsScale
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             color: "#333333"

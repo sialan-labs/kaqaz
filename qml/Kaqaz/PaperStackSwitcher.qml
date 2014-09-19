@@ -18,6 +18,7 @@
 
 import QtQuick 2.2
 import Kaqaz 1.0
+import SialanTools 1.0
 
 Item {
     id: switcher

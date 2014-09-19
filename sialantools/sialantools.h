@@ -31,6 +31,9 @@ public:
     ~SialanTools();
 
 public slots:
+    static QString translateNumbers( QString input );
+    static QString passToMd5( const QString & pass );
+
     static Qt::LayoutDirection directionOf( const QString & str );
     static QVariant call( QObject *obj, const QString & member, Qt::ConnectionType type,
                                                                 const QVariant & v0 = QVariant(),

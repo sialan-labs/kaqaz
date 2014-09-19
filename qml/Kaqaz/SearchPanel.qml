@@ -18,6 +18,7 @@
 
 import QtQuick 2.2
 import Kaqaz 1.0
+import SialanTools 1.0
 
 Item {
     id: search_panel
@@ -81,14 +82,14 @@ Item {
         font: txt.font
     }
 
-    KTextInput{
+    STextInput{
         id: txt
         anchors.verticalCenter: back.verticalCenter
         anchors.left: icon.right
         anchors.right: more_btn.left
         anchors.margins: 10*physicalPlatformScale
         font.pixelSize: 13*fontsScale
-        font.family: globalFontFamily
+        font.family: SApp.globalFontFamily
         inputMethodHints: Qt.ImhNoPredictiveText
     }
 
@@ -101,12 +102,12 @@ Item {
         width: 60*physicalPlatformScale
         text: more? qsTr("Less") : qsTr("More")
         textFont.pixelSize: 10*fontsScale
-        textFont.family: globalFontFamily
+        textFont.family: SApp.globalFontFamily
         textColor: press? "#0d80ec" : "#333333"
         highlightColor: "#00000000"
         onClicked: {
             more = !more
-            devices.hideKeyboard()
+            Devices.hideKeyboard()
             if( more )
                 privates.moreDialog = showBottomPanel(more_dialog_component,portrait)
             else

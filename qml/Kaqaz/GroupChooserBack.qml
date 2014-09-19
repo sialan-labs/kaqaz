@@ -17,10 +17,11 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     id: group_chooser_back
-    width: devices.isMobile? 75*physicalPlatformScale : 100*physicalPlatformScale
+    width: Devices.isMobile? 75*physicalPlatformScale : 100*physicalPlatformScale
     height: 30*physicalPlatformScale
 
     property real radius: 3*physicalPlatformScale
@@ -51,9 +52,9 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
-        font.bold: devices.isTablet
-        font.pixelSize: devices.isTouchDevice? (devices.isMobile? 8*fontsScale : 9*fontsScale) : 10*fontsScale
-        font.family: globalFontFamily
+        font.bold: Devices.isTablet
+        font.pixelSize: Devices.isTouchDevice? (Devices.isMobile? 8*fontsScale : 9*fontsScale) : 10*fontsScale
+        font.family: SApp.globalFontFamily
         color: "#ffffff"
         horizontalAlignment: Text.AlignHCenter
         maximumLineCount: 1

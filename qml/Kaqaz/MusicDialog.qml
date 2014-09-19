@@ -18,6 +18,7 @@
 
 import QtQuick 2.2
 import Qt.labs.folderlistmodel 2.1
+import SialanTools 1.0
 
 Item {
     id: music_dialog
@@ -51,7 +52,7 @@ Item {
 
         model: FolderListModel {
             showDirsFirst: true
-            folder: "file://" + devices.musicsLocation
+            folder: "file://" + Devices.musicsLocation
             nameFilters: ["*.mp3","*.ogg","*.MP3","*.ogg","*.wav","*.WAV"]
             sortField: FolderListModel.Name
         }
@@ -96,7 +97,7 @@ Item {
                 y: parent.height/2 - height/2
                 text: parent.text.length == 0? qsTr("Back") : parent.text
                 font.pixelSize: 12*fontsScale
-                font.family: globalFontFamily
+                font.family: SApp.globalFontFamily
                 color: "#ffffff"
                 clip: true
             }

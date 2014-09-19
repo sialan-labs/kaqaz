@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     anchors.fill: parent
@@ -31,7 +32,7 @@ Item {
             id: limit_text
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 30*fontsScale
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             color: "#333333"
             height: 70*physicalPlatformScale
             text: qsTr("TRIAL EXPIRED")
@@ -41,7 +42,7 @@ Item {
             id: choice_text
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 13*fontsScale
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             color: "#333333"
             text: qsTr("Now you have 2 choice")
         }
@@ -51,7 +52,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: scroll_img.top
         font.pixelSize: 9*fontsScale
-        font.family: globalFontFamily
+        font.family: SApp.globalFontFamily
         color: "#666666"
         text: qsTr("scroll down")
     }

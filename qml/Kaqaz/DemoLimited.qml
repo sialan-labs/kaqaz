@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     id: dlimit
@@ -25,8 +26,8 @@ Item {
     ListView {
         id: dlist
         anchors.fill: parent
-        anchors.topMargin: statusBarHeight
-        anchors.bottomMargin: navigationBarHeight
+        anchors.topMargin: View.statusBarHeight
+        anchors.bottomMargin: View.navigationBarHeight
         orientation: Qt.Vertical
         snapMode: ListView.SnapOneItem
         rebound: Transition { NumberAnimation {duration: 0} }
@@ -90,7 +91,7 @@ Item {
             id: troll_text
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 20*fontsScale
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             color: "#333333"
         }
     }
@@ -102,7 +103,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.leftMargin: 40*physicalPlatformScale
         anchors.rightMargin: 40*physicalPlatformScale
-        anchors.bottomMargin: 20*physicalPlatformScale + navigationBarHeight
+        anchors.bottomMargin: 20*physicalPlatformScale + View.navigationBarHeight
         height: 42*physicalPlatformScale
         normalColor: "#4098bf"
         highlightColor: "#337fa2"

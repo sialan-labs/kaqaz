@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     id: configure
@@ -59,8 +60,8 @@ Item {
                 anchors.right: parent.right
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
-                font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
-                font.family: globalFontFamily
+                font.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
+                font.family: SApp.globalFontFamily
                 color: item.press? "#ffffff" : "#333333"
                 wrapMode: TextInput.WordWrap
                 text: name
@@ -100,9 +101,9 @@ Item {
             model.append({ "name": qsTr("All papers item"), "file": "", "check": true, "pr":"allPaper"})
             if( kaqaz.proBuild )
                 model.append({ "name": qsTr("Notes positioning"), "file": "", "check": true, "pr":"positioning"})
-            if( devices.isMacX )
+            if( Devices.isMacX )
                 model.append({ "name": qsTr("Desktop Touch"), "file": "", "check": true, "pr":"desktopTouchMode"})
-            if( !devices.isDesktop )
+            if( !Devices.isDesktop )
                 model.append({ "name": qsTr("Fullscreen"), "file": "", "check": true, "pr":"fullscreen"})
             model.append({ "name": qsTr("Word suggestions"), "file": "", "check": true, "pr":"keyboardPredicative"})
             model.append({ "name": qsTr("Groups count"), "file": "", "check": true, "pr":"groupsCount"})

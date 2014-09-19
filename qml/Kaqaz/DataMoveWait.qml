@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: move_wait
@@ -30,7 +31,7 @@ Item {
         anchors.right: move_wait.right
         anchors.margins: 20*physicalPlatformScale
         font.pixelSize: 15*fontsScale
-        font.family: globalFontFamily
+        font.family: SApp.globalFontFamily
         horizontalAlignment: Text.AlignHCenter
         color: "#333333"
     }

@@ -18,6 +18,7 @@
 
 import QtQuick 2.0
 import QtPositioning 5.2
+import SialanTools 1.0
 
 Rectangle {
     id: map_view
@@ -80,7 +81,7 @@ Rectangle {
         Text {
             anchors.left: parent.left
             anchors.top: parent.top
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             font.pixelSize: 9*fontsScale
             text: latitude + ", " + longitude
         }
@@ -88,7 +89,7 @@ Rectangle {
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             font.pixelSize: 13*fontsScale
             text: unknown? qsTr("Unknown point") : qsTr("Loading Map...")
         }

@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 
 Rectangle {
@@ -50,7 +51,7 @@ Rectangle {
             id: txt
             anchors.horizontalCenter: parent.horizontalCenter
             font.pixelSize: 12*fontsScale
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             color: "#007ee5"
         }
     }

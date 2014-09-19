@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     width: 100
@@ -41,7 +42,7 @@ Item {
             text: "SIALAN LABS"
             font.pixelSize: 20*fontsScale
             font.weight: Font.DemiBold
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             color: "#333333"
         }
     }
@@ -52,7 +53,7 @@ Item {
         anchors.bottomMargin: 20*physicalPlatformScale
         text: "slide to next"
         font.pixelSize: 12*fontsScale
-        font.family: globalFontFamily
+        font.family: SApp.globalFontFamily
         color: "#333333"
         speed: 1200
         glowWidth: 60*physicalPlatformScale

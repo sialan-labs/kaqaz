@@ -21,6 +21,7 @@
 #include "papermanager.h"
 #include "kaqaz.h"
 #include "database.h"
+#include "sialantools/sialancalendarconverter.h"
 
 #include <QQmlComponent>
 #include <QQmlContext>
@@ -129,7 +130,7 @@ void PaperManager::setRoot(int id)
         break;
 
     case Date:
-        p->papers = Kaqaz::database()->papersOf( Kaqaz::convertDaysToDate(id) );
+        p->papers = Kaqaz::database()->papersOf( SialanCalendarConverter::convertDaysToDate(id) );
         break;
 
     case Group:

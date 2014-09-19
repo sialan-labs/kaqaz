@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: abs_list
@@ -49,7 +50,7 @@ Item {
             anchors.right: parent.right
             anchors.margins: 8*physicalPlatformScale
             font.pixelSize: (physicalPlatformScale == 0)? 1 : 15*physicalPlatformScale
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             color: "#ffffff"
         }
     }

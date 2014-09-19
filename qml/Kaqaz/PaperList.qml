@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     id: paper_list
@@ -37,8 +38,8 @@ Item {
     ListView {
         id: p_list
         anchors.fill: parent
-        anchors.topMargin: -statusBarHeight
-        anchors.bottomMargin: -navigationBarHeight
+        anchors.topMargin: -View.statusBarHeight
+        anchors.bottomMargin: -View.navigationBarHeight
         model: ListModel{}
         maximumFlickVelocity: flickVelocity
         clip: true
@@ -47,12 +48,12 @@ Item {
 
         header: Item{
             width: p_list.width
-            height: (devices.isAndroid? 20 + statusBarHeight : title.height)
+            height: (Devices.isAndroid? 20 + View.statusBarHeight : title.height)
         }
 
         footer: Item{
             width: p_list.width
-            height: navigationBarHeight
+            height: View.navigationBarHeight
         }
 
         delegate: PaperListItem {

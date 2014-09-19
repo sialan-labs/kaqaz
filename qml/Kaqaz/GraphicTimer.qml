@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: graphic_timer

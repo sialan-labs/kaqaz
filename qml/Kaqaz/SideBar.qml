@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 AnimationItem {
     id: side_panel
@@ -70,7 +71,7 @@ AnimationItem {
             opened = side_panel.isVisible()
 
             main.focus = true
-            devices.hideKeyboard()
+            Devices.hideKeyboard()
         }
 
         onReleased: {

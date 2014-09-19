@@ -25,7 +25,6 @@
 #include "panelbox.h"
 #include "sialantools/sialandevices.h"
 #include "sialantools/sialantools.h"
-#include "mimeapps.h"
 #include "aboutdialog.h"
 #include "papersview.h"
 #include "editorview.h"
@@ -93,7 +92,6 @@ public:
     KaqazSync *sync;
     SialanDevices *devices;
     SialanTools *tools;
-    MimeApps *mimeApps;
 
     PanelBox *panel;
     PapersView *papers_view;
@@ -289,11 +287,6 @@ void KaqazDesktop::setSialanDevices(SialanDevices *sdev)
 void KaqazDesktop::setSialanTools(SialanTools *stools)
 {
     p->tools = stools;
-}
-
-void KaqazDesktop::setMimeApps(MimeApps *mapp)
-{
-    p->mimeApps = mapp;
 }
 
 bool KaqazDesktop::start()

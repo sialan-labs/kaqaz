@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: item
@@ -62,7 +63,7 @@ Item {
                      contentY = r.y+r.height-height;
              }
 
-             KTextEdit {
+             STextEdit {
                  id: desc
                  color: "#000000"
                  width: flick.width

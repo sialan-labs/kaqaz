@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     id: state_page
@@ -39,8 +40,8 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: devices.isMobile? 13*fontsScale : 15*fontsScale
-            font.family: globalFontFamily
+            font.pixelSize: Devices.isMobile? 13*fontsScale : 15*fontsScale
+            font.family: SApp.globalFontFamily
             color: "#333333"
         }
 
@@ -49,8 +50,8 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: devices.isMobile? 13*fontsScale : 15*fontsScale
-            font.family: globalFontFamily
+            font.pixelSize: Devices.isMobile? 13*fontsScale : 15*fontsScale
+            font.family: SApp.globalFontFamily
             color: "#333333"
         }
 
@@ -59,8 +60,8 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: devices.isMobile? 13*fontsScale : 15*fontsScale
-            font.family: globalFontFamily
+            font.pixelSize: Devices.isMobile? 13*fontsScale : 15*fontsScale
+            font.family: SApp.globalFontFamily
             color: "#333333"
         }
     }

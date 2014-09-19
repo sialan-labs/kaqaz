@@ -36,12 +36,7 @@ android {
     QT += widgets network
 
     HEADERS += \
-        mimeapps.h \
         iconprovider.h \
-        qtsingleapplication/qtsinglecoreapplication.h \
-        qtsingleapplication/qtsingleapplication.h \
-        qtsingleapplication/qtlockedfile.h \
-        qtsingleapplication/qtlocalpeer.h \
         desktop/kaqazdesktop.h \
         desktop/categoriesmodel.h \
         desktop/panelbox.h \
@@ -69,12 +64,7 @@ android {
         desktop/uiselectordialog.h
 
     SOURCES += \
-        mimeapps.cpp \
         iconprovider.cpp \
-        qtsingleapplication/qtsinglecoreapplication.cpp \
-        qtsingleapplication/qtsingleapplication.cpp \
-        qtsingleapplication/qtlockedfile.cpp \
-        qtsingleapplication/qtlocalpeer.cpp \
         desktop/kaqazdesktop.cpp \
         desktop/categoriesmodel.cpp \
         desktop/panelbox.cpp \
@@ -106,9 +96,6 @@ android {
         desktop/configurepage.ui \
         desktop/aboutdialog.ui\
         desktop/uiselectordialog.ui
-
-    win32: SOURCES += qtsingleapplication/qtlockedfile_win.cpp
-    unix:  SOURCES += qtsingleapplication/qtlockedfile_unix.cpp
 }
 }
 
@@ -120,7 +107,6 @@ win32 {
 SOURCES += main.cpp \
     kaqaz.cpp \
     papermanager.cpp \
-    calendarconverter.cpp \
     repository.cpp \
     resourcemanager.cpp \
     kaqazsync.cpp \
@@ -136,7 +122,6 @@ SOURCES += main.cpp \
 HEADERS += \
     kaqaz.h \
     papermanager.h \
-    calendarconverter.h \
     repository.h \
     resourcemanager.h \
     kaqazsync.h \

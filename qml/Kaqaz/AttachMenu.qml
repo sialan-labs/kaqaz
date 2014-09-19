@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: attach_menu
@@ -68,7 +69,7 @@ Item {
     Rectangle {
         id: back_img
         anchors.fill: parent
-        anchors.bottomMargin: -6*physicalPlatformScale - navigationBarHeight
+        anchors.bottomMargin: -6*physicalPlatformScale - View.navigationBarHeight
         color: "#000000"
         opacity: attach_menu.opened? 0.9 : 0
 
@@ -137,7 +138,7 @@ Item {
         border.width: 1*physicalPlatformScale
         border.color: "#ffffff"
         onClicked: {
-            if( !devices.isTouchDevice ){
+            if( !Devices.isTouchDevice ){
                 var list = kaqaz.getOpenFileNames( qsTr("Select media files."), "Images (*.png *.jpg);;Musics (*.mp3 *.ogg);;Documents (*.pdf *.txt *.text)" )
                 for( var i=0; i<list.length; i++ ){
                     var id = repository.insert( list[i] )

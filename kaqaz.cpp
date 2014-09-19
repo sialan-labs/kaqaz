@@ -31,19 +31,17 @@
 #include "searchhighlighter.h"
 #include "sialantools/sialanqtlogger.h"
 #include "sialantools/sialantools.h"
-#include "sialantools/sialanhashobject.h"
-#include "sialantools/sialanlistobject.h"
-#include "calendarconverter.h"
 #include "resourcemanager.h"
 #include "SimpleQtCryptor/simpleqtcryptor.h"
 #include "sialantools/sialandevices.h"
+#include "sialantools/sialanquickview.h"
+#include "sialantools/sialancalendarconverter.h"
 
 #ifdef Q_OS_ANDROID
 #include "sialantools/sialanjavalayer.h"
 #endif
 
 #ifdef DESKTOP_LINUX
-#include "mimeapps.h"
 #include "iconprovider.h"
 #endif
 
@@ -52,7 +50,6 @@
 #include <QFileDialog>
 #endif
 
-#include <QQuickView>
 #include <QGuiApplication>
 #include <QClipboard>
 #include <QTranslator>
@@ -115,7 +112,7 @@ public:
     KaqazDesktop *viewer_classic;
 #endif
 
-    QQuickView *viewer;
+    SialanQuickView *viewer;
 
     QString homePath;
     QString translationsPath;
@@ -137,19 +134,15 @@ public:
     QHash<QString,QLocale> locales;
     QString language;
 
-    CalendarConverter *calendar;
     Repository *repository;
     Backuper *backuper;
-
-#ifdef DESKTOP_LINUX
-    MimeApps *mimeApps;
-#endif
 
     QFileSystemWatcher *filesystem;
     QMimeDatabase mime_db;
 
     SialanDevices *devices;
     SialanTools *tools;
+    SialanCalendarConverter *calendar;
 
 #ifdef Q_OS_ANDROID
     SialanQtLogger *logger;
@@ -174,7 +167,6 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->viewer_classic = 0;
 #endif
     p->translator = new QTranslator(this);
-    p->calendar = new CalendarConverter();
     p->backuper = new Backuper();
     p->devices = new SialanDevices(this);
     p->tools = new SialanTools(this);
@@ -183,9 +175,6 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->java_layer = SialanJavaLayer::instance();
 #endif
 
-#ifdef DESKTOP_LINUX
-    p->mimeApps = new MimeApps(this);
-#endif
 #ifdef DESKTOP_DEVICE
     QIcon::setThemeSearchPaths( QStringList() << resourcePathAbs() + "/files/icons/" );
     QIcon::setThemeName("FaenzaFlattr");
@@ -231,8 +220,6 @@ Kaqaz::Kaqaz(QObject *parent) :
 
     p->repository = new Repository(this);
 
-    p->calendar->setCalendar( static_cast<CalendarConverter::CalendarTypes>(kaqaz_settings->value("General/Calendar",CalendarConverter::Gregorian).toInt()) );
-
     if( !kaqaz_database )
         kaqaz_database = new Database(profilePath() + "/database.sqlite");
 
@@ -243,8 +230,6 @@ Kaqaz::Kaqaz(QObject *parent) :
     qmlRegisterType<PaperManager>("Kaqaz", 1,0, "PaperManager");
     qmlRegisterType<SearchHighlighter>("Kaqaz", 1,0, "SearchHighlighter");
     qmlRegisterType<Enums>("Kaqaz", 1,0, "Enums");
-    qmlRegisterType<SialanHashObject>("Kaqaz", 1,0, "HashObject");
-    qmlRegisterType<SialanListObject>("Kaqaz", 1,0, "ListObject");
 }
 
 Kaqaz *Kaqaz::instance()
@@ -268,6 +253,11 @@ Backuper *Kaqaz::backuper() const
 KaqazSync *Kaqaz::kaqazSync() const
 {
     return p->sync;
+}
+
+SialanCalendarConverter *Kaqaz::calendarConverter() const
+{
+    return p->calendar;
 }
 
 Repository *Kaqaz::repository() const
@@ -316,27 +306,27 @@ bool Kaqaz::start()
         p->viewer_classic->setKaqazSync(p->sync);
         p->viewer_classic->setSialanDevices(p->devices);
         p->viewer_classic->setSialanTools(p->tools);
-#ifdef DESKTOP_LINUX
-        p->viewer_classic->setMimeApps(p->mimeApps);
-#endif
+
+        p->calendar = new SialanCalendarConverter(this);
     }
     else
 #endif
     {
-        p->viewer = new QQuickView();
+        p->viewer = new SialanQuickView(
+#ifdef DESKTOP_DEVICE
+                            SialanQuickView::AllExceptLogger
+#else
+                            SialanQuickView::AllComponents
+#endif
+                    );
         p->viewer->installEventFilter(this);
-        p->viewer->setResizeMode(QQuickView::SizeRootObjectToView);
         p->viewer->engine()->rootContext()->setContextProperty( "kaqaz", this );
-        p->viewer->engine()->rootContext()->setContextProperty( "view", p->viewer );
         p->viewer->engine()->rootContext()->setContextProperty( "database", kaqaz_database );
         p->viewer->engine()->rootContext()->setContextProperty( "filesystem", p->filesystem );
         p->viewer->engine()->rootContext()->setContextProperty( "repository", p->repository );
         p->viewer->engine()->rootContext()->setContextProperty( "backuper", p->backuper );
         p->viewer->engine()->rootContext()->setContextProperty( "sync", p->sync );
-        p->viewer->engine()->rootContext()->setContextProperty( "devices", p->devices );
-        p->viewer->engine()->rootContext()->setContextProperty( "tools", p->tools );
 #ifdef DESKTOP_LINUX
-        p->viewer->engine()->rootContext()->setContextProperty( "mimeApps", p->mimeApps );
         p->viewer->engine()->addImageProvider( "icon", new IconProvider() );
 #endif
         p->viewer->engine()->rootContext()->setContextProperty( "keyboard", QGuiApplication::inputMethod() );
@@ -344,7 +334,11 @@ bool Kaqaz::start()
             p->viewer->engine()->rootContext()->setContextProperty( "screen", QGuiApplication::screens().first() );
 
         connect(p->viewer->engine(), SIGNAL(quit()), SLOT(close()));
+
+        p->calendar = p->viewer->calendar();
     }
+
+    p->calendar->setCalendar( static_cast<SialanCalendarConverterCore::CalendarTypes>(kaqaz_settings->value("General/Calendar",SialanCalendarConverterCore::Gregorian).toInt()) );
 
     connect( kaqaz_database, SIGNAL(fileDeleted(QString)), p->repository, SLOT(deleteFile(QString)) );
 
@@ -506,81 +500,19 @@ void Kaqaz::removeFile(const QString &path)
 
 void Kaqaz::setCalendar(int t)
 {
-    p->calendar->setCalendar( static_cast<CalendarConverter::CalendarTypes>(t) );
+    p->calendar->setCalendar( static_cast<SialanCalendarConverterCore::CalendarTypes>(t) );
     kaqaz_settings->setValue( "General/Calendar", t );
     emit calendarChanged();
 }
 
 QStringList Kaqaz::calendarsID() const
 {
-    QStringList res;
-    res << QString::number(CalendarConverter::Gregorian);
-    res << QString::number(CalendarConverter::Jalali);
-//    res << QString::number(CalendarConverter::Hijri);
-    return res;
-}
-
-QString Kaqaz::calendarName(int t)
-{
-    switch( t )
-    {
-    case CalendarConverter::Gregorian:
-        return tr("Gregorian");
-        break;
-    case CalendarConverter::Jalali:
-        return tr("Jalali");
-        break;
-    case CalendarConverter::Hijri:
-        return tr("Hijri");
-        break;
-    }
-
-    return QString();
+    return p->calendar->calendarsID();
 }
 
 int Kaqaz::calendar() const
 {
     return kaqaz_settings->value("General/Calendar",0).toInt();
-}
-
-int Kaqaz::currentDays()
-{
-    return QDate(1,1,1).daysTo(QDate::currentDate());
-}
-
-QString Kaqaz::convertIntToStringDate(qint64 d)
-{
-    return convertIntToStringDate(d,"ddd MMM dd yy");
-}
-
-QString Kaqaz::convertIntToFullStringDate(qint64 d)
-{
-    return convertIntToStringDate(d,"ddd MMM dd yyyy");
-}
-
-QString Kaqaz::convertIntToNumStringDate(qint64 d)
-{
-    QDate date = QDate(1,1,1);
-    date = date.addDays(d);
-    return translateNumbers( p->calendar->numberString(date) );
-}
-
-QString Kaqaz::translateInt(qint64 d)
-{
-    return translateNumbers(QString::number(d));
-}
-
-QString Kaqaz::convertIntToStringDate(qint64 d, const QString &format)
-{
-    Q_UNUSED(format)
-    QDate date = QDate(1,1,1);
-    date = date.addDays(d);
-    return translateNumbers( p->calendar->historyString(date) );
-}
-
-QDate Kaqaz::convertDateToGragorian(qint64 y, int m, int d)
-{
-    return p->calendar->toDate(y,m,d);
 }
 
 void Kaqaz::close()
@@ -811,51 +743,6 @@ QString Kaqaz::resourcePath()
     return "file://" + resourcePathAbs();
 #endif
 #endif
-}
-
-QString Kaqaz::fromMSecSinceEpoch(qint64 t)
-{
-    return convertDateTimeToString( QDateTime::fromMSecsSinceEpoch(t) );
-}
-
-QString Kaqaz::convertDateTimeToString(const QDateTime &dt)
-{
-    return translateNumbers( p->calendar->paperString(dt) );
-}
-
-QString Kaqaz::convertDateTimeToLittleString(const QDate &dt)
-{
-    return translateNumbers( p->calendar->littleString(dt) );
-}
-
-int Kaqaz::daysOfMonth(qint64 y, int m)
-{
-    return p->calendar->daysOfMonth(y,m);
-}
-
-QString Kaqaz::monthName(int m)
-{
-    return p->calendar->monthName(m);
-}
-
-qint64 Kaqaz::currentYear()
-{
-    return p->calendar->getDate(QDate::currentDate()).year;
-}
-
-int Kaqaz::currentMonth()
-{
-    return p->calendar->getDate(QDate::currentDate()).month;
-}
-
-int Kaqaz::currentDay()
-{
-    return p->calendar->getDate(QDate::currentDate()).day;
-}
-
-DateProperty Kaqaz::convertDate(const QDate &date)
-{
-    return p->calendar->getDate(date);
 }
 
 QString Kaqaz::passToMd5(const QString &pass)
@@ -1188,16 +1075,6 @@ qreal Kaqaz::colorLightness(const QColor &clr)
 qreal Kaqaz::colorSaturation(const QColor &clr)
 {
     return clr.saturation()/255.0;
-}
-
-QDate Kaqaz::convertDaysToDate(int days)
-{
-    return QDate(1,1,1).addDays(days);
-}
-
-int Kaqaz::convertDateToDays(const QDate &date)
-{
-    return QDate(1,1,1).daysTo(date);
 }
 
 void Kaqaz::setProperty(QObject *obj, const QString &property, const QVariant &v)

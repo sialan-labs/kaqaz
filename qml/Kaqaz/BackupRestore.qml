@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: backup_restore
@@ -65,8 +66,8 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
-                font.family: globalFontFamily
+                font.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
+                font.family: SApp.globalFontFamily
                 color: item.press? "#ffffff" : "#333333"
             }
 

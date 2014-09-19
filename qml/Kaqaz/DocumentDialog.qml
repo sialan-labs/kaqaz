@@ -18,6 +18,7 @@
 
 import QtQuick 2.2
 import Qt.labs.folderlistmodel 2.1
+import SialanTools 1.0
 
 Item {
     id: doc_dialog
@@ -51,7 +52,7 @@ Item {
 
         model: FolderListModel {
             showDirsFirst: true
-            folder: "file://" + devices.documentsLocation
+            folder: "file://" + Devices.documentsLocation
             nameFilters: ["*.pdf","*.txt","*.text"]
             sortField: FolderListModel.Name
         }
@@ -96,7 +97,7 @@ Item {
                 y: parent.height/2 - height/2
                 text: parent.text.length == 0? qsTr("Back") : parent.text
                 font.pixelSize: 12*fontsScale
-                font.family: globalFontFamily
+                font.family: SApp.globalFontFamily
                 color: "#ffffff"
                 clip: true
             }

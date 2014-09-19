@@ -5,22 +5,15 @@
         <file>qml/Kaqaz/AbstractList.qml</file>
         <file>qml/Kaqaz/AbstractListItem.qml</file>
         <file>qml/Kaqaz/AddGroupDialog.qml</file>
-        <file>qml/Kaqaz/AnimationItem.qml</file>
         <file>qml/Kaqaz/AttachInsertDialog.qml</file>
         <file>qml/Kaqaz/AttachMenu.qml</file>
         <file>qml/Kaqaz/AttachViewer.qml</file>
         <file>qml/Kaqaz/BackupRestore.qml</file>
         <file>qml/Kaqaz/BackupWait.qml</file>
-        <file>qml/Kaqaz/BottomPanel.qml</file>
-        <file>qml/Kaqaz/Button.qml</file>
         <file>qml/Kaqaz/Calendar.qml</file>
         <file>qml/Kaqaz/CameraDialog.qml</file>
         <file>qml/Kaqaz/CameraItem.qml</file>
-        <file>qml/Kaqaz/CheckBox.qml</file>
-        <file>qml/Kaqaz/ColorList.qml</file>
-        <file>qml/Kaqaz/CursorPicker.qml</file>
         <file>qml/Kaqaz/DataMoveWait.qml</file>
-        <file>qml/Kaqaz/DateTimeChooser.qml</file>
         <file>qml/Kaqaz/DemoLimited.qml</file>
         <file>qml/Kaqaz/DemoLimitedActiveTrial.qml</file>
         <file>qml/Kaqaz/DemoLimitedBuyPro.qml</file>
@@ -30,7 +23,6 @@
         <file>qml/Kaqaz/DropBoxAuthorize.qml</file>
         <file>qml/Kaqaz/GalleryDialog.qml</file>
         <file>qml/Kaqaz/GeneralSettings.qml</file>
-        <file>qml/Kaqaz/GetPassDialog.qml</file>
         <file>qml/Kaqaz/GlowedAnimatedText.qml</file>
         <file>qml/Kaqaz/GlowedText.qml</file>
         <file>qml/Kaqaz/GraphicTimer.qml</file>
@@ -39,24 +31,18 @@
         <file>qml/Kaqaz/GroupChooserBack.qml</file>
         <file>qml/Kaqaz/GroupManager.qml</file>
         <file>qml/Kaqaz/GroupSelector.qml</file>
-        <file>qml/Kaqaz/Header.qml</file>
         <file>qml/Kaqaz/Helper.qml</file>
         <file>qml/Kaqaz/History.qml</file>
         <file>qml/Kaqaz/ImageSizeSelector.qml</file>
         <file>qml/Kaqaz/ImageViewer.qml</file>
-        <file>qml/Kaqaz/Indicator.qml</file>
         <file>qml/Kaqaz/kaqaz.qml</file>
         <file>qml/Kaqaz/KaqazBlur.qml</file>
         <file>qml/Kaqaz/LanguageSelector.qml</file>
-        <file>qml/Kaqaz/LineEdit.qml</file>
         <file>qml/Kaqaz/MainItem.qml</file>
         <file>qml/Kaqaz/MapView.qml</file>
-        <file>qml/Kaqaz/MenuButton.qml</file>
         <file>qml/Kaqaz/MirrorItem.qml</file>
-        <file>qml/Kaqaz/ModernProgressBar.qml</file>
         <file>qml/Kaqaz/MusicDialog.qml</file>
         <file>qml/Kaqaz/MusicViewer.qml</file>
-        <file>qml/Kaqaz/NormalWheelScroll.qml</file>
         <file>qml/Kaqaz/PaperBackground.qml</file>
         <file>qml/Kaqaz/PaperDeleteDialog.qml</file>
         <file>qml/Kaqaz/PaperEditDialog.qml</file>
@@ -69,19 +55,12 @@
         <file>qml/Kaqaz/PaperStackSwitcher.qml</file>
         <file>qml/Kaqaz/PaperStackSwitcherItem.qml</file>
         <file>qml/Kaqaz/PaperToDo.qml</file>
-        <file>qml/Kaqaz/PasteButton.qml</file>
         <file>qml/Kaqaz/PdfViewer.qml</file>
-        <file>qml/Kaqaz/Picker.qml</file>
-        <file>qml/Kaqaz/PickerHandler.qml</file>
-        <file>qml/Kaqaz/PointingDialog.qml</file>
         <file>qml/Kaqaz/Preference.qml</file>
         <file>qml/Kaqaz/PreferenceDialog.qml</file>
         <file>qml/Kaqaz/ProfileSettings.qml</file>
-        <file>qml/Kaqaz/ProgressBar.qml</file>
         <file>qml/Kaqaz/RestoreDialog.qml</file>
         <file>qml/Kaqaz/RestoreWait.qml</file>
-        <file>qml/Kaqaz/RollerDialog.qml</file>
-        <file>qml/Kaqaz/ScrollBar.qml</file>
         <file>qml/Kaqaz/SearchDateDomain.qml</file>
         <file>qml/Kaqaz/SearchGroupDomain.qml</file>
         <file>qml/Kaqaz/SearchHideHighlights.qml</file>
@@ -90,27 +69,19 @@
         <file>qml/Kaqaz/SearchPaperTypeDomain.qml</file>
         <file>qml/Kaqaz/SearchTimeDomain.qml</file>
         <file>qml/Kaqaz/Security.qml</file>
-        <file>qml/Kaqaz/SelectableList.qml</file>
-        <file>qml/Kaqaz/ShadowRectangle.qml</file>
-        <file>qml/Kaqaz/ShareDialog.qml</file>
         <file>qml/Kaqaz/SialanSplash.qml</file>
         <file>qml/Kaqaz/SideBar.qml</file>
         <file>qml/Kaqaz/SideBarList.qml</file>
-        <file>qml/Kaqaz/SlideMenu.qml</file>
         <file>qml/Kaqaz/SplashDone.qml</file>
         <file>qml/Kaqaz/SplashLanguage.qml</file>
         <file>qml/Kaqaz/SplashMessagePage.qml</file>
         <file>qml/Kaqaz/SplashTextPage.qml</file>
         <file>qml/Kaqaz/StartSplash.qml</file>
         <file>qml/Kaqaz/StateDialog.qml</file>
-        <file>qml/Kaqaz/SubMessage.qml</file>
         <file>qml/Kaqaz/Synchronization.qml</file>
         <file>qml/Kaqaz/SynchronizationItem.qml</file>
-        <file>qml/Kaqaz/TextAreaCore.qml</file>
-        <file>qml/Kaqaz/TextLineCore.qml</file>
         <file>qml/Kaqaz/TextViewer.qml</file>
         <file>qml/Kaqaz/ToDoItem.qml</file>
-        <file>qml/Kaqaz/Tooltip.qml</file>
         <file>qml/Kaqaz/files/active-troll.png</file>
         <file>qml/Kaqaz/files/add.png</file>
         <file>qml/Kaqaz/files/all-papers.png</file>
@@ -193,8 +164,6 @@
         <file>qml/Kaqaz/files/paper-clip.png</file>
         <file>qml/Kaqaz/files/paper-clip-off.png</file>
         <file>qml/Kaqaz/files/add-desktop.png</file>
-        <file>qml/Kaqaz/KTextEdit.qml</file>
-        <file>qml/Kaqaz/KTextInput.qml</file>
         <file>qml/Kaqaz/files/ui-classic-scshot.png</file>
         <file>qml/Kaqaz/files/ui-touch-scshot.png</file>
     </qresource>

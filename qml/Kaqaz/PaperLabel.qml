@@ -18,6 +18,7 @@
 
 import QtQuick 2.2
 import Kaqaz 1.0
+import SialanTools 1.0
 
 Item {
     id: paper_label
@@ -80,7 +81,7 @@ Item {
         anchors.fill: parent
     }
 
-    KTextEdit{
+    STextEdit{
         id: placeholder_text
         anchors.fill: txt
         font: txt.font
@@ -92,8 +93,8 @@ Item {
         id: txt
         anchors.fill: parent
         anchors.topMargin: 5*physicalPlatformScale
-        font.pixelSize: devices.isLargeTablet? 10*fontsScale : 9*fontsScale
-        font.family: globalFontFamily
+        font.pixelSize: Devices.isLargeTablet? 10*fontsScale : 9*fontsScale
+        font.family: SApp.globalFontFamily
         wrapMode: Text.Wrap
         smooth: true
         selectionColor: "#0d80ec"
@@ -144,7 +145,7 @@ Item {
             onClicked: {
                 showMenu()
                 main.focus = true
-                devices.hideKeyboard()
+                Devices.hideKeyboard()
             }
         }
 
@@ -216,7 +217,7 @@ Item {
         main.closePanel()
         var msg = showSubMessage(Qt.createComponent("PaperEditDialog.qml"))
         msg.item = paper_label
-        devices.hideKeyboard()
+        Devices.hideKeyboard()
     }
 
     function commitFaders() {

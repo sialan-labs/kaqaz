@@ -18,6 +18,7 @@
 
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
+import SialanTools 1.0
 
 Item {
     width: 100
@@ -33,7 +34,7 @@ Item {
         anchors.bottomMargin: 10*physicalPlatformScale
         font.pixelSize: 20*fontsScale
         horizontalAlignment: Text.AlignHCenter
-        font.family: globalFontFamily
+        font.family: SApp.globalFontFamily
         color: "#333333"
     }
 
@@ -69,7 +70,7 @@ Item {
                 y: parent.height/2 - height/2
                 text: parent.text
                 font.pixelSize: 13*fontsScale
-                font.family: globalFontFamily
+                font.family: SApp.globalFontFamily
                 color: marea.pressed? "#ffffff" : "#333333"
             }
 

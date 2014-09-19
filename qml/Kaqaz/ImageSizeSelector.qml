@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: size_selector
@@ -71,7 +72,7 @@ Item {
                 y: parent.height/2 - height/2
                 text: parent.text
                 font.pixelSize: 12*fontsScale
-                font.family: globalFontFamily
+                font.family: SApp.globalFontFamily
                 color: "#ffffff"
             }
 

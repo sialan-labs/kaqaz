@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: restore_wait
@@ -39,7 +40,7 @@ Item {
         anchors.right: restore_wait.right
         anchors.margins: 20*physicalPlatformScale
         font.pixelSize: 15*fontsScale
-        font.family: globalFontFamily
+        font.family: SApp.globalFontFamily
         horizontalAlignment: Text.AlignHCenter
         color: "#333333"
     }
@@ -76,7 +77,7 @@ Item {
         interval: 250
         repeat: false
         onTriggered: {
-            var ok = backuper.restore( restore_wait.path, kaqaz.passToMd5(password) )
+            var ok = backuper.restore( restore_wait.path, Tools.passToMd5(password) )
             if( !ok )
                 restore_wait.failed()
             else

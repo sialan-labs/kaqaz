@@ -43,7 +43,6 @@ public:
     void setKaqazSync( KaqazSync *ksync );
     void setSialanDevices( SialanDevices *sdev );
     void setSialanTools( SialanTools *stools );
-    void setMimeApps( MimeApps *mapp );
 
 public slots:
     bool start();

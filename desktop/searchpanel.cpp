@@ -21,6 +21,7 @@
 #include "database.h"
 #include "datewidget.h"
 #include "categoriesmodel.h"
+#include "sialantools/sialancalendarconverter.h"
 
 #include <QLabel>
 #include <QLineEdit>
@@ -201,8 +202,8 @@ void SearchPanel::showDateDomain()
     {
         p->date_from = from_date->dateTime();
         p->date_to   = to_date->dateTime();
-        p->date_btn->setText( tr("From: %1").arg(Kaqaz::instance()->convertDateTimeToLittleString(p->date_from.date())) + "\n" +
-                              tr("To: %1").arg(Kaqaz::instance()->convertDateTimeToLittleString(p->date_to.date())));
+        p->date_btn->setText( tr("From: %1").arg(Kaqaz::instance()->calendarConverter()->convertDateTimeToLittleString(p->date_from.date())) + "\n" +
+                              tr("To: %1").arg(Kaqaz::instance()->calendarConverter()->convertDateTimeToLittleString(p->date_to.date())));
     }
     if( reset_btn->isChecked() )
     {

@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: about_page
@@ -48,8 +49,8 @@ Item {
             anchors.right: parent.right
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: devices.isMobile? 13*fontsScale : 15*fontsScale
-            font.family: globalFontFamily
+            font.pixelSize: Devices.isMobile? 13*fontsScale : 15*fontsScale
+            font.family: SApp.globalFontFamily
             color: "#333333"
         }
 
@@ -59,8 +60,8 @@ Item {
             anchors.right: parent.right
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
-            font.family: globalFontFamily
+            font.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
+            font.family: SApp.globalFontFamily
             color: "#333333"
 
             MouseArea{
@@ -75,8 +76,8 @@ Item {
             anchors.right: parent.right
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
-            font.family: globalFontFamily
+            font.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
+            font.family: SApp.globalFontFamily
             color: "#333333"
         }
 
@@ -86,8 +87,8 @@ Item {
             anchors.right: parent.right
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
-            font.family: globalFontFamily
+            font.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
+            font.family: SApp.globalFontFamily
             color: "#333333"
 
             MouseArea{

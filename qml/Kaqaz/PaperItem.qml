@@ -18,6 +18,7 @@
 
 import QtQuick 2.2
 import QtGraphicalEffects 1.0
+import SialanTools 1.0
 
 AnimationItem {
     id: paper
@@ -86,7 +87,7 @@ AnimationItem {
         {
             txt.text = database.paperTitle(paperItem)
             group_chooser.group = database.paperGroup(paperItem)
-            date_label.text = kaqaz.convertDateTimeToString( database.paperCreatedDate(paperItem) )
+            date_label.text = CalendarConv.convertDateTimeToString( database.paperCreatedDate(paperItem) )
             label.text = database.paperText(paperItem)
         }
         save_timer.stop()
@@ -189,11 +190,11 @@ AnimationItem {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            anchors.leftMargin: 20+pad + (devices.isMobile? 20*physicalPlatformScale : 25*physicalPlatformScale)
-            anchors.rightMargin: 20+pad + (devices.isMobile? 20*physicalPlatformScale : 25*physicalPlatformScale)
+            anchors.leftMargin: 20+pad + (Devices.isMobile? 20*physicalPlatformScale : 25*physicalPlatformScale)
+            anchors.rightMargin: 20+pad + (Devices.isMobile? 20*physicalPlatformScale : 25*physicalPlatformScale)
             height: parent.height
             contentWidth: label.width
-            contentHeight: devices.keyboard? label.paintedHeight+parent.height*1/2 : label.paintedHeight+25*physicalPlatformScale
+            contentHeight: Devices.keyboard? label.paintedHeight+parent.height*1/2 : label.paintedHeight+25*physicalPlatformScale
             flickableDirection: Flickable.VerticalFlick
             interactive: !label.pickersPressed && secondInteractive
             onMovementStarted: {
@@ -207,7 +208,7 @@ AnimationItem {
                     label.commitFaders()
                 }
             }
-            onContentHeightChanged: if(devices.keyboard) label_flickable.ensureVisible(label.cursorPosition)
+            onContentHeightChanged: if(Devices.keyboard) label_flickable.ensureVisible(label.cursorPosition)
 
             property bool secondInteractive: true
 
@@ -217,7 +218,7 @@ AnimationItem {
                 var hg = paper.height*1/2 - 30*physicalPlatformScale
                 if( label.pickersPressed || label.selectionStart != label.selectionEnd )
                     hg = height
-                if( devices.isDesktop )
+                if( Devices.isDesktop )
                     hg = height
 
                 if (contentY >= r.y)
@@ -293,14 +294,14 @@ AnimationItem {
         anchors.top: paper.top
         anchors.left: paper.left
         anchors.right: paper.right
-        anchors.topMargin: 20+pad + (devices.isMobile? 5*physicalPlatformScale : 15*physicalPlatformScale)
+        anchors.topMargin: 20+pad + (Devices.isMobile? 5*physicalPlatformScale : 15*physicalPlatformScale)
         anchors.leftMargin: group_chooser.x + group_chooser.width
         anchors.rightMargin: group_chooser.x + group_chooser.width
         height: 200*physicalPlatformScale
         clip: true
         z: 20
 
-        KTextInput{
+        STextInput{
             id: placeholder_txt
             anchors.fill: txt
             font: txt.font
@@ -314,8 +315,8 @@ AnimationItem {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            font.pixelSize: devices.isLargeTablet? 15*fontsScale : (devices.isMobile? 12*fontsScale : 14*fontsScale)
-            font.family: globalFontFamily
+            font.pixelSize: Devices.isLargeTablet? 15*fontsScale : (Devices.isMobile? 12*fontsScale : 14*fontsScale)
+            font.family: SApp.globalFontFamily
             color: "#333333"
             selectionColor: "#0d80ec"
             selectedTextColor: "#ffffff"
@@ -355,7 +356,7 @@ AnimationItem {
         anchors.left: parent.left
         anchors.margins: 20+pad + 7*physicalPlatformScale
         font.pixelSize: 7*fontsScale
-        font.family: globalFontFamily
+        font.family: SApp.globalFontFamily
         color: "#aaaaaa"
     }
 
@@ -397,7 +398,7 @@ AnimationItem {
                     return
                 if( Math.abs(last_x-mouseX) > 10*physicalPlatformScale && !move_paper_x )
                 {
-                    devices.hideKeyboard()
+                    Devices.hideKeyboard()
                     graphic_timer.stop()
                     move_paper_x = true
                 }
@@ -444,7 +445,7 @@ AnimationItem {
                 first_y = paper.y
                 move_paper_y = false
 
-                if( mousearea.parent != label_flickable || !devices.keyboard )
+                if( mousearea.parent != label_flickable || !Devices.keyboard )
                     paper.focus = true
 
                 graphic_timer.x = mouseX - graphic_timer.width/2 -10*physicalPlatformScale
@@ -506,7 +507,7 @@ AnimationItem {
                         label.focusOn( label.mapFromItem(mousearea,mouseX,mouseY).x, label.mapFromItem(mousearea,mouseX,mouseY).y )
                 }
                 else
-                    devices.hideKeyboard()
+                    Devices.hideKeyboard()
 
                 move_paper_x = false
                 graphic_timer.stop()
@@ -553,7 +554,7 @@ AnimationItem {
 
     function refreshDateLabel() {
         if( paperItem != -1 )
-            date_label.text = kaqaz.convertDateTimeToString( database.paperCreatedDate(paperItem) )
+            date_label.text = CalendarConv.convertDateTimeToString( database.paperCreatedDate(paperItem) )
         else
             date_label.text = ""
     }

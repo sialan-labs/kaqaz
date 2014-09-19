@@ -34,6 +34,7 @@
 #include "editorview.h"
 #include "groupbutton.h"
 #include "sialantools/sialantools.h"
+#include "sialantools/sialancalendarconverter.h"
 #include "kaqazsync.h"
 #include "paperfilesview.h"
 #include "simage.h"
@@ -214,7 +215,7 @@ void EditorView::setPaper(int pid)
     p->body->setText( db->paperText(pid) );
     p->body->setType( db->paperType(pid) );
     p->group->setGroup( db->paperGroup(pid) );
-    p->date->setText( "<font color=\"#888888\">" + Kaqaz::instance()->convertDateTimeToString(db->paperCreatedDate(pid)) + "</font>" );
+    p->date->setText( "<font color=\"#888888\">" + Kaqaz::instance()->calendarConverter()->convertDateTimeToString(db->paperCreatedDate(pid)) + "</font>" );
     p->files->setPaper(pid);
     p->synced = (db->revisionOf(db->paperUuid(pid))!=-1);
     p->attach_img = SImage(*paper_clip).colorize(db->groupColor(p->group->group()).rgba());

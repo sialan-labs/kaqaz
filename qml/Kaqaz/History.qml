@@ -18,6 +18,7 @@
 
 import QtQuick 2.2
 import Kaqaz 1.0
+import SialanTools 1.0
 
 Item {
     id: history
@@ -26,8 +27,8 @@ Item {
 
     Image {
         anchors.fill: parent
-        anchors.topMargin: -statusBarHeight
-        anchors.bottomMargin: -navigationBarHeight
+        anchors.topMargin: -View.statusBarHeight
+        anchors.bottomMargin: -View.navigationBarHeight
         source: "files/menu_background.jpg"
         fillMode: Image.PreserveAspectCrop
     }
@@ -64,18 +65,18 @@ Item {
 
             onDateChanged: {
                 var days = date
-                if( days === kaqaz.currentDays )
+                if( days === CalendarConv.currentDays )
                     text = qsTr("Today")
                 else
-                if( days === kaqaz.currentDays-1 )
+                if( days === CalendarConv.currentDays-1 )
                     text = qsTr("Yesterday")
                 else
-                if( days === kaqaz.currentDays-2 )
+                if( days === CalendarConv.currentDays-2 )
                     text = qsTr("Two days ago")
                 else
-                    text = kaqaz.convertIntToFullStringDate(days)
+                    text = CalendarConv.convertIntToFullStringDate(days)
 
-                papers_count_txt.text = database.papersCountOf(kaqaz.convertDaysToDate(date))
+                papers_count_txt.text = database.papersCountOf(CalendarConv.convertDaysToDate(date))
             }
 
             Connections{
@@ -92,7 +93,7 @@ Item {
                 y: parent.height/2 - height/2
                 text: parent.text
                 font.pixelSize: 11*fontsScale
-                font.family: globalFontFamily
+                font.family: SApp.globalFontFamily
                 color: "#ffffff"
             }
 
@@ -119,7 +120,7 @@ Item {
                 onPressed: item.press = true
                 onReleased: item.press = false
                 onClicked: {
-                    var nodes = database.papersOf(kaqaz.convertDaysToDate(item.date))
+                    var nodes = database.papersOf(CalendarConv.convertDaysToDate(item.date))
                     if( nodes.length === 0 )
                         return
 

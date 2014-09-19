@@ -18,13 +18,14 @@
 
 import QtQuick 2.2
 import Kaqaz 1.0
+import SialanTools 1.0
 
 Rectangle {
     id: main
     width: 48
     height: 70
 
-    property real physicalPlatformScale: devices.density
+    property real physicalPlatformScale: Devices.density
     property real fontsScale: 1
 
     property variant preferenceArray: new Array
@@ -49,12 +50,12 @@ Rectangle {
 
     property bool menuIsVisible: panel.padX != 0
 
-    Component.onCompleted: fontsScale = devices.fontDensity
+    Component.onCompleted: fontsScale = Devices.fontDensity
 
     onHeightChanged: {
         main_page.anim = false
         if( dialogItem )
-            main_page.y = -main.height - statusBarHeight - navigationBarHeight
+            main_page.y = -main.height - View.statusBarHeight - View.navigationBarHeight
     }
 
     onDialogItemChanged: {
@@ -66,7 +67,7 @@ Rectangle {
             dialogItem.visible = true
 
             main_page.panel_anim = false
-            main_page.y = -main.height - statusBarHeight - navigationBarHeight
+            main_page.y = -main.height - View.statusBarHeight - View.navigationBarHeight
         }
         else
         {
@@ -137,9 +138,9 @@ Rectangle {
     Image {
         id: background
         x: 0
-        y: main_page.y -panelHeight - statusBarHeight
+        y: main_page.y -panelHeight - View.statusBarHeight
         width: main.width
-        height: main.height*2.1 + panelHeight + 2*navigationBarHeight + 2*statusBarHeight
+        height: main.height*2.1 + panelHeight + 2*View.navigationBarHeight + 2*View.statusBarHeight
         source: "files/background.jpg"
         fillMode: Image.PreserveAspectCrop
         smooth: false
@@ -195,8 +196,8 @@ Rectangle {
         Image{
             id: dark_background
             anchors.fill: main_page
-            anchors.topMargin: -statusBarHeight
-            anchors.bottomMargin: -navigationBarHeight
+            anchors.topMargin: -View.statusBarHeight
+            anchors.bottomMargin: -View.navigationBarHeight
             visible: false
             source: "files/menu_background.jpg"
             fillMode: Image.PreserveAspectCrop
@@ -270,7 +271,7 @@ Rectangle {
 
                 DropArea {
                     anchors.fill: parent
-                    visible: devices.isDesktop
+                    visible: Devices.isDesktop
                     onDropped: {
                         if( drop.hasUrls ) {
                             var urls = drop.urls
@@ -283,7 +284,7 @@ Rectangle {
                     }
                 }
 
-                property real platformMargins: devices.isMobile? -15 + 5*physicalPlatformScale : -15 + 5*physicalPlatformScale
+                property real platformMargins: Devices.isMobile? -15 + 5*physicalPlatformScale : -15 + 5*physicalPlatformScale
             }
 
             SideBar{
@@ -312,7 +313,7 @@ Rectangle {
         visible: false
         onClicked: {
             main.pressBack()
-            devices.hideKeyboard()
+            Devices.hideKeyboard()
         }
     }
 
@@ -321,7 +322,7 @@ Rectangle {
         anchors.left: main_page.left
         anchors.right: main_page.right
         anchors.top: main_page.top
-        anchors.topMargin: main.height+statusBarHeight+navigationBarHeight
+        anchors.topMargin: main.height+View.statusBarHeight+View.navigationBarHeight
         height: main.height
     }
 
@@ -335,7 +336,7 @@ Rectangle {
     }
 
     function pushPreference( item ){
-        devices.hideKeyboard()
+        Devices.hideKeyboard()
         var current = (preferenceArray.length == 0)? main_item : preferenceArray[preferenceArray.length-1]
         var next = item
 
@@ -369,7 +370,7 @@ Rectangle {
     }
 
     function popPreference(){
-        devices.hideKeyboard()
+        Devices.hideKeyboard()
         var current = preferenceArray[preferenceArray.length-1]
         var res = new Array
         for( var i=0; i<preferenceArray.length-1; i++ )
@@ -410,13 +411,13 @@ Rectangle {
         if( bottomPanel.item )
             hideBottomPanel()
         else
-        if( rollerVisible )
+        if( rollerDialog.visible )
             hideRollerDialog()
         else
         if( subMessage )
             hideSubMessage()
         else
-        if( pointerDialog )
+        if( pointerDialog.visible )
             hidePointDialog()
         else
         if( panel.isVisible() )
@@ -438,7 +439,7 @@ Rectangle {
             stack_switcher.show(0, PaperManager.Clean)
         }
         else
-        if( !devices.isDesktop )
+        if( !Devices.isDesktop )
             back_attemper.show()
     }
 
@@ -446,7 +447,7 @@ Rectangle {
         if( dialogItem )
             dialogItem.destroy()
 
-        devices.hideKeyboard()
+        Devices.hideKeyboard()
         dialogItem = item
         main.focus = true
     }
@@ -456,7 +457,7 @@ Rectangle {
             return
 
         main_page.anim = true
-        devices.hideKeyboard()
+        Devices.hideKeyboard()
         main_page.y = 0
         kaqaz.deleteItemDelay(dialogItem,1000)
         main.focus = true

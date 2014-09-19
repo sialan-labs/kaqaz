@@ -19,6 +19,7 @@
 #include "datesmodel.h"
 #include "database.h"
 #include "kaqaz.h"
+#include "sialantools/sialancalendarconverter.h"
 
 #include <QIcon>
 
@@ -61,7 +62,7 @@ QVariant DatesModel::data(const QModelIndex &index, int role) const
     switch( role )
     {
     case Qt::DisplayRole:
-        res = p->kaqaz->convertIntToStringDate(days);
+        res = p->kaqaz->calendarConverter()->convertIntToStringDate(days);
         break;
 
     case Qt::DecorationRole:

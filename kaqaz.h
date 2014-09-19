@@ -25,6 +25,7 @@
 #include <QSettings>
 #include <QScreen>
 
+class SialanCalendarConverter;
 class Repository;
 class KaqazSync;
 class DateProperty;
@@ -33,7 +34,6 @@ class KaqazPrivate;
 class Backuper;
 class Kaqaz : public QObject
 {
-    Q_PROPERTY( int     currentDays          READ currentDays         NOTIFY currentDaysChanged )
     Q_PROPERTY( bool    proBuild             READ proBuild            NOTIFY proBuildChanged )
     Q_PROPERTY( bool    groupsCount          READ groupsCount         WRITE setGroupsCount         NOTIFY groupsCountChanged)
     Q_PROPERTY( bool    allPaper             READ allPaper            WRITE setAllPaper            NOTIFY allPaperChanged)
@@ -57,6 +57,7 @@ public:
 
     Backuper *backuper() const;
     KaqazSync *kaqazSync() const;
+    SialanCalendarConverter *calendarConverter() const;
     Repository *repository() const;
 
     Q_INVOKABLE bool demoHasTrial() const;
@@ -73,17 +74,7 @@ public:
 
     Q_INVOKABLE void setCalendar( int t );
     Q_INVOKABLE QStringList calendarsID() const;
-    Q_INVOKABLE QString calendarName( int t );
     Q_INVOKABLE int calendar() const;
-
-    Q_INVOKABLE static int currentDays();
-
-    Q_INVOKABLE QString convertIntToStringDate(qint64 d );
-    Q_INVOKABLE QString convertIntToFullStringDate(qint64 d );
-    Q_INVOKABLE QString convertIntToNumStringDate(qint64 d );
-    Q_INVOKABLE QString translateInt(qint64 d);
-    Q_INVOKABLE QString convertIntToStringDate(qint64 d, const QString & format );
-    Q_INVOKABLE QDate convertDateToGragorian( qint64 year, int month, int day );
 
     Q_INVOKABLE void close();
     Q_INVOKABLE void minimize();
@@ -115,16 +106,6 @@ public:
 
     static QString resourcePathAbs();
     static QString resourcePath();
-
-    Q_INVOKABLE QString fromMSecSinceEpoch( qint64 t );
-    Q_INVOKABLE QString convertDateTimeToString( const QDateTime & dt );
-    Q_INVOKABLE QString convertDateTimeToLittleString( const QDate & dt );
-    Q_INVOKABLE int daysOfMonth( qint64 year, int month );
-    Q_INVOKABLE QString monthName( int month );
-    Q_INVOKABLE qint64 currentYear();
-    Q_INVOKABLE int currentMonth();
-    Q_INVOKABLE int currentDay();
-    DateProperty convertDate( const QDate & date );
 
     Q_INVOKABLE static QString passToMd5( const QString & pass );
 
@@ -181,9 +162,6 @@ public:
     Q_INVOKABLE qreal colorLightness( const QColor & clr );
     Q_INVOKABLE qreal colorSaturation( const QColor & clr );
 
-    Q_INVOKABLE static QDate convertDaysToDate( int days );
-    Q_INVOKABLE static int convertDateToDays( const QDate & date );
-
     Q_INVOKABLE void setProperty( QObject *obj, const QString & property, const QVariant & v );
     Q_INVOKABLE QVariant property( QObject *obj, const QString & property );
 
@@ -195,7 +173,6 @@ public slots:
     void reconnectAllResources();
 
 signals:
-    void currentDaysChanged();
     void groupsCountChanged();
     void allPaperChanged();
     void keyboardPredicativeChanged();

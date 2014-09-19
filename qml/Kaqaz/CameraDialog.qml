@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: camera_dialog
@@ -85,7 +86,7 @@ Item {
                 y: parent.height/2 - height/2
                 text: parent.text
                 font.pixelSize: 12*fontsScale
-                font.family: globalFontFamily
+                font.family: SApp.globalFontFamily
                 color: "#ffffff"
                 clip: true
             }
@@ -142,10 +143,10 @@ Item {
 
     Component.onCompleted: {
         initTranslations()
-        if( devices.startCameraPicture() )
+        if( Devices.startCameraPicture() )
             return
         else
-        if( !devices.isTouchDevice ) {
+        if( !Devices.isTouchDevice ) {
             var component = Qt.createComponent("CameraItem.qml");
             var item = component.createObject(camera_dialog);
         }

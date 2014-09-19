@@ -18,6 +18,7 @@
 
 import QtQuick 2.2
 import Kaqaz 1.0
+import SialanTools 1.0
 
 Rectangle {
     id: sidebar_list
@@ -70,7 +71,7 @@ Rectangle {
                     var append_text = " "
                     var groupCount = database.groupPapersCount(iid)
                     if( kaqaz.groupsCount && groupCount != 0 )
-                        append_text += "(" + kaqaz.translateInt(groupCount) + ")"
+                        append_text += "(" + CalendarConv.translateInt(groupCount) + ")"
 
                     color_rect.color = database.groupColor(iid)
                     text = database.groupName(iid) + append_text
@@ -78,16 +79,16 @@ Rectangle {
                 else
                 if( type == 0 ){
                     var days = iid
-                    if( days === kaqaz.currentDays )
+                    if( days === CalendarConv.currentDays )
                         text = qsTr("Today")
                     else
-                    if( days === kaqaz.currentDays-1 )
+                    if( days === CalendarConv.currentDays-1 )
                         text = qsTr("Yesterday")
                     else
-                    if( days === kaqaz.currentDays-2 )
+                    if( days === CalendarConv.currentDays-2 )
                         text = qsTr("Two days ago")
                     else
-                        text = kaqaz.convertIntToStringDate(days,"yyyy MMM dd - dddd")
+                        text = CalendarConv.convertIntToStringDate(days,"yyyy MMM dd - dddd")
                 }
             }
 
@@ -127,7 +128,7 @@ Rectangle {
                 y: parent.height/2 - height/2
                 text: parent.text
                 font.pixelSize: 9*fontsScale
-                font.family: globalFontFamily
+                font.family: SApp.globalFontFamily
                 horizontalAlignment: Qt.AlignLeft
                 color: item.press? "#ffffff" : fontColor
             }
@@ -179,7 +180,7 @@ Rectangle {
             if( kaqaz.allPaper )
                 model.append({"textValue": qsTr("All Papers"), "cmdValue": "all", "typeValue": 0, "guidValue": -1, "iconValue": "files/all-papers.png"})
             model.append({"textValue": qsTr("Search"), "cmdValue": "search", "typeValue": 0, "guidValue": -1, "iconValue": "files/search.png"})
-            if( devices.isDesktop ) {
+            if( Devices.isDesktop ) {
                 if( database.password().length != 0 )
                     model.append({"textValue": qsTr("Lock"), "cmdValue": "lock", "typeValue": 0, "guidValue": -1, "iconValue": "files/lock.png"})
 

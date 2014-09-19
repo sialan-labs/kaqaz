@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: insert_image_dialog
@@ -26,8 +27,8 @@ Item {
     Image {
         id: back_img
         anchors.fill: parent
-        anchors.topMargin: -statusBarHeight
-        anchors.bottomMargin: -navigationBarHeight
+        anchors.topMargin: -View.statusBarHeight
+        anchors.bottomMargin: -View.navigationBarHeight
         source: "files/menu_background.jpg"
         fillMode: Image.PreserveAspectCrop
     }
@@ -89,8 +90,8 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
-                font.family: globalFontFamily
+                font.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
+                font.family: SApp.globalFontFamily
                 color: "#ffffff"
             }
 
@@ -107,7 +108,7 @@ Item {
                         insert_image_dialog.nextPage = obj
                     } else {
                         if( item.command == "picture" ) {
-                            devices.getOpenPictures()
+                            Devices.getOpenPictures()
                         }
                     }
                 }

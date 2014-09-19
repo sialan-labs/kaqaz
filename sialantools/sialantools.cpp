@@ -20,6 +20,19 @@
 
 #include <QMetaMethod>
 #include <QMetaObject>
+#include <QCryptographicHash>
+
+QString sialan_tools_numtranslate_0 = "0";
+QString sialan_tools_numtranslate_1 = "1";
+QString sialan_tools_numtranslate_2 = "2";
+QString sialan_tools_numtranslate_3 = "3";
+QString sialan_tools_numtranslate_4 = "4";
+QString sialan_tools_numtranslate_5 = "5";
+QString sialan_tools_numtranslate_6 = "6";
+QString sialan_tools_numtranslate_7 = "7";
+QString sialan_tools_numtranslate_8 = "8";
+QString sialan_tools_numtranslate_9 = "9";
+
 
 class SialanToolsPrivate
 {
@@ -30,6 +43,29 @@ SialanTools::SialanTools(QObject *parent) :
     QObject(parent)
 {
     p = new SialanToolsPrivate;
+}
+
+QString SialanTools::translateNumbers(QString input)
+{
+    input.replace("0",sialan_tools_numtranslate_0);
+    input.replace("1",sialan_tools_numtranslate_1);
+    input.replace("2",sialan_tools_numtranslate_2);
+    input.replace("3",sialan_tools_numtranslate_3);
+    input.replace("4",sialan_tools_numtranslate_4);
+    input.replace("5",sialan_tools_numtranslate_5);
+    input.replace("6",sialan_tools_numtranslate_6);
+    input.replace("7",sialan_tools_numtranslate_7);
+    input.replace("8",sialan_tools_numtranslate_8);
+    input.replace("9",sialan_tools_numtranslate_9);
+    return input;
+}
+
+QString SialanTools::passToMd5(const QString &pass)
+{
+    if( pass.isEmpty() )
+        return QString();
+
+    return QCryptographicHash::hash( pass.toUtf8(), QCryptographicHash::Md5 ).toHex();
 }
 
 Qt::LayoutDirection SialanTools::directionOf(const QString &str)

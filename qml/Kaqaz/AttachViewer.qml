@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: attach_viewer
@@ -52,7 +53,7 @@ Item {
         Text {
             id: delete_warn
             font.pixelSize: 17*fontsScale
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             anchors.margins: 10*physicalPlatformScale
             anchors.left: parent.left
             anchors.right: parent.horizontalCenter
@@ -149,7 +150,7 @@ Item {
                 onPressed: hideRollerDialog()
                 onDoubleClicked: {
                     var p = kaqaz.cacheFile(item.path)
-                    devices.openFile( "file://" + p )
+                    Devices.openFile( "file://" + p )
                 }
             }
 
@@ -174,7 +175,7 @@ Item {
                     highlightColor: "#222222"
                     onClicked: {
                         var p = kaqaz.cacheFile(item.path)
-                        devices.openFile( "file://" + p )
+                        Devices.openFile( "file://" + p )
                         control_frame.visible = false
                     }
                 }

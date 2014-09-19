@@ -18,7 +18,7 @@
 
 #include "datewidget.h"
 #include "kaqaz.h"
-#include "calendarconverter.h"
+#include "sialantools/sialancalendarconverter.h"
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -168,7 +168,7 @@ QString DateWidget::timeText() const
 QDateTime DateWidget::dateTime() const
 {
     Kaqaz *kqz = Kaqaz::instance();
-    const QDate & date = kqz->convertDateToGragorian( p->year_spin->value(), p->month_spin->value(),
+    const QDate & date = kqz->calendarConverter()->convertDateToGragorian( p->year_spin->value(), p->month_spin->value(),
                                                       p->day_spin->value() );
 
     const QTime & time = QTime( p->hour_spin->value(), p->minute_spin->value() );
@@ -179,9 +179,9 @@ QDateTime DateWidget::dateTime() const
 void DateWidget::setDateTime(const QDateTime &dt)
 {
     Kaqaz *kqz = Kaqaz::instance();
-    const DateProperty & pr = kqz->convertDate(dt.date());
+    const DateProperty & pr = kqz->calendarConverter()->convertDate(dt.date());
 
-    int year = kqz->currentYear();
+    int year = kqz->calendarConverter()->currentYear();
 
     p->year_spin->setMinimum( year-100 );
     p->year_spin->setMaximum( year+100 );
@@ -206,7 +206,7 @@ void DateWidget::setDateTime(const QDateTime &dt)
 void DateWidget::refresh_days()
 {
     Kaqaz *kqz = Kaqaz::instance();
-    p->day_spin->setMaximum( kqz->daysOfMonth(p->year_spin->value(),p->month_spin->value()) );
+    p->day_spin->setMaximum( kqz->calendarConverter()->daysOfMonth(p->year_spin->value(),p->month_spin->value()) );
 }
 
 DateWidget::~DateWidget()

@@ -19,47 +19,32 @@
 import QtQuick 2.2
 import QtMultimedia 5.0
 import QtPositioning 5.2
+import SialanTools 1.0
 
-Rectangle {
+SialanMain {
     id: kaqaz_root
-    width: devices.isTouchDevice? 0 : kaqaz.size.width
-    height: devices.isTouchDevice? 0 : kaqaz.size.height
+    width: Devices.isTouchDevice? 0 : kaqaz.size.width
+    height: Devices.isTouchDevice? 0 : kaqaz.size.height
+    mainFrame: main_frame
 
-    property real fixedHeight: height-statusBarHeight-navigationBarHeight
-
-    property alias physicalPlatformScale: main.physicalPlatformScale
-    property alias fontsScale: main.fontsScale
-
-    property bool portrait: width<height
-
-    property string globalFontFamily: devices.isIOS? "Droid Kaqaz Sans" : kaqaz_normal_font.name
-    property string globalMonoFontFamily: devices.isIOS? "Droid Sans Mono" : kaqaz_mono_font.name
+    property real fixedHeight: height-View.statusBarHeight-View.navigationBarHeight
 
     property int globalInputMethodHints: kaqaz.keyboardPredicative? Qt.ImhNoPredictiveText : Qt.ImhNone
-    property real statusBarHeight: devices.transparentStatusBar && !kaqaz.fullscreen? 24*physicalPlatformScale : 0
-    property real navigationBarHeight: devices.transparentNavigationBar && !kaqaz.fullscreen? 45*physicalPlatformScale : 0
 
     property bool rotated: true
     property alias touchToBack: main.touchToBack
     property alias darkBackground: main.darkBackground
     property alias backHandler: main.backHandler
 
-    property real flickVelocity: devices.isDesktop? 2500 : 25000
-
     property variant subMessage
-    property alias pointerDialog: point_dialog.visible
 
     property alias sidePanel: main.sidePanel
     property alias panelAnimDuration: main.panelAnimDuration
-    property alias bottomPanel: bottom_panel
 
     property alias menuIsVisible: main.menuIsVisible
-    property alias pasteButtonTextObj: paste_btn.textItem
     property alias syncProgressBar: sync_pbar
 
-    property alias rollerVisible: roller_dialog.visible
     property alias position: positioning.position
-
     property alias audioItem: audio_item
 
     property bool passDone: false
@@ -96,11 +81,13 @@ Rectangle {
     FontLoader{
         id: kaqaz_normal_font
         source: kaqaz.resourcePath + "/fonts/DroidKaqazSans.ttf"
+        onStatusChanged: if(status == FontLoader.Ready) SApp.globalFontFamily = name
     }
 
     FontLoader{
         id: kaqaz_mono_font
         source: kaqaz.resourcePath + "/fonts/DroidSansMono.ttf"
+        onStatusChanged: if(status == FontLoader.Ready) SApp.globalMonoFontFamily = name
     }
 
     Item {
@@ -110,29 +97,14 @@ Rectangle {
         MainItem{
             id: main
             x: 0
-            y: statusBarHeight
+            y: View.statusBarHeight
             width: parent.width
-            height: parent.height - statusBarHeight - navigationBarHeight
+            height: parent.height - View.statusBarHeight - View.navigationBarHeight
 
             Behavior on y {
                 NumberAnimation { easing.type: Easing.OutCubic; duration: 250 }
             }
         }
-    }
-
-    BottomPanel {
-        id: bottom_panel
-        z: 10
-    }
-
-    RollerDialog {
-        id: roller_dialog
-        anchors.fill: parent
-        z: 10
-    }
-
-    PasteButton {
-        id: paste_btn
     }
 
     Audio{
@@ -146,17 +118,6 @@ Rectangle {
         id: positioning
         updateInterval: 10000
         active: kaqaz.positioning && kaqaz.proBuild
-    }
-
-    PointingDialog{
-        id: point_dialog
-    }
-
-    Tooltip{
-        id: tooltip
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottomMargin: 32*physicalPlatformScale + navigationBarHeight
     }
 
     ProgressBar {
@@ -193,71 +154,12 @@ Rectangle {
         }
     }
 
-    function showTooltip( text ){
-        tooltip.showText(text)
-    }
-
-    function showSubMessage( item_component ){
-        var item = item_component.createObject(kaqaz_root);
-
-        var component = Qt.createComponent("SubMessage.qml");
-        var msg = component.createObject(kaqaz_root);
-        msg.source = main_frame
-        msg.item = item
-        return item
-    }
-
-    function hideSubMessage(){
-        if( !subMessage )
-            return
-
-        subMessage.hide()
-    }
-
     function showHideHilightPanel() {
         showBottomPanel( Qt.createComponent("SearchHideHighlights.qml") )
     }
 
-    function showBottomPanel( component, fullWidth ){
-        hideBottomPanel()
-        bottom_panel.anchors.rightMargin = fullWidth? 0 : main.panelWidth
-
-        var item = component.createObject(bottom_panel);
-        bottom_panel.item = item
-        return item
-    }
-
-    function hideBottomPanel() {
-        if( bottom_panel.item )
-            bottom_panel.hide()
-    }
-
-    function newModernProgressBar(){
-        var component = Qt.createComponent("ModernProgressBar.qml");
-        var item = component.createObject(kaqaz_root);
-        item.source = main_frame
-        return item
-    }
-
-    function showPointDialog( item, x, y, width, height ){
-        point_dialog.item = item
-        point_dialog.pointingTo(x,y,width,height)
-    }
-
-    function hidePointDialog(){
-        point_dialog.hide()
-    }
-
-    function showRollerDialog( y1, y2, item ){
-        roller_dialog.show(y1,y2,item)
-    }
-
     function showHistory(){
         main.showHistory()
-    }
-
-    function hideRollerDialog(){
-        roller_dialog.hide()
     }
 
     function createPaper( parent ){
@@ -309,7 +211,7 @@ Rectangle {
     function getPass( parent ){
 
         var blur_item
-        if( devices.isDesktop ) {
+        if( Devices.isDesktop ) {
             var blur_cmpt = Qt.createComponent("KaqazBlur.qml");
             blur_item = blur_cmpt.createObject(kaqaz_root);
             blur_item.source = main

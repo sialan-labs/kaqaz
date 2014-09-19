@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     id: dbox_auth
@@ -57,8 +58,8 @@ Item {
 
     Item {
         anchors.fill: parent
-        anchors.topMargin: statusBarHeight
-        anchors.bottomMargin: navigationBarHeight
+        anchors.topMargin: View.statusBarHeight
+        anchors.bottomMargin: View.navigationBarHeight
 
         Column {
             id: column
@@ -78,7 +79,7 @@ Item {
             Text {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: 20*fontsScale
-                font.family: globalFontFamily
+                font.family: SApp.globalFontFamily
                 color: "#007ee5"
                 text: "Dropbox Authorize"
             }
@@ -100,7 +101,7 @@ Item {
             anchors.top: indicator.bottom
             anchors.topMargin: 8*physicalPlatformScale
             font.pixelSize: 10*fontsScale
-            font.family: globalFontFamily
+            font.family: SApp.globalFontFamily
             color: "#555555"
             text: qsTr("Connecting...")
         }

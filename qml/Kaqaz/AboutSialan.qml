@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     width: 100
@@ -24,11 +25,11 @@ Item {
 
     Item {
         anchors.fill: parent
-        anchors.bottomMargin: -navigationBarHeight
+        anchors.bottomMargin: -View.navigationBarHeight
 
         Rectangle {
             anchors.fill: parent
-            anchors.topMargin: -statusBarHeight
+            anchors.topMargin: -View.statusBarHeight
             color: "#ccffffff"
         }
 
@@ -63,8 +64,8 @@ Item {
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: "SIALAN LABS"
                     font.pixelSize: 20*fontsScale
-                    font.weight: devices.isWindows? Font.Normal : Font.DemiBold
-                    font.family: globalFontFamily
+                    font.weight: Devices.isWindows? Font.Normal : Font.DemiBold
+                    font.family: SApp.globalFontFamily
                     color: "#333333"
                 }
 
@@ -79,7 +80,7 @@ Item {
                     anchors.margins: 20*physicalPlatformScale
                     text: kaqaz.aboutSialan()
                     font.pixelSize: 9*fontsScale
-                    font.family: globalFontFamily
+                    font.family: SApp.globalFontFamily
                     wrapMode: Text.WordWrap
                     color: "#333333"
                 }
@@ -108,7 +109,7 @@ Item {
             anchors.left: parent.left
             anchors.bottom: parent.bottom
             anchors.right: parent.right
-            height: navigationBarHeight
+            height: View.navigationBarHeight
             color: visit_btn.press? visit_btn.highlightColor : visit_btn.normalColor
         }
 

@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     width: 100
@@ -63,8 +64,8 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
-                font.family: globalFontFamily
+                font.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
+                font.family: SApp.globalFontFamily
                 color: item.press? "#ffffff" : "#333333"
             }
 
@@ -94,7 +95,7 @@ Item {
 
             var cals = kaqaz.calendarsID()
             for( var i=0; i<cals.length; i++ )
-                model.append({"type": cals[i], "name": kaqaz.calendarName(cals[i])})
+                model.append({"type": cals[i], "name": CalendarConv.calendarName(cals[i])})
 
             focus = true
         }

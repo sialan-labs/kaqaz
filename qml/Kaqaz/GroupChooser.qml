@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: group_chooser
@@ -58,7 +59,7 @@ Item {
         anchors.fill: group_chooser
         onClicked: {
             selectGroup()
-            devices.hideKeyboard()
+            Devices.hideKeyboard()
         }
     }
 

@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.0
+import SialanTools 1.0
 
 Item {
     id: start_splash
@@ -27,8 +28,8 @@ Item {
     ListView {
         id: splashes
         anchors.fill: parent
-        anchors.topMargin: statusBarHeight
-        anchors.bottomMargin: navigationBarHeight
+        anchors.topMargin: View.statusBarHeight
+        anchors.bottomMargin: View.navigationBarHeight
         orientation: Qt.Horizontal
         snapMode: ListView.SnapOneItem
         rebound: Transition { NumberAnimation {duration: 0} }
@@ -125,7 +126,7 @@ Item {
     Row {
         id: squares_row
         anchors.top: parent.top
-        anchors.topMargin: 8*physicalPlatformScale + statusBarHeight
+        anchors.topMargin: 8*physicalPlatformScale + View.statusBarHeight
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
@@ -135,7 +136,7 @@ Item {
         height: 60*physicalPlatformScale
         anchors.bottom: parent.bottom
         anchors.right: parent.right
-        anchors.bottomMargin: navigationBarHeight + 5*physicalPlatformScale
+        anchors.bottomMargin: View.navigationBarHeight + 5*physicalPlatformScale
         textColor: press? "#337fa2" : "#4098bf"
         normalColor: "#00000000"
         highlightColor: "#00000000"

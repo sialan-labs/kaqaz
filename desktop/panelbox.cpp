@@ -23,6 +23,7 @@
 #include "database.h"
 #include "searchpanel.h"
 #include "addgroupdialog.h"
+#include "sialantools/sialancalendarconverter.h"
 
 #include <QListView>
 #include <QMenu>
@@ -99,7 +100,7 @@ PanelBox::PanelBox(QWidget *parent) :
 void PanelBox::date_selected(const QModelIndex &idx)
 {
     const int days = p->dates_model->id(idx);
-    emit showPaperRequest( p->kaqaz->database()->papersOf(p->kaqaz->convertDaysToDate(days)) );
+    emit showPaperRequest( p->kaqaz->database()->papersOf(p->kaqaz->calendarConverter()->convertDaysToDate(days)) );
 }
 
 void PanelBox::group_selected(const QModelIndex &idx)

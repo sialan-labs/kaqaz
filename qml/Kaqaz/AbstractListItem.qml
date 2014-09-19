@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: abs_item
@@ -53,6 +54,6 @@ Item {
         anchors.leftMargin: icn.x + icn.width + 10*physicalPlatformScale
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignLeft
-        font.family: globalFontFamily
+        font.family: SApp.globalFontFamily
     }
 }

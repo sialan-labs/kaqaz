@@ -18,6 +18,7 @@
 
 import QtQuick 2.2
 import QtMultimedia 5.0
+import SialanTools 1.0
 
 Rectangle {
     id: camera_item
@@ -71,6 +72,6 @@ Rectangle {
         anchors.horizontalCenter: camera_item.horizontalCenter
         anchors.bottom: camera_item.bottom
         anchors.bottomMargin: 20*physicalPlatformScale
-        onClicked: camera.imageCapture.captureToLocation( devices.cameraLocation + "/test.jpg" )
+        onClicked: camera.imageCapture.captureToLocation( Devices.cameraLocation + "/test.jpg" )
     }
 }

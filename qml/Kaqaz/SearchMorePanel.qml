@@ -18,6 +18,7 @@
 
 import QtQuick 2.0
 import Kaqaz 1.0
+import SialanTools 1.0
 
 Item {
     id: more_panel
@@ -129,17 +130,17 @@ Item {
                 Text {
                     id: start_date_text
                     font.pixelSize: 8*fontsScale
-                    font.family: globalFontFamily
+                    font.family: SApp.globalFontFamily
                     color: "#333333"
-                    text: more_panel.dateIsSet? "<b>From:</b> " + kaqaz.convertIntToStringDate(kaqaz.convertDateToDays(more_panel.startDate)) : ""
+                    text: more_panel.dateIsSet? "<b>From:</b> " + CalendarConv.convertIntToStringDate(kaqaz.convertDateToDays(more_panel.startDate)) : ""
                 }
 
                 Text {
                     id: end_date_text
                     font.pixelSize: 8*fontsScale
-                    font.family: globalFontFamily
+                    font.family: SApp.globalFontFamily
                     color: "#333333"
-                    text: more_panel.dateIsSet? "<b>To:</b> " + kaqaz.convertIntToStringDate(kaqaz.convertDateToDays(more_panel.endDate)) : ""
+                    text: more_panel.dateIsSet? "<b>To:</b> " + CalendarConv.convertIntToStringDate(kaqaz.convertDateToDays(more_panel.endDate)) : ""
                 }
             }
         }
@@ -167,7 +168,7 @@ Item {
                 Text {
                     id: start_time_text
                     font.pixelSize: 8*fontsScale
-                    font.family: globalFontFamily
+                    font.family: SApp.globalFontFamily
                     color: "#333333"
                     text: more_panel.timeIsSet? "<b>From:</b> " + more_panel.startTime.toLocaleTimeString() : ""
                 }
@@ -175,7 +176,7 @@ Item {
                 Text {
                     id: end_time_text
                     font.pixelSize: 8*fontsScale
-                    font.family: globalFontFamily
+                    font.family: SApp.globalFontFamily
                     color: "#333333"
                     text: more_panel.timeIsSet? "<b>To:</b> " + more_panel.endTime.toLocaleTimeString() : ""
                 }
@@ -205,7 +206,7 @@ Item {
                 Text {
                     id: group_text
                     font.pixelSize: 8*fontsScale
-                    font.family: globalFontFamily
+                    font.family: SApp.globalFontFamily
                     color: "#333333"
                     text: more_panel.selectedGid!=-1? database.groupName(more_panel.selectedGid) : ""
                 }
@@ -235,7 +236,7 @@ Item {
                 Text {
                     id: paper_type_text
                     font.pixelSize: 8*fontsScale
-                    font.family: globalFontFamily
+                    font.family: SApp.globalFontFamily
                     color: "#333333"
                     text: more_panel.domainSelectedText
                 }

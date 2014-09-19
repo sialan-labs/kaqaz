@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     width: 100
@@ -63,8 +64,8 @@ Item {
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
                 text: parent.text
-                font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
-                font.family: globalFontFamily
+                font.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
+                font.family: SApp.globalFontFamily
                 color: item.press? "#ffffff" : "#333333"
             }
 
@@ -103,7 +104,7 @@ Item {
             model.append({"name": qsTr("Calendars"), "cmd": "Calendar.qml" })
             model.append({"name": qsTr("Label Manager"), "cmd": "GroupManager.qml" })
             model.append({"name": qsTr("Backup & Restore"), "cmd": "BackupRestore.qml" })
-//            if( devices.isTouchDevice )
+//            if( Devices.isTouchDevice )
 //                model.append({"name": qsTr("Data Location"), "cmd": "ProfileSettings.qml" })
             model.append({"name": qsTr("Synchronization"), "cmd": "Synchronization.qml" })
             if( kaqaz.proBuild ) {

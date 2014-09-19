@@ -23,6 +23,7 @@
 #include "backuper.h"
 #include "kaqazsync.h"
 #include "database.h"
+#include "sialantools/sialancalendarconverter.h"
 
 #include <QSettings>
 #include <QDir>
@@ -97,7 +98,7 @@ void ConfigurePage::refresh()
     foreach( const QString & calId, cals )
     {
         const int cid = calId.toInt();
-        p->ui->calendar_combo->addItem( p->kqz->calendarName(cid), cid );
+        p->ui->calendar_combo->addItem( p->kqz->calendarConverter()->calendarName(cid), cid );
         if( cid == current_calendar )
             p->ui->calendar_combo->setCurrentIndex( p->ui->calendar_combo->count()-1 );
     }

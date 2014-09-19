@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     id: add_group
@@ -40,8 +41,8 @@ Item {
         anchors.right: add_group.right
         anchors.top: add_group.top
         anchors.topMargin: 20*physicalPlatformScale
-        anchors.leftMargin: devices.isMobile && devices.isAndroid? 40*physicalPlatformScale : 90*physicalPlatformScale
-        anchors.rightMargin: devices.isMobile && devices.isAndroid? 40*physicalPlatformScale : 90*physicalPlatformScale
+        anchors.leftMargin: Devices.isMobile && Devices.isAndroid? 40*physicalPlatformScale : 90*physicalPlatformScale
+        anchors.rightMargin: Devices.isMobile && Devices.isAndroid? 40*physicalPlatformScale : 90*physicalPlatformScale
         height: 75*physicalPlatformScale
         radius: 3*physicalPlatformScale
         color: color_list.currentColor
@@ -61,8 +62,8 @@ Item {
             y: parent.height/2 - height/2
             width: parent.width
             font.pixelSize: 14*fontsScale
-            font.bold: devices.isWindows? false : true
-            font.family: globalFontFamily
+            font.bold: Devices.isWindows? false : true
+            font.family: SApp.globalFontFamily
             color: "white"
             horizontalAlignment: Text.AlignHCenter
             inputMethodHints: globalInputMethodHints

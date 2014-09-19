@@ -17,6 +17,7 @@
 */
 
 import QtQuick 2.2
+import SialanTools 1.0
 
 Item {
     width: 100
@@ -62,8 +63,8 @@ Item {
                 anchors.right: parent.right
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
-                font.pixelSize: devices.isMobile? 11*fontsScale : 13*fontsScale
-                font.family: globalFontFamily
+                font.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
+                font.family: SApp.globalFontFamily
                 color: file_sync.press? "#ffffff" : "#333333"
                 wrapMode: TextInput.WordWrap
                 text: qsTr("Sync files")
