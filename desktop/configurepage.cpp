@@ -24,6 +24,7 @@
 #include "kaqazsync.h"
 #include "database.h"
 #include "sialantools/sialancalendarconverter.h"
+#include "sialantools/sialantools.h"
 
 #include <QSettings>
 #include <QDir>
@@ -181,7 +182,7 @@ void ConfigurePage::makeBackup()
         if( input.isEmpty() )
             return;
 
-        if( pass != p->kqz->passToMd5(input) )
+        if( pass != SialanTools::passToMd5(input) )
             return;
     }
 
@@ -206,7 +207,7 @@ void ConfigurePage::restoreSelected()
         if( pass.isEmpty() )
             return;
 
-        p->kqz->backuper()->restore( path, p->kqz->passToMd5(pass) );
+        p->kqz->backuper()->restore( path, SialanTools::passToMd5(pass) );
     }
 }
 
@@ -301,7 +302,7 @@ void ConfigurePage::changePassword()
     if( !cpass.isEmpty() )
     {
         const QString & dlg_cpass = p->ui->security_cpass->text();
-        if( cpass != p->kqz->passToMd5(dlg_cpass) )
+        if( cpass != SialanTools::passToMd5(dlg_cpass) )
         {
             QMessageBox::critical(this, tr("Incorrect"), tr("Current password is incorrect!") );
             return;
@@ -316,7 +317,7 @@ void ConfigurePage::changePassword()
         return;
     }
 
-    db->setPassword( p->kqz->passToMd5(dlg_pass) );
+    db->setPassword( SialanTools::passToMd5(dlg_pass) );
 
     p->ui->security_cpass->clear();
     p->ui->security_pass->clear();

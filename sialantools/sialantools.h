@@ -31,8 +31,26 @@ public:
     ~SialanTools();
 
 public slots:
+    static void debug( const QVariant & var );
+
+    static QString fileName( const QString & path );
+    static QString fileSuffix( const QString & path );
+    static QString readText( const QString & path );
+
+    static QString qtVersion();
+    static QString aboutSialan();
+
+    static void deleteItemDelay( QObject *o, int ms );
+
+    static qreal colorHue( const QColor & clr );
+    static qreal colorLightness( const QColor & clr );
+    static qreal colorSaturation( const QColor & clr );
+
     static QString translateNumbers( QString input );
     static QString passToMd5( const QString & pass );
+
+    static void setProperty( QObject *obj, const QString & property, const QVariant & v );
+    static QVariant property( QObject *obj, const QString & property );
 
     static Qt::LayoutDirection directionOf( const QString & str );
     static QVariant call( QObject *obj, const QString & member, Qt::ConnectionType type,

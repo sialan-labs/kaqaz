@@ -23,6 +23,7 @@
 #include "qdropboxfile.h"
 #include "database.h"
 #include "kaqaz.h"
+#include "sialantools/sialantools.h"
 
 #include <QThread>
 #include <QPointer>
@@ -59,7 +60,7 @@ bool KaqazSync::tokenAvailable() const
 
 void KaqazSync::setPassword(const QString &pass)
 {
-    QString hash = Kaqaz::passToMd5(pass);
+    QString hash = SialanTools::passToMd5(pass);
     p->db->setSyncPassword( hash );
     p->password = hash;
 }

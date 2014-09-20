@@ -73,6 +73,6 @@ Item {
         destroy_timer.restart()
     }
 
-    Component.onCompleted: subMessage = submsg
+    Component.onCompleted: BackHandler.pushHandler(submsg,submsg.hide)
     Component.onDestruction: if( item ) item.destroy()
 }

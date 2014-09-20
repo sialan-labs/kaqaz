@@ -425,13 +425,6 @@ int PaperManager::currentIndex()
     return p->current;
 }
 
-bool PaperManager::hideCurrentAttachments()
-{
-    QVariant res;
-    QMetaObject::invokeMethod( p->buffer.at(p->current==0? 0 : 1), "hideAttachments", Q_RETURN_ARG(QVariant,res) );
-    return res.toBool();
-}
-
 PaperManager::~PaperManager()
 {
     delete p;

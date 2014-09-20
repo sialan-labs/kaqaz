@@ -29,7 +29,6 @@
 #include "database.h"
 #include "backuper.h"
 #include "searchhighlighter.h"
-#include "sialantools/sialanqtlogger.h"
 #include "sialantools/sialantools.h"
 #include "resourcemanager.h"
 #include "SimpleQtCryptor/simpleqtcryptor.h"
@@ -76,32 +75,6 @@
 #include <QFileSystemWatcher>
 #include <QStandardPaths>
 
-QString translate_0 = "0";
-QString translate_1 = "1";
-QString translate_2 = "2";
-QString translate_3 = "3";
-QString translate_4 = "4";
-QString translate_5 = "5";
-QString translate_6 = "6";
-QString translate_7 = "7";
-QString translate_8 = "8";
-QString translate_9 = "9";
-
-QString translateNumbers( QString input )
-{
-    input.replace("0",translate_0);
-    input.replace("1",translate_1);
-    input.replace("2",translate_2);
-    input.replace("3",translate_3);
-    input.replace("4",translate_4);
-    input.replace("5",translate_5);
-    input.replace("6",translate_6);
-    input.replace("7",translate_7);
-    input.replace("8",translate_8);
-    input.replace("9",translate_9);
-    return input;
-}
-
 Database *kaqaz_database = 0;
 QSettings *kaqaz_settings = 0;
 
@@ -145,7 +118,6 @@ public:
     SialanCalendarConverter *calendar;
 
 #ifdef Q_OS_ANDROID
-    SialanQtLogger *logger;
     SialanJavaLayer *java_layer;
 #endif
 };
@@ -171,7 +143,6 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->devices = new SialanDevices(this);
     p->tools = new SialanTools(this);
 #ifdef Q_OS_ANDROID
-    p->logger = new SialanQtLogger(LOG_PATH,this);
     p->java_layer = SialanJavaLayer::instance();
 #endif
 
@@ -299,6 +270,8 @@ bool Kaqaz::start()
 #ifdef DESKTOP_DEVICE
     if( !p->desktop_touch_mode )
     {
+        p->calendar = new SialanCalendarConverter(this);
+
         p->viewer_classic = new KaqazDesktop();
         p->viewer_classic->setDatabase(kaqaz_database);
         p->viewer_classic->setRepository(p->repository);
@@ -306,8 +279,6 @@ bool Kaqaz::start()
         p->viewer_classic->setKaqazSync(p->sync);
         p->viewer_classic->setSialanDevices(p->devices);
         p->viewer_classic->setSialanTools(p->tools);
-
-        p->calendar = new SialanCalendarConverter(this);
     }
     else
 #endif
@@ -473,17 +444,6 @@ QString Kaqaz::version()
             ;
 }
 
-QString Kaqaz::qtVersion()
-{
-    return qVersion();
-}
-
-QString Kaqaz::aboutSialan()
-{
-    return tr("Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.") + "\n\n" +
-           tr("By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.");
-}
-
 void Kaqaz::deleteFileIfPossible(const QString &id)
 {
     if( kaqaz_database->fileContaintOnDatabase(id) )
@@ -536,20 +496,6 @@ QSettings *Kaqaz::settings()
     return kaqaz_settings;
 }
 
-QScreen *Kaqaz::screen()
-{
-    const QList<QScreen*> & screens = QGuiApplication::screens();
-    if( screens.isEmpty() )
-        return 0;
-
-    return screens.first();
-}
-
-QObject *Kaqaz::screenObj()
-{
-    return screen();
-}
-
 void Kaqaz::refreshSettings()
 {
     if( kaqaz_settings )
@@ -586,17 +532,6 @@ void Kaqaz::setCurrentLanguage(const QString &lang)
     p->language = lang;
 
     kaqaz_settings->setValue("General/Language",lang);
-
-    translate_0 = Kaqaz::tr("0");
-    translate_1 = Kaqaz::tr("1");
-    translate_2 = Kaqaz::tr("2");
-    translate_3 = Kaqaz::tr("3");
-    translate_4 = Kaqaz::tr("4");
-    translate_5 = Kaqaz::tr("5");
-    translate_6 = Kaqaz::tr("6");
-    translate_7 = Kaqaz::tr("7");
-    translate_8 = Kaqaz::tr("8");
-    translate_9 = Kaqaz::tr("9");
 
     emit languageChanged();
     emit languageDirectionChanged();
@@ -745,14 +680,6 @@ QString Kaqaz::resourcePath()
 #endif
 }
 
-QString Kaqaz::passToMd5(const QString &pass)
-{
-    if( pass.isEmpty() )
-        return QString();
-
-    return QCryptographicHash::hash( pass.toUtf8(), QCryptographicHash::Md5 ).toHex();
-}
-
 QStringList Kaqaz::findBackups()
 {
     QString path = BACKUP_PATH;
@@ -779,26 +706,6 @@ void Kaqaz::reconnectAllResources()
     else
 #endif
         QMetaObject::invokeMethod( p->viewer->rootObject(), "refresh" );
-}
-
-QString Kaqaz::fileName(const QString &path)
-{
-    return QFileInfo(path).baseName();
-}
-
-QString Kaqaz::fileSuffix(const QString &path)
-{
-    return QFileInfo(path).suffix().toLower();
-}
-
-QString Kaqaz::readText(const QString &path)
-{
-    QFile file(path);
-    if( !file.open(QFile::ReadOnly) )
-        return QString();
-
-    QString res = QString::fromUtf8(file.readAll());
-    return res;
 }
 
 void Kaqaz::setTutorialCompleted(bool stt)
@@ -949,7 +856,7 @@ void Kaqaz::setFullscreen(bool stt)
             p->viewer_classic->showFullScreen();
         else
 #endif
-            p->viewer->showFullScreen();
+            p->viewer->setFullscreen(true);
     }
     else
     {
@@ -958,7 +865,7 @@ void Kaqaz::setFullscreen(bool stt)
             p->viewer_classic->showNormal();
         else
 #endif
-            p->viewer->showNormal();
+            p->viewer->setFullscreen(false);
     }
 
     emit fullscreenChanged();
@@ -1028,11 +935,6 @@ Qt::LayoutDirection Kaqaz::languageDirection()
     return p->locales.value(currentLanguage()).textDirection();
 }
 
-void Kaqaz::deleteItemDelay(QObject *o, int ms)
-{
-    QTimer::singleShot( ms, o, SLOT(deleteLater()) );
-}
-
 QStringList Kaqaz::getOpenFileNames(const QString &title, const QString &filter)
 {
 #ifdef DESKTOP_DEVICE
@@ -1060,37 +962,6 @@ QByteArray Kaqaz::decrypt(const QByteArray &ar, const QString &password)
     SimpleQtCryptor::Decryptor dec( gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB );
     dec.decrypt( ar, res, true );
     return res;
-}
-
-qreal Kaqaz::colorHue(const QColor &clr)
-{
-    return clr.hue()/255.0;
-}
-
-qreal Kaqaz::colorLightness(const QColor &clr)
-{
-    return 2*clr.lightness()/255.0 - 1;
-}
-
-qreal Kaqaz::colorSaturation(const QColor &clr)
-{
-    return clr.saturation()/255.0;
-}
-
-void Kaqaz::setProperty(QObject *obj, const QString &property, const QVariant &v)
-{
-    if( !obj || property.isEmpty() )
-        return;
-
-    obj->setProperty( property.toUtf8(), v );
-}
-
-QVariant Kaqaz::property(QObject *obj, const QString &property)
-{
-    if( !obj || property.isEmpty() )
-        return QVariant();
-
-    return obj->property(property.toUtf8());
 }
 
 void Kaqaz::timerEvent(QTimerEvent *e)

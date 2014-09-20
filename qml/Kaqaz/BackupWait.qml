@@ -22,7 +22,6 @@ import SialanTools 1.0
 Item {
     id: backup_wait
 
-    property bool backIsActive: true
     property variant progress
 
     Connections {
@@ -50,7 +49,7 @@ Item {
         repeat: false
         onTriggered: {
             backuper.makeBackup( database.password() )
-            backup_wait.backIsActive = false
+            BackHandler.pushHandler(backup_wait,backup_wait.back)
         }
     }
 
@@ -65,7 +64,7 @@ Item {
     }
 
     function back(){
-        return !backIsActive
+        return false
     }
 
     function success(){
@@ -92,7 +91,6 @@ Item {
     Component.onCompleted: {
         initTranslations()
         backup_start.start()
-        backHandler = backup_wait
         progress = newModernProgressBar()
     }
 

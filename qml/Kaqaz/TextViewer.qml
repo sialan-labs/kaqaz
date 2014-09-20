@@ -31,7 +31,7 @@ Item {
 
     signal deleteRequest( variant item )
 
-    onPathChanged: desc.text = kaqaz.readText(path)
+    onPathChanged: desc.text = Tools.readText(path)
 
     Rectangle{
         id: back

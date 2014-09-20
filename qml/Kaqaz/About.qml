@@ -121,7 +121,7 @@ Item {
         about_name_text.text      = qsTr("Kaqaz") + " " + kaqaz.version()
         about_license_text.text   = qsTr("License: GNU GPL Version 3")
         about_powered_text.text   = qsTr("(C) 2014 Sialan Labs")
-        about_framework_text.text = qsTr("Based on") + " Qt" + kaqaz.qtVersion()
+        about_framework_text.text = qsTr("Based on") + " Qt" + Tools.qtVersion()
         about_home.text           = qsTr("Home Page")
         title.text                = qsTr("About")
     }

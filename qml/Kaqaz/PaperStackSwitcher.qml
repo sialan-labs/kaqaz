@@ -44,6 +44,20 @@ Item {
     property int paperType: Enums.AllPapers
     property int selectedGid: -1
 
+    onTypeChanged: {
+        BackHandler.removeHandler(switcher)
+        if( type !== PaperManager.Clean )
+            BackHandler.pushDownHandler(switcher,switcher.clean)
+    }
+
+    onCurrentChanged: {
+        switcher_timer.restart()
+    }
+
+    onKeywordChanged: {
+        switcher_timer.restart()
+    }
+
     Timer {
         id: item_destroyer_timer
         interval: switcher.interval
@@ -127,22 +141,9 @@ Item {
         }
     }
 
-    onCurrentChanged: {
-        switcher_timer.restart()
-    }
-    onKeywordChanged: {
-        switcher_timer.restart()
-    }
-
     Component {
         id: paper_manager_component
         PaperManagerItem{}
-    }
-
-    function hideCurrentAttachments(){
-        if( !currentFrame.item )
-            return false
-        return currentFrame.item.hideCurrentAttachments()
     }
 
     function refresh(){

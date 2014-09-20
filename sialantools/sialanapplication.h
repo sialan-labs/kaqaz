@@ -23,11 +23,20 @@
 
 #ifdef DESKTOP_DEVICE
 #include "qtsingleapplication/qtsingleapplication.h"
-#define INHERIT_QAPP QtSingleApplication
+class INHERIT_QAPP : public QtSingleApplication
+{
+public:
+    INHERIT_QAPP(int &argc, char **argv): QtSingleApplication(argc, argv){}
+};
 #else
 #include <QGuiApplication>
-#define INHERIT_QAPP QGuiApplication
+class INHERIT_QAPP : public QGuiApplication
+{
+public:
+    INHERIT_QAPP(int &argc, char **argv): QGuiApplication(argc, argv){}
+};
 #endif
+
 
 class SialanApplicationPrivate;
 class SialanApplication : public INHERIT_QAPP
@@ -65,12 +74,14 @@ public:
 
 public slots:
     void refreshTranslations();
+    void back();
 
 signals:
     void fakeSignal();
     void globalFontFamilyChanged();
     void globalMonoFontFamilyChanged();
     void languageUpdated();
+    void backRequest();
 
 private:
     SialanApplicationPrivate *p;

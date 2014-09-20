@@ -40,5 +40,6 @@
         <file>qml/SialanTools/files/back_64.png</file>
         <file>qml/SialanTools/files/back_light_32.png</file>
         <file>qml/SialanTools/files/back_light_64.png</file>
+        <file>qml/SialanTools/files/warning.png</file>
     </qresource>
 </RCC>

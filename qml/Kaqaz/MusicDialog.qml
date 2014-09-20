@@ -113,7 +113,6 @@ Item {
                         var id = repository.copyAudioToRepository( item.path )
                         music_dialog.selected(id)
 
-                        backHandler = 0
                         main.popPreference()
                         main.popPreference()
                         darkBackground = false
@@ -142,18 +141,17 @@ Item {
     }
 
     function back(){
-        if( preference_list.model.parentFolder == "" )
-        {
-            backHandler = 0
-            return false
+        if( preference_list.model.parentFolder == "" ) {
+            main.popPreference()
+            return true
         }
 
         preference_list.model.folder = preference_list.model.folder+"/.."
-        return true
+        return false
     }
 
     Component.onCompleted: {
         initTranslations()
-        backHandler = music_dialog
+        BackHandler.pushHandler(music_dialog,music_dialog.back)
     }
 }

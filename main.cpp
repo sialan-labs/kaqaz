@@ -28,6 +28,7 @@
 #include <QFile>
 #include <QIcon>
 #include <QSettings>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {

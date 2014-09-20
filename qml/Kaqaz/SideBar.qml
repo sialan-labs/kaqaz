@@ -35,6 +35,13 @@ AnimationItem {
 
     signal itemSelected( int id, int type )
 
+    onVisibleChanged: {
+        if( visible )
+            BackHandler.pushHandler(side_panel,side_panel.hidePanel)
+        else
+            BackHandler.removeHandler(side_panel)
+    }
+
     MouseArea{
         id: mousearea
         x: maximizeMode? -kaqaz_root.width : -10*physicalPlatformScale

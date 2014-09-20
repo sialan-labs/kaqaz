@@ -35,7 +35,7 @@ Item {
     signal success()
     signal passGiven( string pass )
 
-    Keys.onEscapePressed: View.root.back()
+    Keys.onEscapePressed: SApp.back()
 
     onParentItemChanged: if( !parentItem ) destroy()
 

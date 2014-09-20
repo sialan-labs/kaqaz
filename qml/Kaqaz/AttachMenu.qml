@@ -52,6 +52,11 @@ Item {
     }
 
     onOpenedChanged: {
+        if( opened )
+            BackHandler.pushHandler(attach_menu,attach_menu.hide)
+        else
+            BackHandler.removeHandler(attach_menu)
+
         sidePanel = !opened
         if( opened )
             load_timer.restart()

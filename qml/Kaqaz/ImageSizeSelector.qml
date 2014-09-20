@@ -84,7 +84,6 @@ Item {
                     var id = repository.copyImageToRepository( size_selector.path, imageWidth )
                     size_selector.selected(id)
 
-                    backHandler = 0
                     main.popPreference()
                     main.popPreference()
                     main.popPreference()

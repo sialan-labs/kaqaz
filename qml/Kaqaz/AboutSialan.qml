@@ -78,7 +78,7 @@ Item {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.margins: 20*physicalPlatformScale
-                    text: kaqaz.aboutSialan()
+                    text: Tools.aboutSialan()
                     font.pixelSize: 9*fontsScale
                     font.family: SApp.globalFontFamily
                     wrapMode: Text.WordWrap

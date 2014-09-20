@@ -26,6 +26,7 @@ SialanMain {
     width: Devices.isTouchDevice? 0 : kaqaz.size.width
     height: Devices.isTouchDevice? 0 : kaqaz.size.height
     mainFrame: main_frame
+    panelWidth: main.panelWidth
 
     property real fixedHeight: height-View.statusBarHeight-View.navigationBarHeight
 
@@ -34,9 +35,6 @@ SialanMain {
     property bool rotated: true
     property alias touchToBack: main.touchToBack
     property alias darkBackground: main.darkBackground
-    property alias backHandler: main.backHandler
-
-    property variant subMessage
 
     property alias sidePanel: main.sidePanel
     property alias panelAnimDuration: main.panelAnimDuration
@@ -163,8 +161,7 @@ SialanMain {
     }
 
     function createPaper( parent ){
-        var component = Qt.createComponent("PaperItem.qml");
-        var paper = component.createObject(parent);
+        var paper = paper_cmpnt.createObject(parent);
         return paper
     }
 
@@ -204,10 +201,6 @@ SialanMain {
         main.showPrefrences()
     }
 
-    function back(){
-        main.pressBack()
-    }
-
     function getPass( parent ){
 
         var blur_item
@@ -217,8 +210,8 @@ SialanMain {
             blur_item.source = main
         }
 
-        var component = Qt.createComponent("GetPassDialog.qml");
-        var item = component.createObject(kaqaz_root);
+        var item = get_pass_cmpnt.createObject(kaqaz_root);
+        item.password = database.password()
         item.backBlur = blur_item
         item.parentItem = parent
 
@@ -256,6 +249,19 @@ SialanMain {
 
     function incomingImage( path ) {
         main.incomingImage(path)
+    }
+
+    Component {
+        id: get_pass_cmpnt
+        GetPassDialog {
+            password: database.password()
+        }
+    }
+
+    Component {
+        id: paper_cmpnt
+        PaperItem {
+        }
     }
 
     Component.onCompleted: {

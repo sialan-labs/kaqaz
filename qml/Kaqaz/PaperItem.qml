@@ -112,10 +112,6 @@ AnimationItem {
         paper.saved(paper_item)
     }
 
-    function hideAttachments(){
-        return attach_menu.hide()
-    }
-
     function deleteRequest(){
         paper.deleted(paper)
     }

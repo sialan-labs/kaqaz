@@ -86,7 +86,7 @@ Item {
                 width: height*4/3
                 sourceSize.width: width
                 sourceSize.height: height
-                source: item.directory? "files/folder.png" : ( (kaqaz.fileSuffix(item.path) === "pdf")?"files/pdf.png":"files/text.png")
+                source: item.directory? "files/folder.png" : ( (Tools.fileSuffix(item.path) === "pdf")?"files/pdf.png":"files/text.png")
             }
 
             Text{
@@ -113,7 +113,6 @@ Item {
                         var id = repository.insert( item.path )
                         doc_dialog.selected(id)
 
-                        backHandler = 0
                         main.popPreference()
                         main.popPreference()
                         darkBackground = false
@@ -142,18 +141,17 @@ Item {
     }
 
     function back(){
-        if( preference_list.model.parentFolder == "" )
-        {
-            backHandler = 0
-            return false
+        if( preference_list.model.parentFolder == "" ) {
+            main.popPreference()
+            return true
         }
 
         preference_list.model.folder = preference_list.model.folder+"/.."
-        return true
+        return false
     }
 
     Component.onCompleted: {
         initTranslations()
-        backHandler = doc_dialog
+        BackHandler.pushHandler(doc_dialog,doc_dialog.back)
     }
 }

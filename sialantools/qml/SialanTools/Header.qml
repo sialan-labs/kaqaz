@@ -26,7 +26,6 @@ Item {
     property alias text: title_txt.text
     property bool light: false
     property bool backButton: !Devices.isAndroid && !View.fullscreen
-    property bool forceBack: false
 
     Row {
         id: back_row
@@ -35,7 +34,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.leftMargin: 10*physicalPlatformScale
         width: 75*physicalPlatformScale
-        visible: backButton && !backHandler
+        visible: backButton
 
         Image {
             anchors.verticalCenter: parent.verticalCenter
@@ -63,10 +62,7 @@ Item {
         onReleased: back_row.press = false
         visible: back_row.visible
         onClicked: {
-            if(forceBack)
-                backHandler = 0
-
-            View.root.back()
+            SApp.back()
         }
     }
 

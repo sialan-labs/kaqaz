@@ -87,9 +87,9 @@ Item {
                 x: kaqaz.languageDirection == Qt.RightToLeft? 20 : item.width - width - 20
                 anchors.verticalCenter: parent.verticalCenter
                 visible: item.checkable
-                checked: item.prprt.length==0? false : kaqaz.property(kaqaz,item.prprt)
+                checked: item.prprt.length==0? false : Tools.property(kaqaz,item.prprt)
                 color: item.press? "#ffffff" : "#333333"
-                onCheckedChanged: kaqaz.setProperty(kaqaz,item.prprt,checked)
+                onCheckedChanged: Tools.setProperty(kaqaz,item.prprt,checked)
             }
         }
 

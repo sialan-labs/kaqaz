@@ -21,6 +21,7 @@
 
 #include <QQuickView>
 
+class SialanBackHandler;
 class SialanDesktopTools;
 class SialanDevices;
 class SialanJavaLayer;
@@ -48,8 +49,9 @@ public:
         QtLogger = 8,
         Tools = 16,
         Calendar = 32,
-        AllComponents = 63,
-        AllExceptLogger = 55
+        BackHandler = 64,
+        AllComponents = 127,
+        AllExceptLogger = 119
     };
 
     SialanQuickView( int options = None, QWindow *parent = 0);
@@ -63,6 +65,7 @@ public:
     SialanJavaLayer *javaLayer() const;
 #endif
     SialanCalendarConverter *calendar() const;
+    SialanBackHandler *backHandler() const;
 
     void setFullscreen( bool stt );
     bool fullscreen() const;

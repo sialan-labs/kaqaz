@@ -225,6 +225,8 @@ Item {
     }
 
     function refreshEditPosition(){
+        if( !paper )
+            return
         btn_box.x = paper_label.mapToItem(paper,paper_label.width,0).x + 14*physicalPlatformScale -btn_box.width
         btn_box.y = 15+10*physicalPlatformScale
         listview_btn.x = btn_box.x + btn_box.width - listview_btn.width

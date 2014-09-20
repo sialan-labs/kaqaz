@@ -174,7 +174,6 @@ Item {
     }
 
     Component.onCompleted: {
-//        backHandler = dbox_auth
         started = true
         start_timer.restart()
     }

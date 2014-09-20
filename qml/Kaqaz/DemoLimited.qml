@@ -162,8 +162,8 @@ Item {
     }
 
     function back() {
-        return true
+        return false
     }
 
-    Component.onCompleted: backHandler = dlimit
+    Component.onCompleted: BackHandler.pushHandler(dlimit,dlimit.back)
 }

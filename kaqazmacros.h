@@ -22,6 +22,8 @@
 #include <QtGlobal>
 #include <QDir>
 
+#include "sialantools/sialanapplication.h"
+
 #define DATA_DB_CONNECTION "data_sqlite"
 
 #define KAQAZ_VERSION "1.1.0"
@@ -30,31 +32,12 @@
 
 #define LANG_ON_STARTUP
 
-#ifdef Q_OS_ANDROID
-#define HOME_PATH   QDir::homePath()
-#define BACKUP_PATH "/sdcard/Sialan/Kaqaz/backups"
-#define TEMP_PATH   "/sdcard/Sialan/Kaqaz/temp"
-#define CAMERA_PATH "/sdcard/DCIM"
-#define LOG_PATH    "/sdcard/Sialan/Kaqaz/log"
-#else
-#ifdef Q_OS_IOS
-#define HOME_PATH   QDir::homePath()
-#define BACKUP_PATH QString(QDir::homePath() + "/backups/")
-#define TEMP_PATH   QString(QDir::homePath() + "/tmp/")
-#define CAMERA_PATH QString(QDir::homePath() + "/camera/")
-#else
-#ifdef Q_OS_WIN
-#define HOME_PATH   QString(QDir::homePath() + "/AppData/Local/sialan/kaqaz")
-#else
-#define HOME_PATH   QString(QDir::homePath() + "/.config/sialan/kaqaz.test")
-#endif
-#define LOG_PATH    QString(HOME_PATH+"/log")
-#define BACKUP_PATH QString(HOME_PATH+"/backups")
-#define TEMP_PATH   QDir::tempPath()
-#define CAMERA_PATH QString(QDir::homePath() + "/Pictures/Camera")
-#endif
-#endif
-#define CONFIG_PATH QString(HOME_PATH + "/config.ini")
+#define HOME_PATH   SialanApplication::homePath()
+#define BACKUP_PATH SialanApplication::backupsPath()
+#define TEMP_PATH   SialanApplication::tempPath()
+#define CAMERA_PATH SialanApplication::cameraPath()
+#define LOG_PATH    SialanApplication::logPath()
+#define CONFIG_PATH SialanApplication::confsPath()
 
 #if defined(Q_OS_ANDROID) || defined(Q_OS_IOS) || defined(Q_OS_WINPHONE)
 #define TOUCH_DEVICE

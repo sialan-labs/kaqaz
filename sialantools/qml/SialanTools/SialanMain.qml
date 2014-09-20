@@ -30,7 +30,7 @@ Rectangle {
     property alias tooltip: tool_tip
 
     property variant mainFrame
-    property variant subMessage
+    property SubMessage subMessage
 
     property real panelWidth: width
 
@@ -123,6 +123,7 @@ Rectangle {
         id: sub_msg_component
 
         SubMessage {
+            id: sub_msg
         }
     }
 

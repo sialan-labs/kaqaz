@@ -143,18 +143,17 @@ Item {
     function back(){
         if( sizeSelector )
             return false
-        if( preference_list.model.parentFolder == "" )
-        {
-            backHandler = 0
-            return false
+        if( preference_list.model.parentFolder == "" ) {
+            main.popPreference()
+            return true
         }
 
         preference_list.model.folder = preference_list.model.folder+"/.."
-        return true
+        return false
     }
 
     Component.onCompleted: {
         initTranslations()
-        backHandler = gallery_dialog
+        BackHandler.pushHandler(gallery_dialog,gallery_dialog.back)
     }
 }

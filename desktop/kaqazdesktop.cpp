@@ -33,6 +33,7 @@
 #include "scolor.h"
 #include "addgroupdialog.h"
 #include "sialantools/sialandesktoptools.h"
+#include "sialantools/sialantools.h"
 
 #include <QToolBar>
 #include <QAction>
@@ -294,7 +295,7 @@ bool KaqazDesktop::start()
     if( !p->db->password().isEmpty() )
     {
         const QString & pass = QInputDialog::getText(this, tr("Kaqaz security"), tr("Please enter password:"), QLineEdit::Password);
-        const QString & md5 = p->kaqaz->passToMd5(pass);
+        const QString & md5 = SialanTools::passToMd5(pass);
         if( md5 != p->db->password() )
         {
             QMessageBox::critical(this, tr("Incorrect"), tr("Password is incorrect!"));

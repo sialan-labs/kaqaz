@@ -77,6 +77,11 @@ Item {
     }
 
     onItemChanged: {
+        if( item )
+            BackHandler.pushHandler(p_dialog,p_dialog.hide)
+        else
+            BackHandler.removeHandler(p_dialog)
+
         if( !item )
             return
         if( privates.lastItem )

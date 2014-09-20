@@ -187,7 +187,7 @@ Item {
 
     function back() {
         kaqaz.close()
-        return true
+        return false
     }
 
     Connections {
@@ -201,6 +201,6 @@ Item {
 
     Component.onCompleted: {
         initTranslations()
-        backHandler = start_splash
+        BackHandler.pushHandler(start_splash,start_splash.back)
     }
 }

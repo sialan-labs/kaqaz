@@ -25,6 +25,7 @@
 #include "sialanhashobject.h"
 #include "sialanlistobject.h"
 #include "sialancalendarconverter.h"
+#include "sialanbackhandler.h"
 #ifdef Q_OS_ANDROID
 #include "sialanjavalayer.h"
 #endif
@@ -42,14 +43,15 @@ class SialanQuickViewPrivate
 public:
     int options;
 
-    QPointer<SialanDesktopTools> desktop;
-    QPointer<SialanDevices> devices;
-    QPointer<SialanQtLogger> logger;
-    QPointer<SialanTools> tools;
+    SialanDesktopTools *desktop;
+    SialanDevices *devices;
+    SialanQtLogger *logger;
+    SialanTools *tools;
 #ifdef Q_OS_ANDROID
-    QPointer<SialanJavaLayer> java_layer;
+    SialanJavaLayer *java_layer;
 #endif
-    QPointer<SialanCalendarConverter> calendar;
+    SialanCalendarConverter *calendar;
+    SialanBackHandler *back_handler;
 
     bool fullscreen;
 };
@@ -59,6 +61,15 @@ SialanQuickView::SialanQuickView(int options, QWindow *parent) :
 {
     p = new SialanQuickViewPrivate;
     p->options = options;
+    p->desktop = 0;
+    p->devices = 0;
+    p->logger = 0;
+    p->tools = 0;
+#ifdef Q_OS_ANDROID
+    p->java_layer = 0;
+#endif
+    p->calendar = 0;
+    p->back_handler = 0;
     p->fullscreen = false;
 
     engine()->rootContext()->setContextProperty( "SApp", SialanApplication::instance() );
@@ -75,8 +86,6 @@ SialanQuickView::SialanQuickView(int options, QWindow *parent) :
 
     engine()->setImportPathList( QStringList()<< engine()->importPathList() << "qrc:///sialantools/qml" );
 
-    engine()->rootContext()->setContextProperty("physicalPlatformScale",1);
-    engine()->rootContext()->setContextProperty("fontsScale",1.3);
     engine()->rootContext()->setContextProperty("flickVelocity",
 #ifdef DESKTOP_DEVICE
                                                 25000
@@ -116,6 +125,11 @@ SialanJavaLayer *SialanQuickView::javaLayer() const
 SialanCalendarConverter *SialanQuickView::calendar() const
 {
     return p->calendar;
+}
+
+SialanBackHandler *SialanQuickView::backHandler() const
+{
+    return p->back_handler;
 }
 
 void SialanQuickView::setFullscreen(bool stt)
@@ -192,6 +206,11 @@ void SialanQuickView::init_options()
     {
         p->calendar = new SialanCalendarConverter(this);
         engine()->rootContext()->setContextProperty( "CalendarConv", p->calendar );
+    }
+    if( p->options & BackHandler && !p->back_handler )
+    {
+        p->back_handler = new SialanBackHandler(this);
+        engine()->rootContext()->setContextProperty( "BackHandler", p->back_handler );
     }
 }
 

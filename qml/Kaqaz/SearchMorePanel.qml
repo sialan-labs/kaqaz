@@ -41,9 +41,9 @@ Item {
 
     onStartPageChanged: {
         if( startPage )
-            backHandler = 0
+            BackHandler.removeHandler(more_panel)
         else
-            backHandler = more_panel
+            BackHandler.pushHandler(more_panel,more_panel.back)
     }
 
     MouseArea {
@@ -132,7 +132,7 @@ Item {
                     font.pixelSize: 8*fontsScale
                     font.family: SApp.globalFontFamily
                     color: "#333333"
-                    text: more_panel.dateIsSet? "<b>From:</b> " + CalendarConv.convertIntToStringDate(kaqaz.convertDateToDays(more_panel.startDate)) : ""
+                    text: more_panel.dateIsSet? "<b>From:</b> " + CalendarConv.convertIntToStringDate(CalendarConv.convertDateToDays(more_panel.startDate)) : ""
                 }
 
                 Text {
@@ -140,7 +140,7 @@ Item {
                     font.pixelSize: 8*fontsScale
                     font.family: SApp.globalFontFamily
                     color: "#333333"
-                    text: more_panel.dateIsSet? "<b>To:</b> " + CalendarConv.convertIntToStringDate(kaqaz.convertDateToDays(more_panel.endDate)) : ""
+                    text: more_panel.dateIsSet? "<b>To:</b> " + CalendarConv.convertIntToStringDate(CalendarConv.convertDateToDays(more_panel.endDate)) : ""
                 }
             }
         }
@@ -336,10 +336,10 @@ Item {
 
     function back(){
         if( startPage )
-            return false
+            return true
 
         more_panel.startPage = true
         item_destroy_timer.restart()
-        return true
+        return false
     }
 }

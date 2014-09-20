@@ -32,8 +32,6 @@ Rectangle {
     property variant dialogItem
     property variant panelItem
 
-    property variant backHandler
-
     property real panelHeight: 50*physicalPlatformScale
     property alias panelWidth: panel.width
 
@@ -59,6 +57,11 @@ Rectangle {
     }
 
     onDialogItemChanged: {
+        if( dialogItem )
+            BackHandler.pushHandler(main,main.closeDialog)
+        else
+            BackHandler.removeHandler(main)
+
         main_page.anim = true
         if( dialogItem )
         {
@@ -77,6 +80,11 @@ Rectangle {
     }
 
     onPanelItemChanged: {
+        if( panelItem )
+            BackHandler.pushHandler(main,main.closePanel)
+        else
+            BackHandler.removeHandler(main)
+
         main_page.anim = true
         if( panelItem )
         {
@@ -97,10 +105,19 @@ Rectangle {
 
     Connections {
         target: kaqaz
-        onBackRequest: main.pressBack()
+        onBackRequest: SApp.back()
     }
 
-    Keys.onEscapePressed: pressBack()
+    Connections {
+        target: SApp
+        onBackRequest: {
+            var res = BackHandler.back()
+            if( !res && !Devices.isDesktop )
+                back_attemper.show()
+        }
+    }
+
+    Keys.onEscapePressed: SApp.back()
 
     Timer {
         id: back_attemper
@@ -312,7 +329,7 @@ Rectangle {
         anchors.fill: parent
         visible: false
         onClicked: {
-            main.pressBack()
+            SApp.back()
             Devices.hideKeyboard()
         }
     }
@@ -367,6 +384,9 @@ Rectangle {
         currentFrame = tmp
 
         main_page.focus = true
+
+        if( preferenceArray.length == 1 )
+            BackHandler.pushHandler(main,main.popPreference)
     }
 
     function popPreference(){
@@ -396,51 +416,18 @@ Rectangle {
         nextFrame.opacity = 1
 
         if( current !== main_item )
-            kaqaz.deleteItemDelay( current, 250 )
+            Tools.deleteItemDelay( current, 250 )
 
         var tmp = nextFrame
         nextFrame = currentFrame
         currentFrame = tmp
 
         main.focus = true
-    }
 
-    function pressBack(){
-        if( backHandler && backHandler.back() )
-            return
-        if( bottomPanel.item )
-            hideBottomPanel()
+        if( preferenceArray.length == 0 )
+            BackHandler.removeHandler(main)
         else
-        if( rollerDialog.visible )
-            hideRollerDialog()
-        else
-        if( subMessage )
-            hideSubMessage()
-        else
-        if( pointerDialog.visible )
-            hidePointDialog()
-        else
-        if( panel.isVisible() )
-            panel.hidePanel()
-        else
-        if( preferenceArray.length != 0 )
-            popPreference()
-        else
-        if( dialogItem )
-            closeDialog()
-        else
-        if( panelItem )
-            closePanel()
-        else
-        if( stack_switcher.hideCurrentAttachments() )
-            return
-        else
-        if( stack_switcher.type !== PaperManager.Clean ) {
-            stack_switcher.show(0, PaperManager.Clean)
-        }
-        else
-        if( !Devices.isDesktop )
-            back_attemper.show()
+            return false
     }
 
     function showDialog( item ){
@@ -459,7 +446,7 @@ Rectangle {
         main_page.anim = true
         Devices.hideKeyboard()
         main_page.y = 0
-        kaqaz.deleteItemDelay(dialogItem,1000)
+        Tools.deleteItemDelay(dialogItem,1000)
         main.focus = true
     }
 
@@ -498,7 +485,7 @@ Rectangle {
         main_page.anim = true
         back_area.visible = false
         main_page.y = 0
-        kaqaz.deleteItemDelay(panelItem,250)
+        Tools.deleteItemDelay(panelItem,250)
         main.focus = true
     }
 

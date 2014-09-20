@@ -19,6 +19,7 @@
 #include "aboutdialog.h"
 #include "ui_aboutdialog.h"
 #include "kaqaz.h"
+#include "sialantools/sialantools.h"
 
 #include <QDesktopServices>
 #include <QUrl>
@@ -36,7 +37,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     p->ui = new Ui::AboutDialog;
     p->ui->setupUi(this);
     p->ui->name_label->setText( p->ui->name_label->text() + " " + Kaqaz::version() );
-    p->ui->qtversion_lbl->setText( p->ui->qtversion_lbl->text() + " Qt" + Kaqaz::qtVersion() );
+    p->ui->qtversion_lbl->setText( p->ui->qtversion_lbl->text() + " Qt" + SialanTools::qtVersion() );
 }
 
 void AboutDialog::donateUs()

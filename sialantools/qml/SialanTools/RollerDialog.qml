@@ -24,6 +24,13 @@ Item {
     height: 100
     visible: false
 
+    onVisibleChanged: {
+        if( visible )
+            BackHandler.pushHandler(roller_dialog,roller_dialog.hide)
+        else
+            BackHandler.removeHandler(roller_dialog)
+    }
+
     Rectangle {
         id: top_fader
         anchors.left: roller_dialog.left

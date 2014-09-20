@@ -147,6 +147,11 @@ void SialanApplication::refreshTranslations()
     emit languageUpdated();
 }
 
+void SialanApplication::back()
+{
+    emit backRequest();
+}
+
 SialanApplication::~SialanApplication()
 {
     sialan_app_obj = 0;

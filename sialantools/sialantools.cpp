@@ -21,6 +21,11 @@
 #include <QMetaMethod>
 #include <QMetaObject>
 #include <QCryptographicHash>
+#include <QColor>
+#include <QTimer>
+#include <QFile>
+#include <QDebug>
+#include <QFileInfo>
 
 QString sialan_tools_numtranslate_0 = "0";
 QString sialan_tools_numtranslate_1 = "1";
@@ -43,6 +48,73 @@ SialanTools::SialanTools(QObject *parent) :
     QObject(parent)
 {
     p = new SialanToolsPrivate;
+
+    sialan_tools_numtranslate_0 = SialanTools::tr("0");
+    sialan_tools_numtranslate_1 = SialanTools::tr("1");
+    sialan_tools_numtranslate_2 = SialanTools::tr("2");
+    sialan_tools_numtranslate_3 = SialanTools::tr("3");
+    sialan_tools_numtranslate_4 = SialanTools::tr("4");
+    sialan_tools_numtranslate_5 = SialanTools::tr("5");
+    sialan_tools_numtranslate_6 = SialanTools::tr("6");
+    sialan_tools_numtranslate_7 = SialanTools::tr("7");
+    sialan_tools_numtranslate_8 = SialanTools::tr("8");
+    sialan_tools_numtranslate_9 = SialanTools::tr("9");
+}
+
+void SialanTools::debug(const QVariant &var)
+{
+    qDebug() << var;
+}
+
+QString SialanTools::fileName(const QString &path)
+{
+    return QFileInfo(path).baseName();
+}
+
+QString SialanTools::fileSuffix(const QString &path)
+{
+    return QFileInfo(path).suffix().toLower();
+}
+
+QString SialanTools::readText(const QString &path)
+{
+    QFile file(path);
+    if( !file.open(QFile::ReadOnly) )
+        return QString();
+
+    QString res = QString::fromUtf8(file.readAll());
+    return res;
+}
+
+QString SialanTools::qtVersion()
+{
+    return qVersion();
+}
+
+QString SialanTools::aboutSialan()
+{
+    return tr("Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.") + "\n\n" +
+           tr("By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.");
+}
+
+void SialanTools::deleteItemDelay(QObject *o, int ms)
+{
+    QTimer::singleShot( ms, o, SLOT(deleteLater()) );
+}
+
+qreal SialanTools::colorHue(const QColor &clr)
+{
+    return clr.hue()/255.0;
+}
+
+qreal SialanTools::colorLightness(const QColor &clr)
+{
+    return 2*clr.lightness()/255.0 - 1;
+}
+
+qreal SialanTools::colorSaturation(const QColor &clr)
+{
+    return clr.saturation()/255.0;
 }
 
 QString SialanTools::translateNumbers(QString input)
@@ -66,6 +138,22 @@ QString SialanTools::passToMd5(const QString &pass)
         return QString();
 
     return QCryptographicHash::hash( pass.toUtf8(), QCryptographicHash::Md5 ).toHex();
+}
+
+void SialanTools::setProperty(QObject *obj, const QString &property, const QVariant &v)
+{
+    if( !obj || property.isEmpty() )
+        return;
+
+    obj->setProperty( property.toUtf8(), v );
+}
+
+QVariant SialanTools::property(QObject *obj, const QString &property)
+{
+    if( !obj || property.isEmpty() )
+        return QVariant();
+
+    return obj->property(property.toUtf8());
 }
 
 Qt::LayoutDirection SialanTools::directionOf(const QString &str)
@@ -193,9 +281,10 @@ QVariant SialanTools::call(QObject *obj, const QString &member, Qt::ConnectionTy
         break;
     }
 
-    Q_UNUSED(done)
-
     QVariant result;
+    if( !done )
+        return result;
+
     if( type == QMetaType::Void )
         result = QVariant();
     else

@@ -64,7 +64,7 @@ Rectangle {
             textsColor: dt_chooser.textsColor
             color: dt_chooser.color
             visible: dateVisible
-            nameMethodObject: Calendar
+            nameMethodObject: CalendarConv
             nameMethodFunction: "monthName"
 
             Component.onCompleted: {

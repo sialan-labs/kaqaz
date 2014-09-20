@@ -41,6 +41,7 @@ Item {
         interval: 1000
         repeat: false
         onTriggered: {
+            BackHandler.pushHandler(move_wait,move_wait.back)
             kaqaz.setProfilePath( move_wait.path )
             success()
         }
@@ -56,7 +57,7 @@ Item {
     }
 
     function back(){
-        return true
+        return false
     }
 
     function success(){
@@ -81,6 +82,5 @@ Item {
     Component.onCompleted: {
         initTranslations()
         move_start.start()
-        backHandler = move_wait
     }
 }

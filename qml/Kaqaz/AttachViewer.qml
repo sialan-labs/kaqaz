@@ -200,7 +200,7 @@ Item {
             }
 
             Component.onCompleted: {
-                var suffix = kaqaz.fileSuffix(item.path)
+                var suffix = Tools.fileSuffix(item.path)
                 var component;
                 if( suffix === "jpg" || suffix === "jpeg" || suffix === "png" )
                     component = Qt.createComponent("ImageViewer.qml");

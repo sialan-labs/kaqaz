@@ -23,7 +23,6 @@ Item {
     id: restore_wait
 
     property string path
-    property bool backIsActive: true
     property variant progress
 
     Connections {
@@ -58,7 +57,7 @@ Item {
                 passItem.passGiven.connect(restore_wait.passGiven)
             }
             else
-                restore_wait.backIsActive = false
+                BackHandler.pushHandler(restore_wait,restore_wait.back)
         }
     }
 
@@ -81,14 +80,14 @@ Item {
             if( !ok )
                 restore_wait.failed()
             else
-                restore_wait.backIsActive = false
+                BackHandler.pushHandler(restore_wait,restore_wait.back)
         }
 
         property string password
     }
 
     function back(){
-        return !backIsActive
+        return false
     }
 
     function passGiven( pass ){
@@ -118,7 +117,6 @@ Item {
     Component.onCompleted: {
         initTranslations()
         restore_start.start()
-        backHandler = restore_wait
         progress = newModernProgressBar()
     }
 

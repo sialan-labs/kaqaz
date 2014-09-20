@@ -170,7 +170,7 @@ Item {
 
             var bkps = kaqaz.findBackups()
             for( var i=0; i<bkps.length; i++ )
-                model.append({"name": kaqaz.fileName(bkps[i]), "adrs": bkps[i]})
+                model.append({"name": Tools.fileName(bkps[i]), "adrs": bkps[i]})
 
             focus = true
         }

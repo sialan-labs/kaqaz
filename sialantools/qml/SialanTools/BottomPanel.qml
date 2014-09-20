@@ -35,6 +35,11 @@ Rectangle {
     }
 
     onItemChanged: {
+        if( item )
+            BackHandler.pushHandler(bpanel,bpanel.hide)
+        else
+            BackHandler.removeHandler(bpanel)
+
         if( privates.oldItem )
             privates.oldItem.destroy()
 

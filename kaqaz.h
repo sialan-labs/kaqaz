@@ -65,8 +65,6 @@ public:
     Q_INVOKABLE bool proBuild() const;
 
     Q_INVOKABLE static QString version();
-    Q_INVOKABLE static QString qtVersion();
-    Q_INVOKABLE static QString aboutSialan();
 
     Q_INVOKABLE void deleteFileIfPossible( const QString & id );
 
@@ -81,8 +79,6 @@ public:
 
     Q_INVOKABLE static Database *database();
     Q_INVOKABLE static QSettings *settings();
-    Q_INVOKABLE static QScreen *screen();
-    Q_INVOKABLE static QObject *screenObj();
 
     Q_INVOKABLE void refreshSettings();
 
@@ -107,13 +103,7 @@ public:
     static QString resourcePathAbs();
     static QString resourcePath();
 
-    Q_INVOKABLE static QString passToMd5( const QString & pass );
-
     Q_INVOKABLE QStringList findBackups();
-
-    Q_INVOKABLE QString fileName( const QString & path );
-    Q_INVOKABLE QString fileSuffix( const QString & path );
-    Q_INVOKABLE QString readText( const QString & path );
 
     Q_INVOKABLE void setTutorialCompleted( bool stt );
     Q_INVOKABLE bool isTutorialCompleted() const;
@@ -151,19 +141,10 @@ public:
 
     Q_INVOKABLE Qt::LayoutDirection languageDirection();
 
-    Q_INVOKABLE void deleteItemDelay( QObject *o, int ms );
-
     Q_INVOKABLE QStringList getOpenFileNames( const QString & title, const QString & filter );
 
     Q_INVOKABLE QByteArray encrypt( const QByteArray & ar, const QString & password );
     Q_INVOKABLE QByteArray decrypt( const QByteArray & ar, const QString & password );
-
-    Q_INVOKABLE qreal colorHue( const QColor & clr );
-    Q_INVOKABLE qreal colorLightness( const QColor & clr );
-    Q_INVOKABLE qreal colorSaturation( const QColor & clr );
-
-    Q_INVOKABLE void setProperty( QObject *obj, const QString & property, const QVariant & v );
-    Q_INVOKABLE QVariant property( QObject *obj, const QString & property );
 
 public slots:
     bool start();
