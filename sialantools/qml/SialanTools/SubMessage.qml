@@ -27,6 +27,7 @@ Item {
 
     property variant item
     property alias source: blur.source
+    property alias backgroundColor: backgroud.color
 
     Behavior on opacity {
         NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
@@ -61,6 +62,7 @@ Item {
     }
 
     Rectangle {
+        id: backgroud
         anchors.fill: parent
         color: "#66ffffff"
     }

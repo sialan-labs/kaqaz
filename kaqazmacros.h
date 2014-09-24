@@ -39,15 +39,6 @@
 #define LOG_PATH    SialanApplication::logPath()
 #define CONFIG_PATH SialanApplication::confsPath()
 
-#if defined(Q_OS_ANDROID) || defined(Q_OS_IOS) || defined(Q_OS_WINPHONE)
-#define TOUCH_DEVICE
-#else
-#define DESKTOP_DEVICE
-#ifdef Q_OS_LINUX
-#define DESKTOP_LINUX
-#endif
-#endif
-
 #define DROPBOX_APP_KEY    "js992omoncolisd"
 #define DROPBOX_APP_SECRET "csojevx79okw1dh"
 

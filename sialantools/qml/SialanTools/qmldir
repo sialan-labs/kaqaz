@@ -29,3 +29,6 @@ Header 1.0 Header.qml
 Picker 1.0 Picker.qml
 ShareDialog 1.0 ShareDialog.qml
 Tooltip 1.0 Tooltip.qml
+CradleBits 1.0 CradleBits.qml
+CradleIndicator 1.0 CradleIndicator.qml
+PasteButton 1.0 PasteButton.qml

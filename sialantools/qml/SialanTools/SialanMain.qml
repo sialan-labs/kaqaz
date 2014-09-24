@@ -29,6 +29,8 @@ Rectangle {
     property alias pointerDialog: point_dialog
     property alias tooltip: tool_tip
 
+    property color subMessageBackground: "#66ffffff"
+
     property variant mainFrame
     property SubMessage subMessage
 
@@ -72,6 +74,7 @@ Rectangle {
         var msg = sub_msg_component.createObject(View.root);
         msg.source = mainFrame
         msg.item = item
+        subMessage = msg
         return item
     }
 
@@ -124,6 +127,7 @@ Rectangle {
 
         SubMessage {
             id: sub_msg
+            backgroundColor: subMessageBackground
         }
     }
 

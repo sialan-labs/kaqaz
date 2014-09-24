@@ -52,7 +52,8 @@ SOURCES += \
     sialantools/sialanapplication.cpp \
     sialantools/sialancalendarconvertercore.cpp \
     sialantools/sialancalendarconverter.cpp \
-    sialantools/sialanbackhandler.cpp
+    sialantools/sialanbackhandler.cpp \
+    sialantools/sialansysteminfo.cpp
 
 HEADERS += \
     sialantools/sialandevices.h \
@@ -66,7 +67,8 @@ HEADERS += \
     sialantools/sialan_macros.h \
     sialantools/sialancalendarconvertercore.h \
     sialantools/sialancalendarconverter.h \
-    sialantools/sialanbackhandler.h
+    sialantools/sialanbackhandler.h \
+    sialantools/sialansysteminfo.h
 
 OTHER_FILES += \
     sialantools/android-build/src/org/sialan/android/SialanActivity.java \

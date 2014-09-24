@@ -33,6 +33,8 @@
         <file>qml/SialanTools/Tooltip.qml</file>
         <file>qml/SialanTools/BottomPanel.qml</file>
         <file>qml/SialanTools/PasteButton.qml</file>
+        <file>qml/SialanTools/CradleBits.qml</file>
+        <file>qml/SialanTools/CradleIndicator.qml</file>
         <file>qml/SialanTools/qmldir</file>
         <file>qml/SialanTools/files/pointer-dialog.png</file>
         <file>qml/SialanTools/files/pointer.png</file>
@@ -41,5 +43,6 @@
         <file>qml/SialanTools/files/back_light_32.png</file>
         <file>qml/SialanTools/files/back_light_64.png</file>
         <file>qml/SialanTools/files/warning.png</file>
+
     </qresource>
 </RCC>
