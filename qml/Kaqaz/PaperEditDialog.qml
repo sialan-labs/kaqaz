@@ -265,7 +265,7 @@ Item {
                         if( block_timer.running )
                             return
                         if( delete_frame.confirm ) {
-                            item.deleteRequest()
+                            item.paperItem.deleteRequest()
                             hideSubMessage()
                         }
 

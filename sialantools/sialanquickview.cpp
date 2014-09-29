@@ -32,6 +32,9 @@
 #ifdef DESKTOP_LINUX
 #include "sialanmimeapps.h"
 #endif
+#ifdef SIALAN_SENSORS
+#include "sialansensors.h"
+#endif
 
 #include <QPointer>
 #include <QtQml>
@@ -79,6 +82,9 @@ SialanQuickView::SialanQuickView(int options, QWindow *parent) :
     qmlRegisterType<SialanListObject>("SialanTools", 1,0, "ListObject");
 #ifdef DESKTOP_LINUX
     qmlRegisterType<SialanMimeApps>("SialanTools", 1,0, "MimeApps");
+#endif
+#ifdef SIALAN_SENSORS
+    qmlRegisterType<SialanSensors>("SialanTools", 1,0, "SialanSensors");
 #endif
 
     setResizeMode(QQuickView::SizeRootObjectToView);

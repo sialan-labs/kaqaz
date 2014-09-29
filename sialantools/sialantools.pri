@@ -41,6 +41,12 @@ ios {
 QML_IMPORT_PATH = \
     sialantools/qml/
 
+contains(QT,sensors) {
+    DEFINES += SIALAN_SENSORS
+    SOURCES += sialantools/sialansensors.cpp
+    HEADERS += sialantools/sialansensors.h
+}
+
 SOURCES += \
     sialantools/sialandevices.cpp \
     sialantools/sialanqtlogger.cpp \
