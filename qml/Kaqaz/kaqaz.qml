@@ -115,7 +115,7 @@ SialanMain {
     PositionSource {
         id: positioning
         updateInterval: 10000
-        active: kaqaz.positioning && kaqaz.proBuild
+        active: kaqaz.positioning
     }
 
     ProgressBar {

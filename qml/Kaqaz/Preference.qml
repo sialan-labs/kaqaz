@@ -97,9 +97,7 @@ Item {
 
         function refresh(){
             model.clear()
-            if( kaqaz.proBuild ) {
-                model.append({"name": qsTr("General Settings"), "cmd": "GeneralSettings.qml"})
-            }
+            model.append({"name": qsTr("General Settings"), "cmd": "GeneralSettings.qml"})
             model.append({"name": qsTr("Languages"), "cmd": "LanguageSelector.qml"})
             model.append({"name": qsTr("Calendars"), "cmd": "Calendar.qml" })
             model.append({"name": qsTr("Label Manager"), "cmd": "GroupManager.qml" })
@@ -107,8 +105,8 @@ Item {
 //            if( Devices.isTouchDevice )
 //                model.append({"name": qsTr("Data Location"), "cmd": "ProfileSettings.qml" })
             model.append({"name": qsTr("Synchronization"), "cmd": "Synchronization.qml" })
+            model.append({"name": qsTr("Security"), "cmd": "Security.qml" })
             if( kaqaz.proBuild ) {
-                model.append({"name": qsTr("Security"), "cmd": "Security.qml" })
                 model.append({"name": qsTr("States"), "cmd": "StateDialog.qml" })
             }
             model.append({"name": qsTr("About Kaqaz"), "cmd": "About.qml" })
