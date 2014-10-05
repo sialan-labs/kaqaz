@@ -1,4 +1,34 @@
-kaqaz (1.1.1) unstable; urgency=low
+kaqaz (1.1.1ubuntu5) trusty; urgency=medium
+
+  * Add Missed positioning and multimedia qt modules to control file.
+
+ -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 19:04:58 +0330
+
+kaqaz (1.1.1ubuntu4) trusty; urgency=medium
+
+  * Missed qt5-default in control file.
+
+ -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 18:58:10 +0330
+
+kaqaz (1.1.1ubuntu3) trusty; urgency=medium
+
+  * Bugfix on dh build rule.
+
+ -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 18:49:33 +0330
+
+kaqaz (1.1.1ubuntu2) trusty; urgency=medium
+
+  * Fix problem on qmake on build system.
+
+ -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 18:35:30 +0330
+
+kaqaz (1.1.1ubuntu1) trusty; urgency=medium
+
+  * Install location changed to /opt/extras.ubuntu.com
+
+ -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 18:26:00 +0330
+
+kaqaz (1.1.1) trusty; urgency=low
 
   * Initial Release.
 

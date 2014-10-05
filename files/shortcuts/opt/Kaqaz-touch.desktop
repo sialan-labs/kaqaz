@@ -1,9 +1,9 @@
 [Desktop Entry]
 Categories=Office;
 Comment=Kaqaz, Note, Text, Touch
-Exec=/opt/org.sialan.kaqaz/Kaqaz --touch
+Exec=kaqaz --touch
 GenericName=Kaqaz Touch
-Icon=/opt/org.sialan.kaqaz/icons/kaqaz.png
+Icon=/opt/extras.ubuntu.com/org.sialan.kaqaz/icons/kaqaz.png
 Name=Kaqaz Touch
 NoDisplay=false
 StartupNotify=true
