@@ -166,19 +166,27 @@ isEmpty(PREFIX) {
     PREFIX = /usr
 }
 
+contains(BUILD_MODE,opt) {
+    BIN_PATH = $$PREFIX/
+    SHARES_PATH = $$PREFIX/
+} else {
+    BIN_PATH = $$PREFIX/bin
+    SHARES_PATH = $$PREFIX/share/kaqaz/
+}
+
 android {
 } else {
 linux {
     target = $$TARGET
-    target.path = $$PREFIX/bin
+    target.path = $$BIN_PATH
     translations.files = $$TRANSLATIONS
-    translations.path = $$PREFIX/share/kaqaz/files/translations
+    translations.path = $$SHARES_PATH/files/translations
     fonts.files = $$FONTS
-    fonts.path = $$PREFIX/share/kaqaz/fonts/
+    fonts.path = $$SHARES_PATH/fonts/
     icons.files = files/icons/kaqaz.png
-    icons.path = $$PREFIX/share/kaqaz/icons/
+    icons.path = $$SHARES_PATH/icons/
     faenza.files = files/FaenzaFlattr
-    faenza.path = $$PREFIX/share/kaqaz/files/icons/
+    faenza.path = $$SHARES_PATH/files/icons/
     desktopFile.files = files/shortcuts/Kaqaz.desktop
     desktopFile.path = $$PREFIX/share/applications
     desktopTouchFile.files = files/shortcuts/Kaqaz-touch.desktop
