@@ -1,0 +1,15 @@
+[Desktop Entry]
+Categories=Office;
+Comment=Kaqaz, Note, Text, Touch
+Exec=/opt/org.sialan.kaqaz/Kaqaz --touch
+GenericName=Kaqaz Touch
+Icon=/opt/org.sialan.kaqaz/icons/kaqaz.png
+Name=Kaqaz Touch
+NoDisplay=false
+StartupNotify=true
+Terminal=0
+TerminalOptions=
+Type=Application
+Version=1.1.1
+X-KDE-SubstituteUID=false
+X-KDE-Username=

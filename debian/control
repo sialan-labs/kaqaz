@@ -2,54 +2,39 @@ Source: kaqaz
 Section: Utilities
 Priority: optional
 Maintainer: Sialan Labs <contact@sialan.org>
-Build-Depends: debhelper (>= 8.0.0)
-Standards-Version: 1.1.1
+Uploaders: Sialan Labs <contact@sialan.org>
+Build-Depends:
+ debhelper (>= 8.0.0),
+ g++ (>= 4:4.7),
+ gcc (>= 4:4.7),
+ qtbase5-dev (>= 5.2.0),
+ libqt5sql5-sqlite (>= 5.2.0),
+ libqt5multimediaquick-p5 (>= 5.2.0),
+ libqt5multimedia5-plugins (>= 5.2.0),
+ libqt5multimedia5 (>= 5.2.0),
+ libqt5qml5 (>= 5.2.0),
+ libqt5qml-graphicaleffects (>= 5.2.0),
+ libqt5qml-quickcontrols (>= 5.2.0),
+ qtdeclarative5-dev (>= 5.2.0),
+ libqt5quick5 (>= 5.2.0),
+ libqt5sensors5-dev (>= 5.2.0),
+ libqt5positioning5 (>= 5.2.0)
+Standards-Version: 3.9.4
 Homepage: http://labs.sialan.org
 Vcs-Git: git@github.com:sialan-labs/kaqaz.git
 Vcs-Browser: https://github.com/sialan-labs/kaqaz/
 
 Package: kaqaz
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5sensors5-dev (>= 5.2.0), libqt5sensors5 (>= 5.2.0), libqt5qml-quickcontrols (>= 5.2.0), libqt5qml-graphicaleffects (>= 5.2.0), libqt5positioning5 (>= 5.2.0), libqt5multimedia5 (>= 5.2.0), libqt5multimedia5-plugins (>= 5.2.0), libqt5multimediaquick-p5 (>= 5.2.0), libqt5sql5-sqlite (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), qtdeclarative5-qtsensors-plugin (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), qtdeclarative5-qtpositioning-plugin (>= 5.2.0), dconf-tools
 Description: Kaqaz modern note manager
- Kaqaz is not just an application. It is more like a theory; a theory on which much time has been spent in Sialan Lab to be designed and implemented. 
- 
- Theory of Kaqaz states that imagine you have a lot of blank papers before you. You can write anything on them you would like without any concerns about how it is going to be kept or what will happen to them. You stick a label on them and then attach as many files as you’d like to them. 
- Do not worry about where or how it is going to be put and kept and clear your mind from all such concerns. Turn over the present paper and go to next one and only think about writing. Write on and on and fill in thousands of papers with a distress-free mind. A thousand is a small number for Kaqaz. 
- During all this time Kaqaz saves and keeps all your writings in its storage (cache).
- Say goodbye to crowded lists of hundreds of writings. You can read and edit your writings whenever you want. Just ask Kaqaz what you want. 
- If you are looking for a specific word, say it to Kaqaz via the search tool. If you are looking for a specific label, choose the label from the sidebar and if you are looking for some writings modified on a specific date, type the date on the history tool.
- Surely many more new, smart and advanced tools will be published for expressing your demands to Kaqaz. But for now we are at the beginning and only these tools are presented. 
- Kaqaz tries to sugar-coat writing for you through its simple theory and simplicity of user interface. It tries to make you concentrate only on writing so as to motivate you to write more. 
- The goal of Kaqaz is to inspire people to write diaries, short stories, daily notes, purchase lists, information, etc. as easily and best as possible and more importantly to enjoy writing. 
- Kaqaz attempts to support the habit of writing and motivate the users to write in today’s mechanized world. 
- We hope to develop and strengthen the theory of Kaqaz by relying on your support in order to satisfy you even more, leading to a development in the field of Note Manager Applications. 
- 
- Leading Team of Sialan Science/Research Lab 
- 
- Remarks on Kaqaz Application: 
- Kaqaz is a modern note manager published by Sialan Lab. The focus of Kaqaz is on a better user interface so that the user can feel a different experience with it. Kaqaz has tried to provide faster access bars and present a convenient interface for the users to have an enjoyable time while working on it. Kaqaz is a free and open source software written under GPLv3 license. 
- Note: Kaqaz has employed modern technologies such as AndroidAPI-19, Open GL-3, etc. But it does not signify that it won’t run on older devices; however, it may face some problems on your device. Before purchasing the professional edition of Kaqaz, please download the lite edition from Google Play as a trial for ensuring of its proper performance. 
- To synchronize your notes with your other devices such as your laptop, you can download the desktop version from Sialan’s site. This application supports Windows, Linux, Mac and Android at the moment. iOS and Windows phone versions of this application will be published soon. 
- 
- Some note-worthy features of Kaqaz: 
- - Notes management by means of labels and categories
- - Sorting notes by day
- - A user-interface different from other applications 
- - Advance and Smart searching in notes
- - To-Do papers
- - Backing up notes
- - Encrypted synchronization via Dropbox among all your devices 
- - Attaching photo to any note
- - Supporting left-to-right and right-to-left languages 
- - Sharing papers with other applications
- - Assigning password for protecting notes
- - Settings page for paper appearance 
- - Attach map to note informations
- - Capability of running on all operating systems (Android, Windows, Linux, Mac and soon other operating systems)
- - Kaqaz is a free software.
- - Attaching photos, audio files and folders to any note
- - Status and statistics page for notes
- - Synchronizing files
-
-
+ Kaqaz is not just an application. It is more like a theory; 
+ a theory on which much time has been spent in Sialan Lab to 
+ be designed and implemented. 
+ Kaqaz is a modern note manager published by Sialan Lab. 
+ The focus of Kaqaz is on a better user interface so that the 
+ user can feel a different experience with it. Kaqaz has 
+ tried to provide faster access bars and present a convenient 
+ interface for the users to have an enjoyable time while 
+ working on it. Kaqaz is a free and open source software 
+ written under GPLv3 license. 

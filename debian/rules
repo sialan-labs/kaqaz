@@ -13,6 +13,8 @@ override_dh_auto_configure:
 
 override_dh_install:
 	dh_install
+	mkdir -p debian/kaqaz/usr/bin
+	ln -s /opt/org.sialan.kaqaz/Kaqaz debian/kaqaz/usr/bin/kaqaz
 
 override_dh_clean:
 	dh_clean

@@ -70,7 +70,8 @@ int SialanDesktopTools::desktopSession() const
 
 QColor SialanDesktopTools::titleBarColor() const
 {
-    switch( desktopSession() )
+    const int dsession = desktopSession();
+    switch( dsession )
     {
     case SialanDesktopTools::Mac:
         return QColor("#C8C8C8");
@@ -108,7 +109,10 @@ QColor SialanDesktopTools::titleBarColor() const
             if( sres == "adwaita" )
                 res = new QColor("#EDEDED");
             else
-                res = new QColor("#E5E5E5");
+            if( dsession == SialanDesktopTools::Unity )
+                res = new QColor("#403F3A");
+            else
+                res = new QColor("#EDEDED");
         }
 
         return *res;
@@ -116,7 +120,7 @@ QColor SialanDesktopTools::titleBarColor() const
         break;
     }
 
-    return QColor("#E5E5E5");
+    return QColor("#EDEDED");
 }
 
 QColor SialanDesktopTools::titleBarTransparentColor() const
@@ -128,7 +132,8 @@ QColor SialanDesktopTools::titleBarTransparentColor() const
 
 QColor SialanDesktopTools::titleBarTextColor() const
 {
-    switch( desktopSession() )
+    const int dsession = desktopSession();
+    switch( dsession )
     {
     case SialanDesktopTools::Mac:
         return QColor("#333333");
@@ -165,6 +170,9 @@ QColor SialanDesktopTools::titleBarTextColor() const
             else
             if( sres == "adwaita" )
                 res = new QColor("#333333");
+            else
+            if( dsession == SialanDesktopTools::Unity )
+                res = new QColor("#eeeeee");
             else
                 res = new QColor("#333333");
         }

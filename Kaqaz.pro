@@ -169,9 +169,13 @@ isEmpty(PREFIX) {
 contains(BUILD_MODE,opt) {
     BIN_PATH = $$PREFIX/
     SHARES_PATH = $$PREFIX/
+    APPDESK_PATH = /usr/
+    APPDESK_SRC = files/shortcuts/opt/
 } else {
     BIN_PATH = $$PREFIX/bin
     SHARES_PATH = $$PREFIX/share/kaqaz/
+    APPDESK_PATH = $$PREFIX/
+    APPDESK_SRC = files/shortcuts/normal/
 }
 
 android {
@@ -187,10 +191,10 @@ linux {
     icons.path = $$SHARES_PATH/icons/
     faenza.files = files/FaenzaFlattr
     faenza.path = $$SHARES_PATH/files/icons/
-    desktopFile.files = files/shortcuts/Kaqaz.desktop
-    desktopFile.path = $$PREFIX/share/applications
-    desktopTouchFile.files = files/shortcuts/Kaqaz-touch.desktop
-    desktopTouchFile.path = $$PREFIX/share/applications
+    desktopFile.files = $$APPDESK_SRC/Kaqaz.desktop
+    desktopFile.path = $$APPDESK_PATH/share/applications
+    desktopTouchFile.files = $$APPDESK_SRC/Kaqaz-touch.desktop
+    desktopTouchFile.path = $$APPDESK_PATH/share/applications
 
     INSTALLS = target fonts translations icons desktopFile desktopTouchFile faenza
 }
