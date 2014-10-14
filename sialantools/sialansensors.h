@@ -30,9 +30,9 @@ class SialanSensors : public QObject
     Q_PROPERTY(qreal ay READ ay NOTIFY accChanged)
     Q_PROPERTY(qreal az READ az NOTIFY accChanged)
 
-    Q_PROPERTY(qreal gx READ gx NOTIFY accChanged)
-    Q_PROPERTY(qreal gy READ gy NOTIFY accChanged)
-    Q_PROPERTY(qreal gz READ gz NOTIFY accChanged)
+    Q_PROPERTY(qreal gx READ gx NOTIFY grvChanged)
+    Q_PROPERTY(qreal gy READ gy NOTIFY grvChanged)
+    Q_PROPERTY(qreal gz READ gz NOTIFY grvChanged)
 
     Q_PROPERTY(qreal angleX READ angleX NOTIFY angleChanged)
     Q_PROPERTY(qreal angleY READ angleY NOTIFY angleChanged)
@@ -121,7 +121,7 @@ private slots:
 
 private:
     class ProVector rebase(const class ProVector & v );
-    class SialanSensorsResItem analizeItem(qreal x, qreal y , bool ambiguity = false);
+    class SialanSensorsResItem analizeItem(qreal x, qreal y , qreal z, bool ambiguity = false);
 
 protected:
     void timerEvent( QTimerEvent *e );
