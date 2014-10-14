@@ -40,6 +40,7 @@
 #include <QtQml>
 #include <QQmlEngine>
 #include <QQmlContext>
+#include <QQuickItem>
 
 class SialanQuickViewPrivate
 {
@@ -55,6 +56,8 @@ public:
 #endif
     SialanCalendarConverter *calendar;
     SialanBackHandler *back_handler;
+
+    QPointer<QQuickItem> root;
 
     bool fullscreen;
 };
@@ -174,6 +177,23 @@ qreal SialanQuickView::navigationBarHeight() const
         return 0;
 
     return p->devices->transparentNavigationBar() && !fullscreen()? 45*p->devices->density() : 0;
+}
+
+void SialanQuickView::setRoot(QQuickItem *root)
+{
+    if( p->root == root )
+        return;
+
+    p->root = root;
+    emit rootChanged();
+}
+
+QQuickItem *SialanQuickView::root() const
+{
+    if( p->root )
+        return p->root;
+
+    return rootObject();
 }
 
 void SialanQuickView::init_options()

@@ -21,6 +21,7 @@
 
 #include <QQuickItem>
 #include <QStringList>
+#include <QGeoCoordinate>
 
 class Kaqaz;
 class PaperManagerPrivate;
@@ -65,7 +66,7 @@ public:
     int currentIndex();
 
 public slots:
-    void setAdvanceSearch( const QString & keyword, const QDate & startDate, const QDate & endDate, const QTime & startTime, const QTime & endTime, int group, int domain );
+    void setAdvanceSearch( const QString & keyword, const QDate & startDate, const QDate & endDate, const QTime & startTime, const QTime & endTime, int group, int domain, const QGeoCoordinate & geo );
 
 signals:
     void rootChanged();

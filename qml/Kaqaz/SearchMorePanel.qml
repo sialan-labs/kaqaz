@@ -35,6 +35,8 @@ Item {
     property date endTime
     property bool timeIsSet: false
 
+    property variant geo
+
     property string domainSelectedText
     property int paperType: Enums.AllPapers
     property int selectedGid: -1
@@ -184,6 +186,32 @@ Item {
         }
 
         MenuButton {
+            id: geo_select_btn
+            height: 50*physicalPlatformScale
+            width: column.width
+            normalColor: "#00000000"
+            highlightColor: "#4098bf"
+            textColor: press? "#ffffff" : "#4098bf"
+            textFont.weight: Font.Normal
+            textFont.pixelSize: 13*fontsScale
+            textFont.bold: false
+            text: qsTr("Geo Location Domain")
+            onClicked: {
+                showItem(geo_domain_component)
+            }
+
+            Text {
+                id: geo_text
+                anchors.verticalCenter: parent.verticalCenter
+                x: geo_select_btn.textAlignment==Text.AlignRight? 10*physicalPlatformScale : parent.width-width-10*physicalPlatformScale
+                font.pixelSize: 8*fontsScale
+                font.family: SApp.globalFontFamily
+                color: "#333333"
+                text: more_panel.geo? more_panel.geo.latitude + ", " + more_panel.geo.longitude : ""
+            }
+        }
+
+        MenuButton {
             id: group_btn
             height: 50*physicalPlatformScale
             width: column.width
@@ -307,6 +335,23 @@ Item {
 
             function done() {
                 more_panel.selectedGid = selectedGid
+            }
+        }
+    }
+
+    Component {
+        id: geo_domain_component
+        SearchGeoDomain {
+            id: geo_domain_item
+            height: pages_frame.height
+            onDomainChanged: {
+                more_panel.startPage = true
+                item_destroy_timer.restart()
+                done()
+            }
+
+            function done() {
+                more_panel.geo = domain
             }
         }
     }

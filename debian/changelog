@@ -1,3 +1,9 @@
+kaqaz (1.1.1ubuntu6) trusty; urgency=medium
+
+  * Move app files to /opt/sialan/kaqaz
+
+ -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 20:17:02 +0330
+
 kaqaz (1.1.1ubuntu5) trusty; urgency=medium
 
   * Add Missed positioning and multimedia qt modules to control file.

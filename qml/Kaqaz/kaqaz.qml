@@ -30,7 +30,7 @@ SialanMain {
 
     property real fixedHeight: height-View.statusBarHeight-View.navigationBarHeight
 
-    property int globalInputMethodHints: kaqaz.keyboardPredicative? Qt.ImhNoPredictiveText : Qt.ImhNone
+    property int globalInputMethodHints: kaqaz.keyboardPredicative? Qt.ImhNone : Qt.ImhNoPredictiveText
 
     property bool rotated: true
     property alias touchToBack: main.touchToBack
@@ -184,13 +184,12 @@ SialanMain {
     }
 
     function showHelper(){
-        var component = Qt.createComponent("Helper.qml");
-        var item = component.createObject(kaqaz_root);
+        var item = helper_compoennt.createObject(kaqaz_root);
         return item
     }
 
     function showSplash(){
-        return showSubMessage(Qt.createComponent("StartSplash.qml"))
+        return showSubMessage(start_splash_component)
     }
 
     function search(){
@@ -261,6 +260,18 @@ SialanMain {
     Component {
         id: paper_cmpnt
         PaperItem {
+        }
+    }
+
+    Component {
+        id: start_splash_component
+        StartSplash {
+        }
+    }
+
+    Component {
+        id: helper_compoennt
+        Helper{
         }
     }
 

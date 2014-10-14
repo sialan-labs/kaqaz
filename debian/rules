@@ -8,12 +8,12 @@
 	dh $@ 
 
 override_dh_auto_configure:
-	dh_auto_configure -- PREFIX=/opt/extras.ubuntu.com/org.sialan.kaqaz/ BUILD_MODE=opt BUILD_TYPE=pro
+	dh_auto_configure -- PREFIX=/opt/sialan/kaqaz BUILD_MODE=opt BUILD_TYPE=pro
 
 override_dh_install:
 	dh_install
 	mkdir -p debian/kaqaz/usr/bin
-	ln -s /opt/extras.ubuntu.com/org.sialan.kaqaz/Kaqaz debian/kaqaz/usr/bin/kaqaz
+	ln -s /opt/sialan/kaqaz/Kaqaz debian/kaqaz/usr/bin/kaqaz
 
 override_dh_clean:
 	dh_clean

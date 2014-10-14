@@ -123,4 +123,5 @@ Item {
     }
 
     Component.onCompleted: initTranslations()
+    Component.onDestruction: main.focus = true
 }

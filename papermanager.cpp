@@ -32,6 +32,7 @@
 #include <QFontMetricsF>
 #include <QList>
 #include <QGuiApplication>
+#include <QGeoCoordinate>
 
 class PaperManagerPrivate
 {
@@ -47,6 +48,7 @@ public:
     QDate advsearch_endDate;
     QTime advsearch_startTime;
     QTime advsearch_endTime;
+    QGeoCoordinate advsearch_geo;
     int advsearch_group;
     int advsearch_domain;
 
@@ -126,7 +128,7 @@ void PaperManager::setRoot(int id)
         p->papers = Kaqaz::database()->advanceSearch(p->advsearch_keyword, p->advsearch_startDate,
                                                      p->advsearch_endDate, p->advsearch_startTime,
                                                      p->advsearch_endTime, p->advsearch_group,
-                                                     p->advsearch_domain);
+                                                     p->advsearch_domain , p->advsearch_geo);
         break;
 
     case Date:
@@ -373,7 +375,7 @@ QString PaperManager::keyword() const
     return p->keyword;
 }
 
-void PaperManager::setAdvanceSearch(const QString &keyword, const QDate &startDate, const QDate &endDate, const QTime &startTime, const QTime &endTime, int group, int domain)
+void PaperManager::setAdvanceSearch(const QString &keyword, const QDate &startDate, const QDate &endDate, const QTime &startTime, const QTime &endTime, int group, int domain, const QGeoCoordinate &geo)
 {
     p->advsearch_keyword = keyword;
     p->advsearch_startDate = startDate;
@@ -382,6 +384,7 @@ void PaperManager::setAdvanceSearch(const QString &keyword, const QDate &startDa
     p->advsearch_endTime = endTime;
     p->advsearch_group = group;
     p->advsearch_domain = domain;
+    p->advsearch_geo = geo;
 }
 
 QQuickItem *PaperManager::currentPaper() const

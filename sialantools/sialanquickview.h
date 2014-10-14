@@ -38,7 +38,7 @@ class SialanQuickView : public QQuickView
     Q_PROPERTY(qreal statusBarHeight READ statusBarHeight NOTIFY statusBarHeightChanged)
     Q_PROPERTY(qreal navigationBarHeight READ navigationBarHeight NOTIFY navigationBarHeightChanged)
 
-    Q_PROPERTY(QQuickItem* root READ rootObject NOTIFY fakeSignal)
+    Q_PROPERTY(QQuickItem* root READ root WRITE setRoot NOTIFY rootChanged)
 
 public:
     enum OptionsFlag {
@@ -73,10 +73,14 @@ public:
     qreal statusBarHeight() const;
     qreal navigationBarHeight() const;
 
+    void setRoot( QQuickItem *root );
+    QQuickItem *root() const;
+
 signals:
     void fullscreenChanged();
     void statusBarHeightChanged();
     void navigationBarHeightChanged();
+    void rootChanged();
     void fakeSignal();
 
 private slots:

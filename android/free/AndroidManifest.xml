@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<manifest android:versionCode="12" package="org.sialan.kaqaz.free" android:installLocation="auto" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.1.1">
+<manifest android:versionCode="13" package="org.sialan.kaqaz.free" android:installLocation="auto" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.1.2">
     <application android:name="org.sialan.android.SialanApplication" android:label="Kaqaz" android:icon="@drawable/icon">
         <activity android:name="org.sialan.android.SialanActivity" android:launchMode="singleInstance" android:label="Kaqaz" android:screenOrientation="portrait" android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation">
             <intent-filter>

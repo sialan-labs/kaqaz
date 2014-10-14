@@ -136,4 +136,8 @@ Rectangle {
         ModernProgressBar {
         }
     }
+
+    Component.onCompleted: {
+        View.root = smain
+    }
 }

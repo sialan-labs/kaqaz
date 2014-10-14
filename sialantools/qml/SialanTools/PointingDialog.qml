@@ -29,6 +29,13 @@ Item {
     property real extraX: 0
     property real extraY: 7*physicalPlatformScale
 
+    onVisibleChanged: {
+        if( visible )
+            BackHandler.pushHandler(p_dialog,p_dialog.hide)
+        else
+            BackHandler.removeHandler(p_dialog)
+    }
+
     MouseArea {
         anchors.fill: parent
         onClicked: p_dialog.hide()
@@ -77,11 +84,6 @@ Item {
     }
 
     onItemChanged: {
-        if( item )
-            BackHandler.pushHandler(p_dialog,p_dialog.hide)
-        else
-            BackHandler.removeHandler(p_dialog)
-
         if( !item )
             return
         if( privates.lastItem )
@@ -132,4 +134,6 @@ Item {
         back.y = back.y - extraY
         back.opacity = 0
     }
+
+    Component.onDestruction: BackHandler.removeHandler(p_dialog)
 }

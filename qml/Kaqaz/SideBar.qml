@@ -35,8 +35,8 @@ AnimationItem {
 
     signal itemSelected( int id, int type )
 
-    onVisibleChanged: {
-        if( visible )
+    onVisibledChanged: {
+        if( visibled )
             BackHandler.pushHandler(side_panel,side_panel.hidePanel)
         else
             BackHandler.removeHandler(side_panel)
