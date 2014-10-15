@@ -296,7 +296,7 @@ void SmartIODBoxSingle::pushGroups(const QString & path, qint64 revision)
     END_FNC
 }
 
-void SmartIODBoxSingle::fetchGroups(const QString & path, qint64 revision)
+void SmartIODBoxSingle::fetchGroups(const QString & path, qint64 revision, qint64 current_revision)
 {
     BEGIN_FNC
 
@@ -307,7 +307,7 @@ void SmartIODBoxSingle::fetchGroups(const QString & path, qint64 revision)
     if( data.isEmpty() )
         END_FNC
 
-    CALL_CORE( groupsFetched, data, revision );
+    CALL_CORE( groupsFetched, data, revision, current_revision );
     p->loop->exec();
 
     emit revisionChanged( GROUPS_SYNC_KEY, revision );
@@ -523,7 +523,7 @@ void SmartIODBoxSingleCore::groupsPushed(quint64 revision)
     emit finished();
 }
 
-void SmartIODBoxSingleCore::groupsFetched(const QByteArray &data, quint64 revision)
+void SmartIODBoxSingleCore::groupsFetched(const QByteArray &data, quint64 revision, qint64 current_revision)
 {
     if( data.isEmpty() )
     {
@@ -569,6 +569,9 @@ void SmartIODBoxSingleCore::groupsFetched(const QByteArray &data, quint64 revisi
     mainBuffer.close();
 
     db->setRevision( GROUPS_SYNC_KEY, revision );
+    if( current_revision == -1 )
+        db->setRevision( GROUPS_SYNC_KEY, -1 );
+
     db->setSignalBlocker(false);
     emit finished();
 }

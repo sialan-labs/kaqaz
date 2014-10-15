@@ -46,7 +46,7 @@ public:
     void fetchPaper(const QString & uuid, qint64 revision, const QString & path);
 
     void pushGroups( const QString & path, qint64 revision );
-    void fetchGroups( const QString & path, qint64 revision );
+    void fetchGroups( const QString & path, qint64 revision, qint64 current_revision );
 
     void setDeleted(const QString & path );
 

@@ -1275,6 +1275,11 @@ void Database::update_database()
 
         setValue("version","4");
     }
+    if( value("version") == "4" )
+    {
+        setRevision(GROUPS_SYNC_KEY,-1);
+        setValue("version","5");
+    }
 }
 
 PaperClass Database::getPaper(int id)

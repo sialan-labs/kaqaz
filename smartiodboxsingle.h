@@ -46,7 +46,7 @@ public slots:
     void fetchPaper(const QString & uuid, qint64 revision, const QString & path);
 
     void pushGroups( const QString & path, qint64 revision );
-    void fetchGroups( const QString & path, qint64 revision );
+    void fetchGroups( const QString & path, qint64 revision, qint64 current_revision );
 
     void setDeleted(const QString & path );
 
@@ -90,7 +90,7 @@ public slots:
     void paperFetched(const QString & id, const QByteArray &data, quint64 revision );
 
     void groupsPushed( quint64 revision );
-    void groupsFetched(const QByteArray &data, quint64 revision );
+    void groupsFetched(const QByteArray &data, quint64 revision, qint64 current_revision );
 
     void paperDeleted( const QString & id );
 

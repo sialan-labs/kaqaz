@@ -52,6 +52,7 @@ public:
     QString path;
     QString dest;
     qint64 revision;
+    qint64 current_revision;
     Command command;
 };
 
@@ -184,11 +185,12 @@ void SmartIODBox::pushGroups(const QString &path, qint64 revision)
     APPEND_TO_QUEUE( cmd );
 }
 
-void SmartIODBox::fetchGroups(const QString &path, qint64 revision)
+void SmartIODBox::fetchGroups(const QString &path, qint64 revision, qint64 current_revision)
 {
     SmartIODBoxCommand cmd;
     cmd.path = path;
     cmd.revision = revision;
+    cmd.current_revision = current_revision;
     cmd.command = SmartIODBoxCommand::fetchGroups;
 
     APPEND_TO_QUEUE( cmd );
@@ -251,7 +253,7 @@ bool SmartIODBox::nextCommand()
         QMetaObject::invokeMethod(s, "pushGroups", Qt::QueuedConnection, Q_ARG(QString,cmd.path), Q_ARG(qint64,cmd.revision) );
         break;
     case SmartIODBoxCommand::fetchGroups:
-        QMetaObject::invokeMethod(s, "fetchGroups", Qt::QueuedConnection, Q_ARG(QString,cmd.path), Q_ARG(qint64,cmd.revision) );
+        QMetaObject::invokeMethod(s, "fetchGroups", Qt::QueuedConnection, Q_ARG(QString,cmd.path), Q_ARG(qint64,cmd.revision), Q_ARG(qint64,cmd.current_revision) );
         break;
     case SmartIODBoxCommand::setDeleted:
         QMetaObject::invokeMethod(s, "setDeleted", Qt::QueuedConnection, Q_ARG(QString,cmd.path) );

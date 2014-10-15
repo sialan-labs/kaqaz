@@ -17,10 +17,11 @@
 */
 
 #define ROOT_FOLDER      "/sandbox/"
-#define PAPERS_FOLDER    ROOT_FOLDER"2.0/papers/"
-#define ATTACHS_FOLDER   ROOT_FOLDER"2.0/attachs/"
-#define GROUPS_FILE      ROOT_FOLDER"2.0/groups"
-#define REVISIONS_FILE   ROOT_FOLDER"2.0/revisions"
+#define SYNC_VERSION     "2.0"
+#define PAPERS_FOLDER    ROOT_FOLDER SYNC_VERSION "/papers/"
+#define ATTACHS_FOLDER   ROOT_FOLDER SYNC_VERSION "/attachs/"
+#define GROUPS_FILE      ROOT_FOLDER SYNC_VERSION "/groups"
+#define REVISIONS_FILE   ROOT_FOLDER SYNC_VERSION "/revisions"
 #define MAXIMUM_UPLOAD   10
 #define FILE_MAX_SIZE_MB 20
 #define UPDATE_KEY       "DBOX_UPDATE"
@@ -178,7 +179,9 @@ void KaqazDropBox::localListUpdated()
         const SyncItem & item = syncHash.value(GROUPS_SYNC_KEY);
         qint64 revision = fetchRevision(GROUPS_SYNC_KEY);
         if( revision > item.revision && (item.revision != -1 || item.last_revision == -1) )
-            p->smartio->fetchGroups(GROUPS_FILE,revision);
+        {
+            p->smartio->fetchGroups(GROUPS_FILE, revision, item.revision );
+        }
     }
 
     QHash<QString,QDropboxFileInfo> papersIndexes;
