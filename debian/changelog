@@ -1,3 +1,15 @@
+kaqaz (1.1.2ubuntu1) trusty; urgency=medium
+
+  * Back system bugfix and improvment
+  * Fix word suggestion on/off button bug
+  * Search on papers by user current geo location
+  * Update Translations
+  * Fix start splash bug
+  * Update sialan tools
+  * Many other improvments and bugfixes
+
+ -- Sialan Labs <contact@sialan.org>  Wed, 15 Oct 2014 23:17:43 +0330
+
 kaqaz (1.1.1ubuntu6) trusty; urgency=medium
 
   * Move app files to /opt/sialan/kaqaz
