@@ -196,7 +196,6 @@ Item {
             textFont.pixelSize: 13*fontsScale
             textFont.bold: false
             text: qsTr("Geo Location Domain")
-            visible: kaqaz.proBuild
             onClicked: {
                 showItem(geo_domain_component)
             }

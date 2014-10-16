@@ -82,7 +82,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: parent.height/2 - itemsHeight/2
+        height: parent.height/2 - 1.3*itemsHeight/2
         clip: true
         color: parent.color
 
@@ -102,7 +102,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        height: parent.height/2 - itemsHeight/2
+        height: parent.height/2 - 1.3*itemsHeight/2
         clip: true
         color: parent.color
 

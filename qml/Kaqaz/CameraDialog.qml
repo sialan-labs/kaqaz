@@ -119,7 +119,7 @@ Item {
         function refresh(){
             model.clear()
 
-            var files = kaqaz.findEntryFiles(kaqaz.cameraLocation(),["*.jpg","*.JPEG","*.jpeg","*.JPG"])
+            var files = kaqaz.findEntryFiles(Devices.cameraLocation,["*.jpg","*.JPEG","*.jpeg","*.JPG"])
             for( var i=0; i<20 && i<files.length ; i++ )
                 model.append({"name": Tools.fileName(files[i]), "adrs": files[i]})
 

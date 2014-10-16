@@ -198,7 +198,7 @@ Item {
                 textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Update Location")
-                visible: !map_image.visible && kaqaz.proBuild
+                visible: !map_image.visible
                 onClicked: {
                     database.setPaperLocation(item.paperItem.paperItem,positioning.position.coordinate)
                 }
@@ -210,7 +210,7 @@ Item {
                 height: width/2
                 latitude: edit_dialog.latitude
                 longitude: edit_dialog.longitude
-                visible: !unknown && kaqaz.proBuild
+                visible: !unknown
                 paperId: edit_dialog.item? edit_dialog.item.paperItem.paperItem : 0
             }
 

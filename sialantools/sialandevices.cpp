@@ -20,6 +20,7 @@
 #define WINDOWS_DEFAULT_DPI 96
 
 #include "sialandevices.h"
+#include "sialanapplication.h"
 
 #ifdef Q_OS_ANDROID
 #include "sialanjavalayer.h"
@@ -311,7 +312,7 @@ bool SialanDevices::keyboard() const
 
 QString SialanDevices::cameraLocation() const
 {
-    return "/sdcard/DCIM";
+    return SialanApplication::cameraPath();
 }
 
 QString SialanDevices::picturesLocation() const

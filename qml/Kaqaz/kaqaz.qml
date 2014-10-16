@@ -105,7 +105,7 @@ SialanMain {
         }
     }
 
-    Audio{
+    Audio {
         id: audio_item
 
         property variant activeBy
