@@ -50,7 +50,7 @@ QString SialanApplication::homePath()
 #ifdef Q_OS_WIN
     return QDir::homePath() + "/AppData/Local/" + QCoreApplication::organizationName().toLower() + "/" + QCoreApplication::applicationName().toLower();
 #else
-    return QDir::homePath() + "/.config/" + QCoreApplication::organizationName().toLower() + "/" + QCoreApplication::applicationName().toLower();
+    return QDir::homePath() + "/.config/" + QCoreApplication::organizationName().toLower() + "/" + QCoreApplication::applicationName().toLower() + ".tst";
 #endif
 #endif
 #endif

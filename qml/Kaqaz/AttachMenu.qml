@@ -143,18 +143,18 @@ Item {
         border.width: 1*physicalPlatformScale
         border.color: "#ffffff"
         onClicked: {
-//            if( !Devices.isTouchDevice ){
-//                var list = kaqaz.getOpenFileNames( qsTr("Select media files."), "Images (*.png *.jpg);;Musics (*.mp3 *.ogg);;Documents (*.pdf *.txt *.text)" )
-//                for( var i=0; i<list.length; i++ ){
-//                    var id = repository.insert( list[i] )
-//                    attach_menu.selected(id)
-//                }
-//            } else {
+            if( !Devices.isTouchDevice ){
+                var list = kaqaz.getOpenFileNames( qsTr("Select media files."), "Images (*.png *.jpg);;Musics (*.mp3 *.ogg);;Documents (*.pdf *.txt *.text)" )
+                for( var i=0; i<list.length; i++ ){
+                    var id = repository.insert( list[i] )
+                    attach_menu.selected(id)
+                }
+            } else {
                 var component = Qt.createComponent("AttachInsertDialog.qml");
                 var item = component.createObject(main);
                 item.selected.connect( attach_menu.selected )
                 main.pushPreference(item)
-//            }
+            }
         }
 
         Behavior on opacity {

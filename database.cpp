@@ -245,7 +245,7 @@ QList<int> Database::papersOf(const QDate &date)
         int id    = record.value(0).toInt();
         int ctime = record.value(1).toInt();
 
-        result.insert( ctime, id );
+        result.insertMulti( ctime, id );
     }
 
     return result.values();
@@ -269,7 +269,7 @@ QList<int> Database::papersOf(int group_id)
         int ctime = record.value(1).toInt();
         int cdate = record.value(2).toInt();
 
-        result.insert( cdate*3600*25+ctime, id );
+        result.insertMulti( cdate*3600*25+ctime, id );
     }
 
     return result.values();
@@ -292,7 +292,7 @@ QList<int> Database::papers()
         int ctime = record.value(1).toInt();
         int cdate = record.value(2).toInt();
 
-        result.insert( -(cdate*3600*25+ctime), id );
+        result.insertMulti( -(cdate*3600*25+ctime), id );
     }
 
     return result.values();
