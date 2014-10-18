@@ -88,11 +88,7 @@ Item {
         repeat: false
         interval: 500
         onTriggered: {
-            var component = Qt.createComponent("AttachViewer.qml");
-            var item = component.createObject(gallery_frame);
-            item.paperItem = attach_menu.paperItem
-            item.paper = attach_menu.paper
-
+            var item = attach_viewer_component.createObject(gallery_frame);
             gallery_frame.item = item
         }
     }
@@ -150,15 +146,33 @@ Item {
                     attach_menu.selected(id)
                 }
             } else {
-                var component = Qt.createComponent("AttachInsertDialog.qml");
-                var item = component.createObject(main);
-                item.selected.connect( attach_menu.selected )
+                var item = attach_insert_component.createObject(main);
                 main.pushPreference(item)
             }
         }
 
         Behavior on opacity {
             NumberAnimation { easing.type: Easing.OutCubic; duration: 250 }
+        }
+    }
+
+    Button{
+        id: canvas_btn
+        anchors.verticalCenter: toggle_btn.verticalCenter
+        anchors.right: attach_btn.left
+        anchors.rightMargin: 10*physicalPlatformScale
+        width: 30*physicalPlatformScale
+        normalColor: "#00000000"
+        radius: 2*physicalPlatformScale
+        visible: attach_menu.opened
+        opacity: canvas_btn.opacity
+        icon: "files/pen.png"
+        iconHeight: 16*physicalPlatformScale
+        border.width: 1*physicalPlatformScale
+        border.color: "#ffffff"
+        onClicked: {
+            var item = canvas_component.createObject(main);
+            main.showDialog(item)
         }
     }
 
@@ -221,6 +235,31 @@ Item {
 
         property real root_x: 0
         property real root_y: 0
+    }
+
+    Component {
+        id: attach_insert_component
+        AttachInsertDialog {
+            onSelected: attach_menu.selected(repID)
+        }
+    }
+
+    Component {
+        id: canvas_component
+        KaqazCanvas {
+            onDone: {
+                var id = repository.insert( fileName )
+                attach_menu.selected(id)
+            }
+        }
+    }
+
+    Component {
+        id: attach_viewer_component
+        AttachViewer {
+            paperItem: attach_menu.paperItem
+            paper: attach_menu.paper
+        }
     }
 
     function selected( id ){

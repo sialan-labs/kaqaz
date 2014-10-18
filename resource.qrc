@@ -167,5 +167,7 @@
         <file>qml/Kaqaz/files/ui-classic-scshot.png</file>
         <file>qml/Kaqaz/files/ui-touch-scshot.png</file>
         <file>qml/Kaqaz/SearchGeoDomain.qml</file>
+        <file>qml/Kaqaz/KaqazCanvas.qml</file>
+        <file>qml/Kaqaz/files/pen.png</file>
     </qresource>
 </RCC>
