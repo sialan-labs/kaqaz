@@ -11,7 +11,7 @@ Rectangle {
     visible: width > 100*physicalPlatformScale
 
     property alias source: desat.source
-    property real magScale: width/200*physicalPlatformScale
+    property real magScale: width/300*physicalPlatformScale
 
     signal positionChanged( real mouseX, real mouseY )
 

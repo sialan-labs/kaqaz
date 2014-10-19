@@ -179,5 +179,6 @@
         <file>qml/Kaqaz/files/pen-width.png</file>
         <file>qml/Kaqaz/KaqazCanvasPenMode.qml</file>
         <file>qml/Kaqaz/KaqazCanvasMaginifier.qml</file>
+        <file>qml/Kaqaz/KaqazTouchPointHandler.qml</file>
     </qresource>
 </RCC>

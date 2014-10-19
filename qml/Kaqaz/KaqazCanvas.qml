@@ -73,28 +73,13 @@ Item {
             touchPoints: [
                 TouchPoint {
                     id: point1
-                    onXChanged: {
-                        if( !point2.pressed )
-                            update_timer.startTimer(x,y,true,false)
-
-                        tarea.calculateMagSize()
-                    }
-                    onYChanged: {
-                        if( !point2.pressed )
-                            update_timer.startTimer(x,y,false,true)
-
-                        tarea.calculateMagSize()
-                    }
-                    onPressedChanged: {
-                        if( !point2.pressed )
-                            update_timer.startTimer(-1,-1,true,true)
-                    }
+                    onPressedChanged: if( !point2.pressed ) updatePos(-1,-1)
                 },
                 TouchPoint {
                     id: point2
                     onXChanged: tarea.calculateMagSize()
                     onYChanged: tarea.calculateMagSize()
-                    onPressedChanged: update_timer.startTimer(-1,-1,true,true)
+                    onPressedChanged: updatePos(-1,-1)
                 }
             ]
 
@@ -110,6 +95,20 @@ Item {
                 mag.y = y - (w - Math.abs(point1.y-point2.y))/2
                 mag.width = w
             }
+
+            KaqazTouchPointHandler {
+                id: handler1
+                touchPoint: point1
+                onPositionChanged: {
+                    if( point2.pressed )
+                        return
+
+                    if( !mag.visible )
+                        updatePos(x,y)
+
+                    tarea.calculateMagSize()
+                }
+            }
         }
 
         KaqazCanvasMaginifier {
@@ -117,48 +116,6 @@ Item {
             source: canvas
             width: 0
             onPositionChanged: updatePos(mouseX,mouseY)
-        }
-    }
-
-    Timer {
-        id: update_timer
-        interval: 1
-        onTriggered: {
-            updatePos(bx,by)
-            x_avlb = false
-            y_avlb = false
-        }
-
-        property real bx
-        property real by
-
-        property bool x_avlb: false
-        property bool y_avlb: false
-
-        function startTimer(x,y,xSignal,ySignal) {
-            bx = x
-            by = y
-
-            if( (xSignal && x_avlb) || (ySignal && y_avlb) ) {
-                updatePos(bx,by)
-                x_avlb = false
-                y_avlb = false
-                stop()
-            }
-
-            if( xSignal )
-                x_avlb = true
-            if( ySignal )
-                y_avlb = true
-
-            if( x_avlb && y_avlb ) {
-                updatePos(bx,by)
-                x_avlb = false
-                y_avlb = false
-                stop()
-            } else {
-                restart()
-            }
         }
     }
 
@@ -229,17 +186,6 @@ Item {
             onClicked: {
                 var pos = mapToItem(kaqaz_root,0,0)
                 showPointDialog( pen_mode_component.createObject(tools), pos.x - width, pos.y, 250*physicalPlatformScale, 200*physicalPlatformScale )
-            }
-        }
-
-        Button {
-            width: 40*physicalPlatformScale
-            height: width
-            anchors.verticalCenter: parent.verticalCenter
-            normalColor: "#44ffffff"
-            icon: "files/pen-magnifier.png"
-            iconHeight: 24*physicalPlatformScale
-            onClicked: {
             }
         }
     }
