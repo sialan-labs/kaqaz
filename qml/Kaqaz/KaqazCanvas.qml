@@ -12,12 +12,6 @@ Item {
         id: list
     }
 
-    Timer {
-        id: update_timer
-        interval: 50
-        onTriggered: canvas.requestPaint()
-    }
-
     PaperBackground {
         id: paper_back
         anchors.left: parent.left
@@ -36,12 +30,15 @@ Item {
             id: canvas
             anchors.fill: parent
             renderStrategy: Canvas.Threaded
+            smooth: true
 
             property bool newLine: false
             property bool endLine: false
             property bool start: false
 
-            property color strokeColor: "#333333"
+            property color strokeColor: "black"
+            property real strokeWidth: 1
+            property int penMode: 0
 
             onPaint: {
                 var ctx = canvas.getContext("2d");
@@ -51,69 +48,116 @@ Item {
                     start = true
                     return
                 }
-                if( list.isEmpty() && !endLine )
-                    return
 
-                ctx.strokeStyle = strokeColor
-                ctx.lineWidth = 3*physicalPlatformScale
-
-                if( endLine ) {
-                    endLine = false
-                    while( !list.isEmpty() )
-                        list.takeFirst()
-
-                    return
-                }
-
-                var item = list.takeFirst()
-                if( newLine ) {
-                    ctx.beginPath()
-                    ctx.moveTo(item.x,item.y)
-                    newLine = false
-                }
+                ctx.strokeStyle = penMode==2? paper_back.color : strokeColor
+                ctx.lineWidth = penMode==2? 20*physicalPlatformScale : strokeWidth*physicalPlatformScale
 
                 while( !list.isEmpty() ) {
-                    item = list.takeFirst()
-                    ctx.lineTo(item.x,item.y)
+                    var item = list.takeFirst()
+                    ctx.beginPath()
+                    ctx.moveTo(item.x0,item.y0)
+                    ctx.lineTo(item.x1,item.y1)
+                    ctx.stroke()
+                    newLine = false
                 }
-
-                ctx.stroke()
             }
 
             Component.onCompleted: requestPaint()
         }
 
-        MouseArea {
+        MultiPointTouchArea {
+            id: tarea
             anchors.fill: parent
+            minimumTouchPoints: 1
+            maximumTouchPoints: 2
+            touchPoints: [
+                TouchPoint {
+                    id: point1
+                    onXChanged: {
+                        if( !point2.pressed )
+                            update_timer.startTimer(x,y,true,false)
 
-            property int count: 0
-            onMouseXChanged: {
-                var item = {"x":mouseX,"y":mouseY}
-                if( list.last() == item )
+                        tarea.calculateMagSize()
+                    }
+                    onYChanged: {
+                        if( !point2.pressed )
+                            update_timer.startTimer(x,y,false,true)
+
+                        tarea.calculateMagSize()
+                    }
+                    onPressedChanged: {
+                        if( !point2.pressed )
+                            update_timer.startTimer(-1,-1,true,true)
+                    }
+                },
+                TouchPoint {
+                    id: point2
+                    onXChanged: tarea.calculateMagSize()
+                    onYChanged: tarea.calculateMagSize()
+                    onPressedChanged: update_timer.startTimer(-1,-1,true,true)
+                }
+            ]
+
+            function calculateMagSize() {
+                if( !point1.pressed || !point2.pressed )
                     return
 
-                list.append(item)
-                if( !update_timer.running )
-                    update_timer.start()
-            }
-            onMouseYChanged: {
-                var item = {"x":mouseX,"y":mouseY}
-                if( list.last() == item )
-                    return
+                var w = Math.pow( Math.pow(point1.x-point2.x,2)+Math.pow(point1.y-point2.y,2), 0.5 )
+                var x = point1.x<point2.x? point1.x : point2.x
+                var y = (point1.y<point2.y? point1.y : point2.y)
 
-                list.append(item)
-                if( !update_timer.running )
-                    update_timer.start()
+                mag.x = x - (w - Math.abs(point1.x-point2.x))/2
+                mag.y = y - (w - Math.abs(point1.y-point2.y))/2
+                mag.width = w
             }
-            onPressed: {
-                canvas.newLine = true
-                canvas.endLine = false
+        }
+
+        KaqazCanvasMaginifier {
+            id: mag
+            source: canvas
+            width: 0
+            onPositionChanged: updatePos(mouseX,mouseY)
+        }
+    }
+
+    Timer {
+        id: update_timer
+        interval: 1
+        onTriggered: {
+            updatePos(bx,by)
+            x_avlb = false
+            y_avlb = false
+        }
+
+        property real bx
+        property real by
+
+        property bool x_avlb: false
+        property bool y_avlb: false
+
+        function startTimer(x,y,xSignal,ySignal) {
+            bx = x
+            by = y
+
+            if( (xSignal && x_avlb) || (ySignal && y_avlb) ) {
+                updatePos(bx,by)
+                x_avlb = false
+                y_avlb = false
+                stop()
             }
-            onReleased: {
-                update_timer.stop()
-                canvas.endLine = true
-                canvas.newLine = false
-                canvas.requestPaint()
+
+            if( xSignal )
+                x_avlb = true
+            if( ySignal )
+                y_avlb = true
+
+            if( x_avlb && y_avlb ) {
+                updatePos(bx,by)
+                x_avlb = false
+                y_avlb = false
+                stop()
+            } else {
+                restart()
             }
         }
     }
@@ -147,39 +191,102 @@ Item {
             }
         }
 
-        Component.onCompleted: {
-            color_component.createObject( tools, {"color": "#333333"} )
-            color_component.createObject( tools, {"color": "dodgerblue"} )
-            color_component.createObject( tools, {"color": "gold"} )
-            color_component.createObject( tools, {"color": "purple"} )
-            color_component.createObject( tools, {"color": "darkgreen"} )
+        Button {
+            width: 40*physicalPlatformScale
+            height: width
+            anchors.verticalCenter: parent.verticalCenter
+            icon: "files/pen-color.png"
+            iconHeight: 24*physicalPlatformScale
+            border.color: canvas.strokeColor
+            border.width: 1*physicalPlatformScale
+            normalColor: "#44ffffff"
+            onClicked: {
+                var pos = mapToItem(kaqaz_root,0,0)
+                showPointDialog( color_component.createObject(tools), pos.x - width, pos.y, 250*physicalPlatformScale, 300*physicalPlatformScale )
+            }
+        }
+
+        Button {
+            width: 40*physicalPlatformScale
+            height: width
+            anchors.verticalCenter: parent.verticalCenter
+            icon: "files/pen-width.png"
+            iconHeight: 24*physicalPlatformScale
+            normalColor: "#44ffffff"
+            onClicked: {
+                var pos = mapToItem(kaqaz_root,0,0)
+                showPointDialog( pen_width_component.createObject(tools), pos.x - width, pos.y, 250*physicalPlatformScale, 300*physicalPlatformScale )
+            }
+        }
+
+        Button {
+            width: 40*physicalPlatformScale
+            height: width
+            anchors.verticalCenter: parent.verticalCenter
+            normalColor: "#44ffffff"
+            icon: "files/pen-mode.png"
+            iconHeight: 24*physicalPlatformScale
+            onClicked: {
+                var pos = mapToItem(kaqaz_root,0,0)
+                showPointDialog( pen_mode_component.createObject(tools), pos.x - width, pos.y, 250*physicalPlatformScale, 200*physicalPlatformScale )
+            }
+        }
+
+        Button {
+            width: 40*physicalPlatformScale
+            height: width
+            anchors.verticalCenter: parent.verticalCenter
+            normalColor: "#44ffffff"
+            icon: "files/pen-magnifier.png"
+            iconHeight: 24*physicalPlatformScale
+            onClicked: {
+            }
         }
     }
 
     Component {
         id: color_component
-        Item {
-            width: 48*physicalPlatformScale
-            height: width
-            anchors.verticalCenter: parent.verticalCenter
+        KaqazCanvasColorList {
+            selectedColor: canvas.strokeColor
+            onSelectedColorChanged: canvas.strokeColor = selectedColor
+        }
+    }
 
-            property alias color: rectangle.color
+    Component {
+        id: pen_width_component
+        KaqazCanvasPenWidth {
+            selectedPen: canvas.strokeWidth
+            onSelectedPenChanged: canvas.strokeWidth = selectedPen
+        }
+    }
 
-            Rectangle{
-                id: rectangle
-                anchors.fill: parent
-                radius: width/2
-                border.color: canvas.strokeColor==color? "#aaaaaa" : "#ffffff"
-                border.width: 3*physicalPlatformScale
+    Component {
+        id: pen_mode_component
+        KaqazCanvasPenMode {
+            selectedMode: canvas.penMode
+            onSelectedModeChanged: canvas.penMode = selectedMode
+        }
+    }
+
+    property real startX: -1
+    property real startY: -1
+    function updatePos( mX, mY ) {
+        if( mX == -1 && mY == -1 ) {
+            startX = -1
+            startY = -1
+            return
+        }
+        if( startX == -1 || startY == -1 ) {
+            startX = mX
+            startY = mY
+        } else {
+            list.append(  {"x0":startX,"y0":startY,"x1":mX,"y1":mY} )
+            if( canvas.penMode != 1 ) {
+                startX = mX
+                startY = mY
             }
 
-            MouseArea{
-                id: mousearea
-                anchors.fill: parent
-                onClicked: {
-                    canvas.strokeColor = rectangle.color
-                }
-            }
+            canvas.requestPaint()
         }
     }
 }

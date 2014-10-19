@@ -50,6 +50,9 @@ Item {
         id: back
         scale: 1 - 1/40 + opacity/40
         opacity: 0
+        transformOrigin: mirror? Item.Bottom : Item.Top
+
+        property bool mirror: false
 
         onWidthChanged: refresh()
         onHeightChanged: refresh()
@@ -65,12 +68,12 @@ Item {
         }
 
         Image {
-            source: "files/pointer.png"
+            source: back.mirror? "files/pointer-down.png" : "files/pointer.png"
             width: 42*physicalPlatformScale
             height: 20*physicalPlatformScale
             smooth: true
-            anchors.bottom: border.top
-            anchors.bottomMargin: -11
+            anchors.bottom: back.mirror? border.bottom : border.top
+            anchors.bottomMargin: back.mirror? 10 - 20*physicalPlatformScale : -11
             anchors.left: parent.left
             anchors.leftMargin: width
         }
@@ -111,11 +114,18 @@ Item {
             y = 0
         if( x + width > p_dialog.width )
             width = p_dialog.width - x
-        if( y + height > p_dialog.height )
-            height = p_dialog.height - y
+        if( y > p_dialog.height )
+            height = p_dialog.height
+
+        if( y > p_dialog.height/2 ) {
+            back.mirror = true
+            y = y - height
+        } else {
+            back.mirror = false
+        }
 
         back.x = x - extraX
-        back.y = y - extraY
+        back.y = back.mirror? y + extraY : y - extraY
         back.width = width
         back.height = height
         back.opacity = 0
@@ -131,7 +141,7 @@ Item {
         back.startAnimation()
 
         back.x = back.x - extraX
-        back.y = back.y - extraY
+        back.y = back.mirror? back.y + extraY : back.y - extraY
         back.opacity = 0
     }
 

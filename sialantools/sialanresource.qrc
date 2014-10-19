@@ -43,6 +43,6 @@
         <file>qml/SialanTools/files/back_light_32.png</file>
         <file>qml/SialanTools/files/back_light_64.png</file>
         <file>qml/SialanTools/files/warning.png</file>
-
+        <file>qml/SialanTools/files/pointer-down.png</file>
     </qresource>
 </RCC>

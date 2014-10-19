@@ -169,5 +169,15 @@
         <file>qml/Kaqaz/SearchGeoDomain.qml</file>
         <file>qml/Kaqaz/KaqazCanvas.qml</file>
         <file>qml/Kaqaz/files/pen.png</file>
+        <file>qml/Kaqaz/KaqazCanvasColorList.qml</file>
+        <file>qml/Kaqaz/KaqazCanvasPenWidth.qml</file>
+        <file>qml/Kaqaz/files/back-color.png</file>
+        <file>qml/Kaqaz/files/eraser.png</file>
+        <file>qml/Kaqaz/files/pen-magnifier.png</file>
+        <file>qml/Kaqaz/files/pen-color.png</file>
+        <file>qml/Kaqaz/files/pen-mode.png</file>
+        <file>qml/Kaqaz/files/pen-width.png</file>
+        <file>qml/Kaqaz/KaqazCanvasPenMode.qml</file>
+        <file>qml/Kaqaz/KaqazCanvasMaginifier.qml</file>
     </qresource>
 </RCC>
