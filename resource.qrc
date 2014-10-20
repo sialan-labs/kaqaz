@@ -181,6 +181,9 @@
         <file>qml/Kaqaz/KaqazCanvasMaginifier.qml</file>
         <file>qml/Kaqaz/KaqazTouchPointHandler.qml</file>
         <file>qml/Kaqaz/KaqazCanvasMagnifierLevel.qml</file>
-        <file>KaqazCanvasMagnifierHelper.qml</file>
+        <file>qml/Kaqaz/KaqazCanvasMagnifierHelper.qml</file>
+        <file>qml/Kaqaz/helper/finger-point.png</file>
+        <file>qml/Kaqaz/helper/finger-move-tl.png</file>
+        <file>qml/Kaqaz/helper/finger-move-br.png</file>
     </qresource>
 </RCC>

@@ -59,6 +59,7 @@ ListView {
             horizontalAlignment: Text.AlignLeft
             font.family: SApp.globalFontFamily
             font.pixelSize: 11*fontsScale
+            font.bold: selectedPen == itemWidth
             color: "#333333"
         }
 

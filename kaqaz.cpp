@@ -740,6 +740,17 @@ bool Kaqaz::allPaper() const
     return kaqaz_settings->value("General/AllPaper",true).toBool();
 }
 
+void Kaqaz::setCanvasHelperFirstTime(bool stt)
+{
+    kaqaz_settings->setValue("General/CanvasHelperFirstTime",stt);
+    emit canvasHelperFirstTimeChanged();
+}
+
+bool Kaqaz::canvasHelperFirstTime() const
+{
+    return kaqaz_settings->value("General/CanvasHelperFirstTime",true).toBool();
+}
+
 void Kaqaz::setKeyboardPredicative(bool stt)
 {
     kaqaz_settings->setValue("General/KeyboardPredicative",stt);

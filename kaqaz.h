@@ -34,15 +34,16 @@ class KaqazPrivate;
 class Backuper;
 class Kaqaz : public QObject
 {
-    Q_PROPERTY( bool    proBuild             READ proBuild            NOTIFY proBuildChanged )
-    Q_PROPERTY( bool    groupsCount          READ groupsCount         WRITE setGroupsCount         NOTIFY groupsCountChanged)
-    Q_PROPERTY( bool    allPaper             READ allPaper            WRITE setAllPaper            NOTIFY allPaperChanged)
-    Q_PROPERTY( bool    keyboardPredicative  READ keyboardPredicative WRITE setKeyboardPredicative NOTIFY keyboardPredicativeChanged)
-    Q_PROPERTY( bool    desktopTouchMode     READ desktopTouchMode    WRITE setDesktopTouchMode    NOTIFY desktopTouchModeChanged)
-    Q_PROPERTY( bool    positioning          READ positioning         WRITE setPositioning         NOTIFY positioningChanged)
-    Q_PROPERTY( bool    fullscreen           READ fullscreen          WRITE setFullscreen          NOTIFY fullscreenChanged)
-    Q_PROPERTY( QSize   size                 READ size                WRITE setSize                NOTIFY sizeChanged)
-    Q_PROPERTY( QString resourcePath         READ resourcePath        NOTIFY resourcePathChanged)
+    Q_PROPERTY( bool    proBuild              READ proBuild              NOTIFY proBuildChanged )
+    Q_PROPERTY( bool    groupsCount           READ groupsCount           WRITE setGroupsCount           NOTIFY groupsCountChanged)
+    Q_PROPERTY( bool    allPaper              READ allPaper              WRITE setAllPaper              NOTIFY allPaperChanged)
+    Q_PROPERTY( bool    canvasHelperFirstTime READ canvasHelperFirstTime WRITE setCanvasHelperFirstTime NOTIFY canvasHelperFirstTimeChanged)
+    Q_PROPERTY( bool    keyboardPredicative   READ keyboardPredicative   WRITE setKeyboardPredicative   NOTIFY keyboardPredicativeChanged)
+    Q_PROPERTY( bool    desktopTouchMode      READ desktopTouchMode      WRITE setDesktopTouchMode      NOTIFY desktopTouchModeChanged)
+    Q_PROPERTY( bool    positioning           READ positioning           WRITE setPositioning           NOTIFY positioningChanged)
+    Q_PROPERTY( bool    fullscreen            READ fullscreen            WRITE setFullscreen            NOTIFY fullscreenChanged)
+    Q_PROPERTY( QSize   size                  READ size                  WRITE setSize                  NOTIFY sizeChanged)
+    Q_PROPERTY( QString resourcePath          READ resourcePath          NOTIFY resourcePathChanged)
     Q_PROPERTY( Qt::LayoutDirection  languageDirection  READ languageDirection NOTIFY languageDirectionChanged )
 
     Q_OBJECT
@@ -114,6 +115,9 @@ public:
     void setAllPaper( bool stt );
     bool allPaper() const;
 
+    void setCanvasHelperFirstTime( bool stt );
+    bool canvasHelperFirstTime() const;
+
     void setKeyboardPredicative( bool stt );
     bool keyboardPredicative() const;
 
@@ -156,6 +160,7 @@ public slots:
 signals:
     void groupsCountChanged();
     void allPaperChanged();
+    void canvasHelperFirstTimeChanged();
     void keyboardPredicativeChanged();
     void positioningChanged();
     void resourcePathChanged();

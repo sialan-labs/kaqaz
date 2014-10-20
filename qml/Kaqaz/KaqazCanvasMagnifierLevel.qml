@@ -10,6 +10,8 @@ ListView {
 
     property real selectedLevel: 1
 
+    signal levelSelected( int level )
+
     delegate: Rectangle {
         anchors.right: parent.right
         anchors.left: parent.left
@@ -23,6 +25,7 @@ ListView {
             horizontalAlignment: Text.AlignLeft
             font.family: SApp.globalFontFamily
             font.pixelSize: 11*fontsScale
+            font.bold: selectedLevel == magLevel
             color: "#333333"
         }
 
@@ -32,6 +35,7 @@ ListView {
             hoverEnabled: true
             onClicked: {
                 selectedLevel = magLevel
+                color_list.levelSelected(selectedLevel)
                 hidePointDialog()
             }
         }
@@ -44,7 +48,7 @@ ListView {
 
     Component.onCompleted: {
         model.clear()
-        for( var i=1; i<11; i++ )
+        for( var i=1; i<15; i++ )
             model.append({"magLevel": i})
     }
 }

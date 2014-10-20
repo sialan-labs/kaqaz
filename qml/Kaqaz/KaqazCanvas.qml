@@ -30,6 +30,11 @@ Item {
         id: list
     }
 
+    QtObject {
+        id: privates
+        property variant magHelper
+    }
+
     PaperBackground {
         id: paper_back
         anchors.left: parent.left
@@ -91,7 +96,15 @@ Item {
             touchPoints: [
                 TouchPoint {
                     id: point1
-                    onPressedChanged: if( !point2.pressed ) updatePos(-1,-1)
+                    onPressedChanged: {
+                        if( !point2.pressed )
+                            updatePos(-1,-1)
+                        if( pressed )
+                            mag_size_changed = false
+                        if( !pressed && !mag_size_changed )
+                            mag.width = 0
+                    }
+                    property bool mag_size_changed: false
                 },
                 TouchPoint {
                     id: point2
@@ -112,6 +125,7 @@ Item {
                 mag.x = x - (w - Math.abs(point1.x-point2.x))/2
                 mag.y = y - (w - Math.abs(point1.y-point2.y))/2
                 mag.width = w
+                point1.mag_size_changed = true
             }
 
             KaqazTouchPointHandler {
@@ -134,6 +148,12 @@ Item {
             source: canvas
             width: 0
             onPositionChanged: updatePos(mouseX,mouseY)
+            onVisibleChanged: {
+                if( visible && privates.magHelper ) {
+                    privates.magHelper.destroy()
+                    kaqaz.canvasHelperFirstTime = false
+                }
+            }
         }
     }
 
@@ -214,10 +234,20 @@ Item {
             normalColor: "#44ffffff"
             icon: "files/pen-magnifier.png"
             iconHeight: 24*physicalPlatformScale
+            visible: !Devices.isDesktop
             onClicked: {
                 var pos = mapToItem(kaqaz_root,0,0)
                 showPointDialog( mag_level_component.createObject(tools), pos.x - width, pos.y, 250*physicalPlatformScale, 200*physicalPlatformScale )
             }
+        }
+    }
+
+    Component {
+        id: canvas_mhelper_component
+        KaqazCanvasMagnifierHelper {
+            anchors.fill: parent
+            anchors.bottomMargin: -View.navigationBarHeight
+            anchors.topMargin: -View.statusBarHeight
         }
     }
 
@@ -249,7 +279,12 @@ Item {
         id: mag_level_component
         KaqazCanvasMagnifierLevel {
             selectedLevel: mag.magScale
-            onSelectedLevelChanged: mag.magScale = selectedLevel
+            onLevelSelected: {
+                if( kaqaz.canvasHelperFirstTime && !privates.magHelper )
+                    privates.magHelper = canvas_mhelper_component.createObject(kcanvas)
+
+                mag.magScale = level
+            }
         }
     }
 
