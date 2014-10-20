@@ -98,10 +98,15 @@ Item {
                 }
 
                 ctx.strokeStyle = penMode==2? paper_back.color : strokeColor
+                ctx.fillStyle = penMode==2? paper_back.color : strokeColor
                 ctx.lineWidth = penMode==2? 20*physicalPlatformScale : strokeWidth*physicalPlatformScale
 
                 while( !list.isEmpty() ) {
                     var item = list.takeFirst()
+                    ctx.beginPath()
+                    ctx.arc(item.x0, item.y0, strokeWidth/2, 0, 2*Math.PI, true)
+                    ctx.fill()
+
                     ctx.beginPath()
                     ctx.moveTo(item.x0,item.y0)
                     ctx.lineTo(item.x1,item.y1)
@@ -146,8 +151,8 @@ Item {
                 return
 
             var w = Math.pow( Math.pow(point1.x-point2.x,2)+Math.pow(point1.y-point2.y,2), 0.5 )
-            if( w > Math.min(kcanvas.width,kcanvas.height)*3/4 )
-                w = Math.min(kcanvas.width,kcanvas.height)*3/4
+            if( w > Math.min(kcanvas.width,kcanvas.height)*4/5 )
+                w = Math.min(kcanvas.width,kcanvas.height)*4/5
 
             var x = point1.x<point2.x? point1.x : point2.x
             var y = (point1.y<point2.y? point1.y : point2.y)

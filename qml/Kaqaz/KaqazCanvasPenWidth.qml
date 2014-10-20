@@ -81,7 +81,7 @@ ListView {
 
     Component.onCompleted: {
         model.clear()
-        for( var i=1; i<5; i++ )
+        for( var i=1; i<11; i++ )
             model.append({"itemWidth": i})
     }
 }

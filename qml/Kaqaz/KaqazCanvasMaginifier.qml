@@ -26,7 +26,7 @@ Rectangle {
     radius: width/2
     color: "#333333"
     clip: true
-    visible: width > 200*physicalPlatformScale
+    visible: width > 150*physicalPlatformScale
 
     property point sourcePositionMap: Qt.point(0,0)
     property alias source: desat.source
