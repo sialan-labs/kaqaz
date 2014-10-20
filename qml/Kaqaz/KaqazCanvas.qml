@@ -37,14 +37,6 @@ Item {
         property variant magHelper
     }
 
-    PaperBackground {
-        id: paper_back
-        x: fileId.length==0? 0 : parent.width/2 - img.paintedWidth/2
-        y: fileId.length==0? 0 : parent.height/2 - img.paintedHeight/2 - 20*physicalPlatformScale
-        width: fileId.length==0? parent.width : img.paintedWidth
-        height: fileId.length==0? tools.y + 10*physicalPlatformScale : img.paintedHeight
-    }
-
     Image {
         id: img
         anchors.left: parent.left
@@ -67,14 +59,17 @@ Item {
         }
     }
 
-    Item {
-        id: canvas_frame
-        anchors.fill: paper_back
-        anchors.margins: 20*physicalPlatformScale
+    PaperBackground {
+        id: paper_back
+        x: fileId.length==0? 0 : parent.width/2 - img.paintedWidth/2
+        y: fileId.length==0? 0 : parent.height/2 - img.paintedHeight/2 - 20*physicalPlatformScale
+        width: fileId.length==0? parent.width : img.paintedWidth
+        height: fileId.length==0? tools.y + 10*physicalPlatformScale : img.paintedHeight
 
         Canvas {
             id: canvas
             anchors.fill: parent
+            anchors.margins: 20*physicalPlatformScale
             renderStrategy: Canvas.Threaded
             smooth: true
 
@@ -117,72 +112,77 @@ Item {
 
             Component.onCompleted: requestPaint()
         }
+    }
 
-        MultiPointTouchArea {
-            id: tarea
-            anchors.fill: parent
-            minimumTouchPoints: 1
-            maximumTouchPoints: 2
-            touchPoints: [
-                TouchPoint {
-                    id: point1
-                    onPressedChanged: {
-                        if( !point2.pressed )
-                            updatePos(-1,-1)
-                        if( pressed )
-                            mag_size_changed = false
-                        if( !pressed && !mag_size_changed )
-                            mag.width = 0
-                    }
-                    property bool mag_size_changed: false
-                },
-                TouchPoint {
-                    id: point2
-                    onXChanged: tarea.calculateMagSize()
-                    onYChanged: tarea.calculateMagSize()
-                    onPressedChanged: updatePos(-1,-1)
+
+    MultiPointTouchArea {
+        id: tarea
+        anchors.fill: parent
+        minimumTouchPoints: 1
+        maximumTouchPoints: 2
+        touchPoints: [
+            TouchPoint {
+                id: point1
+                onPressedChanged: {
+                    if( !point2.pressed )
+                        updatePos(-1,-1)
+                    if( pressed )
+                        mag_size_changed = false
+                    if( !pressed && !mag_size_changed )
+                        mag.width = 0
                 }
-            ]
-
-            function calculateMagSize() {
-                if( !point1.pressed || !point2.pressed )
-                    return
-
-                var w = Math.pow( Math.pow(point1.x-point2.x,2)+Math.pow(point1.y-point2.y,2), 0.5 )
-                var x = point1.x<point2.x? point1.x : point2.x
-                var y = (point1.y<point2.y? point1.y : point2.y)
-
-                mag.x = x - (w - Math.abs(point1.x-point2.x))/2
-                mag.y = y - (w - Math.abs(point1.y-point2.y))/2
-                mag.width = w
-                point1.mag_size_changed = true
+                property bool mag_size_changed: false
+            },
+            TouchPoint {
+                id: point2
+                onXChanged: tarea.calculateMagSize()
+                onYChanged: tarea.calculateMagSize()
+                onPressedChanged: updatePos(-1,-1)
             }
+        ]
 
-            KaqazTouchPointHandler {
-                id: handler1
-                touchPoint: point1
-                onPositionChanged: {
-                    if( point2.pressed )
-                        return
+        function calculateMagSize() {
+            if( !point1.pressed || !point2.pressed )
+                return
 
-                    if( !mag.visible )
-                        updatePos(x,y)
+            var w = Math.pow( Math.pow(point1.x-point2.x,2)+Math.pow(point1.y-point2.y,2), 0.5 )
+            if( w > Math.min(kcanvas.width,kcanvas.height)*3/4 )
+                w = Math.min(kcanvas.width,kcanvas.height)*3/4
 
-                    tarea.calculateMagSize()
-                }
-            }
+            var x = point1.x<point2.x? point1.x : point2.x
+            var y = (point1.y<point2.y? point1.y : point2.y)
+
+            mag.x = x - (w - Math.abs(point1.x-point2.x))/2
+            mag.y = y - (w - Math.abs(point1.y-point2.y))/2
+            mag.width = w
+            point1.mag_size_changed = true
         }
 
-        KaqazCanvasMaginifier {
-            id: mag
-            source: canvas
-            width: 0
-            onPositionChanged: updatePos(mouseX,mouseY)
-            onVisibleChanged: {
-                if( visible && privates.magHelper ) {
-                    privates.magHelper.destroy()
-                    kaqaz.canvasHelperFirstTime = false
-                }
+        KaqazTouchPointHandler {
+            id: handler1
+            touchPoint: point1
+            onPositionChanged: {
+                if( point2.pressed )
+                    return
+
+                if( !mag.visible )
+                    updatePos(x,y)
+
+                tarea.calculateMagSize()
+            }
+        }
+    }
+
+    KaqazCanvasMaginifier {
+        id: mag
+        source: paper_back
+        width: 0
+        onPositionChanged: updatePos(mouseX,mouseY)
+        sourcePositionMap: Qt.point(paper_back.x,paper_back.y)
+        onVisibleChanged: {
+            if( visible && privates.magHelper ) {
+                privates.magHelper.destroy()
+                kaqaz.canvasHelperFirstTime = false
             }
         }
     }
@@ -326,14 +326,16 @@ Item {
             startY = -1
             return
         }
+
+        var cgpos = mapToItem(canvas,mX,mY)
         if( startX == -1 || startY == -1 ) {
-            startX = mX
-            startY = mY
+            startX = cgpos.x
+            startY = cgpos.y
         } else {
-            list.append(  {"x0":startX,"y0":startY,"x1":mX,"y1":mY} )
+            list.append(  {"x0":startX,"y0":startY,"x1":cgpos.x,"y1":cgpos.y} )
             if( canvas.penMode != 1 ) {
-                startX = mX
-                startY = mY
+                startX = cgpos.x
+                startY = cgpos.y
             }
 
             canvas.requestPaint()

@@ -26,8 +26,9 @@ Rectangle {
     radius: width/2
     color: "#333333"
     clip: true
-    visible: width > 100*physicalPlatformScale
+    visible: width > 200*physicalPlatformScale
 
+    property point sourcePositionMap: Qt.point(0,0)
     property alias source: desat.source
     property real magScale: 6
 
@@ -49,8 +50,8 @@ Rectangle {
                 smooth: true
                 width: source? source.width : 0
                 height: source? source.height : 0
-                x: -kcmag.x
-                y: -kcmag.y
+                x: -kcmag.x + sourcePositionMap.x
+                y: -kcmag.y + sourcePositionMap.y
             }
         }
     }
