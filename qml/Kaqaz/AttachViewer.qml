@@ -190,6 +190,7 @@ Item {
                     radius: 2*physicalPlatformScale
                     normalColor: "#333333"
                     highlightColor: "#222222"
+                    visible: false
                     onClicked: {
                         attach_viewer.editRequest(fileId)
                     }
@@ -216,8 +217,10 @@ Item {
             Component.onCompleted: {
                 var suffix = Tools.fileSuffix(item.path)
                 var component;
-                if( suffix === "jpg" || suffix === "jpeg" || suffix === "png" )
+                if( suffix === "jpg" || suffix === "jpeg" || suffix === "png" ) {
                     component = Qt.createComponent("ImageViewer.qml");
+                    edit_btn.visible = true
+                }
                 else
                 if( suffix === "mp3" || suffix === "wav" || suffix === "ogg" )
                     component = Qt.createComponent("MusicViewer.qml");
