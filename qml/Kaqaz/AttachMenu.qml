@@ -248,8 +248,22 @@ Item {
         id: canvas_component
         KaqazCanvas {
             onDone: {
-                var id = repository.insert( fileName )
-                attach_menu.selected(id)
+                if( fileId.length == 0 ) {
+                    var id = repository.insert( fileName )
+                    attach_menu.selected(id)
+                } else {
+                    var newFileId = repository.insert( fileName )
+                    var filePath  = repository.getPath(fileId)
+
+                    var date = database.fileTime(paperItem,fileId)
+                    database.removeFileFromPaper(paperItem,fileId)
+                    database.addCustomFileToPaper(paperItem,newFileId,date)
+
+                    if( gallery_frame.item ){
+                        gallery_frame.item.paperItem = -1
+                        gallery_frame.item.paperItem = paperItem
+                    }
+                }
             }
         }
     }
@@ -259,6 +273,12 @@ Item {
         AttachViewer {
             paperItem: attach_menu.paperItem
             paper: attach_menu.paper
+            onEditRequest: {
+                var item = canvas_component.createObject(main)
+                item.fileId = fid
+
+                main.showDialog(item)
+            }
         }
     }
 

@@ -32,6 +32,8 @@ Item {
         attach_list.refresh()
     }
 
+    signal editRequest( string fid )
+
     function deleteRequest( it ){
         msg_item.fileID = it.fileId
         showRollerDialog( it.mapToItem(kaqaz_root,0,0).y + it.height/2 - it.paintedHeight/2,
@@ -154,11 +156,11 @@ Item {
                 }
             }
 
-            Item {
+            Row {
                 id: control_frame
                 y: item.imgY + item.imgHeight - height - 2*physicalPlatformScale
                 height: 30*physicalPlatformScale
-                width: height*2 + 10*physicalPlatformScale
+                spacing: 10*physicalPlatformScale
                 anchors.horizontalCenter: item.horizontalCenter
                 visible: attach_list.edited == item.fileId
                 z: 100
@@ -169,7 +171,6 @@ Item {
                     width: height
                     anchors.top: control_frame.top
                     anchors.bottom: control_frame.bottom
-                    anchors.right: control_frame.right
                     radius: 2*physicalPlatformScale
                     normalColor: "#333333"
                     highlightColor: "#222222"
@@ -181,12 +182,25 @@ Item {
                 }
 
                 Button {
+                    id: edit_btn
+                    icon: "files/pen.png"
+                    width: height
+                    anchors.top: control_frame.top
+                    anchors.bottom: control_frame.bottom
+                    radius: 2*physicalPlatformScale
+                    normalColor: "#333333"
+                    highlightColor: "#222222"
+                    onClicked: {
+                        attach_viewer.editRequest(fileId)
+                    }
+                }
+
+                Button {
                     id: delete_btn
                     icon: "files/delete.png"
                     width: height
                     anchors.top: control_frame.top
                     anchors.bottom: control_frame.bottom
-                    anchors.left: control_frame.left
                     radius: 2*physicalPlatformScale
                     normalColor: "#333333"
                     highlightColor: "#222222"

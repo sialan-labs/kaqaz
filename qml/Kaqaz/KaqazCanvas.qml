@@ -26,6 +26,8 @@ Item {
 
     signal done( string fileName )
 
+    property string fileId
+
     ListObject {
         id: list
     }
@@ -37,11 +39,32 @@ Item {
 
     PaperBackground {
         id: paper_back
+        x: fileId.length==0? 0 : parent.width/2 - img.paintedWidth/2
+        y: fileId.length==0? 0 : parent.height/2 - img.paintedHeight/2 - 20*physicalPlatformScale
+        width: fileId.length==0? parent.width : img.paintedWidth
+        height: fileId.length==0? tools.y + 10*physicalPlatformScale : img.paintedHeight
+    }
+
+    Image {
+        id: img
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: tools.top
         anchors.bottomMargin: -10*physicalPlatformScale
+        fillMode: Image.PreserveAspectFit
+        sourceSize: Qt.size(width,height)
+        source: fileId.length!=0? "file://" + repository.getPath(fileId) : ""
+        asynchronous: true
+        visible: false
+        smooth: true
+        onStatusChanged: {
+            if( status != Image.Ready )
+                return
+
+            canvas.load_image = true
+            canvas.requestPaint()
+        }
     }
 
     Item {
@@ -63,12 +86,19 @@ Item {
             property real strokeWidth: 1
             property int penMode: 0
 
+            property bool load_image: false
+
             onPaint: {
                 var ctx = canvas.getContext("2d");
                 if( !start ) {
                     ctx.fillStyle = paper_back.color
                     ctx.fillRect(0,0,width,height)
                     start = true
+                    return
+                }
+                if( load_image ) {
+                    ctx.drawImage( img,0,0, width, height )
+                    load_image = false
                     return
                 }
 

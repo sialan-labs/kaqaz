@@ -744,8 +744,14 @@ bool Database::hasFiles(int id)
 
 void Database::addFileToPaper(int id, const QString &file)
 {
-    BEGIN
     const QDateTime & modified = QDateTime::currentDateTime();
+    addCustomFileToPaper( id, file, QDateTime(QDate(1,1,1),QTime(0,0,0)).secsTo(modified) );
+}
+
+void Database::addCustomFileToPaper(int id, const QString &file, qint64 date)
+{
+    BEGIN
+    const QDateTime & modified = QDateTime(QDate(1,1,1),QTime(0,0,0)).addSecs(date);
 
     QSqlQuery query(p->db);
     query.prepare("INSERT OR REPLACE INTO Files (paper,file,adate,atime) VALUES (:id,:file,:adate,:atime)");
@@ -784,6 +790,25 @@ bool Database::fileContaintOnDatabase(const QString &file)
     query.exec();
 
     return query.next();
+}
+
+qint64 Database::fileTime(int id, const QString &file)
+{
+    QSqlQuery query(p->db);
+    query.prepare("SELECT adate,atime FROM Files WHERE paper=:id AND file=:file");
+    query.bindValue(":id",id);
+    query.bindValue(":file",file);
+    query.exec();
+
+    if( !query.next() )
+        return 0;
+
+    QSqlRecord record = query.record();
+    int adate = record.value(1).toInt();
+    int atime = record.value(2).toInt();
+
+    QDateTime dt = QDateTime( QDate(1,1,1).addDays(adate), QTime(0,0,0).addSecs(atime) );
+    return QDateTime(QDate(1,1,1),QTime(0,0,0)).secsTo(dt);
 }
 
 QList<int> Database::groups()

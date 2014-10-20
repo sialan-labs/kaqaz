@@ -26,7 +26,7 @@
 
 #define DATA_DB_CONNECTION "data_sqlite"
 
-#define KAQAZ_VERSION "1.1.4"
+#define KAQAZ_VERSION "1.2.0"
 
 #define DEMO_PAPERS_LIMIT 20
 

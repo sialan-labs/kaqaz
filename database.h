@@ -91,8 +91,10 @@ public:
     Q_INVOKABLE QStringList paperFiles( int id );
     Q_INVOKABLE bool hasFiles( int id );
     Q_INVOKABLE void addFileToPaper( int id, const QString & file );
+    Q_INVOKABLE void addCustomFileToPaper( int id, const QString & file, qint64 date );
     Q_INVOKABLE void removeFileFromPaper( int id, const QString & file );
     Q_INVOKABLE bool fileContaintOnDatabase( const QString & file );
+    Q_INVOKABLE qint64 fileTime( int id, const QString & file );
 
     Q_INVOKABLE QList<int> groups();
     Q_INVOKABLE bool groupIsDeleted( int id );
