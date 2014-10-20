@@ -188,6 +188,19 @@ Item {
                 showPointDialog( pen_mode_component.createObject(tools), pos.x - width, pos.y, 250*physicalPlatformScale, 200*physicalPlatformScale )
             }
         }
+
+        Button {
+            width: 40*physicalPlatformScale
+            height: width
+            anchors.verticalCenter: parent.verticalCenter
+            normalColor: "#44ffffff"
+            icon: "files/pen-magnifier.png"
+            iconHeight: 24*physicalPlatformScale
+            onClicked: {
+                var pos = mapToItem(kaqaz_root,0,0)
+                showPointDialog( mag_level_component.createObject(tools), pos.x - width, pos.y, 250*physicalPlatformScale, 200*physicalPlatformScale )
+            }
+        }
     }
 
     Component {
@@ -211,6 +224,14 @@ Item {
         KaqazCanvasPenMode {
             selectedMode: canvas.penMode
             onSelectedModeChanged: canvas.penMode = selectedMode
+        }
+    }
+
+    Component {
+        id: mag_level_component
+        KaqazCanvasMagnifierLevel {
+            selectedLevel: mag.magScale
+            onSelectedLevelChanged: mag.magScale = selectedLevel
         }
     }
 

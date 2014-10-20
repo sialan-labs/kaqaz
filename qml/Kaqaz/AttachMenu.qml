@@ -247,6 +247,7 @@ Item {
     Component {
         id: canvas_component
         KaqazCanvas {
+            clip: true
             onDone: {
                 var id = repository.insert( fileName )
                 attach_menu.selected(id)

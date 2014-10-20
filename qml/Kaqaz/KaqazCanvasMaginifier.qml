@@ -11,7 +11,7 @@ Rectangle {
     visible: width > 100*physicalPlatformScale
 
     property alias source: desat.source
-    property real magScale: width/300*physicalPlatformScale
+    property real magScale: 4
 
     signal positionChanged( real mouseX, real mouseY )
 
@@ -82,10 +82,12 @@ Rectangle {
                 return
             }
 
+            kcmag.positionChanged(-1,-1)
+        }
+        onReleased: {
             out_of_circle = false
             kcmag.positionChanged(-1,-1)
         }
-        onReleased: kcmag.positionChanged(-1,-1)
 
         property bool out_of_circle: false
     }

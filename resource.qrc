@@ -180,5 +180,7 @@
         <file>qml/Kaqaz/KaqazCanvasPenMode.qml</file>
         <file>qml/Kaqaz/KaqazCanvasMaginifier.qml</file>
         <file>qml/Kaqaz/KaqazTouchPointHandler.qml</file>
+        <file>qml/Kaqaz/KaqazCanvasMagnifierLevel.qml</file>
+        <file>KaqazCanvasMagnifierHelper.qml</file>
     </qresource>
 </RCC>
