@@ -26,7 +26,7 @@
 #include "layermanager.h"
 namespace qmapcontrol
 {
-    LayerManager::LayerManager(MapControl* mapcontrol, QSize size)
+    LayerManager::LayerManager(AbstractMapControl *mapcontrol, QSize size)
             :mapcontrol(mapcontrol), scroll(QPoint(0,0)), size(size), whilenewscroll(QPoint(0,0))
     {
         // genauer berechnen?
@@ -71,7 +71,7 @@ namespace qmapcontrol
         while (layerit.hasNext())
         {
             Layer* l = layerit.next();
-            if (l->layername() == layername)
+            if (l->layerName() == layername)
                 return l;
         }
         return 0;
@@ -83,7 +83,7 @@ namespace qmapcontrol
         QListIterator<Layer*> layerit(mylayers);
         while (layerit.hasNext())
         {
-            keys.append(layerit.next()->layername());
+            keys.append(layerit.next()->layerName());
         }
         return keys;
     }
@@ -91,7 +91,7 @@ namespace qmapcontrol
 
     void LayerManager::scrollView(const QPoint& point)
     {
-        QPointF tempMiddle = layer()->mapadapter()->displayToCoordinate(mapmiddle_px + point);
+        QPointF tempMiddle = layer()->mapAdapter()->displayToCoordinate(mapmiddle_px + point);
 
         if((useBoundingBox && boundingBox.contains(tempMiddle)) || !useBoundingBox)
         {
@@ -105,19 +105,6 @@ namespace qmapcontrol
             {
                 newOffscreenImage();
             }
-            else
-            {
-                moveWidgets();
-            }
-        }
-    }
-
-    void LayerManager::moveWidgets()
-    {
-        QListIterator<Layer*> it(mylayers);
-        while (it.hasNext())
-        {
-            it.next()->moveWidgets(mapmiddle_px);
         }
     }
 
@@ -129,13 +116,13 @@ namespace qmapcontrol
             return;
         }
 
-        if ( !layer()->mapadapter() )
+        if ( !layer()->mapAdapter() )
         {
             qDebug() << "LayerManager::setView() - cannot set view settings with no map adapter configured";
             return;
         }
 
-        mapmiddle_px = layer()->mapadapter()->coordinateToDisplay(coordinate);
+        mapmiddle_px = layer()->mapAdapter()->coordinateToDisplay(coordinate);
         mapmiddle = coordinate;
 
         //TODO: muss wegen moveTo() raus
@@ -155,7 +142,7 @@ namespace qmapcontrol
     void LayerManager::setView(QList<QPointF> coordinates)
     {
         setMiddle(coordinates);
-        mapcontrol->update();
+        mapcontrol->refresh();
     }
 
     void LayerManager::setViewAndZoomIn(const QList<QPointF> coordinates)
@@ -173,7 +160,7 @@ namespace qmapcontrol
             zoomOut();
             // bugfix Tl
             // if points are too close -> Loop of death...
-            if ( layer()->mapadapter()->currentZoom() == 0 )
+            if ( layer()->mapAdapter()->currentZoom() == 0 )
             {
                 qDebug() << "LayerManager::setViewAndZoomIn() - reached minium zoom level";
                 break;
@@ -186,7 +173,7 @@ namespace qmapcontrol
             zoomIn();
             // bugfix Tl
             // if points are too close -> Loop of death...
-            if ( layer()->mapadapter()->currentZoom() == 17 )
+            if ( layer()->mapAdapter()->currentZoom() == 17 )
             {
                 qDebug() << "LayerManager::setViewAndZoomIn() - reached maximum zoom level";
                 break;
@@ -198,7 +185,7 @@ namespace qmapcontrol
             zoomOut();
         }
 
-        mapcontrol->update();
+        mapcontrol->refresh();
     }
 
     void LayerManager::setMiddle(QList<QPointF> coordinates)
@@ -214,11 +201,11 @@ namespace qmapcontrol
         for (int i=0; i<coordinates.size(); i++)
         {
             // mitte muss in px umgerechnet werden, da aufgrund der projektion die mittebestimmung aus koordinaten ungenau ist
-            QPoint p = layer()->mapadapter()->coordinateToDisplay(coordinates.at(i));
+            QPoint p = layer()->mapAdapter()->coordinateToDisplay(coordinates.at(i));
             sum_x += p.x();
             sum_y += p.y();
         }
-        QPointF middle = layer()->mapadapter()->displayToCoordinate(QPoint(sum_x/coordinates.size(), sum_y/coordinates.size()));
+        QPointF middle = layer()->mapAdapter()->displayToCoordinate(QPoint(sum_x/coordinates.size(), sum_y/coordinates.size()));
         // middle in px rechnen!
 
         setView(middle);
@@ -252,8 +239,8 @@ namespace qmapcontrol
         QPoint upperLeft = QPoint(mapmiddle_px.x()-screenmiddle.x(), mapmiddle_px.y()+screenmiddle.y());
         QPoint lowerRight = QPoint(mapmiddle_px.x()+screenmiddle.x(), mapmiddle_px.y()-screenmiddle.y());
 
-        QPointF ulCoord = layer()->mapadapter()->displayToCoordinate(upperLeft);
-        QPointF lrCoord = layer()->mapadapter()->displayToCoordinate(lowerRight);
+        QPointF ulCoord = layer()->mapAdapter()->displayToCoordinate(upperLeft);
+        QPointF lrCoord = layer()->mapAdapter()->displayToCoordinate(lowerRight);
 
         QRectF coordinateBB = QRectF(ulCoord, QSizeF( (lrCoord-ulCoord).x(), (lrCoord-ulCoord).y()));
         return coordinateBB;
@@ -277,7 +264,7 @@ namespace qmapcontrol
         {
             //setView(QPointF(0,0));
         }
-        mapcontrol->update();
+        mapcontrol->refresh();
     }
 
     void LayerManager::removeLayer(Layer* layer)
@@ -292,7 +279,7 @@ namespace qmapcontrol
         {
             //setView(QPointF(0,0));
         }
-        mapcontrol->update();
+        mapcontrol->refresh();
     }
 
     void LayerManager::newOffscreenImage(bool clearImage, bool showZoomImage)
@@ -316,7 +303,7 @@ namespace qmapcontrol
             Layer* l = mylayers.at(i);
             if (l->isVisible())
             {
-                if (l->layertype() == Layer::MapLayer)
+                if (l->layerType() == Layer::MapLayer)
                 {
                     l->drawYourImage(&painter, whilenewscroll);
                 }
@@ -326,7 +313,7 @@ namespace qmapcontrol
         composedOffscreenImage = composedOffscreenImage2;
         scroll = mapmiddle_px-whilenewscroll;
 
-        mapcontrol->update();
+        mapcontrol->refresh();
     }
 
     void LayerManager::zoomIn()
@@ -359,13 +346,13 @@ namespace qmapcontrol
         while (it.hasNext())
         {
             Layer* l = it.next();
-            if (!doneadapters.contains(l->mapadapter()))
+            if (!doneadapters.contains(l->mapAdapter()))
             {
                 l->zoomIn();
-                doneadapters.append(l->mapadapter());
+                doneadapters.append(l->mapAdapter());
             }
         }
-        mapmiddle_px = layer()->mapadapter()->coordinateToDisplay(mapmiddle);
+        mapmiddle_px = layer()->mapAdapter()->coordinateToDisplay(mapmiddle);
         whilenewscroll = mapmiddle_px;
 
         newOffscreenImage();
@@ -422,13 +409,13 @@ namespace qmapcontrol
         while (it.hasNext())
         {
             Layer* l = it.next();
-            if (!doneadapters.contains(l->mapadapter()))
+            if (!doneadapters.contains(l->mapAdapter()))
             {
                 l->zoomOut();
-                doneadapters.append(l->mapadapter());
+                doneadapters.append(l->mapAdapter());
             }
         }
-        mapmiddle_px = layer()->mapadapter()->coordinateToDisplay(mapmiddle);
+        mapmiddle_px = layer()->mapAdapter()->coordinateToDisplay(mapmiddle);
         whilenewscroll = mapmiddle_px;
         newOffscreenImage();
     }
@@ -442,13 +429,13 @@ namespace qmapcontrol
         }
 
         int current_zoom;
-        if (layer()->mapadapter()->minZoom() < layer()->mapadapter()->maxZoom())
+        if (layer()->mapAdapter()->minZoom() < layer()->mapAdapter()->maxZoom())
         {
-            current_zoom = layer()->mapadapter()->currentZoom();
+            current_zoom = layer()->mapAdapter()->currentZoom();
         }
         else
         {
-            current_zoom = layer()->mapadapter()->minZoom() - layer()->mapadapter()->currentZoom();
+            current_zoom = layer()->mapAdapter()->minZoom() - layer()->mapAdapter()->currentZoom();
         }
 
 
@@ -495,7 +482,7 @@ namespace qmapcontrol
             //  int(rect.width()+1), int(rect.height()+1));
             //
             // mapcontrol->updateRequest(rect_px);
-            mapcontrol->update();
+            mapcontrol->refresh();
             //newOffscreenImage();
         }
     }
@@ -524,7 +511,7 @@ namespace qmapcontrol
         while (it.hasNext())
         {
             Layer* l = it.next();
-            if (l->layertype() == Layer::GeometryLayer && l->isVisible())
+            if (l->layerType() == Layer::GeometryLayer && l->isVisible())
             {
                 l->drawYourGeometries(painter, mapmiddle_px, layer()->offscreenViewport());
             }
@@ -544,7 +531,7 @@ namespace qmapcontrol
             qDebug() << "LayerManager::currentZoom() - no layers configured";
             return 0;
         }
-        return layer()->mapadapter()->currentZoom();
+        return layer()->mapAdapter()->currentZoom();
     }
 
     void LayerManager::resize(QSize newSize)

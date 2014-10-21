@@ -1,30 +1,23 @@
 /*
-*
-* This file is part of QMapControl,
-* an open-source cross-platform map widget
-*
-* Copyright (C) 2007 - 2008 Kai Winter
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-*
-* You should have received a copy of the GNU Lesser General Public License
-* along with QMapControl. If not, see <http://www.gnu.org/licenses/>.
-*
-* Contact e-mail: kaiwinter@gmx.de
-* Program URL   : http://qmapcontrol.sourceforge.net/
-*
+    Copyright (C) 2014 Sialan Labs
+    http://labs.sialan.org
+
+    This project is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This project is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MAPCONTROL_H
-#define MAPCONTROL_H
+#ifndef QMLMAPCONTROL_H
+#define QMLMAPCONTROL_H
 
 #include "qmapcontrol_global.h"
 #include "layermanager.h"
@@ -32,8 +25,9 @@
 #include "mapadapter.h"
 #include "geometry.h"
 #include "imagemanager.h"
+#include "abstractmapcontrol.h"
 
-#include <QWidget>
+#include <QQuickPaintedItem>
 
 //! QMapControl namespace
 namespace qmapcontrol
@@ -51,7 +45,7 @@ namespace qmapcontrol
      *
      * @author Kai Winter <kaiwinter@gmx.de>
      */
-    class MapControl : public QWidget
+    class QmlMapControl : public QQuickPaintedItem, public AbstractMapControl
     {
         Q_OBJECT
 
@@ -64,31 +58,13 @@ namespace qmapcontrol
             None /*!< Mouse move events have no efect to the map */
         };
 
-        //! The QWidget constructor of MapControl for use with QtDesigner
+        //! The QQuickItem constructor of MapControl for use with QtDesigner
         /*!
-         * @param qParent QWidget parent
-         * @param windowFlags QWidget Window flags
+         * @param qParent QQuickItem parent
+         * @param windowFlags QQuickItem Window flags
          */
-        MapControl (QWidget * parent = 0, Qt::WindowFlags windowFlags = 0);
-
-        //! The constructor of MapControl
-        /*!
-         * The MapControl is the widget which displays the maps.
-         * The size describes the area which gets filled with map data
-         * When you give no MouseMode, the mouse moves the map.
-         * You can change the MouseMode at runtime, e.g. to Dragging, which lets the user drag a rectangular box.
-         * After the dragging a signal with the size of the box is emitted.
-         * The MouseMode ´None´ can be used, to completely define the control of the map yourself.
-         * @param size the size which the widget should fill with map data
-         * @param mousemode the way mouse events are handled
-         * @param showScale true if the scale should be displayed
-         * @param showCrossHairs true if crosshairs should be shown at the centre of the map
-         * @param parent QWidget parent
-         * @param windowFlags QWidget Window flags
-         */
-        MapControl ( QSize size, MouseMode mousemode = Panning, bool showScale = false, bool showCrosshairs = true, QWidget * parent = 0, Qt::WindowFlags windowFlags = 0);
-
-        ~MapControl();
+        QmlMapControl (QQuickItem * parent = 0);
+        ~QmlMapControl();
 
         //! adds a layer
         /*!
@@ -96,6 +72,7 @@ namespace qmapcontrol
          * @param layer the layer which should be added
          */
         void addLayer ( Layer* layer );
+        Q_INVOKABLE void addLayer( QObject *layer );
 
         //! removes a layer
         /*!
@@ -149,7 +126,7 @@ namespace qmapcontrol
          * @return mouse wheel events enabled
          */
         bool mouseWheelEventsEnabled();
-        
+
         //! sets the middle of the map to the given coordinate
         /*!
          * @param  coordinate the coordinate which the view´s middle should be set to
@@ -217,7 +194,7 @@ namespace qmapcontrol
          * For a explanation for the MouseModes see setMouseMode()
          * @return the current MouseMode
          */
-        MapControl::MouseMode mouseMode();
+        QmlMapControl::MouseMode mouseMode();
 
         //int rotation;
 
@@ -316,11 +293,11 @@ namespace qmapcontrol
         int steps; // used for method moveTo()
 
         QPointF clickToWorldCoordinate ( QPoint click );
-        MapControl& operator= ( const MapControl& rhs );
-        MapControl ( const MapControl& old );
+        QmlMapControl& operator= ( const QmlMapControl& rhs );
+        QmlMapControl ( const QmlMapControl& old );
 
     protected:
-        void paintEvent ( QPaintEvent* evnt );
+        void paint (QPainter *painter );
         void mousePressEvent ( QMouseEvent* evnt );
         void mouseReleaseEvent ( QMouseEvent* evnt );
         void mouseMoveEvent ( QMouseEvent* evnt );
@@ -362,6 +339,8 @@ namespace qmapcontrol
         void viewChanged ( const QPointF &coordinate, int zoom ) const;
 
     public slots:
+        void refresh();
+
         //! zooms in one step
         void zoomIn();
 
@@ -406,11 +385,13 @@ namespace qmapcontrol
          * @param newSize The new size
          */
         void resize(const QSize newSize);
-        
+
     private slots:
         void tick();
         void loadingFinished();
         void positionChanged ( Geometry* geom );
+        void sizeChanged();
     };
 }
-#endif
+
+#endif // QMLMAPCONTROL_H

@@ -26,8 +26,14 @@
 #include "layer.h"
 namespace qmapcontrol
 {
-    Layer::Layer(QString layername, MapAdapter* mapadapter, enum LayerType layertype, bool takeevents)
-            :visible(true), mylayername(layername), mylayertype(layertype), mapAdapter(mapadapter), takeevents(takeevents), myoffscreenViewport(QRect(0,0,0,0))
+Layer::Layer()
+    :visible(true), mylayertype(MapLayer), _mapAdapter(0), takeevents(true), myoffscreenViewport(QRect(0,0,0,0))
+{
+
+}
+
+Layer::Layer(QString layername, MapAdapter* mapadapter, enum LayerType layertype, bool takeevents)
+            :visible(true), mylayername(layername), mylayertype(layertype), _mapAdapter(mapadapter), takeevents(takeevents), myoffscreenViewport(QRect(0,0,0,0))
     {
         //qDebug() << "creating new Layer: " << layername << ", type: " << contents;
         //qDebug() << this->layertype;
@@ -35,7 +41,7 @@ namespace qmapcontrol
 
     Layer::~Layer()
     {
-        delete mapAdapter;
+        delete _mapAdapter;
     }
 
     void Layer::setSize(QSize size)
@@ -51,14 +57,48 @@ namespace qmapcontrol
         emit(updateRequest());
     }
 
-    QString Layer::layername() const
+    QString Layer::layerName() const
     {
         return mylayername;
     }
 
-    MapAdapter* Layer::mapadapter()
+    void Layer::setLayerName(const QString &ln)
     {
-        return mapAdapter;
+        if( mylayername == ln )
+            return;
+
+        mylayername = ln;
+        emit layerNameChanged();
+    }
+
+    MapAdapter* Layer::mapAdapter()
+    {
+        return _mapAdapter;
+    }
+
+    void Layer::setMapAdapter(MapAdapter* mapadapter)
+    {
+        if( _mapAdapter == mapadapter )
+            return;
+
+        _mapAdapter = mapadapter;
+        emit updateRequest();
+        emit mapAdapterChanged();
+    }
+
+    QObject *Layer::mapAdapterObject()
+    {
+        return mapAdapter();
+    }
+
+    void Layer::setMapAdapterObject(QObject *mapAdapter)
+    {
+        setMapAdapter( static_cast<MapAdapter*>(mapAdapter) );
+    }
+
+    QObject *Layer::layerObject()
+    {
+        return this;
     }
 
     void Layer::setVisible(bool visible)
@@ -137,11 +177,11 @@ namespace qmapcontrol
     }
     void Layer::zoomIn() const
     {
-        mapAdapter->zoom_in();
+        _mapAdapter->zoom_in();
     }
     void Layer::zoomOut() const
     {
-        mapAdapter->zoom_out();
+        _mapAdapter->zoom_out();
     }
 
     void Layer::mouseEvent(const QMouseEvent* evnt, const QPoint mapmiddle_px)
@@ -153,12 +193,12 @@ namespace qmapcontrol
                  evnt->type() == QEvent::MouseButtonPress)
             {
                 // check for collision
-                QPointF c = mapAdapter->displayToCoordinate(QPoint(evnt->x()-screenmiddle.x()+mapmiddle_px.x(),
+                QPointF c = _mapAdapter->displayToCoordinate(QPoint(evnt->x()-screenmiddle.x()+mapmiddle_px.x(),
                                                                    evnt->y()-screenmiddle.y()+mapmiddle_px.y()));
                 Point* tmppoint = new Point(c.x(), c.y());
                 for (int i=0; i<geometries.count(); i++)
                 {
-                    if (geometries.at(i)->isVisible() && geometries.at(i)->Touches(tmppoint, mapAdapter))
+                    if (geometries.at(i)->isVisible() && geometries.at(i)->Touches(tmppoint, _mapAdapter))
 
                         //if (geometries.at(i)->Touches(c, mapAdapter))
                     {
@@ -203,7 +243,7 @@ namespace qmapcontrol
         painter->translate(-mapmiddle_px+screenmiddle);
         foreach( Geometry* geometry, geometries )
         {
-            geometry->draw(painter, mapAdapter, viewport, offset);
+            geometry->draw(painter, _mapAdapter, viewport, offset);
         }
         painter->translate(mapmiddle_px-screenmiddle);
 
@@ -212,7 +252,7 @@ namespace qmapcontrol
     {
         // screen middle rotieren...
 
-        int tilesize = mapAdapter->tilesize();
+        int tilesize = _mapAdapter->tilesize();
         int cross_x = int(mapmiddle_px.x())%tilesize; // position on middle tile
         int cross_y = int(mapmiddle_px.y())%tilesize;
         //qDebug() << screenmiddle << " - " << cross_x << ", " << cross_y;
@@ -248,16 +288,16 @@ namespace qmapcontrol
         myoffscreenViewport = QRect(from, to);
 
         // for the EmptyMapAdapter no tiles should be loaded and painted.
-        if (mapAdapter->host() == "")
+        if (_mapAdapter->host() == "")
         {
             return;
         }
 
-        if (mapAdapter->isValid(mapmiddle_tile_x, mapmiddle_tile_y, mapAdapter->currentZoom()))
+        if (_mapAdapter->isValid(mapmiddle_tile_x, mapmiddle_tile_y, _mapAdapter->currentZoom()))
         {
             painter->drawPixmap(-cross_x+size.width(),
                                 -cross_y+size.height(),
-                                ImageManager::instance()->getImage(mapAdapter->host(), mapAdapter->query(mapmiddle_tile_x, mapmiddle_tile_y, mapAdapter->currentZoom())));
+                                ImageManager::instance()->getImage(_mapAdapter->host(), _mapAdapter->query(mapmiddle_tile_x, mapmiddle_tile_y, _mapAdapter->currentZoom())));
         }
 
         for (int i=-tiles_left+mapmiddle_tile_x; i<=tiles_right+mapmiddle_tile_x; i++)
@@ -266,12 +306,12 @@ namespace qmapcontrol
             {
                 // check if image is valid
                 if (!(i==mapmiddle_tile_x && j==mapmiddle_tile_y))
-                    if (mapAdapter->isValid(i, j, mapAdapter->currentZoom()))
+                    if (_mapAdapter->isValid(i, j, _mapAdapter->currentZoom()))
                     {
 
                     painter->drawPixmap(((i-mapmiddle_tile_x)*tilesize)-cross_x+size.width(),
                                         ((j-mapmiddle_tile_y)*tilesize)-cross_y+size.height(),
-                                        ImageManager::instance()->getImage(mapAdapter->host(), mapAdapter->query(i, j, mapAdapter->currentZoom())));
+                                        ImageManager::instance()->getImage(_mapAdapter->host(), _mapAdapter->query(i, j, _mapAdapter->currentZoom())));
                     //if (QCoreApplication::hasPendingEvents())
                     //  QCoreApplication::processEvents();
                 }
@@ -288,26 +328,26 @@ namespace qmapcontrol
         int j = upper;
         for (int i=left; i<=right; i++)
         {
-            if (mapAdapter->isValid(i, j, mapAdapter->currentZoom()))
-                ImageManager::instance()->prefetchImage(mapAdapter->host(), mapAdapter->query(i, j, mapAdapter->currentZoom()));
+            if (_mapAdapter->isValid(i, j, _mapAdapter->currentZoom()))
+                ImageManager::instance()->prefetchImage(_mapAdapter->host(), _mapAdapter->query(i, j, _mapAdapter->currentZoom()));
         }
         j = lower;
         for (int i=left; i<=right; i++)
         {
-            if (mapAdapter->isValid(i, j, mapAdapter->currentZoom()))
-                ImageManager::instance()->prefetchImage(mapAdapter->host(), mapAdapter->query(i, j, mapAdapter->currentZoom()));
+            if (_mapAdapter->isValid(i, j, _mapAdapter->currentZoom()))
+                ImageManager::instance()->prefetchImage(_mapAdapter->host(), _mapAdapter->query(i, j, _mapAdapter->currentZoom()));
         }
         int i = left;
         for (int j=upper+1; j<=lower-1; j++)
         {
-            if (mapAdapter->isValid(i, j, mapAdapter->currentZoom()))
-                ImageManager::instance()->prefetchImage(mapAdapter->host(), mapAdapter->query(i, j, mapAdapter->currentZoom()));
+            if (_mapAdapter->isValid(i, j, _mapAdapter->currentZoom()))
+                ImageManager::instance()->prefetchImage(_mapAdapter->host(), _mapAdapter->query(i, j, _mapAdapter->currentZoom()));
         }
         i = right;
         for (int j=upper+1; j<=lower-1; j++)
         {
-            if (mapAdapter->isValid(i, j, mapAdapter->currentZoom()))
-                ImageManager::instance()->prefetchImage(mapAdapter->host(), mapAdapter->query(i, j, mapAdapter->currentZoom()));
+            if (_mapAdapter->isValid(i, j, _mapAdapter->currentZoom()))
+                ImageManager::instance()->prefetchImage(_mapAdapter->host(), _mapAdapter->query(i, j, _mapAdapter->currentZoom()));
         }
     }
 
@@ -316,28 +356,17 @@ namespace qmapcontrol
         return myoffscreenViewport;
     }
 
-    void Layer::moveWidgets(const QPoint mapmiddle_px) const
-    {
-        foreach( Geometry* geometry, geometries )
-        {
-            if (geometry->GeometryType == "Point")
-            {
-                if (((Point*)geometry)->widget()!=0)
-                {
-                    QPoint topleft_relative = QPoint(mapmiddle_px-screenmiddle);
-                    ((Point*)geometry)->drawWidget(mapAdapter, topleft_relative);
-                }
-            }
-        }
-    }
-    Layer::LayerType Layer::layertype() const
+    Layer::LayerType Layer::layerType() const
     {
         return mylayertype;
     }
 
-    void Layer::setMapAdapter(MapAdapter* mapadapter)
+    void Layer::setLayerType(Layer::LayerType lt)
     {
-        mapAdapter = mapadapter;
-        emit(updateRequest());
+        if( lt == mylayertype )
+            return;
+
+        mylayertype = lt;
+        emit layerTypeChanged();
     }
 }

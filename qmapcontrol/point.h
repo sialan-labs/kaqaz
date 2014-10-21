@@ -26,15 +26,6 @@
 #ifndef POINT_H
 #define POINT_H
 
-//#include "qglobal.h"
-#if QT_VERSION >= 0x050000
-    // Qt5 code
-    //#include <QtWidgets>
-#else
-    // Qt4 code
-    #include <QWidget>
-#endif
-
 #include "qmapcontrol_global.h"
 #include "geometry.h"
 
@@ -97,20 +88,6 @@ namespace qmapcontrol
 
         //! Constructor
         /*!
-         * This constructor creates a point which will display the given widget.
-         * You can set an alignment on which corner the widget should be aligned to the coordinate.
-         * You have to set the size of the widget, before adding it to
-         * IMPORTANT: You have to set the QMapControl as parent for the widget!
-         * @param x longitude
-         * @param y latitude
-         * @param widget the widget which should be displayed by this point
-         * @param name name of the point
-         * @param alignment allignment of the point (Middle or TopLeft)
-         */
-        Point(qreal x, qreal y, QWidget* widget, QString name = QString(), enum Alignment alignment = Middle);
-
-        //! Constructor
-        /*!
          * This constructor creates a point which will display the give pixmap.
          * You can set an alignment on which corner the pixmap should be aligned to the coordinate.
          * @param x longitude
@@ -152,11 +129,6 @@ namespace qmapcontrol
 
         virtual QList<Point*> points();
 
-        /*! \brief returns the widget of the point
-        @return the widget of the point
-         */
-        QWidget* widget();
-
         //! returns the pixmap of the point
         /*!
          * @return the pixmap of the point
@@ -197,7 +169,6 @@ namespace qmapcontrol
         qreal Y;
         QSize size;
 
-        QWidget* mywidget;
         QPixmap mypixmap;
         Alignment myalignment;
         int homelevel;
@@ -205,8 +176,6 @@ namespace qmapcontrol
         QSize minsize;
         QSize maxsize;
 
-
-        void drawWidget(const MapAdapter* mapadapter, const QPoint offset);
         // void drawPixmap(QPainter* painter, const MapAdapter* mapadapter, const QRect &viewport, const QPoint versch);
         virtual void draw(QPainter* painter, const MapAdapter* mapadapter, const QRect &viewport, const QPoint offset);
         QPoint alignedPoint(const QPoint point) const;

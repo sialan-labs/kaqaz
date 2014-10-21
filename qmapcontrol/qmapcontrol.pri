@@ -1,4 +1,4 @@
-QT += network gui widgets
+QT += network gui
 
 HEADERS += qmapcontrol/curve.h \
            qmapcontrol/geometry.h \
@@ -7,7 +7,6 @@ HEADERS += qmapcontrol/curve.h \
            qmapcontrol/layermanager.h \
            qmapcontrol/linestring.h \
            qmapcontrol/mapadapter.h \
-           qmapcontrol/mapcontrol.h \
            qmapcontrol/mapnetwork.h \
            qmapcontrol/point.h \
            qmapcontrol/tilemapadapter.h \
@@ -24,7 +23,9 @@ HEADERS += qmapcontrol/curve.h \
            qmapcontrol/fixedimageoverlay.h \
            qmapcontrol/emptymapadapter.h \
            qmapcontrol/arrowpoint.h \
-           qmapcontrol/qmapcontrol_global.h
+           qmapcontrol/qmapcontrol_global.h \
+    $$PWD/qmlmapcontrol.h \
+    $$PWD/abstractmapcontrol.h
 
 SOURCES += qmapcontrol/curve.cpp \
            qmapcontrol/geometry.cpp \
@@ -33,7 +34,6 @@ SOURCES += qmapcontrol/curve.cpp \
            qmapcontrol/layermanager.cpp \
            qmapcontrol/linestring.cpp \
            qmapcontrol/mapadapter.cpp \
-           qmapcontrol/mapcontrol.cpp \
            qmapcontrol/mapnetwork.cpp \
            qmapcontrol/point.cpp \
            qmapcontrol/tilemapadapter.cpp \
@@ -49,4 +49,5 @@ SOURCES += qmapcontrol/curve.cpp \
            qmapcontrol/openaerialmapadapter.cpp \
            qmapcontrol/fixedimageoverlay.cpp \
            qmapcontrol/arrowpoint.cpp \
-           qmapcontrol/emptymapadapter.cpp
+           qmapcontrol/emptymapadapter.cpp \
+    $$PWD/qmlmapcontrol.cpp

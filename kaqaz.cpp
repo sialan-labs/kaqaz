@@ -36,6 +36,11 @@
 #include "sialantools/sialanquickview.h"
 #include "sialantools/sialancalendarconverter.h"
 
+#include "qmapcontrol/osmmapadapter.h"
+#include "qmapcontrol/maplayer.h"
+#include "qmapcontrol/qmlmapcontrol.h"
+#include "qmapcontrol/googlemapadapter.h"
+
 #ifdef Q_OS_ANDROID
 #include "sialantools/sialanjavalayer.h"
 #endif
@@ -77,6 +82,8 @@
 
 Database *kaqaz_database = 0;
 QSettings *kaqaz_settings = 0;
+
+using namespace qmapcontrol;
 
 class KaqazPrivate
 {
@@ -201,6 +208,10 @@ Kaqaz::Kaqaz(QObject *parent) :
     qmlRegisterType<PaperManager>("Kaqaz", 1,0, "PaperManager");
     qmlRegisterType<SearchHighlighter>("Kaqaz", 1,0, "SearchHighlighter");
     qmlRegisterType<Enums>("Kaqaz", 1,0, "Enums");
+    qmlRegisterType<OSMMapAdapter>("Kaqaz", 1,0, "OSMMapAdapter");
+    qmlRegisterType<GoogleMapAdapter>("Kaqaz", 1,0, "GoogleMapAdapter");
+    qmlRegisterType<MapLayer>("Kaqaz", 1,0, "MapLayer");
+    qmlRegisterType<QmlMapControl>("Kaqaz", 1,0, "MapControl");
 }
 
 Kaqaz *Kaqaz::instance()

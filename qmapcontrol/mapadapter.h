@@ -58,9 +58,12 @@ namespace qmapcontrol
         friend class Layer;
 
         Q_OBJECT
+        Q_PROPERTY(QObject* adapter READ adapterObject NOTIFY adapterObjectChanged)
 
     public:
         virtual ~MapAdapter();
+
+        QObject *adapterObject();
 
         //! returns the host of this MapAdapter
         /*!
@@ -128,6 +131,9 @@ namespace qmapcontrol
         QRectF getBoundingbox() const { return mBoundingBox; }
         void setBoundingBox(qreal qMinX, qreal qMinY, qreal qMaxX, qreal qMaxY );
 
+    signals:
+        void adapterObjectChanged();
+
     protected:
         MapAdapter(const QString& qHost, const QString& qServerPath, int qTilesize, int qMinZoom = 0, int qMaxZoom = 0);
         virtual void zoom_in() = 0;
@@ -168,4 +174,5 @@ namespace qmapcontrol
         QRectF mBoundingBox;
     };
 }
+
 #endif

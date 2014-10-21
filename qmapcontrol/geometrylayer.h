@@ -59,7 +59,7 @@ namespace qmapcontrol
          * @param takeevents Should the Layer receive MouseEvents? This is set to true by default. Setting it to false could
          * be something like a "speed up hint"
          */
-        GeometryLayer(QString layername, MapAdapter* mapadapter, bool takeevents=true);
+        GeometryLayer(QString layerName, MapAdapter* mapAdapter, bool takeevents=true);
         virtual ~GeometryLayer();
     };
 }

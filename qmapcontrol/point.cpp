@@ -32,7 +32,6 @@ namespace qmapcontrol
             :Geometry(point.name()), X(point.longitude()), Y(point.latitude())
     {
         visible = point.isVisible();
-        mywidget = 0;
         mypixmap = QPixmap();
         mypen = point.mypen;
         homelevel = -1;
@@ -44,7 +43,6 @@ namespace qmapcontrol
             : Geometry(name), X(x), Y(y), myalignment(alignment)
     {
         GeometryType = "Point";
-        mywidget = 0;
         mypixmap = QPixmap();
         visible = true;
         homelevel = -1;
@@ -52,24 +50,10 @@ namespace qmapcontrol
         maxsize = QSize(-1,-1);
     }
 
-    Point::Point(qreal x, qreal y, QWidget* widget, QString name, enum Alignment alignment)
-            : Geometry(name), X(x), Y(y), mywidget(widget), myalignment(alignment)
-    {
-        // Point(x, y, name, alignment);
-        GeometryType = "Point";
-        mypixmap = QPixmap();
-        visible = true;
-        size = widget->size();
-        homelevel = -1;
-        minsize = QSize(-1,-1);
-        maxsize = QSize(-1,-1);
-        mywidget->show();
-    }
     Point::Point(qreal x, qreal y, QPixmap pixmap, QString name, enum Alignment alignment)
             : Geometry(name), X(x), Y(y), mypixmap(pixmap), myalignment(alignment)
     {
         GeometryType = "Point";
-        mywidget = 0;
         visible = true;
         size = pixmap.size();
         homelevel = -1;
@@ -98,8 +82,6 @@ namespace qmapcontrol
 */
     Point::~Point()
     {
-        delete mywidget;
-        mywidget = 0;
     }
 
     void Point::setPixmap( QPixmap qPixmap )
@@ -115,10 +97,6 @@ namespace qmapcontrol
     void Point::setVisible(bool visible)
     {
         this->visible = visible;
-        if (mywidget !=0)
-        {
-            mywidget->setVisible(visible);
-        }
     }
 
     QRectF Point::boundingBox()
@@ -142,6 +120,7 @@ namespace qmapcontrol
 
     void Point::draw(QPainter* painter, const MapAdapter* mapadapter, const QRect &viewport, const QPoint offset)
     {
+        Q_UNUSED(offset)
         if (!visible)
             return;
 
@@ -188,21 +167,7 @@ namespace qmapcontrol
             }
 
         }
-        else if (mywidget!=0)
-        {
-            drawWidget(mapadapter, offset);
-        }
 
-    }
-
-    void Point::drawWidget(const MapAdapter* mapadapter, const QPoint offset)
-    {
-        const QPointF c = QPointF(X, Y);
-        QPoint point = mapadapter->coordinateToDisplay(c);
-        point -= offset;
-
-        QPoint alignedtopleft = alignedPoint(point);
-        mywidget->setGeometry(alignedtopleft.x(), alignedtopleft.y(), displaysize.width(), displaysize.height());
     }
 
     QPoint Point::alignedPoint(const QPoint point) const
@@ -343,11 +308,6 @@ namespace qmapcontrol
         QList<Point*> points;
         points.append(this);
         return points;
-    }
-
-    QWidget* Point::widget()
-    {
-        return mywidget;
     }
 
     QPixmap Point::pixmap()

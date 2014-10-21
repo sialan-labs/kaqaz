@@ -37,6 +37,11 @@ namespace qmapcontrol
     {
     }
 
+    QObject *MapAdapter::adapterObject()
+    {
+        return this;
+    }
+
     void MapAdapter::changeHostAddress( const QString qHost, const QString qServerPath )
     {
         mServerHost = qHost;

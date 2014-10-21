@@ -60,6 +60,12 @@ namespace qmapcontrol
     class Layer : public QObject
     {
         Q_OBJECT
+        Q_ENUMS(LayerType)
+
+        Q_PROPERTY(QString layerName READ layerName WRITE setLayerName NOTIFY layerNameChanged)
+        Q_PROPERTY(QObject* mapAdapter READ mapAdapterObject WRITE setMapAdapterObject NOTIFY mapAdapterChanged)
+        Q_PROPERTY(LayerType layerType READ layerType WRITE setLayerType NOTIFY layerTypeChanged)
+        Q_PROPERTY(QObject* layerObject READ layerObject NOTIFY layerObjectChanged)
 
     public:
         friend class LayerManager;
@@ -81,14 +87,16 @@ namespace qmapcontrol
          * @param takeevents Should the Layer receive MouseEvents? This is set to true by default. Setting it to false could
          * be something like a "speed up hint"
          */
-        Layer(QString layername, MapAdapter* mapadapter, enum LayerType layertype, bool takeevents=true);
+        Layer();
+        Layer(QString layerName, MapAdapter* _mapAdapter, enum LayerType layertype, bool takeevents=true);
         virtual ~Layer();
 
         //! returns the layer's name
         /*!
          * @return the name of this layer
          */
-        QString	layername() const;
+        QString	layerName() const;
+        void setLayerName( const QString & ln );
 
         //! returns the layer´s MapAdapter
         /*!
@@ -96,7 +104,13 @@ namespace qmapcontrol
          * to do coordinate transformations.
          * @return the MapAdapter which us used by this Layer
          */
-        MapAdapter* mapadapter();
+        MapAdapter* mapAdapter();
+        void setMapAdapter(MapAdapter* mapAdapter);
+
+        QObject* mapAdapterObject();
+        void setMapAdapterObject(QObject* mapAdapter);
+
+        QObject *layerObject();
 
         //! adds a Geometry object to this Layer
         /*!
@@ -145,12 +159,10 @@ namespace qmapcontrol
          * There are two LayerTypes: MapLayer and GeometryLayer
          * @return the LayerType of this Layer
          */
-        Layer::LayerType layertype() const;
-
-        void setMapAdapter(MapAdapter* mapadapter);
+        Layer::LayerType layerType() const;
+        void setLayerType( Layer::LayerType lt );
 
     private:
-        void moveWidgets(const QPoint mapmiddle_px) const;
         void drawYourImage(QPainter* painter, const QPoint mapmiddle_px) const;
         void drawYourGeometries(QPainter* painter, const QPoint mapmiddle_px, QRect viewport) const;
         void setSize(QSize size);
@@ -168,7 +180,7 @@ namespace qmapcontrol
         QPoint screenmiddle;
 
         QList<Geometry*> geometries;
-        MapAdapter* mapAdapter;
+        MapAdapter* _mapAdapter;
         bool takeevents;
         mutable QRect myoffscreenViewport;
 
@@ -184,6 +196,11 @@ namespace qmapcontrol
 
         void updateRequest(QRectF rect);
         void updateRequest();
+
+        void layerNameChanged();
+        void mapAdapterChanged();
+        void layerTypeChanged();
+        void layerObjectChanged();
 
     public slots:
         //! if visible is true, the layer is made visible

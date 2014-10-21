@@ -33,7 +33,8 @@
 #include <QRectF>
 #include "layer.h"
 #include "mapadapter.h"
-#include "mapcontrol.h"
+#include "qmlmapcontrol.h"
+#include "abstractmapcontrol.h"
 
 namespace qmapcontrol
 {
@@ -55,7 +56,7 @@ namespace qmapcontrol
         Q_OBJECT
 
     public:
-        LayerManager(MapControl*, QSize);
+        LayerManager(AbstractMapControl*, QSize);
         ~LayerManager();
 
         //! returns the coordinate of the center of the map
@@ -218,10 +219,9 @@ namespace qmapcontrol
         void newOffscreenImage(bool clearImage=true, bool showZoomImage=true);
         inline bool checkOffscreen() const;
         inline bool containsAll(QList<QPointF> coordinates) const;
-        inline void moveWidgets();
         inline void setMiddle(QList<QPointF> coordinates);
 
-        MapControl* mapcontrol;
+        AbstractMapControl* mapcontrol;
         QPoint screenmiddle; // middle of the screen
         QPoint scroll; // scrollvalue of the offscreen image
         QPoint zoomImageScroll; // scrollvalue of the zoom image
