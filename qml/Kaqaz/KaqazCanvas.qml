@@ -65,11 +65,17 @@ Item {
         y: fileId.length==0? 0 : parent.height/2 - img.paintedHeight/2 - 20*physicalPlatformScale
         width: fileId.length==0? parent.width : img.paintedWidth
         height: fileId.length==0? tools.y + 10*physicalPlatformScale : img.paintedHeight
+        scale: mag.visible? 0.7 : 1
+        transformOrigin: Item.Center
+
+        Behavior on scale {
+            NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
+        }
 
         Canvas {
             id: canvas
             anchors.fill: parent
-            anchors.margins: 20*physicalPlatformScale
+            anchors.margins: 15
             renderStrategy: Canvas.Threaded
             smooth: true
 
@@ -181,7 +187,6 @@ Item {
     KaqazCanvasMaginifier {
         id: mag
         source: paper_back
-        width: 0
         onPositionChanged: updatePos(mouseX,mouseY)
         sourcePositionMap: Qt.point(paper_back.x,paper_back.y)
         onVisibleChanged: {

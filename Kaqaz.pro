@@ -160,6 +160,7 @@ RESOURCES += \
 include(qmake/qtcAddDeployment.pri)
 include(qtdropbox/qtdropbox.pri)
 include(sialantools/sialantools.pri)
+include(qmapcontrol/qmapcontrol.pri)
 qtcAddDeployment()
 
 isEmpty(PREFIX) {

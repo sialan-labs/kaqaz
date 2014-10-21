@@ -20,6 +20,7 @@ import QtQuick 2.2
 import QtMultimedia 5.0
 import QtPositioning 5.2
 import SialanTools 1.0
+import Kaqaz 1.0
 
 SialanMain {
     id: kaqaz_root

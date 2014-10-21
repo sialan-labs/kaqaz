@@ -34,7 +34,7 @@ Rectangle {
 
     signal positionChanged( real mouseX, real mouseY )
 
-    Rectangle {
+    Item {
         id: source_frame
         anchors.fill: parent
         clip: true
@@ -45,13 +45,21 @@ Rectangle {
             scale: magScale
             transformOrigin: Item.Center
 
+            Image {
+                anchors.fill: desat
+                anchors.margins: -200*physicalPlatformScale
+                source: "files/background.jpg"
+                fillMode: Image.PreserveAspectCrop
+                smooth: false
+            }
+
             Desaturate {
                 id: desat
                 smooth: true
-                width: source? source.width : 0
-                height: source? source.height : 0
-                x: -kcmag.x + sourcePositionMap.x
-                y: -kcmag.y + sourcePositionMap.y
+                width: source? source.width*source.scale : 0
+                height: source? source.height*source.scale : 0
+                x: -kcmag.x + sourcePositionMap.x - (width-source.width)/2
+                y: -kcmag.y + sourcePositionMap.y - (height-source.height)/2
             }
         }
     }
