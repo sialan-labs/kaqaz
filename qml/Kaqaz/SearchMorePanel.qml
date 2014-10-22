@@ -207,7 +207,12 @@ Item {
                 font.pixelSize: 8*fontsScale
                 font.family: SApp.globalFontFamily
                 color: "#333333"
-                text: more_panel.geo? more_panel.geo.latitude + ", " + more_panel.geo.longitude : ""
+                text: more_panel.geo? littleNum(more_panel.geo.y) + ", " + littleNum(more_panel.geo.x) + "  " +
+                                      littleNum(more_panel.geo.width) + "x" + littleNum(more_panel.geo.height) : ""
+
+                function littleNum( num ) {
+                    return Math.floor(num*1000)/1000
+                }
             }
         }
 
@@ -344,11 +349,6 @@ Item {
         SearchGeoDomain {
             id: geo_domain_item
             height: pages_frame.height
-            onDomainChanged: {
-                more_panel.startPage = true
-                item_destroy_timer.restart()
-                done()
-            }
 
             function done() {
                 more_panel.geo = domain

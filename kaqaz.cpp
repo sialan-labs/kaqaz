@@ -27,6 +27,7 @@
 #include "kaqazsync.h"
 #include "kaqazmacros.h"
 #include "database.h"
+#include "translationmodel.h"
 #include "backuper.h"
 #include "searchhighlighter.h"
 #include "sialantools/sialantools.h"
@@ -103,6 +104,7 @@ public:
     bool close_blocker;
     bool keyboard;
     bool fullscreen;
+    Kaqaz::MapMode map_mode;
 
     bool demo_active_until_next;
     bool desktop_touch_mode;
@@ -187,6 +189,7 @@ Kaqaz::Kaqaz(QObject *parent) :
     if( !kaqaz_settings )
         kaqaz_settings = new QSettings( p->confPath, QSettings::IniFormat );
 
+    p->map_mode = static_cast<MapMode>(kaqaz_settings->value("General/mapMode",GoogleMap).toInt());
     p->profilePath = kaqaz_settings->value( "General/ProfilePath", p->homePath ).toString();
 #ifdef Q_OS_MAC
     p->desktop_touch_mode = kaqaz_settings->value("UserInterface/type", false).toBool();
@@ -212,6 +215,8 @@ Kaqaz::Kaqaz(QObject *parent) :
     qmlRegisterType<GoogleMapAdapter>("Kaqaz", 1,0, "GoogleMapAdapter");
     qmlRegisterType<MapLayer>("Kaqaz", 1,0, "MapLayer");
     qmlRegisterType<QmlMapControl>("Kaqaz", 1,0, "MapControl");
+    qmlRegisterType<TranslationModel>("Kaqaz", 1,0, "TranslationModel");
+    qmlRegisterUncreatableType<Kaqaz>("Kaqaz", 1,0, "Kaqaz","");
 }
 
 Kaqaz *Kaqaz::instance()
@@ -782,6 +787,21 @@ void Kaqaz::setPositioning(bool stt)
 bool Kaqaz::positioning() const
 {
     return kaqaz_settings->value("General/positioning",true).toBool();
+}
+
+void Kaqaz::setMapMode(Kaqaz::MapMode map)
+{
+    if( p->map_mode == map )
+        return;
+
+    p->map_mode = map;
+    kaqaz_settings->setValue("General/mapMode",static_cast<int>(map));
+    emit mapModeChanged();
+}
+
+Kaqaz::MapMode Kaqaz::mapMode() const
+{
+    return p->map_mode;
 }
 
 void Kaqaz::setTitleFont(const QFont &fnt)

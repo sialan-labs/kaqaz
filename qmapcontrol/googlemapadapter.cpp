@@ -27,7 +27,7 @@
 namespace qmapcontrol
 {
     GoogleMapAdapter::GoogleMapAdapter( googleLayerType qLayerType )
-        : TileMapAdapter("mt1.google.com", "/vt/v=ap.106&hl=en&x=%2&y=%3&zoom=%1&lyrs=" + typeToString(qLayerType), 256, 17, 0)
+        : TileMapAdapter("mt1.google.com", "/vt/v=ap.106&hl=en&x=%2&y=%3&zoom=%1&lyrs=" + typeToString(qLayerType), 256, 17, 1)
             //: TileMapAdapter("tile.openstreetmap.org", "/%1/%2/%3.png", 256, 0, 17)
     {
     }

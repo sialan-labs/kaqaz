@@ -332,7 +332,7 @@ QList<int> Database::search(const QString &keyword)
     return searchQuery(query_str,keyword);
 }
 
-QList<int> Database::advanceSearch(const QString &keyword, const QDate &startDate, const QDate &endDate, const QTime &startTime, const QTime &endTime, int group, int domain, const QGeoCoordinate & geo )
+QList<int> Database::advanceSearch(const QString &keyword, const QDate &startDate, const QDate &endDate, const QTime &startTime, const QTime &endTime, int group, int domain, const QRectF & geo )
 {
     QString query_str = "SELECT id,ctime,cdate FROM Papers WHERE ";
     QHash<QString,QVariant> boundValues;
@@ -394,14 +394,14 @@ QList<int> Database::advanceSearch(const QString &keyword, const QDate &startDat
             query_str += " AND ";
 
         query_str += ":llttd<latitude AND latitude<:blttd";
-        boundValues.insert(":llttd",geo.latitude()-0.01);
-        boundValues.insert(":blttd",geo.latitude()+0.01);
+        boundValues.insert(":llttd",geo.y());
+        boundValues.insert(":blttd",geo.y()+geo.height());
 
         query_str += " AND ";
 
         query_str += ":llntd<longitude AND longitude<:blntd";
-        boundValues.insert(":llntd",geo.longitude()-0.01);
-        boundValues.insert(":blntd",geo.longitude()+0.01);
+        boundValues.insert(":llntd",geo.x());
+        boundValues.insert(":blntd",geo.x()+geo.width());
 
         has_previous = true;
     }

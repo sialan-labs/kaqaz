@@ -24,6 +24,9 @@
 */
 
 #include "layermanager.h"
+
+#include <QDebug>
+
 namespace qmapcontrol
 {
     LayerManager::LayerManager(AbstractMapControl *mapcontrol, QSize size)
@@ -32,7 +35,6 @@ namespace qmapcontrol
         // genauer berechnen?
         offSize = size *2;
         composedOffscreenImage = QPixmap(offSize);
-        composedOffscreenImage2 = QPixmap(offSize);
         zoomImage = QPixmap(size);
         zoomImage.fill(Qt::white);
         screenmiddle = QPoint(size.width()/2, size.height()/2);
@@ -125,18 +127,7 @@ namespace qmapcontrol
         mapmiddle_px = layer()->mapAdapter()->coordinateToDisplay(coordinate);
         mapmiddle = coordinate;
 
-        //TODO: muss wegen moveTo() raus
-        if (!checkOffscreen())
-        {
-            newOffscreenImage();
-        }
-        else
-        {
-            //TODO:
-            // verschiebung ausrechnen
-            // oder immer neues offscreenimage
-            newOffscreenImage();
-        }
+        newOffscreenImage(true, false);
     }
 
     void LayerManager::setView(QList<QPointF> coordinates)
@@ -287,13 +278,13 @@ namespace qmapcontrol
         // 	qDebug() << "LayerManager::newOffscreenImage()";
         whilenewscroll = mapmiddle_px;
 
-        if (clearImage)
+        if (clearImage || ImageManager::instance()->loadQueueSize() == 0)
         {
-            composedOffscreenImage2.fill(Qt::white);
+            composedOffscreenImage.fill(Qt::white);
         }
 
-        QPainter painter(&composedOffscreenImage2);
-        if (showZoomImage)
+        QPainter painter(&composedOffscreenImage);
+        if (showZoomImage|| ImageManager::instance()->loadQueueSize() != 0)
         {
             painter.drawPixmap(screenmiddle.x()-zoomImageScroll.x(), screenmiddle.y()-zoomImageScroll.y(),zoomImage);
         }
@@ -310,19 +301,25 @@ namespace qmapcontrol
             }
         }
 
-        composedOffscreenImage = composedOffscreenImage2;
+        //stop the painter now that we've finished drawing
+        painter.end();
+
+        //composedOffscreenImage = composedOffscreenImage2;
         scroll = mapmiddle_px-whilenewscroll;
 
         mapcontrol->refresh();
     }
 
-    void LayerManager::zoomIn()
+    void LayerManager::zoomIn( QPoint middle )
     {
         if ( !layer() )
         {
             qDebug() << "LayerManager::zoomIn() - no layers configured";
             return;
         }
+
+        if( middle.isNull() )
+            middle = screenmiddle;
 
         ImageManager::instance()->abortLoading();
         //QCoreApplication::processEvents();
@@ -334,7 +331,7 @@ namespace qmapcontrol
         QPixmap tmpImg = composedOffscreenImage.copy(screenmiddle.x()+scroll.x(),screenmiddle.y()+scroll.y(), size.width(), size.height());
 
         QPainter painter(&zoomImage);
-        painter.translate(screenmiddle);
+        painter.translate(middle);
         painter.scale(2, 2);
         painter.translate(-screenmiddle);
 
@@ -355,7 +352,7 @@ namespace qmapcontrol
         mapmiddle_px = layer()->mapAdapter()->coordinateToDisplay(mapmiddle);
         whilenewscroll = mapmiddle_px;
 
-        newOffscreenImage();
+        newOffscreenImage(true, true); //show zoomed image while map loads
     }
 
     bool LayerManager::checkOffscreen() const
@@ -380,7 +377,7 @@ namespace qmapcontrol
 
         return true;
     }
-    void LayerManager::zoomOut()
+    void LayerManager::zoomOut(QPoint middle)
     {
         if ( !layer() )
         {
@@ -388,20 +385,23 @@ namespace qmapcontrol
             return;
         }
 
+        if( middle.isNull() )
+            middle = screenmiddle;
+
         //QCoreApplication::processEvents();
         ImageManager::instance()->abortLoading();
         zoomImageScroll = QPoint(0,0);
         zoomImage.fill(Qt::white);
         QPixmap tmpImg = composedOffscreenImage.copy(screenmiddle.x()+scroll.x(),screenmiddle.y()+scroll.y(), size.width(), size.height());
         QPainter painter(&zoomImage);
-        painter.translate(screenmiddle);
+        painter.translate(middle);
         painter.scale(0.500001,0.500001);
         painter.translate(-screenmiddle);
         painter.drawPixmap(0,0,tmpImg);
 
         painter.translate(screenmiddle);
         painter.scale(2,2);
-        painter.translate(-screenmiddle);
+        painter.translate(-middle);
 
         QListIterator<Layer*> it(mylayers);
         //TODO: remove hack, that mapadapters wont get set zoom multiple times
@@ -417,7 +417,7 @@ namespace qmapcontrol
         }
         mapmiddle_px = layer()->mapAdapter()->coordinateToDisplay(mapmiddle);
         whilenewscroll = mapmiddle_px;
-        newOffscreenImage();
+        newOffscreenImage(true, true); //show zoomed image while map loads
     }
 
     void LayerManager::setZoom(int zoomlevel)
@@ -482,17 +482,16 @@ namespace qmapcontrol
             //  int(rect.width()+1), int(rect.height()+1));
             //
             // mapcontrol->updateRequest(rect_px);
-            mapcontrol->refresh();
-            //newOffscreenImage();
+            newOffscreenImage(false, false);
         }
     }
     void LayerManager::updateRequest()
     {
-        newOffscreenImage();
+        newOffscreenImage(true, false);
     }
     void LayerManager::forceRedraw()
     {
-        newOffscreenImage();
+        newOffscreenImage(true, false);
     }
     void LayerManager::removeZoomImage()
     {
@@ -534,14 +533,32 @@ namespace qmapcontrol
         return layer()->mapAdapter()->currentZoom();
     }
 
+    int LayerManager::minZoom()
+    {
+        if ( !layer() )
+        {
+            qDebug() << "LayerManager::minZoom() - no layers configured";
+            return 0;
+        }
+        return layer()->mapAdapter()->minZoom();
+    }
+
+    int LayerManager::maxZoom()
+    {
+        if ( !layer() )
+        {
+            qDebug() << "LayerManager::maxZoom() - no layers configured";
+            return 0;
+        }
+        return layer()->mapAdapter()->maxZoom();
+    }
+
     void LayerManager::resize(QSize newSize)
     {
         size = newSize;
         offSize = newSize *2;
         composedOffscreenImage = QPixmap(offSize);
-        composedOffscreenImage2 = QPixmap(offSize);
         zoomImage = QPixmap(newSize);
-        zoomImage.fill(Qt::white);
 
         screenmiddle = QPoint(newSize.width()/2, newSize.height()/2);
 
@@ -552,7 +569,6 @@ namespace qmapcontrol
             l->setSize(newSize);
         }
 
-        newOffscreenImage();
         forceRedraw();
     }
 

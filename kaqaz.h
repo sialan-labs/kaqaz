@@ -43,15 +43,22 @@ class Kaqaz : public QObject
     Q_PROPERTY( bool    positioning           READ positioning           WRITE setPositioning           NOTIFY positioningChanged)
     Q_PROPERTY( bool    fullscreen            READ fullscreen            WRITE setFullscreen            NOTIFY fullscreenChanged)
     Q_PROPERTY( QSize   size                  READ size                  WRITE setSize                  NOTIFY sizeChanged)
+    Q_PROPERTY( MapMode mapMode               READ mapMode               WRITE setMapMode               NOTIFY mapModeChanged)
     Q_PROPERTY( QString resourcePath          READ resourcePath          NOTIFY resourcePathChanged)
     Q_PROPERTY( Qt::LayoutDirection  languageDirection  READ languageDirection NOTIFY languageDirectionChanged )
 
+    Q_ENUMS(MapMode)
     Q_OBJECT
 private:
     Kaqaz(QObject *parent = 0);
     ~Kaqaz();
 
 public:
+    enum MapMode {
+        GoogleMap     = 0,
+        OpenStreetMap = 1
+    };
+
     static Kaqaz *instance();
 
     QObject *view();
@@ -124,6 +131,9 @@ public:
     void setPositioning( bool stt );
     bool positioning() const;
 
+    void setMapMode( MapMode map );
+    MapMode mapMode() const;
+
     void setTitleFont( const QFont & fnt );
     QFont titleFont() const;
 
@@ -167,6 +177,7 @@ signals:
     void sizeChanged();
     void desktopTouchModeChanged();
     void fullscreenChanged();
+    void mapModeChanged();
 
     void titleFontChanged();
     void bodyFontChanged();

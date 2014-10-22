@@ -185,5 +185,9 @@
         <file>qml/Kaqaz/helper/finger-point.png</file>
         <file>qml/Kaqaz/helper/finger-move-tl.png</file>
         <file>qml/Kaqaz/helper/finger-move-br.png</file>
+        <file>qml/Kaqaz/OSMapView.qml</file>
+        <file>qml/Kaqaz/GoogleMapView.qml</file>
+        <file>qml/Kaqaz/MapSwitcher.qml</file>
+        <file>qml/Kaqaz/MapSelector.qml</file>
     </qresource>
 </RCC>

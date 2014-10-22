@@ -25,59 +25,10 @@ Item {
     width: 100
     height: 62
 
-    property variant domain
+    property alias domain: map_view.viewPort
 
-    Column {
-        id: column
+    MapSwitcher {
+        id: map_view
         anchors.fill: parent
-
-        Behavior on x {
-            NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
-        }
-
-        MenuButton {
-            height: 50*physicalPlatformScale
-            width: column.width
-            normalColor: "#00000000"
-            highlightColor: "#4098bf"
-            textColor: press? "#ffffff" : "#4098bf"
-            textFont.weight: Font.Normal
-            textFont.pixelSize: 13*fontsScale
-            textFont.bold: false
-            text: qsTr("No Location")
-            onClicked: {
-                geo_domain.domain = 0
-            }
-        }
-
-        MenuButton {
-            height: 50*physicalPlatformScale
-            width: column.width
-            normalColor: "#00000000"
-            highlightColor: "#4098bf"
-            textColor: press? "#ffffff" : "#4098bf"
-            textFont.weight: Font.Normal
-            textFont.pixelSize: 13*fontsScale
-            textFont.bold: false
-            text: qsTr("Current Location")
-            onClicked: {
-                geo_domain.domain = position.coordinate
-            }
-        }
-
-        MenuButton {
-            height: 50*physicalPlatformScale
-            width: column.width
-            normalColor: "#00000000"
-            highlightColor: "#4098bf"
-            textColor: press? "#ffffff" : "#4098bf"
-            textFont.weight: Font.Normal
-            textFont.pixelSize: 13*fontsScale
-            textFont.bold: false
-            textFont.strikeout: true
-            text: qsTr("Select on Map (Soon)")
-            onClicked: {
-            }
-        }
     }
 }

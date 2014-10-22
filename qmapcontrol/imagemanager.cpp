@@ -77,7 +77,8 @@ namespace qmapcontrol
         if ( net->imageIsLoading(url) )
         {
             //currently loading an image
-            return loadingPixmap;
+//            return loadingPixmap;
+            return emptyPixmap;
         }
         else if ( QPixmapCache::find( md5hex(url), &pm) )
         {

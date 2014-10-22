@@ -18,6 +18,8 @@
 
 #include "qmlmapcontrol.h"
 #include <QTimer>
+#include <QtMath>
+#include <QTouchEvent>
 #include <QDebug>
 
 namespace qmapcontrol
@@ -34,6 +36,10 @@ namespace qmapcontrol
         screen_middle = QPoint(size.width()/2, size.height()/2);
 
         mousepressed = false;
+        scaleVisible = true;
+        crosshairsVisible = true;
+        mymousemode = Panning;
+        mouse_wheel_events = true;
 
         connect(ImageManager::instance(), SIGNAL(imageReceived()),
                 this, SLOT(updateRequestNew()));
@@ -43,7 +49,6 @@ namespace qmapcontrol
 
         setWidth(size.width()+1);
         setHeight(size.height()+1);
-        mouse_wheel_events = true;
 
         connect( this, SIGNAL(widthChanged()) , SLOT(sizeChanged()) );
         connect( this, SIGNAL(heightChanged()), SLOT(sizeChanged()) );
@@ -326,6 +331,7 @@ namespace qmapcontrol
 
         evnt->accept();
         update();
+        emit viewChanged(currentCoordinate(), currentZoom());
     }
 
     void QmlMapControl::wheelEvent(QWheelEvent *evnt)
@@ -340,8 +346,12 @@ namespace qmapcontrol
                     return;
                 }
 
-                setView(clickToWorldCoordinate(evnt->pos())); //zoom in under mouse cursor
-                zoomIn();
+                QPoint pnt = evnt->pos();
+                QPoint newPoint( width()-pnt.x(), height()-pnt.y() );
+
+                setView(clickToWorldCoordinate(pnt));
+                zoomIn(pnt);
+                setView(clickToWorldCoordinate(newPoint));
             }
             else
             {
@@ -349,13 +359,68 @@ namespace qmapcontrol
                 {
                     return;
                 }
-                zoomOut();
+                QPoint pnt = evnt->pos();
+                QPoint newPoint( width()-pnt.x(), height()-pnt.y() );
+
+                setView(clickToWorldCoordinate(pnt));
+                zoomOut(pnt);
+                setView(clickToWorldCoordinate(newPoint));
             }
             evnt->accept();
         }
         else
         {
             evnt->ignore();
+        }
+    }
+
+    void QmlMapControl::touchEvent(QTouchEvent *evnt)
+    {
+        const QList<QTouchEvent::TouchPoint> & touchs = evnt->touchPoints();
+        if( touchs.count() != 2 )
+        {
+            QQuickPaintedItem::touchEvent(evnt);
+        }
+        else
+        {
+            evnt->accept();
+
+            const QTouchEvent::TouchPoint & t0 = touchs.first();
+            const QTouchEvent::TouchPoint & t1 = touchs.last();
+
+            if( last_t0_startPos.isNull() )
+                last_t0_startPos = t0.startPos();
+            if( last_t1_startPos.isNull() )
+                last_t1_startPos = t1.startPos();
+
+            qreal startW = qPow( qPow(last_t0_startPos.x()-last_t1_startPos.x(),2)+qPow(last_t0_startPos.y()-last_t1_startPos.y(),2), 0.5 );
+            qreal endW = qPow( qPow(t0.pos().x()-t1.pos().x(),2)+qPow(t0.pos().y()-t1.pos().y(),2), 0.5 );
+
+            if( startW*4/3<endW )
+            {
+                QPoint pnt( last_t0_startPos.x()/2+last_t1_startPos.x()/2, last_t0_startPos.y()/2+last_t1_startPos.y()/2 );
+                QPoint newPoint( width()-pnt.x(), height()-pnt.y() );
+
+                setView(clickToWorldCoordinate(pnt));
+                zoomIn(pnt);
+                setView(clickToWorldCoordinate(newPoint));
+
+                last_t0_startPos = t0.pos();
+                last_t1_startPos = t1.pos();
+            }
+            else
+            if( startW*3/4>endW )
+            {
+                QPoint pnt( t0.pos().x()/2+t1.pos().x()/2, t0.pos().y()/2+t1.pos().y()/2 );
+                QPoint newPoint( width()-pnt.x(), height()-pnt.y() );
+
+                setView(clickToWorldCoordinate(pnt));
+                zoomOut(pnt);
+                setView(clickToWorldCoordinate(newPoint));
+
+                last_t0_startPos = t0.pos();
+                last_t1_startPos = t1.pos();
+            }
         }
     }
 
@@ -390,26 +455,26 @@ namespace qmapcontrol
     }
 
     // slots
-    void QmlMapControl::zoomIn()
+    void QmlMapControl::zoomIn(QPoint middle)
     {
         if( currentZoom() == 17 )
         {
             return;
         }
 
-        layermanager->zoomIn();
+        layermanager->zoomIn(middle);
         updateView();
         emit viewChanged(currentCoordinate(), currentZoom());
     }
 
-    void QmlMapControl::zoomOut()
+    void QmlMapControl::zoomOut(QPoint middle)
     {
         if( currentZoom() == 0 )
         {
             return;
         }
 
-        layermanager->zoomOut();
+        layermanager->zoomOut(middle);
         updateView();
         emit viewChanged(currentCoordinate(), currentZoom());
     }
@@ -426,6 +491,7 @@ namespace qmapcontrol
         layermanager->setZoom(zoomlevel);
         updateView();
         emit viewChanged(currentCoordinate(), currentZoom());
+        refresh();
     }
 
     int QmlMapControl::currentZoom() const
@@ -487,9 +553,10 @@ namespace qmapcontrol
         emit viewChanged(currentCoordinate(), currentZoom());
     }
 
-    void QmlMapControl::setView(const Point* point) const
+    void QmlMapControl::setView(const Point* point)
     {
         layermanager->setView(point->coordinate());
+        refresh();
     }
 
     void QmlMapControl::loadingFinished()
@@ -517,7 +584,11 @@ namespace qmapcontrol
 
     void QmlMapControl::setMouseMode(MouseMode mousemode)
     {
+        if( mymousemode == mousemode )
+            return;
+
         mymousemode = mousemode;
+        emit mouseModeChanged();
     }
 
     QmlMapControl::MouseMode QmlMapControl::mouseMode()
@@ -542,12 +613,30 @@ namespace qmapcontrol
 
     void QmlMapControl::showScale(bool visible)
     {
+        if( scaleVisible == visible )
+            return;
+
         scaleVisible = visible;
+        emit scaleVisibleChanged();
+    }
+
+    bool QmlMapControl::scaleIsVisible() const
+    {
+        return scaleVisible;
     }
 
     void QmlMapControl::showCrosshairs(bool visible)
     {
+        if( crosshairsVisible == visible )
+            return;
+
         crosshairsVisible = visible;
+        emit crosshairsVisibleChanged();
+    }
+
+    bool QmlMapControl::crosshairsIsVisible() const
+    {
+        return crosshairsVisible;
     }
 
     void QmlMapControl::resize(const QSize newSize)

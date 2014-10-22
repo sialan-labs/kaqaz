@@ -6,7 +6,7 @@ folder_03.source = files/FaenzaFlattr
 folder_03.target = files/icons/
 DEPLOYMENTFOLDERS = folder_01 folder_02 folder_03
 
-QT += sql multimedia positioning qml quick
+QT += sql multimedia positioning qml quick xml
 
 contains(BUILD_TYPE,free) {
     DEFINES += FREE_BUILD
@@ -117,7 +117,8 @@ SOURCES += main.cpp \
     smartiodbox.cpp \
     smartiodboxsingle.cpp \
     searchhighlighter.cpp \
-    databasedatatypes.cpp
+    databasedatatypes.cpp \
+    translationmodel.cpp
 
 HEADERS += \
     kaqaz.h \
@@ -135,7 +136,8 @@ HEADERS += \
     sialandeveloper_macros.h \
     smartiodbox.h \
     smartiodboxsingle.h \
-    searchhighlighter.h
+    searchhighlighter.h \
+    translationmodel.h
 
 TRANSLATIONS += \
     files/translations/lang-en.qm \

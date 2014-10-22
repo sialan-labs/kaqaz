@@ -31,6 +31,7 @@
 #include <QDebug>
 #include <QPainter>
 #include <QMouseEvent>
+#include <QPointer>
 
 #include "mapadapter.h"
 #include "layermanager.h"
@@ -88,7 +89,7 @@ namespace qmapcontrol
          * be something like a "speed up hint"
          */
         Layer();
-        Layer(QString layerName, MapAdapter* _mapAdapter, enum LayerType layertype, bool takeevents=true);
+        Layer(QString layerName, MapAdapter* mymapadapter, enum LayerType layertype, bool takeevents=true);
         virtual ~Layer();
 
         //! returns the layer's name
@@ -180,7 +181,7 @@ namespace qmapcontrol
         QPoint screenmiddle;
 
         QList<Geometry*> geometries;
-        MapAdapter* _mapAdapter;
+        QPointer<MapAdapter> mymapadapter;
         bool takeevents;
         mutable QRect myoffscreenViewport;
 

@@ -48,7 +48,7 @@ public:
     QDate advsearch_endDate;
     QTime advsearch_startTime;
     QTime advsearch_endTime;
-    QGeoCoordinate advsearch_geo;
+    QRectF advsearch_geo;
     int advsearch_group;
     int advsearch_domain;
 
@@ -375,7 +375,7 @@ QString PaperManager::keyword() const
     return p->keyword;
 }
 
-void PaperManager::setAdvanceSearch(const QString &keyword, const QDate &startDate, const QDate &endDate, const QTime &startTime, const QTime &endTime, int group, int domain, const QGeoCoordinate &geo)
+void PaperManager::setAdvanceSearch(const QString &keyword, const QDate &startDate, const QDate &endDate, const QTime &startTime, const QTime &endTime, int group, int domain, const QRectF &geo)
 {
     p->advsearch_keyword = keyword;
     p->advsearch_startDate = startDate;

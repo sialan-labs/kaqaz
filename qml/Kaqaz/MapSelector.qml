@@ -16,11 +16,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import QtQuick 2.0
+import QtQuick 2.2
 import SialanTools 1.0
+import Kaqaz 1.0
 
 Item {
-    id: configure
     width: 100
     height: 62
 
@@ -32,7 +32,7 @@ Item {
     }
 
     ListView {
-        id: prefrences
+        id: preference_list
         anchors.top: title.bottom
         anchors.left: parent.left
         anchors.bottom: parent.bottom
@@ -48,11 +48,14 @@ Item {
             height:  50*physicalPlatformScale
             color: press? "#3B97EC" : "#00000000"
 
-            property string dstFile: file
-            property alias press: marea.pressed
-            property bool checkable: check
+            property string text: name
+            property bool press: false
 
-            property string prprt: pr
+            Connections{
+                target: preference_list
+                onMovementStarted: press = false
+                onFlickStarted: press = false
+            }
 
             Text{
                 id: txt
@@ -60,58 +63,46 @@ Item {
                 anchors.right: parent.right
                 anchors.margins: 30*physicalPlatformScale
                 y: parent.height/2 - height/2
+                text: parent.text
                 font.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
                 font.family: SApp.globalFontFamily
                 color: item.press? "#ffffff" : "#333333"
-                wrapMode: TextInput.WordWrap
-                text: name
             }
 
             MouseArea{
-                id: marea
                 anchors.fill: parent
+                onPressed: item.press = true
+                onReleased: item.press = false
                 onClicked: {
-                    if( !item.checkable ) {
-                        var component = Qt.createComponent(item.dstFile)
-                        var citem = component.createObject(main)
-                        pushPreference(citem)
-                    } else {
-                        checkbox.checked = !checkbox.checked
-                    }
+                    kaqaz.mapMode = identifier
+                    showTooltip( qsTr("Map changed") )
+                    main.popPreference()
                 }
-            }
-
-            CheckBox {
-                id: checkbox
-                x: kaqaz.languageDirection == Qt.RightToLeft? 20 : item.width - width - 20
-                anchors.verticalCenter: parent.verticalCenter
-                visible: item.checkable
-                checked: item.prprt.length==0? false : Tools.property(kaqaz,item.prprt)
-                color: item.press? "#ffffff" : "#333333"
-                onCheckedChanged: Tools.setProperty(kaqaz,item.prprt,checked)
             }
         }
 
+        focus: true
         highlight: Rectangle { color: "#3B97EC"; radius: 3; smooth: true }
         currentIndex: -1
 
-        function refresh() {
+        onCurrentItemChanged: {
+            if( !currentItem )
+                return
+        }
+
+        Component.onCompleted: {
             model.clear()
-            model.append({ "name": qsTr("All papers item"), "file": "", "check": true, "pr":"allPaper"})
-            model.append({ "name": qsTr("Notes positioning"), "file": "", "check": true, "pr":"positioning"})
-            if( Devices.isMacX )
-                model.append({ "name": qsTr("Desktop Touch"), "file": "", "check": true, "pr":"desktopTouchMode"})
-            if( !Devices.isDesktop )
-                model.append({ "name": qsTr("Fullscreen"), "file": "", "check": true, "pr":"fullscreen"})
-            model.append({ "name": qsTr("Word suggestions"), "file": "", "check": true, "pr":"keyboardPredicative"})
-            model.append({ "name": qsTr("Groups count"), "file": "", "check": true, "pr":"groupsCount"})
-            model.append({ "name": qsTr("Select Map"), "file": "MapSelector.qml", "check": false, "pr":""})
+
+            model.append({"identifier": Kaqaz.GoogleMap ,"name": qsTr("Google Map")})
+            model.append({"identifier": Kaqaz.OpenStreetMap ,"name": qsTr("OpenStreet Map")})
+
+            focus = true
         }
     }
 
     ScrollBar {
-        scrollArea: prefrences; height: prefrences.height; width: 6*physicalPlatformScale
-        anchors.right: prefrences.right; anchors.top: prefrences.top; color: "#000000"
+        scrollArea: preference_list; height: preference_list.height; width: 6*physicalPlatformScale
+        anchors.right: preference_list.right; anchors.top: preference_list.top;color: "#000000"
     }
 
     Connections{
@@ -120,8 +111,7 @@ Item {
     }
 
     function initTranslations(){
-        prefrences.refresh()
-        title.text = qsTr("General Settings")
+        title.text = qsTr("Maps")
     }
 
     Component.onCompleted: {

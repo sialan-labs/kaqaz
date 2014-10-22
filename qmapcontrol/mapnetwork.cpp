@@ -85,11 +85,11 @@ namespace qmapcontrol
     {
         if (!reply)
         {
-            qDebug() << "MapNetwork::requestFinished - reply no longer valid";
+//            qDebug() << "MapNetwork::requestFinished - reply no longer valid";
             return;
         }
 
-        qDebug() << "MapNetwork::requestFinished" << reply->url().toString();
+//        qDebug() << "MapNetwork::requestFinished" << reply->url().toString();
         if (reply->error() == QNetworkReply::NoError)
         {
             QString id = reply->url().toString();
@@ -108,7 +108,7 @@ namespace qmapcontrol
           
             if (idInMap)
             {
-                qDebug() << "request finished for reply: " << reply << ", belongs to: " << url << endl;
+//                qDebug() << "request finished for reply: " << reply << ", belongs to: " << url << endl;
                 QByteArray ax;
 
                 if (reply->bytesAvailable()>0)
@@ -132,7 +132,7 @@ namespace qmapcontrol
 
         if (loadQueueSize() == 0)
         {
-            qDebug () << "all loaded";
+//            qDebug () << "all loaded";
             parent->loadingQueueEmpty();
         }
 
@@ -151,7 +151,7 @@ namespace qmapcontrol
 
     void MapNetwork::abortLoading()
     {
-        qDebug() << "MapNetwork::abortLoading";
+//        qDebug() << "MapNetwork::abortLoading";
         // be sure that replyList is copied in case it's modified in another thread
         QListIterator<QNetworkReply *> iter(replyList);
         while(iter.hasNext())

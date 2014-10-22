@@ -113,10 +113,10 @@ namespace qmapcontrol
         void setViewAndZoomIn (const QList<QPointF> coordinates);
 
         //! zooms in one step
-        void zoomIn();
+        void zoomIn(QPoint middle = QPoint());
 
         //! zooms out one step
-        void zoomOut();
+        void zoomOut(QPoint middle = QPoint());
 
         //! sets the given zoomlevel
         /*!
@@ -179,6 +179,11 @@ namespace qmapcontrol
         void drawGeoms(QPainter* painter);
         void drawImage(QPainter* painter);
 
+        //! return min Zoom Level
+        int minZoom();
+
+        //! return max Zoom Level
+        int maxZoom();
 
         //! Set whether to enable a view bounding box
         /*!
@@ -230,7 +235,6 @@ namespace qmapcontrol
         QSize offSize; // size of the offscreen image
 
         QPixmap composedOffscreenImage;
-        QPixmap composedOffscreenImage2;
         QPixmap zoomImage;
 
         QList<Layer*>	mylayers;

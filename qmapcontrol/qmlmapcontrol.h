@@ -48,6 +48,14 @@ namespace qmapcontrol
     class QmlMapControl : public QQuickPaintedItem, public AbstractMapControl
     {
         Q_OBJECT
+        Q_ENUMS(MouseMode)
+
+        Q_PROPERTY(MouseMode mouseMode READ mouseMode WRITE setMouseMode NOTIFY mouseModeChanged)
+        Q_PROPERTY(QPointF view READ currentCoordinate WRITE setView NOTIFY viewChanged)
+        Q_PROPERTY(int zoom READ currentZoom WRITE setZoom NOTIFY viewChanged)
+        Q_PROPERTY(bool crosshairs READ crosshairsIsVisible WRITE showCrosshairs NOTIFY crosshairsVisibleChanged)
+        Q_PROPERTY(bool scaleHelper READ scaleIsVisible WRITE showScale NOTIFY scaleVisibleChanged)
+        Q_PROPERTY(QRectF viewPort READ getViewport NOTIFY viewChanged)
 
     public:
         //! Declares what actions mouse movements have on the map
@@ -152,7 +160,7 @@ namespace qmapcontrol
          *
          * @param point the geometric point the view should be set to
          */
-        void setView ( const Point* point ) const;
+        void setView ( const Point* point );
 
         //! Keeps the center of the map on the Geometry, even when it moves
         /*!
@@ -226,8 +234,10 @@ namespace qmapcontrol
          * @param show true if the scale should be displayed
          */
         void showScale ( bool visible );
+        bool scaleIsVisible() const;
 
         void showCrosshairs ( bool visible );
+        bool crosshairsIsVisible() const;
 
         //! Set whether to enable a view bounding box
         /*!
@@ -280,6 +290,9 @@ namespace qmapcontrol
 
         QSize size; // size of the widget
 
+        QPointF last_t0_startPos;
+        QPointF last_t1_startPos;
+
         bool mouse_wheel_events;
         bool mousepressed;
         MouseMode mymousemode;
@@ -302,6 +315,7 @@ namespace qmapcontrol
         void mouseReleaseEvent ( QMouseEvent* evnt );
         void mouseMoveEvent ( QMouseEvent* evnt );
         void wheelEvent( QWheelEvent* evnt );
+        void touchEvent(QTouchEvent* evnt);
 
     signals:
         // void mouseEvent(const QMouseEvent* evnt);
@@ -338,14 +352,18 @@ namespace qmapcontrol
          */
         void viewChanged ( const QPointF &coordinate, int zoom ) const;
 
+        void mouseModeChanged();
+        void scaleVisibleChanged();
+        void crosshairsVisibleChanged();
+
     public slots:
         void refresh();
 
         //! zooms in one step
-        void zoomIn();
+        void zoomIn(QPoint middle = QPoint());
 
         //! zooms out one step
-        void zoomOut();
+        void zoomOut(QPoint middle = QPoint());
 
         //! sets the given zoomlevel
         /*!

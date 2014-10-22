@@ -251,24 +251,6 @@ SialanMain {
         main.incomingImage(path)
     }
 
-//    OSMMapAdapter {
-//        id: osm_adapter
-//    }
-
-//    MapLayer {
-//        id: map_layer
-//        mapAdapter: osm_adapter.adapter
-//        layerName: "OpenStreetMap-Layer"
-//    }
-
-//    MapControl {
-//        id: map_control
-//        width: 500
-//        height: 300
-//        visible: true
-//        Component.onCompleted: addLayer(map_layer.layerObject)
-//    }
-
     Component {
         id: get_pass_cmpnt
         GetPassDialog {
