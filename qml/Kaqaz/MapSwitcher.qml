@@ -9,11 +9,15 @@ Item {
     property rect viewPort
     property point view
     property int zoom
+    property bool scaleHelper
+    property bool crosshairs
 
     property variant item
 
     onViewChanged: if(item) item.view = view
     onZoomChanged: if(item) item.zoom = zoom
+    onScaleHelperChanged: if(item) item.scaleHelper = scaleHelper
+    onCrosshairsChanged: if(item) item.crosshairs = crosshairs
 
     Component.onCompleted: {
         if( kaqaz.mapMode == Kaqaz.GoogleMap ) {
@@ -31,6 +35,8 @@ Item {
             onViewPortChanged: msw.viewPort = viewPort
             onViewChanged: msw.view = view
             onZoomChanged: msw.zoom = zoom
+            onScaleHelperChanged: msw.scaleHelper = scaleHelper
+            onCrosshairsChanged: msw.crosshairs = crosshairs
         }
     }
 
@@ -42,6 +48,8 @@ Item {
             onViewPortChanged: msw.viewPort = viewPort
             onViewChanged: msw.view = view
             onZoomChanged: msw.zoom = zoom
+            onScaleHelperChanged: msw.scaleHelper = scaleHelper
+            onCrosshairsChanged: msw.crosshairs = crosshairs
         }
     }
 }

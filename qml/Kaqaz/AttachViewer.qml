@@ -219,7 +219,7 @@ Item {
                 var component;
                 if( suffix === "jpg" || suffix === "jpeg" || suffix === "png" ) {
                     component = Qt.createComponent("ImageViewer.qml");
-                    edit_btn.visible = true
+                    edit_btn.visible = kaqaz.proBuild
                 }
                 else
                 if( suffix === "mp3" || suffix === "wav" || suffix === "ogg" )

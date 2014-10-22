@@ -84,11 +84,29 @@ QVariant TranslationModel::data(const QModelIndex &index, int role) const
     switch( role )
     {
     case Qt::DisplayRole:
+    case OriginalTextRole:
         res = key;
+        break;
+
+    case TranslationRole:
+        res = p->translations.value(key);
         break;
     }
 
     return res;
+}
+
+QHash<qint32, QByteArray> TranslationModel::roleNames() const
+{
+    QHash<qint32, QByteArray> *res = 0;
+    if( res )
+        return *res;
+
+    res = new QHash<qint32, QByteArray>();
+    res->insert( OriginalTextRole, "originalText" );
+    res->insert( TranslationRole , "translation" );
+
+    return *res;
 }
 
 void TranslationModel::refresh()
@@ -145,7 +163,7 @@ void TranslationModel::parseFolderElement(const QDomElement &element)
         else
         if (child.tagName() == "message")
         {
-            const QDomElement domLocation = child.firstChildElement("location");
+            const QDomElement & domLocation = child.firstChildElement("location");
             const QString & fileName = domLocation.attribute("filename");
             const QString & lineNumber = domLocation.attribute("line");
 
@@ -158,6 +176,11 @@ void TranslationModel::parseFolderElement(const QDomElement &element)
 
         child = child.nextSiblingElement();
     }
+}
+
+void TranslationModel::translationsChanged()
+{
+
 }
 
 TranslationModel::~TranslationModel()

@@ -198,9 +198,8 @@ Item {
                 textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Update Location")
-                visible: !map_image.visible
                 onClicked: {
-                    database.setPaperLocation(item.paperItem.paperItem,positioning.position.coordinate)
+                    showBottomPanel(geo_component,true)
                 }
             }
 
@@ -379,6 +378,47 @@ Item {
                 timeVisible: true
                 color: "#D9D9D9"
                 textsColor: "#111111"
+            }
+        }
+    }
+
+    Component {
+        id: geo_component
+        Item {
+            id: geo_dialog
+            height: 230*physicalPlatformScale
+
+            MouseArea {
+                anchors.fill: parent
+            }
+
+            Button {
+                id: done_btn
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.margins: 10*physicalPlatformScale
+                height: 30*physicalPlatformScale
+                width: 100*physicalPlatformScale
+                color: "#4098bf"
+                highlightColor: "#3B8DB1"
+                textColor: "#ffffff"
+                text: qsTr("Done")
+                onClicked: {
+                    var geo = map_switcher.view
+                    database.setPaperLocation(item.paperItem.paperItem,geo)
+                    main.refreshMenu()
+                    hideBottomPanel()
+                }
+            }
+
+            MapSwitcher {
+                id: map_switcher
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.top: done_btn.bottom
+                anchors.topMargin: 10*physicalPlatformScale
+                Component.onCompleted: crosshairs = true
             }
         }
     }

@@ -164,7 +164,7 @@ Item {
         width: 30*physicalPlatformScale
         normalColor: "#00000000"
         radius: 2*physicalPlatformScale
-        visible: attach_menu.opened
+        visible: attach_menu.opened && kaqaz.proBuild
         opacity: canvas_btn.opacity
         icon: "files/pen.png"
         iconHeight: 16*physicalPlatformScale

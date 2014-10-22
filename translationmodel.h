@@ -28,6 +28,11 @@ class TranslationModel : public QAbstractListModel
     Q_OBJECT
     Q_PROPERTY(QString file READ file WRITE setFile NOTIFY fileChanged)
 public:
+    enum TranslationRoles {
+        OriginalTextRole = Qt::UserRole,
+        TranslationRole
+    };
+
     TranslationModel(QObject *parent = 0);
     ~TranslationModel();
 
@@ -39,6 +44,8 @@ public:
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
+    QHash<qint32,QByteArray> roleNames() const;
+
 public slots:
     void refresh();
 
@@ -47,6 +54,9 @@ signals:
 
 private:
     void parseFolderElement(const QDomElement &element);
+
+private slots:
+    void translationsChanged();
 
 private:
     TranslationModelPrivate *p;

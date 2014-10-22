@@ -73,9 +73,15 @@ Item {
                 onPressed: item.press = true
                 onReleased: item.press = false
                 onClicked: {
-                    kaqaz.setCurrentLanguage(item.text)
-                    showTooltip( qsTr("Language changed") )
-                    main.popPreference()
+                    if( addButton ) {
+                        var component = Qt.createComponent("TranslationEditor.qml")
+                        var citem = component.createObject(main)
+                        pushPreference(citem)
+                    } else {
+                        kaqaz.setCurrentLanguage(item.text)
+                        showTooltip( qsTr("Language changed") )
+                        main.popPreference()
+                    }
                 }
             }
         }
@@ -94,8 +100,9 @@ Item {
 
             var langs = kaqaz.languages()
             for( var i=0; i<langs.length; i++ )
-                model.append({"name": langs[i]})
+                model.append({"name": langs[i], "addButton": false})
 
+//            model.append({"name": qsTr("Add your Language"), "addButton": true})
             focus = true
         }
     }

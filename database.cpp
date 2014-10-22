@@ -699,6 +699,11 @@ void Database::setPaperLocation(int id, const QGeoCoordinate &coo)
     savePaper(paper);
 }
 
+void Database::setPaperLocation(int id, const QPointF &point)
+{
+    setPaperLocation( id, QGeoCoordinate(point.y(), point.x()) );
+}
+
 int Database::paperUuidId(const QString &uuid)
 {
     QSqlQuery query(p->db);

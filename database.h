@@ -76,6 +76,7 @@ public:
 
     Q_INVOKABLE QGeoCoordinate paperLocation( int id );
     Q_INVOKABLE void setPaperLocation( int id, const QGeoCoordinate & coo );
+    Q_INVOKABLE void setPaperLocation(int id, const QPointF & point );
 
     Q_INVOKABLE int paperGroup( int id );
     Q_INVOKABLE void setPaperGroup( int id, int group );

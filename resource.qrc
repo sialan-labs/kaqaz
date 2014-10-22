@@ -189,5 +189,6 @@
         <file>qml/Kaqaz/GoogleMapView.qml</file>
         <file>qml/Kaqaz/MapSwitcher.qml</file>
         <file>qml/Kaqaz/MapSelector.qml</file>
+        <file>qml/Kaqaz/TranslationEditor.qml</file>
     </qresource>
 </RCC>

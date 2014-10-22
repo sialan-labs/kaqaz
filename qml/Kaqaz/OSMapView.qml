@@ -9,6 +9,8 @@ Item {
     property alias viewPort: map_control.viewPort
     property alias view: map_control.view
     property alias zoom: map_control.zoom
+    property alias scaleHelper: map_control.scaleHelper
+    property alias crosshairs: map_control.crosshairs
 
     OSMMapAdapter {
         id: osm_adapter
