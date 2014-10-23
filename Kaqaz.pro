@@ -117,7 +117,8 @@ SOURCES += main.cpp \
     smartiodboxsingle.cpp \
     searchhighlighter.cpp \
     databasedatatypes.cpp \
-    translationmodel.cpp
+    translationmodel.cpp \
+    weathermodel.cpp
 
 HEADERS += \
     kaqaz.h \
@@ -134,7 +135,8 @@ HEADERS += \
     smartiodbox.h \
     smartiodboxsingle.h \
     searchhighlighter.h \
-    translationmodel.h
+    translationmodel.h \
+    weathermodel.h
 
 TRANSLATIONS += \
     files/translations/lang-en.qm \

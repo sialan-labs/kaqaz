@@ -113,6 +113,12 @@ SialanMain {
         onActiveByChanged: if( !activeBy ) audio_item.stop()
     }
 
+//    WeatherModel {
+//        id: weather_model
+//        useGps: kaqaz.positioning
+//        onWeatherChanged: console.debug(weather.temperature, weather.weatherDescription )
+//    }
+
     PositionSource {
         id: positioning
         updateInterval: 10000

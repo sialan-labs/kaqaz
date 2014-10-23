@@ -32,6 +32,7 @@
 #include "searchhighlighter.h"
 #include "sialantools/sialantools.h"
 #include "resourcemanager.h"
+#include "weathermodel.h"
 #include "simpleqtcryptor/simpleqtcryptor.h"
 #include "sialantools/sialandevices.h"
 #include "sialantools/sialanquickview.h"
@@ -216,7 +217,11 @@ Kaqaz::Kaqaz(QObject *parent) :
     qmlRegisterType<MapLayer>("Kaqaz", 1,0, "MapLayer");
     qmlRegisterType<QmlMapControl>("Kaqaz", 1,0, "MapControl");
     qmlRegisterType<TranslationModel>("Kaqaz", 1,0, "TranslationModel");
+    qmlRegisterType<WeatherData>("Kaqaz", 1, 0, "WeatherData");
+    qmlRegisterType<WeatherModel>("Kaqaz", 1, 0, "WeatherModel");
     qmlRegisterUncreatableType<Kaqaz>("Kaqaz", 1,0, "Kaqaz","");
+
+    qRegisterMetaType<WeatherData>("WeatherData");
 }
 
 Kaqaz *Kaqaz::instance()
