@@ -132,11 +132,9 @@ Item {
         function refresh(){
             model.clear()
             model.append({"name": qsTr("Camera"), "file": "CameraDialog.qml", "cmd": ""})
-            if( kaqaz.proBuild )
-                model.append({"name": qsTr("Document"), "file": "DocumentDialog.qml", "cmd": "" })
+            model.append({"name": qsTr("Document"), "file": "DocumentDialog.qml", "cmd": "" })
             model.append({"name": qsTr("Gallery"), "file": "GalleryDialog.qml", "cmd": "picture" })
-            if( kaqaz.proBuild )
-                model.append({"name": qsTr("Music"), "file": "MusicDialog.qml", "cmd": "" })
+            model.append({"name": qsTr("Music"), "file": "MusicDialog.qml", "cmd": "" })
             focus = true
         }
 
