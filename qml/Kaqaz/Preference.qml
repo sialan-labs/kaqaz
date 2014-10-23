@@ -102,7 +102,7 @@ Item {
             model.append({"name": qsTr("Calendars"), "cmd": "Calendar.qml" })
             model.append({"name": qsTr("Label Manager"), "cmd": "GroupManager.qml" })
             model.append({"name": qsTr("Backup & Restore"), "cmd": "BackupRestore.qml" })
-            if( Devices.isAndroid )
+            if( Devices.isAndroid && kaqaz.proBuild )
                 model.append({"name": qsTr("Data Location"), "cmd": "ProfileSettings.qml" })
             model.append({"name": qsTr("Synchronization"), "cmd": "Synchronization.qml" })
             model.append({"name": qsTr("Security"), "cmd": "Security.qml" })

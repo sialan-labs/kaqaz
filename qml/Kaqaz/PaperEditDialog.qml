@@ -386,7 +386,7 @@ Item {
         id: geo_component
         Item {
             id: geo_dialog
-            height: 230*physicalPlatformScale
+            height: 300*physicalPlatformScale
 
             MouseArea {
                 anchors.fill: parent

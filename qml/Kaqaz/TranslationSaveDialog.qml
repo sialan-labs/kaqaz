@@ -179,7 +179,8 @@ Item {
         anchors.bottomMargin: 2*physicalPlatformScale
         font.pixelSize: 10*fontsScale
         font.family: SApp.globalFontFamily
-        text: "Will save to: " + kaqaz.getTempPath() + ".ts"
+        text: "Will save to: " + kaqaz.getTempPath() + ".ts" +
+              "\nPlease send this file to contact@sialan.org after saved."
     }
 
     Button {

@@ -218,7 +218,7 @@ Item {
                 var suffix = Tools.fileSuffix(item.path)
                 var component;
                 if( suffix === "jpg" || suffix === "jpeg" || suffix === "png" ) {
-                    component = image_viewer_component;
+                    component = Qt.createComponent("ImageViewer.qml");
                     edit_btn.visible = kaqaz.proBuild
                 }
                 else
@@ -226,10 +226,10 @@ Item {
                     component = music_viewer_component;
                 else
                 if( suffix === "txt" || suffix === "text" )
-                    component = text_viewer_component;
+                    component = Qt.createComponent("TextViewer.qml");
                 else
                 if( suffix === "pdf" )
-                    component = pdf_viewer_component;
+                    component = Qt.createComponent("PdfViewer.qml");
 
                 var it = component.createObject(item);
                 it.fileId = item.fileId
@@ -291,24 +291,6 @@ Item {
         id: music_viewer_component
         MusicViewer{
             onPressedChanged: attach_list.interactive = !pressed
-        }
-    }
-
-    Component {
-        id: image_viewer_component
-        ImageViewer{
-        }
-    }
-
-    Component {
-        id: text_viewer_component
-        TextViewer{
-        }
-    }
-
-    Component {
-        id: pdf_viewer_component
-        PdfViewer{
         }
     }
 
