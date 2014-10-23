@@ -40,7 +40,8 @@
 #include "database.h"
 #include "smartiodbox.h"
 #include "kaqazmacros.h"
-#include "SimpleQtCryptor/simpleqtcryptor.h"
+#include "kaqaz.h"
+#include "simpleqtcryptor/simpleqtcryptor.h"
 
 #include <QDesktopServices>
 #include <QEventLoop>
@@ -208,7 +209,7 @@ void KaqazDropBox::localListUpdated()
     }
 
     QHash<QString,QDropboxFileInfo> filesIndexes;
-    const QStringList & local_files = QDir(HOME_PATH + "/repository").entryList(QDir::Files);
+    const QStringList & local_files = QDir(Kaqaz::instance()->repositoryPath()).entryList(QDir::Files);
     foreach( const QDropboxFileInfo & inf, files )
     {
         const QString & fileName = QFileInfo(inf.path()).fileName();
@@ -218,8 +219,8 @@ void KaqazDropBox::localListUpdated()
             continue;
         if( dboxFileIsDeleted(ROOT_FOLDER+inf.path()) )
         {
-            if( !fileIsDeleted(HOME_PATH + "/repository/" + fileName) )
-                setFileDeleted(HOME_PATH + "/repository/" + fileName);
+            if( !fileIsDeleted(Kaqaz::instance()->repositoryPath() + "/" + fileName) )
+                setFileDeleted(Kaqaz::instance()->repositoryPath() + "/" + fileName);
             continue;
         }
         if( local_files.contains(fileName) )
@@ -227,12 +228,12 @@ void KaqazDropBox::localListUpdated()
         if( inf.bytes()/(1024*1024) >= FILE_MAX_SIZE_MB )
             continue;
 
-        p->smartio->fetchFile( ROOT_FOLDER+inf.path(), HOME_PATH + "/repository/" + fileName );
+        p->smartio->fetchFile( ROOT_FOLDER+inf.path(), Kaqaz::instance()->repositoryPath() + "/" + fileName );
     }
 
     foreach( const QString & lfile, local_files )
     {
-        const QString & path = QString(HOME_PATH + "/repository/" + lfile);
+        const QString & path = QString(Kaqaz::instance()->repositoryPath() + "/" + lfile);
         if( !p->fileSyncing )
             continue;
         if( fileIsDeleted(path) )

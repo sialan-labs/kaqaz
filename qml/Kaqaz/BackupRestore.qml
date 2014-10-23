@@ -86,8 +86,7 @@ Item {
                             backup_restore.backup()
                     }
                     if( item.command == "restore" ) {
-                        var component = Qt.createComponent("RestoreDialog.qml");
-                        var a = component.createObject(main);
+                        var a = restore_dlg_component.createObject(main);
                         main.pushPreference(a)
                     }
                 }
@@ -113,9 +112,20 @@ Item {
         }
     }
 
+    Component {
+        id: restore_dlg_component
+        RestoreDialog{
+        }
+    }
+
+    Component {
+        id: backup_wait_component
+        BackupWait{
+        }
+    }
+
     function backup(){
-        var component = Qt.createComponent("BackupWait.qml");
-        var item = component.createObject(main);
+        var item = backup_wait_component.createObject(main);
         main.pushPreference(item)
     }
 

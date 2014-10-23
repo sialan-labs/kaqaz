@@ -97,7 +97,7 @@
 #include "qdropbox.h"
 #include "qdropboxfile.h"
 #include "qdropboxfileinfo.h"
-#include "SimpleQtCryptor/simpleqtcryptor.h"
+#include "simpleqtcryptor/simpleqtcryptor.h"
 
 #include <QFileInfo>
 #include <QFile>

@@ -32,7 +32,7 @@
 #include "searchhighlighter.h"
 #include "sialantools/sialantools.h"
 #include "resourcemanager.h"
-#include "SimpleQtCryptor/simpleqtcryptor.h"
+#include "simpleqtcryptor/simpleqtcryptor.h"
 #include "sialantools/sialandevices.h"
 #include "sialantools/sialanquickview.h"
 #include "sialantools/sialancalendarconverter.h"
@@ -157,7 +157,7 @@ Kaqaz::Kaqaz(QObject *parent) :
 
 #ifdef DESKTOP_DEVICE
     QIcon::setThemeSearchPaths( QStringList() << resourcePathAbs() + "/files/icons/" );
-    QIcon::setThemeName("FaenzaFlattr");
+    QIcon::setThemeName("KFaenza");
 #endif
     QDir().mkpath(CAMERA_PATH);
 
@@ -469,9 +469,19 @@ void Kaqaz::deleteFileIfPossible(const QString &id)
     QFile::remove(path);
 }
 
-void Kaqaz::removeFile(const QString &path)
+bool Kaqaz::removeFile(const QString &path)
 {
-    QFile::remove(path);
+    return QFile::remove(path);
+}
+
+bool Kaqaz::existsFile(const QString &path)
+{
+    return QFile::exists(path);
+}
+
+bool Kaqaz::copyFile(const QString &src, const QString &dst)
+{
+    return QFile::copy(src,dst);
 }
 
 void Kaqaz::setCalendar(int t)
@@ -658,6 +668,11 @@ QString Kaqaz::repositoryPath() const
 QString Kaqaz::sdcardPath() const
 {
     return "/sdcard/Android/data/org.sialan.kaqaz";
+}
+
+QString Kaqaz::translatorFilePath() const
+{
+    return profilePath() + "/translate.ts";
 }
 
 QString Kaqaz::resourcePathAbs()

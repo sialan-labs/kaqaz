@@ -542,6 +542,7 @@ void Database::deletePaper(int id)
         removeFileFromPaper(id,f);
 
     setRevision(paper.uuid,-2);
+    emit paperGroupChanged(id);
 }
 
 void Database::setPaper(int id, const QString &title, const QString &text, int group)
@@ -556,6 +557,7 @@ void Database::setPaper(int id, const QString &title, const QString &text, int g
     paper.text      = text;
     paper.group     = group;
     savePaper(paper);
+    emit paperGroupChanged(id);
 }
 
 void Database::setPaper(const QString &uuid, const QString &title, const QString &text, const QString &group, const QString &date, const QGeoCoordinate & location, int type)
@@ -580,6 +582,7 @@ void Database::setPaper(const QString &uuid, const QString &title, const QString
 
     savePaper(paper);
     emit datesListChanged();
+    emit paperGroupChanged(paper_id);
 }
 
 QString Database::paperTitle(int id)
@@ -648,6 +651,7 @@ void Database::setPaperGroup(int id, int group)
 
     paper.group = group;
     savePaper(paper);
+    emit paperGroupChanged(id);
 }
 
 QDateTime Database::paperCreatedDate(int id)

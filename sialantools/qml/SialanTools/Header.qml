@@ -27,6 +27,8 @@ Item {
     property bool light: false
     property bool backButton: !Devices.isAndroid && !View.fullscreen
 
+    signal beginBack()
+
     Row {
         id: back_row
         anchors.left: parent.left
@@ -62,6 +64,7 @@ Item {
         onReleased: back_row.press = false
         visible: back_row.visible
         onClicked: {
+            header.beginBack()
             SApp.back()
         }
     }

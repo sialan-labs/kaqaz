@@ -44,19 +44,12 @@ Item {
         model: ListModel {}
         delegate: Rectangle {
             id: item
-            width: data_list.width
+            width: preference_list.width
             height:  50*physicalPlatformScale
-            color: press? "#3B97EC" : "#00000000"
+            color: marea.pressed? "#3B97EC" : "#00000000"
 
             property string text: name
             property string path: pathValue
-            property bool press: false
-
-            Connections{
-                target: data_list
-                onMovementStarted: press = false
-                onFlickStarted: press = false
-            }
 
             Text{
                 id: txt
@@ -67,13 +60,12 @@ Item {
                 text: parent.text
                 font.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
                 font.family: SApp.globalFontFamily
-                color: item.press? "#ffffff" : "#333333"
+                color: marea.pressed? "#ffffff" : "#333333"
             }
 
             MouseArea{
+                id: marea
                 anchors.fill: parent
-                onPressed: item.press = true
-                onReleased: item.press = false
                 onClicked: {
                     if( database.password().length !== 0 ) {
                         var passItem = getPass(backup_restore)

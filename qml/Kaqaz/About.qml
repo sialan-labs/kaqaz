@@ -71,17 +71,6 @@ Item {
         }
 
         Text{
-            id: about_framework_text
-            anchors.left: parent.left
-            anchors.right: parent.right
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
-            font.family: SApp.globalFontFamily
-            color: "#333333"
-        }
-
-        Text{
             id: about_powered_text
             anchors.left: parent.left
             anchors.right: parent.right
@@ -121,7 +110,6 @@ Item {
         about_name_text.text      = qsTr("Kaqaz") + " " + kaqaz.version()
         about_license_text.text   = qsTr("License: GNU GPL Version 3")
         about_powered_text.text   = qsTr("(C) 2014 Sialan Labs")
-        about_framework_text.text = qsTr("Based on") + " Qt" + Tools.qtVersion()
         about_home.text           = qsTr("Home Page")
         title.text                = qsTr("About")
     }

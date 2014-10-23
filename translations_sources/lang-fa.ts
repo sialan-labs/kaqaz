@@ -4,92 +4,31 @@
 <context>
     <name>About</name>
     <message>
-        <location filename="../qml/Kaqaz/About.qml" line="121"/>
+        <location filename="../qml/Kaqaz/About.qml" line="110"/>
         <source>Kaqaz</source>
         <translation>کاغذ</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/About.qml" line="123"/>
+        <location filename="../qml/Kaqaz/About.qml" line="112"/>
         <source>(C) 2014 Sialan Labs</source>
         <translation>گروه تحقیقاتی سیالان - ۱۳۹۳</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/About.qml" line="124"/>
         <source>Based on</source>
         <translation>تحت</translation>
     </message>
     <message>
-        <source>Version 0.0.1</source>
-        <translation type="obsolete">نسخه‌ی 0.0.1</translation>
-    </message>
-    <message>
-        <source>(C) 2013 Bardia Daneshvar</source>
-        <translation type="obsolete">۱۳۹۲ بردیا دانشور</translation>
-    </message>
-    <message>
-        <source>Powered by Sialan Laboratories</source>
-        <translation type="obsolete">توسط آزمایشگاه‌های سیالان</translation>
-    </message>
-    <message>
-        <source>Using Qt 5.1 technology</source>
-        <translation type="obsolete">ساخته شده به کمک Qt5</translation>
-    </message>
-    <message>
-        <source>HomePage</source>
-        <translation type="obsolete">آدرس خانه</translation>
-    </message>
-    <message>
-        <source>Version 1.0</source>
-        <translation type="obsolete">نسخه‌ی 1.0</translation>
-    </message>
-    <message>
-        <source>Under GPL V3 License</source>
-        <translation type="obsolete">تحت مجوز GPL نسخه‌ی سوم</translation>
-    </message>
-    <message>
-        <source>Author: Bardia Daneshvar</source>
-        <translation type="obsolete">نویسنده: بردیا دانشور</translation>
-    </message>
-    <message>
-        <source>(C) 2013 Sialan Laboratories</source>
-        <translation type="obsolete">گروه تحقیقاتی سیالان - ۱۳۹۲</translation>
-    </message>
-    <message>
-        <source>Using Qt 5.1</source>
-        <translation type="obsolete">ساخته شده به کمک Qt5</translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/About.qml" line="125"/>
+        <location filename="../qml/Kaqaz/About.qml" line="113"/>
         <source>Home Page</source>
         <translation>صفحه‌ی خانگی</translation>
     </message>
     <message>
-        <source>(C) 2013 Sialan Laboratory</source>
-        <translation type="obsolete">گروه تحقیقاتی سیالان - ۱۳۹۲</translation>
-    </message>
-    <message>
-        <source>Kaqaz 1.0</source>
-        <translation type="obsolete">کاغذ 1.0</translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/About.qml" line="122"/>
+        <location filename="../qml/Kaqaz/About.qml" line="111"/>
         <source>License: GNU GPL Version 3</source>
         <translation>مجوز: GNU GPL نسخه‌ی 3</translation>
     </message>
     <message>
-        <source>(C) 2013 Sialan Labs</source>
-        <translation type="obsolete">گروه تحقیقاتی سیالان - ۱۳۹۳</translation>
-    </message>
-    <message>
-        <source>Thanks: Pourya Daneshvar</source>
-        <translation type="obsolete">با تشکر از پوریا دانشور</translation>
-    </message>
-    <message>
-        <source>Based on Qt 5.2</source>
-        <translation type="obsolete">ساخته شده بر اساس 5.2 Qt</translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/About.qml" line="126"/>
+        <location filename="../qml/Kaqaz/About.qml" line="114"/>
         <source>About</source>
         <translation>درباره‌ی کاغذ</translation>
     </message>
@@ -169,10 +108,6 @@
 <context>
     <name>AddGroupDialog</name>
     <message>
-        <source>New Group</source>
-        <translation type="obsolete">گروه جدید</translation>
-    </message>
-    <message>
         <location filename="../qml/Kaqaz/AddGroupDialog.qml" line="121"/>
         <source>Done</source>
         <translation>تایید</translation>
@@ -191,29 +126,6 @@
         <location filename="../desktop/addgroupdialog.cpp" line="108"/>
         <source>Add Label</source>
         <translation>برچسب جدید</translation>
-    </message>
-</context>
-<context>
-    <name>Appearance</name>
-    <message>
-        <source>All papers item</source>
-        <translation type="obsolete">نمایش کلید همه‌ی کاغذها</translation>
-    </message>
-    <message>
-        <source>Word suggestions</source>
-        <translation type="obsolete">پیشنهاد کلمه ها</translation>
-    </message>
-    <message>
-        <source>Groups count</source>
-        <translation type="obsolete">نمایش تعداد کاغذهای گروه‌ها</translation>
-    </message>
-    <message>
-        <source>Modern delete dialog</source>
-        <translation type="obsolete">دیالوگ مدرن پاک کردن</translation>
-    </message>
-    <message>
-        <source>Appearance</source>
-        <translation type="obsolete">نما</translation>
     </message>
 </context>
 <context>
@@ -247,7 +159,7 @@
 <context>
     <name>AttachMenu</name>
     <message>
-        <location filename="../qml/Kaqaz/AttachMenu.qml" line="147"/>
+        <location filename="../qml/Kaqaz/AttachMenu.qml" line="143"/>
         <source>Select media files.</source>
         <translation>انتخاب فایل‌های مدیا.</translation>
     </message>
@@ -255,17 +167,17 @@
 <context>
     <name>AttachViewer</name>
     <message>
-        <location filename="../qml/Kaqaz/AttachViewer.qml" line="274"/>
+        <location filename="../qml/Kaqaz/AttachViewer.qml" line="316"/>
         <source>Are you sure?</source>
         <translation>آیا مطمئنی؟</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/AttachViewer.qml" line="275"/>
+        <location filename="../qml/Kaqaz/AttachViewer.qml" line="317"/>
         <source>Delete</source>
         <translation>پاک کردن</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/AttachViewer.qml" line="276"/>
+        <location filename="../qml/Kaqaz/AttachViewer.qml" line="318"/>
         <source>Cancel</source>
         <translation>لغو</translation>
     </message>
@@ -273,29 +185,17 @@
 <context>
     <name>BackupRestore</name>
     <message>
-        <source>Using this option you can make backup from your notes to your device memory.</source>
-        <translation type="obsolete">به کمک این کلید میتونی از اطلاعاتت یک بکاپ کامل بگیری توی حافظه‌ی سیستمت .</translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/BackupRestore.qml" line="109"/>
+        <location filename="../qml/Kaqaz/BackupRestore.qml" line="108"/>
         <source>Make Backup</source>
         <translation>بکاپ</translation>
     </message>
     <message>
-        <source>Using this option you can restore your data, maked backup before.</source>
-        <translation type="obsolete">و به کمک این کلید هم میتونی بکاپ‌هایی که گرفتی رو بازیابی کنی .</translation>
-    </message>
-    <message>
-        <source>Restore...</source>
-        <translation type="obsolete">بازیابی ...</translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/BackupRestore.qml" line="110"/>
+        <location filename="../qml/Kaqaz/BackupRestore.qml" line="109"/>
         <source>Restore</source>
         <translation>بازیابی</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/BackupRestore.qml" line="128"/>
+        <location filename="../qml/Kaqaz/BackupRestore.qml" line="138"/>
         <source>Backup and Restore</source>
         <translation>پشتیبان گیری و بازیابی</translation>
     </message>
@@ -369,10 +269,6 @@
         <location filename="../desktop/configurepage.ui" line="82"/>
         <source>Backup &amp; Restore</source>
         <translation>پشتیبان گیری و بازیابی</translation>
-    </message>
-    <message>
-        <source>Synchronization</source>
-        <translation type="obsolete">همگام سازی</translation>
     </message>
     <message>
         <location filename="../desktop/configurepage.ui" line="102"/>
@@ -599,15 +495,7 @@
 <context>
     <name>Database</name>
     <message>
-        <source>UnGroup</source>
-        <translation type="obsolete">بی گروه</translation>
-    </message>
-    <message>
-        <source>No Group</source>
-        <translation type="obsolete">بی گروه</translation>
-    </message>
-    <message>
-        <location filename="../database.cpp" line="1077"/>
+        <location filename="../database.cpp" line="1111"/>
         <source>No Label</source>
         <translation>بدون برچسب</translation>
     </message>
@@ -649,25 +537,6 @@
     </message>
 </context>
 <context>
-    <name>DefaultColorDialog</name>
-    <message>
-        <source>Hue</source>
-        <translation type="obsolete">Hue</translation>
-    </message>
-    <message>
-        <source>Saturation</source>
-        <translation type="obsolete">Saturation</translation>
-    </message>
-    <message>
-        <source>Luminosity</source>
-        <translation type="obsolete">Luminosity</translation>
-    </message>
-    <message>
-        <source>Alpha</source>
-        <translation type="obsolete">Alpha</translation>
-    </message>
-</context>
-<context>
     <name>DemoLimited</name>
     <message>
         <location filename="../qml/Kaqaz/DemoLimited.qml" line="110"/>
@@ -678,10 +547,6 @@
         <location filename="../qml/Kaqaz/DemoLimited.qml" line="146"/>
         <source>ACTIVED</source>
         <translation>فعال شد</translation>
-    </message>
-    <message>
-        <source>TRIAL ACTIVED</source>
-        <translation type="obsolete">فعال شد</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/DemoLimited.qml" line="158"/>
@@ -744,45 +609,6 @@
     </message>
 </context>
 <context>
-    <name>DesktopFrame</name>
-    <message>
-        <source>Previous</source>
-        <translation type="obsolete">صفحه‌ی قبلی</translation>
-    </message>
-    <message>
-        <source>Next</source>
-        <translation type="obsolete">صفحه‌ی بعدی</translation>
-    </message>
-    <message>
-        <source>Lock</source>
-        <translation type="obsolete">قفل</translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation type="obsolete">جستجو</translation>
-    </message>
-    <message>
-        <source>Preferences</source>
-        <translation type="obsolete">تنظیمات</translation>
-    </message>
-    <message>
-        <source>Clean</source>
-        <translation type="obsolete">کاغذ سفید</translation>
-    </message>
-    <message>
-        <source>History</source>
-        <translation type="obsolete">تاریخچه</translation>
-    </message>
-    <message>
-        <source>Categories</source>
-        <translation type="obsolete">دسته‌بندی‌ها</translation>
-    </message>
-    <message>
-        <source>Dates</source>
-        <translation type="obsolete">تاریخ‌ها</translation>
-    </message>
-</context>
-<context>
     <name>DocumentDialog</name>
     <message>
         <location filename="../qml/Kaqaz/DocumentDialog.qml" line="98"/>
@@ -811,10 +637,6 @@
         <location filename="../qml/Kaqaz/DropBoxAuthorize.qml" line="130"/>
         <source>Password Repeat</source>
         <translation>تکرار رمز عبور</translation>
-    </message>
-    <message>
-        <source>Enter sync password (optional)</source>
-        <translation type="obsolete">کلمه عبور (دلخواه)</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/DropBoxAuthorize.qml" line="150"/>
@@ -874,34 +696,39 @@
 <context>
     <name>GeneralSettings</name>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="101"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="100"/>
         <source>All papers item</source>
         <translation>نمایش کلید همه‌ی کاغذها</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="102"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="101"/>
         <source>Notes positioning</source>
         <translation>مکان نوشته‌ها (GPS)</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="104"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="103"/>
         <source>Desktop Touch</source>
         <translation>میزکار لمسی</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="106"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="105"/>
         <source>Fullscreen</source>
         <translation>تمام صفحه</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="107"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="106"/>
         <source>Word suggestions</source>
         <translation>پیشنهاد کلمه ها</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="108"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="107"/>
         <source>Groups count</source>
         <translation>نمایش تعداد کاغذهای گروه‌ها</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="108"/>
+        <source>Select Map</source>
+        <translation>انتخاب نقشه</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/GeneralSettings.qml" line="124"/>
@@ -933,21 +760,6 @@
     </message>
 </context>
 <context>
-    <name>GroupChooser</name>
-    <message>
-        <source>Add</source>
-        <translation type="obsolete">جدید</translation>
-    </message>
-    <message>
-        <source>UnGroup</source>
-        <translation type="obsolete">بی گروه</translation>
-    </message>
-    <message>
-        <source>No Group</source>
-        <translation type="obsolete">بی گروه</translation>
-    </message>
-</context>
-<context>
     <name>GroupChooserBack</name>
     <message>
         <location filename="../qml/Kaqaz/GroupChooserBack.qml" line="63"/>
@@ -957,10 +769,6 @@
 </context>
 <context>
     <name>GroupManager</name>
-    <message>
-        <source>Group Manager</source>
-        <translation type="obsolete">مدیریت دسته‌بندی‌ها</translation>
-    </message>
     <message>
         <location filename="../qml/Kaqaz/GroupManager.qml" line="216"/>
         <source>Label Manager</source>
@@ -985,10 +793,6 @@
 <context>
     <name>GroupSelector</name>
     <message>
-        <source>Add Group</source>
-        <translation type="obsolete">گروه جدید</translation>
-    </message>
-    <message>
         <location filename="../qml/Kaqaz/GroupSelector.qml" line="120"/>
         <source>Add Label</source>
         <translation>برچسب جدید</translation>
@@ -997,25 +801,13 @@
 <context>
     <name>Header</name>
     <message>
-        <location filename="../sialantools/qml/SialanTools/Header.qml" line="88"/>
+        <location filename="../sialantools/qml/SialanTools/Header.qml" line="91"/>
         <source>Back</source>
         <translation>برگرد</translation>
     </message>
 </context>
 <context>
     <name>Helper</name>
-    <message>
-        <source>Put your finger here and swipe it
-up and down to select categories.</source>
-        <translation type="obsolete">انگشتتان را اینجا قرار دهید و با حرکت آن
-به بالا و پایین دسته بندی‌ها را انتخاب کنید .</translation>
-    </message>
-    <message>
-        <source>Put your finger here and
-swipe down to select groups.</source>
-        <translation type="obsolete">انگشتتان را اینجا قرار دهید و با
-حرکت آن به پایین گروه را انتخاب کنید .</translation>
-    </message>
     <message>
         <location filename="../qml/Kaqaz/Helper.qml" line="197"/>
         <source>Put your finger here and
@@ -1046,11 +838,6 @@ swipe right to previous paper.</source>
         <translation>یاد گرفتم</translation>
     </message>
     <message>
-        <source>Tap here to select Groups</source>
-        <translation type="obsolete">اینجا را فشار دهید تا گروه جدید
-انتخاب کنید</translation>
-    </message>
-    <message>
         <location filename="../qml/Kaqaz/Helper.qml" line="199"/>
         <source>Put your finger here and swipe it
 left to select categories.</source>
@@ -1069,10 +856,6 @@ left to select categories.</source>
         <location filename="../qml/Kaqaz/History.qml" line="164"/>
         <source>History</source>
         <translation>تاریخچه</translation>
-    </message>
-    <message>
-        <source>Tomorrow</source>
-        <translation type="obsolete">دیروز</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/History.qml" line="75"/>
@@ -1114,22 +897,7 @@ left to select categories.</source>
     </message>
 </context>
 <context>
-    <name>InsertImageDialog</name>
-    <message>
-        <source>Camera</source>
-        <translation type="obsolete">دوربین</translation>
-    </message>
-    <message>
-        <source>Gallery</source>
-        <translation type="obsolete">گالری</translation>
-    </message>
-</context>
-<context>
     <name>Kaqaz</name>
-    <message>
-        <source>unGroup</source>
-        <translation type="obsolete">نامعلوم</translation>
-    </message>
     <message>
         <source>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
         <translation>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</translation>
@@ -1179,10 +947,6 @@ left to select categories.</source>
         <translation>۹</translation>
     </message>
     <message>
-        <source>No Group</source>
-        <translation type="obsolete">بی گروه</translation>
-    </message>
-    <message>
         <source>Gregorian</source>
         <translation>میلادی</translation>
     </message>
@@ -1193,6 +957,58 @@ left to select categories.</source>
     <message>
         <source>Hijri</source>
         <translation>هجری قمری</translation>
+    </message>
+</context>
+<context>
+    <name>KaqazCanvas</name>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvas.qml" line="214"/>
+        <source>Done</source>
+        <translation>تایید</translation>
+    </message>
+</context>
+<context>
+    <name>KaqazCanvasMagnifierHelper</name>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvasMagnifierHelper.qml" line="21"/>
+        <source>Put your fingers on screen
+and move them on screen</source>
+        <translation>انگشتانتان را روی صفحه بگذارید
+و روی صفحه حرکتشان بدهید</translation>
+    </message>
+</context>
+<context>
+    <name>KaqazCanvasMagnifierLevel</name>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvasMagnifierLevel.qml" line="24"/>
+        <source>Zoom</source>
+        <translation>زوم</translation>
+    </message>
+</context>
+<context>
+    <name>KaqazCanvasPenMode</name>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvasPenMode.qml" line="67"/>
+        <source>Normal Pen</source>
+        <translation>قلم معمولی</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvasPenMode.qml" line="68"/>
+        <source>Star Pen</source>
+        <translation>قلم ستاره‌ای</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvasPenMode.qml" line="69"/>
+        <source>Eraser</source>
+        <translation>پاک‌کن</translation>
+    </message>
+</context>
+<context>
+    <name>KaqazCanvasPenWidth</name>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvasPenWidth.qml" line="58"/>
+        <source>Pixel</source>
+        <translation>پیکسل</translation>
     </message>
 </context>
 <context>
@@ -1250,49 +1066,19 @@ left to select categories.</source>
     </message>
 </context>
 <context>
-    <name>LabelEditPanel</name>
-    <message>
-        <source>Copy Text</source>
-        <translation type="obsolete">کپی متن</translation>
-    </message>
-    <message>
-        <source>Paste Text</source>
-        <translation type="obsolete">پیست متن</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">پاک کردن</translation>
-    </message>
-    <message>
-        <source>Insert</source>
-        <translation type="obsolete">اضافه‌کردن</translation>
-    </message>
-    <message>
-        <source>Sync</source>
-        <translation type="obsolete">همگام سازی</translation>
-    </message>
-    <message>
-        <source>Share</source>
-        <translation type="obsolete">اشتراک گذاری</translation>
-    </message>
-    <message>
-        <source>Are you sure?</source>
-        <translation type="obsolete">آیا مطمئنی؟</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">نه</translation>
-    </message>
-</context>
-<context>
     <name>LanguageSelector</name>
     <message>
-        <location filename="../qml/Kaqaz/LanguageSelector.qml" line="77"/>
+        <location filename="../qml/Kaqaz/LanguageSelector.qml" line="82"/>
         <source>Language changed</source>
         <translation>زبان تغییر کرد</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/LanguageSelector.qml" line="114"/>
+        <location filename="../qml/Kaqaz/LanguageSelector.qml" line="105"/>
+        <source>Add your Language</source>
+        <translation>اضافه کردن زبان خود</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/LanguageSelector.qml" line="121"/>
         <source>Languages</source>
         <translation>انتخاب زبان</translation>
     </message>
@@ -1305,9 +1091,32 @@ left to select categories.</source>
         <translation>برای خروج دوباره کلید را فشار دهید</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="540"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="537"/>
         <source>List is empty</source>
         <translation>لیست خالی است</translation>
+    </message>
+</context>
+<context>
+    <name>MapSelector</name>
+    <message>
+        <location filename="../qml/Kaqaz/MapSelector.qml" line="78"/>
+        <source>Map changed</source>
+        <translation>نقشه تغییر کرد</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/MapSelector.qml" line="96"/>
+        <source>Google Map</source>
+        <translation>نقشه‌ی گوگل</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/MapSelector.qml" line="97"/>
+        <source>OpenStreet Map</source>
+        <translation>نقشه‌ی اپن‌استریت</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/MapSelector.qml" line="114"/>
+        <source>Maps</source>
+        <translation>نقشه‌ها</translation>
     </message>
 </context>
 <context>
@@ -1354,13 +1163,17 @@ left to select categories.</source>
         <translation>برگرد</translation>
     </message>
     <message>
-        <source>Gallery</source>
-        <translation type="obsolete">گالری</translation>
-    </message>
-    <message>
         <location filename="../qml/Kaqaz/MusicDialog.qml" line="140"/>
         <source>Music</source>
         <translation>موزیک</translation>
+    </message>
+</context>
+<context>
+    <name>OpenSourceProjects</name>
+    <message>
+        <location filename="../qml/Kaqaz/OpenSourceProjects.qml" line="120"/>
+        <source>Open source projects</source>
+        <translation>پروزه‌های منبع باز</translation>
     </message>
 </context>
 <context>
@@ -1399,55 +1212,6 @@ left to select categories.</source>
         <location filename="../desktop/panelbox.cpp" line="136"/>
         <source>Do you realy want to delete &quot;%1&quot;?</source>
         <translation>آیا از پاک کردن &quot;%1&quot; مطمئن هستید؟</translation>
-    </message>
-</context>
-<context>
-    <name>PanelList</name>
-    <message>
-        <source>Clean Papers</source>
-        <translation type="obsolete">کاغذ سفید</translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation type="obsolete">جستجو</translation>
-    </message>
-    <message>
-        <source>Preferences</source>
-        <translation type="obsolete">تنظیمات</translation>
-    </message>
-    <message>
-        <source>History</source>
-        <translation type="obsolete">تاریخچه</translation>
-    </message>
-    <message>
-        <source>Lock</source>
-        <translation type="obsolete">قفل کردن</translation>
-    </message>
-</context>
-<context>
-    <name>PanelListItem</name>
-    <message>
-        <source>Today</source>
-        <translation type="obsolete">امروز</translation>
-    </message>
-    <message>
-        <source>Tomorrow</source>
-        <translation type="obsolete">دیروز</translation>
-    </message>
-    <message>
-        <source>Two days ago</source>
-        <translation type="obsolete">دو روز پیش</translation>
-    </message>
-    <message>
-        <source>Yesterday</source>
-        <translation type="obsolete">دیروز</translation>
-    </message>
-</context>
-<context>
-    <name>Paper</name>
-    <message>
-        <source>Title</source>
-        <translation type="obsolete">عنوان</translation>
     </message>
 </context>
 <context>
@@ -1534,23 +1298,20 @@ left to select categories.</source>
         <translation>نوع کاغذ</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="314"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="313"/>
         <source>Normal</source>
         <translation>معمولی</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="330"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="329"/>
         <source>To-Do</source>
         <translation>لیست</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="360"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="359"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="405"/>
         <source>Done</source>
         <translation>تایید</translation>
-    </message>
-    <message>
-        <source>Confirm</source>
-        <translation type="obsolete">تایید</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="182"/>
@@ -1563,22 +1324,14 @@ left to select categories.</source>
         <translation>به روزرسانی مکان</translation>
     </message>
     <message>
-        <source>Add Reminder (Soon)</source>
-        <translation type="obsolete">یادآوری کن (به زودی)</translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="249"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="248"/>
         <source>Are you sure?</source>
         <translation>آیا مطمئنی؟</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="263"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="262"/>
         <source>Delete Paper</source>
         <translation>پاک کردن این کاغذ</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">پاک کردن</translation>
     </message>
 </context>
 <context>
@@ -1612,21 +1365,9 @@ left to select categories.</source>
 <context>
     <name>PaperItem</name>
     <message>
-        <source>synced</source>
-        <translation type="obsolete">همگام شده</translation>
-    </message>
-    <message>
-        <source>unsynced</source>
-        <translation type="obsolete">همگام نشده</translation>
-    </message>
-    <message>
         <location filename="../qml/Kaqaz/PaperItem.qml" line="559"/>
         <source>Title</source>
         <translation>عنوان</translation>
-    </message>
-    <message>
-        <source>&lt; Attached Sheet</source>
-        <translation type="obsolete">کاغذ.ضمیمه&gt;</translation>
     </message>
 </context>
 <context>
@@ -1635,10 +1376,6 @@ left to select categories.</source>
         <location filename="../qml/Kaqaz/PaperLabel.qml" line="250"/>
         <source>New text</source>
         <translation>نوشته‌ی جدید</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">ویرایش</translation>
     </message>
 </context>
 <context>
@@ -1693,10 +1430,6 @@ left to select categories.</source>
         <translation>تاریخ‌ها</translation>
     </message>
     <message>
-        <source>Group Manager</source>
-        <translation type="obsolete">مدیریت دسته‌بندی‌ها</translation>
-    </message>
-    <message>
         <location filename="../qml/Kaqaz/Preference.qml" line="100"/>
         <source>General Settings</source>
         <translation>تنظیمات عمومی</translation>
@@ -1707,18 +1440,18 @@ left to select categories.</source>
         <translation>وضعیت</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/Preference.qml" line="113"/>
+        <source>Open source projects</source>
+        <translation>پروزه‌های منبع باز</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/Preference.qml" line="114"/>
         <source>About Sialan</source>
         <translation>درباره سیالان</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/Preference.qml" line="116"/>
+        <location filename="../qml/Kaqaz/Preference.qml" line="117"/>
         <source>Preferences</source>
         <translation>تنظیمات</translation>
-    </message>
-    <message>
-        <source>Smart Menu</source>
-        <translation type="obsolete">منوی هوشمند</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/Preference.qml" line="108"/>
@@ -1727,6 +1460,11 @@ left to select categories.</source>
     </message>
     <message>
         <location filename="../qml/Kaqaz/Preference.qml" line="112"/>
+        <source>Open Source Projects</source>
+        <translation>پروزه‌های منبع باز</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/Preference.qml" line="113"/>
         <source>About Kaqaz</source>
         <translation>درباره‌ی کاغذ</translation>
     </message>
@@ -1736,42 +1474,35 @@ left to select categories.</source>
         <translation>پشتیبان گیری و بازیابی</translation>
     </message>
     <message>
-        <source>Appearance</source>
-        <translation type="obsolete">نما</translation>
-    </message>
-    <message>
         <location filename="../qml/Kaqaz/Preference.qml" line="103"/>
         <source>Label Manager</source>
         <translation>مدیریت برچسب ها</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/Preference.qml" line="106"/>
+        <source>Data Location</source>
+        <translation>مکان اطلاعات</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/Preference.qml" line="107"/>
         <source>Synchronization</source>
         <translation>همگام سازی</translation>
     </message>
-    <message>
-        <source>Calendar</source>
-        <translation type="obsolete">تقویم</translation>
-    </message>
-    <message>
-        <source>Data Location</source>
-        <translation type="obsolete">مکان اطلاعات</translation>
-    </message>
 </context>
 <context>
     <name>ProfileSettings</name>
     <message>
-        <location filename="../qml/Kaqaz/ProfileSettings.qml" line="108"/>
+        <location filename="../qml/Kaqaz/ProfileSettings.qml" line="100"/>
         <source>Keep on Device memory</source>
         <translation>روی حافظه‌ی دستگاه نگه دار</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/ProfileSettings.qml" line="109"/>
+        <location filename="../qml/Kaqaz/ProfileSettings.qml" line="101"/>
         <source>Keep on SD Card</source>
         <translation>روی حافظه‌ی جانبی نگه دار</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/ProfileSettings.qml" line="121"/>
+        <location filename="../qml/Kaqaz/ProfileSettings.qml" line="113"/>
         <source>Data Location</source>
         <translation>مکان اطلاعات</translation>
     </message>
@@ -2093,17 +1824,14 @@ left to select categories.</source>
 <context>
     <name>SearchGeoDomain</name>
     <message>
-        <location filename="../qml/Kaqaz/SearchGeoDomain.qml" line="47"/>
         <source>No Location</source>
         <translation>غیرفعال</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchGeoDomain.qml" line="62"/>
         <source>Current Location</source>
         <translation>مکان جغرافیایی فعلی</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchGeoDomain.qml" line="78"/>
         <source>Select on Map (Soon)</source>
         <translation>انتخاب بر روی نقشه (به زودی)</translation>
     </message>
@@ -2144,22 +1872,18 @@ left to select categories.</source>
         <translation>مکان جغرافیایی</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="224"/>
+        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="229"/>
         <source>Labels</source>
         <translation>برچسب‌ها</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="254"/>
+        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="259"/>
         <source>Paper Type</source>
         <translation>نوع کاغذ</translation>
     </message>
 </context>
 <context>
     <name>SearchPanel</name>
-    <message>
-        <source>Search Keyword</source>
-        <translation type="obsolete">کلید واژه</translation>
-    </message>
     <message>
         <location filename="../qml/Kaqaz/SearchPanel.qml" line="105"/>
         <source>Less</source>
@@ -2441,65 +2165,54 @@ left to select categories.</source>
 <context>
     <name>SideBarList</name>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="83"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="84"/>
         <source>Today</source>
         <translation>امروز</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="86"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="87"/>
         <source>Yesterday</source>
         <translation>دیروز</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="89"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="90"/>
         <source>Two days ago</source>
         <translation>دو روز پیش</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="179"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="180"/>
         <source>Clean Papers</source>
         <translation>کاغذ سفید</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="181"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="182"/>
         <source>All Papers</source>
         <translation>تمامی کاغذها</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="182"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="183"/>
         <source>Search</source>
         <translation>جستجو</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="185"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="186"/>
         <source>Lock</source>
         <translation>قفل کردن</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="187"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="188"/>
         <source>Fullscreen</source>
         <translation>تمام صفحه</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="189"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="190"/>
         <source>Preferences</source>
         <translation>تنظیمات</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="193"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="194"/>
         <source>History</source>
         <translation>تاریخچه</translation>
-    </message>
-</context>
-<context>
-    <name>SmartMenuSettings</name>
-    <message>
-        <source>Enable</source>
-        <translation type="obsolete">فعال</translation>
-    </message>
-    <message>
-        <source>Disable</source>
-        <translation type="obsolete">غیر فعال</translation>
     </message>
 </context>
 <context>
@@ -2579,10 +2292,6 @@ left to select categories.</source>
         <translation>که در %1 برچسب مرتب شده اند</translation>
     </message>
     <message>
-        <source>that sorts in %1 Groups</source>
-        <translation type="obsolete">که در %1 گروه دسته بندی</translation>
-    </message>
-    <message>
         <location filename="../qml/Kaqaz/StateDialog.qml" line="78"/>
         <source>and wrote in %1 Days</source>
         <translation>و در %1 روز نوشته شده است</translation>
@@ -2590,26 +2299,6 @@ left to select categories.</source>
 </context>
 <context>
     <name>Synchronization</name>
-    <message>
-        <source>Under Construction
-We currently working on safe and secure sync system that all of your data sync encrypted to protect your data.
-
-We are hard working to keep your data safe and secure.
-Trust us...</source>
-        <translation type="obsolete">در دست ساخت
-ما در حال حاضر در حال کار بر روی سیستم همگام‌سازی یا sync امن و قابل اعتماد هستیم تا داده‌های شما را بصورت امن و رمزگذاری شده انتقال دهیم .
-
-ما سخت در حال کار هستیم تا داده‌های شما در امنیت کامل نگه‌داری شوند .
-به ما اعتماد کنید ...</translation>
-    </message>
-    <message>
-        <source>Encrypted Sync</source>
-        <translation type="obsolete">همگام سازی رمزنگاری شده</translation>
-    </message>
-    <message>
-        <source>Under Construction</source>
-        <translation type="obsolete">در دست ساخت</translation>
-    </message>
     <message>
         <location filename="../qml/Kaqaz/Synchronization.qml" line="42"/>
         <source>Click to disconnect</source>
@@ -2637,6 +2326,70 @@ Trust us...</source>
         <location filename="../desktop/todopapersitem.cpp" line="105"/>
         <source>Text...</source>
         <translation>متن...</translation>
+    </message>
+</context>
+<context>
+    <name>TranslationEditor</name>
+    <message>
+        <source>Just Save</source>
+        <translation>فقط ذخیره کن</translation>
+    </message>
+    <message>
+        <source>Finish and Send</source>
+        <translation>پایان و ارسال</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="159"/>
+        <source>Clear</source>
+        <translation>از اول</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="169"/>
+        <source>Cleared</source>
+        <translation>پاک شد</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="180"/>
+        <source>Cancel</source>
+        <translation>لغو</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="195"/>
+        <source>Are you sure?</source>
+        <translation>آیا مطمئنی؟</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="208"/>
+        <source>Save</source>
+        <translation>ذخیره سازی</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="234"/>
+        <source>Saved Successfully on</source>
+        <translation>در آدرس زیر ذخیره شد</translation>
+    </message>
+</context>
+<context>
+    <name>TranslationSaveDialog</name>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="35"/>
+        <source>Save and Send</source>
+        <translation>ذخیره وارسال</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="60"/>
+        <source>Country</source>
+        <translation>کشور</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="115"/>
+        <source>Language</source>
+        <translation>زبان</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="194"/>
+        <source>Lets Go</source>
+        <translation>ارسال</translation>
     </message>
 </context>
 <context>

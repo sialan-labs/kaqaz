@@ -2,8 +2,6 @@
     <qresource prefix="/">
         <file>qml/Kaqaz/About.qml</file>
         <file>qml/Kaqaz/AboutSialan.qml</file>
-        <file>qml/Kaqaz/AbstractList.qml</file>
-        <file>qml/Kaqaz/AbstractListItem.qml</file>
         <file>qml/Kaqaz/AddGroupDialog.qml</file>
         <file>qml/Kaqaz/AttachInsertDialog.qml</file>
         <file>qml/Kaqaz/AttachMenu.qml</file>
@@ -190,5 +188,9 @@
         <file>qml/Kaqaz/MapSwitcher.qml</file>
         <file>qml/Kaqaz/MapSelector.qml</file>
         <file>qml/Kaqaz/TranslationEditor.qml</file>
+        <file>qml/Kaqaz/OpenSourceProjects.qml</file>
+        <file>translations_sources/lang-en.ts</file>
+        <file>translations_sources/lang-fa.ts</file>
+        <file>qml/Kaqaz/TranslationSaveDialog.qml</file>
     </qresource>
 </RCC>

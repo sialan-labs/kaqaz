@@ -218,18 +218,18 @@ Item {
                 var suffix = Tools.fileSuffix(item.path)
                 var component;
                 if( suffix === "jpg" || suffix === "jpeg" || suffix === "png" ) {
-                    component = Qt.createComponent("ImageViewer.qml");
+                    component = image_viewer_component;
                     edit_btn.visible = kaqaz.proBuild
                 }
                 else
                 if( suffix === "mp3" || suffix === "wav" || suffix === "ogg" )
-                    component = Qt.createComponent("MusicViewer.qml");
+                    component = music_viewer_component;
                 else
                 if( suffix === "txt" || suffix === "text" )
-                    component = Qt.createComponent("TextViewer.qml");
+                    component = text_viewer_component;
                 else
                 if( suffix === "pdf" )
-                    component = Qt.createComponent("PdfViewer.qml");
+                    component = pdf_viewer_component;
 
                 var it = component.createObject(item);
                 it.fileId = item.fileId
@@ -285,6 +285,31 @@ Item {
     Connections{
         target: kaqaz
         onLanguageChanged: initTranslations()
+    }
+
+    Component {
+        id: music_viewer_component
+        MusicViewer{
+            onPressedChanged: attach_list.interactive = !pressed
+        }
+    }
+
+    Component {
+        id: image_viewer_component
+        ImageViewer{
+        }
+    }
+
+    Component {
+        id: text_viewer_component
+        TextViewer{
+        }
+    }
+
+    Component {
+        id: pdf_viewer_component
+        PdfViewer{
+        }
     }
 
     function initTranslations(){

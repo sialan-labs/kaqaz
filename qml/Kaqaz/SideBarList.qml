@@ -37,6 +37,7 @@ Rectangle {
         target: database
         onGroupsListChanged: refresh()
         onDatesListChanged: refresh()
+        onPaperGroupChanged: refresh()
     }
 
     ListView {

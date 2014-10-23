@@ -511,8 +511,7 @@ Rectangle {
     }
 
     function showSearch(){
-        var component = Qt.createComponent("SearchPanel.qml");
-        var item = component.createObject(panel_frame);
+        var item = search_panel_component.createObject(panel_frame);
         item.keywordChanged.connect(main.search)
         item.advanceSearchRequest.connect(main.advanceSearch)
         showPanel(item)
@@ -523,14 +522,12 @@ Rectangle {
     }
 
     function showPrefrences(){
-        var component = Qt.createComponent("Preference.qml");
-        var item = component.createObject(main);
+        var item = prefrences_component.createObject(main);
         main.pushPreference(item)
     }
 
     function showHistory(){
-        var component = Qt.createComponent("History.qml");
-        var item = component.createObject(main);
+        var item = history_component.createObject(main);
         main.pushPreference(item)
     }
 
@@ -541,8 +538,7 @@ Rectangle {
             return
         }
 
-        var component = Qt.createComponent("PaperList.qml");
-        var item = component.createObject(main);
+        var item = paper_list_component.createObject(main);
         item.list = list
         item.positionViewAtIndex(main.stackSwitcher.currentFrame.item.currentIndex)
         main.pushPreference(item)
@@ -562,5 +558,29 @@ Rectangle {
 
     function initPapers() {
         stack_switcher.init()
+    }
+
+    Component {
+        id: search_panel_component
+        SearchPanel {
+        }
+    }
+
+    Component {
+        id: prefrences_component
+        Preference{
+        }
+    }
+
+    Component {
+        id: history_component
+        History{
+        }
+    }
+
+    Component {
+        id: paper_list_component
+        PaperList{
+        }
     }
 }

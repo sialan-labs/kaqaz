@@ -1,53 +1,53 @@
 QT += network gui
 
-HEADERS += qmapcontrol/curve.h \
-           qmapcontrol/geometry.h \
-           qmapcontrol/imagemanager.h \
-           qmapcontrol/layer.h \
-           qmapcontrol/layermanager.h \
-           qmapcontrol/linestring.h \
-           qmapcontrol/mapadapter.h \
-           qmapcontrol/mapnetwork.h \
-           qmapcontrol/point.h \
-           qmapcontrol/tilemapadapter.h \
-           qmapcontrol/wmsmapadapter.h \
-           qmapcontrol/circlepoint.h \
-           qmapcontrol/imagepoint.h \
-           qmapcontrol/gps_position.h \
-           qmapcontrol/osmmapadapter.h \
-           qmapcontrol/maplayer.h \
-           qmapcontrol/geometrylayer.h \
-           qmapcontrol/yahoomapadapter.h \
-           qmapcontrol/googlemapadapter.h \
-           qmapcontrol/openaerialmapadapter.h \
-           qmapcontrol/fixedimageoverlay.h \
-           qmapcontrol/emptymapadapter.h \
-           qmapcontrol/arrowpoint.h \
-           qmapcontrol/qmapcontrol_global.h \
+HEADERS += $$PWD/curve.h \
+    $$PWD/geometry.h \
+    $$PWD/imagemanager.h \
+    $$PWD/layer.h \
+    $$PWD/layermanager.h \
+    $$PWD/linestring.h \
+    $$PWD/mapadapter.h \
+    $$PWD/mapnetwork.h \
+    $$PWD/point.h \
+    $$PWD/tilemapadapter.h \
+    $$PWD/wmsmapadapter.h \
+    $$PWD/circlepoint.h \
+    $$PWD/imagepoint.h \
+    $$PWD/gps_position.h \
+    $$PWD/osmmapadapter.h \
+    $$PWD/maplayer.h \
+    $$PWD/geometrylayer.h \
+    $$PWD/yahoomapadapter.h \
+    $$PWD/googlemapadapter.h \
+    $$PWD/openaerialmapadapter.h \
+    $$PWD/fixedimageoverlay.h \
+    $$PWD/emptymapadapter.h \
+    $$PWD/arrowpoint.h \
+    $$PWD/qmapcontrol_global.h \
     $$PWD/qmlmapcontrol.h \
     $$PWD/abstractmapcontrol.h
 
-SOURCES += qmapcontrol/curve.cpp \
-           qmapcontrol/geometry.cpp \
-           qmapcontrol/imagemanager.cpp \
-           qmapcontrol/layer.cpp \
-           qmapcontrol/layermanager.cpp \
-           qmapcontrol/linestring.cpp \
-           qmapcontrol/mapadapter.cpp \
-           qmapcontrol/mapnetwork.cpp \
-           qmapcontrol/point.cpp \
-           qmapcontrol/tilemapadapter.cpp \
-           qmapcontrol/wmsmapadapter.cpp \
-           qmapcontrol/circlepoint.cpp \
-           qmapcontrol/imagepoint.cpp \
-           qmapcontrol/gps_position.cpp \
-           qmapcontrol/osmmapadapter.cpp \
-           qmapcontrol/maplayer.cpp \
-           qmapcontrol/geometrylayer.cpp \
-           qmapcontrol/yahoomapadapter.cpp \
-           qmapcontrol/googlemapadapter.cpp \
-           qmapcontrol/openaerialmapadapter.cpp \
-           qmapcontrol/fixedimageoverlay.cpp \
-           qmapcontrol/arrowpoint.cpp \
-           qmapcontrol/emptymapadapter.cpp \
+SOURCES += $$PWD/curve.cpp \
+    $$PWD/geometry.cpp \
+    $$PWD/imagemanager.cpp \
+    $$PWD/layer.cpp \
+    $$PWD/layermanager.cpp \
+    $$PWD/linestring.cpp \
+    $$PWD/mapadapter.cpp \
+    $$PWD/mapnetwork.cpp \
+    $$PWD/point.cpp \
+    $$PWD/tilemapadapter.cpp \
+    $$PWD/wmsmapadapter.cpp \
+    $$PWD/circlepoint.cpp \
+    $$PWD/imagepoint.cpp \
+    $$PWD/gps_position.cpp \
+    $$PWD/osmmapadapter.cpp \
+    $$PWD/maplayer.cpp \
+    $$PWD/geometrylayer.cpp \
+    $$PWD/yahoomapadapter.cpp \
+    $$PWD/googlemapadapter.cpp \
+    $$PWD/openaerialmapadapter.cpp \
+    $$PWD/fixedimageoverlay.cpp \
+    $$PWD/arrowpoint.cpp \
+    $$PWD/emptymapadapter.cpp \
     $$PWD/qmlmapcontrol.cpp

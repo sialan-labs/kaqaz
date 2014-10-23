@@ -30,6 +30,8 @@ Item {
     property alias imgItem: img
     property alias paintedHeight: img.paintedHeight
 
+    property alias pressed: seeker.pressed
+
     signal deleteRequest( variant item )
 
     Connections{
@@ -71,6 +73,31 @@ Item {
         }
 
         property bool playStt: false
+    }
+
+    Connections {
+        target: audioItem
+        onPositionChanged: seeker.value = audioItem.position
+    }
+
+    Slider {
+        id: seeker
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.leftMargin: 20*physicalPlatformScale
+        anchors.rightMargin: 20*physicalPlatformScale
+        backColor: "#555555"
+        maximum: audioItem.duration
+        height: 30*physicalPlatformScale
+        onValueChanged: {
+            if( audioItem.position == value )
+                return
+            if( audioItem.source != "file://" + item.path )
+                return
+
+            audioItem.seek( value )
+        }
     }
 
     Component.onCompleted: {

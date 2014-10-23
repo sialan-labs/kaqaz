@@ -102,7 +102,7 @@ Item {
             for( var i=0; i<langs.length; i++ )
                 model.append({"name": langs[i], "addButton": false})
 
-//            model.append({"name": qsTr("Add your Language"), "addButton": true})
+            model.append({"name": qsTr("Add your Language"), "addButton": true})
             focus = true
         }
     }

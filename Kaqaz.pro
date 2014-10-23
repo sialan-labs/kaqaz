@@ -2,7 +2,7 @@ folder_01.source = files/fonts
 folder_01.target = .
 folder_02.source = files/translations
 folder_02.target = files
-folder_03.source = files/FaenzaFlattr
+folder_03.source = files/KFaenza
 folder_03.target = files/icons/
 DEPLOYMENTFOLDERS = folder_01 folder_02 folder_03
 
@@ -110,7 +110,6 @@ SOURCES += main.cpp \
     repository.cpp \
     resourcemanager.cpp \
     kaqazsync.cpp \
-    SimpleQtCryptor/simpleqtcryptor.cpp \
     backuper.cpp \
     database.cpp \
     kaqazdropbox.cpp \
@@ -126,8 +125,6 @@ HEADERS += \
     repository.h \
     resourcemanager.h \
     kaqazsync.h \
-    SimpleQtCryptor/serpent_sbox.h \
-    SimpleQtCryptor/simpleqtcryptor.h \
     backuper.h \
     kaqazmacros.h \
     database.h \
@@ -163,6 +160,7 @@ include(qmake/qtcAddDeployment.pri)
 include(qtdropbox/qtdropbox.pri)
 include(sialantools/sialantools.pri)
 include(qmapcontrol/qmapcontrol.pri)
+include(simpleqtcryptor/simpleqtcryptor.pri)
 qtcAddDeployment()
 
 isEmpty(PREFIX) {
@@ -192,7 +190,7 @@ linux {
     fonts.path = $$SHARES_PATH/fonts/
     icons.files = files/icons/kaqaz.png
     icons.path = $$SHARES_PATH/icons/
-    faenza.files = files/FaenzaFlattr
+    faenza.files = files/KFaenza
     faenza.path = $$SHARES_PATH/files/icons/
     desktopFile.files = $$APPDESK_SRC/Kaqaz.desktop
     desktopFile.path = $$APPDESK_PATH/share/applications

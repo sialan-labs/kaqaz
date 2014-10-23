@@ -44,5 +44,6 @@
         <file>qml/SialanTools/files/back_light_64.png</file>
         <file>qml/SialanTools/files/warning.png</file>
         <file>qml/SialanTools/files/pointer-down.png</file>
+        <file>qml/SialanTools/Slider.qml</file>
     </qresource>
 </RCC>

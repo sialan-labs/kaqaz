@@ -149,6 +149,7 @@ signals:
     void filesListChanged();
 
     void paperChanged( int id );
+    void paperGroupChanged( int id );
     void fileDeleted( const QString & file );
 
 private:

@@ -4,32 +4,27 @@
 <context>
     <name>About</name>
     <message>
-        <location filename="../qml/Kaqaz/About.qml" line="121"/>
+        <location filename="../qml/Kaqaz/About.qml" line="110"/>
         <source>Kaqaz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/About.qml" line="123"/>
+        <location filename="../qml/Kaqaz/About.qml" line="112"/>
         <source>(C) 2014 Sialan Labs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/About.qml" line="124"/>
-        <source>Based on</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/About.qml" line="125"/>
+        <location filename="../qml/Kaqaz/About.qml" line="113"/>
         <source>Home Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/About.qml" line="122"/>
+        <location filename="../qml/Kaqaz/About.qml" line="111"/>
         <source>License: GNU GPL Version 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/About.qml" line="126"/>
+        <location filename="../qml/Kaqaz/About.qml" line="114"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
@@ -160,7 +155,7 @@
 <context>
     <name>AttachMenu</name>
     <message>
-        <location filename="../qml/Kaqaz/AttachMenu.qml" line="147"/>
+        <location filename="../qml/Kaqaz/AttachMenu.qml" line="143"/>
         <source>Select media files.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -168,17 +163,17 @@
 <context>
     <name>AttachViewer</name>
     <message>
-        <location filename="../qml/Kaqaz/AttachViewer.qml" line="274"/>
+        <location filename="../qml/Kaqaz/AttachViewer.qml" line="316"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/AttachViewer.qml" line="275"/>
+        <location filename="../qml/Kaqaz/AttachViewer.qml" line="317"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/AttachViewer.qml" line="276"/>
+        <location filename="../qml/Kaqaz/AttachViewer.qml" line="318"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -186,17 +181,17 @@
 <context>
     <name>BackupRestore</name>
     <message>
-        <location filename="../qml/Kaqaz/BackupRestore.qml" line="109"/>
+        <location filename="../qml/Kaqaz/BackupRestore.qml" line="108"/>
         <source>Make Backup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/BackupRestore.qml" line="110"/>
+        <location filename="../qml/Kaqaz/BackupRestore.qml" line="109"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/BackupRestore.qml" line="128"/>
+        <location filename="../qml/Kaqaz/BackupRestore.qml" line="138"/>
         <source>Backup and Restore</source>
         <translation type="unfinished"></translation>
     </message>
@@ -496,7 +491,7 @@
 <context>
     <name>Database</name>
     <message>
-        <location filename="../database.cpp" line="1077"/>
+        <location filename="../database.cpp" line="1111"/>
         <source>No Label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -697,33 +692,38 @@
 <context>
     <name>GeneralSettings</name>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="101"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="100"/>
         <source>All papers item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="102"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="101"/>
         <source>Notes positioning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="104"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="103"/>
         <source>Desktop Touch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="106"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="105"/>
         <source>Fullscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="107"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="106"/>
         <source>Word suggestions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="108"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="107"/>
         <source>Groups count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="108"/>
+        <source>Select Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -797,7 +797,7 @@
 <context>
     <name>Header</name>
     <message>
-        <location filename="../sialantools/qml/SialanTools/Header.qml" line="88"/>
+        <location filename="../sialantools/qml/SialanTools/Header.qml" line="91"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
@@ -890,6 +890,57 @@ left to select categories.</source>
     </message>
 </context>
 <context>
+    <name>KaqazCanvas</name>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvas.qml" line="214"/>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KaqazCanvasMagnifierHelper</name>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvasMagnifierHelper.qml" line="21"/>
+        <source>Put your fingers on screen
+and move them on screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KaqazCanvasMagnifierLevel</name>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvasMagnifierLevel.qml" line="24"/>
+        <source>Zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KaqazCanvasPenMode</name>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvasPenMode.qml" line="67"/>
+        <source>Normal Pen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvasPenMode.qml" line="68"/>
+        <source>Star Pen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvasPenMode.qml" line="69"/>
+        <source>Eraser</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KaqazCanvasPenWidth</name>
+    <message>
+        <location filename="../qml/Kaqaz/KaqazCanvasPenWidth.qml" line="58"/>
+        <source>Pixel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>KaqazDesktop</name>
     <message>
         <location filename="../desktop/kaqazdesktop.cpp" line="156"/>
@@ -946,12 +997,17 @@ left to select categories.</source>
 <context>
     <name>LanguageSelector</name>
     <message>
-        <location filename="../qml/Kaqaz/LanguageSelector.qml" line="77"/>
+        <location filename="../qml/Kaqaz/LanguageSelector.qml" line="82"/>
         <source>Language changed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/LanguageSelector.qml" line="114"/>
+        <location filename="../qml/Kaqaz/LanguageSelector.qml" line="105"/>
+        <source>Add your Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/LanguageSelector.qml" line="121"/>
         <source>Languages</source>
         <translation type="unfinished"></translation>
     </message>
@@ -964,8 +1020,31 @@ left to select categories.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="540"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="537"/>
         <source>List is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MapSelector</name>
+    <message>
+        <location filename="../qml/Kaqaz/MapSelector.qml" line="78"/>
+        <source>Map changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/MapSelector.qml" line="96"/>
+        <source>Google Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/MapSelector.qml" line="97"/>
+        <source>OpenStreet Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/MapSelector.qml" line="114"/>
+        <source>Maps</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1015,6 +1094,14 @@ left to select categories.</source>
     <message>
         <location filename="../qml/Kaqaz/MusicDialog.qml" line="140"/>
         <source>Music</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OpenSourceProjects</name>
+    <message>
+        <location filename="../qml/Kaqaz/OpenSourceProjects.qml" line="120"/>
+        <source>Open source projects</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1150,27 +1237,28 @@ left to select categories.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="249"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="248"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="263"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="262"/>
         <source>Delete Paper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="314"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="313"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="330"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="329"/>
         <source>To-Do</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="360"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="359"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="405"/>
         <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1276,6 +1364,11 @@ left to select categories.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/Kaqaz/Preference.qml" line="106"/>
+        <source>Data Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/Kaqaz/Preference.qml" line="108"/>
         <source>Security</source>
         <translation type="unfinished"></translation>
@@ -1287,16 +1380,21 @@ left to select categories.</source>
     </message>
     <message>
         <location filename="../qml/Kaqaz/Preference.qml" line="112"/>
-        <source>About Kaqaz</source>
+        <source>Open Source Projects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/Preference.qml" line="113"/>
+        <source>About Kaqaz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/Preference.qml" line="114"/>
         <source>About Sialan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/Preference.qml" line="116"/>
+        <location filename="../qml/Kaqaz/Preference.qml" line="117"/>
         <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1319,17 +1417,17 @@ left to select categories.</source>
 <context>
     <name>ProfileSettings</name>
     <message>
-        <location filename="../qml/Kaqaz/ProfileSettings.qml" line="108"/>
+        <location filename="../qml/Kaqaz/ProfileSettings.qml" line="100"/>
         <source>Keep on Device memory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/ProfileSettings.qml" line="109"/>
+        <location filename="../qml/Kaqaz/ProfileSettings.qml" line="101"/>
         <source>Keep on SD Card</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/ProfileSettings.qml" line="121"/>
+        <location filename="../qml/Kaqaz/ProfileSettings.qml" line="113"/>
         <source>Data Location</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1649,24 +1747,6 @@ left to select categories.</source>
     </message>
 </context>
 <context>
-    <name>SearchGeoDomain</name>
-    <message>
-        <location filename="../qml/Kaqaz/SearchGeoDomain.qml" line="47"/>
-        <source>No Location</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/SearchGeoDomain.qml" line="62"/>
-        <source>Current Location</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/SearchGeoDomain.qml" line="78"/>
-        <source>Select on Map (Soon)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SearchHideHighlights</name>
     <message>
         <location filename="../qml/Kaqaz/SearchHideHighlights.qml" line="40"/>
@@ -1702,12 +1782,12 @@ left to select categories.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="224"/>
+        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="229"/>
         <source>Labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="254"/>
+        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="259"/>
         <source>Paper Type</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1995,52 +2075,52 @@ left to select categories.</source>
 <context>
     <name>SideBarList</name>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="83"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="84"/>
         <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="86"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="87"/>
         <source>Yesterday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="89"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="90"/>
         <source>Two days ago</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="179"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="180"/>
         <source>Clean Papers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="181"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="182"/>
         <source>All Papers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="182"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="183"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="185"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="186"/>
         <source>Lock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="187"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="188"/>
         <source>Fullscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="189"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="190"/>
         <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="193"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="194"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2155,6 +2235,62 @@ left to select categories.</source>
     <message>
         <location filename="../desktop/todopapersitem.cpp" line="105"/>
         <source>Text...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TranslationEditor</name>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="159"/>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="169"/>
+        <source>Cleared</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="180"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="195"/>
+        <source>Are you sure?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="208"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="234"/>
+        <source>Saved Successfully on</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TranslationSaveDialog</name>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="35"/>
+        <source>Save and Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="60"/>
+        <source>Country</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="115"/>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="194"/>
+        <source>Lets Go</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

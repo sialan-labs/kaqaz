@@ -76,7 +76,9 @@ public:
 
     Q_INVOKABLE void deleteFileIfPossible( const QString & id );
 
-    Q_INVOKABLE void removeFile( const QString & path );
+    Q_INVOKABLE bool removeFile( const QString & path );
+    Q_INVOKABLE bool existsFile( const QString & path );
+    Q_INVOKABLE bool copyFile( const QString & src, const QString & dst );
 
     Q_INVOKABLE void setCalendar( int t );
     Q_INVOKABLE QStringList calendarsID() const;
@@ -107,6 +109,7 @@ public:
     Q_INVOKABLE QString profilePath() const;
     Q_INVOKABLE QString repositoryPath() const;
     Q_INVOKABLE QString sdcardPath() const;
+    Q_INVOKABLE QString translatorFilePath() const;
 
     static QString resourcePathAbs();
     static QString resourcePath();

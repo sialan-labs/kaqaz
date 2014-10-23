@@ -20,6 +20,8 @@
 #define TRANSLATIONMODEL_H
 
 #include <QAbstractListModel>
+#include <QMap>
+#include <QHash>
 
 class QDomElement;
 class TranslationModelPrivate;
@@ -27,6 +29,12 @@ class TranslationModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(QString file READ file WRITE setFile NOTIFY fileChanged)
+    Q_PROPERTY(QString localeName READ localeName NOTIFY localeNameChanged)
+    Q_PROPERTY(int language READ language WRITE setLanguage NOTIFY languageChanged)
+    Q_PROPERTY(int country READ country WRITE setCountry NOTIFY countryChanged)
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
+    Q_PROPERTY(int doneCount READ doneCount NOTIFY doneCountChanged)
+
 public:
     enum TranslationRoles {
         OriginalTextRole = Qt::UserRole,
@@ -39,24 +47,46 @@ public:
     void setFile( const QString & path );
     QString file() const;
 
+    void setLanguage( int lan );
+    int language() const;
+
+    void setCountry( int cn );
+    int country() const;
+
+    QString localeName() const;
+
     QString id( const QModelIndex &index ) const;
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
 
     QHash<qint32,QByteArray> roleNames() const;
+    Qt::ItemFlags flags(const QModelIndex &index) const;
+
+    int count() const;
+    int doneCount() const;
+
+    Q_INVOKABLE QStringList countries() const;
+    Q_INVOKABLE QStringList languages() const;
 
 public slots:
     void refresh();
+    void saveTo( const QString & path );
 
 signals:
     void fileChanged();
+    void languageChanged();
+    void countryChanged();
+    void localeNameChanged();
+    void countChanged();
+    void doneCountChanged();
 
 private:
-    void parseFolderElement(const QDomElement &element);
+    QMap<QString, QString> parseFolderElement(const QDomElement &element);
 
 private slots:
-    void translationsChanged();
+    void clear();
 
 private:
     TranslationModelPrivate *p;

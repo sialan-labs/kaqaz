@@ -17,7 +17,7 @@
 */
 
 #include "resourcemanager.h"
-#include "SimpleQtCryptor/simpleqtcryptor.h"
+#include "simpleqtcryptor/simpleqtcryptor.h"
 
 #include <QFile>
 #include <QDataStream>

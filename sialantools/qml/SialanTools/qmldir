@@ -32,3 +32,4 @@ Tooltip 1.0 Tooltip.qml
 CradleBits 1.0 CradleBits.qml
 CradleIndicator 1.0 CradleIndicator.qml
 PasteButton 1.0 PasteButton.qml
+Slider 1.0 Slider.qml

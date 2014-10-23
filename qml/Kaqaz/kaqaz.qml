@@ -154,7 +154,7 @@ SialanMain {
     }
 
     function showHideHilightPanel() {
-        showBottomPanel( Qt.createComponent("SearchHideHighlights.qml"), portrait )
+        showBottomPanel( search_highlights_component, portrait )
     }
 
     function showHistory(){
@@ -273,6 +273,12 @@ SialanMain {
     Component {
         id: helper_compoennt
         Helper{
+        }
+    }
+
+    Component {
+        id: search_highlights_component
+        SearchHideHighlights{
         }
     }
 
