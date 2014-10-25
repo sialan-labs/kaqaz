@@ -389,7 +389,10 @@ QByteArray SmartIODBoxSingle::decryptData(const QByteArray &sdata)
     SimpleQtCryptor::Decryptor dec( gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB );
     QByteArray enc_code_dec;
     if( dec.decrypt(sdata,enc_code_dec,true) == SimpleQtCryptor::ErrorInvalidKey )
+    {
+        END_FNC_DEBUG
         return enc_code_dec;
+    }
 
     END_FNC_DEBUG
     return enc_code_dec;

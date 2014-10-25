@@ -1251,6 +1251,7 @@ void Database::reinit_buffer()
 
 void Database::update_database()
 {
+    BEGIN_FNC_DEBUG
     const QString & version = value("version");
     if( version.isEmpty() )
     {
@@ -1322,6 +1323,7 @@ void Database::update_database()
         setRevision(GROUPS_SYNC_KEY,-1);
         setValue("version","5");
     }
+    END_FNC_DEBUG
 }
 
 PaperClass Database::getPaper(int id)

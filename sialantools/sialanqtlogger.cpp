@@ -24,6 +24,7 @@
 #include <QDateTime>
 #include <QFileInfo>
 #include <QCoreApplication>
+#include <QMutex>
 
 QSet<SialanQtLogger*> sialan_qt_logger_objs;
 
@@ -38,6 +39,7 @@ class SialanQtLoggerPrivate
 public:
     QFile *file;
     QString path;
+    QMutex file_mutex;
 };
 
 SialanQtLogger::SialanQtLogger(const QString &path, QObject *parent) :
@@ -67,23 +69,31 @@ void SialanQtLogger::logMsg(QtMsgType type, const QMessageLogContext &context, c
     switch (type) {
     case QtDebugMsg:
         text = "Debug" + text;
+        p->file_mutex.lock();
         p->file->write(text.toUtf8());
         p->file->flush();
+        p->file_mutex.unlock();
         break;
     case QtWarningMsg:
         text = "Warning" + text;
+        p->file_mutex.lock();
         p->file->write(text.toUtf8());
         p->file->flush();
+        p->file_mutex.unlock();
         break;
     case QtCriticalMsg:
         text = "Critical" + text;
+        p->file_mutex.lock();
         p->file->write(text.toUtf8());
         p->file->flush();
+        p->file_mutex.unlock();
         break;
     case QtFatalMsg:
         text = "Fatal" + text;
+        p->file_mutex.lock();
         p->file->write(text.toUtf8());
         p->file->flush();
+        p->file_mutex.unlock();
         abort();
     }
 }
