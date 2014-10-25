@@ -1,0 +1,10 @@
+{
+    "policy_groups": [
+        "networking",
+        "audio",
+        "camera",
+        "location",
+        "video"
+    ],
+    "policy_version": 1.1
+}

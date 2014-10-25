@@ -1,0 +1,15 @@
+{
+    "name": "org.sialan.kaqaz",
+    "description": "description of KaqazTouch",
+    "framework": "qt-5.3",
+    "architecture": "all",
+    "title": "Kaqaz",
+    "hooks": {
+        "Kaqaz": {
+            "apparmor": "kaqaz.json",
+            "desktop": "kaqaz.desktop"
+        }
+    },
+    "version": "0.1",
+    "maintainer": "Sialan Labs <contact@sialan.org>"
+}
