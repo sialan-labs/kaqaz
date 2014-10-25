@@ -38,11 +38,11 @@ public:
     QString password;
 };
 
-KaqazSync::KaqazSync(Database *db, QObject *parent) :
+KaqazSync::KaqazSync(QObject *parent) :
     QObject(parent)
 {
     p = new KaqazSyncPrivate;
-    p->db = db;
+    p->db = Kaqaz::database();
     p->kdbox = 0;
     p->password = p->db->syncPassword();
 
@@ -60,9 +60,11 @@ bool KaqazSync::tokenAvailable() const
 
 void KaqazSync::setPassword(const QString &pass)
 {
+    BEGIN_FNC_DEBUG
     QString hash = SialanTools::passToMd5(pass);
     p->db->setSyncPassword( hash );
     p->password = hash;
+    END_FNC_DEBUG
 }
 
 QString KaqazSync::password() const
@@ -72,10 +74,12 @@ QString KaqazSync::password() const
 
 void KaqazSync::setFileSyncing(bool stt)
 {
+    BEGIN_FNC_DEBUG
     p->kdbox->setFileSyncing(stt);
     Kaqaz::settings()->setValue( "General/fileSyncing", stt );
     emit fileSyncingChanged();
     refresh();
+    END_FNC_DEBUG
 }
 
 bool KaqazSync::fileSyncing() const
@@ -85,12 +89,15 @@ bool KaqazSync::fileSyncing() const
 
 void KaqazSync::password_changed(const QString &password)
 {
+    BEGIN_FNC_DEBUG
     p->db->setSyncPassword( password );
     emit passwordChanged();
+    END_FNC_DEBUG
 }
 
 void KaqazSync::connectedChanged()
 {
+    BEGIN_FNC_DEBUG
     if( p->kdbox->connected() )
     {
         connect( p->db, SIGNAL(paperChanged(int))  , p->kdbox, SLOT(refresh()), Qt::QueuedConnection );
@@ -103,35 +110,45 @@ void KaqazSync::connectedChanged()
         disconnect( p->db, SIGNAL(paperChanged(int))  , p->kdbox, SLOT(refresh()) );
         disconnect( p->db, SIGNAL(groupsListChanged()), p->kdbox, SLOT(refresh()) );
     }
+    END_FNC_DEBUG
 }
 
 void KaqazSync::refresh()
 {
+    BEGIN_FNC_DEBUG
     p->kdbox->setLocalSyncHash( p->db->revisions() );
     QMetaObject::invokeMethod( p->kdbox, "refresh", Qt::QueuedConnection );
+    END_FNC_DEBUG
 }
 
 void KaqazSync::refreshForce()
 {
+    BEGIN_FNC_DEBUG
     p->kdbox->setLocalSyncHash( p->db->revisions() );
     QMetaObject::invokeMethod( p->kdbox, "refreshForce", Qt::QueuedConnection );
+    END_FNC_DEBUG
 }
 
 void KaqazSync::start()
 {
+    BEGIN_FNC_DEBUG
     QMetaObject::invokeMethod( p->kdbox, "connectDropbox", Qt::QueuedConnection, Q_ARG(QString,p->password) );
+    END_FNC_DEBUG
 }
 
 void KaqazSync::stop()
 {
+    BEGIN_FNC_DEBUG
     QSettings settings(CONFIG_PATH,QSettings::IniFormat);
     settings.remove(TOKEN_KEY);
     settings.remove(TOKEN_SECRET);
     reload();
+    END_FNC_DEBUG
 }
 
 void KaqazSync::reload()
 {
+    BEGIN_FNC_DEBUG
     if( p->thread )
     {
         p->thread->quit();
@@ -168,11 +185,14 @@ void KaqazSync::reload()
     QMetaObject::invokeMethod( p->kdbox, "initialize", Qt::QueuedConnection );
 
     emit tokenAvailableChanged();
+    END_FNC_DEBUG
 }
 
 void KaqazSync::authorizeDone()
 {
+    BEGIN_FNC_DEBUG
     QMetaObject::invokeMethod( p->kdbox, "authorizeDone", Qt::QueuedConnection );
+    END_FNC_DEBUG
 }
 
 void KaqazSync::paperDeleted(const QString &id)
@@ -181,7 +201,9 @@ void KaqazSync::paperDeleted(const QString &id)
     if( paperId == -1 )
         return;
 
+    BEGIN_FNC_DEBUG
     p->db->deletePaper( paperId );
+    END_FNC_DEBUG
 }
 
 KaqazSync::~KaqazSync()

@@ -116,7 +116,9 @@ bool KaqazDropBox::tokenAvailable() const
 
 void KaqazDropBox::setFileSyncing(bool stt)
 {
+    BEGIN_FNC_DEBUG
     p->fileSyncing = stt;
+    END_FNC_DEBUG
 }
 
 bool KaqazDropBox::fileSyncing() const
@@ -126,17 +128,21 @@ bool KaqazDropBox::fileSyncing() const
 
 void KaqazDropBox::setLocalSyncHash(const SyncItemHash &hash)
 {
+    BEGIN_FNC_DEBUG
     p->mutex.lock();
     p->syncHash = hash;
     p->mutex.unlock();
+    END_FNC_DEBUG
 }
 
 SyncItemHash KaqazDropBox::localSyncHash() const
 {
+    BEGIN_FNC_DEBUG
     p->mutex.lock();
     SyncItemHash res = p->syncHash;
     p->mutex.unlock();
 
+    END_FNC_DEBUG
     return res;
 }
 
@@ -146,10 +152,13 @@ void KaqazDropBox::localListUpdated()
         return;
     if( !beginPush(UPDATE_KEY) )
         return;
+
+    BEGIN_FNC_DEBUG
     if( p->on_fnc_call.count() != 1 )
     {
         refresh();
         endPush(UPDATE_KEY);
+        END_FNC_DEBUG
         return;
     }
 
@@ -165,6 +174,7 @@ void KaqazDropBox::localListUpdated()
         if( SmartIODBoxSingle::fatalError() )
         {
             endPush(UPDATE_KEY);
+            END_FNC_DEBUG
             return;
         }
     }
@@ -291,29 +301,36 @@ void KaqazDropBox::localListUpdated()
     p->smartio->start();
     if( !p->smartio->isActive() )
         update_finished();
+
+    END_FNC_DEBUG
 }
 
 void KaqazDropBox::update_finished()
 {
+    BEGIN_FNC_DEBUG
     emit syncFinished();
     if( !endPush(UPDATE_KEY) )
         emit refreshRequest();
+    END_FNC_DEBUG
 }
 
 void KaqazDropBox::connectDropbox(const QString &password)
 {
+    BEGIN_FNC_DEBUG
     if( p->connected )
     {
         p->password_setted = true;
         p->master_password = password;
         p->smartio->setPassword(p->master_password);
         refresh();
+        END_FNC_DEBUG
         return;
     }
 
     if(!p->dbox->requestTokenAndWait())
     {
         emit getTokenFailed();
+        END_FNC_DEBUG
         return;
     }
 
@@ -331,12 +348,14 @@ void KaqazDropBox::connectDropbox(const QString &password)
         if(i>3)
         {
             emit authorizeFailed();
+            END_FNC_DEBUG
             return;
         }
 
         if(p->dbox->error() != QDropbox::NoError)
         {
             emit accessError( p->dbox->errorString() );
+            END_FNC_DEBUG
             return;
         }
     }
@@ -351,10 +370,12 @@ void KaqazDropBox::connectDropbox(const QString &password)
     p->connected = true;
     refresh();
     emit connectedChanged();
+    END_FNC_DEBUG
 }
 
 void KaqazDropBox::disconnectDropbox()
 {
+    BEGIN_FNC_DEBUG
     p->settings->remove(TOKEN_KEY);
     p->settings->remove(TOKEN_SECRET);
     p->settings->sync();
@@ -364,10 +385,12 @@ void KaqazDropBox::disconnectDropbox()
     p->smartio->setTokenSecret(p->dbox->tokenSecret());
     p->connected = false;
     emit connectedChanged();
+    END_FNC_DEBUG
 }
 
 void KaqazDropBox::initialize()
 {
+    BEGIN_FNC_DEBUG
     if(p->dbox )
         return;
 
@@ -395,40 +418,49 @@ void KaqazDropBox::initialize()
     connect( p->smartio, SIGNAL(progressFinished())             , SLOT(update_finished())          , Qt::QueuedConnection );
 
     emit connectedChanged();
+    END_FNC_DEBUG
 }
 
 void KaqazDropBox::refresh()
 {
+    BEGIN_FNC_DEBUG
     if( p->refresh_timer )
         killTimer(p->refresh_timer);
 
     p->refresh_timer = startTimer(5000);
+    END_FNC_DEBUG
 }
 
 void KaqazDropBox::refreshForce()
 {
+    BEGIN_FNC_DEBUG
     localListUpdated();
+    END_FNC_DEBUG
 }
 
 QByteArray KaqazDropBox::encryptData(const QByteArray &data)
 {
+    BEGIN_FNC_DEBUG
     QSharedPointer<SimpleQtCryptor::Key> gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(p->master_password));
     SimpleQtCryptor::Encryptor enc( gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB, SimpleQtCryptor::NoChecksum );
 
     QByteArray enc_new_data;
     enc.encrypt( data, enc_new_data, true );
 
+    END_FNC_DEBUG
     return enc_new_data;
 }
 
 QByteArray KaqazDropBox::decryptData(const QByteArray &sdata)
 {
+    BEGIN_FNC_DEBUG
     QSharedPointer<SimpleQtCryptor::Key> gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(p->master_password));
     SimpleQtCryptor::Decryptor dec( gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB );
     QByteArray enc_code_dec;
     if( dec.decrypt(sdata,enc_code_dec,true) == SimpleQtCryptor::ErrorInvalidKey )
         return enc_code_dec;
 
+    END_FNC_DEBUG
     return enc_code_dec;
 }
 
@@ -480,10 +512,12 @@ qint64 KaqazDropBox::fetchRevision(const QString &path)
 
 void KaqazDropBox::setRevision(const QString &path, qint64 revision)
 {
+    BEGIN_FNC_DEBUG
     fetchRevisions();
     const QString & id = "{" + QFileInfo(path).fileName() + "}";
     p->revisions[id] = revision;
     pushRevisions();
+    END_FNC_DEBUG
 }
 
 void KaqazDropBox::pushRevisions()
@@ -495,6 +529,7 @@ void KaqazDropBox::pushRevisions()
     if( !rvsn_file.open(QDropboxFile::WriteOnly) )
         return;
 
+    BEGIN_FNC_DEBUG
     QString data;
     QHashIterator<QString,qint64> i(p->revisions);
     while(i.hasNext())
@@ -508,6 +543,8 @@ void KaqazDropBox::pushRevisions()
 
     if( !endPush(REVISIONS_FILE) )
         pushRevisions();
+
+    END_FNC_DEBUG
 }
 
 void KaqazDropBox::fetchRevisions()
@@ -564,21 +601,26 @@ bool KaqazDropBox::endPush(const QString &id)
 
 void KaqazDropBox::authorizeDone()
 {
+    BEGIN_FNC_DEBUG
     p->loop->exit();
+    END_FNC_DEBUG
 }
 
 void KaqazDropBox::authorizeApplication()
 {
+    BEGIN_FNC_DEBUG
     QDesktopServices::openUrl(p->dbox->authorizeLink());
 
     emit authorizeRequest();
     p->loop->exec();
 
     p->dbox->requestAccessTokenAndWait();
+    END_FNC_DEBUG
 }
 
 void KaqazDropBox::timerEvent(QTimerEvent *e)
 {
+    BEGIN_FNC_DEBUG
     if( e->timerId() == p->refresh_timer )
     {
         killTimer(p->refresh_timer);
@@ -586,6 +628,7 @@ void KaqazDropBox::timerEvent(QTimerEvent *e)
 
         localListUpdated();
     }
+    END_FNC_DEBUG
 }
 
 void KaqazDropBox::checkToken()

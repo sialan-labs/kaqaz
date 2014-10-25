@@ -39,6 +39,16 @@
 #define LOG_PATH    SialanApplication::logPath()
 #define CONFIG_PATH SialanApplication::confsPath()
 
+#ifdef SUPER_DEBUG
+#define BEGIN_FNC_DEBUG \
+    qDebug() << "Begin " << __LINE__ << __PRETTY_FUNCTION__ ;
+#define END_FNC_DEBUG \
+    qDebug() << "End " << __LINE__ << __PRETTY_FUNCTION__ ;
+#else
+#define BEGIN_FNC_DEBUG
+#define END_FNC_DEBUG
+#endif
+
 #define DROPBOX_APP_KEY    "js992omoncolisd"
 #define DROPBOX_APP_SECRET "csojevx79okw1dh"
 

@@ -18,6 +18,7 @@
 
 #include "resourcemanager.h"
 #include "simpleqtcryptor/simpleqtcryptor.h"
+#include "kaqazmacros.h"
 
 #include <QFile>
 #include <QDataStream>
@@ -48,6 +49,7 @@ void ResourceManager::addFile(const QString &filePath, const QString & password)
     if( !src.open(QFile::ReadOnly) )
         return;
 
+    BEGIN_FNC_DEBUG
     QSharedPointer<SimpleQtCryptor::Key> gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(password));
     SimpleQtCryptor::Encryptor enc( gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB, SimpleQtCryptor::NoChecksum );
 
@@ -64,6 +66,7 @@ void ResourceManager::addFile(const QString &filePath, const QString & password)
         p->stream << ar;
         ar.clear();
     } while( !tmp.isEmpty() );
+    END_FNC_DEBUG
 }
 
 QString ResourceManager::extractFile(const QString &filePath, const QString & password)
@@ -72,6 +75,7 @@ QString ResourceManager::extractFile(const QString &filePath, const QString & pa
     if( !dest.open(QFile::WriteOnly) )
         return QString();
 
+    BEGIN_FNC_DEBUG
     QSharedPointer<SimpleQtCryptor::Key> gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(password));
     SimpleQtCryptor::Decryptor dec( gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB );
 
@@ -81,6 +85,7 @@ QString ResourceManager::extractFile(const QString &filePath, const QString & pa
     {
         dest.close();
         QFile::remove(filePath);
+        END_FNC_DEBUG
         return QString();
     }
 
@@ -105,11 +110,13 @@ QString ResourceManager::extractFile(const QString &filePath, const QString & pa
             size -= rsize;
     }
 
+    END_FNC_DEBUG
     return fileName;
 }
 
 void ResourceManager::writeHead(const QString &password)
 {
+    BEGIN_FNC_DEBUG
     p->file.reset();
 
     QSharedPointer<SimpleQtCryptor::Key> gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(password));
@@ -119,10 +126,12 @@ void ResourceManager::writeHead(const QString &password)
     enc.encrypt( QUuid::createUuid().toByteArray(), enc_header_code, true );
 
     p->stream << enc_header_code;
+    END_FNC_DEBUG
 }
 
 bool ResourceManager::checkHead(const QString &password)
 {
+    BEGIN_FNC_DEBUG
     p->file.reset();
 
     QSharedPointer<SimpleQtCryptor::Key> gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(password));
@@ -131,6 +140,7 @@ bool ResourceManager::checkHead(const QString &password)
     QByteArray enc_header_code;
     QByteArray enc_header_code_dec;
     p->stream >> enc_header_code;
+    END_FNC_DEBUG
     if( dec.decrypt(enc_header_code,enc_header_code_dec,true) == SimpleQtCryptor::ErrorInvalidKey )
         return false;
     else
@@ -139,7 +149,9 @@ bool ResourceManager::checkHead(const QString &password)
 
 void ResourceManager::close()
 {
+    BEGIN_FNC_DEBUG
     p->file.close();
+    END_FNC_DEBUG
 }
 
 qint64 ResourceManager::size()

@@ -118,7 +118,6 @@ public:
     QString language;
 
     Repository *repository;
-    Backuper *backuper;
 
     QFileSystemWatcher *filesystem;
     QMimeDatabase mime_db;
@@ -149,7 +148,6 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->viewer_classic = 0;
 #endif
     p->translator = new QTranslator(this);
-    p->backuper = new Backuper();
     p->devices = new SialanDevices(this);
     p->tools = new SialanTools(this);
 #ifdef Q_OS_ANDROID
@@ -203,9 +201,9 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->repository = new Repository(this);
 
     if( !kaqaz_database )
-        kaqaz_database = new Database(profilePath() + "/database.sqlite");
+        kaqaz_database = new Database();
 
-    p->sync = new KaqazSync(kaqaz_database,this);
+    p->sync = new KaqazSync(this);
 
     init_languages();
 
@@ -217,6 +215,7 @@ Kaqaz::Kaqaz(QObject *parent) :
     qmlRegisterType<MapLayer>("Kaqaz", 1,0, "MapLayer");
     qmlRegisterType<QmlMapControl>("Kaqaz", 1,0, "MapControl");
     qmlRegisterType<TranslationModel>("Kaqaz", 1,0, "TranslationModel");
+    qmlRegisterType<Backuper>("Kaqaz", 1,0, "Backuper");
     qmlRegisterType<WeatherData>("Kaqaz", 1, 0, "WeatherData");
     qmlRegisterType<WeatherModel>("Kaqaz", 1, 0, "WeatherModel");
     qmlRegisterUncreatableType<Kaqaz>("Kaqaz", 1,0, "Kaqaz","");
@@ -235,11 +234,6 @@ Kaqaz *Kaqaz::instance()
 QObject *Kaqaz::view()
 {
     return p->viewer;
-}
-
-Backuper *Kaqaz::backuper() const
-{
-    return p->backuper;
 }
 
 KaqazSync *Kaqaz::kaqazSync() const
@@ -296,7 +290,6 @@ bool Kaqaz::start()
         p->viewer_classic = new KaqazDesktop();
         p->viewer_classic->setDatabase(kaqaz_database);
         p->viewer_classic->setRepository(p->repository);
-        p->viewer_classic->setBackuper(p->backuper);
         p->viewer_classic->setKaqazSync(p->sync);
         p->viewer_classic->setSialanDevices(p->devices);
         p->viewer_classic->setSialanTools(p->tools);
@@ -316,14 +309,10 @@ bool Kaqaz::start()
         p->viewer->engine()->rootContext()->setContextProperty( "database", kaqaz_database );
         p->viewer->engine()->rootContext()->setContextProperty( "filesystem", p->filesystem );
         p->viewer->engine()->rootContext()->setContextProperty( "repository", p->repository );
-        p->viewer->engine()->rootContext()->setContextProperty( "backuper", p->backuper );
         p->viewer->engine()->rootContext()->setContextProperty( "sync", p->sync );
 #ifdef DESKTOP_LINUX
         p->viewer->engine()->addImageProvider( "icon", new IconProvider() );
 #endif
-        p->viewer->engine()->rootContext()->setContextProperty( "keyboard", QGuiApplication::inputMethod() );
-        if( !QGuiApplication::screens().isEmpty() )
-            p->viewer->engine()->rootContext()->setContextProperty( "screen", QGuiApplication::screens().first() );
 
         connect(p->viewer->engine(), SIGNAL(quit()), SLOT(close()));
 
@@ -1070,8 +1059,6 @@ bool Kaqaz::eventFilter(QObject *o, QEvent *e)
 
 Kaqaz::~Kaqaz()
 {
-    p->backuper->deleteLater();
-
 //    delete p->viewer;
     delete p->calendar;
     delete p;

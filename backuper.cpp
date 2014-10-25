@@ -52,11 +52,13 @@ Backuper::Backuper() :
 
 void Backuper::makeBackup( const QString & password )
 {
+    BEGIN_FNC_DEBUG
     const QString & db_path = Kaqaz::database()->path();
     const QString & repository_path = p->kaqaz->repositoryPath();
     const QString & conf_path = HOME_PATH + "/config.ini";
 
     QMetaObject::invokeMethod( p->core, "makeBackup", Q_ARG(QString,repository_path), Q_ARG(QString,db_path), Q_ARG(QString,conf_path), Q_ARG(QString,password) );
+    END_FNC_DEBUG
 }
 
 bool Backuper::restore(const QString &path, const QString &password)
@@ -67,6 +69,7 @@ bool Backuper::restore(const QString &path, const QString &password)
     else
         rsrc.close();
 
+    BEGIN_FNC_DEBUG
     const QString & home_path = p->kaqaz->profilePath();
     const QString & repository_path = p->kaqaz->repositoryPath();
 
@@ -74,12 +77,19 @@ bool Backuper::restore(const QString &path, const QString &password)
 
     QMetaObject::invokeMethod( p->core, "restore", Q_ARG(QString,repository_path), Q_ARG(QString,home_path), Q_ARG(QString,path), Q_ARG(QString,password) );
 
+    END_FNC_DEBUG
     return true;
 }
 
 Backuper::~Backuper()
 {
-    p->thread->deleteLater();
+    if( p->thread )
+    {
+        p->thread->quit();
+        p->thread->wait();
+        p->thread->deleteLater();
+    }
+
     p->core->deleteLater();
     delete p;
 }
@@ -100,6 +110,7 @@ BackuperCore::BackuperCore()
 
 void BackuperCore::makeBackup(const QString &repository_path, const QString &db_path, const QString &cnf_path, const QString &password)
 {
+    BEGIN_FNC_DEBUG
     QString path = BACKUP_PATH;
     QDir().mkpath(path);
 
@@ -125,10 +136,12 @@ void BackuperCore::makeBackup(const QString &repository_path, const QString &db_
 
     rsrc.close();
     emit success();
+    END_FNC_DEBUG
 }
 
 void BackuperCore::restore(const QString &repository_path, const QString &home_path, const QString &path, const QString &password)
 {
+    BEGIN_FNC_DEBUG
     ResourceManager rsrc( path, false );
     rsrc.checkHead(password);
 
@@ -158,6 +171,7 @@ void BackuperCore::restore(const QString &repository_path, const QString &home_p
 
     QMetaObject::invokeMethod( p->kaqaz, "reconnectAllResources" );
     emit success();
+    END_FNC_DEBUG
 }
 
 BackuperCore::~BackuperCore()

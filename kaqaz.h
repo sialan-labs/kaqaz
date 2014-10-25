@@ -63,7 +63,6 @@ public:
 
     QObject *view();
 
-    Backuper *backuper() const;
     KaqazSync *kaqazSync() const;
     SialanCalendarConverter *calendarConverter() const;
     Repository *repository() const;

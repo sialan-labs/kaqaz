@@ -29,7 +29,7 @@ class KaqazSync : public QObject
     Q_PROPERTY(QString password READ password NOTIFY passwordChanged)
     Q_OBJECT
 public:
-    KaqazSync(class Database *db, QObject *parent = 0);
+    KaqazSync(QObject *parent = 0);
     ~KaqazSync();
 
     bool tokenAvailable() const;

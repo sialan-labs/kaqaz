@@ -20,7 +20,6 @@
 #include "kaqaz.h"
 #include "database.h"
 #include "repository.h"
-#include "backuper.h"
 #include "kaqazsync.h"
 #include "panelbox.h"
 #include "sialantools/sialandevices.h"
@@ -89,7 +88,6 @@ public:
 
     Database *db;
     Repository *repository;
-    Backuper *backuper;
     KaqazSync *sync;
     SialanDevices *devices;
     SialanTools *tools;
@@ -264,11 +262,6 @@ void KaqazDesktop::setDatabase(Database *db)
 void KaqazDesktop::setRepository(Repository *rep)
 {
     p->repository = rep;
-}
-
-void KaqazDesktop::setBackuper(Backuper *bkpr)
-{
-    p->backuper = bkpr;
 }
 
 void KaqazDesktop::setKaqazSync(KaqazSync *ksync)

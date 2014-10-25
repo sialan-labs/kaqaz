@@ -8,12 +8,15 @@ DEPLOYMENTFOLDERS = folder_01 folder_02 folder_03
 
 QT += sql multimedia positioning qml quick xml
 
-contains(BUILD_TYPE,free) {
+contains(BUILD_MODE,free) {
     DEFINES += FREE_BUILD
 }
-contains(BUILD_TYPE,trial) {
+contains(BUILD_MODE,trial) {
     DEFINES += FREE_BUILD
     DEFINES += TRIAL_BUILD
+}
+contains(BUILD_MODE,superdebug) {
+    DEFINES += SUPER_DEBUG
 }
 
 ios {

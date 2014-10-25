@@ -16,9 +16,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "kaqazmacros.h"
+
 #define CACHE_SIZE 20
 #define DB_EMIT if( !p->signal_blocker ) emit
 #define BEGIN \
+    BEGIN_FNC_DEBUG \
     begin();
 #define COMMIT \
     if( p->commit_timer ) {\
@@ -29,7 +32,8 @@
     if( p->uncommited > 40 ) \
         commit(); \
     else \
-        p->commit_timer = startTimer(800);
+        p->commit_timer = startTimer(800); \
+    END_FNC_DEBUG
 
 #include "database.h"
 #include "kaqazmacros.h"
@@ -73,13 +77,13 @@ public:
     int uncommited;
 };
 
-Database::Database(const QString & path, QObject *parent) :
+Database::Database(QObject *parent) :
     QObject(parent)
 {
     p = new DatabasePrivate;
     p->current_activity = 0;
     p->max_paper_id = 0;
-    p->path = path;
+    p->path = Kaqaz::instance()->profilePath() + "/database.sqlite";
     p->signal_blocker = false;
     p->begined = false;
     p->commit_timer = 0;
@@ -334,6 +338,7 @@ QList<int> Database::search(const QString &keyword)
 
 QList<int> Database::advanceSearch(const QString &keyword, const QDate &startDate, const QDate &endDate, const QTime &startTime, const QTime &endTime, int group, int domain, const QRectF & geo )
 {
+    BEGIN_FNC_DEBUG
     QString query_str = "SELECT id,ctime,cdate FROM Papers WHERE ";
     QHash<QString,QVariant> boundValues;
 
@@ -434,6 +439,7 @@ QList<int> Database::advanceSearch(const QString &keyword, const QDate &startDat
         has_previous = true;
     }
 
+    END_FNC_DEBUG
     if( !has_previous )
         return QList<int>();
 
@@ -442,6 +448,7 @@ QList<int> Database::advanceSearch(const QString &keyword, const QDate &startDat
 
 QList<int> Database::searchQuery(const QString &qry_str, const QString & kw, const QHash<QString, QVariant> & boundValues)
 {
+    BEGIN_FNC_DEBUG
     QHash<int,qint64> result;
     QHash<int,int> result_counts;
     QSet<int> result_exact;
@@ -493,6 +500,7 @@ QList<int> Database::searchQuery(const QString &qry_str, const QString & kw, con
     QList<int> final_result = result.keys();
     qSort(final_result.begin(),final_result.end(),searchSort);
 
+    END_FNC_DEBUG
     return final_result;
 }
 

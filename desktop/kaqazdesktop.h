@@ -39,7 +39,6 @@ public:
 
     void setDatabase( Database *db );
     void setRepository( Repository *rep );
-    void setBackuper( Backuper *bkpr );
     void setKaqazSync( KaqazSync *ksync );
     void setSialanDevices( SialanDevices *sdev );
     void setSialanTools( SialanTools *stools );

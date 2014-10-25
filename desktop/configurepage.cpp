@@ -34,6 +34,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QFile>
+#include <QPointer>
 #include <QDebug>
 
 class ConfigurePagePrivate
@@ -42,6 +43,7 @@ public:
     Ui::ConfigurePage *ui;
     QSettings *settings;
     Kaqaz *kqz;
+    Backuper *backuper;
 
     QFileSystemModel *backups_model;
 
@@ -79,10 +81,10 @@ ConfigurePage::ConfigurePage(QWidget *parent) :
 
     p->ui->backup_pbar->hide();
 
-    Backuper *bkpr = p->kqz->backuper();
-    connect( bkpr, SIGNAL(progress(int)), SLOT(backupProgress(int)) );
-    connect( bkpr, SIGNAL(failed())     , SLOT(backupFailed())      );
-    connect( bkpr, SIGNAL(success())    , SLOT(backupFinished())    );
+    p->backuper = new Backuper();
+    connect( p->backuper, SIGNAL(progress(int)), SLOT(backupProgress(int)) );
+    connect( p->backuper, SIGNAL(failed())     , SLOT(backupFailed())      );
+    connect( p->backuper, SIGNAL(success())    , SLOT(backupFinished())    );
 
     connect( p->kqz->kaqazSync(), SIGNAL(authorizeRequest()), SLOT(syncAuthorizeRequest()) );
 
@@ -186,7 +188,7 @@ void ConfigurePage::makeBackup()
             return;
     }
 
-    p->kqz->backuper()->makeBackup(pass);
+    p->backuper->makeBackup(pass);
 }
 
 void ConfigurePage::restoreSelected()
@@ -200,14 +202,14 @@ void ConfigurePage::restoreSelected()
     if( del == QMessageBox::No )
         return;
 
-    bool first_try = p->kqz->backuper()->restore(path);
+    bool first_try = p->backuper->restore(path);
     if( !first_try )
     {
         const QString & pass = QInputDialog::getText( this, tr("Password"), tr("Please enter password"), QLineEdit::Password );
         if( pass.isEmpty() )
             return;
 
-        p->kqz->backuper()->restore( path, SialanTools::passToMd5(pass) );
+        p->backuper->restore( path, SialanTools::passToMd5(pass) );
     }
 }
 
@@ -338,6 +340,7 @@ void ConfigurePage::closeEvent(QCloseEvent *e)
 
 ConfigurePage::~ConfigurePage()
 {
+    delete p->backuper;
     delete p->ui;
     delete p;
 }

@@ -18,6 +18,7 @@
 
 import QtQuick 2.2
 import SialanTools 1.0
+import Kaqaz 1.0
 
 Item {
     id: restore_wait
@@ -25,11 +26,11 @@ Item {
     property string path
     property variant progress
 
-    Connections {
-        target: backuper
+    Backuper {
+        id: backuper
         onSuccess: restore_wait.success()
         onFailed: restore_wait.failed()
-        onProgress: progress.setValue(percent)
+        onProgress: restore_wait.progress.setValue(percent)
     }
 
     Text {

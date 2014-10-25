@@ -16,14 +16,18 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "kaqazmacros.h"
+
 #define BEGIN_FNC \
     if(p->started) return; \
+    BEGIN_FNC_DEBUG \
     p->started = true; \
     emit started(this);
 
 #define END_FNC { \
     p->started = false; \
     emit finished(this); \
+    END_FNC_DEBUG \
     return; }
 
 #define NAME_OF(METHOD) #METHOD
@@ -327,16 +331,20 @@ void SmartIODBoxSingle::setDeleted(const QString &path)
 
 void SmartIODBoxSingle::close()
 {
+    BEGIN_FNC_DEBUG
     p->thread->quit();
     p->thread->wait();
     p->thread->deleteLater();
+    END_FNC_DEBUG
 }
 
 QString SmartIODBoxSingle::cache() const
 {
+    BEGIN_FNC_DEBUG
     p->cache_mutex.lock();
     QString result = p->cache;
     p->cache_mutex.unlock();
+    END_FNC_DEBUG
     return result;
 }
 
@@ -347,51 +355,63 @@ bool SmartIODBoxSingle::fatalError()
 
 void SmartIODBoxSingle::cacheIsReady(const QByteArray &data)
 {
+    BEGIN_FNC_DEBUG
     p->cache_mutex.lock();
     p->cache = data;
     p->cache_mutex.unlock();
+    END_FNC_DEBUG
 }
 
 void SmartIODBoxSingle::coreFinished()
 {
+    BEGIN_FNC_DEBUG
     p->loop->exit();
+    END_FNC_DEBUG
 }
 
 QByteArray SmartIODBoxSingle::encryptData(const QByteArray &data)
 {
+    BEGIN_FNC_DEBUG
     QSharedPointer<SimpleQtCryptor::Key> gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(p->password));
     SimpleQtCryptor::Encryptor enc( gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB, SimpleQtCryptor::NoChecksum );
 
     QByteArray enc_new_data;
     enc.encrypt( data, enc_new_data, true );
 
+    BEGIN_FNC_DEBUG
     return enc_new_data;
 }
 
 QByteArray SmartIODBoxSingle::decryptData(const QByteArray &sdata)
 {
+    BEGIN_FNC_DEBUG
     QSharedPointer<SimpleQtCryptor::Key> gKey = QSharedPointer<SimpleQtCryptor::Key>(new SimpleQtCryptor::Key(p->password));
     SimpleQtCryptor::Decryptor dec( gKey, SimpleQtCryptor::SERPENT_32, SimpleQtCryptor::ModeCFB );
     QByteArray enc_code_dec;
     if( dec.decrypt(sdata,enc_code_dec,true) == SimpleQtCryptor::ErrorInvalidKey )
         return enc_code_dec;
 
+    END_FNC_DEBUG
     return enc_code_dec;
 }
 
 SmartIODBoxSingle::~SmartIODBoxSingle()
 {
+    BEGIN_FNC_DEBUG
     p->core->deleteLater();
+    END_FNC_DEBUG
     delete p;
 }
 
 void SmartIODBoxSingleCore::requestPaperToSync(const QString &uuid)
 {
+    BEGIN_FNC_DEBUG
     Database *db = Kaqaz::database();
     int paperId = db->paperUuidId(uuid);
     if( paperId == -1 )
     {
         emit finished();
+        END_FNC_DEBUG
         return;
     }
 
@@ -415,10 +435,12 @@ void SmartIODBoxSingleCore::requestPaperToSync(const QString &uuid)
 
     emit paperIsReady(d);
     emit finished();
+    END_FNC_DEBUG
 }
 
 void SmartIODBoxSingleCore::requestGroupsToSync()
 {
+    BEGIN_FNC_DEBUG
     Database *db = Kaqaz::database();
 
     QByteArray data;
@@ -448,22 +470,27 @@ void SmartIODBoxSingleCore::requestGroupsToSync()
 
     emit groupsIsReady(data);
     emit finished();
+    END_FNC_DEBUG
 }
 
 void SmartIODBoxSingleCore::paperPushed(const QString &id, quint64 revision)
 {
+    BEGIN_FNC_DEBUG
     Database *db = Kaqaz::database();
     db->setSignalBlocker(true);
     db->setRevision(id,revision);
     db->setSignalBlocker(false);
     emit finished();
+    END_FNC_DEBUG
 }
 
 void SmartIODBoxSingleCore::paperFetched(const QString &uuid, const QByteArray &d_const, quint64 revision)
 {
+    BEGIN_FNC_DEBUG
     if( d_const.isEmpty() )
     {
         emit finished();
+        END_FNC_DEBUG
         return;
     }
 
@@ -512,22 +539,27 @@ void SmartIODBoxSingleCore::paperFetched(const QString &uuid, const QByteArray &
 
     db->setSignalBlocker(false);
     emit finished();
+    END_FNC_DEBUG
 }
 
 void SmartIODBoxSingleCore::groupsPushed(quint64 revision)
 {
+    BEGIN_FNC_DEBUG
     Database *db = Kaqaz::database();
     db->setSignalBlocker(true);
     db->setRevision( GROUPS_SYNC_KEY, revision );
     db->setSignalBlocker(false);
     emit finished();
+    END_FNC_DEBUG
 }
 
 void SmartIODBoxSingleCore::groupsFetched(const QByteArray &data, quint64 revision, qint64 current_revision)
 {
+    BEGIN_FNC_DEBUG
     if( data.isEmpty() )
     {
         emit finished();
+        END_FNC_DEBUG
         return;
     }
 
@@ -574,15 +606,18 @@ void SmartIODBoxSingleCore::groupsFetched(const QByteArray &data, quint64 revisi
 
     db->setSignalBlocker(false);
     emit finished();
+    END_FNC_DEBUG
 }
 
 void SmartIODBoxSingleCore::paperDeleted(const QString &id)
 {
+    BEGIN_FNC_DEBUG
     Database *db = Kaqaz::database();
     int paperId = db->paperUuidId(id);
     if( paperId == -1 )
     {
         emit finished();
+        END_FNC_DEBUG
         return;
     }
 
@@ -591,4 +626,5 @@ void SmartIODBoxSingleCore::paperDeleted(const QString &id)
     db->setSignalBlocker(false);
 
     emit finished();
+    END_FNC_DEBUG
 }

@@ -18,17 +18,18 @@
 
 import QtQuick 2.2
 import SialanTools 1.0
+import Kaqaz 1.0
 
 Item {
     id: backup_wait
 
     property variant progress
 
-    Connections {
-        target: backuper
+    Backuper {
+        id: backuper
         onSuccess: backup_wait.success()
         onFailed: backup_wait.failed()
-        onProgress: progress.setValue(percent)
+        onProgress: backup_wait.progress.setValue(percent)
     }
 
     Text {
@@ -90,8 +91,8 @@ Item {
 
     Component.onCompleted: {
         initTranslations()
-        backup_start.start()
         progress = newModernProgressBar()
+        backup_start.start()
     }
 
     Component.onDestruction: if(progress) progress.destroy()

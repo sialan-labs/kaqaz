@@ -30,6 +30,7 @@
 
 #include "smartiodbox.h"
 #include "smartiodboxsingle.h"
+#include "kaqazmacros.h"
 
 #include <QQueue>
 #include <QSet>
@@ -87,11 +88,13 @@ void SmartIODBox::setToken(const QString &t)
     if( p->token == t )
         return;
 
+    BEGIN_FNC_DEBUG
     p->token = t;
     foreach( SmartIODBoxSingle *s, p->threads )
         QMetaObject::invokeMethod(s, __FUNCTION__, Qt::QueuedConnection, Q_ARG(QString,p->token) );
 
     emit tokenChanged();
+    END_FNC_DEBUG
 }
 
 QString SmartIODBox::token() const
@@ -104,11 +107,13 @@ void SmartIODBox::setTokenSecret(const QString &s)
     if( p->tsecret == s )
         return;
 
+    BEGIN_FNC_DEBUG
     p->tsecret = s;
     foreach( SmartIODBoxSingle *s, p->threads )
         QMetaObject::invokeMethod(s, __FUNCTION__, Qt::QueuedConnection, Q_ARG(QString,p->tsecret) );
 
     emit tokenSecret();
+    END_FNC_DEBUG
 }
 
 QString SmartIODBox::tokenSecret() const
@@ -121,11 +126,13 @@ void SmartIODBox::setPassword(const QString &pass)
     if( p->password == pass )
         return;
 
+    BEGIN_FNC_DEBUG
     p->password = pass;
     foreach( SmartIODBoxSingle *s, p->threads )
         QMetaObject::invokeMethod(s, "setPassword", Qt::QueuedConnection, Q_ARG(QString,p->password) );
 
     emit passwordChanged();
+    END_FNC_DEBUG
 }
 
 QString SmartIODBox::password() const
@@ -135,26 +142,31 @@ QString SmartIODBox::password() const
 
 void SmartIODBox::pushFile(const QString &file, const QString &dest)
 {
+    BEGIN_FNC_DEBUG
     SmartIODBoxCommand cmd;
     cmd.path = file;
     cmd.dest = dest;
     cmd.command = SmartIODBoxCommand::pushFile;
 
     APPEND_TO_QUEUE( cmd );
+    END_FNC_DEBUG
 }
 
 void SmartIODBox::fetchFile(const QString &path, const QString &dest)
 {
+    BEGIN_FNC_DEBUG
     SmartIODBoxCommand cmd;
     cmd.path = path;
     cmd.dest = dest;
     cmd.command = SmartIODBoxCommand::fetchFile;
 
     APPEND_TO_QUEUE( cmd );
+    END_FNC_DEBUG
 }
 
 void SmartIODBox::pushPaper(const QString &uuid, qint64 revision, const QString &dest)
 {
+    BEGIN_FNC_DEBUG
     SmartIODBoxCommand cmd;
     cmd.dest = dest;
     cmd.uuid = uuid;
@@ -162,10 +174,12 @@ void SmartIODBox::pushPaper(const QString &uuid, qint64 revision, const QString 
     cmd.command = SmartIODBoxCommand::pushPaper;
 
     APPEND_TO_QUEUE( cmd );
+    END_FNC_DEBUG
 }
 
 void SmartIODBox::fetchPaper(const QString &uuid, qint64 revision, const QString &path)
 {
+    BEGIN_FNC_DEBUG
     SmartIODBoxCommand cmd;
     cmd.path = path;
     cmd.uuid = uuid;
@@ -173,20 +187,24 @@ void SmartIODBox::fetchPaper(const QString &uuid, qint64 revision, const QString
     cmd.command = SmartIODBoxCommand::fetchPaper;
 
     APPEND_TO_QUEUE( cmd );
+    END_FNC_DEBUG
 }
 
 void SmartIODBox::pushGroups(const QString &path, qint64 revision)
 {
+    BEGIN_FNC_DEBUG
     SmartIODBoxCommand cmd;
     cmd.path = path;
     cmd.revision = revision;
     cmd.command = SmartIODBoxCommand::pushGroups;
 
     APPEND_TO_QUEUE( cmd );
+    END_FNC_DEBUG
 }
 
 void SmartIODBox::fetchGroups(const QString &path, qint64 revision, qint64 current_revision)
 {
+    BEGIN_FNC_DEBUG
     SmartIODBoxCommand cmd;
     cmd.path = path;
     cmd.revision = revision;
@@ -194,15 +212,18 @@ void SmartIODBox::fetchGroups(const QString &path, qint64 revision, qint64 curre
     cmd.command = SmartIODBoxCommand::fetchGroups;
 
     APPEND_TO_QUEUE( cmd );
+    END_FNC_DEBUG
 }
 
 void SmartIODBox::setDeleted(const QString &path)
 {
+    BEGIN_FNC_DEBUG
     SmartIODBoxCommand cmd;
     cmd.path = path;
     cmd.command = SmartIODBoxCommand::setDeleted;
 
     APPEND_TO_QUEUE( cmd );
+    END_FNC_DEBUG
 }
 
 qreal SmartIODBox::progress() const
@@ -217,11 +238,13 @@ bool SmartIODBox::isActive() const
 
 void SmartIODBox::start()
 {
+    BEGIN_FNC_DEBUG
     while( nextCommand() );
 
     if( p->queued_cnt == 1 )
         emit progressStarted();
     emit progressChanged(progress());
+    END_FNC_DEBUG
 }
 
 bool SmartIODBox::nextCommand()
@@ -233,6 +256,7 @@ bool SmartIODBox::nextCommand()
     if( !s )
         return false;
 
+    BEGIN_FNC_DEBUG
     p->actived = true;
     const SmartIODBoxCommand & cmd = p->queue.takeFirst();
     switch( static_cast<int>(cmd.command) )
@@ -264,11 +288,13 @@ bool SmartIODBox::nextCommand()
         break;
     }
 
+    END_FNC_DEBUG
     return p->actived;
 }
 
 void SmartIODBox::finished(SmartIODBoxSingle *s)
 {
+    BEGIN_FNC_DEBUG
     p->threadsQueue << s;
     nextCommand();
     CLOSE_EXTRA_SINGLES(0)
@@ -283,6 +309,7 @@ void SmartIODBox::finished(SmartIODBoxSingle *s)
         p->actived = false;
         emit progressFinished();
     }
+    END_FNC_DEBUG
 }
 
 SmartIODBoxSingle *SmartIODBox::getSingle()
@@ -292,6 +319,7 @@ SmartIODBoxSingle *SmartIODBox::getSingle()
     if( p->threads.count() > MAX_ACTIVE_THREAD )
         return 0;
 
+    BEGIN_FNC_DEBUG
     SmartIODBoxSingle *s = new SmartIODBoxSingle();
     QMetaObject::invokeMethod(s, "setToken", Qt::QueuedConnection, Q_ARG(QString,p->token) );
     QMetaObject::invokeMethod(s, "setTokenSecret", Qt::QueuedConnection, Q_ARG(QString,p->tsecret) );
@@ -302,6 +330,7 @@ SmartIODBoxSingle *SmartIODBox::getSingle()
 
     p->threads.insert(s);
 
+    END_FNC_DEBUG
     return s;
 }
 

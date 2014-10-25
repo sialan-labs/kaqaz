@@ -37,7 +37,7 @@ class Database : public QObject
 {
     Q_OBJECT
 public:
-    Database(const QString & path, QObject *parent = 0);
+    Database(QObject *parent = 0);
     ~Database();
 
     Q_INVOKABLE void connect();
