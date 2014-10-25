@@ -106,11 +106,7 @@ void QDropbox::setApiVersion(QString apiversion)
 
 void QDropbox::requestFinished(int nr, QNetworkReply *rply)
 {
-    if( !replynrMap.contains(rply) )
-        return;
-
-    replynrMap.remove(rply);
-
+    rply->deleteLater();
 #ifdef QTDROPBOX_DEBUG
     int resp_bytes = rply->bytesAvailable();
 #endif
@@ -317,7 +313,6 @@ void QDropbox::networkReplyFinished(QNetworkReply *rply)
 #endif
     int reqnr = replynrMap[rply];
     requestFinished(reqnr, rply);
-    rply->deleteLater();
 }
 /*
 QString QDropbox::hmacsha1(QString base, QString key)

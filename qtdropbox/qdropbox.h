@@ -541,10 +541,10 @@ private:
     QString oauthToken;
     QString oauthTokenSecret;
 
-    QHash <QNetworkReply*,int>  replynrMap;
+    QMap <QNetworkReply*,int>  replynrMap;
     int  lastreply;
     QMap<int,qdropbox_request> requestMap;
-    QHash<int,int> delayMap;
+    QMap<int,int> delayMap;
 
     QString mail;
     QString password;

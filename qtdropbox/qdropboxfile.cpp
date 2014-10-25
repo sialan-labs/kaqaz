@@ -90,6 +90,8 @@ bool QDropboxFile::open(QIODevice::OpenMode mode)
 
 void QDropboxFile::close()
 {
+	if(isMode(QIODevice::WriteOnly))
+		flush();
 	QIODevice::close();
 	return;
 }
@@ -173,16 +175,17 @@ qint64 QDropboxFile::readData(char *data, qint64 maxlen)
         maxlen = _buffer->size();
 
 	QByteArray tmp = _buffer->mid(_position, maxlen);
-	memcpy(data, tmp.data(), maxlen);
+	const qint64 read = tmp.size();
+	memcpy(data, tmp.data(), read);
    
 #ifdef QTDROPBOX_DEBUG
     qDebug() << "new size = " << _buffer->size() << endl;
     qDebug() << "new bytes = " << _buffer->toHex() << endl;
 #endif
 
-	_position += maxlen;
+	_position += read;
 
-    return maxlen;
+    return read;
 }
 
 qint64 QDropboxFile::writeData(const char *data, qint64 len)
@@ -201,9 +204,7 @@ qint64 QDropboxFile::writeData(const char *data, qint64 len)
     // flush if the threshold is reached
     _currentThreshold += len;
     if(_currentThreshold > _bufferThreshold)
-    {
-//        flush();
-    }
+        flush();
 
 	int written_bytes = len;
 
@@ -217,9 +218,18 @@ qint64 QDropboxFile::writeData(const char *data, qint64 len)
 
 void QDropboxFile::networkRequestFinished(QNetworkReply *rply)
 {
+    rply->deleteLater();
+
 #ifdef QTDROPBOX_DEBUG
     qDebug() << "QDropboxFile::networkRequestFinished(...)" << endl;
 #endif
+
+    if (rply->error() != QNetworkReply::NoError)
+    {
+        lastErrorCode = rply->error();
+        stopEventLoop();
+        return;
+    }
 
     switch(_waitMode)
     {
@@ -241,7 +251,6 @@ void QDropboxFile::networkRequestFinished(QNetworkReply *rply)
 #endif
         break;
     }
-    rply->deleteLater();
 }
 
 void QDropboxFile::obtainToken()
@@ -292,7 +301,9 @@ bool QDropboxFile::getFileContent(QString filename)
 #endif
 
     QNetworkRequest rq(request);
-    _conManager.get(rq);
+    QNetworkReply *reply = _conManager.get(rq);
+    connect(this, &QDropboxFile::operationAborted, reply, &QNetworkReply::abort);
+    connect(reply, &QNetworkReply::downloadProgress, this, &QDropboxFile::downloadProgress);
 
     _waitMode = waitForRead;
     startEventLoop();
@@ -401,10 +412,14 @@ void QDropboxFile::rplyFileWrite(QNetworkReply *rply)
         return;
         break;
     default:
+        delete _metadata;
+
+        _metadata = new QDropboxFileInfo{QString{response}.trimmed(), this};
+        if (!_metadata->isValid())
+            _metadata->clear();
         break;
     }
 
-    // TODO interpret returned data as QDropboxFileMetadata
     emit bytesWritten(_buffer->size());
     return;
 }
@@ -463,7 +478,9 @@ bool QDropboxFile::putFile()
 #endif
 
     QNetworkRequest rq(request);
-    _conManager.put(rq, *_buffer);
+    QNetworkReply *reply = _conManager.put(rq, *_buffer);
+    connect(this, &QDropboxFile::operationAborted, reply, &QNetworkReply::abort);
+    connect(reply, &QNetworkReply::uploadProgress, this, &QDropboxFile::uploadProgress);
 
     _waitMode = waitForWrite;	
     startEventLoop();
@@ -561,4 +578,9 @@ bool QDropboxFile::reset()
 	QIODevice::reset();
 	_position = 0;
 	return true;
+}
+
+void QDropboxFile::abort()
+{
+    emit operationAborted();
 }
