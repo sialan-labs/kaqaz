@@ -298,7 +298,7 @@ bool Kaqaz::start()
 #endif
     {
         p->viewer = new SialanQuickView(
-#ifdef DESKTOP_DEVICE
+#ifdef QT_DEBUG
                             SialanQuickView::AllExceptLogger
 #else
                             SialanQuickView::AllComponents

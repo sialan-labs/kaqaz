@@ -20,7 +20,10 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QDir>
 #include <QDateTime>
+#include <QFileInfo>
+#include <QCoreApplication>
 
 QSet<SialanQtLogger*> sialan_qt_logger_objs;
 
@@ -34,18 +37,26 @@ class SialanQtLoggerPrivate
 {
 public:
     QFile *file;
+    QString path;
 };
 
 SialanQtLogger::SialanQtLogger(const QString &path, QObject *parent) :
     QObject(parent)
 {
     p = new SialanQtLoggerPrivate;
+    p->path = path;
+
+    if( QFile::exists(p->path) )
+        QFile::copy( p->path, QFileInfo(p->path).dir().path() + "/crash_" + QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch()) );
+
     p->file = new QFile(path);
     p->file->open(QFile::WriteOnly);
 
     sialan_qt_logger_objs.insert(this);
     if( sialan_qt_logger_objs.count() == 1 )
         qInstallMessageHandler(sialanQtLoggerFnc);
+
+    connect( QCoreApplication::instance(), SIGNAL(aboutToQuit()), SLOT(app_closed()) );
 }
 
 void SialanQtLogger::logMsg(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -80,6 +91,11 @@ void SialanQtLogger::logMsg(QtMsgType type, const QMessageLogContext &context, c
 void SialanQtLogger::debug(const QVariant &var)
 {
     qDebug() << var;
+}
+
+void SialanQtLogger::app_closed()
+{
+    QFile::remove(p->path);
 }
 
 SialanQtLogger::~SialanQtLogger()

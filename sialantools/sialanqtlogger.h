@@ -34,6 +34,9 @@ public:
 public slots:
     void debug( const QVariant & var );
 
+private slots:
+    void app_closed();
+
 private:
     SialanQtLoggerPrivate *p;
 };
