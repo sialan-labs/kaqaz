@@ -37,6 +37,7 @@ class SialanDevices : public QObject
     Q_PROPERTY(bool isLinux        READ isLinux        NOTIFY isLinuxChanged        )
     Q_PROPERTY(bool isAndroid      READ isAndroid      NOTIFY isAndroidChanged      )
     Q_PROPERTY(bool isIOS          READ isIOS          NOTIFY isIOSChanged          )
+    Q_PROPERTY(bool isUbuntuTouch  READ isUbuntuTouch  NOTIFY isUbuntuTouchChanged  )
     Q_PROPERTY(bool isWindowsPhone READ isWindowsPhone NOTIFY isWindowsPhoneChanged )
 
     Q_PROPERTY(QObject* screen READ screenObj NOTIFY screenChanged )
@@ -78,6 +79,7 @@ public:
     bool isLinux() const;
     bool isAndroid() const;
     bool isIOS() const;
+    bool isUbuntuTouch() const;
     bool isWindowsPhone() const;
 
     QScreen *screen() const;
@@ -133,6 +135,7 @@ signals:
     void isLinuxChanged();
     void isAndroidChanged();
     void isIOSChanged();
+    void isUbuntuTouchChanged();
     void isWindowsPhoneChanged();
 
     void screenChanged();

@@ -18,6 +18,7 @@
 
 #define LINUX_DEFAULT_DPI 96
 #define WINDOWS_DEFAULT_DPI 96
+#define UTOUCH_DEFAULT_DPI 96
 
 #include "sialandevices.h"
 #include "sialanapplication.h"
@@ -96,13 +97,13 @@ bool SialanDevices::isLargeTablet() const
 #ifdef Q_OS_ANDROID
     return isTablet() && p->java_layer->getSizeName() == 3;
 #else
-    return false;
+    return isTouchDevice() && lcdPhysicalSize() >= 9;
 #endif
 }
 
 bool SialanDevices::isTouchDevice() const
 {
-    return isAndroid() || isIOS() || isWindowsPhone();
+    return isAndroid() || isIOS() || isWindowsPhone() || isUbuntuTouch();
 }
 
 bool SialanDevices::isDesktop() const
@@ -149,6 +150,15 @@ bool SialanDevices::isAndroid() const
 bool SialanDevices::isIOS() const
 {
 #ifdef Q_OS_IOS
+    return true;
+#else
+    return false;
+#endif
+}
+
+bool SialanDevices::isUbuntuTouch() const
+{
+#ifdef Q_OS_UBUNTUTOUCH
     return true;
 #else
     return false;
@@ -263,7 +273,11 @@ qreal SialanDevices::density() const
     return ratio*densityDpi()/180.0;
 #else
 #ifdef Q_OS_LINUX
+#ifdef Q_OS_UBUNTUTOUCH
+    return screen()->logicalDotsPerInch()/UTOUCH_DEFAULT_DPI;
+#else
     return screen()->logicalDotsPerInch()/LINUX_DEFAULT_DPI;
+#endif
 #else
 #ifdef Q_OS_WIN32
     return 0.95*screen()->logicalDotsPerInch()/WINDOWS_DEFAULT_DPI;
@@ -285,8 +299,13 @@ qreal SialanDevices::fontDensity() const
     return 1.4;
 #else
 #ifdef Q_OS_LINUX
+#ifdef Q_OS_UBUNTUTOUCH
     qreal ratio = 1.3;
     return ratio*density();
+#else
+    qreal ratio = 1.3;
+    return ratio*density();
+#endif
 #else
 #ifdef Q_OS_WIN32
     qreal ratio = 1.4;

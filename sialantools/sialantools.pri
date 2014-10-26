@@ -1,4 +1,3 @@
-
 QT += qml quick
 
 android {
@@ -15,27 +14,32 @@ android {
     HEADERS += \
         sialantools/sialanjavalayer.h
 } else {
-ios {
-} else {
-    QT += widgets
+    ios {
 
-    HEADERS += \
-        sialantools/sialanmimeapps.h \
-        sialantools/qtsingleapplication/qtsinglecoreapplication.h \
-        sialantools/qtsingleapplication/qtsingleapplication.h \
-        sialantools/qtsingleapplication/qtlockedfile.h \
-        sialantools/qtsingleapplication/qtlocalpeer.h
+    } else {
+        contains(BUILD_MODE,ubuntutouch) {
+            DEFINES += Q_OS_UBUNTUTOUCH
+        } else {
+            QT += widgets
 
-    SOURCES += \
-        sialantools/sialanmimeapps.cpp \
-        sialantools/qtsingleapplication/qtsinglecoreapplication.cpp \
-        sialantools/qtsingleapplication/qtsingleapplication.cpp \
-        sialantools/qtsingleapplication/qtlockedfile.cpp \
-        sialantools/qtsingleapplication/qtlocalpeer.cpp
+            HEADERS += \
+                sialantools/sialanmimeapps.h \
+                sialantools/qtsingleapplication/qtsinglecoreapplication.h \
+                sialantools/qtsingleapplication/qtsingleapplication.h \
+                sialantools/qtsingleapplication/qtlockedfile.h \
+                sialantools/qtsingleapplication/qtlocalpeer.h
 
-    win32: SOURCES += sialantools/qtsingleapplication/qtlockedfile_win.cpp
-    unix:  SOURCES += sialantools/qtsingleapplication/qtlockedfile_unix.cpp
-}
+            SOURCES += \
+                sialantools/sialanmimeapps.cpp \
+                sialantools/qtsingleapplication/qtsinglecoreapplication.cpp \
+                sialantools/qtsingleapplication/qtsingleapplication.cpp \
+                sialantools/qtsingleapplication/qtlockedfile.cpp \
+                sialantools/qtsingleapplication/qtlocalpeer.cpp
+
+            win32: SOURCES += sialantools/qtsingleapplication/qtlockedfile_win.cpp
+            unix:  SOURCES += sialantools/qtsingleapplication/qtlockedfile_unix.cpp
+        }
+    }
 }
 
 QML_IMPORT_PATH = \
