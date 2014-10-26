@@ -29,82 +29,82 @@ ios {
     folder_04.target = .
     DEPLOYMENTFOLDERS += folder_03 folder_04
 } else {
-android {
-    contains(DEFINES,FREE_BUILD) {
-        ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android/free
+    android {
+        contains(DEFINES,FREE_BUILD) {
+            ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android/free
+        } else {
+            ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android/pro
+        }
     } else {
-        ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android/pro
+        QT += widgets
+
+        HEADERS += \
+            iconprovider.h \
+            desktop/kaqazdesktop.h \
+            desktop/categoriesmodel.h \
+            desktop/panelbox.h \
+            desktop/datesmodel.h \
+            desktop/papersview.h \
+            desktop/paperviewdelegate.h \
+            desktop/papersmodel.h \
+            desktop/editorview.h \
+            desktop/editorviewmanager.h \
+            desktop/searchpanel.h \
+            desktop/groupbutton.h \
+            desktop/addgroupdialog.h \
+            desktop/paperconfigure.h \
+            desktop/mapwidget.h \
+            desktop/datewidget.h \
+            desktop/configurepage.h \
+            desktop/aboutdialog.h \
+            desktop/simage.h \
+            desktop/paperfilesview.h \
+            desktop/paperfilesmodel.h \
+            desktop/todopapers.h \
+            desktop/scolor.h \
+            desktop/papertextarea.h \
+            desktop/todopapersitem.h \
+            desktop/uiselectordialog.h
+
+        SOURCES += \
+            iconprovider.cpp \
+            desktop/kaqazdesktop.cpp \
+            desktop/categoriesmodel.cpp \
+            desktop/panelbox.cpp \
+            desktop/datesmodel.cpp \
+            desktop/papersview.cpp \
+            desktop/paperviewdelegate.cpp \
+            desktop/papersmodel.cpp \
+            desktop/editorview.cpp \
+            desktop/editorviewmanager.cpp \
+            desktop/searchpanel.cpp \
+            desktop/groupbutton.cpp \
+            desktop/addgroupdialog.cpp \
+            desktop/paperconfigure.cpp \
+            desktop/mapwidget.cpp \
+            desktop/datewidget.cpp \
+            desktop/configurepage.cpp \
+            desktop/aboutdialog.cpp \
+            desktop/simage.cpp \
+            desktop/paperfilesview.cpp \
+            desktop/paperfilesmodel.cpp \
+            desktop/todopapers.cpp \
+            desktop/scolor.cpp \
+            desktop/papertextarea.cpp \
+            desktop/todopapersitem.cpp \
+            desktop/uiselectordialog.cpp
+
+        FORMS += \
+            desktop/paperconfigure.ui \
+            desktop/configurepage.ui \
+            desktop/aboutdialog.ui\
+            desktop/uiselectordialog.ui
+
+        win32 {
+            QT += winextras
+            RC_FILE = files/kaqaz.rc
+        }
     }
-} else {
-    QT += widgets network
-
-    HEADERS += \
-        iconprovider.h \
-        desktop/kaqazdesktop.h \
-        desktop/categoriesmodel.h \
-        desktop/panelbox.h \
-        desktop/datesmodel.h \
-        desktop/papersview.h \
-        desktop/paperviewdelegate.h \
-        desktop/papersmodel.h \
-        desktop/editorview.h \
-        desktop/editorviewmanager.h \
-        desktop/searchpanel.h \
-        desktop/groupbutton.h \
-        desktop/addgroupdialog.h \
-        desktop/paperconfigure.h \
-        desktop/mapwidget.h \
-        desktop/datewidget.h \
-        desktop/configurepage.h \
-        desktop/aboutdialog.h \
-        desktop/simage.h \
-        desktop/paperfilesview.h \
-        desktop/paperfilesmodel.h \
-        desktop/todopapers.h \
-        desktop/scolor.h \
-        desktop/papertextarea.h \
-        desktop/todopapersitem.h \
-        desktop/uiselectordialog.h
-
-    SOURCES += \
-        iconprovider.cpp \
-        desktop/kaqazdesktop.cpp \
-        desktop/categoriesmodel.cpp \
-        desktop/panelbox.cpp \
-        desktop/datesmodel.cpp \
-        desktop/papersview.cpp \
-        desktop/paperviewdelegate.cpp \
-        desktop/papersmodel.cpp \
-        desktop/editorview.cpp \
-        desktop/editorviewmanager.cpp \
-        desktop/searchpanel.cpp \
-        desktop/groupbutton.cpp \
-        desktop/addgroupdialog.cpp \
-        desktop/paperconfigure.cpp \
-        desktop/mapwidget.cpp \
-        desktop/datewidget.cpp \
-        desktop/configurepage.cpp \
-        desktop/aboutdialog.cpp \
-        desktop/simage.cpp \
-        desktop/paperfilesview.cpp \
-        desktop/paperfilesmodel.cpp \
-        desktop/todopapers.cpp \
-        desktop/scolor.cpp \
-        desktop/papertextarea.cpp \
-        desktop/todopapersitem.cpp \
-        desktop/uiselectordialog.cpp
-
-    FORMS += \
-        desktop/paperconfigure.ui \
-        desktop/configurepage.ui \
-        desktop/aboutdialog.ui\
-        desktop/uiselectordialog.ui
-}
-}
-
-win32 {
-    QT += winextras
-    RC_FILE = files/kaqaz.rc
 }
 
 SOURCES += main.cpp \
@@ -186,22 +186,22 @@ contains(BUILD_MODE,opt) {
 
 android {
 } else {
-linux {
-    target = $$TARGET
-    target.path = $$BIN_PATH
-    translations.files = $$TRANSLATIONS
-    translations.path = $$SHARES_PATH/files/translations
-    fonts.files = $$FONTS
-    fonts.path = $$SHARES_PATH/fonts/
-    icons.files = files/icons/kaqaz.png
-    icons.path = $$SHARES_PATH/icons/
-    faenza.files = files/KFaenza
-    faenza.path = $$SHARES_PATH/files/icons/
-    desktopFile.files = $$APPDESK_SRC/Kaqaz.desktop
-    desktopFile.path = $$APPDESK_PATH/share/applications
-    desktopTouchFile.files = $$APPDESK_SRC/Kaqaz-touch.desktop
-    desktopTouchFile.path = $$APPDESK_PATH/share/applications
+    linux {
+        target = $$TARGET
+        target.path = $$BIN_PATH
+        translations.files = $$TRANSLATIONS
+        translations.path = $$SHARES_PATH/files/translations
+        fonts.files = $$FONTS
+        fonts.path = $$SHARES_PATH/fonts/
+        icons.files = files/icons/kaqaz.png
+        icons.path = $$SHARES_PATH/icons/
+        faenza.files = files/KFaenza
+        faenza.path = $$SHARES_PATH/files/icons/
+        desktopFile.files = $$APPDESK_SRC/Kaqaz.desktop
+        desktopFile.path = $$APPDESK_PATH/share/applications
+        desktopTouchFile.files = $$APPDESK_SRC/Kaqaz-touch.desktop
+        desktopTouchFile.path = $$APPDESK_PATH/share/applications
 
-    INSTALLS = target fonts translations icons desktopFile desktopTouchFile faenza
-}
+        INSTALLS = target fonts translations icons desktopFile desktopTouchFile faenza
+    }
 }

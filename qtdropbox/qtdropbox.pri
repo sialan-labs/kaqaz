@@ -1,4 +1,4 @@
-QT       += network xml
+QT += network xml
 
 INCLUDEPATH += $$PWD
 
