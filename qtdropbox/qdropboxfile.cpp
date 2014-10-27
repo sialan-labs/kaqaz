@@ -414,7 +414,7 @@ void QDropboxFile::rplyFileWrite(QNetworkReply *rply)
     default:
         delete _metadata;
 
-        _metadata = new QDropboxFileInfo{QString{response}.trimmed(), this};
+        _metadata = new QDropboxFileInfo(response.trimmed(), this);
         if (!_metadata->isValid())
             _metadata->clear();
         break;

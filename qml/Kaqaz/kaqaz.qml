@@ -44,6 +44,7 @@ SialanMain {
     property alias syncProgressBar: sync_pbar
 
     property alias position: positioning.position
+    property alias weather: weather_model.weather
     property alias audioItem: audio_item
 
     property bool passDone: false
@@ -113,11 +114,10 @@ SialanMain {
         onActiveByChanged: if( !activeBy ) audio_item.stop()
     }
 
-//    WeatherModel {
-//        id: weather_model
-//        useGps: kaqaz.positioning
-//        onWeatherChanged: console.debug(weather.temperature, weather.weatherDescription )
-//    }
+    WeatherModel {
+        id: weather_model
+        active: kaqaz.positioning && kaqaz.weatherActive && kaqaz.proBuild
+    }
 
     PositionSource {
         id: positioning

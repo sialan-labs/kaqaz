@@ -56,6 +56,11 @@ QDropbox::QDropbox(QString key, QString sharedSecret, OAuthMethod method, QStrin
     _evLoop = NULL;
 }
 
+QDropbox::~QDropbox()
+{
+
+}
+
 QDropbox::Error QDropbox::error()
 {
     return errorState;

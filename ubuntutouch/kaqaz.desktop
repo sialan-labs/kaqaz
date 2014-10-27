@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=TouchTest
+Exec=qmlscene   $@ TouchTest.qml
+Icon=qmlscene
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true
+Comment=description of TouchTest
+

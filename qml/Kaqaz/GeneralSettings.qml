@@ -99,6 +99,8 @@ Item {
             model.clear()
             model.append({ "name": qsTr("All papers item"), "file": "", "check": true, "pr":"allPaper"})
             model.append({ "name": qsTr("Notes positioning"), "file": "", "check": true, "pr":"positioning"})
+            if( kaqaz.proBuild )
+                model.append({ "name": qsTr("Weather detector"), "file": "", "check": true, "pr":"weatherActive"})
             if( Devices.isMacX )
                 model.append({ "name": qsTr("Desktop Touch"), "file": "", "check": true, "pr":"desktopTouchMode"})
             if( !Devices.isDesktop )

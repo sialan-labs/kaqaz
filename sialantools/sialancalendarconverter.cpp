@@ -141,6 +141,26 @@ QString SialanCalendarConverter::monthName(int m)
     return p->calendar->monthName(m);
 }
 
+QDateTime SialanCalendarConverter::combineDateAndTime(const QDate &date, const QTime &time)
+{
+    return QDateTime(date, time);
+}
+
+int SialanCalendarConverter::dateMonth(const QDate &date)
+{
+    return convertDate(date).month;
+}
+
+int SialanCalendarConverter::dateDay(const QDate &date)
+{
+    return convertDate(date).day;
+}
+
+qint64 SialanCalendarConverter::dateYear(const QDate &date)
+{
+    return convertDate(date).year;
+}
+
 qint64 SialanCalendarConverter::currentYear()
 {
     return p->calendar->getDate(QDate::currentDate()).year;

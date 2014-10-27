@@ -105,8 +105,11 @@ AnimationItem {
             paper_item = database.createPaper()
 
         database.setPaper( paper_item, txt.text, label.text, group_chooser.group )
-        if( paperItem == -1 )
-            database.setPaperLocation(paper_item,positioning.position.coordinate)
+        if( paperItem == -1 ) {
+            database.setPaperLocation(paper_item, positioning.position.coordinate)
+            database.setPaperTemperature( paper_item, weather.temperature )
+            database.setPaperWeather( paper_item, weather.weatherIcon )
+        }
 
         paperItem = paper_item
         paper.saved(paper_item)

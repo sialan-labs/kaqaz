@@ -158,6 +158,8 @@ public:
                       OAuthMethod method = QDropbox::Plaintext,
                       QString url = "api.dropbox.com", QObject *parent = 0);
 
+    ~QDropbox();
+
     /*!
       If an error occured you can access the last error code by using this function.
      */
@@ -544,7 +546,7 @@ private:
     QMap <QNetworkReply*,int>  replynrMap;
     int  lastreply;
     QMap<int,qdropbox_request> requestMap;
-    QMap<int,int> delayMap;
+    QMap<int,int> delayMap; // There is a bug
 
     QString mail;
     QString password;

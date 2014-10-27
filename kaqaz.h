@@ -41,6 +41,7 @@ class Kaqaz : public QObject
     Q_PROPERTY( bool    keyboardPredicative   READ keyboardPredicative   WRITE setKeyboardPredicative   NOTIFY keyboardPredicativeChanged)
     Q_PROPERTY( bool    desktopTouchMode      READ desktopTouchMode      WRITE setDesktopTouchMode      NOTIFY desktopTouchModeChanged)
     Q_PROPERTY( bool    positioning           READ positioning           WRITE setPositioning           NOTIFY positioningChanged)
+    Q_PROPERTY( bool    weatherActive         READ weatherActive         WRITE setWeatherActive         NOTIFY weatherActiveChanged)
     Q_PROPERTY( bool    fullscreen            READ fullscreen            WRITE setFullscreen            NOTIFY fullscreenChanged)
     Q_PROPERTY( QSize   size                  READ size                  WRITE setSize                  NOTIFY sizeChanged)
     Q_PROPERTY( MapMode mapMode               READ mapMode               WRITE setMapMode               NOTIFY mapModeChanged)
@@ -133,6 +134,9 @@ public:
     void setPositioning( bool stt );
     bool positioning() const;
 
+    void setWeatherActive( bool stt );
+    bool weatherActive() const;
+
     void setMapMode( MapMode map );
     MapMode mapMode() const;
 
@@ -175,6 +179,7 @@ signals:
     void canvasHelperFirstTimeChanged();
     void keyboardPredicativeChanged();
     void positioningChanged();
+    void weatherActiveChanged();
     void resourcePathChanged();
     void sizeChanged();
     void desktopTouchModeChanged();

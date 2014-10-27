@@ -154,10 +154,6 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->java_layer = SialanJavaLayer::instance();
 #endif
 
-#ifdef DESKTOP_DEVICE
-    QIcon::setThemeSearchPaths( QStringList() << resourcePathAbs() + "/files/icons/" );
-    QIcon::setThemeName("KFaenza");
-#endif
     QDir().mkpath(CAMERA_PATH);
 
     p->filesystem = new QFileSystemWatcher(this);
@@ -285,6 +281,9 @@ bool Kaqaz::start()
 #ifdef DESKTOP_DEVICE
     if( !p->desktop_touch_mode )
     {
+        QIcon::setThemeSearchPaths( QStringList() << resourcePathAbs() + "/files/icons/" );
+        QIcon::setThemeName("KFaenza");
+
         p->calendar = new SialanCalendarConverter(this);
 
         p->viewer_classic = new KaqazDesktop();
@@ -796,6 +795,17 @@ void Kaqaz::setPositioning(bool stt)
 bool Kaqaz::positioning() const
 {
     return kaqaz_settings->value("General/positioning",true).toBool();
+}
+
+void Kaqaz::setWeatherActive(bool stt)
+{
+    kaqaz_settings->setValue("General/weatherActive",stt);
+    emit weatherActiveChanged();
+}
+
+bool Kaqaz::weatherActive() const
+{
+    return kaqaz_settings->value("General/weatherActive",true).toBool();
 }
 
 void Kaqaz::setMapMode(Kaqaz::MapMode map)

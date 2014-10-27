@@ -70,6 +70,12 @@ public slots:
     int daysOfMonth( qint64 year, int month );
     QString monthName( int month );
 
+    QDateTime combineDateAndTime( const QDate & date, const QTime & time );
+
+    int dateMonth( const QDate & date );
+    int dateDay( const QDate & date );
+    qint64 dateYear( const QDate & date );
+
     static QDate convertDaysToDate( int days );
     static int convertDateToDays( const QDate & date );
 

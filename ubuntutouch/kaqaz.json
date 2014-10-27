@@ -1,9 +1,11 @@
 {
     "policy_groups": [
         "networking",
+        "video_files_read",
+        "picture_files_read",
+        "location",
         "audio",
         "camera",
-        "location",
         "video"
     ],
     "policy_version": 1.1

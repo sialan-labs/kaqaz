@@ -52,46 +52,18 @@ Item {
     }
 
     Header {
+        id: header
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-    }
-
-    Text {
-        id: title
-        x: 40*physicalPlatformScale
-        y: 60*physicalPlatformScale
-        width: parent.width-2*x
-        text: paperItem && paperItem.text.length!=0? paperItem.text: qsTr("Untitled Paper")
-        font.pixelSize: Devices.isMobile? 22*fontsScale : 25*fontsScale
-        font.weight: Font.Light
-        font.family: SApp.globalFontFamily
-        color: "#333333"
-        elide: Text.ElideRight
-        wrapMode: Text.WrapAnywhere
-        maximumLineCount: 1
-    }
-
-    Text {
-        id: body
-        x: 50*physicalPlatformScale
-        width: parent.width-2*x
-        anchors.top: title.bottom
-        text: paperItem? paperItem.bodyText : ""
-        font.pixelSize: Devices.isMobile? 9*fontsScale : 10*fontsScale
-        font.weight: Font.Light
-        font.family: SApp.globalFontFamily
-        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-        maximumLineCount: 2
-        elide: Text.ElideRight
-        color: "#666666"
+        height: Devices.isAndroid? 0 : 60*physicalPlatformScale
     }
 
     Flickable {
         id: edit_flick
-        anchors.left: title.left
-        anchors.right: title.right
-        anchors.top: body.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: header.bottom
         anchors.topMargin: 20*physicalPlatformScale
         anchors.bottom: parent.bottom
         contentHeight: column.height
@@ -103,181 +75,92 @@ Item {
             id: column
             width: edit_flick.width
 
-            MenuButton {
-                height: 50*physicalPlatformScale
-                width: column.width
-                normalColor: "#00000000"
-                highlightColor: "#4098bf"
-                textColor: press? "#ffffff" : "#4098bf"
-                textFont.weight: Font.Normal
-                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
-                textFont.bold: false
-                text: qsTr("Share Paper")
-                onClicked: {
-                    if( Devices.isLinux && !Devices.isAndroid ) {
-                        hideSubMessage()
-                        var path = kaqaz.getStaticTempPath()
-                        kaqaz.shareToFile( database.paperTitle(edit_dialog.item.paperItem.paperItem),
-                                           database.paperText(edit_dialog.item.paperItem.paperItem),
-                                           path )
+            Text {
+                id: title
+                x: 40*physicalPlatformScale
+                y: 60*physicalPlatformScale
+                width: parent.width-2*x
+                text: paperItem && paperItem.text.length!=0? paperItem.text: qsTr("Untitled Paper")
+                font.pixelSize: Devices.isMobile? 22*fontsScale : 25*fontsScale
+                font.weight: Font.Light
+                font.family: SApp.globalFontFamily
+                color: "#333333"
+                elide: Text.ElideRight
+                wrapMode: Text.WrapAnywhere
+                maximumLineCount: 1
+            }
 
-                        var msg = showSubMessage(Qt.createComponent("ShareDialog.qml"))
-                        msg.sources = [path]
+            Text {
+                id: body
+                x: 50*physicalPlatformScale
+                width: parent.width-2*x
+                text: paperItem? paperItem.bodyText : ""
+                font.pixelSize: Devices.isMobile? 9*fontsScale : 10*fontsScale
+                font.weight: Font.Light
+                font.family: SApp.globalFontFamily
+                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                maximumLineCount: 2
+                elide: Text.ElideRight
+                color: "#666666"
+            }
 
-                    } else {
-                        Devices.share( database.paperTitle(edit_dialog.item.paperItem.paperItem),
-                                     database.paperText(edit_dialog.item.paperItem.paperItem) )
-                    }
+            Grid {
+                id: button_box
+                anchors.horizontalCenter: parent.horizontalCenter
+                columns: 3
+
+                PaperTypeButton {
+                    paperObject: edit_dialog.item? edit_dialog.item.paperItem : 0
+                    paperItem: edit_dialog.item? edit_dialog.item.paperItem.paperItem : 0
+                }
+                PaperCalendarButton {
+                    paperObject: edit_dialog.item? edit_dialog.item.paperItem : 0
+                    paperItem: edit_dialog.item? edit_dialog.item.paperItem.paperItem : 0
+                }
+                PaperClockButton {
+                    paperObject: edit_dialog.item? edit_dialog.item.paperItem : 0
+                    paperItem: edit_dialog.item? edit_dialog.item.paperItem.paperItem : 0
+                }
+                PaperWeatherButton {
+                    paperObject: edit_dialog.item? edit_dialog.item.paperItem : 0
+                    paperItem: edit_dialog.item? edit_dialog.item.paperItem.paperItem : 0
+                    visible: kaqaz.proBuild
+                }
+                PaperMapButton {
+                    paperObject: edit_dialog.item? edit_dialog.item.paperItem : 0
+                    paperItem: edit_dialog.item? edit_dialog.item.paperItem.paperItem : 0
+                }
+                PaperTemperatureButton {
+                    paperObject: edit_dialog.item? edit_dialog.item.paperItem : 0
+                    paperItem: edit_dialog.item? edit_dialog.item.paperItem.paperItem : 0
+                    visible: kaqaz.proBuild
                 }
             }
 
-            MenuButton {
-                height: 50*physicalPlatformScale
-                width: column.width
-                normalColor: "#00000000"
-                highlightColor: "#4098bf"
-                textColor: press? "#ffffff" : "#4098bf"
-                textFont.weight: Font.Normal
-                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
-                textFont.bold: false
-                text: qsTr("Force sync")
-                onClicked: {
-                    if( sync.tokenAvailable ) {
-                        sync.refreshForce()
-                        syncProgressBar.visible = true
-                    }
-                    hideSubMessage()
-                }
+            PaperShareButton {
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: button_box.width
+                height: 52*physicalPlatformScale
+                paperObject: edit_dialog.item? edit_dialog.item.paperItem : 0
+                paperItem: edit_dialog.item? edit_dialog.item.paperItem.paperItem : 0
             }
 
-            MenuButton {
-                height: 50*physicalPlatformScale
-                width: column.width
-                normalColor: "#00000000"
-                highlightColor: "#4098bf"
-                textColor: press? "#ffffff" : "#4098bf"
-                textFont.weight: Font.Normal
-                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
-                textFont.bold: false
-                text: qsTr("Paper Type")
-//                visible: false
-                onClicked: {
-                    if( !paperTypeObj )
-                        paperTypeObj = showBottomPanel(paper_type_component,true)
-                }
-
-                property variant paperTypeObj
-            }
-
-            MenuButton {
-                id: update_btn
-                height: 50*physicalPlatformScale
-                width: parent.width
-                normalColor: "#00000000"
-                highlightColor: "#4098bf"
-                textColor: press? "#ffffff" : "#4098bf"
-                textFont.weight: Font.Normal
-                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
-                textFont.bold: false
-                text: qsTr("Update Date")
-                onClicked: {
-                    if( !dateChooser )
-                        dateChooser = showBottomPanel(date_component,true)
-                }
-
-                property variant dateChooser
-            }
-
-            MenuButton {
-                height: 50*physicalPlatformScale
-                width: column.width
-                normalColor: "#00000000"
-                highlightColor: "#4098bf"
-                textColor: press? "#ffffff" : "#4098bf"
-                textFont.weight: Font.Normal
-                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
-                textFont.bold: false
-                text: qsTr("Update Location")
-                onClicked: {
-                    showBottomPanel(geo_component,true)
-                }
-            }
-
-            MapView {
+            PaperMapView {
                 id: map_image
-                width: column.width
-                height: width/2
+                width: 400*physicalPlatformScale
+                height: 3*width/4
+                anchors.horizontalCenter: parent.horizontalCenter
                 latitude: edit_dialog.latitude
                 longitude: edit_dialog.longitude
                 visible: !unknown
-                paperId: edit_dialog.item? edit_dialog.item.paperItem.paperItem : 0
             }
 
-            Item {
-                id: delete_frame
-                height: 50*physicalPlatformScale + (confirm?delete_confirm_text.height:0)
-                width: column.width
-                clip: true
-
-                property bool confirm: false
-
-                Behavior on height {
-                    NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
-                }
-
-                Timer {
-                    id: confirm_timer
-                    interval: 2000
-                    onTriggered: delete_frame.confirm = false
-                }
-
-                Timer {
-                    id: block_timer
-                    interval: 400
-                }
-
-                Text {
-                    id: delete_confirm_text
-                    width: column.width
-                    font.weight: Font.Normal
-                    font.pixelSize: Devices.isMobile? 13*fontsScale : 15*fontsScale
-                    font.family: SApp.globalFontFamily
-                    font.bold: false
-                    anchors.bottom: delete_btn.top
-                    color: "#ff5532"
-                    text: qsTr("Are you sure?")
-                }
-
-                MenuButton {
-                    id: delete_btn
-                    height: 50*physicalPlatformScale
-                    width: column.width
-                    anchors.bottom: parent.bottom
-                    normalColor: "#00000000"
-                    highlightColor: "#ff5532"
-                    textColor: press? "#ffffff" : "#ff5532"
-                    textFont.weight: Font.Normal
-                    textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
-                    textFont.bold: false
-                    text: qsTr("Delete Paper")
-                    onClicked: {
-                        if( block_timer.running )
-                            return
-                        if( delete_frame.confirm ) {
-                            item.paperItem.deleteRequest()
-                            hideSubMessage()
-                        }
-
-                        delete_frame.confirm = !delete_frame.confirm
-                        confirm_timer.restart()
-                        block_timer.restart()
-                    }
-                }
-            }
-
-            Item {
-                width: 10
-                height: 100*physicalPlatformScale
+            PaperDeleteButton {
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: button_box.width
+                height: 52*physicalPlatformScale
+                paperObject: edit_dialog.item? edit_dialog.item.paperItem : 0
+                paperItem: edit_dialog.item? edit_dialog.item.paperItem.paperItem : 0
             }
         }
     }
@@ -293,133 +176,5 @@ Item {
         anchors.fill: parent
         visible: bottomPanel.item? true : false
         onClicked: hideBottomPanel()
-    }
-
-    Component {
-        id: paper_type_component
-        Column {
-            id: paper_types
-            height: 100*physicalPlatformScale
-
-            MenuButton {
-                height: 50*physicalPlatformScale
-                width: paper_types.width
-                normalColor: "#00000000"
-                highlightColor: "#4098bf"
-                textColor: press? "#ffffff" : "#4098bf"
-                textFont.weight: Font.Normal
-                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
-                textFont.bold: false
-                text: qsTr("Normal")
-                onClicked: {
-                    database.setPaperType(item.paperItem.paperItem,Enums.Normal)
-                    hideBottomPanel()
-                }
-            }
-
-            MenuButton {
-                height: 50*physicalPlatformScale
-                width: paper_types.width
-                normalColor: "#00000000"
-                highlightColor: "#4098bf"
-                textColor: press? "#ffffff" : "#4098bf"
-                textFont.weight: Font.Normal
-                textFont.pixelSize: Devices.isMobile? 11*fontsScale : 13*fontsScale
-                textFont.bold: false
-                text: qsTr("To-Do")
-                onClicked: {
-                    item.paperItem.save()
-                    database.setPaperType(item.paperItem.paperItem,Enums.ToDo)
-                    hideBottomPanel()
-                }
-            }
-        }
-    }
-
-    Component {
-        id: date_component
-        Item {
-            id: date_dialog
-            height: 230*physicalPlatformScale
-
-            MouseArea {
-                anchors.fill: parent
-            }
-
-            Button {
-                id: done_btn
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.margins: 10*physicalPlatformScale
-                height: 30*physicalPlatformScale
-                width: 100*physicalPlatformScale
-                color: "#4098bf"
-                highlightColor: "#3B8DB1"
-                textColor: "#ffffff"
-                text: qsTr("Done")
-                onClicked: {
-                    var date = dateChooser.getDate()
-                    database.setPaperCreatedDate(edit_dialog.item.paperItem.paperItem,date)
-                    item.paperItem.refreshDateLabel()
-                    main.refreshMenu()
-                    hideBottomPanel()
-                }
-            }
-
-            DateTimeChooser {
-                id: dateChooser
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.top: done_btn.bottom
-                anchors.margins: 20*physicalPlatformScale
-                anchors.topMargin: 10*physicalPlatformScale
-                dateVisible: true
-                timeVisible: true
-                color: "#D9D9D9"
-                textsColor: "#111111"
-            }
-        }
-    }
-
-    Component {
-        id: geo_component
-        Item {
-            id: geo_dialog
-            height: 300*physicalPlatformScale
-
-            MouseArea {
-                anchors.fill: parent
-            }
-
-            Button {
-                id: done_btn
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.margins: 10*physicalPlatformScale
-                height: 30*physicalPlatformScale
-                width: 100*physicalPlatformScale
-                color: "#4098bf"
-                highlightColor: "#3B8DB1"
-                textColor: "#ffffff"
-                text: qsTr("Done")
-                onClicked: {
-                    var geo = map_switcher.view
-                    database.setPaperLocation(item.paperItem.paperItem,geo)
-                    main.refreshMenu()
-                    hideBottomPanel()
-                }
-            }
-
-            MapSwitcher {
-                id: map_switcher
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.top: done_btn.bottom
-                anchors.topMargin: 10*physicalPlatformScale
-                Component.onCompleted: crosshairs = true
-            }
-        }
     }
 }

@@ -568,7 +568,7 @@ void Database::setPaper(int id, const QString &title, const QString &text, int g
     emit paperGroupChanged(id);
 }
 
-void Database::setPaper(const QString &uuid, const QString &title, const QString &text, const QString &group, const QString &date, const QGeoCoordinate & location, int type)
+void Database::setPaper(const QString &uuid, const QString &title, const QString &text, const QString &group, const QString &date, const QGeoCoordinate & location, int type, const QString & weather, int temperature)
 {
     int paper_id = paperUuidId(uuid);
     if( paper_id == -1 )
@@ -580,13 +580,15 @@ void Database::setPaper(const QString &uuid, const QString &title, const QString
 
     PaperClass paper = getPaper(paper_id);
 
-    paper.uuid      = uuid;
-    paper.title     = title;
-    paper.text      = text;
-    paper.group     = group_id;
-    paper.location  = location;
-    paper.create    = QDateTime::fromString(date);
-    paper.type      = static_cast<Enums::PaperType>(type);
+    paper.uuid        = uuid;
+    paper.title       = title;
+    paper.text        = text;
+    paper.group       = group_id;
+    paper.location    = location;
+    paper.create      = QDateTime::fromString(date);
+    paper.type        = static_cast<Enums::PaperType>(type);
+    paper.weather     = weather;
+    paper.temperature = temperature;
 
     savePaper(paper);
     emit datesListChanged();
@@ -641,6 +643,40 @@ void Database::setPaperType(int id, int type)
         return;
 
     paper.type = static_cast<Enums::PaperType>(type);
+    savePaper(paper);
+}
+
+int Database::paperTemperature(int id)
+{
+    return getPaper(id).temperature;
+}
+
+void Database::setPaperTemperature(int id, int tmp)
+{
+    PaperClass paper = getPaper(id);
+    if( paper.id == -1 )
+        return;
+    if( paper.temperature == tmp )
+        return;
+
+    paper.temperature = tmp;
+    savePaper(paper);
+}
+
+QString Database::paperWeather(int id)
+{
+    return getPaper(id).weather;
+}
+
+void Database::setPaperWeather(int id, const QString &weather)
+{
+    PaperClass paper = getPaper(id);
+    if( paper.id == -1 )
+        return;
+    if( paper.weather == weather )
+        return;
+
+    paper.weather = weather;
     savePaper(paper);
 }
 
@@ -1323,6 +1359,21 @@ void Database::update_database()
         setRevision(GROUPS_SYNC_KEY,-1);
         setValue("version","5");
     }
+    if( value("version") == "5" )
+    {
+        QStringList query_list;
+        query_list << "BEGIN;";
+        query_list << "ALTER TABLE Papers ADD COLUMN weather VARCHAR(64) DEFAULT NULL;";
+        query_list << "ALTER TABLE Papers ADD COLUMN temperature INT DEFAULT NULL;";
+        query_list << "CREATE INDEX weather_p ON Papers (weather ASC);";
+        query_list << "CREATE INDEX temperature_p ON Papers (temperature ASC);";
+        query_list << "COMMIT;";
+
+        foreach( const QString & query_str, query_list )
+            QSqlQuery( query_str, p->db ).exec();
+
+        setValue("version","6");
+    }
     END_FNC_DEBUG
 }
 
@@ -1338,7 +1389,7 @@ PaperClass Database::getPaper(int id)
     }
 
     QSqlQuery query(p->db);
-    query.prepare("SELECT id,uuid,title,text,ctime,cdate,mtime,mdate,activity,grp,latitude,longitude,altitude,type FROM Papers WHERE id=:id");
+    query.prepare("SELECT id,uuid,title,text,ctime,cdate,mtime,mdate,activity,grp,latitude,longitude,altitude,type,weather,temperature FROM Papers WHERE id=:id");
     query.bindValue(":id",id);
     query.exec();
 
@@ -1362,6 +1413,8 @@ PaperClass Database::getPaper(int id)
     result.group    = record.value(9).toInt();
     result.location = QGeoCoordinate( record.value(10).toDouble(), record.value(11).toDouble(), record.value(12).toDouble() );
     result.type     = static_cast<Enums::PaperType>(record.value(13).toInt());
+    result.weather     = record.value(14).toString();
+    result.temperature = record.value(15).toInt();
 
     p->papers << result;
     p->cached_papers_ids.insert(result.id);
@@ -1389,8 +1442,8 @@ void Database::savePaper(PaperClass paper)
     paper.modified = QDateTime::currentDateTime();
 
     QSqlQuery query(p->db);
-    query.prepare("INSERT OR REPLACE INTO Papers (id,uuid,title,text,ctime,cdate,mtime,mdate,activity,grp,latitude,longitude,altitude,type) "
-                  "VALUES (:id,:uuid,:title,:text,:ctime,:cdate,:mtime,:mdate,:actvt,:grp,:ltud,:lgud,:atud,:type)");
+    query.prepare("INSERT OR REPLACE INTO Papers (id,uuid,title,text,ctime,cdate,mtime,mdate,activity,grp,latitude,longitude,altitude,type,weather,temperature) "
+                  "VALUES (:id,:uuid,:title,:text,:ctime,:cdate,:mtime,:mdate,:actvt,:grp,:ltud,:lgud,:atud,:type,:wthr,:tmp)");
     query.bindValue(":id"    ,paper.id);
     query.bindValue(":uuid"  ,paper.uuid);
     query.bindValue(":title" ,paper.title);
@@ -1405,6 +1458,8 @@ void Database::savePaper(PaperClass paper)
     query.bindValue(":lgud"  ,paper.location.longitude());
     query.bindValue(":atud"  ,paper.location.altitude());
     query.bindValue(":type"  ,static_cast<int>(paper.type));
+    query.bindValue(":tmp"   ,paper.temperature);
+    query.bindValue(":wthr"  ,paper.weather);
 
     if( allow_exec )
         query.exec();

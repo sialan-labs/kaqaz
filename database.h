@@ -63,7 +63,7 @@ public:
     Q_INVOKABLE void deletePaper( int id );
 
     Q_INVOKABLE void setPaper(int id, const QString & title, const QString & text, int group );
-    Q_INVOKABLE void setPaper(const QString & uuid, const QString & title, const QString & text, const QString & group, const QString & date, const QGeoCoordinate & location , int type);
+    Q_INVOKABLE void setPaper(const QString & uuid, const QString & title, const QString & text, const QString & group, const QString & date, const QGeoCoordinate & location , int type, const QString & weather, int temperature);
 
     Q_INVOKABLE QString paperTitle( int id );
     Q_INVOKABLE void setPaperTitle( int id, const QString & title );
@@ -73,6 +73,12 @@ public:
 
     Q_INVOKABLE int paperType( int id );
     Q_INVOKABLE void setPaperType( int id, int type );
+
+    Q_INVOKABLE int paperTemperature( int id );
+    Q_INVOKABLE void setPaperTemperature( int id, int tmp );
+
+    Q_INVOKABLE QString paperWeather( int id );
+    Q_INVOKABLE void setPaperWeather( int id, const QString & weather );
 
     Q_INVOKABLE QGeoCoordinate paperLocation( int id );
     Q_INVOKABLE void setPaperLocation( int id, const QGeoCoordinate & coo );

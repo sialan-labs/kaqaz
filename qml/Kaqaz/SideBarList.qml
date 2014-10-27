@@ -113,6 +113,7 @@ Rectangle {
                 id: icon_img
                 height: 22*physicalPlatformScale
                 width: height
+                sourceSize: Qt.size(width,height)
                 anchors.left: item.left
                 anchors.leftMargin: 6*physicalPlatformScale
                 anchors.verticalCenter: item.verticalCenter
@@ -152,6 +153,13 @@ Rectangle {
                     if( item.command === "lock" )
                         lock()
                     else
+                    if( item.command === "sync" ){
+                        if( sync.tokenAvailable ) {
+                            sync.refreshForce()
+                            syncProgressBar.visible = true
+                        }
+                    }
+                    else
                     if( item.command === "fullscreen" )
                         kaqaz.fullscreen = !kaqaz.fullscreen
                     else
@@ -187,6 +195,7 @@ Rectangle {
 
                 model.append({"textValue": qsTr("Fullscreen"), "cmdValue": "fullscreen", "typeValue": 0, "guidValue": -1, "iconValue": "files/fullscreen.png"})
             }
+            model.append({"textValue": qsTr("Force Sync"), "cmdValue": "sync", "typeValue": 0, "guidValue": -1, "iconValue": "files/sync.png"})
             model.append({"textValue": qsTr("Preferences"), "cmdValue": "preferences", "typeValue": 0, "guidValue": -1, "iconValue": "files/preferences.png"})
 
             model.append({"textValue": "", "cmdValue": "", "typeValue": -1, "guidValue": -1, "iconValue": ""})

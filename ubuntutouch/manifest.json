@@ -1,7 +1,7 @@
 {
     "name": "org.sialan.kaqaz",
     "description": "description of KaqazTouch",
-    "framework": "qt-5.3",
+    "framework": "ubuntu-sdk-14.04",
     "architecture": "all",
     "title": "Kaqaz",
     "hooks": {

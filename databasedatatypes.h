@@ -75,6 +75,7 @@ public:
     PaperClass(){
         id = -1;
         type = Enums::Normal;
+        temperature = 0;
     }
 
     int id;
@@ -86,6 +87,8 @@ public:
     QGeoCoordinate location;
     int group;
     int activity;
+    QString weather;
+    int temperature;
     QStringList files;
     Enums::PaperType type;
 };

@@ -53,7 +53,7 @@ class WeatherData : public QObject {
     Q_PROPERTY(QString dayOfWeek READ dayOfWeek WRITE setDayOfWeek NOTIFY dataChanged)
     Q_PROPERTY(QString weatherIcon READ weatherIcon WRITE setWeatherIcon NOTIFY dataChanged)
     Q_PROPERTY(QString weatherDescription READ weatherDescription WRITE setWeatherDescription NOTIFY dataChanged)
-    Q_PROPERTY(QString temperature READ temperature WRITE setTemperature NOTIFY dataChanged)
+    Q_PROPERTY(int temperature READ temperature WRITE setTemperature NOTIFY dataChanged)
 
 public:
     explicit WeatherData(QObject *parent = 0);
@@ -62,12 +62,12 @@ public:
     QString dayOfWeek() const;
     QString weatherIcon() const;
     QString weatherDescription() const;
-    QString temperature() const;
+    int temperature() const;
 
     void setDayOfWeek(const QString &value);
     void setWeatherIcon(const QString &value);
     void setWeatherDescription(const QString &value);
-    void setTemperature(const QString &value);
+    void setTemperature(int value);
 
 signals:
     void dataChanged();
@@ -76,7 +76,7 @@ private:
     QString m_dayOfWeek;
     QString m_weather;
     QString m_weatherDescription;
-    QString m_temperature;
+    int m_temperature;
 };
 
 Q_DECLARE_METATYPE(WeatherData)
@@ -87,10 +87,7 @@ class WeatherModel : public QObject
     Q_OBJECT
     Q_PROPERTY(bool ready READ ready NOTIFY readyChanged)
     Q_PROPERTY(bool hasSource READ hasSource NOTIFY readyChanged)
-    Q_PROPERTY(bool hasValidCity READ hasValidCity NOTIFY cityChanged)
-    Q_PROPERTY(bool hasValidWeather READ hasValidWeather NOTIFY weatherChanged)
-    Q_PROPERTY(bool useGps READ useGps WRITE setUseGps NOTIFY useGpsChanged)
-    Q_PROPERTY(QString city READ city WRITE setCity NOTIFY cityChanged)
+    Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
     Q_PROPERTY(WeatherData *weather READ weather NOTIFY weatherChanged)
     Q_PROPERTY(QQmlListProperty<WeatherData> forecast READ forecast NOTIFY weatherChanged)
 
@@ -100,36 +97,33 @@ public:
 
     bool ready() const;
     bool hasSource() const;
-    bool useGps() const;
-    bool hasValidCity() const;
-    bool hasValidWeather() const;
-    void setUseGps(bool value);
-    void hadError(bool tryAgain);
 
-    QString city() const;
-    void setCity(const QString &value);
+    bool active() const;
+    void setActive( bool stt );
+
+    void hadError(bool tryAgain);
 
     WeatherData *weather() const;
     QQmlListProperty<WeatherData> forecast() const;
 
 public slots:
-    Q_INVOKABLE void refreshWeather();
+    void refreshWeather();
+
+    void start();
+    void stop();
 
 private slots:
-    void queryCity();
-    void networkSessionOpened();
+    void startGps();
     void positionUpdated(QGeoPositionInfo gpsPos);
     void positionError(QGeoPositionInfoSource::Error e);
     // these would have QNetworkReply* params but for the signalmapper
-    void handleGeoNetworkData(QObject *networkReply);
     void handleWeatherNetworkData(QObject *networkReply);
     void handleForecastNetworkData(QObject *networkReply);
 
 signals:
     void readyChanged();
-    void useGpsChanged();
-    void cityChanged();
     void weatherChanged();
+    void activeChanged();
 
 private:
     WeatherModelPrivate *d;

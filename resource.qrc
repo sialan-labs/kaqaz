@@ -37,7 +37,7 @@
         <file>qml/Kaqaz/KaqazBlur.qml</file>
         <file>qml/Kaqaz/LanguageSelector.qml</file>
         <file>qml/Kaqaz/MainItem.qml</file>
-        <file>qml/Kaqaz/MapView.qml</file>
+        <file>qml/Kaqaz/PaperMapView.qml</file>
         <file>qml/Kaqaz/MirrorItem.qml</file>
         <file>qml/Kaqaz/MusicDialog.qml</file>
         <file>qml/Kaqaz/MusicViewer.qml</file>
@@ -192,5 +192,36 @@
         <file>translations_sources/lang-en.ts</file>
         <file>translations_sources/lang-fa.ts</file>
         <file>qml/Kaqaz/TranslationSaveDialog.qml</file>
+        <file>qml/Kaqaz/PaperCalendarButton.qml</file>
+        <file>qml/Kaqaz/PaperClockButton.qml</file>
+        <file>qml/Kaqaz/PaperShareButton.qml</file>
+        <file>qml/Kaqaz/PaperMapButton.qml</file>
+        <file>qml/Kaqaz/PaperWeatherButton.qml</file>
+        <file>qml/Kaqaz/PaperAbstractButton.qml</file>
+        <file>qml/Kaqaz/files/sync.png</file>
+        <file>qml/Kaqaz/files/paperbuttons/calendar.png</file>
+        <file>qml/Kaqaz/files/paperbuttons/clock.png</file>
+        <file>qml/Kaqaz/files/paperbuttons/share.png</file>
+        <file>qml/Kaqaz/files/paperbuttons/paper-task.png</file>
+        <file>qml/Kaqaz/PaperTypeButton.qml</file>
+        <file>qml/Kaqaz/files/paperbuttons/paper-note.png</file>
+        <file>qml/Kaqaz/PaperDeleteButton.qml</file>
+        <file>qml/Kaqaz/files/paperbuttons/delete.png</file>
+        <file>qml/Kaqaz/files/weather/weather-clear-night.png</file>
+        <file>qml/Kaqaz/files/weather/weather-clear.png</file>
+        <file>qml/Kaqaz/files/weather/weather-clouds-night.png</file>
+        <file>qml/Kaqaz/files/weather/weather-clouds.png</file>
+        <file>qml/Kaqaz/files/weather/weather-few-clouds-night.png</file>
+        <file>qml/Kaqaz/files/weather/weather-few-clouds.png</file>
+        <file>qml/Kaqaz/files/weather/weather-fog.png</file>
+        <file>qml/Kaqaz/files/weather/weather-overcast.png</file>
+        <file>qml/Kaqaz/files/weather/weather-showers-scattered.png</file>
+        <file>qml/Kaqaz/files/weather/weather-showers.png</file>
+        <file>qml/Kaqaz/files/weather/weather-snow.png</file>
+        <file>qml/Kaqaz/files/weather/weather-storm.png</file>
+        <file>qml/Kaqaz/files/weather/weather-unknown.png</file>
+        <file>qml/Kaqaz/files/paperbuttons/map.png</file>
+        <file>qml/Kaqaz/files/paperbuttons/temperature.png</file>
+        <file>qml/Kaqaz/PaperTemperatureButton.qml</file>
     </qresource>
 </RCC>

@@ -31,44 +31,6 @@ Rectangle {
     property bool unknown: !latitude && !longitude
     property int paperId
 
-    Item{
-        id: fader_item
-        height: 60*physicalPlatformScale
-        visible: false
-
-        Button {
-            id: unpin_map_btn
-            anchors.bottom: fader_item.bottom
-            anchors.left: fader_item.left
-            anchors.margins: 10*physicalPlatformScale
-            width: (fader_item.width - 30*physicalPlatformScale)/2
-            normalColor: "#ffffff"
-            textColor: "#333333"
-            onClicked: {
-                database.setPaperLocation(paperId,QtPositioning.coordinate(0,0))
-                hideRollerDialog()
-            }
-        }
-
-        Button {
-            id: open_map_btn
-            anchors.bottom: fader_item.bottom
-            anchors.left: fader_item.horizontalCenter
-            anchors.leftMargin: 5*physicalPlatformScale
-            anchors.margins: 10*physicalPlatformScale
-            width: (fader_item.width - 30*physicalPlatformScale)/2
-            normalColor: "#ffffff"
-            textColor: "#333333"
-            onClicked: {
-                if( !longitude && !latitude )
-                    Qt.openUrlExternally("http://maps.google.com")
-                else
-                    Qt.openUrlExternally("http://maps.google.com/maps?&q=" + latitude + "," + longitude)
-                hideRollerDialog()
-            }
-        }
-    }
-
     Image {
         id: splash_map
         source: "files/map-loading.png"
@@ -122,14 +84,10 @@ Rectangle {
         cursorShape: Qt.PointingHandCursor
         visible: !unknown
         onClicked: {
-            showRollerDialog( map_view.mapToItem(kaqaz_root,0,0).y, map_view.mapToItem(kaqaz_root,0,map_view.height).y, fader_item )
+            if( !longitude && !latitude )
+                Qt.openUrlExternally("http://maps.google.com")
+            else
+                Qt.openUrlExternally("http://maps.google.com/maps?&q=" + latitude + "," + longitude)
         }
     }
-
-    function initTranslations(){
-        unpin_map_btn.text = qsTr("Unpin")
-        open_map_btn.text = qsTr("Open")
-    }
-
-    Component.onCompleted: initTranslations()
 }
