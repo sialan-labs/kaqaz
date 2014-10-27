@@ -38,14 +38,9 @@ Item {
 
         Component.onCompleted: {
             pw_list.model.append( {"iconId": "weather-clear"} )
-            pw_list.model.append( {"iconId": "weather-clear-night"} )
-            pw_list.model.append( {"iconId": "weather-few-clouds"} )
-            pw_list.model.append( {"iconId": "weather-few-clouds-night"} )
             pw_list.model.append( {"iconId": "weather-clouds"} )
-            pw_list.model.append( {"iconId": "weather-clouds-night"} )
             pw_list.model.append( {"iconId": "weather-overcast"} )
             pw_list.model.append( {"iconId": "weather-showers"} )
-            pw_list.model.append( {"iconId": "weather-showers-scattered"} )
             pw_list.model.append( {"iconId": "weather-storm"} )
             pw_list.model.append( {"iconId": "weather-snow"} )
             pw_list.model.append( {"iconId": "weather-fog"} )
