@@ -151,6 +151,7 @@ public:
     QElapsedTimer throttle;
     int nErrors;
     int minMsBeforeNewRequest;
+    QHash<QString,QString> weather_icons;
 
     WeatherModelPrivate() :
             src(NULL),
@@ -192,6 +193,20 @@ WeatherModel::WeatherModel(QObject *parent) :
         QObject(parent),
         d(new WeatherModelPrivate)
 {
+    d->weather_icons["01d"] = "weather-clear";
+    d->weather_icons["01n"] = "weather-clear-night";
+    d->weather_icons["02d"] = "weather-few-clouds";
+    d->weather_icons["02n"] = "weather-few-clouds-night";
+    d->weather_icons["03d"] = "weather-clouds";
+    d->weather_icons["03n"] = "weather-clouds-night";
+    d->weather_icons["04d"] = "weather-overcast";
+    d->weather_icons["09d"] = "weather-showers";
+    d->weather_icons["10d"] = "weather-showers-scattered";
+    d->weather_icons["11d"] = "weather-storm";
+    d->weather_icons["13d"] = "weather-snow";
+    d->weather_icons["50d"] = "weather-fog";
+    d->weather_icons[""   ] = "weather-unknown";
+
     d->fcProp = new QQmlListProperty<WeatherData>(this, d,
                                                           forecastAppend,
                                                           forecastCount,
@@ -334,7 +349,7 @@ void WeatherModel::handleWeatherNetworkData(QObject *replyObj)
                 val = weatherArray.at(0);
                 tempObject = val.toObject();
                 d->now.setWeatherDescription(tempObject.value(QStringLiteral("description")).toString());
-                d->now.setWeatherIcon(tempObject.value("icon").toString());
+                d->now.setWeatherIcon( d->weather_icons.value(tempObject.value("icon").toString()) );
             }
             if (obj.contains(QStringLiteral("main"))) {
                 val = obj.value(QStringLiteral("main"));

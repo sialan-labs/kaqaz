@@ -498,7 +498,7 @@ Rectangle {
         stack_switcher.show(0,PaperManager.Search)
     }
 
-    function advanceSearch( keyword, startDate, endDate, startTime, endTime, group, domain, geo ) {
+    function advanceSearch( keyword, startDate, endDate, startTime, endTime, group, domain, geo, weather ) {
         stack_switcher.keyword = keyword
         stack_switcher.startDate = startDate
         stack_switcher.endDate = endDate
@@ -507,6 +507,7 @@ Rectangle {
         stack_switcher.selectedGid = group
         stack_switcher.paperType = domain
         stack_switcher.geo = geo
+        stack_switcher.weather = weather
         stack_switcher.show(0,PaperManager.AdvanceSearch)
     }
 

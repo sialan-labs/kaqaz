@@ -336,7 +336,7 @@ QList<int> Database::search(const QString &keyword)
     return searchQuery(query_str,keyword);
 }
 
-QList<int> Database::advanceSearch(const QString &keyword, const QDate &startDate, const QDate &endDate, const QTime &startTime, const QTime &endTime, int group, int domain, const QRectF & geo )
+QList<int> Database::advanceSearch(const QString &keyword, const QDate &startDate, const QDate &endDate, const QTime &startTime, const QTime &endTime, int group, int domain, const QRectF & geo, const QString & weather )
 {
     BEGIN_FNC_DEBUG
     QString query_str = "SELECT id,ctime,cdate FROM Papers WHERE ";
@@ -391,6 +391,15 @@ QList<int> Database::advanceSearch(const QString &keyword, const QDate &startDat
 
         query_str += "grp=:grp";
         boundValues.insert(":grp",group);
+        has_previous = true;
+    }
+    if( !weather.isEmpty() )
+    {
+        if( has_previous )
+            query_str += " AND ";
+
+        query_str += "weather=:wthr";
+        boundValues.insert(":wthr",weather);
         has_previous = true;
     }
     if( geo.isValid() )

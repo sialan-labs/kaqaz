@@ -28,7 +28,7 @@ Item {
     property alias text: txt.text
 
     signal keywordChanged( string text )
-    signal advanceSearchRequest( string keyword, variant startDate, variant endDate, variant startTime, variant endTime, int group, int domain, variant geo )
+    signal advanceSearchRequest( string keyword, variant startDate, variant endDate, variant startTime, variant endTime, int group, int domain, variant geo, string weather )
 
     onTextChanged: search_timer.restart()
 
@@ -48,6 +48,7 @@ Item {
         property int paperType: Enums.AllPapers
         property int selectedGid: -1
 
+        property string weather
         property variant geo
 
         onMoreDialogChanged: more_btn.more = moreDialog? true : false
@@ -151,6 +152,7 @@ Item {
             onSelectedGidChanged: { privates.selectedGid = selectedGid; refreshSearch() }
             onDomainSelectedTextChanged: { privates.domainSelectedText = domainSelectedText; refreshSearch() }
             onGeoChanged: { privates.geo = geo; refreshSearch() }
+            onWeatherChanged: { privates.weather = weather; refreshSearch() }
 
             Component.onCompleted: {
                 dateIsSet = privates.dateIsSet
@@ -163,6 +165,7 @@ Item {
                 selectedGid = privates.selectedGid
                 domainSelectedText = privates.domainSelectedText
                 geo = privates.geo
+                weather = privates.weather
             }
         }
     }
@@ -172,13 +175,13 @@ Item {
     }
 
     function startSearch() {
-        if( privates.dateIsSet || privates.timeIsSet || privates.paperType!=Enums.AllPapers || privates.selectedGid!=-1 || privates.geo ) {
+        if( privates.dateIsSet || privates.timeIsSet || privates.paperType!=Enums.AllPapers || privates.selectedGid!=-1 || privates.geo || privates.weather.length != 0 ) {
             search_panel.advanceSearchRequest(text, privates.dateIsSet? privates.startDate : 0,
                                                     privates.dateIsSet? privates.endDate : 0,
                                                     privates.timeIsSet? privates.startTime : 0,
                                                     privates.timeIsSet? privates.endTime : 0,
                                                     privates.selectedGid, privates.paperType,
-                                                    privates.geo )
+                                                    privates.geo, privates.weather )
         } else {
             search_panel.keywordChanged(text)
         }

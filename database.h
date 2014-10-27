@@ -57,7 +57,7 @@ public:
     Q_INVOKABLE QList<int> papersOf( int group_id );
     Q_INVOKABLE QList<int> papers();
     Q_INVOKABLE QList<int> search(const QString & keyword );
-    Q_INVOKABLE QList<int> advanceSearch(const QString & keyword, const QDate & startDate, const QDate & endDate, const QTime & startTime, const QTime & endTime, int group, int domain, const QRectF &geo = QRectF() );
+    Q_INVOKABLE QList<int> advanceSearch(const QString & keyword, const QDate & startDate, const QDate & endDate, const QTime & startTime, const QTime & endTime, int group, int domain, const QRectF &geo = QRectF(), const QString & weather = QString() );
 
     Q_INVOKABLE int createPaper(const QString &uuid = QString());
     Q_INVOKABLE void deletePaper( int id );

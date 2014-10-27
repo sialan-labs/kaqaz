@@ -31,65 +31,7 @@ PaperAbstractButton {
     }
 
     onRefresh: {
-        var icon_name = "weather-unknown"
-        switch( paperWeather ) {
-        case "01d":
-            icon_name = "weather-clear";
-            break;
-        case "01n":
-            icon_name = "weather-clear-night";
-            break;
-        case "02d":
-            icon_name = "weather-few-clouds";
-            break;
-        case "02n":
-            icon_name = "weather-few-clouds-night";
-            break;
-        case "03d":
-            icon_name = "weather-clouds";
-            break;
-        case "03n":
-            icon_name = "weather-clouds-night";
-            break;
-        case "04d":
-            icon_name = "weather-overcast";
-            break;
-        case "04n":
-            icon_name = "weather-overcast";
-            break;
-        case "09d":
-            icon_name = "weather-showers";
-            break;
-        case "09n":
-            icon_name = "weather-showers";
-            break;
-        case "10d":
-            icon_name = "weather-showers-scattered";
-            break;
-        case "10n":
-            icon_name = "weather-showers-scattered";
-            break;
-        case "11d":
-            icon_name = "weather-storm";
-            break;
-        case "11n":
-            icon_name = "weather-storm";
-            break;
-        case "13d":
-            icon_name = "weather-snow";
-            break;
-        case "13n":
-            icon_name = "weather-snow";
-            break;
-        case "50d":
-            icon_name = "weather-fog";
-            break;
-        case "50n":
-            icon_name = "weather-fog";
-            break;
-        }
-
-        background = "files/weather/" + icon_name + ".png"
+        background = "files/weather/" + paperWeather + ".png"
     }
 
     onPaperWeatherChanged: refresh()
@@ -125,7 +67,7 @@ PaperAbstractButton {
                         asynchronous: true
                         fillMode: Image.PreserveAspectFit
                         sourceSize: Qt.size(width,height)
-                        source: "files/weather/" + iconPath + ".png"
+                        source: "files/weather/" + iconId + ".png"
                     }
 
                     MouseArea {
@@ -140,19 +82,19 @@ PaperAbstractButton {
                 }
 
                 Component.onCompleted: {
-                    pw_list.model.append( {"iconId": "01d", "iconPath": "weather-clear"} )
-                    pw_list.model.append( {"iconId": "01n", "iconPath": "weather-clear-night"} )
-                    pw_list.model.append( {"iconId": "02d", "iconPath": "weather-few-clouds"} )
-                    pw_list.model.append( {"iconId": "02n", "iconPath": "weather-few-clouds-night"} )
-                    pw_list.model.append( {"iconId": "03d", "iconPath": "weather-clouds"} )
-                    pw_list.model.append( {"iconId": "03n", "iconPath": "weather-clouds-night"} )
-                    pw_list.model.append( {"iconId": "04d", "iconPath": "weather-overcast"} )
-                    pw_list.model.append( {"iconId": "09d", "iconPath": "weather-showers"} )
-                    pw_list.model.append( {"iconId": "10d", "iconPath": "weather-showers-scattered"} )
-                    pw_list.model.append( {"iconId": "11d", "iconPath": "weather-storm"} )
-                    pw_list.model.append( {"iconId": "13d", "iconPath": "weather-snow"} )
-                    pw_list.model.append( {"iconId": "50d", "iconPath": "weather-fog"} )
-                    pw_list.model.append( {"iconId": ""   , "iconPath": "weather-unknown"} )
+                    pw_list.model.append( {"iconId": "weather-clear"} )
+                    pw_list.model.append( {"iconId": "weather-clear-night"} )
+                    pw_list.model.append( {"iconId": "weather-few-clouds"} )
+                    pw_list.model.append( {"iconId": "weather-few-clouds-night"} )
+                    pw_list.model.append( {"iconId": "weather-clouds"} )
+                    pw_list.model.append( {"iconId": "weather-clouds-night"} )
+                    pw_list.model.append( {"iconId": "weather-overcast"} )
+                    pw_list.model.append( {"iconId": "weather-showers"} )
+                    pw_list.model.append( {"iconId": "weather-showers-scattered"} )
+                    pw_list.model.append( {"iconId": "weather-storm"} )
+                    pw_list.model.append( {"iconId": "weather-snow"} )
+                    pw_list.model.append( {"iconId": "weather-fog"} )
+                    pw_list.model.append( {"iconId": "weather-unknown"} )
                 }
             }
         }

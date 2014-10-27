@@ -23,7 +23,7 @@ import SialanTools 1.0
 Item {
     id: more_panel
     width: 100
-    height: column.height + header_frame.height
+    height: flickable.height + header_frame.height
 
     property bool startPage: true
 
@@ -36,6 +36,7 @@ Item {
     property bool timeIsSet: false
 
     property variant geo
+    property string weather
 
     property string domainSelectedText
     property int paperType: Enums.AllPapers
@@ -99,189 +100,234 @@ Item {
         }
     }
 
-    Column {
-        id: column
+    Flickable {
+        id: flickable
         anchors.top: header_frame.bottom
-        width: parent.width
         x: startPage? 0 : -width
+        height: 220*physicalPlatformScale
+        width: parent.width
+        contentWidth: column.width
+        contentHeight: column.height
+        flickableDirection: Flickable.VerticalFlick
+        clip: true
 
         Behavior on x {
             NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
         }
 
-        MenuButton {
-            id: date_dmn_btn
-            height: 50*physicalPlatformScale
-            width: column.width
-            normalColor: "#00000000"
-            highlightColor: "#4098bf"
-            textColor: press? "#ffffff" : "#4098bf"
-            textFont.weight: Font.Normal
-            textFont.pixelSize: 13*fontsScale
-            textFont.bold: false
-            text: qsTr("Date Domain")
-            onClicked: {
-                showItem(date_domain_component)
+        Column {
+            id: column
+            width: flickable.width
+
+            MenuButton {
+                id: date_dmn_btn
+                height: 50*physicalPlatformScale
+                width: column.width
+                normalColor: "#00000000"
+                highlightColor: "#4098bf"
+                textColor: press? "#ffffff" : "#4098bf"
+                textFont.weight: Font.Normal
+                textFont.pixelSize: 13*fontsScale
+                textFont.bold: false
+                text: qsTr("Date Domain")
+                onClicked: {
+                    showItem(date_domain_component)
+                }
+
+                Column {
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: date_dmn_btn.textAlignment==Text.AlignRight? 10*physicalPlatformScale : parent.width-width-10*physicalPlatformScale
+                    spacing: -4*physicalPlatformScale
+
+                    Text {
+                        id: start_date_text
+                        font.pixelSize: 8*fontsScale
+                        font.family: SApp.globalFontFamily
+                        color: "#333333"
+                        text: more_panel.dateIsSet? "<b>From:</b> " + CalendarConv.convertIntToStringDate(CalendarConv.convertDateToDays(more_panel.startDate)) : ""
+                    }
+
+                    Text {
+                        id: end_date_text
+                        font.pixelSize: 8*fontsScale
+                        font.family: SApp.globalFontFamily
+                        color: "#333333"
+                        text: more_panel.dateIsSet? "<b>To:</b> " + CalendarConv.convertIntToStringDate(CalendarConv.convertDateToDays(more_panel.endDate)) : ""
+                    }
+                }
             }
 
-            Column {
-                anchors.verticalCenter: parent.verticalCenter
-                x: date_dmn_btn.textAlignment==Text.AlignRight? 10*physicalPlatformScale : parent.width-width-10*physicalPlatformScale
-                spacing: -4*physicalPlatformScale
+            MenuButton {
+                id: time_dmn_btn
+                height: 50*physicalPlatformScale
+                width: column.width
+                normalColor: "#00000000"
+                highlightColor: "#4098bf"
+                textColor: press? "#ffffff" : "#4098bf"
+                textFont.weight: Font.Normal
+                textFont.pixelSize: 13*fontsScale
+                textFont.bold: false
+                text: qsTr("Time Domain")
+                onClicked: {
+                    showItem(time_domain_component)
+                }
 
-                Text {
-                    id: start_date_text
-                    font.pixelSize: 8*fontsScale
-                    font.family: SApp.globalFontFamily
-                    color: "#333333"
-                    text: more_panel.dateIsSet? "<b>From:</b> " + CalendarConv.convertIntToStringDate(CalendarConv.convertDateToDays(more_panel.startDate)) : ""
+                Column {
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: time_dmn_btn.textAlignment==Text.AlignRight? 10*physicalPlatformScale : parent.width-width-10*physicalPlatformScale
+                    spacing: -4*physicalPlatformScale
+
+                    Text {
+                        id: start_time_text
+                        font.pixelSize: 8*fontsScale
+                        font.family: SApp.globalFontFamily
+                        color: "#333333"
+                        text: more_panel.timeIsSet? "<b>From:</b> " + more_panel.startTime.toLocaleTimeString() : ""
+                    }
+
+                    Text {
+                        id: end_time_text
+                        font.pixelSize: 8*fontsScale
+                        font.family: SApp.globalFontFamily
+                        color: "#333333"
+                        text: more_panel.timeIsSet? "<b>To:</b> " + more_panel.endTime.toLocaleTimeString() : ""
+                    }
+                }
+            }
+
+            MenuButton {
+                id: geo_select_btn
+                height: 50*physicalPlatformScale
+                width: column.width
+                normalColor: "#00000000"
+                highlightColor: "#4098bf"
+                textColor: press? "#ffffff" : "#4098bf"
+                textFont.weight: Font.Normal
+                textFont.pixelSize: 13*fontsScale
+                textFont.bold: false
+                text: qsTr("Geo Location Domain")
+                onClicked: {
+                    showItem(geo_domain_component)
                 }
 
                 Text {
-                    id: end_date_text
+                    id: geo_text
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: geo_select_btn.textAlignment==Text.AlignRight? 10*physicalPlatformScale : parent.width-width-10*physicalPlatformScale
                     font.pixelSize: 8*fontsScale
                     font.family: SApp.globalFontFamily
                     color: "#333333"
-                    text: more_panel.dateIsSet? "<b>To:</b> " + CalendarConv.convertIntToStringDate(CalendarConv.convertDateToDays(more_panel.endDate)) : ""
+                    text: more_panel.geo? littleNum(more_panel.geo.y) + ", " + littleNum(more_panel.geo.x) + "  " +
+                                          littleNum(more_panel.geo.width) + "x" + littleNum(more_panel.geo.height) : ""
+
+                    function littleNum( num ) {
+                        return Math.floor(num*1000)/1000
+                    }
                 }
             }
-        }
 
-        MenuButton {
-            id: time_dmn_btn
-            height: 50*physicalPlatformScale
-            width: column.width
-            normalColor: "#00000000"
-            highlightColor: "#4098bf"
-            textColor: press? "#ffffff" : "#4098bf"
-            textFont.weight: Font.Normal
-            textFont.pixelSize: 13*fontsScale
-            textFont.bold: false
-            text: qsTr("Time Domain")
-            onClicked: {
-                showItem(time_domain_component)
-            }
-
-            Column {
-                anchors.verticalCenter: parent.verticalCenter
-                x: time_dmn_btn.textAlignment==Text.AlignRight? 10*physicalPlatformScale : parent.width-width-10*physicalPlatformScale
-                spacing: -4*physicalPlatformScale
-
-                Text {
-                    id: start_time_text
-                    font.pixelSize: 8*fontsScale
-                    font.family: SApp.globalFontFamily
-                    color: "#333333"
-                    text: more_panel.timeIsSet? "<b>From:</b> " + more_panel.startTime.toLocaleTimeString() : ""
+            MenuButton {
+                id: weather_btn
+                height: 50*physicalPlatformScale
+                width: column.width
+                normalColor: "#00000000"
+                highlightColor: "#4098bf"
+                textColor: press? "#ffffff" : "#4098bf"
+                textFont.weight: Font.Normal
+                textFont.pixelSize: 13*fontsScale
+                textFont.bold: false
+                text: qsTr("Weather")
+                onClicked: {
+                    showItem(weather_component)
                 }
 
-                Text {
-                    id: end_time_text
-                    font.pixelSize: 8*fontsScale
-                    font.family: SApp.globalFontFamily
-                    color: "#333333"
-                    text: more_panel.timeIsSet? "<b>To:</b> " + more_panel.endTime.toLocaleTimeString() : ""
+                Column {
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: weather_btn.textAlignment==Text.AlignRight? 10*physicalPlatformScale : parent.width-width-10*physicalPlatformScale
+                    spacing: -4*physicalPlatformScale
+
+                    Text {
+                        id: weather_text
+                        font.pixelSize: 8*fontsScale
+                        font.family: SApp.globalFontFamily
+                        color: "#333333"
+                        text: more_panel.weather
+                    }
                 }
             }
-        }
 
-        MenuButton {
-            id: geo_select_btn
-            height: 50*physicalPlatformScale
-            width: column.width
-            normalColor: "#00000000"
-            highlightColor: "#4098bf"
-            textColor: press? "#ffffff" : "#4098bf"
-            textFont.weight: Font.Normal
-            textFont.pixelSize: 13*fontsScale
-            textFont.bold: false
-            text: qsTr("Geo Location Domain")
-            onClicked: {
-                showItem(geo_domain_component)
-            }
+            MenuButton {
+                id: group_btn
+                height: 50*physicalPlatformScale
+                width: column.width
+                normalColor: "#00000000"
+                highlightColor: "#4098bf"
+                textColor: press? "#ffffff" : "#4098bf"
+                textFont.weight: Font.Normal
+                textFont.pixelSize: 13*fontsScale
+                textFont.bold: false
+                text: qsTr("Labels")
+                onClicked: {
+                    showItem(group_domain_component)
+                }
 
-            Text {
-                id: geo_text
-                anchors.verticalCenter: parent.verticalCenter
-                x: geo_select_btn.textAlignment==Text.AlignRight? 10*physicalPlatformScale : parent.width-width-10*physicalPlatformScale
-                font.pixelSize: 8*fontsScale
-                font.family: SApp.globalFontFamily
-                color: "#333333"
-                text: more_panel.geo? littleNum(more_panel.geo.y) + ", " + littleNum(more_panel.geo.x) + "  " +
-                                      littleNum(more_panel.geo.width) + "x" + littleNum(more_panel.geo.height) : ""
+                Column {
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: group_btn.textAlignment==Text.AlignRight? 10*physicalPlatformScale : parent.width-width-10*physicalPlatformScale
+                    spacing: -4*physicalPlatformScale
 
-                function littleNum( num ) {
-                    return Math.floor(num*1000)/1000
+                    Text {
+                        id: group_text
+                        font.pixelSize: 8*fontsScale
+                        font.family: SApp.globalFontFamily
+                        color: "#333333"
+                        text: more_panel.selectedGid!=-1? database.groupName(more_panel.selectedGid) : ""
+                    }
                 }
             }
-        }
 
-        MenuButton {
-            id: group_btn
-            height: 50*physicalPlatformScale
-            width: column.width
-            normalColor: "#00000000"
-            highlightColor: "#4098bf"
-            textColor: press? "#ffffff" : "#4098bf"
-            textFont.weight: Font.Normal
-            textFont.pixelSize: 13*fontsScale
-            textFont.bold: false
-            text: qsTr("Labels")
-            onClicked: {
-                showItem(group_domain_component)
-            }
-
-            Column {
-                anchors.verticalCenter: parent.verticalCenter
-                x: group_btn.textAlignment==Text.AlignRight? 10*physicalPlatformScale : parent.width-width-10*physicalPlatformScale
-                spacing: -4*physicalPlatformScale
-
-                Text {
-                    id: group_text
-                    font.pixelSize: 8*fontsScale
-                    font.family: SApp.globalFontFamily
-                    color: "#333333"
-                    text: more_panel.selectedGid!=-1? database.groupName(more_panel.selectedGid) : ""
+            MenuButton {
+                id: paper_type_btn
+                height: 50*physicalPlatformScale
+                width: column.width
+                normalColor: "#00000000"
+                highlightColor: "#4098bf"
+                textColor: press? "#ffffff" : "#4098bf"
+                textFont.weight: Font.Normal
+                textFont.pixelSize: 13*fontsScale
+                textFont.bold: false
+                text: qsTr("Paper Type")
+                onClicked: {
+                    showItem(type_domain_component)
                 }
-            }
-        }
 
-        MenuButton {
-            id: paper_type_btn
-            height: 50*physicalPlatformScale
-            width: column.width
-            normalColor: "#00000000"
-            highlightColor: "#4098bf"
-            textColor: press? "#ffffff" : "#4098bf"
-            textFont.weight: Font.Normal
-            textFont.pixelSize: 13*fontsScale
-            textFont.bold: false
-            text: qsTr("Paper Type")
-            onClicked: {
-                showItem(type_domain_component)
-            }
+                Column {
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: paper_type_btn.textAlignment==Text.AlignRight? 10*physicalPlatformScale : parent.width-width-10*physicalPlatformScale
+                    spacing: -4*physicalPlatformScale
 
-            Column {
-                anchors.verticalCenter: parent.verticalCenter
-                x: paper_type_btn.textAlignment==Text.AlignRight? 10*physicalPlatformScale : parent.width-width-10*physicalPlatformScale
-                spacing: -4*physicalPlatformScale
-
-                Text {
-                    id: paper_type_text
-                    font.pixelSize: 8*fontsScale
-                    font.family: SApp.globalFontFamily
-                    color: "#333333"
-                    text: more_panel.domainSelectedText
+                    Text {
+                        id: paper_type_text
+                        font.pixelSize: 8*fontsScale
+                        font.family: SApp.globalFontFamily
+                        color: "#333333"
+                        text: more_panel.domainSelectedText
+                    }
                 }
             }
         }
     }
 
+    ScrollBar {
+        scrollArea: flickable; height: flickable.height; width: 6*physicalPlatformScale
+        anchors.right: flickable.right; anchors.top: flickable.top; color: "#000000"
+    }
+
     Item {
         id: pages_frame
-        anchors.top: column.top
-        anchors.left: column.right
-        anchors.bottom: column.bottom
+        anchors.top: flickable.top
+        anchors.left: flickable.right
+        anchors.bottom: flickable.bottom
         width: parent.width
         clip: true
 
@@ -370,6 +416,23 @@ Item {
             function done() {
                 more_panel.domainSelectedText = selectedText
                 more_panel.paperType = domain
+            }
+        }
+    }
+
+    Component {
+        id: weather_component
+        SearchPaperWeather {
+            height: pages_frame.height
+
+            onWeatherChanged: {
+                more_panel.startPage = true
+                item_destroy_timer.restart()
+                done()
+            }
+
+            function done() {
+                more_panel.weather = weather
             }
         }
     }

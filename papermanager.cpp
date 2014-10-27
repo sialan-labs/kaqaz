@@ -49,6 +49,7 @@ public:
     QTime advsearch_startTime;
     QTime advsearch_endTime;
     QRectF advsearch_geo;
+    QString advsearch_weather;
     int advsearch_group;
     int advsearch_domain;
 
@@ -128,7 +129,8 @@ void PaperManager::setRoot(int id)
         p->papers = Kaqaz::database()->advanceSearch(p->advsearch_keyword, p->advsearch_startDate,
                                                      p->advsearch_endDate, p->advsearch_startTime,
                                                      p->advsearch_endTime, p->advsearch_group,
-                                                     p->advsearch_domain , p->advsearch_geo);
+                                                     p->advsearch_domain , p->advsearch_geo,
+                                                     p->advsearch_weather);
         break;
 
     case Date:
@@ -375,7 +377,7 @@ QString PaperManager::keyword() const
     return p->keyword;
 }
 
-void PaperManager::setAdvanceSearch(const QString &keyword, const QDate &startDate, const QDate &endDate, const QTime &startTime, const QTime &endTime, int group, int domain, const QRectF &geo)
+void PaperManager::setAdvanceSearch(const QString &keyword, const QDate &startDate, const QDate &endDate, const QTime &startTime, const QTime &endTime, int group, int domain, const QRectF &geo, const QString &weather)
 {
     p->advsearch_keyword = keyword;
     p->advsearch_startDate = startDate;
@@ -385,6 +387,7 @@ void PaperManager::setAdvanceSearch(const QString &keyword, const QDate &startDa
     p->advsearch_group = group;
     p->advsearch_domain = domain;
     p->advsearch_geo = geo;
+    p->advsearch_weather = weather;
 }
 
 QQuickItem *PaperManager::currentPaper() const

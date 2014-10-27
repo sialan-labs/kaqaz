@@ -224,5 +224,6 @@
         <file>qml/Kaqaz/files/paperbuttons/temperature.png</file>
         <file>qml/Kaqaz/PaperTemperatureButton.qml</file>
         <file>qml/Kaqaz/KaqazShareDialog.qml</file>
+        <file>qml/Kaqaz/SearchPaperWeather.qml</file>
     </qresource>
 </RCC>

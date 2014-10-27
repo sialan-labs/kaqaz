@@ -66,7 +66,7 @@ public:
     int currentIndex();
 
 public slots:
-    void setAdvanceSearch( const QString & keyword, const QDate & startDate, const QDate & endDate, const QTime & startTime, const QTime & endTime, int group, int domain, const QRectF & geo );
+    void setAdvanceSearch( const QString & keyword, const QDate & startDate, const QDate & endDate, const QTime & startTime, const QTime & endTime, int group, int domain, const QRectF & geo, const QString & weather );
 
 signals:
     void rootChanged();

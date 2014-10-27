@@ -44,6 +44,7 @@ Item {
     property int paperType: Enums.AllPapers
     property int selectedGid: -1
     property variant geo
+    property string weather
 
     onTypeChanged: {
         BackHandler.removeHandler(switcher)
@@ -158,7 +159,7 @@ Item {
         nextFrame.item = createItem()
         nextFrame.item.type = type
         nextFrame.item.keyword = keyword
-        nextFrame.item.setAdvanceSearch(keyword,startDate,endDate,startTime,endTime,selectedGid,paperType,geo)
+        nextFrame.item.setAdvanceSearch(keyword,startDate,endDate,startTime,endTime,selectedGid,paperType,geo,weather)
         nextFrame.item.root = current
         nextFrame.visible = true
 
