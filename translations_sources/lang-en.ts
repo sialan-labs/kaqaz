@@ -132,22 +132,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/AttachInsertDialog.qml" line="136"/>
+        <location filename="../qml/Kaqaz/AttachInsertDialog.qml" line="135"/>
         <source>Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/AttachInsertDialog.qml" line="137"/>
+        <location filename="../qml/Kaqaz/AttachInsertDialog.qml" line="136"/>
         <source>Gallery</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/AttachInsertDialog.qml" line="139"/>
+        <location filename="../qml/Kaqaz/AttachInsertDialog.qml" line="137"/>
         <source>Music</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/AttachInsertDialog.qml" line="157"/>
+        <location filename="../qml/Kaqaz/AttachInsertDialog.qml" line="155"/>
         <source>Insert Attachment</source>
         <translation type="unfinished"></translation>
     </message>
@@ -163,17 +163,17 @@
 <context>
     <name>AttachViewer</name>
     <message>
-        <location filename="../qml/Kaqaz/AttachViewer.qml" line="316"/>
+        <location filename="../qml/Kaqaz/AttachViewer.qml" line="298"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/AttachViewer.qml" line="317"/>
+        <location filename="../qml/Kaqaz/AttachViewer.qml" line="299"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/AttachViewer.qml" line="318"/>
+        <location filename="../qml/Kaqaz/AttachViewer.qml" line="300"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -199,17 +199,17 @@
 <context>
     <name>BackupWait</name>
     <message>
-        <location filename="../qml/Kaqaz/BackupWait.qml" line="78"/>
+        <location filename="../qml/Kaqaz/BackupWait.qml" line="79"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/BackupWait.qml" line="88"/>
+        <location filename="../qml/Kaqaz/BackupWait.qml" line="89"/>
         <source>Please Wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/BackupWait.qml" line="73"/>
+        <location filename="../qml/Kaqaz/BackupWait.qml" line="74"/>
         <source>Done Successfully</source>
         <translation type="unfinished"></translation>
     </message>
@@ -319,7 +319,7 @@
     <message>
         <location filename="../desktop/configurepage.ui" line="445"/>
         <location filename="../desktop/configurepage.ui" line="517"/>
-        <location filename="../desktop/configurepage.cpp" line="199"/>
+        <location filename="../desktop/configurepage.cpp" line="201"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
@@ -385,64 +385,64 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="181"/>
-        <location filename="../desktop/configurepage.cpp" line="206"/>
+        <location filename="../desktop/configurepage.cpp" line="183"/>
+        <location filename="../desktop/configurepage.cpp" line="208"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="181"/>
-        <location filename="../desktop/configurepage.cpp" line="206"/>
+        <location filename="../desktop/configurepage.cpp" line="183"/>
+        <location filename="../desktop/configurepage.cpp" line="208"/>
         <source>Please enter password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="199"/>
+        <location filename="../desktop/configurepage.cpp" line="201"/>
         <source>Do you realy want to restore? all of your current data will be deleted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="221"/>
+        <location filename="../desktop/configurepage.cpp" line="223"/>
         <source>Delete Backup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="221"/>
+        <location filename="../desktop/configurepage.cpp" line="223"/>
         <source>Do you realy want to delete selected backup?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="275"/>
+        <location filename="../desktop/configurepage.cpp" line="277"/>
         <source>Please Wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="307"/>
+        <location filename="../desktop/configurepage.cpp" line="309"/>
         <source>Incorrect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="307"/>
+        <location filename="../desktop/configurepage.cpp" line="309"/>
         <source>Current password is incorrect!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="316"/>
+        <location filename="../desktop/configurepage.cpp" line="318"/>
         <source>Incorrect repeat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="316"/>
+        <location filename="../desktop/configurepage.cpp" line="318"/>
         <source>Password repeat is incorrect!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="326"/>
+        <location filename="../desktop/configurepage.cpp" line="328"/>
         <source>Successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/configurepage.cpp" line="326"/>
+        <location filename="../desktop/configurepage.cpp" line="328"/>
         <source>Password changed successfully :)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -491,7 +491,7 @@
 <context>
     <name>Database</name>
     <message>
-        <location filename="../database.cpp" line="1111"/>
+        <location filename="../database.cpp" line="1155"/>
         <source>No Label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -703,31 +703,36 @@
     </message>
     <message>
         <location filename="../qml/Kaqaz/GeneralSettings.qml" line="103"/>
-        <source>Desktop Touch</source>
+        <source>Weather detector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/GeneralSettings.qml" line="105"/>
-        <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="106"/>
-        <source>Word suggestions</source>
+        <source>Desktop Touch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/GeneralSettings.qml" line="107"/>
-        <source>Groups count</source>
+        <source>Fullscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/GeneralSettings.qml" line="108"/>
+        <source>Word suggestions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="109"/>
+        <source>Groups count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="110"/>
         <source>Select Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="124"/>
+        <location filename="../qml/Kaqaz/GeneralSettings.qml" line="126"/>
         <source>General Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -900,7 +905,7 @@ left to select categories.</source>
 <context>
     <name>KaqazCanvasMagnifierHelper</name>
     <message>
-        <location filename="../qml/Kaqaz/KaqazCanvasMagnifierHelper.qml" line="21"/>
+        <location filename="../qml/Kaqaz/KaqazCanvasMagnifierHelper.qml" line="39"/>
         <source>Put your fingers on screen
 and move them on screen</source>
         <translation type="unfinished"></translation>
@@ -909,7 +914,7 @@ and move them on screen</source>
 <context>
     <name>KaqazCanvasMagnifierLevel</name>
     <message>
-        <location filename="../qml/Kaqaz/KaqazCanvasMagnifierLevel.qml" line="24"/>
+        <location filename="../qml/Kaqaz/KaqazCanvasMagnifierLevel.qml" line="42"/>
         <source>Zoom</source>
         <translation type="unfinished"></translation>
     </message>
@@ -943,53 +948,53 @@ and move them on screen</source>
 <context>
     <name>KaqazDesktop</name>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="156"/>
-        <location filename="../desktop/kaqazdesktop.cpp" line="169"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="154"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="167"/>
         <source>Add Paper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="157"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="155"/>
         <source>Add To-Do</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="158"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="156"/>
         <source>Add Label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="159"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="157"/>
         <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="160"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="158"/>
         <source>Configure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="161"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="159"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="297"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="290"/>
         <source>Kaqaz security</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="297"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="290"/>
         <source>Please enter password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="301"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="294"/>
         <source>Incorrect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../desktop/kaqazdesktop.cpp" line="301"/>
+        <location filename="../desktop/kaqazdesktop.cpp" line="294"/>
         <source>Password is incorrect!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1049,29 +1054,6 @@ and move them on screen</source>
     </message>
 </context>
 <context>
-    <name>MapView</name>
-    <message>
-        <location filename="../qml/Kaqaz/MapView.qml" line="94"/>
-        <source>Unknown point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/MapView.qml" line="94"/>
-        <source>Loading Map...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/MapView.qml" line="130"/>
-        <source>Unpin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/MapView.qml" line="131"/>
-        <source>Open</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>MapWidget</name>
     <message>
         <location filename="../desktop/mapwidget.cpp" line="166"/>
@@ -1100,8 +1082,8 @@ and move them on screen</source>
 <context>
     <name>OpenSourceProjects</name>
     <message>
-        <location filename="../qml/Kaqaz/OpenSourceProjects.qml" line="120"/>
-        <source>Open source projects</source>
+        <location filename="../qml/Kaqaz/OpenSourceProjects.qml" line="138"/>
+        <source>Open Source Projects</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1140,6 +1122,32 @@ and move them on screen</source>
     <message>
         <location filename="../desktop/panelbox.cpp" line="136"/>
         <source>Do you realy want to delete &quot;%1&quot;?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaperCalendarButton</name>
+    <message>
+        <location filename="../qml/Kaqaz/PaperCalendarButton.qml" line="99"/>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaperClockButton</name>
+    <message>
+        <location filename="../qml/Kaqaz/PaperClockButton.qml" line="41"/>
+        <source>AM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperClockButton.qml" line="41"/>
+        <source>PM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperClockButton.qml" line="111"/>
+        <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1197,6 +1205,24 @@ and move them on screen</source>
     </message>
 </context>
 <context>
+    <name>PaperDeleteButton</name>
+    <message>
+        <location filename="../qml/Kaqaz/PaperDeleteButton.qml" line="41"/>
+        <source>Delete Paper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperDeleteButton.qml" line="60"/>
+        <source>Delete It</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperDeleteButton.qml" line="75"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PaperDeleteDialog</name>
     <message>
         <location filename="../qml/Kaqaz/PaperDeleteDialog.qml" line="91"/>
@@ -1207,59 +1233,8 @@ and move them on screen</source>
 <context>
     <name>PaperEditDialog</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="65"/>
+        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="83"/>
         <source>Untitled Paper</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="115"/>
-        <source>Share Paper</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="143"/>
-        <source>Force sync</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="162"/>
-        <source>Paper Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="182"/>
-        <source>Update Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="200"/>
-        <source>Update Location</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="248"/>
-        <source>Are you sure?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="262"/>
-        <source>Delete Paper</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="313"/>
-        <source>Normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="329"/>
-        <source>To-Do</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="359"/>
-        <location filename="../qml/Kaqaz/PaperEditDialog.qml" line="405"/>
-        <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1294,7 +1269,7 @@ and move them on screen</source>
 <context>
     <name>PaperItem</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperItem.qml" line="559"/>
+        <location filename="../qml/Kaqaz/PaperItem.qml" line="562"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1312,6 +1287,69 @@ and move them on screen</source>
     <message>
         <location filename="../qml/Kaqaz/PaperListItem.qml" line="80"/>
         <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaperMapButton</name>
+    <message>
+        <location filename="../qml/Kaqaz/PaperMapButton.qml" line="50"/>
+        <source>Unpin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperMapButton.qml" line="67"/>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaperMapView</name>
+    <message>
+        <location filename="../qml/Kaqaz/PaperMapView.qml" line="56"/>
+        <source>Unknown point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperMapView.qml" line="56"/>
+        <source>Loading Map...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaperShareButton</name>
+    <message>
+        <location filename="../qml/Kaqaz/PaperShareButton.qml" line="53"/>
+        <source>Share Paper</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaperTemperatureButton</name>
+    <message>
+        <location filename="../qml/Kaqaz/PaperTemperatureButton.qml" line="63"/>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaperTypeButton</name>
+    <message>
+        <location filename="../qml/Kaqaz/PaperTypeButton.qml" line="60"/>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/PaperTypeButton.qml" line="78"/>
+        <source>To-Do</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaperWeatherButton</name>
+    <message>
+        <location filename="../qml/Kaqaz/PaperWeatherButton.qml" line="110"/>
+        <source>Please select weather</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1718,17 +1756,17 @@ and move them on screen</source>
 <context>
     <name>RestoreWait</name>
     <message>
-        <location filename="../qml/Kaqaz/RestoreWait.qml" line="114"/>
+        <location filename="../qml/Kaqaz/RestoreWait.qml" line="115"/>
         <source>Please Wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/RestoreWait.qml" line="99"/>
+        <location filename="../qml/Kaqaz/RestoreWait.qml" line="100"/>
         <source>Done Successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/RestoreWait.qml" line="104"/>
+        <location filename="../qml/Kaqaz/RestoreWait.qml" line="105"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2090,37 +2128,42 @@ and move them on screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="180"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="188"/>
         <source>Clean Papers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="182"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="190"/>
         <source>All Papers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="183"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="191"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="186"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="194"/>
         <source>Lock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="188"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="196"/>
         <source>Fullscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="190"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="198"/>
+        <source>Force Sync</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="199"/>
         <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="194"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="203"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2241,32 +2284,32 @@ and move them on screen</source>
 <context>
     <name>TranslationEditor</name>
     <message>
-        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="159"/>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="177"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="169"/>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="187"/>
         <source>Cleared</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="180"/>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="198"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="195"/>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="213"/>
         <source>Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="208"/>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="226"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="234"/>
+        <location filename="../qml/Kaqaz/TranslationEditor.qml" line="252"/>
         <source>Saved Successfully on</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2274,22 +2317,22 @@ and move them on screen</source>
 <context>
     <name>TranslationSaveDialog</name>
     <message>
-        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="35"/>
+        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="53"/>
         <source>Save and Send</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="60"/>
+        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="78"/>
         <source>Country</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="115"/>
+        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="133"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="194"/>
+        <location filename="../qml/Kaqaz/TranslationSaveDialog.qml" line="213"/>
         <source>Lets Go</source>
         <translation type="unfinished"></translation>
     </message>

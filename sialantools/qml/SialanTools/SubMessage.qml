@@ -58,6 +58,7 @@ Item {
         id: blur
         anchors.fill: parent
         radius: 64
+        cached: true
     }
 
     Rectangle {
