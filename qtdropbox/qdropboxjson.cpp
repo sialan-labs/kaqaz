@@ -495,7 +495,7 @@ void QDropboxJson::setTimestamp(QString key, QDateTime value)
         *(valueMap[key].value.value) = value.toString(dtFormat);
     }else{
         qdropboxjson_entry e;
-        QString *valuePointer = new QString(QLocale{QLocale::English}.toString(value, dtFormat));
+        QString *valuePointer = new QString(QLocale(QLocale::English).toString(value, dtFormat));
         e.value.value = valuePointer;
         e.value.value = valuePointer;
         e.type        = QDROPBOXJSON_TYPE_STR;

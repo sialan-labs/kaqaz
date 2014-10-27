@@ -195,7 +195,9 @@ Rectangle {
 
                 model.append({"textValue": qsTr("Fullscreen"), "cmdValue": "fullscreen", "typeValue": 0, "guidValue": -1, "iconValue": "files/fullscreen.png"})
             }
-            model.append({"textValue": qsTr("Force Sync"), "cmdValue": "sync", "typeValue": 0, "guidValue": -1, "iconValue": "files/sync.png"})
+            if( sync.tokenAvailable )
+                model.append({"textValue": qsTr("Force Sync"), "cmdValue": "sync", "typeValue": 0, "guidValue": -1, "iconValue": "files/sync.png"})
+
             model.append({"textValue": qsTr("Preferences"), "cmdValue": "preferences", "typeValue": 0, "guidValue": -1, "iconValue": "files/preferences.png"})
 
             model.append({"textValue": "", "cmdValue": "", "typeValue": -1, "guidValue": -1, "iconValue": ""})

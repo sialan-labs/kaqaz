@@ -26,6 +26,7 @@ Item {
     property int paperItem
     property variant paperObject
     property alias background: back_image.source
+    property alias pressed: marea.pressed
 
     signal clicked()
     signal refresh()
@@ -33,13 +34,13 @@ Item {
     Image {
         id: back_image
         anchors.fill: parent
-        asynchronous: true
         sourceSize: Qt.size(width,height)
         fillMode: Image.PreserveAspectFit
         smooth: true
     }
 
     MouseArea {
+        id: marea
         anchors.fill: parent
         onClicked: pa_btn.clicked()
     }

@@ -30,9 +30,8 @@ PaperAbstractButton {
                                database.paperText(paperItem),
                                path )
 
-            var msg = showSubMessage(Qt.createComponent("ShareDialog"))
+            var msg = showSubMessage(Qt.createComponent("KaqazShareDialog.qml"))
             msg.sources = [path]
-
         } else {
             Devices.share( database.paperTitle(paperItem),
                          database.paperText(paperItem) )
@@ -41,7 +40,7 @@ PaperAbstractButton {
 
     Rectangle {
         anchors.fill: parent
-        color: "#3B8DB1"
+        color: pressed? "#3580A1" : "#3B8DB1"
         radius: 4*physicalPlatformScale
         anchors.margins: 5*physicalPlatformScale
 

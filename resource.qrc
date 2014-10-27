@@ -223,5 +223,6 @@
         <file>qml/Kaqaz/files/paperbuttons/map.png</file>
         <file>qml/Kaqaz/files/paperbuttons/temperature.png</file>
         <file>qml/Kaqaz/PaperTemperatureButton.qml</file>
+        <file>qml/Kaqaz/KaqazShareDialog.qml</file>
     </qresource>
 </RCC>

@@ -107,7 +107,7 @@ Item {
             Grid {
                 id: button_box
                 anchors.horizontalCenter: parent.horizontalCenter
-                columns: 3
+                columns: Math.floor((parent.width - 20*physicalPlatformScale)/(92*physicalPlatformScale))
 
                 PaperTypeButton {
                     paperObject: edit_dialog.item? edit_dialog.item.paperItem : 0
@@ -147,9 +147,9 @@ Item {
 
             PaperMapView {
                 id: map_image
-                width: 400*physicalPlatformScale
-                height: 3*width/4
                 anchors.horizontalCenter: parent.horizontalCenter
+                width: button_box.width
+                height: 3*width/4
                 latitude: edit_dialog.latitude
                 longitude: edit_dialog.longitude
                 visible: !unknown
