@@ -194,14 +194,14 @@ WeatherModel::WeatherModel(QObject *parent) :
         d(new WeatherModelPrivate)
 {
     d->weather_icons["01d"] = "weather-clear";
-    d->weather_icons["01n"] = "weather-clear-night";
-    d->weather_icons["02d"] = "weather-few-clouds";
-    d->weather_icons["02n"] = "weather-few-clouds-night";
+    d->weather_icons["01n"] = "weather-clear";
+    d->weather_icons["02d"] = "weather-clear";
+    d->weather_icons["02n"] = "weather-clear";
     d->weather_icons["03d"] = "weather-clouds";
-    d->weather_icons["03n"] = "weather-clouds-night";
+    d->weather_icons["03n"] = "weather-clouds";
     d->weather_icons["04d"] = "weather-overcast";
     d->weather_icons["09d"] = "weather-showers";
-    d->weather_icons["10d"] = "weather-showers-scattered";
+    d->weather_icons["10d"] = "weather-showers";
     d->weather_icons["11d"] = "weather-storm";
     d->weather_icons["13d"] = "weather-snow";
     d->weather_icons["50d"] = "weather-fog";
