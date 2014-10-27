@@ -237,6 +237,7 @@ Item {
                 textFont.pixelSize: 13*fontsScale
                 textFont.bold: false
                 text: qsTr("Weather")
+                visible: kaqaz.proBuild
                 onClicked: {
                     showItem(weather_component)
                 }

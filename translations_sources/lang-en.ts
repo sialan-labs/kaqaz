@@ -491,7 +491,7 @@
 <context>
     <name>Database</name>
     <message>
-        <location filename="../database.cpp" line="1155"/>
+        <location filename="../database.cpp" line="1164"/>
         <source>No Label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1025,7 +1025,7 @@ and move them on screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="537"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="538"/>
         <source>List is empty</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1319,7 +1319,7 @@ and move them on screen</source>
 <context>
     <name>PaperShareButton</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperShareButton.qml" line="53"/>
+        <location filename="../qml/Kaqaz/PaperShareButton.qml" line="52"/>
         <source>Share Paper</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1348,7 +1348,7 @@ and move them on screen</source>
 <context>
     <name>PaperWeatherButton</name>
     <message>
-        <location filename="../qml/Kaqaz/PaperWeatherButton.qml" line="110"/>
+        <location filename="../qml/Kaqaz/PaperWeatherButton.qml" line="52"/>
         <source>Please select weather</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1795,37 +1795,42 @@ and move them on screen</source>
 <context>
     <name>SearchMorePanel</name>
     <message>
-        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="70"/>
+        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="71"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="88"/>
+        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="89"/>
         <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="122"/>
+        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="132"/>
         <source>Date Domain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="160"/>
+        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="170"/>
         <source>Time Domain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="198"/>
+        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="208"/>
         <source>Geo Location Domain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="229"/>
+        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="239"/>
+        <source>Weather</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="269"/>
         <source>Labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="259"/>
+        <location filename="../qml/Kaqaz/SearchMorePanel.qml" line="299"/>
         <source>Paper Type</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1833,17 +1838,17 @@ and move them on screen</source>
 <context>
     <name>SearchPanel</name>
     <message>
-        <location filename="../qml/Kaqaz/SearchPanel.qml" line="105"/>
+        <location filename="../qml/Kaqaz/SearchPanel.qml" line="106"/>
         <source>Less</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchPanel.qml" line="105"/>
+        <location filename="../qml/Kaqaz/SearchPanel.qml" line="106"/>
         <source>More</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SearchPanel.qml" line="171"/>
+        <location filename="../qml/Kaqaz/SearchPanel.qml" line="174"/>
         <source>Search keyword</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2153,17 +2158,17 @@ and move them on screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="198"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="199"/>
         <source>Force Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="199"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="201"/>
         <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/SideBarList.qml" line="203"/>
+        <location filename="../qml/Kaqaz/SideBarList.qml" line="205"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
