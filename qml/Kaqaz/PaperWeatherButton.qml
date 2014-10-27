@@ -23,7 +23,11 @@ PaperAbstractButton {
     background: "files/weather/weather-unknown.png"
 
     property string paperWeather: paperItem? database.paperWeather(paperItem) : ""
+    property variant paperDate: paperItem? database.paperCreatedDate(paperItem) : 0
+
     property variant weatherChooser
+
+    property bool night: false
 
     onClicked: {
         if( !weatherChooser )
@@ -31,10 +35,25 @@ PaperAbstractButton {
     }
 
     onRefresh: {
-        background = "files/weather/" + paperWeather + ".png"
+        var pw = paperWeather
+        if( night && (pw == "weather-clear" || pw == "weather-clouds") )
+            pw = pw + "-night"
+
+        background = "files/weather/" + pw + ".png"
     }
 
     onPaperWeatherChanged: refresh()
+    onNightChanged: refresh()
+
+    onPaperDateChanged: {
+        if( !paperDate )
+            return
+
+        if( paperDate.getHours()<12 )
+            night = false
+        else
+            night = true
+    }
 
     Component {
         id: paper_weather_component
@@ -82,8 +101,14 @@ PaperAbstractButton {
                 }
 
                 Component.onCompleted: {
-                    pw_list.model.append( {"iconId": "weather-clear"} )
-                    pw_list.model.append( {"iconId": "weather-clouds"} )
+                    if( night ) {
+                        pw_list.model.append( {"iconId": "weather-clear-night"} )
+                        pw_list.model.append( {"iconId": "weather-clouds-night"} )
+                    } else {
+                        pw_list.model.append( {"iconId": "weather-clear"} )
+                        pw_list.model.append( {"iconId": "weather-clouds"} )
+                    }
+
                     pw_list.model.append( {"iconId": "weather-overcast"} )
                     pw_list.model.append( {"iconId": "weather-showers"} )
                     pw_list.model.append( {"iconId": "weather-storm"} )
