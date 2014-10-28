@@ -205,6 +205,7 @@ Item {
         } else {
             var pnt = mapToItem(to_do,x,y)
             to_do.focusOn(pnt.x,pnt.y)
+            Devices.showKeyboard()
         }
     }
 
