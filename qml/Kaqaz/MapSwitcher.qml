@@ -55,6 +55,13 @@ Item {
             onZoomChanged: msw.zoom = zoom
             onScaleHelperChanged: msw.scaleHelper = scaleHelper
             onCrosshairsChanged: msw.crosshairs = crosshairs
+
+            Component.onCompleted: {
+                view = msw.view
+                zoom = msw.zoom
+                scaleHelper = msw.scaleHelper
+                crosshairs = msw.crosshairs
+            }
         }
     }
 
@@ -68,6 +75,13 @@ Item {
             onZoomChanged: msw.zoom = zoom
             onScaleHelperChanged: msw.scaleHelper = scaleHelper
             onCrosshairsChanged: msw.crosshairs = crosshairs
+
+            Component.onCompleted: {
+                view = msw.view
+                zoom = msw.zoom
+                scaleHelper = msw.scaleHelper
+                crosshairs = msw.crosshairs
+            }
         }
     }
 }

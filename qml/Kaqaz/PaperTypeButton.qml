@@ -24,7 +24,7 @@ PaperAbstractButton {
     id: ptype_btn
     background: "files/paperbuttons/paper-note.png"
 
-    property int paperType: paperItem? database.paperType(paperItem) : Enums.Normal
+    property int paperType: paperItem>0? database.paperType(paperItem) : Enums.Normal
     property variant dateChooser
 
     onClicked: {

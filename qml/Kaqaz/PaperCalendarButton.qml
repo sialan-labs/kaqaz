@@ -23,7 +23,7 @@ PaperAbstractButton {
     id: pcal_btn
     background: "files/paperbuttons/calendar.png"
 
-    property variant paperDate: paperItem? database.paperCreatedDate(paperItem) : 0
+    property variant paperDate: paperItem>0? database.paperCreatedDate(paperItem) : 0
     property variant dateChooser
 
     onClicked: {
@@ -51,7 +51,7 @@ PaperAbstractButton {
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         color: "#333333"
-        font.pixelSize: 24*fontsScale
+        font.pixelSize: 30*physicalPlatformScale
         font.family: SApp.globalFontFamily
         font.bold: true
     }
@@ -62,7 +62,7 @@ PaperAbstractButton {
         anchors.top: parent.top
         anchors.topMargin: 18*physicalPlatformScale
         color: "#ffffff"
-        font.pixelSize: 8*fontsScale
+        font.pixelSize: 11*physicalPlatformScale
         font.family: SApp.globalFontFamily
     }
 
@@ -72,7 +72,7 @@ PaperAbstractButton {
         anchors.top: parent.top
         anchors.topMargin: 30*physicalPlatformScale
         color: "#333333"
-        font.pixelSize: 8*fontsScale
+        font.pixelSize: 11*physicalPlatformScale
         font.family: SApp.globalFontFamily
     }
 
@@ -121,6 +121,7 @@ PaperAbstractButton {
                 timeVisible: false
                 color: "#D9D9D9"
                 textsColor: "#111111"
+                Component.onCompleted: setDate(paperDate)
             }
         }
     }

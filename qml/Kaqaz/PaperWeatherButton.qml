@@ -22,8 +22,8 @@ PaperAbstractButton {
     id: pw_btn
     background: "files/weather/weather-unknown.png"
 
-    property string paperWeather: paperItem? database.paperWeather(paperItem) : ""
-    property variant paperDate: paperItem? database.paperCreatedDate(paperItem) : 0
+    property string paperWeather: paperItem>0? database.paperWeather(paperItem) : ""
+    property variant paperDate: paperItem>0? database.paperCreatedDate(paperItem) : 0
 
     property variant weatherChooser
 
@@ -36,6 +36,8 @@ PaperAbstractButton {
 
     onRefresh: {
         var pw = paperWeather
+        if( pw.length == 0 )
+            pw = "weather-unknown"
         if( night && (pw == "weather-clear" || pw == "weather-clouds") )
             pw = pw + "-night"
 

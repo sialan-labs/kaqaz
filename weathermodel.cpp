@@ -56,6 +56,7 @@
 #include <QUrlQuery>
 #include <QElapsedTimer>
 #include <QLoggingCategory>
+#include <QCoreApplication>
 #include <QtMath>
 
 /*
@@ -222,13 +223,12 @@ WeatherModel::WeatherModel(QObject *parent) :
             this, SLOT(handleForecastNetworkData(QObject*)));
 
     d->nam = new QNetworkAccessManager(this);
+
+    connect(QCoreApplication::instance(), SIGNAL(aboutToQuit()), SLOT(stop()) );
 }
 
 WeatherModel::~WeatherModel()
 {
-    d->ns->close();
-    if (d->src)
-        d->src->stopUpdates();
     delete d;
 }
 
@@ -239,6 +239,7 @@ void WeatherModel::start()
 
     QNetworkConfigurationManager ncm;
     d->ns = new QNetworkSession(ncm.defaultConfiguration(), this);
+
     connect(d->ns, SIGNAL(opened()), this, SLOT(startGps()));
 
     if (d->ns->isOpen())
@@ -318,6 +319,8 @@ void WeatherModel::refreshWeather()
     url.setQuery(query);
 
     QNetworkReply *rep = d->nam->get(QNetworkRequest(url));
+    connect( QCoreApplication::instance(), SIGNAL(aboutToQuit()), rep, SLOT(abort()) );
+
     // connect up the signal right away
     d->weatherReplyMapper->setMapping(rep, rep);
     connect(rep, SIGNAL(finished()),
@@ -376,6 +379,8 @@ void WeatherModel::handleWeatherNetworkData(QObject *replyObj)
     url.setQuery(query);
 
     QNetworkReply *rep = d->nam->get(QNetworkRequest(url));
+    connect( QCoreApplication::instance(), SIGNAL(aboutToQuit()), rep, SLOT(abort()) );
+
     // connect up the signal right away
     d->forecastReplyMapper->setMapping(rep, rep);
     connect(rep, SIGNAL(finished()), d->forecastReplyMapper, SLOT(map()));

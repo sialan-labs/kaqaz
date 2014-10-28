@@ -23,6 +23,8 @@ import QtPositioning 5.0
 PaperAbstractButton {
     background: "files/paperbuttons/map.png"
 
+    property variant paperLocation: paperItem>0? database.paperLocation(paperItem) : 0
+
     onClicked: {
         showBottomPanel(geo_component,true)
     }
@@ -80,7 +82,10 @@ PaperAbstractButton {
                 anchors.bottom: parent.bottom
                 anchors.top: done_btn.bottom
                 anchors.topMargin: 10*physicalPlatformScale
-                Component.onCompleted: crosshairs = true
+                Component.onCompleted: {
+                    view = Qt.point(paperLocation.longitude,paperLocation.latitude)
+                    crosshairs = true
+                }
             }
         }
     }

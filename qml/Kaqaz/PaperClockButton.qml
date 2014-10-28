@@ -23,7 +23,7 @@ PaperAbstractButton {
     id: pclk_btn
     background: "files/paperbuttons/clock.png"
 
-    property variant paperDate: paperItem? database.paperCreatedDate(paperItem) : 0
+    property variant paperDate: paperItem>0? database.paperCreatedDate(paperItem) : 0
     property variant dateChooser
 
     onClicked: {
@@ -133,6 +133,7 @@ PaperAbstractButton {
                 timeVisible: true
                 color: "#D9D9D9"
                 textsColor: "#111111"
+                Component.onCompleted: setDate(paperDate)
             }
         }
     }

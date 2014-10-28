@@ -198,7 +198,6 @@ AnimationItem {
             interactive: !label.pickersPressed && secondInteractive
             onMovementStarted: {
                 label.commitBlocker = true
-                pasteButtonTextObj = 0
                 hideRollerDialog()
             }
             onMovementEnded: {

@@ -200,6 +200,7 @@ Item {
             var pnt = mapToItem(txt,x,y)
             txt.focus = true
             txt.cursorPosition = txt.positionAt(pnt.x,pnt.y)
+            Devices.showKeyboard()
             showPicker()
         } else {
             var pnt = mapToItem(to_do,x,y)

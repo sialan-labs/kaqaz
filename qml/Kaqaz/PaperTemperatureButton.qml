@@ -23,7 +23,7 @@ PaperAbstractButton {
     id: pt_btn
     background: "files/paperbuttons/temperature.png"
 
-    property int paperTemperature: paperItem? database.paperTemperature(paperItem) : 0
+    property int paperTemperature: paperItem>0? database.paperTemperature(paperItem) : 0
     property variant temperatureChooser
 
     onClicked: {

@@ -31,6 +31,11 @@ Rectangle {
     property alias dateLabel: date_text.text
     property alias timeLabel: time_text.text
 
+    QtObject {
+        id: privates
+        property variant date: new Date
+    }
+
     Row {
         id: row
         anchors.top: date_line.bottom
@@ -46,9 +51,11 @@ Rectangle {
             color: dt_chooser.color
             visible: dateVisible
 
-            Component.onCompleted: {
+            Component.onCompleted: refresh()
+
+            function refresh() {
                 var objs = new Array
-                var year = CalendarConv.currentYear
+                var year = CalendarConv.dateYear(privates.date)
                 for( var i = 0; i<200; i++ )
                     objs[i] = i+year-100
 
@@ -67,9 +74,11 @@ Rectangle {
             nameMethodObject: CalendarConv
             nameMethodFunction: "monthName"
 
-            Component.onCompleted: {
+            Component.onCompleted: refresh()
+
+            function refresh() {
                 var objs = new Array
-                var month = CalendarConv.currentMonth
+                var month = CalendarConv.dateMonth(privates.date)
                 for( var i = 0; i<12; i++ )
                     objs[i] = i+1
 
@@ -87,10 +96,18 @@ Rectangle {
             visible: dateVisible
 
             property int daysCount: CalendarConv.daysOfMonth(year_list.currentItem,month_list.currentItem)
-            property int currentDay: CalendarConv.currentDay
 
             onDaysCountChanged: {
                 var objs = new Array
+                for( var i = 0; i<daysCount; i++ )
+                    objs[i] = i+1
+
+                items = objs
+            }
+
+            function refresh() {
+                var objs = new Array
+                var currentDay = CalendarConv.dateDay(privates.date)
                 if( currentDay > daysCount )
                     currentDay = daysCount
 
@@ -118,10 +135,11 @@ Rectangle {
             nameMethodObject: row
             nameMethodFunction: "rightJustify"
 
-            Component.onCompleted: {
+            Component.onCompleted: refresh()
+
+            function refresh() {
                 var objs = new Array
-                var data = new Date()
-                var hour = data.getHours()%12
+                var hour = privates.date.getHours()%12
                 for( var i = 0; i<12; i++ )
                     objs[i] = i
 
@@ -140,10 +158,11 @@ Rectangle {
             nameMethodObject: row
             nameMethodFunction: "rightJustify"
 
-            Component.onCompleted: {
+            Component.onCompleted: refresh()
+
+            function refresh() {
                 var objs = new Array
-                var data = new Date()
-                var minute = data.getMinutes()
+                var minute = privates.date.getMinutes()
                 for( var i = 0; i<60; i++ )
                     objs[i] = i
 
@@ -162,10 +181,11 @@ Rectangle {
             nameMethodObject: clock_list
             nameMethodFunction: "clockType"
 
-            Component.onCompleted: {
+            Component.onCompleted: refresh()
+
+            function refresh() {
                 var objs = new Array
-                var data = new Date()
-                var clock = Math.floor(data.getHours()/12)
+                var clock = Math.floor(privates.date.getHours()/12)
                 for( var i = 0; i<2; i++ )
                     objs[i] = i
 
@@ -179,6 +199,8 @@ Rectangle {
         }
 
         function rightJustify( str ) {
+            if( !str )
+                return ""
             var tempString = str.toString()
             while( tempString.length < 2 )
                 tempString = "0" + tempString
@@ -227,6 +249,19 @@ Rectangle {
         color: dt_chooser.textsColor
         visible: timeVisible
         text: qsTr("Time")
+    }
+
+    function setDate( date ) {
+        if( date == 0 )
+            date = new Date()
+
+        privates.date = date
+        year_list.refresh()
+        month_list.refresh()
+        day_list.refresh()
+        hour_list.refresh()
+        minute_list.refresh()
+        clock_list.refresh()
     }
 
     function getDate() {
