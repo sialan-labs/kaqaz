@@ -24,7 +24,7 @@ Item {
     width: 100
     height: 62
 
-    signal done( string fileName )
+    signal done( string fileName, string fileId )
 
     property string fileId
 

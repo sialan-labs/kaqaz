@@ -97,9 +97,9 @@ SialanQuickView::SialanQuickView(int options, QWindow *parent) :
 
     engine()->rootContext()->setContextProperty("flickVelocity",
 #ifdef DESKTOP_DEVICE
-                                                25000
-#else
                                                 2500
+#else
+                                                25000
 #endif
                                                 );
 }

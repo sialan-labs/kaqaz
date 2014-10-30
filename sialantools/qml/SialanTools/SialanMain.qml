@@ -29,8 +29,7 @@ Rectangle {
     property alias pointerDialog: point_dialog
     property alias tooltip: tool_tip
 
-    property color subMessageBackground: "#44ffffff"
-    property bool subMessageBlur: true
+    property color subMessageBackground: "#66ffffff"
 
     property variant mainFrame
     property SubMessage subMessage
@@ -129,7 +128,6 @@ Rectangle {
         SubMessage {
             id: sub_msg
             backgroundColor: subMessageBackground
-            backBlur: subMessageBlur
         }
     }
 

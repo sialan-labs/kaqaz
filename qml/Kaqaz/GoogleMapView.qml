@@ -30,7 +30,7 @@ Item {
         crosshairs: false
         visible: true
         Component.onCompleted: {
-            var geo = positioning.position.coordinate
+            var geo = position.coordinate
             addLayer(map_layer.layerObject)
             view = Qt.point(geo.longitude,geo.latitude)
             zoom = 15

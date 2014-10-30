@@ -106,7 +106,7 @@ AnimationItem {
 
         database.setPaper( paper_item, txt.text, label.text, group_chooser.group )
         if( paperItem == -1 ) {
-            database.setPaperLocation(paper_item, positioning.position.coordinate)
+            database.setPaperLocation(paper_item, position.coordinate)
             database.setPaperTemperature( paper_item, weather.temperature )
             database.setPaperWeather( paper_item, weather.weatherIcon )
         }
@@ -213,7 +213,7 @@ AnimationItem {
             function ensureVisible(pos)
             {
                 var r = label.positionToRectangle(pos)
-                var hg = paper.height*1/2 - 30*physicalPlatformScale
+                var hg = paper.height - Devices.keyboardHeight - 30*physicalPlatformScale
                 if( label.pickersPressed || label.selectionStart != label.selectionEnd )
                     hg = height
                 if( Devices.isDesktop )

@@ -45,5 +45,9 @@
         <file>qml/SialanTools/files/warning.png</file>
         <file>qml/SialanTools/files/pointer-down.png</file>
         <file>qml/SialanTools/Slider.qml</file>
+        <file>qml/SialanTools/ColorfullListView.qml</file>
+        <file>qml/SialanTools/files/indicator_light.png</file>
+        <file>qml/SialanTools/files/indicator.png</file>
+        <file>qml/SialanTools/SideMenu.qml</file>
     </qresource>
 </RCC>

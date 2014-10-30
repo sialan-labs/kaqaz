@@ -117,6 +117,7 @@ SialanMain {
     WeatherModel {
         id: weather_model
         active: kaqaz.positioning && kaqaz.weatherActive && kaqaz.proBuild
+        geoCoordinate: position.coordinate
     }
 
     PositionSource {
@@ -160,7 +161,8 @@ SialanMain {
     }
 
     function showHideHilightPanel() {
-        showBottomPanel( search_highlights_component, portrait )
+        var component = Qt.createComponent("SearchHideHighlights.qml")
+        showBottomPanel( component, portrait )
     }
 
     function showHistory(){
@@ -191,12 +193,14 @@ SialanMain {
     }
 
     function showHelper(){
-        var item = helper_compoennt.createObject(kaqaz_root);
+        var component = Qt.createComponent("Helper.qml")
+        var item = component.createObject(kaqaz_root);
         return item
     }
 
     function showSplash(){
-        return showSubMessage(start_splash_component)
+        var component = Qt.createComponent("StartSplash.qml")
+        return showSubMessage(component)
     }
 
     function search(){
@@ -267,24 +271,6 @@ SialanMain {
     Component {
         id: paper_cmpnt
         PaperItem {
-        }
-    }
-
-    Component {
-        id: start_splash_component
-        StartSplash {
-        }
-    }
-
-    Component {
-        id: helper_compoennt
-        Helper{
-        }
-    }
-
-    Component {
-        id: search_highlights_component
-        SearchHideHighlights{
         }
     }
 

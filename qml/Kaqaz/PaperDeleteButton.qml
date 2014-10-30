@@ -59,7 +59,9 @@ PaperAbstractButton {
                 textFont.bold: false
                 text: qsTr("Delete It")
                 onClicked: {
+                    paperObject.deleteRequest()
                     hideBottomPanel()
+                    hideSubMessage()
                 }
             }
 

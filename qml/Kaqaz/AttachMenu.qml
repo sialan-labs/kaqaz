@@ -88,7 +88,12 @@ Item {
         repeat: false
         interval: 500
         onTriggered: {
-            var item = attach_viewer_component.createObject(gallery_frame);
+            var component = Qt.createComponent("AttachViewer.qml")
+            var item = component.createObject(gallery_frame);
+            item.paperItem = attach_menu.paperItem
+            item.paper = attach_menu.paper
+            item.editRequest.connect(attach_menu.showCanvas)
+
             gallery_frame.item = item
         }
     }
@@ -146,7 +151,9 @@ Item {
                     attach_menu.selected(id)
                 }
             } else {
-                var item = attach_insert_component.createObject(main);
+                var component = Qt.createComponent("AttachInsertDialog.qml")
+                var item = component.createObject(main);
+                item.selected.connect(attach_menu.selected)
                 main.pushPreference(item)
             }
         }
@@ -171,7 +178,9 @@ Item {
         border.width: 1*physicalPlatformScale
         border.color: "#ffffff"
         onClicked: {
-            var item = canvas_component.createObject(main);
+            var component = Qt.createComponent("KaqazCanvas.qml")
+            var item = component.createObject(main);
+            item.done.connect(attach_menu.canvasDone)
             main.showDialog(item)
         }
     }
@@ -237,51 +246,6 @@ Item {
         property real root_y: 0
     }
 
-    Component {
-        id: attach_insert_component
-        AttachInsertDialog {
-            onSelected: attach_menu.selected(repID)
-        }
-    }
-
-    Component {
-        id: canvas_component
-        KaqazCanvas {
-            onDone: {
-                if( fileId.length == 0 ) {
-                    var id = repository.insert( fileName )
-                    attach_menu.selected(id)
-                } else {
-                    var newFileId = repository.insert( fileName )
-                    var filePath  = repository.getPath(fileId)
-
-                    var date = database.fileTime(paperItem,fileId)
-                    database.removeFileFromPaper(paperItem,fileId)
-                    database.addCustomFileToPaper(paperItem,newFileId,date)
-
-                    if( gallery_frame.item ){
-                        gallery_frame.item.paperItem = -1
-                        gallery_frame.item.paperItem = paperItem
-                    }
-                }
-            }
-        }
-    }
-
-    Component {
-        id: attach_viewer_component
-        AttachViewer {
-            paperItem: attach_menu.paperItem
-            paper: attach_menu.paper
-            onEditRequest: {
-                var item = canvas_component.createObject(main)
-                item.fileId = fid
-
-                main.showDialog(item)
-            }
-        }
-    }
-
     function selected( id ){
         if( paperItem == -1 )
             paper.save()
@@ -300,6 +264,34 @@ Item {
         if( gallery_frame.item ){
             gallery_frame.item.paperItem = -1
             gallery_frame.item.paperItem = paperItem
+        }
+    }
+
+    function showCanvas( fid ) {
+        var component = Qt.createComponent("KaqazCanvas.qml")
+        var item = component.createObject(main)
+        item.done.connect(attach_menu.canvasDone)
+        item.fileId = fid
+
+        main.showDialog(item)
+    }
+
+    function canvasDone( fileName, fileId ) {
+        if( fileId.length == 0 ) {
+            var id = repository.insert( fileName )
+            attach_menu.selected(id)
+        } else {
+            var newFileId = repository.insert( fileName )
+            var filePath  = repository.getPath(fileId)
+
+            var date = database.fileTime(paperItem,fileId)
+            database.removeFileFromPaper(paperItem,fileId)
+            database.addCustomFileToPaper(paperItem,newFileId,date)
+
+            if( gallery_frame.item ){
+                gallery_frame.item.paperItem = -1
+                gallery_frame.item.paperItem = paperItem
+            }
         }
     }
 

@@ -139,11 +139,9 @@ class WeatherModelPrivate
 {
 public:
     static const int baseMsBeforeNewRequest = 5 * 1000; // 5 s, increased after each missing answer up to 10x
-    QGeoPositionInfoSource *src;
     QGeoCoordinate coord;
     QString longitude, latitude;
     QNetworkAccessManager *nam;
-    QNetworkSession *ns;
     WeatherData now;
     QList<WeatherData*> forecast;
     QQmlListProperty<WeatherData> *fcProp;
@@ -153,11 +151,10 @@ public:
     int nErrors;
     int minMsBeforeNewRequest;
     QHash<QString,QString> weather_icons;
+    QSet<QNetworkReply*> replies;
 
     WeatherModelPrivate() :
-            src(NULL),
             nam(NULL),
-            ns(NULL),
             fcProp(NULL),
             ready(false),
             nErrors(0),
@@ -222,8 +219,6 @@ WeatherModel::WeatherModel(QObject *parent) :
     connect(d->forecastReplyMapper, SIGNAL(mapped(QObject*)),
             this, SLOT(handleForecastNetworkData(QObject*)));
 
-    d->nam = new QNetworkAccessManager(this);
-
     connect(QCoreApplication::instance(), SIGNAL(aboutToQuit()), SLOT(stop()) );
 }
 
@@ -234,64 +229,30 @@ WeatherModel::~WeatherModel()
 
 void WeatherModel::start()
 {
-    if( d->ns )
+    if( d->nam )
         return;
 
-    QNetworkConfigurationManager ncm;
-    d->ns = new QNetworkSession(ncm.defaultConfiguration(), this);
-
-    connect(d->ns, SIGNAL(opened()), this, SLOT(startGps()));
-
-    if (d->ns->isOpen())
-        startGps();
-
-    d->ns->open();
+    d->nam = new QNetworkAccessManager(this);
     emit activeChanged();
 }
 
 void WeatherModel::stop()
 {
-    if( d->ns )
+    foreach( QNetworkReply *rply, d->replies )
     {
-        d->ns->close();
-        d->ns->deleteLater();
-        d->ns = 0;
+        rply->abort();
+        rply->close();
+        delete rply;
     }
-    if( d->src )
+
+    d->replies.clear();
+    if( d->nam )
     {
-        d->src->stopUpdates();
-        d->src->deleteLater();
-        d->src = 0;
+        delete d->nam;
+        d->nam = 0;
     }
 
     emit activeChanged();
-}
-
-void WeatherModel::startGps()
-{
-    if( d->src )
-        return;
-
-    d->src = QGeoPositionInfoSource::createDefaultSource(this);
-
-    connect(d->src, SIGNAL(positionUpdated(QGeoPositionInfo)),
-            this, SLOT(positionUpdated(QGeoPositionInfo)));
-    connect(d->src, SIGNAL(error(QGeoPositionInfoSource::Error)),
-            this, SLOT(positionError(QGeoPositionInfoSource::Error)));
-
-    d->src->startUpdates();
-}
-
-void WeatherModel::positionUpdated(QGeoPositionInfo gpsPos)
-{
-    d->coord = gpsPos.coordinate();
-    refreshWeather();
-}
-
-void WeatherModel::positionError(QGeoPositionInfoSource::Error e)
-{
-    Q_UNUSED(e);
-    qWarning() << "Position source error.";
 }
 
 void WeatherModel::hadError(bool tryAgain)
@@ -303,8 +264,28 @@ void WeatherModel::hadError(bool tryAgain)
     d->minMsBeforeNewRequest = (d->nErrors + 1) * d->baseMsBeforeNewRequest;
 }
 
+void WeatherModel::setGeoCoordinate(const QGeoCoordinate &coo)
+{
+    if( coo == d->coord )
+        return;
+
+    d->coord = coo;
+    emit geoCoordinateChanged();
+    refreshWeather();
+}
+
+QGeoCoordinate WeatherModel::geoCoordinate() const
+{
+    return d->coord;
+}
+
 void WeatherModel::refreshWeather()
 {
+    if( !d->nam )
+        return;
+    if( !d->coord.isValid() )
+        return;
+
     QString latitude, longitude;
     longitude.setNum( qFloor(d->coord.longitude()*10)/10.0 );
     latitude.setNum( qFloor(d->coord.latitude()*10)/10.0 );
@@ -319,7 +300,7 @@ void WeatherModel::refreshWeather()
     url.setQuery(query);
 
     QNetworkReply *rep = d->nam->get(QNetworkRequest(url));
-    connect( QCoreApplication::instance(), SIGNAL(aboutToQuit()), rep, SLOT(abort()) );
+    d->replies.insert(rep);
 
     // connect up the signal right away
     d->weatherReplyMapper->setMapping(rep, rep);
@@ -329,6 +310,9 @@ void WeatherModel::refreshWeather()
 
 void WeatherModel::handleWeatherNetworkData(QObject *replyObj)
 {
+    if( !d->nam )
+        return;
+
     qCDebug(requestsLog) << "got weather network data";
     QNetworkReply *networkReply = qobject_cast<QNetworkReply*>(replyObj);
     if (!networkReply)
@@ -362,7 +346,8 @@ void WeatherModel::handleWeatherNetworkData(QObject *replyObj)
             }
         }
     }
-    networkReply->deleteLater();
+    delete networkReply;
+    d->replies.remove(networkReply);
 
     QString latitude, longitude;
     longitude.setNum( qFloor(d->coord.longitude()*10)/10.0 );
@@ -379,7 +364,7 @@ void WeatherModel::handleWeatherNetworkData(QObject *replyObj)
     url.setQuery(query);
 
     QNetworkReply *rep = d->nam->get(QNetworkRequest(url));
-    connect( QCoreApplication::instance(), SIGNAL(aboutToQuit()), rep, SLOT(abort()) );
+    d->replies.insert(rep);
 
     // connect up the signal right away
     d->forecastReplyMapper->setMapping(rep, rep);
@@ -444,7 +429,8 @@ void WeatherModel::handleForecastNetworkData(QObject *replyObj)
 
         emit weatherChanged();
     }
-    networkReply->deleteLater();
+    delete networkReply;
+    d->replies.remove(networkReply);
 }
 
 WeatherData *WeatherModel::weather() const
@@ -462,14 +448,9 @@ bool WeatherModel::ready() const
     return d->ready;
 }
 
-bool WeatherModel::hasSource() const
-{
-    return (d->src != NULL);
-}
-
 bool WeatherModel::active() const
 {
-    return d->ns;
+    return d->nam;
 }
 
 void WeatherModel::setActive(bool stt)

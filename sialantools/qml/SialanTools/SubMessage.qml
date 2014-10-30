@@ -28,7 +28,6 @@ Item {
     property variant item
     property alias source: blur.source
     property alias backgroundColor: backgroud.color
-    property alias backBlur: desaturate.visible
 
     Behavior on opacity {
         NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
@@ -60,15 +59,6 @@ Item {
         anchors.fill: parent
         radius: 64
         cached: true
-        visible: false
-    }
-
-    Desaturate {
-        id: desaturate
-        anchors.fill: parent
-        source: blur
-        cached: true
-        desaturation: 0.7
     }
 
     Rectangle {

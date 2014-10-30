@@ -300,7 +300,7 @@ bool Kaqaz::start()
 #ifdef QT_DEBUG
                             SialanQuickView::AllExceptLogger
 #else
-                            SialanQuickView::AllComponents
+                            SialanQuickView::AllExceptLogger
 #endif
                     );
         p->viewer->installEventFilter(this);

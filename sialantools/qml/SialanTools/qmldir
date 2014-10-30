@@ -33,3 +33,5 @@ CradleBits 1.0 CradleBits.qml
 CradleIndicator 1.0 CradleIndicator.qml
 PasteButton 1.0 PasteButton.qml
 Slider 1.0 Slider.qml
+ColorfullListView 1.0 ColorfullListView.qml
+SideMenu 1.0 SideMenu.qml

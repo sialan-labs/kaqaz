@@ -86,9 +86,9 @@ class WeatherModel : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool ready READ ready NOTIFY readyChanged)
-    Q_PROPERTY(bool hasSource READ hasSource NOTIFY readyChanged)
     Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
     Q_PROPERTY(WeatherData *weather READ weather NOTIFY weatherChanged)
+    Q_PROPERTY(QGeoCoordinate geoCoordinate READ geoCoordinate WRITE setGeoCoordinate NOTIFY geoCoordinateChanged)
     Q_PROPERTY(QQmlListProperty<WeatherData> forecast READ forecast NOTIFY weatherChanged)
 
 public:
@@ -96,12 +96,14 @@ public:
     ~WeatherModel();
 
     bool ready() const;
-    bool hasSource() const;
 
     bool active() const;
     void setActive( bool stt );
 
     void hadError(bool tryAgain);
+
+    void setGeoCoordinate( const QGeoCoordinate & coo );
+    QGeoCoordinate geoCoordinate() const;
 
     WeatherData *weather() const;
     QQmlListProperty<WeatherData> forecast() const;
@@ -113,9 +115,6 @@ public slots:
     void stop();
 
 private slots:
-    void startGps();
-    void positionUpdated(QGeoPositionInfo gpsPos);
-    void positionError(QGeoPositionInfoSource::Error e);
     // these would have QNetworkReply* params but for the signalmapper
     void handleWeatherNetworkData(QObject *networkReply);
     void handleForecastNetworkData(QObject *networkReply);
@@ -124,6 +123,7 @@ signals:
     void readyChanged();
     void weatherChanged();
     void activeChanged();
+    void geoCoordinateChanged();
 
 private:
     WeatherModelPrivate *d;

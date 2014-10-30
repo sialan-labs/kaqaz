@@ -20,6 +20,7 @@
 #define SIALANDEVICES_H
 
 #include <QObject>
+#include <QSize>
 
 class QScreen;
 class SialanDevicesPrivate;
@@ -47,6 +48,9 @@ class SialanDevices : public QObject
     Q_PROPERTY(qreal lcdPhysicalHeight READ lcdPhysicalHeight NOTIFY lcdPhysicalHeightChanged )
     Q_PROPERTY(qreal lcdDpiX           READ lcdDpiX           NOTIFY lcdDpiXChanged           )
     Q_PROPERTY(qreal lcdDpiY           READ lcdDpiY           NOTIFY lcdDpiYChanged           )
+
+    Q_PROPERTY(QSize screenSize        READ screenSize        NOTIFY geometryChanged          )
+    Q_PROPERTY(qreal keyboardHeight    READ keyboardHeight    NOTIFY geometryChanged          )
 
     Q_PROPERTY(int   densityDpi  READ densityDpi  NOTIFY densityDpiChanged  )
     Q_PROPERTY(qreal density     READ density     NOTIFY densityChanged     )
@@ -90,6 +94,9 @@ public:
     qreal lcdPhysicalHeight() const;
     qreal lcdDpiX() const;
     qreal lcdDpiY() const;
+
+    QSize screenSize() const;
+    qreal keyboardHeight() const;
 
     int densityDpi() const;
     qreal density() const;
@@ -146,6 +153,8 @@ signals:
 
     void lcdDpiXChanged();
     void lcdDpiYChanged();
+
+    void geometryChanged();
 
     void transparentStatusBarChanged();
     void transparentNavigationBarChanged();
