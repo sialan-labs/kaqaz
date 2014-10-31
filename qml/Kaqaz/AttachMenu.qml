@@ -24,7 +24,7 @@ Item {
     width: 100
     height: opened? (kaqaz_root.width>minimumHeight? minimumHeight : kaqaz_root.width) : toggle_btn.height + 10 +20*physicalPlatformScale
 
-    property real minimumHeight: kaqaz_root.height - 50*physicalPlatformScale
+    property real minimumHeight: kaqaz_root.height - 50*physicalPlatformScale - View.navigationBarHeight - View.statusBarHeight
 
     property bool opened: false
     property int paperItem

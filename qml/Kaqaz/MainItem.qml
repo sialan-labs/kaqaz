@@ -176,8 +176,11 @@ Rectangle {
     }
 
     Item {
+        id: mirror_back
         anchors.top: parent.top
         anchors.bottom: main_page.bottom
+        anchors.topMargin: -View.statusBarHeight
+        anchors.bottomMargin: -View.navigationBarHeight
         width: list.width
         x: main_item.parent.x + main_item.width - width
         clip: true
@@ -191,11 +194,22 @@ Rectangle {
     }
 
     Rectangle {
-        anchors.right: main_page.right
+        anchors.right: mirror_back.right
         anchors.bottom: main_page.top
         width: list.width
-        height: panel_frame.height
-        visible: !portrait
+        height: 200*physicalPlatformScale
+        visible: !portrait && preferenceArray.length==0
+        color: list.color
+        clip: true
+    }
+
+    Rectangle {
+        anchors.right: mirror_back.right
+        anchors.top: main_page.bottom
+        anchors.bottom: main_page.bottom
+        anchors.bottomMargin: -View.navigationBarHeight
+        width: list.width
+        visible: !portrait && preferenceArray.length==0
         color: list.color
         clip: true
     }
@@ -277,31 +291,40 @@ Rectangle {
                 }
             }
 
-            PaperStackSwitcher{
-                id: stack_switcher
-                width: portrait? parent.width - platformMargins : parent.width - platformMargins -platformMargins/2 - list.width - 10*physicalPlatformScale
-                height: parent.height - platformMargins
-                y: platformMargins/2
+            Item {
+                id: stack_switcher_frame
+                width: portrait? parent.width : parent.width - list.width
+                height: parent.height + View.statusBarHeight + View.navigationBarHeight
+                y: -View.statusBarHeight
                 anchors.right: portrait? panel.left : list.left
-                anchors.rightMargin: portrait? -15 + platformMargins/2 : 0
-                clip: !portrait
+                anchors.rightMargin: portrait? -15 : 0
+                clip: true
 
-                DropArea {
+                PaperStackSwitcher{
+                    id: stack_switcher
                     anchors.fill: parent
-                    visible: Devices.isDesktop
-                    onDropped: {
-                        if( drop.hasUrls ) {
-                            var urls = drop.urls
-                            for( var i=0; i<urls.length; i++ )
-                                stack_switcher.currentFrame.item.currentPaper.addFile(urls[i])
-                        }
-                        else
-                        if( drop.hasText )
-                            stack_switcher.currentFrame.item.currentPaper.bodyText += "\n" + drop.text
-                    }
-                }
+                    anchors.bottomMargin: View.navigationBarHeight + platformMargins/2
+                    anchors.topMargin: View.statusBarHeight + platformMargins/2
+                    anchors.leftMargin: platformMargins/2
+                    anchors.rightMargin: platformMargins/2
 
-                property real platformMargins: Devices.isMobile? -15 + 5*physicalPlatformScale : -15 + 5*physicalPlatformScale
+                    DropArea {
+                        anchors.fill: parent
+                        visible: Devices.isDesktop
+                        onDropped: {
+                            if( drop.hasUrls ) {
+                                var urls = drop.urls
+                                for( var i=0; i<urls.length; i++ )
+                                    stack_switcher.currentFrame.item.currentPaper.addFile(urls[i])
+                            }
+                            else
+                            if( drop.hasText )
+                                stack_switcher.currentFrame.item.currentPaper.bodyText += "\n" + drop.text
+                        }
+                    }
+
+                    property real platformMargins: Devices.isMobile? -15 + 5*physicalPlatformScale : -15 + 5*physicalPlatformScale
+                }
             }
 
             SideBar{

@@ -30,6 +30,7 @@ Rectangle {
     property alias tooltip: tool_tip
 
     property color subMessageBackground: "#66ffffff"
+    property bool subMessageBlur: true
 
     property variant mainFrame
     property SubMessage subMessage
@@ -128,6 +129,7 @@ Rectangle {
         SubMessage {
             id: sub_msg
             backgroundColor: subMessageBackground
+            blurBack: subMessageBlur
         }
     }
 

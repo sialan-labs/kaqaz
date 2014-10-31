@@ -28,6 +28,7 @@ Item {
     property variant item
     property alias source: blur.source
     property alias backgroundColor: backgroud.color
+    property alias blurBack: blur.visible
 
     Behavior on opacity {
         NumberAnimation{ easing.type: Easing.OutCubic; duration: 400 }
