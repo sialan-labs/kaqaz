@@ -19,10 +19,13 @@
 import QtQuick 2.0
 
 TextEdit {
+    id: textedit
+
     onFocusChanged: {
-        if(focus)
-            Devices.showKeyboard()
+        if( focus )
+            View.focusedText = textedit
         else
-            Devices.hideKeyboard()
+        if( View.focusedText == textedit )
+            View.focusedText = 0
     }
 }

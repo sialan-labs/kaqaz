@@ -37,6 +37,7 @@
 #endif
 
 #include <QPointer>
+#include <QSharedPointer>
 #include <QtQml>
 #include <QQmlEngine>
 #include <QQmlContext>
@@ -58,6 +59,7 @@ public:
     SialanBackHandler *back_handler;
 
     QPointer<QQuickItem> root;
+    QPointer<QQuickItem> focused_text;
 
     bool fullscreen;
 };
@@ -194,6 +196,34 @@ QQuickItem *SialanQuickView::root() const
         return p->root;
 
     return rootObject();
+}
+
+void SialanQuickView::setFocusedText(QQuickItem *item)
+{
+    if( p->focused_text == item )
+        return;
+    if( p->focused_text )
+        disconnect( item, SIGNAL(destroyed()), this, SIGNAL(focusedTextChanged()) );
+
+    p->focused_text = item;
+    if( item )
+    {
+        connect( item, SIGNAL(destroyed()), this, SIGNAL(focusedTextChanged()) );
+        if( p->devices )
+            p->devices->showKeyboard();
+    }
+    else
+    {
+        if( p->devices )
+            p->devices->hideKeyboard();
+    }
+
+    emit focusedTextChanged();
+}
+
+QQuickItem *SialanQuickView::focusedText() const
+{
+    return p->focused_text;
 }
 
 void SialanQuickView::init_options()

@@ -19,10 +19,13 @@
 import QtQuick 2.0
 
 TextInput {
+    id: textinput
+
     onFocusChanged: {
-        if(focus)
-            Devices.showKeyboard()
+        if( focus )
+            View.focusedText = textinput
         else
-            Devices.hideKeyboard()
+        if( View.focusedText == textinput )
+            View.focusedText = 0
     }
 }
