@@ -215,6 +215,7 @@ Kaqaz::Kaqaz(QObject *parent) :
     qmlRegisterType<WeatherData>("Kaqaz", 1, 0, "WeatherData");
     qmlRegisterType<WeatherModel>("Kaqaz", 1, 0, "WeatherModel");
     qmlRegisterUncreatableType<Kaqaz>("Kaqaz", 1,0, "Kaqaz","");
+    qmlRegisterUncreatableType<Database>("Kaqaz", 1,0, "Database","");
 
     qRegisterMetaType<WeatherData>("WeatherData");
 }

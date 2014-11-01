@@ -54,6 +54,7 @@ Item {
             if( !ok ) {
                 var passItem = getPass(restore_wait)
                 passItem.getPassOnly = true
+                passItem.inputMethodHints = Qt.ImhNone
                 passItem.allowBack = true
                 passItem.passGiven.connect(restore_wait.passGiven)
             }

@@ -50,4 +50,16 @@ Rectangle {
         verticalAlignment: Text.AlignVCenter
         onAccepted: line_edit_frame.accepted()
     }
+
+    function paste() {
+        main_item.paste()
+    }
+
+    function copy() {
+        main_item.copy()
+    }
+
+    function cut() {
+        main_item.cut()
+    }
 }

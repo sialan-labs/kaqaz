@@ -28,8 +28,8 @@ SialanMain {
     height: Devices.isTouchDevice? 0 : kaqaz.size.height
     mainFrame: main_frame
     panelWidth: main.panelWidth
-    subMessageBlur: false
-    subMessageBackground: "#e5ffffff"
+    subMessageBlur: Devices.isDesktop
+    subMessageBackground: Devices.isDesktop? "#66ffffff" : "#e5ffffff"
 
     property real fixedHeight: height-View.statusBarHeight-View.navigationBarHeight
 
@@ -267,6 +267,7 @@ SialanMain {
         id: get_pass_cmpnt
         GetPassDialog {
             password: database.password()
+            inputMethodHints: database.passwordType()==0? Qt.ImhDigitsOnly : Qt.ImhNone
         }
     }
 

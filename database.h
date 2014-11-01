@@ -36,7 +36,14 @@ class DatabasePrivate;
 class Database : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(PasswordType)
+
 public:
+    enum PasswordType {
+        Numeric    = 0,
+        Characters = 1
+    };
+
     Database(QObject *parent = 0);
     ~Database();
 
@@ -122,8 +129,9 @@ public:
 
     Q_INVOKABLE QList<int> activities();
 
+    Q_INVOKABLE int passwordType();
     Q_INVOKABLE QString password();
-    Q_INVOKABLE void setPassword( const QString & pass );
+    Q_INVOKABLE void setPassword(const QString & pass, int type = Numeric );
 
     Q_INVOKABLE QString syncPassword();
     Q_INVOKABLE void setSyncPassword( const QString & pass );

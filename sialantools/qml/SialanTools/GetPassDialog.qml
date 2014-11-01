@@ -28,6 +28,7 @@ Item {
     property string password
     property bool getPassOnly: false
     property alias allowBack: title.visible
+    property alias inputMethodHints: pass.inputMethodHints
 
     property variant backBlur
     property variant parentItem
@@ -155,6 +156,23 @@ Item {
                 echoMode: TextInput.Password
                 inputMethodHints: Qt.ImhDigitsOnly
                 onAccepted: get_pass.done()
+            }
+
+            Button {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.margins: 4*physicalPlatformScale
+                height: 32*physicalPlatformScale
+                radius: 2*physicalPlatformScale
+                textFont.bold: false
+                normalColor: "#888888"
+                highlightColor: "#444444"
+                textColor: "#ffffff"
+                text: qsTr("Paste")
+                onClicked: {
+                    pass.text = ""
+                    pass.paste()
+                }
             }
         }
 

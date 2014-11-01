@@ -1039,14 +1039,20 @@ QList<int> Database::activities()
     return p->activities.keys();
 }
 
+int Database::passwordType()
+{
+    return value("passType").toInt();
+}
+
 QString Database::password()
 {
     return value("password");
 }
 
-void Database::setPassword(const QString &pass)
+void Database::setPassword(const QString &pass, int type)
 {
     setValue("password",pass);
+    setValue("passType",QString::number(type));
 }
 
 QString Database::syncPassword()

@@ -90,6 +90,7 @@ Item {
             anchors.top: column.bottom
             anchors.bottom: btn.top
             anchors.left: parent.left
+            light: false
             anchors.right: parent.right
             indicatorSize: 22*physicalPlatformScale
             Component.onCompleted: indicator.start()
@@ -117,6 +118,23 @@ Item {
             placeholder: qsTr("Password (optional and unchangable)")
             onTextChanged: password_repeat.text = ""
             onAccepted: password_repeat.lineFocus = true
+
+            Button {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.margins: 4*physicalPlatformScale
+                height: 32*physicalPlatformScale
+                radius: 2*physicalPlatformScale
+                textFont.bold: false
+                normalColor: "#888888"
+                highlightColor: "#444444"
+                textColor: "#ffffff"
+                text: qsTr("Paste")
+                onClicked: {
+                    password_line.text = ""
+                    password_line.paste()
+                }
+            }
         }
 
         LineEdit {
@@ -136,6 +154,23 @@ Item {
                 } else {
                     password_repeat.border.width = 1*physicalPlatformScale
                     password_repeat.border.color = "#aaff0000"
+                }
+            }
+
+            Button {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.margins: 4*physicalPlatformScale
+                height: 32*physicalPlatformScale
+                radius: 2*physicalPlatformScale
+                textFont.bold: false
+                normalColor: "#888888"
+                highlightColor: "#444444"
+                textColor: "#ffffff"
+                text: qsTr("Paste")
+                onClicked: {
+                    password_repeat.text = ""
+                    password_repeat.paste()
                 }
             }
         }
