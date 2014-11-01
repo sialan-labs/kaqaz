@@ -198,6 +198,7 @@ AnimationItem {
             interactive: !label.pickersPressed && secondInteractive
             onMovementStarted: {
                 label.commitBlocker = true
+                pasteButton.textItem = 0
                 hideRollerDialog()
             }
             onMovementEnded: {
@@ -397,8 +398,9 @@ AnimationItem {
                 if( Math.abs(last_x-mouseX) > 10*physicalPlatformScale && !move_paper_x )
                 {
                     Devices.hideKeyboard()
-                    graphic_timer.stop()
+                    press_is_click = false
                     move_paper_x = true
+                    pasteButton.textItem = 0
                 }
                 if( !move_paper_x )
                     return
@@ -446,10 +448,8 @@ AnimationItem {
                 if( mousearea.parent != label_flickable || !Devices.keyboard )
                     paper.focus = true
 
-                graphic_timer.x = mouseX - graphic_timer.width/2 -10*physicalPlatformScale
-                graphic_timer.y = mouseY - graphic_timer.height/2 -10*physicalPlatformScale
                 if( paper.x == 0 )
-                    graphic_timer.start()
+                    press_is_click = true
 
             }
 
@@ -499,7 +499,7 @@ AnimationItem {
                     }
                 }
                 else
-                if( graphic_timer.running || move_paper_y )
+                if( press_is_click || move_paper_y )
                 {
                     if( !label_flickable.dragging )
                         label.focusOn( label.mapFromItem(mousearea,mouseX,mouseY).x, label.mapFromItem(mousearea,mouseX,mouseY).y )
@@ -508,26 +508,14 @@ AnimationItem {
                     Devices.hideKeyboard()
 
                 move_paper_x = false
-                graphic_timer.stop()
-            }
-
-            GraphicTimer{
-                id: graphic_timer
-                width: 140*physicalPlatformScale
-                height: 140*physicalPlatformScale
-                delayStart: 100
-                interval: 1200
-                onDone: {
-                    label.selectWord( label.mapFromItem(mousearea,mousearea.mouseX,mousearea.mouseY).x, label.mapFromItem(mousearea,mousearea.mouseX,mousearea.mouseY).y )
-
-                }
+                press_is_click = false
             }
 
             Connections {
                 target: label_flickable
                 onContentYChanged: {
                     mousearea.move_paper_y = true
-                    graphic_timer.stop()
+                    press_is_click = false
                 }
             }
 
@@ -547,6 +535,7 @@ AnimationItem {
             property real mouse_pin_y: 0
 
             property bool pressedValve: false
+            property bool press_is_click: false
         }
     }
 
