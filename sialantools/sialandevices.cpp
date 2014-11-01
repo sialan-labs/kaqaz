@@ -245,10 +245,23 @@ QSize SialanDevices::screenSize() const
 
 qreal SialanDevices::keyboardHeight() const
 {
-    if( isMobile() )
-        return screenSize().height()*3/5;
+    const QSize & scr_size = screenSize();
+    bool portrait = scr_size.width()<scr_size.height();
+
+    if( portrait )
+    {
+        if( isMobile() )
+            return screenSize().height()*0.6;
+        else
+            return screenSize().height()*0.4;
+    }
     else
-        return screenSize().height()*2/5;
+    {
+        if( isMobile() )
+            return screenSize().height()*0.7;
+        else
+            return screenSize().height()*0.5;
+    }
 }
 
 bool SialanDevices::transparentStatusBar() const
