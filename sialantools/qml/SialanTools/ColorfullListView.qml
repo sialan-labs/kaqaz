@@ -28,6 +28,7 @@ Item {
     property color titleBarDefaultColor: "#0d80ec"
     property color titleBarDefaultTextColor: "#ffffff"
     property alias titleBarFont: title_txt.font
+    property alias titleBarColor: titlebar.color
 
     property real headersHeight: 50*physicalPlatformScale
     property real topMargin: 30*physicalPlatformScale
@@ -37,6 +38,9 @@ Item {
     property real contentY: listv.contentY
 
     property alias model: listv.model
+    property alias count: listv.count
+    property alias atBegin: listv.atYBeginning
+    property alias atEnd: listv.atYEnd
 
     property Component delegate
     property Component header
@@ -56,24 +60,45 @@ Item {
         onWidthChanged: refresh()
 
         function refresh() {
-            var item = listv.itemAt(width/2,contentY+headerColorDomain+1)
+            var header_extra_area = 100*physicalPlatformScale
+
+            var item = listv.itemAt(width/2,contentY+headerColorDomain+1+header_extra_area)
             if( !item ) {
                 titlebar.color = titleBarDefaultColor
                 title_txt_frame.y = titleBarHeight
                 title_txt_frame.opacity = 0
                 return
             }
+            if( !item.itemIsHeader ) {
+                return
+            }
 
             var currentItemIndex = item.itemIndex
-            color0 = currentItemIndex==0? titleBarDefaultColor : listv.model.get(currentItemIndex-1).color
-            color1 = item.itemColor
+
+            var prevItem
+            for( var i=currentItemIndex-1; i>=0; i-- )
+                if( listv.model.get(i).isHeader ) {
+                    prevItem = listv.model.get(i)
+                    break
+                }
+
+            var crntItem
+            for( var i=currentItemIndex; i<model.count; i++ )
+                if( listv.model.get(i).isHeader ) {
+                    crntItem = listv.model.get(i)
+                    break
+                }
+
+            color0 = prevItem? prevItem.color : titleBarDefaultColor
+            color1 = crntItem? crntItem.color : titleBarDefaultColor
 
             var itemY = item.y - contentY - headerColorDomain
 
-            var itemH_ratio = Math.abs(itemY)/item.height
             var itemY_ratio = (itemY + headerColorHeight)/headerColorHeight
             if( itemY_ratio < 0 )
                 itemY_ratio = 0
+            if( itemY_ratio > 1 )
+                itemY_ratio = 1
 
             var red = color0.r*itemY_ratio + color1.r*(1-itemY_ratio)
             var grn = color0.g*itemY_ratio + color1.g*(1-itemY_ratio)
@@ -82,17 +107,28 @@ Item {
             titlebar.color = Qt.rgba(red, grn, blu, 1)
 
             var title_new_y = titlebar.height + item.y-contentY
-            if( title_new_y < titlebar.height - title_txt_frame.height )
-                title_new_y = titlebar.height - title_txt_frame.height
+            var title_new_opacity = (title_new_y-headerColorHeight)/header_extra_area
 
-            var title_new_opacity = (5-itemH_ratio*10)/5 + 1
+            var title_new_txt = crntItem.title
+            if( title_new_y < titlebar.height - title_txt_frame.height ) {
+                title_new_y = titlebar.height - title_txt_frame.height
+            }
+            else
+            if( title_new_y > headerColorHeight ) {
+                title_new_y = titlebar.height - title_txt_frame.height
+                if( prevItem )
+                    title_new_txt = prevItem.title
+                else
+                    title_new_opacity = 0
+            }
+
             if( title_new_opacity < 0 )
-                title_new_opacity = 0
+                title_new_opacity = 1
 
             title_txt_frame.y = title_new_y
             title_txt_frame.width = item.width
             title_txt_frame.opacity = title_new_opacity
-            title_txt.text = item.itemTitle
+            title_txt.text = title_new_txt
         }
 
         header: Item {
@@ -112,21 +148,23 @@ Item {
 
         delegate: Item {
             id: item
-            width: itemObj? itemObj.width : listv.width
-            height: itemObj? itemObj.height + headersHeight : headersHeight
+            width: listv.width
+            height: itemObj? itemObj.height + itemIsHeader*headersHeight : headersHeight
             x: itemObj? itemObj.x : 0
 
             property int itemIndex: index
             property variant itemObj
             property color itemColor: color? color : "#333333"
             property string itemTitle: title
+            property bool itemIsHeader: isHeader
 
             Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: parent.top
                 color: item.itemColor
-                height: headersHeight
+                height: headersHeight*itemIsHeader
+                visible: itemIsHeader
 
                 Text {
                     anchors.centerIn: parent
@@ -137,9 +175,14 @@ Item {
             }
 
             Component.onCompleted: {
-                itemObj = cf_listv.delegate.createObject(item)
+                itemObj = cf_listv.delegate.createObject(item, {"y": headersHeight*itemIsHeader, "title": title, "color": color, "isHeader": isHeader})
             }
         }
+    }
+
+    ScrollBar {
+        scrollArea: listv; height: listv.height; width: 6*physicalPlatformScale
+        anchors.right: listv.right; anchors.top: listv.top; color: "#000000"
     }
 
     Rectangle {
@@ -162,6 +205,7 @@ Item {
                 id: title_txt
                 anchors.centerIn: parent
                 color: titleBarDefaultTextColor
+                font.family: SApp.globalFontFamily
             }
         }
     }

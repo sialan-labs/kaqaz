@@ -22,7 +22,7 @@ Item {
     id: indicator
 
     property bool light: true
-    property real indicatorSize: 22
+    property real indicatorSize: 16*physicalPlatformScale
     property string source: light? "files/indicator_light.png" : "files/indicator.png"
 
     QtObject {

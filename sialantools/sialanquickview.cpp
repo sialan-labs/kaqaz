@@ -170,7 +170,7 @@ qreal SialanQuickView::statusBarHeight() const
     if( !p->devices )
         return 0;
 
-    return p->devices->transparentStatusBar() && !fullscreen()? 24*p->devices->density() : 0;
+    return p->devices->transparentStatusBar() && !fullscreen()? 20*p->devices->density() : 0;
 }
 
 qreal SialanQuickView::navigationBarHeight() const

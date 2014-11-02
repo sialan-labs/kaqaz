@@ -54,33 +54,36 @@ Item {
     }
 
     MouseArea {
-        id: discard_marea
-        anchors.fill: parent
-        visible: sidemenu.percent != 0
-        onClicked: discard()
-    }
-
-    MouseArea {
         id: marea
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        width: handleWidth + menuWidth
+        width: lastState? parent.width : handleWidth + menuWidth
         x: item_frame.x
         onMouseXChanged: {
             var newX = item_frame.x + mouseX-pinX
             if( newX > 0 )
                 newX = 0
+            if( Math.abs(x-startX) > 5*physicalPlatformScale )
+                movedX = true
 
             item_frame.x = newX
         }
         onPressed: {
             pinX = mouseX
             item_frame.anim = false
+            startX = x
+            movedX = false
         }
         onReleased: {
             item_frame.anim = true
 
             var basePercent = lastState? 0.8 : 0.2
+
+            if( !movedX ) {
+                item_frame.x = -menuWidth
+                lastState = false
+                return
+            }
 
             if( sidemenu.percent > basePercent ) {
                 item_frame.x = 0
@@ -93,11 +96,20 @@ Item {
 
         property real pinX: 0
         property bool lastState: false
+        property real startX: 0
+        property bool movedX: false
     }
 
     function discard() {
+        item_frame.anim = true
         item_frame.x = -menuWidth
         marea.lastState = false
+    }
+
+    function show() {
+        item_frame.anim = true
+        item_frame.x = 0
+        marea.lastState = true
     }
 
     Component.onCompleted: BackHandler.pushHandler(sidemenu,sidemenu.discard)
