@@ -205,16 +205,21 @@ void SialanImageColorAnalizorCore::analize(const QString &path)
     qreal sum_r = 0;
     qreal sum_g = 0;
     qreal sum_b = 0;
-    int count = image_size.width()*image_size.height();
+    int count = 0;
 
     for( int i=0 ; i<image_size.width(); i++ )
     {
         for( int j=0 ; j<image_size.height(); j++ )
         {
             QColor clr = img.pixel(i,j);
+            qreal mid = (clr.red()+clr.green()+clr.blue())/3;
+            if( mid > 180 || mid < 70 )
+                continue;
+
             sum_r += clr.red();
             sum_g += clr.green();
             sum_b += clr.blue();
+            count++;
         }
     }
 
