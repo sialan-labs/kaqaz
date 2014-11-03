@@ -203,7 +203,7 @@ void SialanQuickView::setFocusedText(QQuickItem *item)
     if( p->focused_text == item )
         return;
     if( p->focused_text )
-        disconnect( item, SIGNAL(destroyed()), this, SIGNAL(focusedTextChanged()) );
+        disconnect( p->focused_text, SIGNAL(destroyed()), this, SIGNAL(focusedTextChanged()) );
 
     p->focused_text = item;
     if( item )
@@ -224,6 +224,11 @@ void SialanQuickView::setFocusedText(QQuickItem *item)
 QQuickItem *SialanQuickView::focusedText() const
 {
     return p->focused_text;
+}
+
+void SialanQuickView::discardFocusedText()
+{
+    setFocusedText(0);
 }
 
 void SialanQuickView::init_options()

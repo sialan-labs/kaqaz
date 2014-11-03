@@ -40,8 +40,6 @@ public:
     void setDatabase( Database *db );
     void setRepository( Repository *rep );
     void setKaqazSync( KaqazSync *ksync );
-    void setSialanDevices( SialanDevices *sdev );
-    void setSialanTools( SialanTools *stools );
 
 public slots:
     bool start();

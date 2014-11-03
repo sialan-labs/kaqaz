@@ -182,7 +182,7 @@ Item {
 
     ScrollBar {
         scrollArea: listv; height: listv.height; width: 6*physicalPlatformScale
-        anchors.right: listv.right; anchors.top: listv.top; color: "#000000"
+        anchors.right: listv.right; anchors.top: listv.top; color: titleBarColor
     }
 
     Rectangle {

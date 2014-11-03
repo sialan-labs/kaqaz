@@ -193,7 +193,7 @@ Item {
 
     Component.onCompleted: {
         active_focus_timer.start()
-        touchToBack = true
+        main.touchToBack = true
         lastSearchKeyword = ""
         initTranslations()
     }

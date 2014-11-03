@@ -122,8 +122,6 @@ public:
     QFileSystemWatcher *filesystem;
     QMimeDatabase mime_db;
 
-    SialanDevices *devices;
-    SialanTools *tools;
     SialanCalendarConverter *calendar;
 
 #ifdef Q_OS_ANDROID
@@ -148,8 +146,6 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->viewer_classic = 0;
 #endif
     p->translator = new QTranslator(this);
-    p->devices = new SialanDevices(this);
-    p->tools = new SialanTools(this);
 #ifdef Q_OS_ANDROID
     p->java_layer = SialanJavaLayer::instance();
 #endif
@@ -291,8 +287,6 @@ bool Kaqaz::start()
         p->viewer_classic->setDatabase(kaqaz_database);
         p->viewer_classic->setRepository(p->repository);
         p->viewer_classic->setKaqazSync(p->sync);
-        p->viewer_classic->setSialanDevices(p->devices);
-        p->viewer_classic->setSialanTools(p->tools);
     }
     else
 #endif
@@ -316,18 +310,18 @@ bool Kaqaz::start()
 
         connect(p->viewer->engine(), SIGNAL(quit()), SLOT(close()));
 
+        connect( p->viewer->devices(), SIGNAL(incomingImage(QString)), SLOT(incomingImage(QString)) );
+        connect( p->viewer->devices(), SIGNAL(incomingShare(QString,QString)), SLOT(incomingShare(QString,QString)) );
+        connect( p->viewer->devices(), SIGNAL(selectImageResult(QString)), SLOT(selectImageResult(QString)) );
+        connect( p->viewer->devices(), SIGNAL(activityPaused()), SLOT(activityPaused()) );
+        connect( p->viewer->devices(), SIGNAL(activityResumed()), SLOT(activityResumed()) );
+
         p->calendar = p->viewer->calendar();
     }
 
     p->calendar->setCalendar( static_cast<SialanCalendarConverterCore::CalendarTypes>(kaqaz_settings->value("General/Calendar",SialanCalendarConverterCore::Gregorian).toInt()) );
 
     connect( kaqaz_database, SIGNAL(fileDeleted(QString)), p->repository, SLOT(deleteFile(QString)) );
-
-    connect( p->devices, SIGNAL(incomingImage(QString)), SLOT(incomingImage(QString)) );
-    connect( p->devices, SIGNAL(incomingShare(QString,QString)), SLOT(incomingShare(QString,QString)) );
-    connect( p->devices, SIGNAL(selectImageResult(QString)), SLOT(selectImageResult(QString)) );
-    connect( p->devices, SIGNAL(activityPaused()), SLOT(activityPaused()) );
-    connect( p->devices, SIGNAL(activityResumed()), SLOT(activityResumed()) );
 
     bool res = false;
 #ifdef DESKTOP_DEVICE
@@ -875,7 +869,7 @@ QSize Kaqaz::size() const
     if( !p->desktop_touch_mode )
         return kaqaz_settings->value("UserInterface/sizeClassic", QSize(1024,640)).value<QSize>();
     else
-        return kaqaz_settings->value("UserInterface/size",QSize(1024*p->devices->density(),600*p->devices->density())).value<QSize>();
+        return kaqaz_settings->value("UserInterface/size",QSize(1024*p->viewer->devices()->density(),600*p->viewer->devices()->density())).value<QSize>();
 #else
     return QSize(0,0);
 #endif

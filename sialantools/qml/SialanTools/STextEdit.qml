@@ -26,6 +26,6 @@ TextEdit {
             View.focusedText = textedit
         else
         if( View.focusedText == textedit )
-            View.focusedText = 0
+            View.discardFocusedText()
     }
 }

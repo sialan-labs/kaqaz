@@ -27,7 +27,7 @@ SialanMain {
     width: Devices.isTouchDevice? 0 : kaqaz.size.width
     height: Devices.isTouchDevice? 0 : kaqaz.size.height
     mainFrame: main_frame
-    panelWidth: main.panelWidth
+    panelWidth: mainItem? mainItem.panelWidth : width
     subMessageBlur: Devices.isDesktop
     subMessageBackground: Devices.isDesktop? "#66ffffff" : "#e5ffffff"
 
@@ -36,13 +36,9 @@ SialanMain {
     property int globalInputMethodHints: kaqaz.keyboardPredicative? Qt.ImhNone : Qt.ImhNoPredictiveText
 
     property bool rotated: true
-    property alias touchToBack: main.touchToBack
-    property alias darkBackground: main.darkBackground
+    property bool inited: false
 
-    property alias sidePanel: main.sidePanel
-    property alias panelAnimDuration: main.panelAnimDuration
-
-    property alias menuIsVisible: main.menuIsVisible
+    property alias mainItem: main
     property alias syncProgressBar: sync_pbar
 
     property alias position: positioning.position
@@ -102,10 +98,6 @@ SialanMain {
             y: View.statusBarHeight
             width: parent.width
             height: parent.height - View.statusBarHeight - View.navigationBarHeight
-
-            Behavior on y {
-                NumberAnimation { easing.type: Easing.OutCubic; duration: 250 }
-            }
         }
     }
 
@@ -118,14 +110,14 @@ SialanMain {
 
     WeatherModel {
         id: weather_model
-        active: kaqaz.positioning && kaqaz.weatherActive && kaqaz.proBuild
+        active: inited && kaqaz.positioning && kaqaz.weatherActive && kaqaz.proBuild
         geoCoordinate: position.coordinate
     }
 
     PositionSource {
         id: positioning
         updateInterval: 10000
-        active: kaqaz.positioning
+        active: inited && kaqaz.positioning
     }
 
     ProgressBar {
@@ -134,7 +126,7 @@ SialanMain {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.rightMargin: portrait? 0 : main.panelWidth
+        anchors.rightMargin: portrait? 0 : panelWidth
         color: "#aaffffff"
         radius: 0
         visible: false
@@ -168,7 +160,7 @@ SialanMain {
     }
 
     function showHistory(){
-        main.showHistory()
+        mainItem.showHistory()
     }
 
     function createPaper( parent ){
@@ -177,7 +169,7 @@ SialanMain {
     }
 
     function setCurrentGroup( id ){
-        main.setCurrentGroup(id)
+        mainItem.setCurrentGroup(id)
     }
 
     function getKaqaz(){
@@ -186,12 +178,12 @@ SialanMain {
 
     function refresh(){
         sync_pbar.visible = false
-        main.refresh()
+        mainItem.refresh()
         sync.reload()
     }
 
     function clean(){
-        main.clean()
+        mainItem.clean()
     }
 
     function showHelper(){
@@ -206,11 +198,11 @@ SialanMain {
     }
 
     function search(){
-        main.showSearch()
+        mainItem.showSearch()
     }
 
     function prefrences(){
-        main.showPrefrences()
+        mainItem.showPrefrences()
     }
 
     function getPass( parent ){
@@ -219,7 +211,7 @@ SialanMain {
         if( Devices.isDesktop ) {
             var blur_cmpt = Qt.createComponent("KaqazBlur.qml");
             blur_item = blur_cmpt.createObject(kaqaz_root);
-            blur_item.source = main
+            blur_item.source = mainFrame
         }
 
         var item = get_pass_cmpnt.createObject(kaqaz_root);
@@ -252,15 +244,15 @@ SialanMain {
     }
 
     function showMenu(){
-        main.showMenu()
+        mainItem.showMenu()
     }
 
     function incomingShare( title, message ) {
-        main.incomingShare(title,message)
+        mainItem.incomingShare(title,message)
     }
 
     function incomingImage( path ) {
-        main.incomingImage(path)
+        mainItem.incomingImage(path)
     }
 
     Component {
@@ -277,9 +269,26 @@ SialanMain {
         }
     }
 
+    Timer {
+        id: init_timer
+        interval: 1000
+        onTriggered: {
+            inited = true
+        }
+    }
+
+    Timer {
+        id: main_init_timer
+        interval: 20
+        onTriggered: {
+            main.initPapers()
+            init_timer.restart()
+        }
+    }
+
     Component.onCompleted: {
         if( database.password().length !== 0 )
-            kaqaz_root.lock()
+            lock()
         else
             passDone = true
         if( !kaqaz.isTutorialCompleted() )
@@ -288,6 +297,6 @@ SialanMain {
         if( !kaqaz.demoHasTrial() )
             showSubMessage(Qt.createComponent("DemoLimited.qml"))
 
-        main.initPapers()
+        main_init_timer.restart()
     }
 }

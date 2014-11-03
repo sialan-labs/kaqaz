@@ -72,7 +72,7 @@ Item {
 
     Timer {
         id: switcher_timer
-        interval: panelAnimDuration
+        interval: main.panelAnimDuration
         repeat: false
         onTriggered: switchItems()
     }

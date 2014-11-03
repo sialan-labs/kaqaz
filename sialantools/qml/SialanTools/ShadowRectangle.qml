@@ -17,28 +17,38 @@
 */
 
 import QtQuick 2.2
+import QtGraphicalEffects 1.0
 
 Item {
-    property alias color : rectangle.color
-    property alias shadowOpacity: shadow.opacity
-    property alias radius: rectangle.radius
-    property alias visibleShadow: shadow.visible
-    property real shadowSize: 8
+    property alias color : back.color
+    property alias shadowOpacity: blur.opacity
+    property alias radius: blur.radius
+    property alias visibleShadow: blur.visible
+    property real shadowSize: 8*physicalPlatformScale
 
-    BorderImage {
+    Item {
         id: shadow
-        opacity: 0.6
-        anchors.fill: rectangle
-        anchors { leftMargin: -shadowSize; topMargin: -shadowSize; rightMargin: -shadowSize; bottomMargin: -shadowSize }
-        border { left: 10; top: 10; right: 10; bottom: 10 }
-        source: "files/shadow.png";
-        smooth: true
+        anchors.fill: parent
+        visible: false
+
+        Rectangle {
+            anchors.centerIn: parent
+            width: back.width
+            height: back.height
+            color: "#333333"
+        }
+    }
+
+    FastBlur {
+        id: blur
+        anchors.fill: shadow
+        source: shadow
+        radius: 2*physicalPlatformScale
     }
 
     Rectangle {
-        id: rectangle;
-        smooth: true
+        id: back
         anchors.fill: parent
-        radius: 5
+        anchors.margins: shadowSize
     }
 }

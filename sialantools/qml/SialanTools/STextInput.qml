@@ -26,6 +26,6 @@ TextInput {
             View.focusedText = textinput
         else
         if( View.focusedText == textinput )
-            View.focusedText = 0
+            View.discardFocusedText()
     }
 }

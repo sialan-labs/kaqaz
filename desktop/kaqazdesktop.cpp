@@ -89,8 +89,6 @@ public:
     Database *db;
     Repository *repository;
     KaqazSync *sync;
-    SialanDevices *devices;
-    SialanTools *tools;
 
     PanelBox *panel;
     PapersView *papers_view;
@@ -271,16 +269,6 @@ void KaqazDesktop::setKaqazSync(KaqazSync *ksync)
     connect( p->sync, SIGNAL(syncStarted())      , SLOT(syncStarted())       );
     connect( p->sync, SIGNAL(syncProgress(qreal)), SLOT(syncProgress(qreal)) );
     connect( p->sync, SIGNAL(syncFinished())     , SLOT(syncFinished())      );
-}
-
-void KaqazDesktop::setSialanDevices(SialanDevices *sdev)
-{
-    p->devices = sdev;
-}
-
-void KaqazDesktop::setSialanTools(SialanTools *stools)
-{
-    p->tools = stools;
 }
 
 bool KaqazDesktop::start()

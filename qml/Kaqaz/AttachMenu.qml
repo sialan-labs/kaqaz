@@ -57,7 +57,7 @@ Item {
         else
             BackHandler.removeHandler(attach_menu)
 
-        sidePanel = !opened
+        main.sidePanel = !opened
         if( opened )
             load_timer.restart()
         else {

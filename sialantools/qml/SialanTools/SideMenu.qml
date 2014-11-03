@@ -98,6 +98,13 @@ Item {
         property bool lastState: false
         property real startX: 0
         property bool movedX: false
+
+        onLastStateChanged: {
+            if( lastState )
+                BackHandler.pushHandler(sidemenu,sidemenu.discard)
+            else
+                BackHandler.removeHandler(sidemenu)
+        }
     }
 
     function discard() {
@@ -111,6 +118,4 @@ Item {
         item_frame.x = 0
         marea.lastState = true
     }
-
-    Component.onCompleted: BackHandler.pushHandler(sidemenu,sidemenu.discard)
 }

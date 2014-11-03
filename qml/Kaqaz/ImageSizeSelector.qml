@@ -87,7 +87,7 @@ Item {
                     main.popPreference()
                     main.popPreference()
                     main.popPreference()
-                    darkBackground = false
+                    main.darkBackground = false
                 }
             }
         }

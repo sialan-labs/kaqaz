@@ -275,6 +275,6 @@ Item {
     Component.onDestruction: {
         if( backBlur )
             backBlur.destroy()
-        main.focus = true
+        View.root.focus = true
     }
 }

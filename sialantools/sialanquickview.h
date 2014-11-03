@@ -80,6 +80,9 @@ public:
     void setFocusedText( QQuickItem *item );
     QQuickItem *focusedText() const;
 
+public slots:
+    void discardFocusedText();
+
 signals:
     void fullscreenChanged();
     void statusBarHeightChanged();

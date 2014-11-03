@@ -40,10 +40,10 @@ Item {
     onNextPageChanged: {
         if( nextPage ){
             back_img.visible = false
-            darkBackground = true
+            main.darkBackground = true
         } else {
             back_img.visible = true
-            darkBackground = false
+            main.darkBackground = false
         }
     }
 
