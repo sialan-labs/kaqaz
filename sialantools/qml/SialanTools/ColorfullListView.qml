@@ -175,7 +175,7 @@ Item {
             }
 
             Component.onCompleted: {
-                itemObj = cf_listv.delegate.createObject(item, {"y": headersHeight*itemIsHeader, "title": title, "color": color, "isHeader": isHeader})
+                itemObj = cf_listv.delegate.createObject(item, {"y": headersHeight*itemIsHeader, "modelItem": modelItem})
             }
         }
     }
