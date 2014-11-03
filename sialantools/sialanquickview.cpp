@@ -25,6 +25,7 @@
 #include "sialanhashobject.h"
 #include "sialanlistobject.h"
 #include "sialancalendarconverter.h"
+#include "sialanimagecoloranalizor.h"
 #include "sialanbackhandler.h"
 #ifdef Q_OS_ANDROID
 #include "sialanjavalayer.h"
@@ -85,6 +86,7 @@ SialanQuickView::SialanQuickView(int options, QWindow *parent) :
 
     qmlRegisterType<SialanHashObject>("SialanTools", 1,0, "HashObject");
     qmlRegisterType<SialanListObject>("SialanTools", 1,0, "ListObject");
+    qmlRegisterType<SialanImageColorAnalizor>("SialanTools", 1,0, "ImageColorAnalizor");
 #ifdef DESKTOP_LINUX
     qmlRegisterType<SialanMimeApps>("SialanTools", 1,0, "MimeApps");
 #endif
