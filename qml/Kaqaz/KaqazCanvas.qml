@@ -219,7 +219,7 @@ Item {
                 var fileName = kaqaz.getTempPath() + ".png"
                 canvas.save(fileName)
 
-                kcanvas.done(fileName)
+                kcanvas.done(fileName, fileId)
 
                 kaqaz.removeFile(fileName)
                 main.closeDialog()
