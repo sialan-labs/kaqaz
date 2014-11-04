@@ -83,7 +83,10 @@ PaperAbstractButton {
                 anchors.top: done_btn.bottom
                 anchors.topMargin: 10*physicalPlatformScale
                 Component.onCompleted: {
-                    view = Qt.point(paperLocation.longitude,paperLocation.latitude)
+                    if( paperLocation != 0 && (paperLocation.longitude != 0 || paperLocation.latitude != 0) )
+                        view = Qt.point(paperLocation.longitude,paperLocation.latitude)
+
+                    console.debug(paperLocation.longitude, paperLocation.latitude, paperLocation)
                     crosshairs = true
                 }
             }
