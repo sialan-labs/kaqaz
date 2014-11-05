@@ -41,6 +41,8 @@ class SialanQuickView : public QQuickView
     Q_PROPERTY(QQuickItem* root        READ root        WRITE setRoot        NOTIFY rootChanged)
     Q_PROPERTY(QQuickItem* focusedText READ focusedText WRITE setFocusedText NOTIFY focusedTextChanged)
 
+    Q_PROPERTY(int layoutDirection READ layoutDirection WRITE setLayoutDirection NOTIFY layoutDirectionChanged)
+
 public:
     enum OptionsFlag {
         None = 0,
@@ -80,6 +82,9 @@ public:
     void setFocusedText( QQuickItem *item );
     QQuickItem *focusedText() const;
 
+    int layoutDirection() const;
+    void setLayoutDirection( int l );
+
 public slots:
     void discardFocusedText();
 
@@ -89,6 +94,7 @@ signals:
     void navigationBarHeightChanged();
     void rootChanged();
     void focusedTextChanged();
+    void layoutDirectionChanged();
     void fakeSignal();
 
 private slots:

@@ -27,6 +27,8 @@
 #include <QSet>
 #include <QImageReader>
 #include <QImage>
+#include <QFileInfo>
+#include <QDebug>
 
 SialanImageColorAnalizorThread *colorizor_thread = 0;
 

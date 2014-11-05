@@ -63,6 +63,7 @@ public:
     QPointer<QQuickItem> focused_text;
 
     bool fullscreen;
+    int layoutDirection;
 };
 
 SialanQuickView::SialanQuickView(int options, QWindow *parent) :
@@ -80,6 +81,7 @@ SialanQuickView::SialanQuickView(int options, QWindow *parent) :
     p->calendar = 0;
     p->back_handler = 0;
     p->fullscreen = false;
+    p->layoutDirection = Qt::LeftToRight;
 
     engine()->rootContext()->setContextProperty( "SApp", SialanApplication::instance() );
     engine()->rootContext()->setContextProperty( "View", this );
@@ -226,6 +228,20 @@ void SialanQuickView::setFocusedText(QQuickItem *item)
 QQuickItem *SialanQuickView::focusedText() const
 {
     return p->focused_text;
+}
+
+int SialanQuickView::layoutDirection() const
+{
+    return p->layoutDirection;
+}
+
+void SialanQuickView::setLayoutDirection(int l)
+{
+    if( l == p->layoutDirection )
+        return;
+
+    p->layoutDirection = l;
+    emit layoutDirectionChanged();
 }
 
 void SialanQuickView::discardFocusedText()

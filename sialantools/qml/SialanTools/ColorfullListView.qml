@@ -192,6 +192,10 @@ Item {
         color: titleBarDefaultColor
         clip: true
 
+        MouseArea {
+            anchors.fill: parent
+        }
+
         Behavior on color {
             ColorAnimation{ easing.type: Easing.OutCubic; duration: 400 }
         }
