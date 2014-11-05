@@ -28,7 +28,7 @@ Vcs-Git: git://git@github.com:sialan-labs/kaqaz.git
 Vcs-Browser: https://github.com/sialan-labs/kaqaz/
 
 Package: kaqaz
-Architecture: any
+Architecture: i386 amd64 armhf
 Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5sensors5-dev (>= 5.2.0), libqt5sensors5 (>= 5.2.0), libqt5qml-graphicaleffects (>= 5.2.0), libqt5positioning5 (>= 5.2.0), libqt5multimedia5 (>= 5.2.0), libqt5multimedia5-plugins (>= 5.2.0), libqt5multimediaquick-p5 (>= 5.2.0), libqt5sql5-sqlite (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), qtdeclarative5-qtsensors-plugin (>= 5.2.0), qtdeclarative5-qtmultimedia-plugin (>= 5.2.0), qtdeclarative5-qtpositioning-plugin (>= 5.2.0), dconf-tools
 Description: Kaqaz modern note manager
  Kaqaz is not just an application. It is more like a theory; 
