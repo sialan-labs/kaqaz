@@ -1,9 +1,11 @@
 [Desktop Entry]
-Name=TouchTest
-Exec=qmlscene   $@ TouchTest.qml
-Icon=qmlscene
+Version=1.0
+Name=Kaqaz
+GenericName=Kaqaz
+Exec=./Kaqaz
+Icon=kaqaz.png
 Terminal=false
 Type=Application
 X-Ubuntu-Touch=true
-Comment=description of TouchTest
+Comment=Kaqaz Note Manager
 

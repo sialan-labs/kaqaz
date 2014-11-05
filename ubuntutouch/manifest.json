@@ -1,8 +1,8 @@
 {
     "name": "org.sialan.kaqaz",
-    "description": "description of KaqazTouch",
+    "description": "Kaqaz note manager",
     "framework": "ubuntu-sdk-14.04",
-    "architecture": "all",
+    "architecture": "armhf",
     "title": "Kaqaz",
     "hooks": {
         "Kaqaz": {
@@ -10,6 +10,6 @@
             "desktop": "kaqaz.desktop"
         }
     },
-    "version": "0.1",
+    "version": "1.2.0",
     "maintainer": "Sialan Labs <contact@sialan.org>"
 }
