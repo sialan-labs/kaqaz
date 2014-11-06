@@ -43,7 +43,7 @@ Switch to source directory and run this commands:
 
 And if you want to build kaqaz like a portable app run this command instead:
 
-    qmake -r .. BUILD_MODE+=superdebug BUILD_MODE+=pro PREFIX=/usr BUILD_MODE+=opt
+    qmake -r .. BUILD_MODE+=superdebug BUILD_MODE+=pro PREFIX=/opt/kaqaz BUILD_MODE+=opt
 
 AND Last:
 
