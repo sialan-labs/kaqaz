@@ -48,8 +48,10 @@ SialanQtLogger::SialanQtLogger(const QString &path, QObject *parent) :
     p = new SialanQtLoggerPrivate;
     p->path = path;
 
+#ifndef Q_OS_UBUNTUTOUCH
     if( QFile::exists(p->path) )
         QFile::copy( p->path, QFileInfo(p->path).dir().path() + "/crash_" + QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch()) );
+#endif
 
     p->file = new QFile(path);
     p->file->open(QFile::WriteOnly);
@@ -105,7 +107,9 @@ void SialanQtLogger::debug(const QVariant &var)
 
 void SialanQtLogger::app_closed()
 {
+#ifndef Q_OS_UBUNTUTOUCH
     QFile::remove(p->path);
+#endif
 }
 
 SialanQtLogger::~SialanQtLogger()

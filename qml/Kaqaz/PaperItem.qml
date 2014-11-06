@@ -193,7 +193,7 @@ AnimationItem {
             anchors.rightMargin: 20+pad + (Devices.isMobile? 20*physicalPlatformScale : 25*physicalPlatformScale)
             height: parent.height
             contentWidth: label.width
-            contentHeight: Devices.keyboard && !Devices.isDesktop? label.paintedHeight+parent.height*1/2 : label.paintedHeight+25*physicalPlatformScale
+            contentHeight: Devices.keyboard && !Devices.isDesktop? label.paintedHeight+Devices.keyboardHeight : label.paintedHeight+25*physicalPlatformScale
             flickableDirection: Flickable.VerticalFlick
             interactive: !label.pickersPressed && secondInteractive
             onMovementStarted: {

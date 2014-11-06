@@ -18,7 +18,7 @@
 
 #define LINUX_DEFAULT_DPI 96
 #define WINDOWS_DEFAULT_DPI 96
-#define UTOUCH_DEFAULT_DPI 96
+#define UTOUCH_DEFAULT_DPI 76
 
 #include "sialandevices.h"
 #include "sialanapplication.h"
@@ -245,9 +245,11 @@ QSize SialanDevices::screenSize() const
 
 qreal SialanDevices::keyboardHeight() const
 {
+#ifdef Q_OS_UBUNTUTOUCH
+    return screenSize().height()*0.5;
+#else
     const QSize & scr_size = screenSize();
     bool portrait = scr_size.width()<scr_size.height();
-
     if( portrait )
     {
         if( isMobile() )
@@ -262,6 +264,7 @@ qreal SialanDevices::keyboardHeight() const
         else
             return screenSize().height()*0.5;
     }
+#endif
 }
 
 bool SialanDevices::transparentStatusBar() const

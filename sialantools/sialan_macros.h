@@ -21,7 +21,7 @@
 
 #include <QtGlobal>
 
-#if defined(Q_OS_ANDROID) || defined(Q_OS_IOS) || defined(Q_OS_WINPHONE)
+#if defined(Q_OS_ANDROID) || defined(Q_OS_IOS) || defined(Q_OS_WINPHONE) || defined(Q_OS_UBUNTUTOUCH)
 #define TOUCH_DEVICE
 #else
 #define DESKTOP_DEVICE

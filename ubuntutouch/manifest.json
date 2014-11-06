@@ -2,7 +2,7 @@
     "name": "org.sialan.kaqaz",
     "description": "Kaqaz note manager",
     "framework": "ubuntu-sdk-14.04",
-    "architecture": "armhf",
+    "architecture": "all",
     "title": "Kaqaz",
     "hooks": {
         "Kaqaz": {
