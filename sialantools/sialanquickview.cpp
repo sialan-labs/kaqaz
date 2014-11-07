@@ -36,6 +36,9 @@
 #ifdef SIALAN_SENSORS
 #include "sialansensors.h"
 #endif
+#ifdef SIALAN_NOTIFICATION
+#include "sialannotification.h"
+#endif
 
 #include <QPointer>
 #include <QSharedPointer>
@@ -94,6 +97,9 @@ SialanQuickView::SialanQuickView(int options, QWindow *parent) :
 #endif
 #ifdef SIALAN_SENSORS
     qmlRegisterType<SialanSensors>("SialanTools", 1,0, "SialanSensors");
+#endif
+#ifdef SIALAN_NOTIFICATION
+    qmlRegisterType<SialanNotification>("SialanTools", 1,0, "SialanNotification");
 #endif
 
     setResizeMode(QQuickView::SizeRootObjectToView);

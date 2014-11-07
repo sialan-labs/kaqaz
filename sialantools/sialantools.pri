@@ -50,6 +50,13 @@ contains(QT,sensors) {
     SOURCES += sialantools/sialansensors.cpp
     HEADERS += sialantools/sialansensors.h
 }
+linux {
+contains(QT,dbus) {
+    DEFINES += SIALAN_NOTIFICATION
+    SOURCES += sialantools/sialannotification.cpp
+    HEADERS += sialantools/sialannotification.h
+}
+}
 
 SOURCES += \
     sialantools/sialandevices.cpp \
