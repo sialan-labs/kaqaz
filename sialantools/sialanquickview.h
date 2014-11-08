@@ -57,7 +57,7 @@ public:
         AllExceptLogger = 119
     };
 
-    SialanQuickView( int options = None, QWindow *parent = 0);
+    SialanQuickView( int options = Devices|BackHandler, QWindow *parent = 0);
     ~SialanQuickView();
 
     SialanDesktopTools *desktopTools() const;

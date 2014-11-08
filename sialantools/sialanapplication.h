@@ -44,6 +44,7 @@ class SialanApplication : public INHERIT_QAPP
     Q_OBJECT
 
     Q_PROPERTY(QString homePath     READ homePath     NOTIFY fakeSignal)
+    Q_PROPERTY(QString appPath      READ appPath      NOTIFY fakeSignal)
     Q_PROPERTY(QString logPath      READ logPath      NOTIFY fakeSignal)
     Q_PROPERTY(QString confsPath    READ confsPath    NOTIFY fakeSignal)
     Q_PROPERTY(QString tempPath     READ tempPath     NOTIFY fakeSignal)
@@ -58,6 +59,7 @@ public:
     ~SialanApplication();
 
     static QString homePath();
+    static QString appPath();
     static QString logPath();
     static QString confsPath();
     static QString tempPath();

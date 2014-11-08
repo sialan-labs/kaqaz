@@ -60,6 +60,11 @@ QString SialanApplication::homePath()
 #endif
 }
 
+QString SialanApplication::appPath()
+{
+    return QCoreApplication::applicationDirPath();
+}
+
 QString SialanApplication::logPath()
 {
 #ifdef Q_OS_ANDROID

@@ -20,14 +20,20 @@ import QtQuick 2.0
 
 Item {
     id: indicator
+    width: indicatorSize
+    height: indicatorSize
 
     property bool light: true
+    property bool modern: false
     property real indicatorSize: 16*physicalPlatformScale
-    property string source: light? "files/indicator_light.png" : "files/indicator.png"
+    property string source: light? "files/" + privates.name + "_light.png" : "files/" + privates.name + ".png"
 
     QtObject {
         id: privates
         property variant item
+        property string modern_name: "indicator_2"
+        property string old_name: "indicator"
+        property string name: modern? modern_name : old_name
     }
 
     Component {
@@ -38,6 +44,7 @@ Item {
             height: width
             anchors.centerIn: parent
             source: indicator.source
+            sourceSize: Qt.size(width,height)
             smooth: true
             transformOrigin: Item.Center
 

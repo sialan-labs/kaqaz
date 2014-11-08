@@ -137,7 +137,11 @@ int SialanListObject::indexOf(const QVariant &v) const
 
 void SialanListObject::fromList(const QVariantList &list)
 {
+    if( p->list == list )
+        return;
+
     p->list = list;
+    emit countChanged();
 }
 
 QVariantList SialanListObject::toList() const

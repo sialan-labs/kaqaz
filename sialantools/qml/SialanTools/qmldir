@@ -35,3 +35,5 @@ PasteButton 1.0 PasteButton.qml
 Slider 1.0 Slider.qml
 ColorfullListView 1.0 ColorfullListView.qml
 SideMenu 1.0 SideMenu.qml
+SialanLogo 1.0 SialanLogo.qml
+QueueList 1.0 QueueList.qml

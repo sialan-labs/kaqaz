@@ -49,5 +49,10 @@
         <file>qml/SialanTools/files/indicator_light.png</file>
         <file>qml/SialanTools/files/indicator.png</file>
         <file>qml/SialanTools/SideMenu.qml</file>
+        <file>qml/SialanTools/files/indicator_2_light.png</file>
+        <file>qml/SialanTools/files/indicator_2.png</file>
+        <file>qml/SialanTools/files/sialan-logo.png</file>
+        <file>qml/SialanTools/SialanLogo.qml</file>
+        <file>qml/SialanTools/QueueList.qml</file>
     </qresource>
 </RCC>

@@ -26,6 +26,7 @@ class SialanListObjectPrivate;
 class SialanListObject : public QObject
 {
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+    Q_PROPERTY(QVariantList list READ toList WRITE fromList NOTIFY countChanged)
 
     Q_OBJECT
 public:
