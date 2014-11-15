@@ -285,6 +285,11 @@ bool SialanDevices::transparentNavigationBar() const
 #endif
 }
 
+qreal SialanDevices::standardTitleBarHeight() const
+{
+    return 50*density();
+}
+
 int SialanDevices::densityDpi() const
 {
 #ifdef Q_OS_ANDROID
@@ -364,12 +369,12 @@ bool SialanDevices::keyboard() const
     return p->keyboard_stt;
 }
 
-QString SialanDevices::cameraLocation() const
+QString SialanDevices::cameraLocation()
 {
     return SialanApplication::cameraPath();
 }
 
-QString SialanDevices::picturesLocation() const
+QString SialanDevices::picturesLocation()
 {
     QStringList probs;
     probs = QStandardPaths::standardLocations( QStandardPaths::PicturesLocation );
@@ -387,7 +392,7 @@ QString SialanDevices::picturesLocation() const
     return probs.last();
 }
 
-QString SialanDevices::musicsLocation() const
+QString SialanDevices::musicsLocation()
 {
     QStringList probs;
     probs = QStandardPaths::standardLocations( QStandardPaths::MusicLocation );
@@ -405,7 +410,7 @@ QString SialanDevices::musicsLocation() const
     return probs.last();
 }
 
-QString SialanDevices::documentsLocation() const
+QString SialanDevices::documentsLocation()
 {
     QStringList probs;
     probs = QStandardPaths::standardLocations( QStandardPaths::DocumentsLocation );
@@ -424,7 +429,7 @@ QString SialanDevices::documentsLocation() const
     return probs.last();
 }
 
-QString SialanDevices::resourcePath() const
+QString SialanDevices::resourcePath()
 {
 #ifndef Q_OS_MAC
     return QCoreApplication::applicationDirPath() + "/";

@@ -56,8 +56,9 @@ class SialanDevices : public QObject
     Q_PROPERTY(qreal density     READ density     NOTIFY densityChanged     )
     Q_PROPERTY(qreal fontDensity READ fontDensity NOTIFY fontDensityChanged )
 
-    Q_PROPERTY(bool transparentStatusBar     READ transparentStatusBar     NOTIFY transparentStatusBarChanged    )
-    Q_PROPERTY(bool transparentNavigationBar READ transparentNavigationBar NOTIFY transparentNavigationBarChanged)
+    Q_PROPERTY(bool  transparentStatusBar     READ transparentStatusBar     NOTIFY transparentStatusBarChanged    )
+    Q_PROPERTY(bool  transparentNavigationBar READ transparentNavigationBar NOTIFY transparentNavigationBarChanged)
+    Q_PROPERTY(qreal standardTitleBarHeight   READ standardTitleBarHeight   NOTIFY standardTitleBarHeightChanged  )
 
     Q_PROPERTY(QString clipboard READ clipboard WRITE setClipboard NOTIFY clipboardChanged)
 
@@ -104,15 +105,16 @@ public:
 
     bool transparentStatusBar() const;
     bool transparentNavigationBar() const;
+    qreal standardTitleBarHeight() const;
 
     QString clipboard() const;
     bool keyboard() const;
 
-    QString cameraLocation() const;
-    QString picturesLocation() const;
-    QString musicsLocation() const;
-    QString documentsLocation() const;
-    QString resourcePath() const;
+    static QString cameraLocation();
+    static QString picturesLocation();
+    static QString musicsLocation();
+    static QString documentsLocation();
+    static QString resourcePath();
 
 public slots:
     void hideKeyboard();
@@ -158,6 +160,7 @@ signals:
 
     void transparentStatusBarChanged();
     void transparentNavigationBarChanged();
+    void standardTitleBarHeightChanged();
 
     void densityDpiChanged();
     void densityChanged();

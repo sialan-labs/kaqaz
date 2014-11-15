@@ -20,9 +20,14 @@ import QtQuick 2.0
 
 STextInput {
     id: core
+    selectByMouse: !pickerEnable
 
     property alias press: cpicker.press
     property alias commitBlocker: cpicker.commitBlocker
+    property alias pickerEnable: marea.visible
+
+    property alias pickersColor: cpicker.pickersColor
+    property alias pickersStrokeColor: cpicker.pickersStrokeColor
 
     onTextChanged: {
         if( privates.last_text != text )
@@ -41,6 +46,15 @@ STextInput {
     }
 
     MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.IBeamCursor
+        visible: !marea.visible
+        onPressed: mouse.accepted = false
+    }
+
+    MouseArea {
+        id: marea
+        cursorShape: Qt.IBeamCursor
         anchors.fill: parent
         onPressed: {
             cpicker.show()

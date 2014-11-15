@@ -37,6 +37,13 @@ Rectangle {
 
     property real panelWidth: width
 
+    FontLoader{
+        source: "fonts/DroidKaqazSans.ttf"
+    }
+    FontLoader{
+        source: "fonts/DroidSansMono.ttf"
+    }
+
     PointingDialog{
         id: point_dialog
         z: 9

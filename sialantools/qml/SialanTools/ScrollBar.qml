@@ -61,6 +61,7 @@ import QtQuick 2.0
 
 Item {
     id: container
+    width: 6*physicalPlatformScale
 
     property variant scrollArea
     property variant orientation: Qt.Vertical
