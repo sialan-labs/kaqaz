@@ -131,7 +131,7 @@ const QHash<QString, QColor> &SialanImageColorAnalizorThread::results() const
     return p->results;
 }
 
-void SialanImageColorAnalizorThread::analize(const QString &path)
+void SialanImageColorAnalizorThread::analize(int method, const QString &path)
 {
     if( p->results.contains(path) )
         return;
@@ -143,7 +143,7 @@ void SialanImageColorAnalizorThread::analize(const QString &path)
         return;
     }
 
-    QMetaObject::invokeMethod( core, "analize", Qt::QueuedConnection, Q_ARG(QString,path) );
+    QMetaObject::invokeMethod( core, "analize", Qt::QueuedConnection, Q_ARG(int,method) , Q_ARG(QString,path) );
 }
 
 void SialanImageColorAnalizorThread::found_slt(SialanImageColorAnalizorCore *c, const QString &source, const QColor & color)

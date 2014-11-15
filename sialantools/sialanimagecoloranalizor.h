@@ -73,7 +73,7 @@ public:
     const QHash<QString,QColor> & results() const;
 
 public slots:
-    void analize( const QString & path );
+    void analize(int method, const QString & path );
 
 signals:
     void found( const QString & path );
