@@ -24,6 +24,7 @@ Item {
     height: 30
 
     property real ratio: 572/69
+    property bool dark: false
 
     Image {
         id: img
@@ -32,6 +33,6 @@ Item {
         anchors.centerIn: parent
         sourceSize: Qt.size(width,height)
         fillMode: Image.PreserveAspectFit
-        source: "files/sialan-logo.png"
+        source: dark? "files/sialan-logo-dark.png" : "files/sialan-logo.png"
     }
 }

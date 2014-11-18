@@ -28,6 +28,7 @@ Rectangle {
     property alias bottomPanel: bottom_panel
     property alias pointerDialog: point_dialog
     property alias tooltip: tool_tip
+    property alias messageDialog: message_dialog
 
     property color subMessageBackground: "#66ffffff"
     property bool subMessageBlur: true
@@ -56,6 +57,12 @@ Rectangle {
 
     RollerDialog {
         id: roller_dialog
+        anchors.fill: parent
+        z: 10
+    }
+
+    MessageDialog {
+        id: message_dialog
         anchors.fill: parent
         z: 10
     }

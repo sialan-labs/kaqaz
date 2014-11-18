@@ -66,8 +66,9 @@ Item {
     property variant scrollArea
     property variant orientation: Qt.Vertical
     property alias color: bilbilak.color
+    property bool forceVisible: false
 
-    opacity: scrollArea.movingVertically || scrollArea.movingHorizontally? 1 : 0
+    opacity: scrollArea.movingVertically || scrollArea.movingHorizontally || forceVisible? 1 : 0
 
     function position()
     {
@@ -115,6 +116,13 @@ Item {
         opacity: 0.5
 
         property real diagonal: size()<20*physicalPlatformScale? 20*physicalPlatformScale : size()
+
+        Behavior on width {
+            NumberAnimation { duration: 300 }
+        }
+        Behavior on height {
+            NumberAnimation { duration: 300 }
+        }
     }
 
     Behavior on opacity {
