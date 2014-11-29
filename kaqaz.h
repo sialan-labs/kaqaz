@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Sialan Labs
-    http://labs.sialan.org
+    Copyright (C) 2014 Aseman
+    http://aseman.co
 
     Kaqaz is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 #include <QSettings>
 #include <QScreen>
 
-class SialanCalendarConverter;
+class AsemanCalendarConverter;
 class Repository;
 class KaqazSync;
 class DateProperty;
@@ -65,7 +65,7 @@ public:
     QObject *view();
 
     KaqazSync *kaqazSync() const;
-    SialanCalendarConverter *calendarConverter() const;
+    AsemanCalendarConverter *calendarConverter() const;
     Repository *repository() const;
 
     Q_INVOKABLE bool demoHasTrial() const;

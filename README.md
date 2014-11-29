@@ -1,9 +1,9 @@
 Kaqaz - Note Manager
 =====
 
-Kaqaz is a modern note manager published by Sialan Lab. The focus of Kaqaz is on a better user interface so that the user can feel a different experience with it. Kaqaz has tried to provide faster access bars and present a convenient interface for the users to have an enjoyable time while working on it. Kaqaz is a free and open source software written under GPLv3 license. 
+Kaqaz is a modern note manager published by Aseman Lab. The focus of Kaqaz is on a better user interface so that the user can feel a different experience with it. Kaqaz has tried to provide faster access bars and present a convenient interface for the users to have an enjoyable time while working on it. Kaqaz is a free and open source software written under GPLv3 license. 
 
-### [Download Binary Packages](http://labs.sialan.org/projects/kaqaz)
+### [Download Binary Packages](http://aseman.co/projects/kaqaz)
 
 ### How to Compile
 #### Install dependencies
@@ -30,7 +30,7 @@ If you want get source from git repository you should install git on your system
 
 After git installed, get code with this command:
 
-    git clone https://github.com/sialan-labs/kaqaz.git
+    git clone https://github.com/aseman-labs/kaqaz.git
 
 #### Start building
 
@@ -66,6 +66,6 @@ Note: For android you must download Android-SDK and Android NDK and for iOS down
 
 ## LICENSE 
 
-Copyright © 2014 Sialan Labs <contact@sialan.org>  
+Copyright © 2014 Aseman <contact@aseman.org>  
 This project is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 

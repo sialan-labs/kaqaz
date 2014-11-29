@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Sialan Labs
-    http://labs.sialan.org
+    Copyright (C) 2014 Aseman
+    http://aseman.co
 
     This project is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@
 #include "repository.h"
 #include "kaqazsync.h"
 #include "panelbox.h"
-#include "sialantools/sialandevices.h"
-#include "sialantools/sialantools.h"
+#include "asemantools/asemandevices.h"
+#include "asemantools/asemantools.h"
 #include "aboutdialog.h"
 #include "papersview.h"
 #include "editorview.h"
@@ -31,8 +31,8 @@
 #include "configurepage.h"
 #include "scolor.h"
 #include "addgroupdialog.h"
-#include "sialantools/sialandesktoptools.h"
-#include "sialantools/sialantools.h"
+#include "asemantools/asemandesktoptools.h"
+#include "asemantools/asemantools.h"
 
 #include <QToolBar>
 #include <QAction>
@@ -72,7 +72,7 @@ class KaqazDesktopPrivate
 {
 public:
     Kaqaz *kaqaz;
-    SialanDesktopTools *desktop;
+    AsemanDesktopTools *desktop;
 
     QWidget *main_widget;
     QVBoxLayout *main_layout;
@@ -113,7 +113,7 @@ KaqazDesktop::KaqazDesktop() :
     p->resize_save_timer = 0;
     p->kaqaz = Kaqaz::instance();
 
-    p->desktop = new SialanDesktopTools(this);
+    p->desktop = new AsemanDesktopTools(this);
 
     QFontDatabase::addApplicationFont( p->kaqaz->resourcePathAbs() + "/fonts/DroidKaqazSans.ttf" );
 
@@ -276,7 +276,7 @@ bool KaqazDesktop::start()
     if( !p->db->password().isEmpty() )
     {
         const QString & pass = QInputDialog::getText(this, tr("Kaqaz security"), tr("Please enter password:"), QLineEdit::Password);
-        const QString & md5 = SialanTools::passToMd5(pass);
+        const QString & md5 = AsemanTools::passToMd5(pass);
         if( md5 != p->db->password() )
         {
             QMessageBox::critical(this, tr("Incorrect"), tr("Password is incorrect!"));

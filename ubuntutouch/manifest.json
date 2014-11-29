@@ -1,5 +1,5 @@
 {
-    "name": "org.sialan.kaqaz",
+    "name": "org.aseman.kaqaz",
     "description": "Kaqaz note manager",
     "framework": "ubuntu-sdk-14.04",
     "architecture": "all",
@@ -11,5 +11,5 @@
         }
     },
     "version": "1.2.0",
-    "maintainer": "Sialan Labs <contact@sialan.org>"
+    "maintainer": "Aseman <contact@aseman.org>"
 }

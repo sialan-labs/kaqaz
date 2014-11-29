@@ -237,7 +237,7 @@ ApplicationWindow {
         y: large? main.height/2-largeHeight/2 : main.height - smallHeight - 10
         width: large? largeWidth :smallWidth
         height: large? largeHeight :smallHeight
-        source: "files/sialan-labs.png"
+        source: "files/aseman-labs.png"
         sourceSize: Qt.size(large?largeWidth:smallWidth ,large?largeHeight:smallHeight )
         opacity: main.frame<540 || main.frame>570? 1 : 0
 

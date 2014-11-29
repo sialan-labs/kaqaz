@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Sialan Labs
-    http://labs.sialan.org
+    Copyright (C) 2014 Aseman
+    http://aseman.co
 
     Kaqaz is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #include <QDir>
 #include <QThread>
 
-#include "sialantools/sialanapplication.h"
+#include "asemantools/asemanapplication.h"
 
 #define DATA_DB_CONNECTION "data_sqlite"
 
@@ -33,12 +33,12 @@
 
 #define LANG_ON_STARTUP
 
-#define HOME_PATH   SialanApplication::homePath()
-#define BACKUP_PATH SialanApplication::backupsPath()
-#define TEMP_PATH   SialanApplication::tempPath()
-#define CAMERA_PATH SialanApplication::cameraPath()
-#define LOG_PATH    SialanApplication::logPath()
-#define CONFIG_PATH SialanApplication::confsPath()
+#define HOME_PATH   AsemanApplication::homePath()
+#define BACKUP_PATH AsemanApplication::backupsPath()
+#define TEMP_PATH   AsemanApplication::tempPath()
+#define CAMERA_PATH AsemanApplication::cameraPath()
+#define LOG_PATH    AsemanApplication::logPath()
+#define CONFIG_PATH AsemanApplication::confsPath()
 
 #ifdef SUPER_DEBUG
 #define BEGIN_FNC_DEBUG \

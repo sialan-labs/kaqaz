@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Sialan Labs
-    http://labs.sialan.org
+    Copyright (C) 2014 Aseman
+    http://aseman.co
 
     This project is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 #include "datesmodel.h"
 #include "database.h"
 #include "kaqaz.h"
-#include "sialantools/sialancalendarconverter.h"
+#include "asemantools/asemancalendarconverter.h"
 
 #include <QIcon>
 

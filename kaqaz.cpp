@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Sialan Labs
-    http://labs.sialan.org
+    Copyright (C) 2014 Aseman
+    http://aseman.co
 
     Kaqaz is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,13 +30,13 @@
 #include "translationmodel.h"
 #include "backuper.h"
 #include "searchhighlighter.h"
-#include "sialantools/sialantools.h"
+#include "asemantools/asemantools.h"
 #include "resourcemanager.h"
 #include "weathermodel.h"
 #include "simpleqtcryptor/simpleqtcryptor.h"
-#include "sialantools/sialandevices.h"
-#include "sialantools/sialanquickview.h"
-#include "sialantools/sialancalendarconverter.h"
+#include "asemantools/asemandevices.h"
+#include "asemantools/asemanquickview.h"
+#include "asemantools/asemancalendarconverter.h"
 
 #include "qmapcontrol/osmmapadapter.h"
 #include "qmapcontrol/maplayer.h"
@@ -44,7 +44,7 @@
 #include "qmapcontrol/googlemapadapter.h"
 
 #ifdef Q_OS_ANDROID
-#include "sialantools/sialanjavalayer.h"
+#include "asemantools/asemanjavalayer.h"
 #endif
 
 #ifdef DESKTOP_LINUX
@@ -94,7 +94,7 @@ public:
     KaqazDesktop *viewer_classic;
 #endif
 
-    SialanQuickView *viewer;
+    AsemanQuickView *viewer;
 
     QString homePath;
     QString translationsPath;
@@ -122,10 +122,10 @@ public:
     QFileSystemWatcher *filesystem;
     QMimeDatabase mime_db;
 
-    SialanCalendarConverter *calendar;
+    AsemanCalendarConverter *calendar;
 
 #ifdef Q_OS_ANDROID
-    SialanJavaLayer *java_layer;
+    AsemanJavaLayer *java_layer;
 #endif
 };
 
@@ -147,7 +147,7 @@ Kaqaz::Kaqaz(QObject *parent) :
 #endif
     p->translator = new QTranslator(this);
 #ifdef Q_OS_ANDROID
-    p->java_layer = SialanJavaLayer::instance();
+    p->java_layer = AsemanJavaLayer::instance();
 #endif
 
     QDir().mkpath(CAMERA_PATH);
@@ -234,7 +234,7 @@ KaqazSync *Kaqaz::kaqazSync() const
     return p->sync;
 }
 
-SialanCalendarConverter *Kaqaz::calendarConverter() const
+AsemanCalendarConverter *Kaqaz::calendarConverter() const
 {
     return p->calendar;
 }
@@ -281,7 +281,7 @@ bool Kaqaz::start()
         QIcon::setThemeSearchPaths( QStringList() << resourcePathAbs() + "/files/icons/" );
         QIcon::setThemeName("KFaenza");
 
-        p->calendar = new SialanCalendarConverter(this);
+        p->calendar = new AsemanCalendarConverter(this);
 
         p->viewer_classic = new KaqazDesktop();
         p->viewer_classic->setDatabase(kaqaz_database);
@@ -291,11 +291,11 @@ bool Kaqaz::start()
     else
 #endif
     {
-        p->viewer = new SialanQuickView(
+        p->viewer = new AsemanQuickView(
 #ifdef QT_DEBUG
-                            SialanQuickView::AllExceptLogger
+                            AsemanQuickView::AllExceptLogger
 #else
-                            SialanQuickView::AllComponents
+                            AsemanQuickView::AllComponents
 #endif
                     );
         p->viewer->installEventFilter(this);
@@ -319,7 +319,7 @@ bool Kaqaz::start()
         p->calendar = p->viewer->calendar();
     }
 
-    p->calendar->setCalendar( static_cast<SialanCalendarConverterCore::CalendarTypes>(kaqaz_settings->value("General/Calendar",SialanCalendarConverterCore::Gregorian).toInt()) );
+    p->calendar->setCalendar( static_cast<AsemanCalendarConverterCore::CalendarTypes>(kaqaz_settings->value("General/Calendar",AsemanCalendarConverterCore::Gregorian).toInt()) );
 
     connect( kaqaz_database, SIGNAL(fileDeleted(QString)), p->repository, SLOT(deleteFile(QString)) );
 
@@ -474,7 +474,7 @@ bool Kaqaz::copyFile(const QString &src, const QString &dst)
 
 void Kaqaz::setCalendar(int t)
 {
-    p->calendar->setCalendar( static_cast<SialanCalendarConverterCore::CalendarTypes>(t) );
+    p->calendar->setCalendar( static_cast<AsemanCalendarConverterCore::CalendarTypes>(t) );
     kaqaz_settings->setValue( "General/Calendar", t );
     emit calendarChanged();
 }
@@ -655,7 +655,7 @@ QString Kaqaz::repositoryPath() const
 
 QString Kaqaz::sdcardPath() const
 {
-    return "/sdcard/Android/data/org.sialan.kaqaz";
+    return "/sdcard/Android/data/org.aseman.kaqaz";
 }
 
 QString Kaqaz::translatorFilePath() const

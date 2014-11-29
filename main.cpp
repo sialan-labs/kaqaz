@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Sialan Labs
-    http://labs.sialan.org
+    Copyright (C) 2014 Aseman
+    http://aseman.co
 
     Kaqaz is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 #include "kaqazmacros.h"
 #include "kaqaz.h"
 #include "resourcemanager.h"
-#include "sialantools/sialanapplication.h"
+#include "asemantools/asemanapplication.h"
 
 #ifdef DESKTOP_DEVICE
 #include "desktop/uiselectordialog.h"
@@ -32,11 +32,11 @@
 
 int main(int argc, char *argv[])
 {
-    SialanApplication app(argc, argv);
+    AsemanApplication app(argc, argv);
     app.setApplicationName("Kaqaz");
     app.setApplicationDisplayName("Kaqaz");
-    app.setOrganizationDomain("org.sialan.kaqaz");
-    app.setOrganizationName("Sialan");
+    app.setOrganizationDomain("org.aseman.kaqaz");
+    app.setOrganizationName("Aseman");
     app.setWindowIcon(QIcon(app.applicationDirPath()+"/qml/Kaqaz/files/kaqaz.png"));
 
 #ifdef DESKTOP_DEVICE

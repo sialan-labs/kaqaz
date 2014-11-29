@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Sialan Labs
-    http://labs.sialan.org
+    Copyright (C) 2014 Aseman
+    http://aseman.co
 
     Kaqaz is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -80,8 +80,8 @@
 #define GROUP_DATA_HEADER  QString("KaqazGroups")
 #define GROUP_DATA_VERSION QString("1.0")
 
-#define CALL_CORE_VOID( METHOD ) SialanTools::call(p->core, NAME_OF(METHOD), Qt::QueuedConnection );
-#define CALL_CORE( METHOD, ... ) SialanTools::call(p->core, NAME_OF(METHOD), Qt::QueuedConnection, __VA_ARGS__ );
+#define CALL_CORE_VOID( METHOD ) AsemanTools::call(p->core, NAME_OF(METHOD), Qt::QueuedConnection );
+#define CALL_CORE( METHOD, ... ) AsemanTools::call(p->core, NAME_OF(METHOD), Qt::QueuedConnection, __VA_ARGS__ );
 
 #define ALLOC_DBOX(NAME) \
     QDropbox NAME( DROPBOX_APP_KEY, DROPBOX_APP_SECRET, QDropbox::Plaintext, "api.dropbox.com", this ); \
@@ -96,7 +96,7 @@
 #include "smartiodboxsingle.h"
 #include "kaqaz.h"
 #include "database.h"
-#include "sialantools/sialantools.h"
+#include "asemantools/asemantools.h"
 #include "kaqazmacros.h"
 #include "qdropbox.h"
 #include "qdropboxfile.h"

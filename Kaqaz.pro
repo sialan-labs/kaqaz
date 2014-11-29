@@ -1,5 +1,5 @@
 contains(BUILD_MODE,ubuntutouch) {
-    DESTDIR = org.sialan.kaqaz
+    DESTDIR = org.aseman.kaqaz
 }
 
 folder_01.source = files/fonts
@@ -148,7 +148,7 @@ HEADERS += \
     database.h \
     databasedatatypes.h \
     kaqazdropbox.h \
-    sialandeveloper_macros.h \
+    asemandeveloper_macros.h \
     smartiodbox.h \
     smartiodboxsingle.h \
     searchhighlighter.h \
@@ -166,9 +166,9 @@ FONTS += \
 OTHER_FILES += \
     android/pro/AndroidManifest.xml \
     android/free/AndroidManifest.xml \
-    android-build/src/org/sialan/android/SialanActivity.java \
-    android-build/src/org/sialan/android/SialanApplication.java \
-    android-build/src/org/sialan/android/SialanJavaLayer.java \
+    android-build/src/org/aseman/android/AsemanActivity.java \
+    android-build/src/org/aseman/android/AsemanApplication.java \
+    android-build/src/org/aseman/android/AsemanJavaLayer.java \
     iOS/Info.plist \
     files/database/database.sqlite
 
@@ -177,8 +177,8 @@ RESOURCES += \
 
 include(qmake/qtcAddDeployment.pri)
 include(qtdropbox/qtdropbox.pri)
-include(sialantools/sialantools.pri)
-include(sialantools/qmake/clickPkg.pri)
+include(asemantools/asemantools.pri)
+include(asemantools/qmake/clickPkg.pri)
 include(qmapcontrol/qmapcontrol.pri)
 include(simpleqtcryptor/simpleqtcryptor.pri)
 qtcAddDeployment()

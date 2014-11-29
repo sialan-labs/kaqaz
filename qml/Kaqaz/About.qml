@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Sialan Labs
-    http://labs.sialan.org
+    Copyright (C) 2014 Aseman
+    http://aseman.co
 
     Kaqaz is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 */
 
 import QtQuick 2.2
-import SialanTools 1.0
+import AsemanTools 1.0
 
 Item {
     id: about_page
@@ -82,7 +82,7 @@ Item {
 
             MouseArea{
                 anchors.fill: parent
-                onClicked: Qt.openUrlExternally("http://labs.sialan.org/")
+                onClicked: Qt.openUrlExternally("http://aseman.co/")
             }
         }
     }
@@ -109,7 +109,7 @@ Item {
     function initTranslations(){
         about_name_text.text      = qsTr("Kaqaz") + " " + kaqaz.version()
         about_license_text.text   = qsTr("License: GNU GPL Version 3")
-        about_powered_text.text   = qsTr("(C) 2014 Sialan Labs")
+        about_powered_text.text   = qsTr("(C) 2014 Aseman")
         about_home.text           = qsTr("Home Page")
         title.text                = qsTr("About")
     }

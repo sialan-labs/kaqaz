@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Sialan Labs
-    http://labs.sialan.org
+    Copyright (C) 2014 Aseman
+    http://aseman.co
 
     Kaqaz is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@
 #include "database.h"
 #include "kaqazmacros.h"
 #include "kaqaz.h"
-#include "sialandeveloper_macros.h"
+#include "asemandeveloper_macros.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
