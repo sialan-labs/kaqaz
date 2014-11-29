@@ -18,7 +18,7 @@ kaqaz (1.2.0trusty1) trusty; urgency=medium
   * Keyboard size bugfix
   * Many other improvments, bugfixes and crash fixes.
 
- -- Aseman <contact@aseman.org>  Tue, 04 Nov 2014 14:08:14 +0330
+ -- Sialan Labs <contact@sialan.org>  Tue, 04 Nov 2014 14:08:14 +0330
 
 kaqaz (1.1.2ubuntu1) trusty; urgency=medium
 
@@ -27,49 +27,49 @@ kaqaz (1.1.2ubuntu1) trusty; urgency=medium
   * Search on papers by user current geo location
   * Update Translations
   * Fix start splash bug
-  * Update aseman tools
+  * Update sialan tools
   * Many other improvments and bugfixes
 
- -- Aseman <contact@aseman.org>  Wed, 15 Oct 2014 23:17:43 +0330
+ -- Sialan Labs <contact@sialan.org>  Wed, 15 Oct 2014 23:17:43 +0330
 
 kaqaz (1.1.1ubuntu6) trusty; urgency=medium
 
-  * Move app files to /opt/aseman/kaqaz
+  * Move app files to /opt/sialan/kaqaz
 
- -- Aseman <contact@aseman.org>  Sun, 05 Oct 2014 20:17:02 +0330
+ -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 20:17:02 +0330
 
 kaqaz (1.1.1ubuntu5) trusty; urgency=medium
 
   * Add Missed positioning and multimedia qt modules to control file.
 
- -- Aseman <contact@aseman.org>  Sun, 05 Oct 2014 19:04:58 +0330
+ -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 19:04:58 +0330
 
 kaqaz (1.1.1ubuntu4) trusty; urgency=medium
 
   * Missed qt5-default in control file.
 
- -- Aseman <contact@aseman.org>  Sun, 05 Oct 2014 18:58:10 +0330
+ -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 18:58:10 +0330
 
 kaqaz (1.1.1ubuntu3) trusty; urgency=medium
 
   * Bugfix on dh build rule.
 
- -- Aseman <contact@aseman.org>  Sun, 05 Oct 2014 18:49:33 +0330
+ -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 18:49:33 +0330
 
 kaqaz (1.1.1ubuntu2) trusty; urgency=medium
 
   * Fix problem on qmake on build system.
 
- -- Aseman <contact@aseman.org>  Sun, 05 Oct 2014 18:35:30 +0330
+ -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 18:35:30 +0330
 
 kaqaz (1.1.1ubuntu1) trusty; urgency=medium
 
   * Install location changed to /opt/extras.ubuntu.com
 
- -- Aseman <contact@aseman.org>  Sun, 05 Oct 2014 18:26:00 +0330
+ -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 18:26:00 +0330
 
 kaqaz (1.1.1) trusty; urgency=low
 
   * Initial Release.
 
- -- Aseman <contact@aseman.org>  Sun, 05 Oct 2014 14:16:45 +0330
+ -- Sialan Labs <contact@sialan.org>  Sun, 05 Oct 2014 14:16:45 +0330

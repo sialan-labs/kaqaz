@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Aseman
-    http://aseman.co
+    Copyright (C) 2014 Sialan Labs
+    http://labs.sialan.org
 
     Kaqaz is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 */
 
 import QtQuick 2.0
-import AsemanTools 1.0
+import SialanTools 1.0
 
 Item {
     id: start_splash
@@ -97,7 +97,7 @@ Item {
         function refresh() {
             model.clear()
 
-            var items = ["AsemanSplash.qml","SplashLanguage.qml","SplashTextPage.qml","SplashMessagePage.qml","SplashMessagePage.qml","SplashMessagePage.qml"
+            var items = ["SialanSplash.qml","SplashLanguage.qml","SplashTextPage.qml","SplashMessagePage.qml","SplashMessagePage.qml","SplashMessagePage.qml"
                     ,"SplashTextPage.qml","SplashMessagePage.qml","SplashMessagePage.qml","SplashDone.qml"]
 
             for( var i=0; i<items.length; i++ ) {

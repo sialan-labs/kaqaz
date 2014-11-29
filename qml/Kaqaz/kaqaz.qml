@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Aseman
-    http://aseman.co
+    Copyright (C) 2014 Sialan Labs
+    http://labs.sialan.org
 
     Kaqaz is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,10 +19,10 @@
 import QtQuick 2.2
 import QtMultimedia 5.0
 import QtPositioning 5.2
-import AsemanTools 1.0
+import SialanTools 1.0
 import Kaqaz 1.0
 
-AsemanMain {
+SialanMain {
     id: kaqaz_root
     width: Devices.isTouchDevice? 0 : kaqaz.size.width
     height: Devices.isTouchDevice? 0 : kaqaz.size.height

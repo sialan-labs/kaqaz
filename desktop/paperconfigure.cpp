@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Aseman
-    http://aseman.co
+    Copyright (C) 2014 Sialan Labs
+    http://labs.sialan.org
 
     This project is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 #include "database.h"
 #include "mapwidget.h"
 #include "datewidget.h"
-#include "asemantools/asemancalendarconverter.h"
+#include "sialantools/sialancalendarconverter.h"
 
 #include <QTimer>
 #include <QMenu>

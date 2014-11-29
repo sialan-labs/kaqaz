@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Aseman
-    http://aseman.co
+    Copyright (C) 2014 Sialan Labs
+    http://labs.sialan.org
 
     Kaqaz is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 */
 
 import QtQuick 2.0
-import AsemanTools 1.0
+import SialanTools 1.0
 
 Item {
     width: 100
@@ -117,7 +117,7 @@ Item {
             model.append({"title": "QMapControl", "license": "GNU LGPL v2", "link": "http://sourceforge.net/projects/qmapcontrol/", "description": "QMapControl is a Qt widget which enables your applications to use map data from different sources on desktop or mobiles. Maps can be enriched by custom objects which will be drawn into the map."})
             model.append({"title": "Qt Framework " + Tools.qtVersion(), "license": "GNU GPL v3", "link": "http://qt.io", "description": "Qt is a cross-platform application and UI framework for developers using C++ or QML, a CSS & JavaScript like language."})
             model.append({"title": "QtSingleApplication", "license": "GNU GPL v3", "link": "https://github.com/lycis/QtDropbox/", "description": "The QtSingleApplication component provides support for applications that can be only started once per user."})
-            model.append({"title": "Aseman Qt Tools", "license": "GNU GPL v3", "link": "https://github.com/aseman-labs/aseman-qt-tools", "description": "Some tools, creating for Aseman Qt projects and used on many of Aseman's projects"})
+            model.append({"title": "Sialan Qt Tools", "license": "GNU GPL v3", "link": "https://github.com/sialan-labs/sialan-qt-tools", "description": "Some tools, creating for Sialan Qt projects and used on many of Sialan's projects"})
             model.append({"title": "SimpleQtCryptor", "license": "GNU GPL v3", "link": "http://zo0ok.com/techfindings/archives/595", "description": "Simple Qt encryption library and tools."})
 
             focus = true

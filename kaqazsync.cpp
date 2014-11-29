@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Aseman
-    http://aseman.co
+    Copyright (C) 2014 Sialan Labs
+    http://labs.sialan.org
 
     Kaqaz is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,13 +17,13 @@
 */
 
 #include "kaqazsync.h"
-#include "asemandeveloper_macros.h"
+#include "sialandeveloper_macros.h"
 #include "kaqazmacros.h"
 #include "kaqazdropbox.h"
 #include "qdropboxfile.h"
 #include "database.h"
 #include "kaqaz.h"
-#include "asemantools/asemantools.h"
+#include "sialantools/sialantools.h"
 
 #include <QThread>
 #include <QPointer>
@@ -61,7 +61,7 @@ bool KaqazSync::tokenAvailable() const
 void KaqazSync::setPassword(const QString &pass)
 {
     BEGIN_FNC_DEBUG
-    QString hash = AsemanTools::passToMd5(pass);
+    QString hash = SialanTools::passToMd5(pass);
     p->db->setSyncPassword( hash );
     p->password = hash;
     END_FNC_DEBUG

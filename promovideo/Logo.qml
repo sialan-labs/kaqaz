@@ -14,7 +14,7 @@ Item {
     AnimatedImage {
         anchors.centerIn: kaqaz_img
         anchors.margins: -70
-        source: "files/animated-aseman-icon.gif"
+        source: "files/animated-sialan-icon.gif"
         playing: true
     }
 }

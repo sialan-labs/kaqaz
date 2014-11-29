@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Aseman
-    http://aseman.co
+    Copyright (C) 2014 Sialan Labs
+    http://labs.sialan.org
 
     Kaqaz is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 import QtQuick 2.0
 import Kaqaz 1.0
-import AsemanTools 1.0
+import SialanTools 1.0
 
 Item {
     id: ts_dialog
@@ -198,7 +198,7 @@ Item {
         font.pixelSize: 10*fontsScale
         font.family: SApp.globalFontFamily
         text: "Will save to: " + kaqaz.getTempPath() + ".ts" +
-              "\nPlease send this file to contact@aseman.org after saved."
+              "\nPlease send this file to contact@sialan.org after saved."
     }
 
     Button {

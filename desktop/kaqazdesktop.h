@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Aseman
-    http://aseman.co
+    Copyright (C) 2014 Sialan Labs
+    http://labs.sialan.org
 
     This project is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@
 #include <QMainWindow>
 
 class MimeApps;
-class AsemanTools;
-class AsemanDevices;
+class SialanTools;
+class SialanDevices;
 class KaqazSync;
 class Backuper;
 class Repository;

@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="../qml/Kaqaz/About.qml" line="112"/>
-        <source>(C) 2014 Aseman</source>
+        <source>(C) 2014 Sialan Labs</source>
         <translation>گروه تحقیقاتی سیالان - ۱۳۹۳</translation>
     </message>
     <message>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <location filename="../desktop/aboutdialog.ui" line="197"/>
-        <source>(C) 2014 Aseman</source>
+        <source>(C) 2014 Sialan Labs</source>
         <translation>گروه تحقیقاتی سیالان - ۱۳۹۳</translation>
     </message>
     <message>
@@ -68,23 +68,23 @@
     </message>
     <message>
         <location filename="../desktop/aboutdialog.ui" line="250"/>
-        <source>Aseman</source>
+        <source>Sialan</source>
         <translation>سیالان</translation>
     </message>
     <message>
         <location filename="../desktop/aboutdialog.ui" line="381"/>
-        <source>ASEMAN</source>
-        <translation>ASEMAN</translation>
+        <source>SIALAN LABS</source>
+        <translation>SIALAN LABS</translation>
     </message>
     <message>
         <location filename="../desktop/aboutdialog.ui" line="391"/>
-        <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. </source>
+        <source>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../desktop/aboutdialog.ui" line="417"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;http://aseman.co&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;aseman.co&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;http://aseman.co&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;aseman.co&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;http://labs.sialan.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;labs.sialan.org&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;http://labs.sialan.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;labs.sialan.org&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../desktop/aboutdialog.ui" line="447"/>
@@ -98,10 +98,10 @@
     </message>
 </context>
 <context>
-    <name>AboutAseman</name>
+    <name>AboutSialan</name>
     <message>
-        <location filename="../qml/Kaqaz/AboutAseman.qml" line="103"/>
-        <source>Check Aseman website</source>
+        <location filename="../qml/Kaqaz/AboutSialan.qml" line="103"/>
+        <source>Check Sialan website</source>
         <translation>وب سایت سیالان</translation>
     </message>
 </context>
@@ -242,12 +242,12 @@
 <context>
     <name>CheckBox</name>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/CheckBox.qml" line="101"/>
+        <location filename="../sialantools/qml/SialanTools/CheckBox.qml" line="101"/>
         <source>On</source>
         <translation>فعال</translation>
     </message>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/CheckBox.qml" line="102"/>
+        <location filename="../sialantools/qml/SialanTools/CheckBox.qml" line="102"/>
         <source>Off</source>
         <translation>خاموش</translation>
     </message>
@@ -454,22 +454,22 @@
 <context>
     <name>CursorPicker</name>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/CursorPicker.qml" line="353"/>
+        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="353"/>
         <source>Copy</source>
         <translation>کپی متن</translation>
     </message>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/CursorPicker.qml" line="354"/>
+        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="354"/>
         <source>Cut</source>
         <translation>برش متن</translation>
     </message>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/CursorPicker.qml" line="355"/>
+        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="355"/>
         <source>Paste</source>
         <translation>پیست</translation>
     </message>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/CursorPicker.qml" line="356"/>
+        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="356"/>
         <source>Delete</source>
         <translation>پاک کردن</translation>
     </message>
@@ -503,22 +503,22 @@
 <context>
     <name>DateTimeChooser</name>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/DateTimeChooser.qml" line="177"/>
+        <location filename="../sialantools/qml/SialanTools/DateTimeChooser.qml" line="177"/>
         <source>AM</source>
         <translation>AM</translation>
     </message>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/DateTimeChooser.qml" line="177"/>
+        <location filename="../sialantools/qml/SialanTools/DateTimeChooser.qml" line="177"/>
         <source>PM</source>
         <translation>PM</translation>
     </message>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/DateTimeChooser.qml" line="218"/>
+        <location filename="../sialantools/qml/SialanTools/DateTimeChooser.qml" line="218"/>
         <source>Date</source>
         <translation>تاریخ</translation>
     </message>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/DateTimeChooser.qml" line="229"/>
+        <location filename="../sialantools/qml/SialanTools/DateTimeChooser.qml" line="229"/>
         <source>Time</source>
         <translation>زمان</translation>
     </message>
@@ -750,27 +750,27 @@
 <context>
     <name>GetPassDialog</name>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/GetPassDialog.qml" line="171"/>
+        <location filename="../sialantools/qml/SialanTools/GetPassDialog.qml" line="171"/>
         <source>Paste</source>
         <translation>پیست</translation>
     </message>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/GetPassDialog.qml" line="259"/>
+        <location filename="../sialantools/qml/SialanTools/GetPassDialog.qml" line="259"/>
         <source>Please enter the password</source>
         <translation>کلمه‌ی عبور را وارد کنید</translation>
     </message>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/GetPassDialog.qml" line="260"/>
+        <location filename="../sialantools/qml/SialanTools/GetPassDialog.qml" line="260"/>
         <source>password</source>
         <translation>کلمه‌ی عبور</translation>
     </message>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/GetPassDialog.qml" line="261"/>
+        <location filename="../sialantools/qml/SialanTools/GetPassDialog.qml" line="261"/>
         <source>Done</source>
         <translation>تایید</translation>
     </message>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/GetPassDialog.qml" line="262"/>
+        <location filename="../sialantools/qml/SialanTools/GetPassDialog.qml" line="262"/>
         <source>Incorrect!</source>
         <translation>اشتباه است!</translation>
     </message>
@@ -817,7 +817,7 @@
 <context>
     <name>Header</name>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/Header.qml" line="91"/>
+        <location filename="../sialantools/qml/SialanTools/Header.qml" line="91"/>
         <source>Back</source>
         <translation>برگرد</translation>
     </message>
@@ -915,8 +915,8 @@ left to select categories.</source>
 <context>
     <name>Kaqaz</name>
     <message>
-        <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</translation>
+        <source>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
+        <translation>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</translation>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
@@ -1524,7 +1524,7 @@ and move them on screen</source>
 <context>
     <name>PasteButton</name>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/PasteButton.qml" line="45"/>
+        <location filename="../sialantools/qml/SialanTools/PasteButton.qml" line="45"/>
         <source>Paste</source>
         <translation>پیست</translation>
     </message>
@@ -1557,7 +1557,7 @@ and move them on screen</source>
     </message>
     <message>
         <location filename="../qml/Kaqaz/Preference.qml" line="114"/>
-        <source>About Aseman</source>
+        <source>About Sialan</source>
         <translation>درباره سیالان</translation>
     </message>
     <message>
@@ -1622,259 +1622,259 @@ and move them on screen</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="215"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="215"/>
         <source>January</source>
         <translation>ژانویه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="218"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="218"/>
         <source>February</source>
         <translation>فوریه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="221"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="221"/>
         <source>March</source>
         <translation>مارس</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="224"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="224"/>
         <source>April</source>
         <translation>آوریل</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="227"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="227"/>
         <source>May</source>
         <translation>مه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="230"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="230"/>
         <source>June</source>
         <translation>ژوئن</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="233"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="233"/>
         <source>July</source>
         <translation>ژوئیه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="236"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="236"/>
         <source>August</source>
         <translation>اوت</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="239"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="239"/>
         <source>September</source>
         <translation>سپتامبر</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="242"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="242"/>
         <source>October</source>
         <translation>اکتبر</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="245"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="245"/>
         <source>November</source>
         <translation>نوامبر</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="248"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="248"/>
         <source>December</source>
         <translation>دسامبر</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="260"/>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="622"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="260"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="622"/>
         <source>Sunday</source>
         <translation>یکشنبه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="263"/>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="625"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="263"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="625"/>
         <source>Monday</source>
         <translation>دوشنبه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="266"/>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="628"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="266"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="628"/>
         <source>Tuesday</source>
         <translation>سه‌شنبه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="269"/>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="631"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="269"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="631"/>
         <source>Wednesday</source>
         <translation>چهارشنبه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="272"/>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="634"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="272"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="634"/>
         <source>Thuresday</source>
         <translation>پنج‌شنبه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="275"/>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="637"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="275"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="637"/>
         <source>Friday</source>
         <translation>جمعه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="278"/>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="619"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="278"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="619"/>
         <source>Saturday</source>
         <translation>شنبه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="392"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="392"/>
         <source>Farvardin</source>
         <translation>فروردین</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="395"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="395"/>
         <source>Ordibehesht</source>
         <translation>اردیبهشت</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="398"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="398"/>
         <source>Khordad</source>
         <translation>خرداد</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="401"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="401"/>
         <source>Tir</source>
         <translation>تیر</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="404"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="404"/>
         <source>Mordad</source>
         <translation>مرداد</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="407"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="407"/>
         <source>Shahrivar</source>
         <translation>شهریور</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="410"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="410"/>
         <source>Mehr</source>
         <translation>مهر</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="413"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="413"/>
         <source>Abaan</source>
         <translation>آبان</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="416"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="416"/>
         <source>Aazar</source>
         <translation>آذر</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="419"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="419"/>
         <source>Dey</source>
         <translation>دی</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="422"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="422"/>
         <source>Bahman</source>
         <translation>بهمن</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="425"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="425"/>
         <source>Esfand</source>
         <translation>اسفند</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="437"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="437"/>
         <source>Shanbe</source>
         <translation>شنبه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="440"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="440"/>
         <source>1Shanbe</source>
         <translation>یک‌شنبه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="443"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="443"/>
         <source>2Shanbe</source>
         <translation>دوشنبه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="446"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="446"/>
         <source>3Shanbe</source>
         <translation>سه‌شنبه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="449"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="449"/>
         <source>4Shanbe</source>
         <translation>چهارشنبه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="452"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="452"/>
         <source>5Shanbe</source>
         <translation>پنج‌شنبه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="455"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="455"/>
         <source>Jome</source>
         <translation>جمعه</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="574"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="574"/>
         <source>Moharram</source>
         <translation>محرم</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="577"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="577"/>
         <source>Safar</source>
         <translation>wtv</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="580"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="580"/>
         <source>Rabiol Avval</source>
         <translation>ربیع‌الاول</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="583"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="583"/>
         <source>Rabio Sani</source>
         <translation>ربیع‌الثانی</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="586"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="586"/>
         <source>Jamadiol Aval</source>
         <translation>جمادی‌الاول</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="589"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="589"/>
         <source>Jamadio Sani</source>
         <translation>جمادی‌الثانی</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="592"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="592"/>
         <source>Rajab</source>
         <translation>رجب</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="595"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="595"/>
         <source>Shaban</source>
         <translation>شعبان</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="598"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="598"/>
         <source>Ramadan</source>
         <translation>رمضان</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="601"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="601"/>
         <source>Shaval</source>
         <translation>شوال</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="604"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="604"/>
         <source>Zighade</source>
         <translation>ذی‌القعده</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconvertercore.cpp" line="607"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="607"/>
         <source>Zihaje</source>
         <translation>ذی‌الحجه</translation>
     </message>
@@ -2198,88 +2198,88 @@ and move them on screen</source>
 <context>
     <name>ShareDialog</name>
     <message>
-        <location filename="../asemantools/qml/AsemanTools/ShareDialog.qml" line="55"/>
+        <location filename="../sialantools/qml/SialanTools/ShareDialog.qml" line="55"/>
         <source>Select Application</source>
         <translation>انتخاب کنید</translation>
     </message>
 </context>
 <context>
-    <name>AsemanCalendarConverter</name>
+    <name>SialanCalendarConverter</name>
     <message>
-        <location filename="../asemantools/asemancalendarconverter.cpp" line="61"/>
+        <location filename="../sialantools/sialancalendarconverter.cpp" line="61"/>
         <source>Gregorian</source>
         <translation>میلادی</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconverter.cpp" line="64"/>
+        <location filename="../sialantools/sialancalendarconverter.cpp" line="64"/>
         <source>Jalali</source>
         <translation>جلالی</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemancalendarconverter.cpp" line="67"/>
+        <location filename="../sialantools/sialancalendarconverter.cpp" line="67"/>
         <source>Hijri</source>
         <translation>هجری قمری</translation>
     </message>
 </context>
 <context>
-    <name>AsemanTools</name>
+    <name>SialanTools</name>
     <message>
-        <location filename="../asemantools/asemantools.cpp" line="52"/>
+        <location filename="../sialantools/sialantools.cpp" line="52"/>
         <source>0</source>
         <translation>۰</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemantools.cpp" line="53"/>
+        <location filename="../sialantools/sialantools.cpp" line="53"/>
         <source>1</source>
         <translation>۱</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemantools.cpp" line="54"/>
+        <location filename="../sialantools/sialantools.cpp" line="54"/>
         <source>2</source>
         <translation>۲</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemantools.cpp" line="55"/>
+        <location filename="../sialantools/sialantools.cpp" line="55"/>
         <source>3</source>
         <translation>۳</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemantools.cpp" line="56"/>
+        <location filename="../sialantools/sialantools.cpp" line="56"/>
         <source>4</source>
         <translation>۴</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemantools.cpp" line="57"/>
+        <location filename="../sialantools/sialantools.cpp" line="57"/>
         <source>5</source>
         <translation>۵</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemantools.cpp" line="58"/>
+        <location filename="../sialantools/sialantools.cpp" line="58"/>
         <source>6</source>
         <translation>۶</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemantools.cpp" line="59"/>
+        <location filename="../sialantools/sialantools.cpp" line="59"/>
         <source>7</source>
         <translation>۷</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemantools.cpp" line="60"/>
+        <location filename="../sialantools/sialantools.cpp" line="60"/>
         <source>8</source>
         <translation>۸</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemantools.cpp" line="61"/>
+        <location filename="../sialantools/sialantools.cpp" line="61"/>
         <source>9</source>
         <translation>۹</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemantools.cpp" line="96"/>
-        <source>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation>Aseman is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</translation>
+        <location filename="../sialantools/sialantools.cpp" line="96"/>
+        <source>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
+        <translation>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</translation>
     </message>
     <message>
-        <location filename="../asemantools/asemantools.cpp" line="97"/>
+        <location filename="../sialantools/sialantools.cpp" line="97"/>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
         <translation>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</translation>
     </message>

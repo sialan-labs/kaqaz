@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Aseman
-    http://aseman.co
+    Copyright (C) 2014 Sialan Labs
+    http://labs.sialan.org
 
     Kaqaz is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 */
 
 import QtQuick 2.2
-import AsemanTools 1.0
+import SialanTools 1.0
 
 Item {
     width: 100
@@ -111,7 +111,7 @@ Item {
             }
             model.append({"name": qsTr("Open Source Projects"), "cmd": "OpenSourceProjects.qml" })
             model.append({"name": qsTr("About Kaqaz"), "cmd": "About.qml" })
-            model.append({"name": qsTr("About Aseman"), "cmd": "AboutAseman.qml" })
+            model.append({"name": qsTr("About Sialan"), "cmd": "AboutSialan.qml" })
             focus = true
 
             title.text = qsTr("Preferences")

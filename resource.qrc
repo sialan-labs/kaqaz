@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/Kaqaz/About.qml</file>
-        <file>qml/Kaqaz/AboutAseman.qml</file>
+        <file>qml/Kaqaz/AboutSialan.qml</file>
         <file>qml/Kaqaz/AddGroupDialog.qml</file>
         <file>qml/Kaqaz/AttachInsertDialog.qml</file>
         <file>qml/Kaqaz/AttachMenu.qml</file>
@@ -67,7 +67,7 @@
         <file>qml/Kaqaz/SearchPaperTypeDomain.qml</file>
         <file>qml/Kaqaz/SearchTimeDomain.qml</file>
         <file>qml/Kaqaz/Security.qml</file>
-        <file>qml/Kaqaz/AsemanSplash.qml</file>
+        <file>qml/Kaqaz/SialanSplash.qml</file>
         <file>qml/Kaqaz/SideBar.qml</file>
         <file>qml/Kaqaz/SideBarList.qml</file>
         <file>qml/Kaqaz/SplashDone.qml</file>
@@ -138,7 +138,7 @@
         <file>qml/Kaqaz/files/scroll-down.png</file>
         <file>qml/Kaqaz/files/search.png</file>
         <file>qml/Kaqaz/files/shadow.png</file>
-        <file>qml/Kaqaz/files/aseman.png</file>
+        <file>qml/Kaqaz/files/sialan.png</file>
         <file>qml/Kaqaz/files/text.png</file>
         <file>qml/Kaqaz/files/trash.png</file>
         <file>qml/Kaqaz/files/warning.png</file>

@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2014 Aseman
-    http://aseman.co
+    Copyright (C) 2014 Sialan Labs
+    http://labs.sialan.org
 
     This project is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 #include "todopapers.h"
 #include "todopapersitem.h"
-#include "asemantools/asemantools.h"
+#include "sialantools/sialantools.h"
 
 #include <QScrollArea>
 #include <QHBoxLayout>
@@ -78,7 +78,7 @@ void ToDoPapers::setText(const QString &text)
         return;
 
     p->text = text;
-    setLayoutDirection( AsemanTools::directionOf(text) );
+    setLayoutDirection( SialanTools::directionOf(text) );
 
     cleanAndRefresh();
     emit textChanged();
