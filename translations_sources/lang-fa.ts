@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Based on</source>
-        <translation>تحت</translation>
+        <translation type="obsolete">تحت</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/About.qml" line="113"/>
@@ -242,12 +242,12 @@
 <context>
     <name>CheckBox</name>
     <message>
-        <location filename="../sialantools/qml/SialanTools/CheckBox.qml" line="101"/>
+        <location filename="../sialantools/qml/SialanTools/CheckBox.qml" line="107"/>
         <source>On</source>
         <translation>فعال</translation>
     </message>
     <message>
-        <location filename="../sialantools/qml/SialanTools/CheckBox.qml" line="102"/>
+        <location filename="../sialantools/qml/SialanTools/CheckBox.qml" line="108"/>
         <source>Off</source>
         <translation>خاموش</translation>
     </message>
@@ -454,22 +454,22 @@
 <context>
     <name>CursorPicker</name>
     <message>
-        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="353"/>
+        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="360"/>
         <source>Copy</source>
         <translation>کپی متن</translation>
     </message>
     <message>
-        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="354"/>
+        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="361"/>
         <source>Cut</source>
         <translation>برش متن</translation>
     </message>
     <message>
-        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="355"/>
+        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="362"/>
         <source>Paste</source>
         <translation>پیست</translation>
     </message>
     <message>
-        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="356"/>
+        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="363"/>
         <source>Delete</source>
         <translation>پاک کردن</translation>
     </message>
@@ -687,6 +687,28 @@
     </message>
 </context>
 <context>
+    <name>FavoriteMessage</name>
+    <message>
+        <location filename="../qml/Kaqaz/FavoriteMessage.qml" line="18"/>
+        <source>Thank you for choosing Kaqaz.
+If you are like this app, please rate us on Google play or Bazaar.
+Thank you.</source>
+        <translation>از شما بخاطر انتخاب کاغذ متشکریم.
+اگر از این برنامه خوشتان آمده، برای حمایت از ما لطفا به کاغذ در بازار امتیاز دهید.
+متشکریم.</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/FavoriteMessage.qml" line="29"/>
+        <source>Cancel</source>
+        <translation>لغو</translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/FavoriteMessage.qml" line="41"/>
+        <source>OK</source>
+        <translation>برو به بازار</translation>
+    </message>
+</context>
+<context>
     <name>GalleryDialog</name>
     <message>
         <location filename="../qml/Kaqaz/GalleryDialog.qml" line="98"/>
@@ -817,7 +839,7 @@
 <context>
     <name>Header</name>
     <message>
-        <location filename="../sialantools/qml/SialanTools/Header.qml" line="91"/>
+        <location filename="../sialantools/qml/SialanTools/Header.qml" line="92"/>
         <source>Back</source>
         <translation>برگرد</translation>
     </message>
@@ -916,63 +938,63 @@ left to select categories.</source>
     <name>Kaqaz</name>
     <message>
         <source>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</source>
-        <translation>Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</translation>
+        <translation type="obsolete">Sialan Labs is a not-for-profit research and software development team launched in February 2014 focusing on development of products, technologies and solutions in order to publish them as open-source projects accessible to all people in the universe. Currently, we are focusing on design and development of software applications and tools which have direct connection with end users.</translation>
     </message>
     <message>
         <source>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</source>
-        <translation>By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</translation>
+        <translation type="obsolete">By enabling innovative projects and distributing software to millions of users globally, the lab is working to accelerate the growth of high-impact open source software projects and promote an open source culture of accessibility and increased productivity around the world. The lab partners with industry leaders and policy makers to bring open source technologies to new sectors, including education, health and government.</translation>
     </message>
     <message>
         <source>0</source>
-        <translation>۰</translation>
+        <translation type="obsolete">۰</translation>
     </message>
     <message>
         <source>1</source>
-        <translation>۱</translation>
+        <translation type="obsolete">۱</translation>
     </message>
     <message>
         <source>2</source>
-        <translation>۲</translation>
+        <translation type="obsolete">۲</translation>
     </message>
     <message>
         <source>3</source>
-        <translation>۳</translation>
+        <translation type="obsolete">۳</translation>
     </message>
     <message>
         <source>4</source>
-        <translation>۴</translation>
+        <translation type="obsolete">۴</translation>
     </message>
     <message>
         <source>5</source>
-        <translation>۵</translation>
+        <translation type="obsolete">۵</translation>
     </message>
     <message>
         <source>6</source>
-        <translation>۶</translation>
+        <translation type="obsolete">۶</translation>
     </message>
     <message>
         <source>7</source>
-        <translation>۷</translation>
+        <translation type="obsolete">۷</translation>
     </message>
     <message>
         <source>8</source>
-        <translation>۸</translation>
+        <translation type="obsolete">۸</translation>
     </message>
     <message>
         <source>9</source>
-        <translation>۹</translation>
+        <translation type="obsolete">۹</translation>
     </message>
     <message>
         <source>Gregorian</source>
-        <translation>میلادی</translation>
+        <translation type="obsolete">میلادی</translation>
     </message>
     <message>
         <source>Jalali</source>
-        <translation>جلالی</translation>
+        <translation type="obsolete">جلالی</translation>
     </message>
     <message>
         <source>Hijri</source>
-        <translation>هجری قمری</translation>
+        <translation type="obsolete">هجری قمری</translation>
     </message>
 </context>
 <context>
@@ -1102,12 +1124,12 @@ and move them on screen</source>
 <context>
     <name>MainItem</name>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="139"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="149"/>
         <source>Press again to exit</source>
         <translation>برای خروج دوباره کلید را فشار دهید</translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="564"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="574"/>
         <source>List is empty</source>
         <translation>لیست خالی است</translation>
     </message>
@@ -1139,19 +1161,19 @@ and move them on screen</source>
     <name>MapView</name>
     <message>
         <source>Unknown point</source>
-        <translation>نقطه‌ی ناشناخته</translation>
+        <translation type="obsolete">نقطه‌ی ناشناخته</translation>
     </message>
     <message>
         <source>Loading Map...</source>
-        <translation>در حال بارگذاری نقشه...</translation>
+        <translation type="obsolete">در حال بارگذاری نقشه...</translation>
     </message>
     <message>
         <source>Unpin</source>
-        <translation>حذف نقشه</translation>
+        <translation type="obsolete">حذف نقشه</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>باز کردن</translation>
+        <translation type="obsolete">باز کردن</translation>
     </message>
 </context>
 <context>
@@ -1184,7 +1206,7 @@ and move them on screen</source>
     <name>OpenSourceProjects</name>
     <message>
         <source>Open source projects</source>
-        <translation>پروزه‌های منبع باز</translation>
+        <translation type="obsolete">پروزه‌های منبع باز</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/OpenSourceProjects.qml" line="138"/>
@@ -1344,43 +1366,43 @@ and move them on screen</source>
     </message>
     <message>
         <source>Share Paper</source>
-        <translation>اشتراک گذاری</translation>
+        <translation type="obsolete">اشتراک گذاری</translation>
     </message>
     <message>
         <source>Force sync</source>
-        <translation>همگام سازی</translation>
+        <translation type="obsolete">همگام سازی</translation>
     </message>
     <message>
         <source>Paper Type</source>
-        <translation>نوع کاغذ</translation>
+        <translation type="obsolete">نوع کاغذ</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation>معمولی</translation>
+        <translation type="obsolete">معمولی</translation>
     </message>
     <message>
         <source>To-Do</source>
-        <translation>لیست</translation>
+        <translation type="obsolete">لیست</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation>تایید</translation>
+        <translation type="obsolete">تایید</translation>
     </message>
     <message>
         <source>Update Date</source>
-        <translation>به روزرسانی تاریخ</translation>
+        <translation type="obsolete">به روزرسانی تاریخ</translation>
     </message>
     <message>
         <source>Update Location</source>
-        <translation>به روزرسانی مکان</translation>
+        <translation type="obsolete">به روزرسانی مکان</translation>
     </message>
     <message>
         <source>Are you sure?</source>
-        <translation>آیا مطمئنی؟</translation>
+        <translation type="obsolete">آیا مطمئنی؟</translation>
     </message>
     <message>
         <source>Delete Paper</source>
-        <translation>پاک کردن این کاغذ</translation>
+        <translation type="obsolete">پاک کردن این کاغذ</translation>
     </message>
 </context>
 <context>
@@ -1553,7 +1575,7 @@ and move them on screen</source>
     </message>
     <message>
         <source>Open source projects</source>
-        <translation>پروزه‌های منبع باز</translation>
+        <translation type="obsolete">پروزه‌های منبع باز</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/Preference.qml" line="114"/>
@@ -1622,259 +1644,259 @@ and move them on screen</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="215"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="237"/>
         <source>January</source>
         <translation>ژانویه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="218"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="240"/>
         <source>February</source>
         <translation>فوریه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="221"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="243"/>
         <source>March</source>
         <translation>مارس</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="224"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="246"/>
         <source>April</source>
         <translation>آوریل</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="227"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="249"/>
         <source>May</source>
         <translation>مه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="230"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="252"/>
         <source>June</source>
         <translation>ژوئن</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="233"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="255"/>
         <source>July</source>
         <translation>ژوئیه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="236"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="258"/>
         <source>August</source>
         <translation>اوت</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="239"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="261"/>
         <source>September</source>
         <translation>سپتامبر</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="242"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="264"/>
         <source>October</source>
         <translation>اکتبر</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="245"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="267"/>
         <source>November</source>
         <translation>نوامبر</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="248"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="270"/>
         <source>December</source>
         <translation>دسامبر</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="260"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="622"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="282"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="644"/>
         <source>Sunday</source>
         <translation>یکشنبه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="263"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="625"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="285"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="647"/>
         <source>Monday</source>
         <translation>دوشنبه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="266"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="628"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="288"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="650"/>
         <source>Tuesday</source>
         <translation>سه‌شنبه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="269"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="631"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="291"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="653"/>
         <source>Wednesday</source>
         <translation>چهارشنبه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="272"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="634"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="294"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="656"/>
         <source>Thuresday</source>
         <translation>پنج‌شنبه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="275"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="637"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="297"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="659"/>
         <source>Friday</source>
         <translation>جمعه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="278"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="619"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="300"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="641"/>
         <source>Saturday</source>
         <translation>شنبه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="392"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="414"/>
         <source>Farvardin</source>
         <translation>فروردین</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="395"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="417"/>
         <source>Ordibehesht</source>
         <translation>اردیبهشت</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="398"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="420"/>
         <source>Khordad</source>
         <translation>خرداد</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="401"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="423"/>
         <source>Tir</source>
         <translation>تیر</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="404"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="426"/>
         <source>Mordad</source>
         <translation>مرداد</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="407"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="429"/>
         <source>Shahrivar</source>
         <translation>شهریور</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="410"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="432"/>
         <source>Mehr</source>
         <translation>مهر</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="413"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="435"/>
         <source>Abaan</source>
         <translation>آبان</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="416"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="438"/>
         <source>Aazar</source>
         <translation>آذر</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="419"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="441"/>
         <source>Dey</source>
         <translation>دی</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="422"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="444"/>
         <source>Bahman</source>
         <translation>بهمن</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="425"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="447"/>
         <source>Esfand</source>
         <translation>اسفند</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="437"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="459"/>
         <source>Shanbe</source>
         <translation>شنبه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="440"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="462"/>
         <source>1Shanbe</source>
         <translation>یک‌شنبه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="443"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="465"/>
         <source>2Shanbe</source>
         <translation>دوشنبه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="446"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="468"/>
         <source>3Shanbe</source>
         <translation>سه‌شنبه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="449"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="471"/>
         <source>4Shanbe</source>
         <translation>چهارشنبه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="452"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="474"/>
         <source>5Shanbe</source>
         <translation>پنج‌شنبه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="455"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="477"/>
         <source>Jome</source>
         <translation>جمعه</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="574"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="596"/>
         <source>Moharram</source>
         <translation>محرم</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="577"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="599"/>
         <source>Safar</source>
         <translation>wtv</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="580"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="602"/>
         <source>Rabiol Avval</source>
         <translation>ربیع‌الاول</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="583"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="605"/>
         <source>Rabio Sani</source>
         <translation>ربیع‌الثانی</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="586"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="608"/>
         <source>Jamadiol Aval</source>
         <translation>جمادی‌الاول</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="589"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="611"/>
         <source>Jamadio Sani</source>
         <translation>جمادی‌الثانی</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="592"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="614"/>
         <source>Rajab</source>
         <translation>رجب</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="595"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="617"/>
         <source>Shaban</source>
         <translation>شعبان</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="598"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="620"/>
         <source>Ramadan</source>
         <translation>رمضان</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="601"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="623"/>
         <source>Shaval</source>
         <translation>شوال</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="604"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="626"/>
         <source>Zighade</source>
         <translation>ذی‌القعده</translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="607"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="629"/>
         <source>Zihaje</source>
         <translation>ذی‌الحجه</translation>
     </message>
@@ -1937,15 +1959,15 @@ and move them on screen</source>
     <name>SearchGeoDomain</name>
     <message>
         <source>No Location</source>
-        <translation>غیرفعال</translation>
+        <translation type="obsolete">غیرفعال</translation>
     </message>
     <message>
         <source>Current Location</source>
-        <translation>مکان جغرافیایی فعلی</translation>
+        <translation type="obsolete">مکان جغرافیایی فعلی</translation>
     </message>
     <message>
         <source>Select on Map (Soon)</source>
-        <translation>انتخاب بر روی نقشه (به زودی)</translation>
+        <translation type="obsolete">انتخاب بر روی نقشه (به زودی)</translation>
     </message>
 </context>
 <context>
@@ -2459,11 +2481,11 @@ and move them on screen</source>
     <name>TranslationEditor</name>
     <message>
         <source>Just Save</source>
-        <translation>فقط ذخیره کن</translation>
+        <translation type="obsolete">فقط ذخیره کن</translation>
     </message>
     <message>
         <source>Finish and Send</source>
-        <translation>پایان و ارسال</translation>
+        <translation type="obsolete">پایان و ارسال</translation>
     </message>
     <message>
         <location filename="../qml/Kaqaz/TranslationEditor.qml" line="177"/>
@@ -2554,18 +2576,18 @@ and move them on screen</source>
 Kaqaz is coming soon for smart phones.
 
 Signup below to know when Kaqaz is available for smart phones!</source>
-        <translation>این نسخه از کاغذ با موبایل‌ها سازگار نیست.
+        <translation type="obsolete">این نسخه از کاغذ با موبایل‌ها سازگار نیست.
 کاغذ نسخه‌ی مخصوص موبایل به زودی منتشر میشه.
 
 اگر دوست داری موقعی که نسخه‌ی مخصوص موبایل کاغذ منتشر شد مطلع بشی، به کمک فورم زیر ثبت‌نام کن!</translation>
     </message>
     <message>
         <source>Enter Your Email Address:</source>
-        <translation>ایمیل:</translation>
+        <translation type="obsolete">ایمیل:</translation>
     </message>
     <message>
         <source>Keep me posted!</source>
-        <translation>منو خبر کن!</translation>
+        <translation type="obsolete">منو خبر کن!</translation>
     </message>
 </context>
 </TS>

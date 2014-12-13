@@ -150,6 +150,12 @@ Kaqaz::Kaqaz(QObject *parent) :
     p->java_layer = SialanJavaLayer::instance();
 #endif
 
+    QPalette masterPalette;
+    masterPalette.setColor(QPalette::Highlight,"#0d80ec");
+    masterPalette.setColor(QPalette::HighlightedText,"#ffffff");
+
+    QGuiApplication::setPalette(masterPalette);
+
     QDir().mkpath(CAMERA_PATH);
 
     p->filesystem = new QFileSystemWatcher(this);
@@ -930,6 +936,20 @@ void Kaqaz::setFullscreen(bool stt)
 bool Kaqaz::fullscreen() const
 {
     return p->fullscreen;
+}
+
+int Kaqaz::runCount() const
+{
+    return settings()->value("General/runCount",0).toInt();
+}
+
+void Kaqaz::setRunCount(int cnt)
+{
+    if( runCount() == cnt )
+        return;
+
+    settings()->setValue("General/runCount", cnt);
+    emit runCountChanged();
 }
 
 QStringList Kaqaz::dirEntryFiles(const QString &path, const QStringList & filters)

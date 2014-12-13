@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.0">
 <context>
     <name>About</name>
     <message>
@@ -238,12 +238,12 @@
 <context>
     <name>CheckBox</name>
     <message>
-        <location filename="../sialantools/qml/SialanTools/CheckBox.qml" line="101"/>
+        <location filename="../sialantools/qml/SialanTools/CheckBox.qml" line="107"/>
         <source>On</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/qml/SialanTools/CheckBox.qml" line="102"/>
+        <location filename="../sialantools/qml/SialanTools/CheckBox.qml" line="108"/>
         <source>Off</source>
         <translation type="unfinished"></translation>
     </message>
@@ -450,22 +450,22 @@
 <context>
     <name>CursorPicker</name>
     <message>
-        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="353"/>
+        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="360"/>
         <source>Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="354"/>
+        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="361"/>
         <source>Cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="355"/>
+        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="362"/>
         <source>Paste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="356"/>
+        <location filename="../sialantools/qml/SialanTools/CursorPicker.qml" line="363"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -683,6 +683,26 @@
     </message>
 </context>
 <context>
+    <name>FavoriteMessage</name>
+    <message>
+        <location filename="../qml/Kaqaz/FavoriteMessage.qml" line="18"/>
+        <source>Thank you for choosing Kaqaz.
+If you are like this app, please rate us on Google play or Bazaar.
+Thank you.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/FavoriteMessage.qml" line="29"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/Kaqaz/FavoriteMessage.qml" line="41"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GalleryDialog</name>
     <message>
         <location filename="../qml/Kaqaz/GalleryDialog.qml" line="98"/>
@@ -813,7 +833,7 @@
 <context>
     <name>Header</name>
     <message>
-        <location filename="../sialantools/qml/SialanTools/Header.qml" line="91"/>
+        <location filename="../sialantools/qml/SialanTools/Header.qml" line="92"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1031,12 +1051,12 @@ and move them on screen</source>
 <context>
     <name>MainItem</name>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="139"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="149"/>
         <source>Press again to exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Kaqaz/MainItem.qml" line="564"/>
+        <location filename="../qml/Kaqaz/MainItem.qml" line="574"/>
         <source>List is empty</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1484,259 +1504,259 @@ and move them on screen</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="215"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="237"/>
         <source>January</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="218"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="240"/>
         <source>February</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="221"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="243"/>
         <source>March</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="224"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="246"/>
         <source>April</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="227"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="249"/>
         <source>May</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="230"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="252"/>
         <source>June</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="233"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="255"/>
         <source>July</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="236"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="258"/>
         <source>August</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="239"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="261"/>
         <source>September</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="242"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="264"/>
         <source>October</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="245"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="267"/>
         <source>November</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="248"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="270"/>
         <source>December</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="260"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="622"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="282"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="644"/>
         <source>Sunday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="263"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="625"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="285"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="647"/>
         <source>Monday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="266"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="628"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="288"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="650"/>
         <source>Tuesday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="269"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="631"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="291"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="653"/>
         <source>Wednesday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="272"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="634"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="294"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="656"/>
         <source>Thuresday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="275"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="637"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="297"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="659"/>
         <source>Friday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="278"/>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="619"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="300"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="641"/>
         <source>Saturday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="392"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="414"/>
         <source>Farvardin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="395"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="417"/>
         <source>Ordibehesht</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="398"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="420"/>
         <source>Khordad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="401"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="423"/>
         <source>Tir</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="404"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="426"/>
         <source>Mordad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="407"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="429"/>
         <source>Shahrivar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="410"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="432"/>
         <source>Mehr</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="413"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="435"/>
         <source>Abaan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="416"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="438"/>
         <source>Aazar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="419"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="441"/>
         <source>Dey</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="422"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="444"/>
         <source>Bahman</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="425"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="447"/>
         <source>Esfand</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="437"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="459"/>
         <source>Shanbe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="440"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="462"/>
         <source>1Shanbe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="443"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="465"/>
         <source>2Shanbe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="446"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="468"/>
         <source>3Shanbe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="449"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="471"/>
         <source>4Shanbe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="452"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="474"/>
         <source>5Shanbe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="455"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="477"/>
         <source>Jome</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="574"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="596"/>
         <source>Moharram</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="577"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="599"/>
         <source>Safar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="580"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="602"/>
         <source>Rabiol Avval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="583"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="605"/>
         <source>Rabio Sani</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="586"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="608"/>
         <source>Jamadiol Aval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="589"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="611"/>
         <source>Jamadio Sani</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="592"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="614"/>
         <source>Rajab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="595"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="617"/>
         <source>Shaban</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="598"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="620"/>
         <source>Ramadan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="601"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="623"/>
         <source>Shaval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="604"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="626"/>
         <source>Zighade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="607"/>
+        <location filename="../sialantools/sialancalendarconvertercore.cpp" line="629"/>
         <source>Zihaje</source>
         <translation type="unfinished"></translation>
     </message>

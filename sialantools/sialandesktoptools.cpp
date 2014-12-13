@@ -201,9 +201,9 @@ bool SialanDesktopTools::titleBarIsDark() const
         return true;
 }
 
-#ifdef DESKTOP_DEVICE
 QString SialanDesktopTools::getOpenFileName(QWindow *window, const QString & title, const QString &filter, const QString &startPath)
 {
+#ifdef DESKTOP_DEVICE
     const int dsession = desktopSession();
     switch( dsession )
     {
@@ -243,10 +243,18 @@ QString SialanDesktopTools::getOpenFileName(QWindow *window, const QString & tit
     }
 
     return QString();
+#else
+    Q_UNUSED(window)
+    Q_UNUSED(title)
+    Q_UNUSED(filter)
+    Q_UNUSED(startPath)
+    return QString();
+#endif
 }
 
 QString SialanDesktopTools::getSaveFileName(QWindow *window, const QString &title, const QString &filter, const QString &startPath)
 {
+#ifdef DESKTOP_DEVICE
     const int dsession = desktopSession();
     switch( dsession )
     {
@@ -286,10 +294,18 @@ QString SialanDesktopTools::getSaveFileName(QWindow *window, const QString &titl
     }
 
     return QString();
+#else
+    Q_UNUSED(window)
+    Q_UNUSED(title)
+    Q_UNUSED(filter)
+    Q_UNUSED(startPath)
+    return QString();
+#endif
 }
 
 QString SialanDesktopTools::getExistingDirectory(QWindow *window, const QString &title, const QString &startPath)
 {
+#ifdef DESKTOP_DEVICE
     const int dsession = desktopSession();
     switch( dsession )
     {
@@ -329,8 +345,13 @@ QString SialanDesktopTools::getExistingDirectory(QWindow *window, const QString 
     }
 
     return QString();
-}
+#else
+    Q_UNUSED(window)
+    Q_UNUSED(title)
+    Q_UNUSED(startPath)
+    return QString();
 #endif
+}
 
 SialanDesktopTools::~SialanDesktopTools()
 {

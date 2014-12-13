@@ -111,6 +111,10 @@ Rectangle {
     Connections {
         target: SApp
         onBackRequest: {
+            if(timer_delayer.running)
+                return
+
+            timer_delayer.start()
             var res = BackHandler.back()
             if( !res && !Devices.isDesktop )
                 back_attemper.show()
@@ -118,6 +122,12 @@ Rectangle {
     }
 
     Keys.onEscapePressed: SApp.back()
+
+    Timer {
+        id: timer_delayer
+        interval: 300
+        repeat: false
+    }
 
     Timer {
         id: back_attemper

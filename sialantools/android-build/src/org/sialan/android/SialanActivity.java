@@ -2,6 +2,16 @@
     Copyright (c) 2012-2013, BogDan Vatra <bogdan@kde.org>
     Contact: http://www.qt-project.org/legal
 
+    Commercial License Usage
+    Licensees holding valid commercial Qt licenses may use this file in
+    accordance with the commercial license agreement provided with the
+    Software or, alternatively, in accordance with the terms contained in
+    a written agreement between you and Digia.  For licensing terms and
+    conditions see http://qt.digia.com/licensing.  For further information
+    use the contact form at http://qt.digia.com/contact-us.
+
+    BSD License Usage
+    Alternatively, this file may be used under the BSD license as follows:
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions
     are met:
@@ -34,6 +44,7 @@ import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,12 +63,15 @@ import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.PackageInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources.Theme;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -85,16 +99,10 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PackageInfo;
 
-//@ANDROID-11
-//QtCreator import android.app.Fragment;
-//QtCreator import android.view.ActionMode;
-//QtCreator import android.view.ActionMode.Callback;
-//@ANDROID-11
-
 public class SialanActivity extends Activity
 {
     private final static int MINISTRO_INSTALL_REQUEST_CODE = 0xf3ee; // request code used to know when Ministro instalation is finished
-    private static final int MINISTRO_API_LEVEL = 4; // Ministro api level (check IMinistro.aidl file)
+    private static final int MINISTRO_API_LEVEL = 5; // Ministro api level (check IMinistro.aidl file)
     private static final int NECESSITAS_API_LEVEL = 2; // Necessitas api level used by platform plugin
     private static final int QT_VERSION = 0x050100; // This app requires at least Qt version 5.1.0
 
@@ -112,6 +120,7 @@ public class SialanActivity extends Activity
     private static final String MAIN_LIBRARY_KEY = "main.library";
     private static final String STATIC_INIT_CLASSES_KEY = "static.init.classes";
     private static final String NECESSITAS_API_LEVEL_KEY = "necessitas.api.level";
+    private static final String EXTRACT_STYLE_KEY = "extract.android.style";
 
     /// Ministro server parameter keys
     private static final String REQUIRED_MODULES_KEY = "required.modules";
@@ -125,28 +134,37 @@ public class SialanActivity extends Activity
                                                                        // for more details.
 
     private static final String REPOSITORY_KEY = "repository";         // use this key to overwrite the default ministro repsitory
+    private static final String ANDROID_THEMES_KEY = "android.themes"; // themes that your application uses
 
-    private static final String APPLICATION_PARAMETERS = null; // use this variable to pass any parameters to your application,
+
+    public String APPLICATION_PARAMETERS = null; // use this variable to pass any parameters to your application,
                                                                // the parameters must not contain any white spaces
                                                                // and must be separated with "\t"
                                                                // e.g "-param1\t-param2=value2\t-param3\tvalue3"
 
-    private String ENVIRONMENT_VARIABLES = "QT_USE_ANDROID_NATIVE_STYLE=1\t";
+    public String ENVIRONMENT_VARIABLES = "QT_USE_ANDROID_NATIVE_STYLE=1\tQT_USE_ANDROID_NATIVE_DIALOGS=1\t";
                                                                // use this variable to add any environment variables to your application.
                                                                // the env vars must be separated with "\t"
                                                                // e.g. "ENV_VAR1=1\tENV_VAR2=2\t"
                                                                // Currently the following vars are used by the android plugin:
-                                                               // * QT_USE_ANDROID_NATIVE_STYLE - 1 to use the android widget style if available,
-                                                               //   note that the android style plugin in Qt 5.1 is not fully functional.
+                                                               // * QT_USE_ANDROID_NATIVE_STYLE - 1 to use the android widget style if available.
+                                                               // * QT_USE_ANDROID_NATIVE_DIALOGS -1 to use the android native dialogs.
 
-    private static final String QT_ANDROID_THEME = "light"; // sets the default theme to light. Possible values are:
-                                                            // * ""           - for the device default dark theme
-                                                            // * "light"      - for the device default light theme
-                                                            // * "holo"       - for the holo dark theme
-                                                            // * "holo_light" - for the holo light theme
+    public String[] QT_ANDROID_THEMES = null;     // A list with all themes that your application want to use.
+                                                  // The name of the theme must be the same with any theme from
+                                                  // http://developer.android.com/reference/android/R.style.html
+                                                  // The most used themes are:
+                                                  //  * "Theme" - (fallback) check http://developer.android.com/reference/android/R.style.html#Theme
+                                                  //  * "Theme_Black" - check http://developer.android.com/reference/android/R.style.html#Theme_Black
+                                                  //  * "Theme_Light" - (default for API <=10) check http://developer.android.com/reference/android/R.style.html#Theme_Light
+                                                  //  * "Theme_Holo" - check http://developer.android.com/reference/android/R.style.html#Theme_Holo
+                                                  //  * "Theme_Holo_Light" - (default for API 11-13) check http://developer.android.com/reference/android/R.style.html#Theme_Holo_Light
+                                                  //  * "Theme_DeviceDefault" - check http://developer.android.com/reference/android/R.style.html#Theme_DeviceDefault
+                                                  //  * "Theme_DeviceDefault_Light" - (default for API 14+) check http://developer.android.com/reference/android/R.style.html#Theme_DeviceDefault_Light
+
+    public String QT_ANDROID_DEFAULT_THEME = null; // sets the default theme.
 
     private static final int INCOMPATIBLE_MINISTRO_VERSION = 1; // Incompatible Ministro version. Ministro needs to be upgraded.
-    private static final String DISPLAY_DPI_KEY = "display.dpi";
     private static final int BUFFER_SIZE = 1024;
 
     private ActivityInfo m_activityInfo = null; // activity info object, used to access the libs and the strings
@@ -164,15 +182,27 @@ public class SialanActivity extends Activity
                                                         // * unstable - unstable repository, DO NOT use this repository in production,
                                                         // this repository is used to push Qt snapshots.
     private String[] m_qtLibs = null; // required qt libs
+    private int m_displayDensity = -1;
 
     private static SialanActivity instance;
     public boolean _transparentStatusBar = false;
     public boolean _transparentNavigationBar = false;
     public static final int SELECT_IMAGE = 1;
 
-//    SialanActivity(){
-//        SialanActivity.instance = this;
-//    }
+    public SialanActivity()
+    {
+        if (Build.VERSION.SDK_INT <= 10) {
+            QT_ANDROID_THEMES = new String[] {"Theme_Light"};
+            QT_ANDROID_DEFAULT_THEME = "Theme_Light";
+        }
+        else if ((Build.VERSION.SDK_INT >= 11 && Build.VERSION.SDK_INT <= 13) || Build.VERSION.SDK_INT == 21){
+            QT_ANDROID_THEMES = new String[] {"Theme_Holo_Light"};
+            QT_ANDROID_DEFAULT_THEME = "Theme_Holo_Light";
+        } else {
+            QT_ANDROID_THEMES = new String[] {"Theme_DeviceDefault_Light"};
+            QT_ANDROID_DEFAULT_THEME = "Theme_DeviceDefault_Light";
+        }
+    }
 
     public static SialanActivity getActivityInstance() {
         return SialanActivity.instance;
@@ -271,23 +301,24 @@ public class SialanActivity extends Activity
 
     private ServiceConnection m_ministroConnection=new ServiceConnection() {
         private IMinistro m_service = null;
-    @Override
+        @Override
         public void onServiceConnected(ComponentName name, IBinder service)
         {
             m_service = IMinistro.Stub.asInterface(service);
             try {
-                if (m_service!=null) {
-                    Bundle parameters= new Bundle();
+                if (m_service != null) {
+                    Bundle parameters = new Bundle();
                     parameters.putStringArray(REQUIRED_MODULES_KEY, m_qtLibs);
                     parameters.putString(APPLICATION_TITLE_KEY, (String)SialanActivity.this.getTitle());
                     parameters.putInt(MINIMUM_MINISTRO_API_KEY, MINISTRO_API_LEVEL);
                     parameters.putInt(MINIMUM_QT_VERSION_KEY, QT_VERSION);
                     parameters.putString(ENVIRONMENT_VARIABLES_KEY, ENVIRONMENT_VARIABLES);
-                    if (null!=APPLICATION_PARAMETERS)
+                    if (APPLICATION_PARAMETERS != null)
                         parameters.putString(APPLICATION_PARAMETERS_KEY, APPLICATION_PARAMETERS);
                     parameters.putStringArray(SOURCES_KEY, m_sources);
                     parameters.putString(REPOSITORY_KEY, m_repository);
-                    parameters.putInt(DISPLAY_DPI_KEY, SialanActivity.this.getResources().getDisplayMetrics().densityDpi);
+                    if (QT_ANDROID_THEMES != null)
+                        parameters.putStringArray(ANDROID_THEMES_KEY, QT_ANDROID_THEMES);
                     m_service.requestLoader(m_ministroCallback, parameters);
                 }
             } catch (RemoteException e) {
@@ -295,19 +326,19 @@ public class SialanActivity extends Activity
             }
         }
 
-    private IMinistroCallback m_ministroCallback = new IMinistroCallback.Stub() {
-        // this function is called back by Ministro.
-        @Override
-        public void loaderReady(final Bundle loaderParams) throws RemoteException {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    unbindService(m_ministroConnection);
-                    loadApplication(loaderParams);
-                }
-            });
-        }
-    };
+        private IMinistroCallback m_ministroCallback = new IMinistroCallback.Stub() {
+            // this function is called back by Ministro.
+            @Override
+            public void loaderReady(final Bundle loaderParams) throws RemoteException {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        unbindService(m_ministroConnection);
+                        loadApplication(loaderParams);
+                    }
+                });
+            }
+        };
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
@@ -622,6 +653,15 @@ public class SialanActivity extends Activity
                                                 m_activityInfo.metaData.getString("android.app.static_init_classes").split(":"));
                 }
                 loaderParams.putStringArrayList(NATIVE_LIBRARIES_KEY, libraryList);
+
+
+                String themePath = getApplicationInfo().dataDir + "/qt-reserved-files/android-style/";
+                String stylePath = themePath + m_displayDensity + "/";
+                if (!(new File(stylePath)).exists())
+                    loaderParams.putString(EXTRACT_STYLE_KEY, stylePath);
+                ENVIRONMENT_VARIABLES += "\tMINISTRO_ANDROID_STYLE_PATH=" + stylePath
+                                       + "\tQT_ANDROID_THEMES_ROOT_PATH=" + themePath;
+
                 loaderParams.putString(ENVIRONMENT_VARIABLES_KEY, ENVIRONMENT_VARIABLES
                                                                   + "\tQML2_IMPORT_PATH=" + pluginsPrefix + "/qml"
                                                                   + "\tQML_IMPORT_PATH=" + pluginsPrefix + "/imports"
@@ -857,6 +897,26 @@ public class SialanActivity extends Activity
             return;
         }
 
+        try {
+            m_activityInfo = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA);
+            for (Field f : Class.forName("android.R$style").getDeclaredFields()) {
+                if (f.getInt(null) == m_activityInfo.getThemeResource()) {
+                    QT_ANDROID_THEMES = new String[] {f.getName()};
+                    QT_ANDROID_DEFAULT_THEME = f.getName();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            finish();
+            return;
+        }
+
+        try {
+            setTheme(Class.forName("android.R$style").getDeclaredField(QT_ANDROID_DEFAULT_THEME).getInt(null));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Window w = getWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
@@ -868,21 +928,39 @@ public class SialanActivity extends Activity
             _transparentStatusBar = true;
         }
 
-        ENVIRONMENT_VARIABLES += "\tQT_ANDROID_THEME=" + QT_ANDROID_THEME
-                              + "/\tQT_ANDROID_THEME_DISPLAY_DPI=" + getResources().getDisplayMetrics().densityDpi + "\t";
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        try {
-            m_activityInfo = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA);
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
-            finish();
+        if (Build.VERSION.SDK_INT > 10) {
+            try {
+                requestWindowFeature(Window.class.getField("FEATURE_ACTION_BAR").getInt(null));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
+
+        if (SialanApplication.m_delegateObject != null && SialanApplication.onCreate != null) {
+            SialanApplication.invokeDelegateMethod(SialanApplication.onCreate, savedInstanceState);
             return;
         }
 
+        m_displayDensity = getResources().getDisplayMetrics().densityDpi;
+
+        ENVIRONMENT_VARIABLES += "\tQT_ANDROID_THEME=" + QT_ANDROID_DEFAULT_THEME
+                              + "/\tQT_ANDROID_THEME_DISPLAY_DPI=" + m_displayDensity + "\t";
+
         if (null == getLastNonConfigurationInstance()) {
             // if splash screen is defined, then show it
-            if (m_activityInfo.metaData.containsKey("android.app.splash_screen") )
-                setContentView(m_activityInfo.metaData.getInt("android.app.splash_screen"));
+            if (m_activityInfo.metaData.containsKey("android.app.splash_screen_drawable"))
+                getWindow().setBackgroundDrawableResource(m_activityInfo.metaData.getInt("android.app.splash_screen_drawable"));
+            else
+                getWindow().setBackgroundDrawable(new ColorDrawable(0xff000000));
+
+            if (m_activityInfo.metaData.containsKey("android.app.background_running")
+                && m_activityInfo.metaData.getBoolean("android.app.background_running")) {
+                ENVIRONMENT_VARIABLES += "QT_BLOCK_EVENT_LOOPS_WHEN_SUSPENDED=0\t";
+            } else {
+                ENVIRONMENT_VARIABLES += "QT_BLOCK_EVENT_LOOPS_WHEN_SUSPENDED=1\t";
+            }
             startApp(true);
         }
 
@@ -1501,132 +1579,5 @@ public class SialanActivity extends Activity
     //---------------------------------------------------------------------------
 //@ANDROID-8
     //////////////// Activity API 11 /////////////
-
-//@ANDROID-11
-//QtCreator     @Override
-//QtCreator     public boolean dispatchKeyShortcutEvent(KeyEvent event)
-//QtCreator     {
-//QtCreator         if (SialanApplication.m_delegateObject != null  && SialanApplication.dispatchKeyShortcutEvent != null)
-//QtCreator             return (Boolean) SialanApplication.invokeDelegateMethod(SialanApplication.dispatchKeyShortcutEvent, event);
-//QtCreator         else
-//QtCreator             return super.dispatchKeyShortcutEvent(event);
-//QtCreator     }
-//QtCreator     public boolean super_dispatchKeyShortcutEvent(KeyEvent event)
-//QtCreator     {
-//QtCreator         return super.dispatchKeyShortcutEvent(event);
-//QtCreator     }
-//QtCreator     //---------------------------------------------------------------------------
-//QtCreator 
-//QtCreator     @Override
-//QtCreator     public void onActionModeFinished(ActionMode mode)
-//QtCreator     {
-//QtCreator         if (!SialanApplication.invokeDelegate(mode).invoked)
-//QtCreator             super.onActionModeFinished(mode);
-//QtCreator     }
-//QtCreator     public void super_onActionModeFinished(ActionMode mode)
-//QtCreator     {
-//QtCreator         super.onActionModeFinished(mode);
-//QtCreator     }
-//QtCreator     //---------------------------------------------------------------------------
-//QtCreator 
-//QtCreator     @Override
-//QtCreator     public void onActionModeStarted(ActionMode mode)
-//QtCreator     {
-//QtCreator         if (!SialanApplication.invokeDelegate(mode).invoked)
-//QtCreator             super.onActionModeStarted(mode);
-//QtCreator     }
-//QtCreator     public void super_onActionModeStarted(ActionMode mode)
-//QtCreator     {
-//QtCreator         super.onActionModeStarted(mode);
-//QtCreator     }
-//QtCreator     //---------------------------------------------------------------------------
-//QtCreator 
-//QtCreator     @Override
-//QtCreator     public void onAttachFragment(Fragment fragment)
-//QtCreator     {
-//QtCreator         if (!SialanApplication.invokeDelegate(fragment).invoked)
-//QtCreator             super.onAttachFragment(fragment);
-//QtCreator     }
-//QtCreator     public void super_onAttachFragment(Fragment fragment)
-//QtCreator     {
-//QtCreator         super.onAttachFragment(fragment);
-//QtCreator     }
-//QtCreator     //---------------------------------------------------------------------------
-//QtCreator 
-//QtCreator     @Override
-//QtCreator     public View onCreateView(View parent, String name, Context context, AttributeSet attrs)
-//QtCreator     {
-//QtCreator         SialanApplication.InvokeResult res = SialanApplication.invokeDelegate(parent, name, context, attrs);
-//QtCreator         if (res.invoked)
-//QtCreator             return (View)res.methodReturns;
-//QtCreator         else
-//QtCreator             return super.onCreateView(parent, name, context, attrs);
-//QtCreator     }
-//QtCreator     public View super_onCreateView(View parent, String name, Context context,
-//QtCreator             AttributeSet attrs) {
-//QtCreator         return super.onCreateView(parent, name, context, attrs);
-//QtCreator     }
-//QtCreator     //---------------------------------------------------------------------------
-//QtCreator 
-//QtCreator     @Override
-//QtCreator     public boolean onKeyShortcut(int keyCode, KeyEvent event)
-//QtCreator     {
-//QtCreator         if (SialanApplication.m_delegateObject != null  && SialanApplication.onKeyShortcut != null)
-//QtCreator             return (Boolean) SialanApplication.invokeDelegateMethod(SialanApplication.onKeyShortcut, keyCode,event);
-//QtCreator         else
-//QtCreator             return super.onKeyShortcut(keyCode, event);
-//QtCreator     }
-//QtCreator     public boolean super_onKeyShortcut(int keyCode, KeyEvent event)
-//QtCreator     {
-//QtCreator         return super.onKeyShortcut(keyCode, event);
-//QtCreator     }
-//QtCreator     //---------------------------------------------------------------------------
-//QtCreator 
-//QtCreator     @Override
-//QtCreator     public ActionMode onWindowStartingActionMode(Callback callback)
-//QtCreator     {
-//QtCreator         SialanApplication.InvokeResult res = SialanApplication.invokeDelegate(callback);
-//QtCreator         if (res.invoked)
-//QtCreator             return (ActionMode)res.methodReturns;
-//QtCreator         else
-//QtCreator             return super.onWindowStartingActionMode(callback);
-//QtCreator     }
-//QtCreator     public ActionMode super_onWindowStartingActionMode(Callback callback)
-//QtCreator     {
-//QtCreator         return super.onWindowStartingActionMode(callback);
-//QtCreator     }
-//QtCreator     //---------------------------------------------------------------------------
-//@ANDROID-11
     //////////////// Activity API 12 /////////////
-
-//@ANDROID-12
-//QtCreator     @Override
-//QtCreator     public boolean dispatchGenericMotionEvent(MotionEvent ev)
-//QtCreator     {
-//QtCreator         if (SialanApplication.m_delegateObject != null  && SialanApplication.dispatchGenericMotionEvent != null)
-//QtCreator             return (Boolean) SialanApplication.invokeDelegateMethod(SialanApplication.dispatchGenericMotionEvent, ev);
-//QtCreator         else
-//QtCreator             return super.dispatchGenericMotionEvent(ev);
-//QtCreator     }
-//QtCreator     public boolean super_dispatchGenericMotionEvent(MotionEvent event)
-//QtCreator     {
-//QtCreator         return super.dispatchGenericMotionEvent(event);
-//QtCreator     }
-//QtCreator     //---------------------------------------------------------------------------
-//QtCreator 
-//QtCreator     @Override
-//QtCreator     public boolean onGenericMotionEvent(MotionEvent event)
-//QtCreator     {
-//QtCreator         if (SialanApplication.m_delegateObject != null  && SialanApplication.onGenericMotionEvent != null)
-//QtCreator             return (Boolean) SialanApplication.invokeDelegateMethod(SialanApplication.onGenericMotionEvent, event);
-//QtCreator         else
-//QtCreator             return super.onGenericMotionEvent(event);
-//QtCreator     }
-//QtCreator     public boolean super_onGenericMotionEvent(MotionEvent event)
-//QtCreator     {
-//QtCreator         return super.onGenericMotionEvent(event);
-//QtCreator     }
-//QtCreator     //---------------------------------------------------------------------------
-//@ANDROID-12
-
 }

@@ -255,6 +255,11 @@ SialanMain {
         mainItem.incomingImage(path)
     }
 
+    function showFavoriteMessage() {
+        var component = Qt.createComponent("FavoriteMessage.qml")
+        messageDialog.show(component)
+    }
+
     Component {
         id: get_pass_cmpnt
         GetPassDialog {
@@ -296,6 +301,10 @@ SialanMain {
         else
         if( !kaqaz.demoHasTrial() )
             showSubMessage(Qt.createComponent("DemoLimited.qml"))
+
+        kaqaz.runCount++
+        if( kaqaz.runCount == 2 )
+            showFavoriteMessage()
 
         main_init_timer.restart()
     }
